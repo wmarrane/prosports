@@ -8,6 +8,9 @@ import ModalidadesList from './pages/modalidades/ModalidadesList'
 import ModalidadeForm from './pages/modalidades/ModalidadeForm'
 import CategoriasList from './pages/categorias/CategoriasList'
 import CategoriaForm from './pages/categorias/CategoriaForm'
+import MunicipiosList from './pages/municipios/MunicipiosList'
+import MunicipioForm from './pages/municipios/MunicipioForm'
+import MunicipiosImport from './pages/municipios/MunicipiosImport'
 
 export default function App() {
   return (
@@ -26,6 +29,10 @@ export default function App() {
             <Route path="/categorias" element={<CategoriasList />} />
             <Route path="/categorias/nova" element={<CategoriaForm />} />
             <Route path="/categorias/:id/editar" element={<CategoriaForm />} />
+            <Route path="/municipios" element={<MunicipiosList />} />
+            <Route path="/municipios/novo" element={<MunicipioForm />} />
+            <Route path="/municipios/:id/editar" element={<MunicipioForm />} />
+            <Route path="/municipios/importar" element={<MunicipiosImport />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

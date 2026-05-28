@@ -8,6 +8,7 @@ const navGroups: NavGroup[] = [
   {
     title: 'Cadastros',
     items: [
+      { label: 'Municípios', to: '/municipios' },
       { label: 'Delegações', to: '/delegacoes' },
       { label: 'Modalidades', to: '/modalidades' },
       { label: 'Categorias', to: '/categorias' },
