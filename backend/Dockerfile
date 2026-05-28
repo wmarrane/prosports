@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npx prisma generate
+RUN if grep -q "^model " prisma/schema.prisma 2>/dev/null; then npx prisma generate; fi
 RUN npm run build
 
 # Estágio 2: runtime mínimo
