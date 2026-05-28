@@ -1,0 +1,32 @@
+{
+  "name": "prosports-backend",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@prisma/client": "^5.22.0",
+    "zod": "^3.23.8",
+    "jsonwebtoken": "^9.0.2",
+    "pino": "^9.4.0",
+    "exceljs": "^4.4.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "redis": "^4.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "prisma": "^5.22.0",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "vitest": "^2.1.9"
+  }
+}
