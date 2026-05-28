@@ -15,10 +15,13 @@ function getVersion(): string {
 }
 
 function getCommit(): string {
+  if (process.env.APP_COMMIT && process.env.APP_COMMIT !== 'unknown') {
+    return process.env.APP_COMMIT
+  }
   try {
     return execSync('git rev-parse --short HEAD').toString().trim()
   } catch {
-    return 'unknown'
+    return process.env.APP_COMMIT ?? 'unknown'
   }
 }
 

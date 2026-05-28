@@ -1,6 +1,10 @@
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        APP_COMMIT: ${GIT_COMMIT:-unknown}
     ports:
       - "8080:80"
     depends_on:
