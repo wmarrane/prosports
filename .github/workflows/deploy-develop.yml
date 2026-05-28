@@ -1,0 +1,35 @@
+name: Deploy → Develop (Local)
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: develop
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Criar .env
+        run: |
+          cat > .env << EOF
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          REDIS_URL=redis://redis:6379
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          NODE_ENV=development
+          EOF
+
+      - name: Instalar dependências do backend
+        run: cd backend && npm ci
+
+      - name: Rodar migrations Prisma
+        run: cd backend && DATABASE_URL=${{ secrets.DATABASE_URL }} npx prisma migrate deploy
+
+      - name: Build e subir containers
+        run: docker compose up -d --build
+
+      - name: Limpar imagens antigas
+        run: docker image prune -f
