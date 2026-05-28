@@ -27,3 +27,43 @@ model User {
   criado_em         DateTime  @default(now())
   atualizado_em     DateTime  @updatedAt
 }
+
+model Delegacao {
+  id            Int      @id @default(autoincrement())
+  nome          String
+  municipio     String
+  estado        String   @db.Char(2)
+  logo_path     String?
+  criado_em     DateTime @default(now())
+  atualizado_em DateTime @updatedAt
+}
+
+model Modalidade {
+  id            Int         @id @default(autoincrement())
+  nome          String      @unique
+  descricao     String?
+  categorias    Categoria[]
+  criado_em     DateTime    @default(now())
+  atualizado_em DateTime    @updatedAt
+}
+
+enum Genero {
+  MASCULINO
+  FEMININO
+  MISTO
+  LIVRE
+}
+
+model Categoria {
+  id            Int        @id @default(autoincrement())
+  modalidade    Modalidade @relation(fields: [modalidade_id], references: [id])
+  modalidade_id Int
+  nome          String
+  genero        Genero
+  idade_min     Int?
+  idade_max     Int?
+  criado_em     DateTime   @default(now())
+  atualizado_em DateTime   @updatedAt
+
+  @@unique([modalidade_id, nome, genero])
+}
