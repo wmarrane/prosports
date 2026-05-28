@@ -23,11 +23,14 @@ const mockPrisma = prisma as any
 beforeEach(() => vi.clearAllMocks())
 
 describe('delegacoes.service', () => {
-  it('listar retorna lista ordenada', async () => {
-    mockPrisma.delegacao.findMany.mockResolvedValue([{ id: 1, nome: 'SP' }])
+  it('listar retorna lista ordenada incluindo município', async () => {
+    mockPrisma.delegacao.findMany.mockResolvedValue([{ id: 1, nome: 'SP', municipio: { id: 1, nome: 'São Paulo', uf: 'SP' } }])
     const result = await service.listar()
-    expect(result).toEqual([{ id: 1, nome: 'SP' }])
-    expect(mockPrisma.delegacao.findMany).toHaveBeenCalledWith({ orderBy: { nome: 'asc' } })
+    expect(result[0].municipio.uf).toBe('SP')
+    expect(mockPrisma.delegacao.findMany).toHaveBeenCalledWith({
+      orderBy: { nome: 'asc' },
+      include: { municipio: true },
+    })
   })
 
   it('buscarPorId lança 404 quando não encontrado', async () => {
@@ -35,11 +38,14 @@ describe('delegacoes.service', () => {
     await expect(service.buscarPorId(99)).rejects.toMatchObject({ status: 404 })
   })
 
-  it('criar chama prisma.create com dados corretos', async () => {
-    const data = { nome: 'SP', municipio: 'São Paulo', estado: 'SP' }
+  it('criar chama prisma.create com municipio_id', async () => {
+    const data = { nome: 'SP', municipio_id: 42 }
     mockPrisma.delegacao.create.mockResolvedValue({ id: 1, ...data })
     await service.criar(data)
-    expect(mockPrisma.delegacao.create).toHaveBeenCalledWith({ data })
+    expect(mockPrisma.delegacao.create).toHaveBeenCalledWith({
+      data,
+      include: { municipio: true },
+    })
   })
 
   it('remover deleta arquivo de logo se existir', async () => {

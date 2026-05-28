@@ -4,8 +4,7 @@ import * as service from './delegacoes.service'
 
 const createSchema = z.object({
   nome: z.string().min(1),
-  municipio: z.string().min(1),
-  estado: z.string().length(2),
+  municipio_id: z.coerce.number().int().positive(),
 })
 
 const updateSchema = createSchema.partial()
