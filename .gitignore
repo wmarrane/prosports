@@ -10,3 +10,9 @@ yarn-error.log*
 .pnp.js
 
 .vscode/*
+
+# macOS metadata
+.DS_Store
+
+# Root-level lock file (root has no deps; backend/package-lock.json is tracked)
+/package-lock.json
