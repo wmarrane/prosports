@@ -1,0 +1,9 @@
+# Placeholder para deploy GCP — configurado em spec separado
+# Referencia imagens do Artifact Registry em vez de builds locais
+services:
+  backend:
+    image: ${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/prosports/backend:${IMAGE_TAG}
+    environment:
+      - DATABASE_URL=${PROD_DATABASE_URL}
+      - JWT_SECRET=${PROD_JWT_SECRET}
+      - NODE_ENV=production
