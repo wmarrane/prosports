@@ -6,3 +6,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  ADMIN
+  DELEGACAO
+  VIEWER
+}
+
+model User {
+  id                Int       @id @default(autoincrement())
+  nome              String
+  email             String    @unique
+  senha_hash        String
+  role              Role      @default(VIEWER)
+  ativo             Boolean   @default(true)
+  tentativas_login  Int       @default(0)
+  bloqueado_ate     DateTime?
+  ultimo_login      DateTime?
+  criado_em         DateTime  @default(now())
+  atualizado_em     DateTime  @updatedAt
+}
