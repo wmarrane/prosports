@@ -1,5 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
+import { APP_VERSION, APP_COMMIT } from '../lib/version'
+import { useNovidades } from '../lib/use-novidades'
 
 type NavItem = { label: string; to: string }
 type NavGroup = { title: string; items: NavItem[] }
@@ -26,6 +28,7 @@ const navGroups: NavGroup[] = [
 export default function Layout() {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate()
+  const { temNovidade } = useNovidades()
 
   async function handleLogout() {
     await logout()
@@ -65,14 +68,26 @@ export default function Layout() {
           ))}
         </nav>
 
-        <div className="px-4 py-4 border-t border-gray-800">
-          <p className="text-xs text-gray-500 mb-2 truncate">{user?.email}</p>
+        <div className="px-4 py-4 border-t border-gray-800 space-y-2">
+          <p className="text-xs text-gray-500 truncate">{user?.email}</p>
           <button
             onClick={handleLogout}
             className="w-full text-left text-sm text-gray-400 hover:text-white transition-colors"
           >
             Sair
           </button>
+          <NavLink
+            to="/novidades"
+            className="flex items-center justify-between text-xs text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            <span>v{APP_VERSION} <span className="text-gray-600">({APP_COMMIT})</span></span>
+            {temNovidade && (
+              <span
+                className="inline-block w-2 h-2 rounded-full bg-indigo-500"
+                aria-label="Nova versão disponível"
+              />
+            )}
+          </NavLink>
         </div>
       </aside>
 

@@ -11,6 +11,7 @@ import CategoriaForm from './pages/categorias/CategoriaForm'
 import MunicipiosList from './pages/municipios/MunicipiosList'
 import MunicipioForm from './pages/municipios/MunicipioForm'
 import MunicipiosImport from './pages/municipios/MunicipiosImport'
+import Novidades from './pages/Novidades'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/municipios/novo" element={<MunicipioForm />} />
             <Route path="/municipios/:id/editar" element={<MunicipioForm />} />
             <Route path="/municipios/importar" element={<MunicipiosImport />} />
+            <Route path="/novidades" element={<Novidades />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
