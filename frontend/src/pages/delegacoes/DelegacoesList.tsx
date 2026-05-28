@@ -33,8 +33,10 @@ export default function DelegacoesList() {
       className: 'w-16',
     },
     { header: 'Nome', accessor: (row: Delegacao) => row.nome },
-    { header: 'Município', accessor: (row: Delegacao) => row.municipio },
-    { header: 'Estado', accessor: (row: Delegacao) => row.estado },
+    {
+      header: 'Município',
+      accessor: (row: Delegacao) => `${row.municipio.nome} — ${row.municipio.uf}`,
+    },
     {
       header: 'Ações',
       accessor: (row: Delegacao) => (

@@ -3,6 +3,7 @@ import type { FormEvent, ChangeEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
+import MunicipioSelect from '../../components/MunicipioSelect'
 import { delegacoesService } from '../../services/delegacoes'
 
 export default function DelegacaoForm() {
@@ -12,8 +13,7 @@ export default function DelegacaoForm() {
   const queryClient = useQueryClient()
 
   const [nome, setNome] = useState('')
-  const [municipio, setMunicipio] = useState('')
-  const [estado, setEstado] = useState('')
+  const [municipioId, setMunicipioId] = useState<number | null>(null)
   const [logo, setLogo] = useState<File | null>(null)
   const [erro, setErro] = useState('')
 
@@ -26,8 +26,7 @@ export default function DelegacaoForm() {
   useEffect(() => {
     if (existing) {
       setNome(existing.nome)
-      setMunicipio(existing.municipio)
-      setEstado(existing.estado)
+      setMunicipioId(existing.municipio_id)
     }
   }, [existing])
 
@@ -44,10 +43,13 @@ export default function DelegacaoForm() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setErro('')
+    if (!municipioId) {
+      setErro('Selecione um município.')
+      return
+    }
     const formData = new FormData()
     formData.append('nome', nome)
-    formData.append('municipio', municipio)
-    formData.append('estado', estado.toUpperCase().slice(0, 2))
+    formData.append('municipio_id', String(municipioId))
     if (logo) formData.append('logo', logo)
     salvar(formData)
   }
@@ -64,13 +66,7 @@ export default function DelegacaoForm() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">Município</label>
-            <input value={municipio} onChange={e => setMunicipio(e.target.value)} required
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Estado (UF)</label>
-            <input value={estado} onChange={e => setEstado(e.target.value)} required maxLength={2} placeholder="SP"
-              className="w-24 px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <MunicipioSelect value={municipioId} onChange={setMunicipioId} />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">Logo (JPEG, PNG ou WebP — máx. 2MB)</label>
