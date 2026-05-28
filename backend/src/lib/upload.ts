@@ -4,6 +4,8 @@ import { randomUUID } from 'crypto'
 import fs from 'fs'
 
 const UPLOADS_DIR = process.env.UPLOADS_DIR ?? path.join(process.cwd(), 'uploads')
+const ALLOWED_MIMES = ['image/jpeg', 'image/png', 'image/webp']
+const ALLOWED_EXTS = ['.jpg', '.jpeg', '.png', '.webp']
 
 export function ensureDir(subdir: string) {
   const dir = path.join(UPLOADS_DIR, subdir)
@@ -22,8 +24,8 @@ export function createUpload(subdir: string) {
     }),
     limits: { fileSize: 2 * 1024 * 1024 },
     fileFilter: (_req, file, cb) => {
-      const allowed = ['image/jpeg', 'image/png', 'image/webp']
-      if (allowed.includes(file.mimetype)) {
+      const ext = path.extname(file.originalname).toLowerCase()
+      if (ALLOWED_MIMES.includes(file.mimetype) && ALLOWED_EXTS.includes(ext)) {
         cb(null, true)
       } else {
         cb(Object.assign(new Error('Tipo de arquivo não permitido. Use JPEG, PNG ou WebP.'), { status: 400 }))
@@ -33,6 +35,10 @@ export function createUpload(subdir: string) {
 }
 
 export function deleteFile(subdir: string, filename: string) {
-  const filepath = path.join(UPLOADS_DIR, subdir, filename)
+  const baseDir = path.resolve(ensureDir(subdir))
+  const filepath = path.resolve(baseDir, filename)
+  if (!filepath.startsWith(baseDir + path.sep) && filepath !== baseDir) {
+    throw Object.assign(new Error('Acesso negado'), { status: 403 })
+  }
   if (fs.existsSync(filepath)) fs.unlinkSync(filepath)
 }
