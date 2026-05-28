@@ -1,9 +1,13 @@
 import 'dotenv/config'
+import path from 'path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import pino from 'pino'
 import { connectRedis } from './lib/redis'
 import authRoutes from './modules/auth/auth.routes'
+import delegacoesRoutes from './modules/delegacoes/delegacoes.routes'
+import modalidadesRoutes from './modules/modalidades/modalidades.routes'
+import categoriasRoutes from './modules/categorias/categorias.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -15,6 +19,7 @@ import {
 const app = express()
 const logger = pino()
 const PORT = process.env.PORT ?? 3000
+const UPLOADS_DIR = process.env.UPLOADS_DIR ?? path.join(process.cwd(), 'uploads')
 
 app.set('trust proxy', 1)
 
@@ -24,7 +29,11 @@ app.use(globalRateLimit)
 app.use(express.json({ limit: '1mb' }))
 app.use(cookieParser())
 
+app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/auth', authRateLimit, authRoutes)
+app.use('/delegacoes', delegacoesRoutes)
+app.use('/modalidades', modalidadesRoutes)
+app.use('/categorias', categoriasRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
