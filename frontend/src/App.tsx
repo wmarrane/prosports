@@ -1,23 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
+import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
-import { useAuthStore } from './store/authStore'
-
-function Dashboard() {
-  const { user, logout } = useAuthStore()
-  return (
-    <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center gap-4">
-      <h1 className="text-2xl font-bold">Bem-vindo, {user?.nome}</h1>
-      <p className="text-gray-400">Papel: {user?.role}</p>
-      <button
-        onClick={logout}
-        className="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-sm transition-colors"
-      >
-        Sair
-      </button>
-    </div>
-  )
-}
+import DelegacoesList from './pages/delegacoes/DelegacoesList'
+import DelegacaoForm from './pages/delegacoes/DelegacaoForm'
+import ModalidadesList from './pages/modalidades/ModalidadesList'
+import ModalidadeForm from './pages/modalidades/ModalidadeForm'
+import CategoriasList from './pages/categorias/CategoriasList'
+import CategoriaForm from './pages/categorias/CategoriaForm'
 
 export default function App() {
   return (
@@ -25,7 +15,18 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to="/delegacoes" replace />} />
+            <Route path="/delegacoes" element={<DelegacoesList />} />
+            <Route path="/delegacoes/nova" element={<DelegacaoForm />} />
+            <Route path="/delegacoes/:id/editar" element={<DelegacaoForm />} />
+            <Route path="/modalidades" element={<ModalidadesList />} />
+            <Route path="/modalidades/nova" element={<ModalidadeForm />} />
+            <Route path="/modalidades/:id/editar" element={<ModalidadeForm />} />
+            <Route path="/categorias" element={<CategoriasList />} />
+            <Route path="/categorias/nova" element={<CategoriaForm />} />
+            <Route path="/categorias/:id/editar" element={<CategoriaForm />} />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
