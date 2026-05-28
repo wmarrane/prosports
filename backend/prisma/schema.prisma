@@ -28,14 +28,27 @@ model User {
   atualizado_em     DateTime  @updatedAt
 }
 
-model Delegacao {
-  id            Int      @id @default(autoincrement())
+model Municipio {
+  id            Int         @id @default(autoincrement())
+  codigo_ibge   String      @unique @db.Char(7)
   nome          String
-  municipio     String
-  estado        String   @db.Char(2)
+  uf            String      @db.Char(2)
+  delegacoes    Delegacao[]
+  criado_em     DateTime    @default(now())
+  atualizado_em DateTime    @updatedAt
+
+  @@index([uf, nome])
+  @@index([nome])
+}
+
+model Delegacao {
+  id            Int       @id @default(autoincrement())
+  nome          String
+  municipio     Municipio @relation(fields: [municipio_id], references: [id])
+  municipio_id  Int
   logo_path     String?
-  criado_em     DateTime @default(now())
-  atualizado_em DateTime @updatedAt
+  criado_em     DateTime  @default(now())
+  atualizado_em DateTime  @updatedAt
 }
 
 model Modalidade {
