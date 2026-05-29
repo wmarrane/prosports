@@ -1,4 +1,4 @@
-export type Role = 'ADMIN' | 'DELEGACAO' | 'VIEWER'
+export type Role = 'ADMIN' | 'PARTICIPANTE' | 'VIEWER'
 
 export type AuthUser = {
   id: number
