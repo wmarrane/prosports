@@ -4,8 +4,6 @@ import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
 import ModalidadesList from './pages/modalidades/ModalidadesList'
 import ModalidadeForm from './pages/modalidades/ModalidadeForm'
-import CategoriasList from './pages/categorias/CategoriasList'
-import CategoriaForm from './pages/categorias/CategoriaForm'
 import MunicipiosList from './pages/municipios/MunicipiosList'
 import MunicipioForm from './pages/municipios/MunicipioForm'
 import MunicipiosImport from './pages/municipios/MunicipiosImport'
@@ -16,6 +14,8 @@ import DelegaciasList from './pages/delegacias/DelegaciasList'
 import DelegaciaForm from './pages/delegacias/DelegaciaForm'
 import ParticipantesList from './pages/participantes/ParticipantesList'
 import ParticipanteForm from './pages/participantes/ParticipanteForm'
+import TiposModalidadeList from './pages/tipos-modalidade/TiposModalidadeList'
+import TipoModalidadeForm from './pages/tipos-modalidade/TipoModalidadeForm'
 import CompeticoesList from './pages/competicoes/CompeticoesList'
 import CompeticaoForm from './pages/competicoes/CompeticaoForm'
 
@@ -40,13 +40,13 @@ export default function App() {
             <Route path="/participantes/novo" element={<ParticipanteForm />} />
             <Route path="/participantes/:id/editar" element={<ParticipanteForm />} />
 
+            <Route path="/tipos-modalidade"            element={<TiposModalidadeList />} />
+            <Route path="/tipos-modalidade/novo"       element={<TipoModalidadeForm />} />
+            <Route path="/tipos-modalidade/:id/editar" element={<TipoModalidadeForm />} />
+
             <Route path="/modalidades" element={<ModalidadesList />} />
             <Route path="/modalidades/nova" element={<ModalidadeForm />} />
             <Route path="/modalidades/:id/editar" element={<ModalidadeForm />} />
-
-            <Route path="/categorias" element={<CategoriasList />} />
-            <Route path="/categorias/nova" element={<CategoriaForm />} />
-            <Route path="/categorias/:id/editar" element={<CategoriaForm />} />
 
             <Route path="/municipios" element={<MunicipiosList />} />
             <Route path="/municipios/novo" element={<MunicipioForm />} />

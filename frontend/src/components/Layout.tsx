@@ -10,13 +10,13 @@ const navGroups: NavGroup[] = [
   {
     title: 'Cadastros',
     items: [
-      { label: 'Municípios',    to: '/municipios' },
-      { label: 'Inspetorias',   to: '/inspetorias' },
-      { label: 'Delegacias',    to: '/delegacias' },
-      { label: 'Participantes', to: '/participantes' },
-      { label: 'Modalidades',   to: '/modalidades' },
-      { label: 'Categorias',    to: '/categorias' },
-      { label: 'Competições',   to: '/competicoes' },
+      { label: 'Municípios',          to: '/municipios' },
+      { label: 'Inspetorias',         to: '/inspetorias' },
+      { label: 'Delegacias',          to: '/delegacias' },
+      { label: 'Participantes',       to: '/participantes' },
+      { label: 'Tipos de Modalidade', to: '/tipos-modalidade' },
+      { label: 'Modalidades',         to: '/modalidades' },
+      { label: 'Competições',         to: '/competicoes' },
     ],
   },
 ]
