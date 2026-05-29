@@ -11,6 +11,7 @@ import inspetoriasRoutes from './modules/inspetorias/inspetorias.routes'
 import delegaciasRoutes from './modules/delegacias/delegacias.routes'
 import participantesRoutes from './modules/participantes/participantes.routes'
 import competicoesRoutes from './modules/competicoes/competicoes.routes'
+import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -34,6 +35,7 @@ app.use(cookieParser())
 
 app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/auth', authRateLimit, authRoutes)
+app.use('/tipos-modalidade', tiposModalidadeRoutes)
 app.use('/modalidades', modalidadesRoutes)
 app.use('/municipios', municipiosRoutes)
 app.use('/inspetorias', inspetoriasRoutes)
