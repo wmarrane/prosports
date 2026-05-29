@@ -100,3 +100,12 @@ model Categoria {
 
   @@unique([modalidade_id, nome, genero])
 }
+
+model Competicao {
+  id                  Int       @id @default(autoincrement())
+  nome                String    @unique
+  estados             String[]
+  adicionar_subtitulo Boolean   @default(false)
+  criado_em           DateTime  @default(now())
+  atualizado_em       DateTime  @updatedAt
+}
