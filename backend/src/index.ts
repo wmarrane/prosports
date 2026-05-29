@@ -8,6 +8,9 @@ import authRoutes from './modules/auth/auth.routes'
 import modalidadesRoutes from './modules/modalidades/modalidades.routes'
 import categoriasRoutes from './modules/categorias/categorias.routes'
 import municipiosRoutes from './modules/municipios/municipios.routes'
+import inspetoriasRoutes from './modules/inspetorias/inspetorias.routes'
+import delegaciasRoutes from './modules/delegacias/delegacias.routes'
+import participantesRoutes from './modules/participantes/participantes.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -34,6 +37,9 @@ app.use('/auth', authRateLimit, authRoutes)
 app.use('/modalidades', modalidadesRoutes)
 app.use('/categorias', categoriasRoutes)
 app.use('/municipios', municipiosRoutes)
+app.use('/inspetorias', inspetoriasRoutes)
+app.use('/delegacias', delegaciasRoutes)
+app.use('/participantes', participantesRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
