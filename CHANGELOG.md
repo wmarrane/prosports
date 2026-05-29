@@ -5,6 +5,19 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.3.0] - 2026-05-29
+
+### Added
+- Entidade Competição com CRUD admin (nome único, lista de UFs onde acontece, flag "adicionar subtítulo").
+
+### Changed
+- Sidebar reorganizado: item "Competições" movido para o grupo "Cadastros".
+- Constante de UFs do Brasil extraída para `frontend/src/lib/ufs.ts` (DRY).
+
+### Removed
+- Item "Edições" do sidebar (entidade ainda não implementada).
+- Grupo "Competições" do sidebar (item único movido para Cadastros).
+
 ## [1.2.0] - 2026-05-29
 
 ### Added
