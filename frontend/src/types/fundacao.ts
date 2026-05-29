@@ -1,15 +1,3 @@
-import type { Municipio } from './municipio'
-
-export type Delegacao = {
-  id: number
-  nome: string
-  municipio_id: number
-  municipio: Municipio
-  logo_path: string | null
-  criado_em: string
-  atualizado_em: string
-}
-
 export type Modalidade = {
   id: number
   nome: string
