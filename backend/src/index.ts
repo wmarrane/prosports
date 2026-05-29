@@ -6,7 +6,6 @@ import pino from 'pino'
 import { connectRedis } from './lib/redis'
 import authRoutes from './modules/auth/auth.routes'
 import modalidadesRoutes from './modules/modalidades/modalidades.routes'
-import categoriasRoutes from './modules/categorias/categorias.routes'
 import municipiosRoutes from './modules/municipios/municipios.routes'
 import inspetoriasRoutes from './modules/inspetorias/inspetorias.routes'
 import delegaciasRoutes from './modules/delegacias/delegacias.routes'
@@ -36,7 +35,6 @@ app.use(cookieParser())
 app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/auth', authRateLimit, authRoutes)
 app.use('/modalidades', modalidadesRoutes)
-app.use('/categorias', categoriasRoutes)
 app.use('/municipios', municipiosRoutes)
 app.use('/inspetorias', inspetoriasRoutes)
 app.use('/delegacias', delegaciasRoutes)

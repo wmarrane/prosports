@@ -72,40 +72,34 @@ model Participante {
 }
 
 model Modalidade {
-  id            Int         @id @default(autoincrement())
-  nome          String      @unique
-  descricao     String?
-  categorias    Categoria[]
-  criado_em     DateTime    @default(now())
-  atualizado_em DateTime    @updatedAt
-}
+  id                  Int             @id @default(autoincrement())
+  nome                String
+  sigla               String
+  competicao          Competicao      @relation(fields: [competicao_id], references: [id])
+  competicao_id       Int
+  tipo_modalidade     TipoModalidade  @relation(fields: [tipo_modalidade_id], references: [id])
+  tipo_modalidade_id  Int
+  criado_em           DateTime        @default(now())
+  atualizado_em       DateTime        @updatedAt
 
-enum Genero {
-  MASCULINO
-  FEMININO
-  MISTO
-  LIVRE
-}
-
-model Categoria {
-  id            Int        @id @default(autoincrement())
-  modalidade    Modalidade @relation(fields: [modalidade_id], references: [id])
-  modalidade_id Int
-  nome          String
-  genero        Genero
-  idade_min     Int?
-  idade_max     Int?
-  criado_em     DateTime   @default(now())
-  atualizado_em DateTime   @updatedAt
-
-  @@unique([modalidade_id, nome, genero])
+  @@unique([competicao_id, nome])
+  @@unique([competicao_id, sigla])
 }
 
 model Competicao {
-  id                  Int       @id @default(autoincrement())
-  nome                String    @unique
+  id                  Int          @id @default(autoincrement())
+  nome                String       @unique
   estados             String[]
-  adicionar_subtitulo Boolean   @default(false)
-  criado_em           DateTime  @default(now())
-  atualizado_em       DateTime  @updatedAt
+  adicionar_subtitulo Boolean      @default(false)
+  modalidades         Modalidade[]
+  criado_em           DateTime     @default(now())
+  atualizado_em       DateTime     @updatedAt
+}
+
+model TipoModalidade {
+  id            Int          @id @default(autoincrement())
+  nome          String       @unique
+  modalidades   Modalidade[]
+  criado_em     DateTime     @default(now())
+  atualizado_em DateTime     @updatedAt
 }

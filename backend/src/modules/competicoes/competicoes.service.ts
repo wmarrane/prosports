@@ -53,5 +53,12 @@ export async function editar(
 }
 
 export async function remover(id: number) {
+  const vinculadas = await prisma.modalidade.count({ where: { competicao_id: id } })
+  if (vinculadas > 0) {
+    throw Object.assign(
+      new Error('Remova as modalidades vinculadas antes de excluir esta competição.'),
+      { status: 409 }
+    )
+  }
   return prisma.competicao.delete({ where: { id } })
 }

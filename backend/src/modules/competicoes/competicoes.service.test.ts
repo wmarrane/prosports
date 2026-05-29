@@ -9,6 +9,9 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
+    modalidade: {
+      count: vi.fn(),
+    },
   },
 }))
 
@@ -76,7 +79,14 @@ describe('competicoes.service', () => {
     })
   })
 
-  it('remover deleta direto', async () => {
+  it('remover lança 409 se há modalidade vinculada', async () => {
+    mockPrisma.modalidade.count.mockResolvedValue(2)
+    await expect(service.remover(1)).rejects.toMatchObject({ status: 409 })
+    expect(mockPrisma.competicao.delete).not.toHaveBeenCalled()
+  })
+
+  it('remover deleta quando não há modalidade vinculada', async () => {
+    mockPrisma.modalidade.count.mockResolvedValue(0)
     mockPrisma.competicao.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.competicao.delete).toHaveBeenCalledWith({ where: { id: 1 } })
