@@ -5,6 +5,21 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.4.0] - 2026-05-29
+
+### Added
+- Entidade TipoModalidade com CRUD admin.
+- Modalidade ganha FKs obrigatórias para Competição e TipoModalidade, e novo campo Sigla.
+
+### Changed
+- Modalidade reescrita: agora pertence a uma Competição, tem Tipo (FK) e Sigla; nome e sigla únicos por competição (uniqueness composto).
+- Sidebar: "Tipos de Modalidade" entra entre Participantes e Modalidades; "Categorias" removido.
+
+### Removed
+- Entidade Categoria (e enum Genero — só era usado por Categoria).
+- Campo `descricao` de Modalidade.
+- Item "Categorias" do sidebar e rotas correspondentes.
+
 ## [1.3.0] - 2026-05-29
 
 ### Added
