@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser'
 import pino from 'pino'
 import { connectRedis } from './lib/redis'
 import authRoutes from './modules/auth/auth.routes'
-import delegacoesRoutes from './modules/delegacoes/delegacoes.routes'
 import modalidadesRoutes from './modules/modalidades/modalidades.routes'
 import categoriasRoutes from './modules/categorias/categorias.routes'
 import municipiosRoutes from './modules/municipios/municipios.routes'
@@ -32,7 +31,6 @@ app.use(cookieParser())
 
 app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/auth', authRateLimit, authRoutes)
-app.use('/delegacoes', delegacoesRoutes)
 app.use('/modalidades', modalidadesRoutes)
 app.use('/categorias', categoriasRoutes)
 app.use('/municipios', municipiosRoutes)

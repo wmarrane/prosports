@@ -29,26 +29,46 @@ model User {
 }
 
 model Municipio {
-  id            Int         @id @default(autoincrement())
-  codigo_ibge   String      @unique @db.Char(7)
+  id            Int            @id @default(autoincrement())
+  codigo_ibge   String         @unique @db.Char(7)
   nome          String
-  uf            String      @db.Char(2)
-  delegacoes    Delegacao[]
-  criado_em     DateTime    @default(now())
-  atualizado_em DateTime    @updatedAt
+  uf            String         @db.Char(2)
+  participantes Participante[]
+  criado_em     DateTime       @default(now())
+  atualizado_em DateTime       @updatedAt
 
   @@index([uf, nome])
   @@index([nome])
 }
 
-model Delegacao {
-  id            Int       @id @default(autoincrement())
+model Inspetoria {
+  id            Int            @id @default(autoincrement())
+  nome          String         @unique
+  participantes Participante[]
+  criado_em     DateTime       @default(now())
+  atualizado_em DateTime       @updatedAt
+}
+
+model Delegacia {
+  id            Int            @id @default(autoincrement())
+  nome          String         @unique
+  participantes Participante[]
+  criado_em     DateTime       @default(now())
+  atualizado_em DateTime       @updatedAt
+}
+
+model Participante {
+  id            Int          @id @default(autoincrement())
   nome          String
-  municipio     Municipio @relation(fields: [municipio_id], references: [id])
+  subtitulo     String?
+  inspetoria    Inspetoria?  @relation(fields: [inspetoria_id], references: [id])
+  inspetoria_id Int?
+  delegacia     Delegacia?   @relation(fields: [delegacia_id], references: [id])
+  delegacia_id  Int?
+  municipio     Municipio    @relation(fields: [municipio_id], references: [id])
   municipio_id  Int
-  logo_path     String?
-  criado_em     DateTime  @default(now())
-  atualizado_em DateTime  @updatedAt
+  criado_em     DateTime     @default(now())
+  atualizado_em DateTime     @updatedAt
 }
 
 model Modalidade {

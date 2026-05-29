@@ -52,10 +52,10 @@ export async function editar(
 }
 
 export async function remover(id: number) {
-  const vinculadas = await prisma.delegacao.count({ where: { municipio_id: id } })
-  if (vinculadas > 0) {
+  const vinculados = await prisma.participante.count({ where: { municipio_id: id } })
+  if (vinculados > 0) {
     throw Object.assign(
-      new Error('Remova as delegações vinculadas antes de excluir este município.'),
+      new Error('Remova os participantes vinculados antes de excluir este município.'),
       { status: 409 }
     )
   }

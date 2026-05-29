@@ -10,7 +10,7 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
-    delegacao: {
+    participante: {
       count: vi.fn(),
     },
   },
@@ -74,14 +74,14 @@ describe('municipios.service', () => {
     expect(mockPrisma.municipio.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { uf: 'RJ' } })
   })
 
-  it('remover falha com 409 quando há delegação vinculada', async () => {
-    mockPrisma.delegacao.count.mockResolvedValue(2)
+  it('remover falha com 409 quando há participante vinculado', async () => {
+    mockPrisma.participante.count.mockResolvedValue(2)
     await expect(service.remover(1)).rejects.toMatchObject({ status: 409 })
     expect(mockPrisma.municipio.delete).not.toHaveBeenCalled()
   })
 
-  it('remover deleta quando não há delegação vinculada', async () => {
-    mockPrisma.delegacao.count.mockResolvedValue(0)
+  it('remover deleta quando não há participante vinculado', async () => {
+    mockPrisma.participante.count.mockResolvedValue(0)
     mockPrisma.municipio.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.municipio.delete).toHaveBeenCalledWith({ where: { id: 1 } })
