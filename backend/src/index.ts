@@ -11,6 +11,7 @@ import municipiosRoutes from './modules/municipios/municipios.routes'
 import inspetoriasRoutes from './modules/inspetorias/inspetorias.routes'
 import delegaciasRoutes from './modules/delegacias/delegacias.routes'
 import participantesRoutes from './modules/participantes/participantes.routes'
+import competicoesRoutes from './modules/competicoes/competicoes.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -40,6 +41,7 @@ app.use('/municipios', municipiosRoutes)
 app.use('/inspetorias', inspetoriasRoutes)
 app.use('/delegacias', delegaciasRoutes)
 app.use('/participantes', participantesRoutes)
+app.use('/competicoes', competicoesRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
