@@ -16,6 +16,8 @@ import DelegaciasList from './pages/delegacias/DelegaciasList'
 import DelegaciaForm from './pages/delegacias/DelegaciaForm'
 import ParticipantesList from './pages/participantes/ParticipantesList'
 import ParticipanteForm from './pages/participantes/ParticipanteForm'
+import CompeticoesList from './pages/competicoes/CompeticoesList'
+import CompeticaoForm from './pages/competicoes/CompeticaoForm'
 
 export default function App() {
   return (
@@ -50,6 +52,10 @@ export default function App() {
             <Route path="/municipios/novo" element={<MunicipioForm />} />
             <Route path="/municipios/:id/editar" element={<MunicipioForm />} />
             <Route path="/municipios/importar" element={<MunicipiosImport />} />
+
+            <Route path="/competicoes" element={<CompeticoesList />} />
+            <Route path="/competicoes/nova" element={<CompeticaoForm />} />
+            <Route path="/competicoes/:id/editar" element={<CompeticaoForm />} />
 
             <Route path="/novidades" element={<Novidades />} />
           </Route>

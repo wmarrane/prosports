@@ -16,13 +16,7 @@ const navGroups: NavGroup[] = [
       { label: 'Participantes', to: '/participantes' },
       { label: 'Modalidades',   to: '/modalidades' },
       { label: 'Categorias',    to: '/categorias' },
-    ],
-  },
-  {
-    title: 'Competições',
-    items: [
-      { label: 'Edições', to: '/edicoes' },
-      { label: 'Competições', to: '/competicoes' },
+      { label: 'Competições',   to: '/competicoes' },
     ],
   },
 ]
