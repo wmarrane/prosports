@@ -5,8 +5,8 @@ import * as service from './participantes.service'
 const createSchema = z.object({
   nome: z.string().min(1),
   subtitulo: z.string().optional(),
-  inspetoria_id: z.coerce.number().int().positive().optional(),
-  delegacia_id: z.coerce.number().int().positive().optional(),
+  inspetoria_id: z.coerce.number().int().positive().nullable().optional(),
+  delegacia_id: z.coerce.number().int().positive().nullable().optional(),
   municipio_id: z.coerce.number().int().positive(),
 })
 

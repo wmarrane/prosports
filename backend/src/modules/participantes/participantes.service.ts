@@ -21,8 +21,8 @@ export async function buscarPorId(id: number) {
 export async function criar(data: {
   nome: string
   subtitulo?: string
-  inspetoria_id?: number
-  delegacia_id?: number
+  inspetoria_id?: number | null
+  delegacia_id?: number | null
   municipio_id: number
 }) {
   return prisma.participante.create({ data, include: INCLUDE })

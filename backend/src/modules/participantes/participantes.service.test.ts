@@ -63,6 +63,16 @@ describe('participantes.service', () => {
     })
   })
 
+  it('editar aceita null para inspetoria_id e delegacia_id', async () => {
+    mockPrisma.participante.update.mockResolvedValue({ id: 1 })
+    await service.editar(1, { inspetoria_id: null, delegacia_id: null })
+    expect(mockPrisma.participante.update).toHaveBeenCalledWith({
+      where: { id: 1 },
+      data: { inspetoria_id: null, delegacia_id: null },
+      include: INCLUDE,
+    })
+  })
+
   it('remover deleta direto', async () => {
     mockPrisma.participante.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
