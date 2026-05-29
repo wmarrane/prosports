@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
 import { modalidadesService } from '../../services/modalidades'
-import type { Modalidade } from '../../types/fundacao'
+import type { Modalidade } from '../../types/modalidade'
 
 export default function ModalidadesList() {
   const navigate = useNavigate()
@@ -11,7 +11,7 @@ export default function ModalidadesList() {
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['modalidades'],
-    queryFn: modalidadesService.listar,
+    queryFn: () => modalidadesService.listar(),
   })
 
   const { mutate: remover } = useMutation({
@@ -21,9 +21,10 @@ export default function ModalidadesList() {
   })
 
   const columns = [
+    { header: 'Competição', accessor: (row: Modalidade) => row.competicao.nome },
+    { header: 'Tipo', accessor: (row: Modalidade) => row.tipo_modalidade.nome },
     { header: 'Nome', accessor: (row: Modalidade) => row.nome },
-    { header: 'Descrição', accessor: (row: Modalidade) => row.descricao ?? '—' },
-    { header: 'Categorias', accessor: (row: Modalidade) => row._count?.categorias ?? 0, className: 'w-24 text-center' },
+    { header: 'Sigla', accessor: (row: Modalidade) => row.sigla, className: 'w-20 font-mono' },
     {
       header: 'Ações',
       accessor: (row: Modalidade) => (

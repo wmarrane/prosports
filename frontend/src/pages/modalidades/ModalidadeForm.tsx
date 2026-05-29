@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import { modalidadesService } from '../../services/modalidades'
+import { competicoesService } from '../../services/competicoes'
+import { tiposModalidadeService } from '../../services/tipos-modalidade'
 
 export default function ModalidadeForm() {
   const { id } = useParams()
@@ -11,9 +13,21 @@ export default function ModalidadeForm() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
+  const [competicaoId, setCompeticaoId] = useState<number | ''>('')
+  const [tipoModalidadeId, setTipoModalidadeId] = useState<number | ''>('')
   const [nome, setNome] = useState('')
-  const [descricao, setDescricao] = useState('')
+  const [sigla, setSigla] = useState('')
   const [erro, setErro] = useState('')
+
+  const { data: competicoes = [] } = useQuery({
+    queryKey: ['competicoes'],
+    queryFn: competicoesService.listar,
+  })
+
+  const { data: tipos = [] } = useQuery({
+    queryKey: ['tipos-modalidade'],
+    queryFn: tiposModalidadeService.listar,
+  })
 
   const { data: existing } = useQuery({
     queryKey: ['modalidades', Number(id)],
@@ -22,32 +36,74 @@ export default function ModalidadeForm() {
   })
 
   useEffect(() => {
-    if (existing) { setNome(existing.nome); setDescricao(existing.descricao ?? '') }
+    if (existing) {
+      setCompeticaoId(existing.competicao_id)
+      setTipoModalidadeId(existing.tipo_modalidade_id)
+      setNome(existing.nome)
+      setSigla(existing.sigla)
+    }
   }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
-    mutationFn: () => isEdit
-      ? modalidadesService.editar(Number(id), { nome, descricao: descricao || undefined })
-      : modalidadesService.criar({ nome, descricao: descricao || undefined }),
+    mutationFn: () => {
+      const payload = {
+        nome,
+        sigla: sigla.trim().toUpperCase(),
+        competicao_id: Number(competicaoId),
+        tipo_modalidade_id: Number(tipoModalidadeId),
+      }
+      return isEdit
+        ? modalidadesService.editar(Number(id), payload)
+        : modalidadesService.criar(payload)
+    },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['modalidades'] }); navigate('/modalidades') },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    setErro('')
+    if (!competicaoId) return setErro('Selecione uma competição.')
+    if (!tipoModalidadeId) return setErro('Selecione um tipo de modalidade.')
+    if (!nome.trim()) return setErro('Informe o nome.')
+    if (sigla.trim().length < 2) return setErro('Sigla deve ter ao menos 2 caracteres.')
+    salvar()
+  }
+
+  const inputClass = 'w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
 
   return (
     <div className="text-white">
       <PageHeader title={isEdit ? 'Editar Modalidade' : 'Nova Modalidade'} backTo="/modalidades" />
       <div className="p-6 max-w-lg">
-        <form onSubmit={(e: FormEvent) => { e.preventDefault(); setErro(''); salvar() }} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Competição</label>
+            <select value={competicaoId} onChange={e => setCompeticaoId(e.target.value === '' ? '' : Number(e.target.value))} required className={inputClass}>
+              <option value="">— Selecione —</option>
+              {competicoes.map(c => <option key={c.id} value={c.id}>{c.nome}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Tipo de Modalidade</label>
+            <select value={tipoModalidadeId} onChange={e => setTipoModalidadeId(e.target.value === '' ? '' : Number(e.target.value))} required className={inputClass}>
+              <option value="">— Selecione —</option>
+              {tipos.map(t => <option key={t.id} value={t.id}>{t.nome}</option>)}
+            </select>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">Nome</label>
-            <input value={nome} onChange={e => setNome(e.target.value)} required
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <input value={nome} onChange={e => setNome(e.target.value)} required className={inputClass} />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Descrição (opcional)</label>
-            <textarea value={descricao} onChange={e => setDescricao(e.target.value)} rows={3}
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" />
+            <label className="block text-sm font-medium text-gray-300 mb-1">Sigla (2 a 6 caracteres)</label>
+            <input value={sigla} onChange={e => setSigla(e.target.value)} required maxLength={6}
+              className={`${inputClass} font-mono uppercase`} placeholder="Ex.: FUT" />
           </div>
+
           {erro && <p className="text-sm text-red-400">{erro}</p>}
           <button type="submit" disabled={isPending}
             className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors">
