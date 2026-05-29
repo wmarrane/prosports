@@ -5,8 +5,8 @@ import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
 import { municipiosService } from '../../services/municipios'
 import type { Municipio } from '../../types/municipio'
+import { UFS } from '../../lib/ufs'
 
-const UFS = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
 const PAGE_SIZE = 50
 
 export default function MunicipiosList() {
