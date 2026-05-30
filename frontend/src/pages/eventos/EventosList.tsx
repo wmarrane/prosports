@@ -89,7 +89,13 @@ export default function EventosList() {
                     <Cadastro size={13} /> {ev.organizador}
                   </div>
                 )}
-                <div className="mt-3 flex justify-end">
+                <div className="mt-3 flex justify-end gap-3">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); navigate(`/eventos/${ev.id}/inscricoes`) }}
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)]"
+                  >
+                    Inscrições
+                  </button>
                   <button
                     onClick={(e) => handleRemove(e, ev)}
                     className="text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"

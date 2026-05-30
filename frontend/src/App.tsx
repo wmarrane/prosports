@@ -21,6 +21,7 @@ import CompeticaoForm from './pages/competicoes/CompeticaoForm'
 import Painel from './pages/Painel'
 import EventosList from './pages/eventos/EventosList'
 import EventoForm from './pages/eventos/EventoForm'
+import EventoInscricoes from './pages/eventos/EventoInscricoes'
 import Relatorio from './pages/Relatorio'
 import Admin from './pages/Admin'
 
@@ -34,9 +35,10 @@ export default function App() {
             <Route path="/" element={<Navigate to="/painel" replace />} />
 
             <Route path="/painel"    element={<Painel />} />
-            <Route path="/eventos"             element={<EventosList />} />
-            <Route path="/eventos/novo"        element={<EventoForm />} />
-            <Route path="/eventos/:id/editar"  element={<EventoForm />} />
+            <Route path="/eventos"                  element={<EventosList />} />
+            <Route path="/eventos/novo"             element={<EventoForm />} />
+            <Route path="/eventos/:id/editar"       element={<EventoForm />} />
+            <Route path="/eventos/:id/inscricoes"   element={<EventoInscricoes />} />
             <Route path="/relatorio" element={<Relatorio />} />
             <Route path="/admin"     element={<Admin />} />
 
