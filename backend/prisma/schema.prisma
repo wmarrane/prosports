@@ -34,6 +34,7 @@ model Municipio {
   nome          String
   uf            String         @db.Char(2)
   participantes Participante[]
+  eventos       Evento[]
   criado_em     DateTime       @default(now())
   atualizado_em DateTime       @updatedAt
 
@@ -92,6 +93,7 @@ model Competicao {
   estados             String[]
   adicionar_subtitulo Boolean      @default(false)
   modalidades         Modalidade[]
+  eventos             Evento[]
   criado_em           DateTime     @default(now())
   atualizado_em       DateTime     @updatedAt
 }
@@ -102,4 +104,29 @@ model TipoModalidade {
   modalidades   Modalidade[]
   criado_em     DateTime     @default(now())
   atualizado_em DateTime     @updatedAt
+}
+
+enum EventoStatus {
+  rascunho
+  inscricoes
+  pronto
+  sorteado
+  parcial
+}
+
+model Evento {
+  id              Int           @id @default(autoincrement())
+  nome            String
+  data_hora       DateTime
+  local           String
+  organizador     String?
+  status          EventoStatus  @default(rascunho)
+  competicao      Competicao    @relation(fields: [competicao_id], references: [id])
+  competicao_id   Int
+  municipio       Municipio     @relation(fields: [municipio_id], references: [id])
+  municipio_id    Int
+  criado_em       DateTime      @default(now())
+  atualizado_em   DateTime      @updatedAt
+
+  @@unique([competicao_id, nome])
 }
