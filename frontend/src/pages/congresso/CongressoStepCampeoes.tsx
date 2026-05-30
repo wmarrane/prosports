@@ -1,8 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import CampeaoBadge from '../../components/CampeaoBadge'
+import CampeaoSlot from '../../components/CampeaoSlot'
 
 type Props = {
   eventoId: number
@@ -16,8 +18,35 @@ const DIM = '#94a3b8'
 const SUCCESS = '#14b88a'
 const CARD_BG = 'rgba(255,255,255,.04)'
 const CARD_BORDER = 'rgba(255,255,255,.1)'
+const MODAL_BG = '#0f1623'
+const MODAL_BORDER = 'rgba(255,255,255,0.1)'
+const BTN_PRIMARY = {
+  background: '#1061d8',
+  color: '#fff',
+  border: 'none',
+  borderRadius: 10,
+  padding: '12px 24px',
+  fontSize: 16,
+  fontWeight: 600,
+  cursor: 'pointer',
+} as const
+const BTN_GHOST_OUTLINE = {
+  background: 'transparent',
+  color: '#1061d8',
+  border: '1px solid #1061d8',
+  borderRadius: 10,
+  padding: '12px 24px',
+  fontSize: 16,
+  fontWeight: 600,
+  cursor: 'pointer',
+} as const
+
+const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
 export default function CongressoStepCampeoes({ eventoId, modalidadeId, competicaoId, onNext }: Props) {
+  const queryClient = useQueryClient()
+  const [editOpen, setEditOpen] = useState(false)
+
   const { data: campeoes = [], isLoading } = useQuery({
     queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -37,6 +66,26 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
   const modalidade = modalidades.find(m => m.id === modalidadeId)
   const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
   const ordenados = [...campeoes].sort((a, b) => a.posicao - b.posicao)
+
+  const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
+    mutationFn: (data: { participante_id: number; posicao: number }) =>
+      campeoesAnterioresService.criar({
+        evento_id: eventoId,
+        modalidade_id: modalidadeId,
+        participante_id: data.participante_id,
+        posicao: data.posicao,
+      }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
+  })
+
+  const { mutate: removerCampeao } = useMutation({
+    mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+  })
+
+  const excludeCampeoesIds = campeoes.map(c => c.participante_id)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -100,21 +149,55 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
         )}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 12 }}>
-        <button
-          onClick={onNext}
-          style={{
-            background: '#1061d8',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 10,
-            padding: '12px 24px',
-            fontSize: 16,
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}
-        >Próximo →</button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: 12, gap: 12 }}>
+        <button onClick={() => setEditOpen(true)} style={BTN_GHOST_OUTLINE}>Editar campeões</button>
+        <button onClick={onNext} style={BTN_PRIMARY}>Próximo →</button>
       </div>
+
+      {editOpen && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 40,
+          }}
+          onClick={() => setEditOpen(false)}
+        >
+          <div
+            style={{
+              background: MODAL_BG, border: `1px solid ${MODAL_BORDER}`,
+              borderRadius: 16, padding: 24, maxWidth: 960, width: '100%', margin: '0 16px',
+              maxHeight: '85vh', overflowY: 'auto',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 style={{ fontSize: 20, fontWeight: 600, color: FG, marginBottom: 4 }}>
+              Editar campeões do ano anterior
+            </h3>
+            <p style={{ fontSize: 13, color: DIM, marginBottom: 16 }}>
+              Cadastre até 12 colocados. Quem se inscrever neste evento recebe o badge correspondente.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {POSICOES.map(pos => {
+                const c = ordenados.find(x => x.posicao === pos) ?? null
+                return (
+                  <CampeaoSlot
+                    key={pos}
+                    posicao={pos}
+                    campeao={c}
+                    excludeIds={excludeCampeoesIds}
+                    onCriar={(participante_id) => criarCampeao({ participante_id, posicao: pos })}
+                    onRemover={(cid) => removerCampeao(cid)}
+                    salvando={salvandoCampeao}
+                  />
+                )
+              })}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+              <button onClick={() => setEditOpen(false)} style={BTN_PRIMARY}>Fechar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
