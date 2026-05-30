@@ -12,6 +12,7 @@ import delegaciasRoutes from './modules/delegacias/delegacias.routes'
 import participantesRoutes from './modules/participantes/participantes.routes'
 import competicoesRoutes from './modules/competicoes/competicoes.routes'
 import eventosRoutes from './modules/eventos/eventos.routes'
+import inscricoesRoutes from './modules/inscricoes/inscricoes.routes'
 import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.routes'
 import {
   helmetMiddleware,
@@ -42,6 +43,7 @@ app.use('/municipios', municipiosRoutes)
 app.use('/inspetorias', inspetoriasRoutes)
 app.use('/delegacias', delegaciasRoutes)
 app.use('/participantes', participantesRoutes)
+app.use('/inscricoes', inscricoesRoutes)
 app.use('/eventos', eventosRoutes)
 app.use('/competicoes', competicoesRoutes)
 
