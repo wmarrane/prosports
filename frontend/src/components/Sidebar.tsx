@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 import { APP_VERSION, APP_COMMIT } from '../lib/version'
@@ -8,8 +9,8 @@ import {
   ChevR, ChevronDown,
 } from '../lib/icons'
 
-type NavLeaf = { id: string; label: string; icon: React.ComponentType<{ size?: number }>; path: string }
-type NavExpandable = { id: string; label: string; icon: React.ComponentType<{ size?: number }>; expandable: true; children: { id: string; label: string; path: string }[] }
+type NavLeaf = { id: string; label: string; icon: LucideIcon; path: string }
+type NavExpandable = { id: string; label: string; icon: LucideIcon; expandable: true; children: { id: string; label: string; path: string }[] }
 type NavCat = { cat: string }
 type NavItem = NavLeaf | NavExpandable | NavCat
 
