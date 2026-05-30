@@ -1,13 +1,15 @@
 import type { ChavesResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
+import CampeaoBadge from '../CampeaoBadge'
 
 type Props = {
   resultado: ChavesResultado
   participantesById: Map<number, Participante>
   large?: boolean
+  campeoesByParticipanteId?: Map<number, 1 | 2 | 3>
 }
 
-export default function SorteioChaves({ resultado, participantesById, large = false }: Props) {
+export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
   const cardPad = large ? 'p-6' : 'p-4'
   const itemSpacing = large ? 'space-y-3' : 'space-y-1.5'
   const indexClass = large ? 'font-mono text-base text-[var(--t3)] w-12' : 'font-mono text-[var(--t3)] w-8'
@@ -26,9 +28,15 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
             ) : (
               (() => {
                 const p = participantesById.get(pid)
-                return p
-                  ? <span className={nameClass}>{p.nome}{p.subtitulo ? <span className={subClass}>— {p.subtitulo}</span> : null}</span>
-                  : <span className="text-[var(--t4)]">—</span>
+                const pos = campeoesByParticipanteId?.get(pid)
+                return (
+                  <span className="inline-flex items-center gap-2">
+                    {pos && <CampeaoBadge posicao={pos} large={large} />}
+                    {p
+                      ? <span className={nameClass}>{p.nome}{p.subtitulo ? <span className={subClass}>— {p.subtitulo}</span> : null}</span>
+                      : <span className="text-[var(--t4)]">—</span>}
+                  </span>
+                )
               })()
             )}
           </li>

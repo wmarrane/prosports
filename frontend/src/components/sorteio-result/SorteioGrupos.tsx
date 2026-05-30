@@ -1,13 +1,15 @@
 import type { GruposResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
+import CampeaoBadge from '../CampeaoBadge'
 
 type Props = {
   resultado: GruposResultado
   participantesById: Map<number, Participante>
   large?: boolean
+  campeoesByParticipanteId?: Map<number, 1 | 2 | 3>
 }
 
-export default function SorteioGrupos({ resultado, participantesById, large = false }: Props) {
+export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
@@ -30,10 +32,14 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
           <ul className={large ? 'space-y-3' : 'space-y-1.5'}>
             {g.participantes.map(pid => {
               const p = participantesById.get(pid)
+              const pos = campeoesByParticipanteId?.get(pid)
               return (
-                <li key={pid} className={itemClass}>
-                  {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
-                  {p?.subtitulo && <span className={subItemClass}>— {p.subtitulo}</span>}
+                <li key={pid} className={`${itemClass} inline-flex items-center gap-2 w-full`}>
+                  {pos && <CampeaoBadge posicao={pos} large={large} />}
+                  <span>
+                    {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
+                    {p?.subtitulo && <span className={subItemClass}>— {p.subtitulo}</span>}
+                  </span>
                 </li>
               )
             })}
