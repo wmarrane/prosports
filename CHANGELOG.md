@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.10.0] - 2026-05-30
+
+### Added
+- Workspace operacional em /eventos/:id/inscricoes: seção "Sorteio" por modalidade com botão Sortear / Re-sortear (confirm) / Apagar sorteio (confirm).
+- Visualização do resultado por tipo: cards de grupo (grupos), lista numerada com BYEs (chaves), lista ordenada com medalhas top 3 (ordem de entrada).
+- Indicador de progresso "X de Y modalidades sorteadas" + barra.
+- Selo ✓ verde nas chips de modalidades que já foram sorteadas.
+
+### Notes
+- Aviso amigável quando modalidade é do tipo `especifico` (sem sorteio automático).
+- Erros 400 do backend (sem regra de grupos, 0 inscritos) renderizados inline.
+
 ## [1.9.0] - 2026-05-30
 
 ### Added
