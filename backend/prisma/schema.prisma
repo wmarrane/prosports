@@ -69,6 +69,7 @@ model Participante {
   municipio     Municipio    @relation(fields: [municipio_id], references: [id])
   municipio_id  Int
   inscricoes    Inscricao[]
+  campeoes_anteriores CampeaoAnterior[]
   criado_em     DateTime     @default(now())
   atualizado_em DateTime     @updatedAt
 }
@@ -83,6 +84,7 @@ model Modalidade {
   tipo_modalidade_id  Int
   inscricoes          Inscricao[]
   sorteios            Sorteio[]
+  campeoes_anteriores CampeaoAnterior[]
   criado_em           DateTime        @default(now())
   atualizado_em       DateTime        @updatedAt
 
@@ -146,6 +148,7 @@ model Evento {
   municipio_id    Int
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
+  campeoes_anteriores CampeaoAnterior[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -188,4 +191,20 @@ model Sorteio {
 
   @@unique([evento_id, modalidade_id])
   @@index([evento_id])
+}
+
+model CampeaoAnterior {
+  id              Int           @id @default(autoincrement())
+  evento          Evento        @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id       Int
+  modalidade      Modalidade    @relation(fields: [modalidade_id], references: [id])
+  modalidade_id   Int
+  participante    Participante  @relation(fields: [participante_id], references: [id])
+  participante_id Int
+  posicao         Int
+  criado_em       DateTime      @default(now())
+  atualizado_em   DateTime      @updatedAt
+
+  @@unique([evento_id, modalidade_id, posicao])
+  @@index([evento_id, modalidade_id])
 }
