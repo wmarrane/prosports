@@ -1,0 +1,61 @@
+import prisma from '../../lib/prisma'
+
+const INCLUDE = { competicao: true, municipio: true } as const
+
+async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn()
+  } catch (err: any) {
+    if (err?.code === 'P2002') {
+      throw Object.assign(
+        new Error('Já existe um evento com este nome nesta competição.'),
+        { status: 409 }
+      )
+    }
+    throw err
+  }
+}
+
+type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
+
+type CreateInput = {
+  nome: string
+  data_hora: Date
+  local: string
+  organizador?: string
+  status?: EventoStatus
+  competicao_id: number
+  municipio_id: number
+}
+
+export async function listar(competicao_id?: number) {
+  return prisma.evento.findMany({
+    where: competicao_id ? { competicao_id } : undefined,
+    orderBy: { data_hora: 'desc' },
+    include: INCLUDE,
+  })
+}
+
+export async function buscarPorId(id: number) {
+  const item = await prisma.evento.findUnique({
+    where: { id },
+    include: INCLUDE,
+  })
+  if (!item) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+  return item
+}
+
+export async function criar(data: CreateInput) {
+  return mapPrismaError(() => prisma.evento.create({ data, include: INCLUDE }))
+}
+
+export async function editar(
+  id: number,
+  data: Partial<CreateInput>
+) {
+  return mapPrismaError(() => prisma.evento.update({ where: { id }, data, include: INCLUDE }))
+}
+
+export async function remover(id: number) {
+  return prisma.evento.delete({ where: { id } })
+}
