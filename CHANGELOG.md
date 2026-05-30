@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.17.0] - 2026-05-30
+
+### Changed
+- `SorteioChaves` (modalidades tipo chaves) agora renderiza bracket de eliminação simples em árvore (colunas horizontais por rodada), em vez de lista flat de slots.
+- Labels semânticos por rodada: Final / Semifinal / Quartas / Oitavas / "Nª Rodada" para tamanhos maiores.
+- Round 0 mostra os pares iniciais (nomes ou BYE quando N não é potência de 2). Rounds seguintes mostram placeholders "Vencedor M{n}".
+
+### Notes
+- Sem mudança no backend. Sorteios antigos (formato `size = pot2` com nulls) continuam renderizando — frontend confia em `slots.length` para determinar N atual.
+- Badge de campeão do ano anterior continua aparecendo ao lado do nome na 1ª rodada.
+- Constraint "modalidade tipo chaves não tem fase de grupos" já era garantida pelo backend (service dispatch por tipo).
+
 ## [1.16.1] - 2026-05-30
 
 ### Added
