@@ -1,8 +1,11 @@
 import type { Competicao } from './competicao'
 
+export type TipoDisputa = 'grupos' | 'chaves' | 'especifico' | 'ordem_entrada'
+
 export type TipoModalidade = {
   id: number
   nome: string
+  tipo: TipoDisputa
   criado_em: string
   atualizado_em: string
 }
