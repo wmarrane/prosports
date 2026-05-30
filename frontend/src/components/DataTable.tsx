@@ -16,16 +16,16 @@ type Props<T> = {
 export default function DataTable<T>({ columns, data, keyExtractor, emptyMessage = 'Nenhum registro encontrado.' }: Props<T>) {
   if (data.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500 text-sm">{emptyMessage}</div>
+      <div className="text-center py-12 text-[var(--t3)] text-sm">{emptyMessage}</div>
     )
   }
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm text-left">
         <thead>
-          <tr className="border-b border-gray-800">
+          <tr className="border-b border-[var(--card-border)]">
             {columns.map((col) => (
-              <th key={col.header} className={`px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider ${col.className ?? ''}`}>
+              <th key={col.header} className={`px-4 py-3 text-xs font-semibold text-[var(--t3)] uppercase tracking-wider ${col.className ?? ''}`}>
                 {col.header}
               </th>
             ))}
@@ -33,9 +33,9 @@ export default function DataTable<T>({ columns, data, keyExtractor, emptyMessage
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr key={keyExtractor(row)} className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors">
+            <tr key={keyExtractor(row)} className="border-b border-[var(--card-border)] hover:bg-[var(--card-bg-2)]/50 transition-colors">
               {columns.map((col) => (
-                <td key={col.header} className={`px-4 py-3 text-gray-300 ${col.className ?? ''}`}>
+                <td key={col.header} className={`px-4 py-3 text-[var(--t2)] ${col.className ?? ''}`}>
                   {col.accessor(row)}
                 </td>
               ))}

@@ -13,10 +13,10 @@ const SECTION_LABEL: Record<ChangelogSection, string> = {
 }
 
 const SECTION_COLOR: Record<ChangelogSection, string> = {
-  Added: 'text-emerald-400',
-  Changed: 'text-amber-400',
-  Fixed: 'text-sky-400',
-  Removed: 'text-red-400',
+  Added: 'text-[var(--success)]',
+  Changed: 'text-[var(--warn)]',
+  Fixed: 'text-[var(--info)]',
+  Removed: 'text-[var(--danger)]',
 }
 
 const SECTION_ORDER: ChangelogSection[] = ['Added', 'Changed', 'Fixed', 'Removed']
@@ -34,28 +34,28 @@ export default function Novidades() {
   })()
 
   return (
-    <div className="text-white">
+    <div className="text-[var(--t1)]">
       <PageHeader title="Novidades" />
       <div className="p-6 max-w-3xl space-y-6">
-        <div className="text-xs text-gray-500">
-          Versão atual: <span className="text-gray-300">v{APP_VERSION}</span>
-          {' · '}commit <span className="text-gray-300">{APP_COMMIT}</span>
+        <div className="text-xs text-[var(--t3)]">
+          Versão atual: <span className="text-[var(--t2)]">v{APP_VERSION}</span>
+          {' · '}commit <span className="text-[var(--t2)]">{APP_COMMIT}</span>
           {' · '}build {builtAt}
         </div>
 
-        {isLoading && <p className="text-gray-400 text-sm">Carregando...</p>}
-        {error && <p className="text-red-400 text-sm">Não foi possível carregar o changelog.</p>}
+        {isLoading && <p className="text-[var(--t3)] text-sm">Carregando...</p>}
+        {error && <p className="text-[var(--danger)] text-sm">Não foi possível carregar o changelog.</p>}
 
         {releases && releases.length === 0 && (
-          <p className="text-gray-400 text-sm">Nenhum release registrado ainda.</p>
+          <p className="text-[var(--t3)] text-sm">Nenhum release registrado ainda.</p>
         )}
 
         <div className="space-y-6">
           {releases?.map((r) => (
-            <article key={r.version} className="bg-gray-900 border border-gray-800 rounded-lg p-5">
+            <article key={r.version} className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg p-5">
               <header className="flex items-baseline justify-between mb-3">
-                <h2 className="text-lg font-semibold text-white">v{r.version}</h2>
-                <span className="text-xs text-gray-500">{r.date}</span>
+                <h2 className="text-lg font-semibold text-[var(--t1)]">v{r.version}</h2>
+                <span className="text-xs text-[var(--t3)]">{r.date}</span>
               </header>
               <div className="space-y-3">
                 {SECTION_ORDER.map((sec) => {
@@ -66,7 +66,7 @@ export default function Novidades() {
                       <h3 className={`text-xs font-semibold uppercase tracking-wider ${SECTION_COLOR[sec]} mb-1`}>
                         {SECTION_LABEL[sec]}
                       </h3>
-                      <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
+                      <ul className="list-disc list-inside text-sm text-[var(--t2)] space-y-1">
                         {items.map((item, i) => <li key={i}>{item}</li>)}
                       </ul>
                     </div>

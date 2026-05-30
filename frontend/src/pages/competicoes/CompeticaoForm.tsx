@@ -56,50 +56,50 @@ export default function CompeticaoForm() {
     salvar()
   }
 
-  const inputClass = 'w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+  const inputClass = 'w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]'
 
   return (
-    <div className="text-white">
+    <div className="text-[var(--t1)]">
       <PageHeader title={isEdit ? 'Editar Competição' : 'Nova Competição'} backTo="/competicoes" />
       <div className="p-6 max-w-2xl">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Nome</label>
+            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Nome</label>
             <input value={nome} onChange={e => setNome(e.target.value)} required className={inputClass} />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Estados (selecione ao menos uma UF)</label>
+            <label className="block text-sm font-medium text-[var(--t2)] mb-2">Estados (selecione ao menos uma UF)</label>
             <div className="grid grid-cols-4 gap-2">
               {UFS.map(uf => (
-                <label key={uf} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 hover:bg-gray-700 cursor-pointer text-sm">
+                <label key={uf} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] hover:bg-[var(--card-bg-2)] cursor-pointer text-sm">
                   <input
                     type="checkbox"
                     checked={estados.includes(uf)}
                     onChange={() => toggleUf(uf)}
-                    className="rounded border-gray-600 bg-gray-900 text-indigo-500 focus:ring-indigo-500"
+                    className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)]"
                   />
-                  <span className="text-gray-200">{uf}</span>
+                  <span className="text-[var(--t1)]">{uf}</span>
                 </label>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-[var(--t2)] cursor-pointer">
               <input
                 type="checkbox"
                 checked={adicionarSubtitulo}
                 onChange={e => setAdicionarSubtitulo(e.target.checked)}
-                className="rounded border-gray-600 bg-gray-900 text-indigo-500 focus:ring-indigo-500"
+                className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)]"
               />
               Adicionar subtítulo aos participantes
             </label>
           </div>
 
-          {erro && <p className="text-sm text-red-400">{erro}</p>}
+          {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}
           <button type="submit" disabled={isPending}
-            className="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors">
+            className="px-6 py-2 bg-[var(--brand-500)] hover:bg-[var(--brand-400)] disabled:opacity-50 text-[var(--t1)] text-sm font-medium rounded-lg transition-colors">
             {isPending ? 'Salvando...' : 'Salvar'}
           </button>
         </form>

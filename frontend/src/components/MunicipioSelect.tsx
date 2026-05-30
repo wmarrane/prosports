@@ -59,16 +59,16 @@ export default function MunicipioSelect({ value, onChange, placeholder = 'Busque
     setQuery('')
   }
 
-  const inputClass = 'w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+  const inputClass = 'w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]'
 
   return (
     <div className="relative" ref={containerRef}>
       {selected && !open ? (
-        <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm">
+        <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm">
           <span>{selected.nome} — {selected.uf}</span>
           <div className="flex gap-2">
-            <button type="button" onClick={() => setOpen(true)} className="text-xs text-indigo-400 hover:text-indigo-300">Trocar</button>
-            <button type="button" onClick={clear} className="text-xs text-red-400 hover:text-red-300">Remover</button>
+            <button type="button" onClick={() => setOpen(true)} className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)]">Trocar</button>
+            <button type="button" onClick={clear} className="text-xs text-[var(--danger)] hover:text-[var(--danger-700)]">Remover</button>
           </div>
         </div>
       ) : (
@@ -83,22 +83,22 @@ export default function MunicipioSelect({ value, onChange, placeholder = 'Busque
         />
       )}
       {open && (
-        <div className="absolute z-10 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-10 mt-1 w-full bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg shadow-lg max-h-60 overflow-auto">
           {debouncedQuery.length < 2 && (
-            <p className="px-3 py-2 text-xs text-gray-500">Digite ao menos 2 caracteres...</p>
+            <p className="px-3 py-2 text-xs text-[var(--t3)]">Digite ao menos 2 caracteres...</p>
           )}
           {debouncedQuery.length >= 2 && isFetching && (
-            <p className="px-3 py-2 text-xs text-gray-500">Buscando...</p>
+            <p className="px-3 py-2 text-xs text-[var(--t3)]">Buscando...</p>
           )}
           {debouncedQuery.length >= 2 && !isFetching && data?.data.length === 0 && (
-            <p className="px-3 py-2 text-xs text-gray-500">Nenhum município encontrado.</p>
+            <p className="px-3 py-2 text-xs text-[var(--t3)]">Nenhum município encontrado.</p>
           )}
           {data?.data.map((m) => (
             <button
               key={m.id}
               type="button"
               onClick={() => pick(m)}
-              className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700"
+              className="w-full text-left px-3 py-2 text-sm text-[var(--t1)] hover:bg-[var(--card-bg-2)]"
             >
               {m.nome} — {m.uf}
             </button>
