@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.8.0] - 2026-05-30
+
+### Added
+- Entidade Inscricao: vínculo Evento × Modalidade × Participante (unique composto, sem duplicatas).
+- Tela /eventos/:id/inscricoes com chips de modalidade, lista de inscritos e modal de inscrever (autocomplete sobre pool global de Participantes).
+- Componente reutilizável `ParticipanteSelect` (autocomplete client-side).
+
+### Changed
+- Card do Evento (lista /eventos) ganha botão "Inscrições" que leva à nova tela operacional.
+- Apagar um Evento agora também remove suas inscrições em cascata.
+
 ## [1.7.0] - 2026-05-30
 
 ### Added
