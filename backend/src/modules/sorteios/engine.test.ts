@@ -67,6 +67,33 @@ describe('drawGroups', () => {
     // Soma e cobertura
     expect(a.grupos.map(g => g.participantes.length).sort()).toEqual([3,3,4,4])
   })
+
+  it('sem campeoesPids: comportamento igual (regressão)', () => {
+    const regra = { id: 1, quantidade_grupos: 2, grupos_3_componentes: 2, grupos_4_componentes: 0, numero_classificados: 2 }
+    const a = drawGroups([1,2,3,4,5,6], regra, 'seed-x')
+    const b = drawGroups([1,2,3,4,5,6], regra, 'seed-x', [])
+    expect(a).toEqual(b)
+  })
+
+  it('1 campeão + 5 outros (regra 2g de 3): campeão na 1ª pos do Grupo A; outros 5 distribuídos', () => {
+    const regra = { id: 1, quantidade_grupos: 2, grupos_3_componentes: 2, grupos_4_componentes: 0, numero_classificados: 2 }
+    const out = drawGroups([10,20,30,40,50,60], regra, 'seed-c1', [10])
+    expect(out.grupos[0].participantes[0]).toBe(10)
+    const todos = [...out.grupos[0].participantes, ...out.grupos[1].participantes].sort((a,b)=>a-b)
+    expect(todos).toEqual([10,20,30,40,50,60])
+  })
+
+  it('3 campeões + 3 outros (regra 2g de 3): 1º e 2º campeões nas 1ªs pos de A e B; 3º entra no shuffle', () => {
+    const regra = { id: 1, quantidade_grupos: 2, grupos_3_componentes: 2, grupos_4_componentes: 0, numero_classificados: 2 }
+    const out = drawGroups([10,20,30,40,50,60], regra, 'seed-c3', [10, 20, 30])
+    expect(out.grupos[0].participantes[0]).toBe(10)
+    expect(out.grupos[1].participantes[0]).toBe(20)
+    const todos = [...out.grupos[0].participantes, ...out.grupos[1].participantes]
+    expect(todos.includes(30)).toBe(true)
+    expect(out.grupos[0].participantes[0]).not.toBe(30)
+    expect(out.grupos[1].participantes[0]).not.toBe(30)
+    expect(todos.sort((a,b)=>a-b)).toEqual([10,20,30,40,50,60])
+  })
 })
 
 describe('drawBracket', () => {

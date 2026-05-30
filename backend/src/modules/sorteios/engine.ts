@@ -44,26 +44,44 @@ export function drawGroups(
   participantes: readonly number[],
   regra: RegraGrupos,
   seed: string,
+  campeoesPids: readonly number[] = [],
 ): GruposResultado {
-  const shuffled = shuffleSeeded(participantes, seed)
-  // Ordem dos tamanhos (quais grupos têm 3 vs 4 componentes) também é aleatória.
-  // Sub-seed independente para que dois embaralhamentos derivados da mesma seed
-  // não fiquem correlacionados.
+  // Sequência de tamanhos embaralhada (igual ao atual)
   const sizes: number[] = [
     ...Array(regra.grupos_3_componentes).fill(3),
     ...Array(regra.grupos_4_componentes).fill(4),
   ]
   const shuffledSizes = shuffleSeeded(sizes, `${seed}:sizes`)
+  const numGrupos = shuffledSizes.length
+
+  // Campeões que viram cabeça de grupo (até numGrupos)
+  const cabecas = campeoesPids.slice(0, numGrupos)
+  const cabecasSet = new Set<number>(cabecas)
+
+  // Outros = participantes que NÃO são cabeças (incluindo campeões excedentes)
+  const outros = participantes.filter(pid => !cabecasSet.has(pid))
+  const outrosShuffled = shuffleSeeded(outros, seed)
+
+  // Montar grupos
   const grupos: { letra: string; participantes: number[] }[] = []
-  let i = 0
-  for (let g = 0; g < shuffledSizes.length; g++) {
+  let cursor = 0
+  for (let g = 0; g < numGrupos; g++) {
     const tam = shuffledSizes[g]
+    const grupoParticipantes: number[] = []
+    if (g < cabecas.length) {
+      grupoParticipantes.push(cabecas[g])
+    } else {
+      grupoParticipantes.push(outrosShuffled[cursor++])
+    }
+    for (let j = 1; j < tam; j++) {
+      grupoParticipantes.push(outrosShuffled[cursor++])
+    }
     grupos.push({
       letra: String.fromCharCode(65 + g),
-      participantes: shuffled.slice(i, i + tam),
+      participantes: grupoParticipantes,
     })
-    i += tam
   }
+
   return {
     regra_id: regra.id,
     classificados_por_grupo: regra.numero_classificados,
