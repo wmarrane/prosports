@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.11.0] - 2026-05-30
+
+### Added
+- Importação CSV em massa de inscrições no workspace de evento (`/eventos/:id/inscricoes`) — wizard 3 passos: upload → revisão (dry-run com contadores e tabela por linha) → importação.
+- Auto-criação de Participante global quando o CSV traz nome+município que ainda não existe (match case-insensitive).
+- Endpoint `POST /inscricoes/import` (admin) com modo `dry_run` para preview sem persistência.
+
+### Notes
+- CSV header obrigatório: `nome,municipio_uf,municipio_nome,subtitulo` (subtítulo opcional). Linhas com município inexistente viram erro e não bloqueiam as demais.
+- Limite de 2000 linhas por import.
+
 ## [1.10.0] - 2026-05-30
 
 ### Added
