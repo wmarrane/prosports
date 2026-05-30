@@ -92,6 +92,7 @@ export function drawGroups(
 export type BracketResultado = {
   size: number
   slots: (number | null)[]
+  byePositions: number[]
 }
 
 export type RegraChaves = {
@@ -101,44 +102,49 @@ export type RegraChaves = {
   posicao_quarto_cabeca: number
 }
 
+export type RegraBracket = {
+  numero_inscrito: number
+  posicoes_bye: number[]
+}
+
 export function drawBracket(
   participantes: readonly number[],
   regra: RegraChaves,
+  regraBracket: RegraBracket,
   seed: string,
   campeoesPids: readonly number[] = [],
 ): BracketResultado {
-  const n = participantes.length
-  const slots: (number | null)[] = new Array(n).fill(null)
+  const N = participantes.length
+  const slots: (number | null)[] = new Array(N).fill(null)
 
-  // Mapear cabeças nas posições da regra (até 4)
-  const posicoes = [
+  const cabecasPos = [
     regra.posicao_primeiro_cabeca,
     regra.posicao_segundo_cabeca,
     regra.posicao_terceiro_cabeca,
     regra.posicao_quarto_cabeca,
-  ]
-  for (let i = 0; i < 4; i++) {
-    const pos = posicoes[i]
+  ].filter(p => p > 0)
+
+  const usedPids = new Set<number>()
+  for (let i = 0; i < cabecasPos.length && i < campeoesPids.length; i++) {
     const pid = campeoesPids[i]
-    if (pos === 0 || pid === undefined) continue
-    if (pos < 1 || pos > n) continue
-    slots[pos - 1] = pid
-  }
-
-  // Outros = participantes que NÃO foram colocados como cabeça
-  const colocadosSet = new Set<number>(slots.filter((s): s is number => s !== null))
-  const outros = participantes.filter(pid => !colocadosSet.has(pid))
-  const outrosShuffled = shuffleSeeded(outros, seed)
-
-  // Preencher slots vazios em ordem
-  let cursor = 0
-  for (let j = 0; j < n; j++) {
-    if (slots[j] === null) {
-      slots[j] = outrosShuffled[cursor++]
+    if (cabecasPos[i] >= 1 && cabecasPos[i] <= N) {
+      slots[cabecasPos[i] - 1] = pid
+      usedPids.add(pid)
     }
   }
 
-  return { size: n, slots }
+  const restantes = participantes.filter(p => !usedPids.has(p))
+  const shuffled = shuffleSeeded(restantes, seed)
+
+  let idx = 0
+  for (let i = 0; i < N; i++) {
+    if (slots[i] === null && idx < shuffled.length) {
+      slots[i] = shuffled[idx++]
+    }
+  }
+
+  const byePositions = [...regraBracket.posicoes_bye].sort((a, b) => a - b)
+  return { size: N, slots, byePositions }
 }
 
 export type OrdemResultado = { ordem: number[] }
