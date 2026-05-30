@@ -14,6 +14,7 @@ import competicoesRoutes from './modules/competicoes/competicoes.routes'
 import eventosRoutes from './modules/eventos/eventos.routes'
 import inscricoesRoutes from './modules/inscricoes/inscricoes.routes'
 import sorteiosRoutes from './modules/sorteios/sorteios.routes'
+import campeoesAnterioresRoutes from './modules/campeoes_anteriores/campeoes_anteriores.routes'
 import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.routes'
 import {
   helmetMiddleware,
@@ -45,6 +46,7 @@ app.use('/inspetorias', inspetoriasRoutes)
 app.use('/delegacias', delegaciasRoutes)
 app.use('/participantes', participantesRoutes)
 app.use('/sorteios', sorteiosRoutes)
+app.use('/campeoes-anteriores', campeoesAnterioresRoutes)
 app.use('/inscricoes', inscricoesRoutes)
 app.use('/eventos', eventosRoutes)
 app.use('/competicoes', competicoesRoutes)
