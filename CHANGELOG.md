@@ -5,6 +5,19 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.6.0] - 2026-05-30
+
+### Added
+- Entidade Evento: edições de competições com data/hora, local, organizador e status (rascunho / inscrições / pronto / sorteado / parcial). FKs para Competição e Município.
+- Página /eventos com grid de cards (substitui placeholder F0) + formulário de criação/edição.
+
+### Changed
+- Competição agora bloqueia exclusão se houver Eventos vinculados (além de Modalidades).
+- Município agora bloqueia exclusão se houver Eventos vinculados (além de Participantes).
+
+### Fixed
+- Recuperação da tabela `sistema_disputas_grupos` (regras de composição de grupos por competição) que havia sido removida por engano em migração intermediária.
+
 ## [1.5.0] - 2026-05-29
 
 ### Added
