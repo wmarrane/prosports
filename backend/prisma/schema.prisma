@@ -208,3 +208,15 @@ model CampeaoAnterior {
   @@unique([evento_id, modalidade_id, posicao])
   @@index([evento_id, modalidade_id])
 }
+
+model SistemaDisputasChaves {
+  id                       Int @id @default(autoincrement())
+  numero_inscrito          Int
+  posicao_primeiro_cabeca  Int
+  posicao_segundo_cabeca   Int
+  posicao_terceiro_cabeca  Int
+  posicao_quarto_cabeca    Int
+
+  @@unique([numero_inscrito])
+  @@map("sistema_disputas_chaves")
+}
