@@ -52,10 +52,16 @@ export async function editar(
 }
 
 export async function remover(id: number) {
-  const vinculados = await prisma.participante.count({ where: { municipio_id: id } })
-  if (vinculados > 0) {
+  const [participantes, eventos] = await Promise.all([
+    prisma.participante.count({ where: { municipio_id: id } }),
+    prisma.evento.count({ where: { municipio_id: id } }),
+  ])
+  const motivos: string[] = []
+  if (participantes > 0) motivos.push('participantes')
+  if (eventos > 0) motivos.push('eventos')
+  if (motivos.length > 0) {
     throw Object.assign(
-      new Error('Remova os participantes vinculados antes de excluir este município.'),
+      new Error(`Remova os ${motivos.join(' e ')} vinculados antes de excluir este município.`),
       { status: 409 }
     )
   }
