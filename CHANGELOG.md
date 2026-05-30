@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.16.1] - 2026-05-30
+
+### Added
+- Modo Congresso: passo "Participantes" agora permite adicionar inscritos (botão "+ Inscrever" abre modal com autocomplete) e remover (botão "×" por linha, com confirmação).
+- Modo Congresso: passo "Campeões do Ano Anterior" agora tem botão "Editar campeões" que abre modal com 12 slots para cadastrar/remover.
+
+### Changed
+- `CampeaoSlot` extraído de `EventoInscricoes.tsx` para componente reutilizável (`frontend/src/components/CampeaoSlot.tsx`). Comportamento idêntico nas duas telas.
+
 ## [1.16.0] - 2026-05-30
 
 ### Added
