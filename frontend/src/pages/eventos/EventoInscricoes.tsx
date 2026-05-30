@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
+import ImportInscricoesModal from '../../components/import/ImportInscricoesModal'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
@@ -32,6 +33,7 @@ export default function EventoInscricoes() {
   const [pickedId, setPickedId] = useState<number | null>(null)
   const [erroModal, setErroModal] = useState('')
   const [erroSorteio, setErroSorteio] = useState('')
+  const [importOpen, setImportOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -204,10 +206,16 @@ export default function EventoInscricoes() {
                 <h2 className="text-sm font-medium text-[var(--t2)]">
                   {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
                 </h2>
-                <button
-                  onClick={() => { setInscreverOpen(true); setPickedId(null); setErroModal('') }}
-                  className="btn btn-primary"
-                >+ Inscrever</button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setImportOpen(true)}
+                    className="px-3 py-2 text-sm text-[var(--t2)] hover:text-[var(--t1)] border border-[var(--card-border)] rounded-lg"
+                  >Importar CSV</button>
+                  <button
+                    onClick={() => { setInscreverOpen(true); setPickedId(null); setErroModal('') }}
+                    className="btn btn-primary"
+                  >+ Inscrever</button>
+                </div>
               </div>
               {loadingInscricoes ? (
                 <p className="text-sm text-[var(--t3)]">Carregando...</p>
@@ -285,6 +293,14 @@ export default function EventoInscricoes() {
           </div>
         </div>
       )}
+
+      <ImportInscricoesModal
+        open={importOpen}
+        eventoId={eventoId}
+        modalidadeId={modalidadeId ?? 0}
+        onClose={() => setImportOpen(false)}
+        onImported={() => queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })}
+      />
     </div>
   )
 }
