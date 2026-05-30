@@ -5,6 +5,22 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.18.0] - 2026-05-30
+
+### Added
+- Nova tabela `bracket_chaves_byes(numero_inscrito INT PK, posicoes_bye INT[])` populada com posições de BYE por número de inscritos (N=2..77), extraídas da planilha oficial `CHAVES CT.xlsx`.
+- Script de extração `backend/scripts/extract-bracket-byes.py` para regenerar o seed quando a planilha mudar.
+
+### Changed
+- Engine `drawBracket` agora usa `bracket_chaves_byes.posicoes_bye` em vez de `nextPow2 - N` para determinar BYEs. Estrutura assimétrica do regulamento (ex.: N=20 com 4 BYEs nas posições 1, 10, 11, 20) preservada.
+- `SorteioChaves` (frontend) renderiza bracket em 3 colunas: R1 (pares reais) / Avançam (cards individuais para cada BYE) / Demais rodadas (placeholder "conforme regulamento").
+- `Sorteio.resultado` agora inclui `byePositions: number[]` (1-indexed).
+
+### Notes
+- Sorteios pré-v1.18.0 (sem `byePositions`) continuam renderizando via builder legado (nextPow2).
+- Render fiel de R3+ para estruturas assimétricas (ex.: N=20 onde 4 R1-winners vão direto pra R3) fica para V2.
+- Posições BYE para N=2..5 e N=23..77 foram derivadas via fórmula `min(N - pot2_below, pot2_above - N)` + standard seeding. Marcadas como "DERIVED — VERIFICAR" no seed SQL para conferência manual contra a planilha.
+
 ## [1.17.1] - 2026-05-30
 
 ### Fixed
