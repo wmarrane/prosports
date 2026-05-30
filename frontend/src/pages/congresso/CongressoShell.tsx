@@ -58,7 +58,7 @@ export default function CongressoShell({ step, onBack, children }: Props) {
   return (
     <div
       className="congresso-shell"
-      style={{ background: SHELL_BG, color: SHELL_FG, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+      style={{ background: SHELL_BG, color: SHELL_FG, height: '100vh', display: 'flex', flexDirection: 'column' }}
     >
       <header
         style={{
@@ -98,7 +98,7 @@ export default function CongressoShell({ step, onBack, children }: Props) {
           <X size={16} /> Sair
         </button>
       </header>
-      <main style={{ flex: 1, overflow: 'auto', padding: 32 }}>
+      <main style={{ flex: 1, overflow: 'auto', padding: 32, minHeight: 0 }}>
         {children}
       </main>
     </div>
