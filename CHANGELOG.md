@@ -5,6 +5,20 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.15.0] - 2026-05-30
+
+### Added
+- Entidade CampeaoAnterior: registra os 3 primeiros colocados do ano anterior por (evento, modalidade), com FK obrigatório para Participante.
+- Endpoints `/campeoes-anteriores` (GET com filtros, POST, DELETE).
+- Nova seção "Campeões do ano anterior" em `/eventos/:id/inscricoes` (modalidade selecionada) com 3 slots fixos (1º/2º/3º).
+- Sinalização visual com medalhas 🥇🥈🥉 em 3 lugares: tabela de inscrições, render do sorteio (F4c) e Modo Congresso (F6).
+- Componente reutilizável `CampeaoBadge` (com prop `large` para Datashow).
+
+### Notes
+- Componentes de resultado de sorteio ganham prop opcional `campeoesByParticipanteId` — não quebra usos atuais.
+- Substituição = DELETE + POST (sem PUT).
+- Apagar Evento cascateia (remove campeões anteriores junto).
+
 ## [1.14.0] - 2026-05-30
 
 ### Added
