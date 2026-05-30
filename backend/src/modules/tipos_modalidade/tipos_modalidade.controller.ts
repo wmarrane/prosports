@@ -2,7 +2,12 @@ import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './tipos_modalidade.service'
 
-const createSchema = z.object({ nome: z.string().min(1) })
+const TIPO_VALUES = ['grupos','chaves','especifico','ordem_entrada'] as const
+
+const createSchema = z.object({
+  nome: z.string().min(1),
+  tipo: z.enum(TIPO_VALUES).optional(),
+})
 const updateSchema = createSchema.partial()
 
 export async function listar(_req: Request, res: Response, next: NextFunction) {
