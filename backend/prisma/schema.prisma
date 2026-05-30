@@ -220,3 +220,9 @@ model SistemaDisputasChaves {
   @@unique([numero_inscrito])
   @@map("sistema_disputas_chaves")
 }
+
+model BracketChavesByes {
+  numero_inscrito Int   @id
+  posicoes_bye    Int[]
+  @@map("bracket_chaves_byes")
+}
