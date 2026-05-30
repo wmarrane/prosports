@@ -1,1 +1,1 @@
-export type CongressoStep = 'evento' | 'modalidade' | 'participantes' | 'sorteio'
+export type CongressoStep = 'evento' | 'modalidade' | 'participantes' | 'campeoes' | 'sorteio'

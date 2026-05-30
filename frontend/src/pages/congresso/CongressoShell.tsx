@@ -7,6 +7,7 @@ const STEP_LABELS: Record<CongressoStep, string> = {
   evento: 'Selecione o Evento',
   modalidade: 'Selecione a Modalidade',
   participantes: 'Participantes Confirmados',
+  campeoes: 'Campeões do Ano Anterior',
   sorteio: 'Sorteio',
 }
 
@@ -14,7 +15,8 @@ const STEP_INDEX: Record<CongressoStep, number> = {
   evento: 1,
   modalidade: 2,
   participantes: 3,
-  sorteio: 4,
+  campeoes: 4,
+  sorteio: 5,
 }
 
 type Props = {
@@ -82,7 +84,7 @@ export default function CongressoShell({ step, onBack, children }: Props) {
           >← Voltar</button>
         )}
         <div style={{ flex: 1, textAlign: 'center', color: SHELL_DIM, fontSize: 14 }}>
-          Passo {STEP_INDEX[step]} de 4 · {STEP_LABELS[step]}
+          Passo {STEP_INDEX[step]} de 5 · {STEP_LABELS[step]}
         </div>
         <button
           onClick={toggleFullscreen}
