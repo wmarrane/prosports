@@ -38,3 +38,9 @@ jobs:
 
       - name: Limpar imagens antigas
         run: docker image prune -f
+
+      - name: Limpar build cache (mantém 1GB recente)
+        run: docker builder prune -f --keep-storage 1GB
+
+      - name: Limpar networks/containers órfãos
+        run: docker system prune -f
