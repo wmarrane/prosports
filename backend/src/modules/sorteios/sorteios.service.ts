@@ -68,6 +68,21 @@ export async function executar(input: { evento_id: number; modalidade_id: number
     )
   }
   const pids = inscricoes.map(i => i.participante_id)
+  const inscritosSet = new Set<number>(pids)
+
+  // Campeões cadastrados ordenados por posição, filtrados pelos que estão inscritos
+  let campeoesPidsInscritos: number[] = []
+  if (tipo === 'grupos' || tipo === 'chaves') {
+    const campeoes = await prisma.campeaoAnterior.findMany({
+      where: { evento_id: input.evento_id, modalidade_id: input.modalidade_id },
+      orderBy: { posicao: 'asc' },
+      select: { participante_id: true },
+    })
+    campeoesPidsInscritos = campeoes
+      .map(c => c.participante_id)
+      .filter(pid => inscritosSet.has(pid))
+  }
+
   const seed = novaSeed()
   let resultado: unknown
 
@@ -83,9 +98,20 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         { status: 400 },
       )
     }
-    resultado = engine.drawGroups(pids, regra, seed)
+    resultado = engine.drawGroups(pids, regra, seed, campeoesPidsInscritos)
   } else if (tipo === 'chaves') {
-    resultado = engine.drawBracket(pids, seed)
+    const regra = await prisma.sistemaDisputasChaves.findFirst({
+      where: { numero_inscrito: pids.length },
+    })
+    if (!regra) {
+      throw Object.assign(
+        new Error(
+          `Não há regra de chaveamento para ${pids.length} inscritos. Cadastre em Administração.`,
+        ),
+        { status: 400 },
+      )
+    }
+    resultado = engine.drawBracket(pids, regra, seed, campeoesPidsInscritos)
   } else if (tipo === 'ordem_entrada') {
     resultado = engine.shuffleOrder(pids, seed)
   } else {
