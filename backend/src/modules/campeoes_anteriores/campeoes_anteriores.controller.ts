@@ -6,7 +6,7 @@ const createSchema = z.object({
   evento_id: z.coerce.number().int().positive(),
   modalidade_id: z.coerce.number().int().positive(),
   participante_id: z.coerce.number().int().positive(),
-  posicao: z.coerce.number().int().min(1).max(3),
+  posicao: z.coerce.number().int().min(1).max(12),
 })
 
 const listQuerySchema = z.object({

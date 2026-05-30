@@ -55,7 +55,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   }, [inscricoes])
 
   const campeoesByParticipanteId = useMemo(() => {
-    const m = new Map<number, 1 | 2 | 3>()
+    const m = new Map<number, number>()
     for (const c of campeoes) m.set(c.participante_id, c.posicao)
     return m
   }, [campeoes])

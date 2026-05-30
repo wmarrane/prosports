@@ -7,7 +7,7 @@ type CampeaoPayload = {
   evento_id: number
   modalidade_id: number
   participante_id: number
-  posicao: 1 | 2 | 3
+  posicao: number  // 1-12
 }
 
 export const campeoesAnterioresService = {

@@ -26,10 +26,12 @@ function formatDateBR(iso: string): string {
   }
 }
 
-const POSICAO_LABEL: Record<1 | 2 | 3, string> = { 1: '1º lugar', 2: '2º lugar', 3: '3º lugar' }
+const NUM_POSICOES = 12
+const POSICOES = Array.from({ length: NUM_POSICOES }, (_, i) => i + 1)
+function posicaoLabel(n: number): string { return `${n}º lugar` }
 
 type CampeaoSlotProps = {
-  posicao: 1 | 2 | 3
+  posicao: number
   campeao: CampeaoAnterior | null
   excludeIds: number[]
   onCriar: (participante_id: number) => void
@@ -45,14 +47,14 @@ function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvand
       <div className="border border-[var(--card-border)] rounded-lg p-3 bg-[var(--card-bg-2)]">
         <div className="flex items-center gap-2 mb-2">
           <CampeaoBadge posicao={posicao} />
-          <span className="text-xs text-[var(--t3)]">{POSICAO_LABEL[posicao]}</span>
+          <span className="text-xs text-[var(--t3)]">{posicaoLabel(posicao)}</span>
         </div>
         <div className="text-sm text-[var(--t1)]">{campeao.participante.nome}</div>
         {campeao.participante.subtitulo && (
           <div className="text-xs text-[var(--t3)] mt-0.5">{campeao.participante.subtitulo}</div>
         )}
         <button
-          onClick={() => { if (confirm(`Remover ${POSICAO_LABEL[posicao]}?`)) onRemover(campeao.id) }}
+          onClick={() => { if (confirm(`Remover ${posicaoLabel(posicao)}?`)) onRemover(campeao.id) }}
           className="mt-2 text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"
         >Remover</button>
       </div>
@@ -63,7 +65,7 @@ function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvand
     <div className="border border-[var(--card-border)] rounded-lg p-3 bg-[var(--card-bg-2)] space-y-2">
       <div className="flex items-center gap-2">
         <CampeaoBadge posicao={posicao} />
-        <span className="text-xs text-[var(--t3)]">{POSICAO_LABEL[posicao]}</span>
+        <span className="text-xs text-[var(--t3)]">{posicaoLabel(posicao)}</span>
       </div>
       <ParticipanteSelect value={pickedId} onChange={(id) => setPickedId(id)} excludeIds={excludeIds} />
       <button
@@ -131,7 +133,7 @@ export default function EventoInscricoes() {
   }, [inscricoes])
 
   const campeoesByParticipanteId = useMemo(() => {
-    const m = new Map<number, 1 | 2 | 3>()
+    const m = new Map<number, number>()
     for (const c of campeoes) m.set(c.participante_id, c.posicao)
     return m
   }, [campeoes])
@@ -176,7 +178,7 @@ export default function EventoInscricoes() {
   })
 
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
-    mutationFn: (data: { participante_id: number; posicao: 1 | 2 | 3 }) =>
+    mutationFn: (data: { participante_id: number; posicao: number }) =>
       campeoesAnterioresService.criar({
         evento_id: eventoId,
         modalidade_id: modalidadeId!,
@@ -369,8 +371,9 @@ export default function EventoInscricoes() {
 
             <div className="border-t border-[var(--card-border)] pt-5 space-y-3">
               <h2 className="text-sm font-medium text-[var(--t2)]">Campeões do ano anterior</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {([1, 2, 3] as const).map(pos => {
+              <p className="text-xs text-[var(--t3)]">Cadastre até 12 colocados. Quem se inscrever neste evento recebe o badge correspondente.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {POSICOES.map(pos => {
                   const c = campeoes.find(x => x.posicao === pos) ?? null
                   return (
                     <CampeaoSlot

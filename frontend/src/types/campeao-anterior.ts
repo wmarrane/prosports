@@ -6,7 +6,7 @@ export type CampeaoAnterior = {
   modalidade_id: number
   participante_id: number
   participante: Participante
-  posicao: 1 | 2 | 3
+  posicao: number  // 1-12
   criado_em: string
   atualizado_em: string
 }

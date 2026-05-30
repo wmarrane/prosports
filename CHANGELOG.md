@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.15.1] - 2026-05-30
+
+### Changed
+- Campeões do ano anterior: expandido de 3 para **12 slots** por (evento, modalidade) — agora cadastra do 1º ao 12º colocado.
+- `CampeaoBadge`: posições 1-3 mantêm 🥇🥈🥉; posições 4-12 ganham círculo discreto com número ordinal (ex: `4º`).
+- Grid de slots passa para 4 colunas no desktop (3 linhas × 4 cards = 12).
+
 ## [1.15.0] - 2026-05-30
 
 ### Added

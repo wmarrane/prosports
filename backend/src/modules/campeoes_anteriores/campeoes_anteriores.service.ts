@@ -16,13 +16,11 @@ async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
   }
 }
 
-type Posicao = 1 | 2 | 3
-
 type CreateInput = {
   evento_id: number
   modalidade_id: number
   participante_id: number
-  posicao: Posicao
+  posicao: number  // 1-12, validado pelo Zod no controller
 }
 
 export async function listar(filtros: { evento_id?: number; modalidade_id?: number }) {

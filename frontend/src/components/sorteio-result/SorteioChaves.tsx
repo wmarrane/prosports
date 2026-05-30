@@ -6,7 +6,7 @@ type Props = {
   resultado: ChavesResultado
   participantesById: Map<number, Participante>
   large?: boolean
-  campeoesByParticipanteId?: Map<number, 1 | 2 | 3>
+  campeoesByParticipanteId?: Map<number, number>
 }
 
 export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {

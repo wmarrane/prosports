@@ -70,7 +70,7 @@ describe('campeoes_anteriores.service', () => {
     mockPrisma.evento.findUnique.mockResolvedValue({ competicao_id: 1 })
     mockPrisma.modalidade.findUnique.mockResolvedValue({ competicao_id: 1 })
     mockPrisma.campeaoAnterior.create.mockResolvedValue({ id: 1 })
-    const data = { evento_id: 1, modalidade_id: 2, participante_id: 3, posicao: 1 as 1 | 2 | 3 }
+    const data = { evento_id: 1, modalidade_id: 2, participante_id: 3, posicao: 1 }
     await service.criar(data)
     expect(mockPrisma.campeaoAnterior.create).toHaveBeenCalledWith({ data, include: INCLUDE })
   })
