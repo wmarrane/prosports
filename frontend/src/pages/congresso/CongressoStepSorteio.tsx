@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
+import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
@@ -42,11 +43,22 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     queryFn: () => inscricoesService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
   })
 
+  const { data: campeoes = [] } = useQuery({
+    queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
+    queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
+  })
+
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
     for (const i of inscricoes) m.set(i.participante_id, i.participante)
     return m
   }, [inscricoes])
+
+  const campeoesByParticipanteId = useMemo(() => {
+    const m = new Map<number, 1 | 2 | 3>()
+    for (const c of campeoes) m.set(c.participante_id, c.posicao)
+    return m
+  }, [campeoes])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -165,13 +177,13 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         {sorteio.tipo === 'grupos' && (
-          <SorteioGrupos resultado={sorteio.resultado} participantesById={participantesById} large />
+          <SorteioGrupos resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
         )}
         {sorteio.tipo === 'chaves' && (
-          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large />
+          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
-          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large />
+          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
         )}
         {erro && <p style={{ color: DANGER, fontSize: 16, marginTop: 12 }}>{erro}</p>}
       </div>
