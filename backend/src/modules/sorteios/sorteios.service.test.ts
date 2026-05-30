@@ -26,6 +26,9 @@ vi.mock('../../lib/prisma', () => ({
     campeaoAnterior: {
       findMany: vi.fn(),
     },
+    bracketChavesByes: {
+      findUnique: vi.fn(),
+    },
   },
 }))
 
@@ -37,6 +40,8 @@ beforeEach(() => {
   vi.clearAllMocks()
   // Default: no campeões cadastrados (tests that need campeões override this)
   mockPrisma.campeaoAnterior.findMany.mockResolvedValue([])
+  // Default: valid bracket structure for N=5 (tests that need different N override this)
+  mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 5, posicoes_bye: [] })
 })
 
 describe('sorteios.service', () => {
@@ -216,5 +221,26 @@ describe('sorteios.service', () => {
     const call = mockPrisma.sorteio.upsert.mock.calls[0][0]
     expect(call.create.resultado.slots[0]).toBe(1)
     expect(call.create.resultado.slots[4]).toBe(2)
+  })
+
+  it('executar chaves lança 400 amigável quando bracket_chaves_byes ausente para N', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({
+      id: 1, competicao_id: 10,
+      tipo_modalidade: { tipo: 'chaves' },
+    })
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { participante_id: 100 }, { participante_id: 200 },
+    ])
+    mockPrisma.sistemaDisputasChaves.findFirst.mockResolvedValue({
+      numero_inscrito: 2, posicao_primeiro_cabeca: 1,
+      posicao_segundo_cabeca: 2, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0,
+    })
+    mockPrisma.bracketChavesByes.findUnique.mockResolvedValue(null)
+
+    await expect(service.executar({ evento_id: 1, modalidade_id: 1 })).rejects.toMatchObject({
+      status: 400,
+      message: expect.stringContaining('estrutura de bracket'),
+    })
   })
 })

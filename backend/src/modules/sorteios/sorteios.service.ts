@@ -100,9 +100,14 @@ export async function executar(input: { evento_id: number; modalidade_id: number
     }
     resultado = engine.drawGroups(pids, regra, seed, campeoesPidsInscritos)
   } else if (tipo === 'chaves') {
-    const regra = await prisma.sistemaDisputasChaves.findFirst({
-      where: { numero_inscrito: pids.length },
-    })
+    const [regra, regraBracket] = await Promise.all([
+      prisma.sistemaDisputasChaves.findFirst({
+        where: { numero_inscrito: pids.length },
+      }),
+      prisma.bracketChavesByes.findUnique({
+        where: { numero_inscrito: pids.length },
+      }),
+    ])
     if (!regra) {
       throw Object.assign(
         new Error(
@@ -111,7 +116,15 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         { status: 400 },
       )
     }
-    resultado = engine.drawBracket(pids, regra, seed, campeoesPidsInscritos)
+    if (!regraBracket) {
+      throw Object.assign(
+        new Error(
+          `Não há estrutura de bracket cadastrada para ${pids.length} inscritos. Cadastre em Administração.`,
+        ),
+        { status: 400 },
+      )
+    }
+    resultado = engine.drawBracket(pids, regra, regraBracket, seed, campeoesPidsInscritos)
   } else if (tipo === 'ordem_entrada') {
     resultado = engine.shuffleOrder(pids, seed)
   } else {
