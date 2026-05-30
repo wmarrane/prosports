@@ -13,6 +13,20 @@ const listQuerySchema = z.object({
   modalidade_id: z.coerce.number().int().positive().optional(),
 })
 
+const importRowSchema = z.object({
+  nome: z.string().min(1).max(200),
+  municipio_uf: z.string().length(2),
+  municipio_nome: z.string().min(1).max(120),
+  subtitulo: z.string().max(200).optional(),
+})
+
+const importSchema = z.object({
+  evento_id: z.coerce.number().int().positive(),
+  modalidade_id: z.coerce.number().int().positive(),
+  dry_run: z.boolean(),
+  rows: z.array(importRowSchema).min(1).max(2000),
+})
+
 export async function listar(req: Request, res: Response, next: NextFunction) {
   try {
     const filtros = listQuerySchema.parse(req.query)
@@ -35,5 +49,12 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
     await service.remover(Number(req.params.id))
     res.status(204).send()
+  } catch (err) { next(err) }
+}
+
+export async function importar(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = importSchema.parse(req.body)
+    res.json(await service.importar(body))
   } catch (err) { next(err) }
 }
