@@ -12,6 +12,9 @@ vi.mock('../../lib/prisma', () => ({
     modalidade: {
       count: vi.fn(),
     },
+    evento: {
+      count: vi.fn(),
+    },
   },
 }))
 
@@ -81,12 +84,27 @@ describe('competicoes.service', () => {
 
   it('remover lança 409 se há modalidade vinculada', async () => {
     mockPrisma.modalidade.count.mockResolvedValue(2)
-    await expect(service.remover(1)).rejects.toMatchObject({ status: 409 })
+    mockPrisma.evento.count.mockResolvedValue(0)
+    await expect(service.remover(1)).rejects.toMatchObject({ status: 409, message: expect.stringContaining('modalidades') })
     expect(mockPrisma.competicao.delete).not.toHaveBeenCalled()
   })
 
-  it('remover deleta quando não há modalidade vinculada', async () => {
+  it('remover lança 409 se há evento vinculado', async () => {
     mockPrisma.modalidade.count.mockResolvedValue(0)
+    mockPrisma.evento.count.mockResolvedValue(3)
+    await expect(service.remover(1)).rejects.toMatchObject({ status: 409, message: expect.stringContaining('eventos') })
+    expect(mockPrisma.competicao.delete).not.toHaveBeenCalled()
+  })
+
+  it('remover lança 409 com mensagem composta se há ambos', async () => {
+    mockPrisma.modalidade.count.mockResolvedValue(2)
+    mockPrisma.evento.count.mockResolvedValue(1)
+    await expect(service.remover(1)).rejects.toMatchObject({ status: 409, message: expect.stringContaining('modalidades e eventos') })
+  })
+
+  it('remover deleta quando não há vínculos', async () => {
+    mockPrisma.modalidade.count.mockResolvedValue(0)
+    mockPrisma.evento.count.mockResolvedValue(0)
     mockPrisma.competicao.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.competicao.delete).toHaveBeenCalledWith({ where: { id: 1 } })
