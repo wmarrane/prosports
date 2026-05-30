@@ -5,6 +5,7 @@ import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
 import ImportInscricoesModal from '../../components/import/ImportInscricoesModal'
+import CampeaoBadge from '../../components/CampeaoBadge'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
@@ -12,8 +13,10 @@ import { eventosService } from '../../services/eventos'
 import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
+import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import type { Inscricao } from '../../types/inscricao'
 import type { Participante } from '../../types/participante'
+import type { CampeaoAnterior } from '../../types/campeao-anterior'
 
 function formatDateBR(iso: string): string {
   try {
@@ -21,6 +24,55 @@ function formatDateBR(iso: string): string {
   } catch {
     return iso
   }
+}
+
+const POSICAO_LABEL: Record<1 | 2 | 3, string> = { 1: '1º lugar', 2: '2º lugar', 3: '3º lugar' }
+
+type CampeaoSlotProps = {
+  posicao: 1 | 2 | 3
+  campeao: CampeaoAnterior | null
+  excludeIds: number[]
+  onCriar: (participante_id: number) => void
+  onRemover: (id: number) => void
+  salvando: boolean
+}
+
+function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando }: CampeaoSlotProps) {
+  const [pickedId, setPickedId] = useState<number | null>(null)
+
+  if (campeao) {
+    return (
+      <div className="border border-[var(--card-border)] rounded-lg p-3 bg-[var(--card-bg-2)]">
+        <div className="flex items-center gap-2 mb-2">
+          <CampeaoBadge posicao={posicao} />
+          <span className="text-xs text-[var(--t3)]">{POSICAO_LABEL[posicao]}</span>
+        </div>
+        <div className="text-sm text-[var(--t1)]">{campeao.participante.nome}</div>
+        {campeao.participante.subtitulo && (
+          <div className="text-xs text-[var(--t3)] mt-0.5">{campeao.participante.subtitulo}</div>
+        )}
+        <button
+          onClick={() => { if (confirm(`Remover ${POSICAO_LABEL[posicao]}?`)) onRemover(campeao.id) }}
+          className="mt-2 text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"
+        >Remover</button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="border border-[var(--card-border)] rounded-lg p-3 bg-[var(--card-bg-2)] space-y-2">
+      <div className="flex items-center gap-2">
+        <CampeaoBadge posicao={posicao} />
+        <span className="text-xs text-[var(--t3)]">{POSICAO_LABEL[posicao]}</span>
+      </div>
+      <ParticipanteSelect value={pickedId} onChange={(id) => setPickedId(id)} excludeIds={excludeIds} />
+      <button
+        onClick={() => { if (pickedId) { onCriar(pickedId); setPickedId(null) } }}
+        disabled={!pickedId || salvando}
+        className="btn btn-primary btn-sm disabled:opacity-50 text-xs"
+      >{salvando ? 'Salvando...' : 'Salvar'}</button>
+    </div>
+  )
 }
 
 export default function EventoInscricoes() {
@@ -57,6 +109,12 @@ export default function EventoInscricoes() {
     queryFn: () => sorteiosService.listar({ evento_id: eventoId }),
   })
 
+  const { data: campeoes = [] } = useQuery({
+    queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
+    queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId! }),
+    enabled: modalidadeId != null,
+  })
+
   const sorteioDaModalidade = modalidadeId != null
     ? sorteios.find(s => s.modalidade_id === modalidadeId) ?? null
     : null
@@ -71,6 +129,12 @@ export default function EventoInscricoes() {
     for (const i of inscricoes) m.set(i.participante_id, i.participante)
     return m
   }, [inscricoes])
+
+  const campeoesByParticipanteId = useMemo(() => {
+    const m = new Map<number, 1 | 2 | 3>()
+    for (const c of campeoes) m.set(c.participante_id, c.posicao)
+    return m
+  }, [campeoes])
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
@@ -111,6 +175,24 @@ export default function EventoInscricoes() {
     onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao apagar sorteio.'),
   })
 
+  const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
+    mutationFn: (data: { participante_id: number; posicao: 1 | 2 | 3 }) =>
+      campeoesAnterioresService.criar({
+        evento_id: eventoId,
+        modalidade_id: modalidadeId!,
+        participante_id: data.participante_id,
+        posicao: data.posicao,
+      }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
+  })
+
+  const { mutate: removerCampeao } = useMutation({
+    mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+  })
+
   function handleSortear() {
     setErroSorteio('')
     executarSorteio()
@@ -130,9 +212,21 @@ export default function EventoInscricoes() {
   }
 
   const excludeIds = inscricoes.map(i => i.participante_id)
+  const excludeCampeoesIds = campeoes.map(c => c.participante_id)
 
   const columns = [
-    { header: 'Nome', accessor: (row: Inscricao) => row.participante.nome },
+    {
+      header: 'Nome',
+      accessor: (row: Inscricao) => {
+        const pos = campeoesByParticipanteId.get(row.participante_id)
+        return (
+          <span className="inline-flex items-center gap-2">
+            {pos && <CampeaoBadge posicao={pos} />}
+            {row.participante.nome}
+          </span>
+        )
+      },
+    },
     { header: 'Subtítulo', accessor: (row: Inscricao) => row.participante.subtitulo ?? '—' },
     {
       header: 'Município',
@@ -248,13 +342,13 @@ export default function EventoInscricoes() {
                     </div>
                   </div>
                   {sorteioDaModalidade.tipo === 'grupos' && (
-                    <SorteioGrupos resultado={sorteioDaModalidade.resultado} participantesById={participantesById} />
+                    <SorteioGrupos resultado={sorteioDaModalidade.resultado} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
                   )}
                   {sorteioDaModalidade.tipo === 'chaves' && (
-                    <SorteioChaves resultado={sorteioDaModalidade.resultado} participantesById={participantesById} />
+                    <SorteioChaves resultado={sorteioDaModalidade.resultado} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
                   )}
                   {sorteioDaModalidade.tipo === 'ordem_entrada' && (
-                    <SorteioOrdem resultado={sorteioDaModalidade.resultado} participantesById={participantesById} />
+                    <SorteioOrdem resultado={sorteioDaModalidade.resultado} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
                   )}
                   {erroSorteio && <p className="text-sm text-[var(--danger)]">{erroSorteio}</p>}
                 </div>
@@ -271,6 +365,26 @@ export default function EventoInscricoes() {
                   {erroSorteio && <p className="text-sm text-[var(--danger)]">{erroSorteio}</p>}
                 </div>
               )}
+            </div>
+
+            <div className="border-t border-[var(--card-border)] pt-5 space-y-3">
+              <h2 className="text-sm font-medium text-[var(--t2)]">Campeões do ano anterior</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {([1, 2, 3] as const).map(pos => {
+                  const c = campeoes.find(x => x.posicao === pos) ?? null
+                  return (
+                    <CampeaoSlot
+                      key={pos}
+                      posicao={pos}
+                      campeao={c}
+                      excludeIds={excludeCampeoesIds}
+                      onCriar={(participante_id) => criarCampeao({ participante_id, posicao: pos })}
+                      onRemover={(cid) => removerCampeao(cid)}
+                      salvando={salvandoCampeao}
+                    />
+                  )
+                })}
+              </div>
             </div>
           </>
         )}
