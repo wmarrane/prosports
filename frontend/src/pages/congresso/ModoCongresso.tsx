@@ -4,6 +4,7 @@ import CongressoShell from './CongressoShell'
 import CongressoStepEvento from './CongressoStepEvento'
 import CongressoStepModalidade from './CongressoStepModalidade'
 import CongressoStepParticipantes from './CongressoStepParticipantes'
+import CongressoStepCampeoes from './CongressoStepCampeoes'
 import CongressoStepSorteio from './CongressoStepSorteio'
 import { eventosService } from '../../services/eventos'
 import type { CongressoStep } from '../../types/congresso-step'
@@ -21,7 +22,8 @@ export default function ModoCongresso() {
   const competicaoId = evento?.competicao_id
 
   function handleBack() {
-    if (step === 'sorteio') setStep('participantes')
+    if (step === 'sorteio') setStep('campeoes')
+    else if (step === 'campeoes') setStep('participantes')
     else if (step === 'participantes') setStep('modalidade')
     else if (step === 'modalidade') { setStep('evento'); setEventoId(null) }
   }
@@ -43,6 +45,14 @@ export default function ModoCongresso() {
       )}
       {step === 'participantes' && eventoId != null && modalidadeId != null && (
         <CongressoStepParticipantes
+          eventoId={eventoId}
+          modalidadeId={modalidadeId}
+          competicaoId={competicaoId}
+          onNext={() => setStep('campeoes')}
+        />
+      )}
+      {step === 'campeoes' && eventoId != null && modalidadeId != null && (
+        <CongressoStepCampeoes
           eventoId={eventoId}
           modalidadeId={modalidadeId}
           competicaoId={competicaoId}
