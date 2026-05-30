@@ -24,6 +24,7 @@ import EventoForm from './pages/eventos/EventoForm'
 import EventoInscricoes from './pages/eventos/EventoInscricoes'
 import Relatorio from './pages/Relatorio'
 import Admin from './pages/Admin'
+import ModoCongresso from './pages/congresso/ModoCongresso'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
+          <Route path="/congresso" element={<ModoCongresso />} />
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/painel" replace />} />
 

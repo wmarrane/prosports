@@ -42,8 +42,13 @@ export default function Topbar({ onToggleCollapse }: Props) {
   const crumbs = segments.length > 0 ? segments.map(labelFor) : ['Painel']
   const userInitials = (user?.email ?? 'U').slice(0, 2).toUpperCase()
 
-  function handleCongresso() {
-    alert('Modo Congresso — em construção (fase F6)')
+  async function handleCongresso() {
+    try {
+      await document.documentElement.requestFullscreen()
+    } catch {
+      // permissão negada ou contexto inseguro — segue sem fullscreen
+    }
+    navigate('/congresso')
   }
 
   return (
