@@ -8,9 +8,9 @@ export default function Layout() {
   const toggle = () => setCollapsed((v) => !v)
 
   return (
-    <div className="app-shell" style={{ display: 'flex', minHeight: '100vh', background: 'var(--app-bg)' }}>
+    <div className="app-shell" style={{ display: 'flex', height: '100vh', background: 'var(--app-bg)' }}>
       <Sidebar collapsed={collapsed} onToggleCollapse={toggle} />
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
         <Topbar onToggleCollapse={toggle} />
         <div className="page-body" style={{ flex: 1, overflow: 'auto', color: 'var(--t1)' }}>
           <Outlet />
