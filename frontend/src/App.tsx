@@ -18,6 +18,10 @@ import TiposModalidadeList from './pages/tipos-modalidade/TiposModalidadeList'
 import TipoModalidadeForm from './pages/tipos-modalidade/TipoModalidadeForm'
 import CompeticoesList from './pages/competicoes/CompeticoesList'
 import CompeticaoForm from './pages/competicoes/CompeticaoForm'
+import Painel from './pages/Painel'
+import Eventos from './pages/Eventos'
+import Relatorio from './pages/Relatorio'
+import Admin from './pages/Admin'
 
 export default function App() {
   return (
@@ -26,7 +30,12 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path="/" element={<Navigate to="/participantes" replace />} />
+            <Route path="/" element={<Navigate to="/painel" replace />} />
+
+            <Route path="/painel"    element={<Painel />} />
+            <Route path="/eventos"   element={<Eventos />} />
+            <Route path="/relatorio" element={<Relatorio />} />
+            <Route path="/admin"     element={<Admin />} />
 
             <Route path="/inspetorias" element={<InspetoriasList />} />
             <Route path="/inspetorias/novo" element={<InspetoriaForm />} />
