@@ -58,3 +58,141 @@ export async function criar(data: CreateInput) {
 export async function remover(id: number) {
   return prisma.inscricao.delete({ where: { id } })
 }
+
+export type ImportRow = {
+  nome: string
+  municipio_uf: string
+  municipio_nome: string
+  subtitulo?: string
+}
+
+export type ImportRowResult = {
+  linha: number
+  nome: string
+  status: 'criada' | 'duplicada' | 'erro'
+  erro?: string
+  participante_criado?: boolean
+}
+
+export type ImportResult = {
+  rows: ImportRowResult[]
+  contadores: {
+    criadas: number
+    duplicadas: number
+    erros: number
+    participantes_criados: number
+  }
+}
+
+export async function importar(input: {
+  evento_id: number
+  modalidade_id: number
+  dry_run: boolean
+  rows: ImportRow[]
+}): Promise<ImportResult> {
+  const [evento, modalidade] = await Promise.all([
+    prisma.evento.findUnique({
+      where: { id: input.evento_id },
+      select: { id: true, competicao_id: true },
+    }),
+    prisma.modalidade.findUnique({
+      where: { id: input.modalidade_id },
+      select: { id: true, competicao_id: true },
+    }),
+  ])
+  if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+  if (!modalidade) throw Object.assign(new Error('Modalidade não encontrada'), { status: 404 })
+  if (evento.competicao_id !== modalidade.competicao_id) {
+    throw Object.assign(
+      new Error('A modalidade não pertence à competição deste evento.'),
+      { status: 400 },
+    )
+  }
+
+  const ufsSet = new Set(input.rows.map(r => r.municipio_uf.toUpperCase()))
+  const municipios = await prisma.municipio.findMany({
+    where: { uf: { in: Array.from(ufsSet) } },
+    select: { id: true, nome: true, uf: true },
+  })
+  const municipiosByKey = new Map<string, number>()
+  for (const m of municipios) {
+    municipiosByKey.set(`${m.uf.toUpperCase()}:${m.nome.toLowerCase()}`, m.id)
+  }
+
+  const municipioIds = municipios.map(m => m.id)
+  const participantes = municipioIds.length > 0
+    ? await prisma.participante.findMany({
+        where: { municipio_id: { in: municipioIds } },
+        select: { id: true, nome: true, municipio_id: true },
+      })
+    : []
+  const participantesByKey = new Map<string, number>()
+  for (const p of participantes) {
+    participantesByKey.set(`${p.municipio_id}:${p.nome.toLowerCase()}`, p.id)
+  }
+
+  const inscricoes = await prisma.inscricao.findMany({
+    where: { evento_id: input.evento_id, modalidade_id: input.modalidade_id },
+    select: { participante_id: true },
+  })
+  const inscritosSet = new Set<number>(inscricoes.map(i => i.participante_id))
+
+  const results: ImportRowResult[] = []
+  const contadores = { criadas: 0, duplicadas: 0, erros: 0, participantes_criados: 0 }
+
+  for (let i = 0; i < input.rows.length; i++) {
+    const row = input.rows[i]
+    const linha = i + 1
+    const nome = row.nome.trim()
+    const uf = row.municipio_uf.trim().toUpperCase()
+    const munNome = row.municipio_nome.trim()
+    const subtitulo = row.subtitulo?.trim() || undefined
+
+    const munKey = `${uf}:${munNome.toLowerCase()}`
+    const municipio_id = municipiosByKey.get(munKey)
+    if (!municipio_id) {
+      results.push({ linha, nome, status: 'erro', erro: `Município '${munNome}/${uf}' não encontrado` })
+      contadores.erros++
+      continue
+    }
+
+    const partKey = `${municipio_id}:${nome.toLowerCase()}`
+    let participante_id = participantesByKey.get(partKey)
+    let participante_criado = false
+
+    if (!participante_id) {
+      if (input.dry_run) {
+        participante_id = -linha
+      } else {
+        const created = await prisma.participante.create({
+          data: { nome, municipio_id, subtitulo },
+        })
+        participante_id = created.id
+      }
+      participantesByKey.set(partKey, participante_id)
+      participante_criado = true
+      contadores.participantes_criados++
+    }
+
+    if (inscritosSet.has(participante_id)) {
+      results.push({ linha, nome, status: 'duplicada' })
+      contadores.duplicadas++
+      continue
+    }
+
+    if (!input.dry_run) {
+      await prisma.inscricao.create({
+        data: {
+          evento_id: input.evento_id,
+          modalidade_id: input.modalidade_id,
+          participante_id,
+        },
+      })
+    }
+    inscritosSet.add(participante_id)
+    results.push({ linha, nome, status: 'criada', participante_criado })
+    contadores.criadas++
+  }
+
+  return { rows: results, contadores }
+}
