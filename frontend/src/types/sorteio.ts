@@ -7,6 +7,7 @@ export type GruposResultado = {
 export type ChavesResultado = {
   size: number
   slots: (number | null)[]
+  byePositions?: number[]  // 1-indexed; ausente em sorteios pré-v1.18.0
 }
 
 export type OrdemResultado = {
