@@ -5,6 +5,24 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.16.0] - 2026-05-30
+
+### Added
+- Tabela `sistema_disputas_chaves` agora gerenciada pelo Prisma (adotada via migration idempotente).
+- Motor de sorteio: campeões inscritos viram sementes —
+  - `grupos`: 1 campeão por grupo (até qtd grupos) na 1ª vaga; demais e excedentes vão pro sorteio normal.
+  - `chaves`: até 4 campeões viram cabeças nas posições definidas em `sistema_disputas_chaves`; demais sorteados nos slots restantes.
+- Novo 4º passo "Campeões do Ano Anterior" no Modo Congresso, entre Participantes e Sorteio. Lista grande com pill verde "✓ Inscrito" ou cinza "Não inscrito".
+
+### Changed
+- `drawBracket`: agora usa `size = N` literal (não mais próxima potência de 2). Sem BYEs.
+- `chaves` exige regra cadastrada em `sistema_disputas_chaves` para o N de inscritos (400 amigável quando ausente).
+- Modo Congresso: wizard cresceu de 4 para 5 passos.
+
+### Notes
+- Sorteios antigos persistidos em formato `size = pot 2 com nulls` continuam renderizando corretamente. Novos sorteios usam `size = N`.
+- Operador re-sorteia para aplicar a nova regra de cabeças/sementes.
+
 ## [1.15.1] - 2026-05-30
 
 ### Changed
