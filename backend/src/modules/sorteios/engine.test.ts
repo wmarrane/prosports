@@ -48,14 +48,24 @@ describe('drawGroups', () => {
     expect(todos).toEqual([1,2,3,4,5,6])
   })
 
-  it('7 participantes + regra (2g, 1 de 3, 1 de 4) → primeiro grupo 3, segundo 4', () => {
+  it('7 participantes + regra (1 de 3, 1 de 4) → tamanhos {3,4} em ordem aleatória, todos os ids presentes', () => {
     const regra = { id: 2, quantidade_grupos: 2, grupos_3_componentes: 1, grupos_4_componentes: 1, numero_classificados: 2 }
     const out = drawGroups([10,20,30,40,50,60,70], regra, 'seed2')
     expect(out.grupos).toHaveLength(2)
-    expect(out.grupos[0].participantes).toHaveLength(3)
-    expect(out.grupos[1].participantes).toHaveLength(4)
+    const tamanhos = out.grupos.map(g => g.participantes.length).sort()
+    expect(tamanhos).toEqual([3, 4])
     const todos = [...out.grupos[0].participantes, ...out.grupos[1].participantes].sort((a,b)=>a-b)
     expect(todos).toEqual([10,20,30,40,50,60,70])
+  })
+
+  it('ordem dos tamanhos é determinística para a mesma seed (mas pode variar entre seeds)', () => {
+    const regra = { id: 3, quantidade_grupos: 4, grupos_3_componentes: 2, grupos_4_componentes: 2, numero_classificados: 2 }
+    const participantes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+    const a = drawGroups(participantes, regra, 'seedA')
+    const b = drawGroups(participantes, regra, 'seedA')
+    expect(a.grupos.map(g => g.participantes.length)).toEqual(b.grupos.map(g => g.participantes.length))
+    // Soma e cobertura
+    expect(a.grupos.map(g => g.participantes.length).sort()).toEqual([3,3,4,4])
   })
 })
 

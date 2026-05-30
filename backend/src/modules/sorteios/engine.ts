@@ -46,11 +46,18 @@ export function drawGroups(
   seed: string,
 ): GruposResultado {
   const shuffled = shuffleSeeded(participantes, seed)
+  // Ordem dos tamanhos (quais grupos têm 3 vs 4 componentes) também é aleatória.
+  // Sub-seed independente para que dois embaralhamentos derivados da mesma seed
+  // não fiquem correlacionados.
+  const sizes: number[] = [
+    ...Array(regra.grupos_3_componentes).fill(3),
+    ...Array(regra.grupos_4_componentes).fill(4),
+  ]
+  const shuffledSizes = shuffleSeeded(sizes, `${seed}:sizes`)
   const grupos: { letra: string; participantes: number[] }[] = []
   let i = 0
-  const total = regra.grupos_3_componentes + regra.grupos_4_componentes
-  for (let g = 0; g < total; g++) {
-    const tam = g < regra.grupos_3_componentes ? 3 : 4
+  for (let g = 0; g < shuffledSizes.length; g++) {
+    const tam = shuffledSizes[g]
     grupos.push({
       letra: String.fromCharCode(65 + g),
       participantes: shuffled.slice(i, i + tam),
