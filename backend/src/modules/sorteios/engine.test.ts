@@ -97,26 +97,46 @@ describe('drawGroups', () => {
 })
 
 describe('drawBracket', () => {
-  it('5 participantes → size 8, 3 byes (null), todos pids presentes', () => {
-    const out = drawBracket([1,2,3,4,5], 'seed')
-    expect(out.size).toBe(8)
-    expect(out.slots).toHaveLength(8)
-    const nulls = out.slots.filter(s => s === null).length
-    expect(nulls).toBe(3)
+  it('sem campeoes + regra qualquer + 5 inscritos → size=5, todos pids presentes, sem nulls', () => {
+    const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 5, posicao_terceiro_cabeca: 4, posicao_quarto_cabeca: 3 }
+    const out = drawBracket([1,2,3,4,5], regra, 'seed-b')
+    expect(out.size).toBe(5)
+    expect(out.slots).toHaveLength(5)
+    expect(out.slots.filter(s => s === null)).toHaveLength(0)
     const pids = out.slots.filter((s): s is number => s !== null).sort()
     expect(pids).toEqual([1,2,3,4,5])
   })
 
-  it('8 participantes → size 8, 0 byes', () => {
-    const out = drawBracket([1,2,3,4,5,6,7,8], 'seed')
+  it('4 campeoes inscritos + regra (1,8,5,4): slots fixos preenchidos, outros shuffled', () => {
+    const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 8, posicao_terceiro_cabeca: 5, posicao_quarto_cabeca: 4 }
+    const out = drawBracket([1,2,3,4,5,6,7,8], regra, 'seed-b4b', [1, 2, 3, 4])
     expect(out.size).toBe(8)
-    expect(out.slots.filter(s => s === null)).toHaveLength(0)
+    expect(out.slots[0]).toBe(1)
+    expect(out.slots[7]).toBe(2)
+    expect(out.slots[4]).toBe(3)
+    expect(out.slots[3]).toBe(4)
+    const outrosSlots = [out.slots[1], out.slots[2], out.slots[5], out.slots[6]].sort((a, b) => (a as number) - (b as number))
+    expect(outrosSlots).toEqual([5, 6, 7, 8])
   })
 
-  it('1 participante → size 1, slots = [pid]', () => {
-    const out = drawBracket([42], 'seed')
-    expect(out.size).toBe(1)
-    expect(out.slots).toEqual([42])
+  it('2 campeoes + regra com terceira_cabeca=0 → só 2 cabeças usadas', () => {
+    const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 4, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0 }
+    const out = drawBracket([1,2,3,4], regra, 'seed-b2', [1, 2])
+    expect(out.size).toBe(4)
+    expect(out.slots[0]).toBe(1)
+    expect(out.slots[3]).toBe(2)
+    const outrosSlots = [out.slots[1], out.slots[2]].sort((a, b) => (a as number) - (b as number))
+    expect(outrosSlots).toEqual([3, 4])
+  })
+
+  it('sem campeoes (default) → todos no shuffle, regras ignoradas para fixação', () => {
+    const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 4, posicao_terceiro_cabeca: 3, posicao_quarto_cabeca: 2 }
+    const a = drawBracket([1,2,3,4], regra, 'seed-b-equal')
+    const b = drawBracket([1,2,3,4], regra, 'seed-b-equal', [])
+    expect(a).toEqual(b)
+    expect(a.size).toBe(4)
+    const pids = a.slots.filter((s): s is number => s !== null).sort()
+    expect(pids).toEqual([1,2,3,4])
   })
 })
 

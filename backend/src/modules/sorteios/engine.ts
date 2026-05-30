@@ -94,12 +94,51 @@ export type BracketResultado = {
   slots: (number | null)[]
 }
 
-export function drawBracket(participantes: readonly number[], seed: string): BracketResultado {
+export type RegraChaves = {
+  posicao_primeiro_cabeca: number
+  posicao_segundo_cabeca: number
+  posicao_terceiro_cabeca: number
+  posicao_quarto_cabeca: number
+}
+
+export function drawBracket(
+  participantes: readonly number[],
+  regra: RegraChaves,
+  seed: string,
+  campeoesPids: readonly number[] = [],
+): BracketResultado {
   const n = participantes.length
-  const size = n <= 1 ? 1 : 2 ** Math.ceil(Math.log2(n))
-  const padded: (number | null)[] = [...participantes, ...Array(size - n).fill(null)]
-  const shuffled = shuffleSeeded(padded, seed)
-  return { size, slots: shuffled }
+  const slots: (number | null)[] = new Array(n).fill(null)
+
+  // Mapear cabeças nas posições da regra (até 4)
+  const posicoes = [
+    regra.posicao_primeiro_cabeca,
+    regra.posicao_segundo_cabeca,
+    regra.posicao_terceiro_cabeca,
+    regra.posicao_quarto_cabeca,
+  ]
+  for (let i = 0; i < 4; i++) {
+    const pos = posicoes[i]
+    const pid = campeoesPids[i]
+    if (pos === 0 || pid === undefined) continue
+    if (pos < 1 || pos > n) continue
+    slots[pos - 1] = pid
+  }
+
+  // Outros = participantes que NÃO foram colocados como cabeça
+  const colocadosSet = new Set<number>(slots.filter((s): s is number => s !== null))
+  const outros = participantes.filter(pid => !colocadosSet.has(pid))
+  const outrosShuffled = shuffleSeeded(outros, seed)
+
+  // Preencher slots vazios em ordem
+  let cursor = 0
+  for (let j = 0; j < n; j++) {
+    if (slots[j] === null) {
+      slots[j] = outrosShuffled[cursor++]
+    }
+  }
+
+  return { size: n, slots }
 }
 
 export type OrdemResultado = { ordem: number[] }
