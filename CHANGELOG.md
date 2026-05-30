@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.18.1] - 2026-05-30
+
+### Changed
+- `SorteioChaves` agora renderiza lista vertical 1→N (preservando a ordem das posições da planilha), com BYEs marcados in-line ("BYE — avança direto"). Substitui o layout em 3 colunas (R1 / Avançam / Demais rodadas) do v1.18.0, que ficou distante do desenho de referência da planilha CT.
+
 ## [1.18.0] - 2026-05-30
 
 ### Added

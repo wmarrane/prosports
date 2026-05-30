@@ -52,22 +52,6 @@ function buildBracketLegacy(slots: readonly (number | null)[]): Match[][] {
   return result
 }
 
-function buildR1FromPlanilha(slots: readonly (number | null)[], byePositions: number[]): Match[] {
-  const byeSet = new Set(byePositions)
-  const nonByeIndices = Array.from({ length: slots.length }, (_, i) => i + 1).filter(p => !byeSet.has(p))
-  const matches: Match[] = []
-  for (let i = 0; i < nonByeIndices.length; i += 2) {
-    matches.push({
-      id: `R0M${i / 2}`,
-      round: 0,
-      index: i / 2,
-      top: slots[nonByeIndices[i] - 1] ?? null,
-      bottom: (i + 1) < nonByeIndices.length ? (slots[nonByeIndices[i + 1] - 1] ?? null) : null,
-    })
-  }
-  return matches
-}
-
 function roundLabel(matchesNesta: number, roundIdx: number): string {
   if (matchesNesta === 1) return 'Final'
   if (matchesNesta === 2) return 'Semifinal'
@@ -132,24 +116,6 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
   )
 }
 
-function ByeCard({ pid, large, participantesById, campeoesByParticipanteId }: {
-  pid: number | null
-  large: boolean
-  participantesById: Map<number, Participante>
-  campeoesByParticipanteId?: Map<number, number>
-}) {
-  return (
-    <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 12 : 8 }}>
-      <div style={{ padding: '4px 0' }}>
-        <SlotRender pid={pid} fallbackText="—" large={large} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
-      </div>
-      <div style={{ fontSize: large ? '0.85rem' : '0.75rem', color: 'var(--t3)', fontStyle: 'italic', textAlign: 'center', marginTop: 4 }}>
-        avança direto
-      </div>
-    </div>
-  )
-}
-
 export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
   // Fallback para sorteios pré-v1.18.0 (sem byePositions)
   if (!resultado.byePositions) {
@@ -177,49 +143,48 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
     )
   }
 
-  // Novo builder em 3 colunas: R1 / Avançam / Demais rodadas
-  const r1 = buildR1FromPlanilha(resultado.slots, resultado.byePositions)
-  const colMinWidth = large ? 280 : 200
-  const gap = large ? 32 : 16
-  const pad = large ? 16 : 8
+  // Novo render (v1.18.1): lista vertical 1→N preservando ordem da planilha, BYEs marcados.
+  const byeSet = new Set(resultado.byePositions)
+  const N = resultado.slots.length
+  const indexClass = large
+    ? 'font-mono text-base text-[var(--t3)] w-12 text-right'
+    : 'font-mono text-[var(--t3)] w-8 text-right'
+  const nameClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
+  const subClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
+  const byeLabelClass = large
+    ? 'text-base text-[var(--t3)] italic ml-3'
+    : 'text-xs text-[var(--t3)] italic ml-2'
 
   return (
-    <div style={{ display: 'flex', gap, overflowX: 'auto', padding: pad }}>
-      {/* Coluna 1: R1 */}
-      {r1.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', gap: large ? 16 : 8, minWidth: colMinWidth, flexShrink: 0 }}>
-          <div className="eyebrow text-[var(--t3)]" style={{ textAlign: 'center', marginBottom: 4 }}>
-            {roundLabel(r1.length, 0)} · {r1.length} {r1.length === 1 ? 'match' : 'matches'}
-          </div>
-          {r1.map(match => (
-            <MatchCard key={match.id} match={match} large={large}
-              participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
-          ))}
-        </div>
-      )}
-
-      {/* Coluna 2: BYEs (avançam) */}
-      {resultado.byePositions.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', gap: large ? 16 : 8, minWidth: colMinWidth, flexShrink: 0 }}>
-          <div className="eyebrow text-[var(--t3)]" style={{ textAlign: 'center', marginBottom: 4 }}>
-            Avançam (BYEs) · {resultado.byePositions.length}
-          </div>
-          {resultado.byePositions.map((pos, i) => (
-            <ByeCard key={`bye-${i}`} pid={resultado.slots[pos - 1] ?? null} large={large}
-              participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId} />
-          ))}
-        </div>
-      )}
-
-      {/* Coluna 3: Demais rodadas */}
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: large ? 16 : 8, minWidth: colMinWidth, flexShrink: 0 }}>
-        <div className="eyebrow text-[var(--t3)]" style={{ textAlign: 'center', marginBottom: 4 }}>
-          Demais rodadas
-        </div>
-        <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 16 : 12, textAlign: 'center', fontStyle: 'italic', color: 'var(--t3)', fontSize: large ? '1rem' : '0.85rem' }}>
-          Conforme regulamento da modalidade
-        </div>
-      </div>
+    <div className={`bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-xl ${large ? 'p-6' : 'p-4'}`}>
+      <ul className={large ? 'space-y-3' : 'space-y-1.5'}>
+        {Array.from({ length: N }, (_, i) => {
+          const pos = i + 1
+          const pid = resultado.slots[i] ?? null
+          const isBye = byeSet.has(pos)
+          const campeaoPos = pid !== null ? campeoesByParticipanteId?.get(pid) : undefined
+          const participante = pid !== null ? participantesById.get(pid) : null
+          return (
+            <li key={pos} className="flex items-center gap-3">
+              <span className={indexClass}>{String(pos).padStart(2, '0')}</span>
+              {pid === null ? (
+                <span className={`${nameClass} text-[var(--t4)]`}>—</span>
+              ) : participante ? (
+                <span className="inline-flex items-center gap-2">
+                  {campeaoPos && <CampeaoBadge posicao={campeaoPos} large={large} />}
+                  <span className={nameClass}>
+                    {participante.nome}
+                    {participante.subtitulo && <span className={subClass}>— {participante.subtitulo}</span>}
+                  </span>
+                </span>
+              ) : (
+                <span className={`${nameClass} text-[var(--t4)]`}>—</span>
+              )}
+              {isBye && <span className={byeLabelClass}>BYE — avança direto</span>}
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
