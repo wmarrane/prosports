@@ -82,6 +82,7 @@ model Modalidade {
   tipo_modalidade     TipoModalidade  @relation(fields: [tipo_modalidade_id], references: [id])
   tipo_modalidade_id  Int
   inscricoes          Inscricao[]
+  sorteios            Sorteio[]
   criado_em           DateTime        @default(now())
   atualizado_em       DateTime        @updatedAt
 
@@ -144,6 +145,7 @@ model Evento {
   municipio       Municipio     @relation(fields: [municipio_id], references: [id])
   municipio_id    Int
   inscricoes      Inscricao[]
+  sorteios        Sorteio[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -170,4 +172,20 @@ model Inscricao {
 
   @@unique([evento_id, modalidade_id, participante_id])
   @@index([evento_id, modalidade_id])
+}
+
+model Sorteio {
+  id              Int          @id @default(autoincrement())
+  evento          Evento       @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id       Int
+  modalidade      Modalidade   @relation(fields: [modalidade_id], references: [id])
+  modalidade_id   Int
+  tipo            TipoDisputa
+  seed            String
+  resultado       Json
+  gerado_em       DateTime     @default(now())
+  atualizado_em   DateTime     @updatedAt
+
+  @@unique([evento_id, modalidade_id])
+  @@index([evento_id])
 }
