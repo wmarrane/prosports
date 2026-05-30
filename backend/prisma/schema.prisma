@@ -88,14 +88,29 @@ model Modalidade {
 }
 
 model Competicao {
-  id                  Int          @id @default(autoincrement())
-  nome                String       @unique
-  estados             String[]
-  adicionar_subtitulo Boolean      @default(false)
-  modalidades         Modalidade[]
-  eventos             Evento[]
-  criado_em           DateTime     @default(now())
-  atualizado_em       DateTime     @updatedAt
+  id                       Int                      @id @default(autoincrement())
+  nome                     String                   @unique
+  estados                  String[]
+  adicionar_subtitulo      Boolean                  @default(false)
+  modalidades              Modalidade[]
+  eventos                  Evento[]
+  sistema_disputas_grupos  SistemaDisputasGrupos[]
+  criado_em                DateTime                 @default(now())
+  atualizado_em            DateTime                 @updatedAt
+}
+
+model SistemaDisputasGrupos {
+  id                   Int        @id @default(autoincrement())
+  quantidade_equipes   Int
+  quantidade_grupos    Int
+  grupos_3_componentes Int
+  grupos_4_componentes Int
+  numero_classificados Int
+  competicao           Competicao @relation(fields: [competicao_id], references: [id], onDelete: Cascade)
+  competicao_id        Int
+
+  @@index([competicao_id])
+  @@map("sistema_disputas_grupos")
 }
 
 model TipoModalidade {
