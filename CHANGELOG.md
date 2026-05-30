@@ -5,6 +5,16 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.14.0] - 2026-05-30
+
+### Added
+- Página /admin real: landing com 6 cards (Competições, Modalidades, Tipos de Modalidade, Municípios, Inspetorias, Delegacias) com contadores e link direto pro CRUD correspondente.
+- Página /relatorio real: tabela de eventos (com status, inscrições, sorteios) e botão "Exportar CSV" por linha. Download gerado client-side com snapshot do evento: cada linha = (modalidade, participante, status_sorteio) cobrindo todos os tipos (grupos/chaves/ordem_entrada/especifico/não sorteado).
+
+### Notes
+- CSV inclui BOM UTF-8 para abrir corretamente no Excel com acentuação.
+- Nenhum endpoint novo, nenhuma dependência nova.
+
 ## [1.13.0] - 2026-05-30
 
 ### Added
