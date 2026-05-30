@@ -12,6 +12,10 @@ vi.mock('../../lib/prisma', () => ({
     modalidade: {
       count: vi.fn(),
     },
+    sorteio: {
+      deleteMany: vi.fn(),
+    },
+    $transaction: vi.fn(),
   },
 }))
 
@@ -40,12 +44,6 @@ describe('tipos_modalidade.service', () => {
     expect(mockPrisma.tipoModalidade.create).toHaveBeenCalledWith({ data: { nome: 'Coletivo' } })
   })
 
-  it('editar chama prisma.update', async () => {
-    mockPrisma.tipoModalidade.update.mockResolvedValue({ id: 1, nome: 'Individual' })
-    await service.editar(1, { nome: 'Individual' })
-    expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { nome: 'Individual' } })
-  })
-
   it('criar com tipo passa o valor para prisma.create', async () => {
     mockPrisma.tipoModalidade.create.mockResolvedValue({ id: 1, nome: 'Atletismo', tipo: 'ordem_entrada' })
     await service.criar({ nome: 'Atletismo', tipo: 'ordem_entrada' })
@@ -58,10 +56,45 @@ describe('tipos_modalidade.service', () => {
     expect(mockPrisma.tipoModalidade.create).toHaveBeenCalledWith({ data: { nome: 'Vôlei' } })
   })
 
-  it('editar com tipo atualiza o campo', async () => {
-    mockPrisma.tipoModalidade.update.mockResolvedValue({ id: 1, nome: 'X', tipo: 'chaves' })
+  it('editar sem mudar tipo apenas atualiza', async () => {
+    mockPrisma.tipoModalidade.update.mockResolvedValue({ id: 1, nome: 'Individual' })
+    await service.editar(1, { nome: 'Individual' })
+    expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { nome: 'Individual' } })
+    expect(mockPrisma.$transaction).not.toHaveBeenCalled()
+    expect(mockPrisma.sorteio.deleteMany).not.toHaveBeenCalled()
+  })
+
+  it('editar com tipo igual ao atual NÃO apaga sorteios', async () => {
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue({ tipo: 'grupos' })
+    mockPrisma.tipoModalidade.update.mockResolvedValue({ id: 1, tipo: 'grupos' })
+    await service.editar(1, { tipo: 'grupos' })
+    expect(mockPrisma.$transaction).not.toHaveBeenCalled()
+    expect(mockPrisma.sorteio.deleteMany).not.toHaveBeenCalled()
+    expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { tipo: 'grupos' } })
+  })
+
+  it('editar com tipo diferente do atual apaga sorteios das modalidades vinculadas em transação', async () => {
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue({ tipo: 'grupos' })
+    const txMock = {
+      sorteio: { deleteMany: vi.fn().mockResolvedValue({ count: 2 }) },
+      tipoModalidade: { update: vi.fn().mockResolvedValue({ id: 1, tipo: 'chaves' }) },
+    }
+    mockPrisma.$transaction.mockImplementation((fn: any) => fn(txMock))
+
     await service.editar(1, { tipo: 'chaves' })
-    expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { tipo: 'chaves' } })
+
+    expect(mockPrisma.$transaction).toHaveBeenCalledTimes(1)
+    expect(txMock.sorteio.deleteMany).toHaveBeenCalledWith({
+      where: { modalidade: { tipo_modalidade_id: 1 } },
+    })
+    expect(txMock.tipoModalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { tipo: 'chaves' },
+    })
+  })
+
+  it('editar com id inexistente lança 404 (quando muda tipo)', async () => {
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue(null)
+    await expect(service.editar(999, { tipo: 'chaves' })).rejects.toMatchObject({ status: 404 })
   })
 
   it('remover lança 409 quando há modalidade vinculada', async () => {

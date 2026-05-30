@@ -9,6 +9,13 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
+    tipoModalidade: {
+      findUnique: vi.fn(),
+    },
+    sorteio: {
+      deleteMany: vi.fn(),
+    },
+    $transaction: vi.fn(),
   },
 }))
 
@@ -60,12 +67,57 @@ describe('modalidades.service', () => {
     ).rejects.toMatchObject({ status: 409, message: expect.stringContaining('Já existe') })
   })
 
-  it('editar chama prisma.update com include', async () => {
+  it('editar sem mudar tipo_modalidade_id apenas atualiza', async () => {
     mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
     await service.editar(1, { nome: 'Renomeada' })
     expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
       where: { id: 1 }, data: { nome: 'Renomeada' }, include: INCLUDE,
     })
+    expect(mockPrisma.$transaction).not.toHaveBeenCalled()
+    expect(mockPrisma.sorteio.deleteMany).not.toHaveBeenCalled()
+  })
+
+  it('editar com tipo_modalidade_id que mantém o mesmo tipo NÃO apaga sorteios', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ tipo_modalidade: { tipo: 'grupos' } })
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue({ tipo: 'grupos' })
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
+
+    await service.editar(1, { tipo_modalidade_id: 99 })
+
+    expect(mockPrisma.$transaction).not.toHaveBeenCalled()
+    expect(mockPrisma.sorteio.deleteMany).not.toHaveBeenCalled()
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { tipo_modalidade_id: 99 }, include: INCLUDE,
+    })
+  })
+
+  it('editar com tipo_modalidade_id que MUDA o tipo apaga sorteios na transação', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ tipo_modalidade: { tipo: 'grupos' } })
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue({ tipo: 'chaves' })
+    const txMock = {
+      sorteio: { deleteMany: vi.fn().mockResolvedValue({ count: 1 }) },
+      modalidade: { update: vi.fn().mockResolvedValue({ id: 1 }) },
+    }
+    mockPrisma.$transaction.mockImplementation((fn: any) => fn(txMock))
+
+    await service.editar(1, { tipo_modalidade_id: 42 })
+
+    expect(mockPrisma.$transaction).toHaveBeenCalledTimes(1)
+    expect(txMock.sorteio.deleteMany).toHaveBeenCalledWith({ where: { modalidade_id: 1 } })
+    expect(txMock.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { tipo_modalidade_id: 42 }, include: INCLUDE,
+    })
+  })
+
+  it('editar com tipo_modalidade_id inexistente lança 400', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ tipo_modalidade: { tipo: 'grupos' } })
+    mockPrisma.tipoModalidade.findUnique.mockResolvedValue(null)
+    await expect(service.editar(1, { tipo_modalidade_id: 999 })).rejects.toMatchObject({ status: 400 })
+  })
+
+  it('editar com id de modalidade inexistente lança 404 (quando muda tipo_modalidade_id)', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue(null)
+    await expect(service.editar(999, { tipo_modalidade_id: 1 })).rejects.toMatchObject({ status: 404 })
   })
 
   it('editar também mapeia P2002 para 409', async () => {

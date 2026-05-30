@@ -46,7 +46,28 @@ export async function editar(
   id: number,
   data: Partial<{ nome: string; sigla: string; competicao_id: number; tipo_modalidade_id: number }>
 ) {
-  return mapPrismaError(() => prisma.modalidade.update({ where: { id }, data, include: INCLUDE }))
+  return mapPrismaError(async () => {
+    if (data.tipo_modalidade_id !== undefined) {
+      const atual = await prisma.modalidade.findUnique({
+        where: { id },
+        select: { tipo_modalidade: { select: { tipo: true } } },
+      })
+      if (!atual) throw Object.assign(new Error('Modalidade não encontrada'), { status: 404 })
+      const novo = await prisma.tipoModalidade.findUnique({
+        where: { id: data.tipo_modalidade_id },
+        select: { tipo: true },
+      })
+      if (!novo) throw Object.assign(new Error('Tipo de modalidade não encontrado'), { status: 400 })
+
+      if (novo.tipo !== atual.tipo_modalidade.tipo) {
+        return prisma.$transaction(async tx => {
+          await tx.sorteio.deleteMany({ where: { modalidade_id: id } })
+          return tx.modalidade.update({ where: { id }, data, include: INCLUDE })
+        })
+      }
+    }
+    return prisma.modalidade.update({ where: { id }, data, include: INCLUDE })
+  })
 }
 
 export async function remover(id: number) {

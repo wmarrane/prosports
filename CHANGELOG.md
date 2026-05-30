@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.17.1] - 2026-05-30
+
+### Fixed
+- Mudar o `tipo_modalidade_id` de uma Modalidade agora apaga automaticamente os sorteios antigos da modalidade quando o novo tipo (grupos/chaves/etc) diverge do anterior. Antes, o sorteio antigo (com `tipo` snapshot do tipo anterior) continuava sendo renderizado por EventoInscricoes e Modo Congresso.
+- Mudar o campo `tipo` de um TipoModalidade agora apaga automaticamente os sorteios de todas as Modalidades vinculadas quando o tipo muda. Mesma causa raiz.
+
+### Notes
+- Dados existentes corrigidos via SQL: TipoModalidade "Chaves" estava com `tipo='grupos'` (default da migration de criação do enum); ajustado para `chaves`. Mesma correção aplicada para "Especifico" e "Ordem de entrada". Sorteio órfão da modalidade Tênis Feminino 21 anos (Jogos Regionais de Campinas) apagado — re-sortear pela UI para gerar bracket de chaves.
+
 ## [1.17.0] - 2026-05-30
 
 ### Changed

@@ -17,6 +17,22 @@ export async function criar(data: { nome: string; tipo?: TipoDisputa }) {
 }
 
 export async function editar(id: number, data: { nome?: string; tipo?: TipoDisputa }) {
+  if (data.tipo !== undefined) {
+    const atual = await prisma.tipoModalidade.findUnique({
+      where: { id },
+      select: { tipo: true },
+    })
+    if (!atual) throw Object.assign(new Error('Tipo de modalidade não encontrado'), { status: 404 })
+
+    if (atual.tipo !== data.tipo) {
+      return prisma.$transaction(async tx => {
+        await tx.sorteio.deleteMany({
+          where: { modalidade: { tipo_modalidade_id: id } },
+        })
+        return tx.tipoModalidade.update({ where: { id }, data })
+      })
+    }
+  }
   return prisma.tipoModalidade.update({ where: { id }, data })
 }
 
