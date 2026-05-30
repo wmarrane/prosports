@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.13.0] - 2026-05-30
+
+### Added
+- Painel real (`/painel`): hero com saudação + CTAs (Modo Congresso, + Novo evento), 4 KPI cards (Competições / Eventos / Participantes / Sorteios realizados) e lista "Próximos sorteios" (eventos ativos com modalidades pendentes, ordenado por data, click → /eventos/:id/inscricoes).
+
+### Notes
+- Frontend-only — sem novos endpoints, sem migrations. Derivação client-side via useMemo sobre as queries de eventos/modalidades/sorteios.
+- Gráficos (área inscrições + donut tipo) e Atividade recente ficam para iteração futura (F1b/F1c).
+
 ## [1.12.0] - 2026-05-30
 
 ### Added
