@@ -1,0 +1,280 @@
+/*
+ * R2P Design System — Colors & Typography
+ * ─────────────────────────────────────────
+ * Source of truth: frontend/tailwind.config.js + src/styles.css from wmarrane/R2P
+ * Brand: R2P Monitor (Requisition to Pay) — internal procurement & payment
+ *        platform for Ituran. Portuguese-language enterprise UI.
+ *
+ * Use this file as a drop-in token layer when prototyping anything that should
+ * feel like R2P. Pair with /fonts (Inter + JetBrains Mono).
+ */
+
+/* ── Web fonts (loaded from Google Fonts) ─────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ─────────────── BRAND BLUE (primary scale) ─────────────── */
+  --brand-50:  #eef4ff;
+  --brand-100: #dde9ff;
+  --brand-200: #c3d5ff;
+  --brand-300: #93b8ff;
+  --brand-400: #5e8eff;
+  --brand-500: #1061d8;  /* hero blue — links, primary buttons, focus */
+  --brand-600: #0b4fb8;
+  --brand-700: #083f96;
+  --brand-800: #063074;
+  --brand-900: #042258;
+  --brand-950: #021444;  /* deep brand navy — gradient anchor */
+
+  /* ─────────────── SIDEBAR (dark chrome) ─────────────── */
+  --sidebar:        #0c0f1c;
+  --sidebar-soft:   #161929;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+
+  /* ─────────────── SURFACES (light app body) ─────────────── */
+  --surface:    #f0f2f7;   /* app background */
+  --surface-2:  #ffffff;   /* cards */
+  --surface-3:  #f8fafc;   /* zebra / table head */
+
+  /* ─────────────── NEUTRALS (slate scale used throughout) ─────────────── */
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;   /* default body text */
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;   /* headings */
+
+  /* ─────────────── SEMANTIC (status, charts, data accents) ─────────────── */
+  --success:      #10b981;
+  --success-soft: #d1fae5;
+  --success-700:  #047857;
+  --warn:         #f59e0b;
+  --warn-soft:    #fef3c7;
+  --warn-700:     #b45309;
+  --danger:       #ef4444;
+  --danger-soft:  #fee2e2;
+  --danger-700:   #b91c1c;
+  --info:         #3b82f6;
+  --info-soft:    #dbeafe;
+  --info-700:     #1d4ed8;
+  --violet:       #8b5cf6;
+  --violet-soft:  #ede9fe;
+  --pink:         #ec4899;
+  --pink-soft:    #fce7f3;
+  --teal:         #06b6d4;
+
+  /* ─────────────── FOREGROUNDS (semantic aliases) ─────────────── */
+  --fg-1: var(--slate-900);    /* h1/h2 */
+  --fg-2: var(--slate-700);    /* body */
+  --fg-3: var(--slate-500);    /* secondary */
+  --fg-4: var(--slate-400);    /* tertiary, captions */
+  --fg-on-brand: #ffffff;
+  --fg-on-dark:  #ffffff;
+  --link:        var(--brand-500);
+  --link-hover:  var(--brand-600);
+
+  /* ─────────────── GRADIENTS (signature visual) ─────────────── */
+  --grad-brand:       linear-gradient(135deg, #1061d8 0%, #4f8ef7 100%);
+  --grad-brand-deep:  linear-gradient(160deg, #021444 0%, #042258 25%, #083f96 65%, #1061d8 100%);
+  --grad-sidebar:     linear-gradient(175deg, #0c0f1c 0%, #080a14 100%);
+  --grad-success:     linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --grad-warn:        linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  --grad-danger:      linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  --grad-info:        linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  --grad-violet:      linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+  --grad-pink:        linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+  --grad-teal:        linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  --grad-text:        linear-gradient(135deg, #1061d8 0%, #4f8ef7 100%);
+
+  /* ─────────────── TYPOGRAPHY ─────────────── */
+  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, sans-serif;        /* Inter at 700–900 */
+  --font-mono:    'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Inter optical sizing & font features */
+  --font-features: 'cv11', 'ss01', 'liga' 1, 'calt' 1;
+
+  /* Type scale (px) */
+  --text-2xs:  10px;   /* uppercase eyebrow / version stamps */
+  --text-xs:   12px;   /* captions, table headers (uppercased) */
+  --text-sm:   13px;   /* sidebar nav, dense rows */
+  --text-base: 14px;   /* body default */
+  --text-md:   15px;   /* lead paragraphs */
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;   /* page titles (mobile) */
+  --text-3xl:  28px;   /* page titles (desktop) */
+  --text-4xl:  36px;
+  --text-5xl:  44px;   /* hero numbers / login headline */
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+  --weight-extrabold: 800;
+  --weight-black:   900;
+
+  /* Tracking — R2P uses very tight tracking on display text and
+     wide letter-spacing on uppercase eyebrows. */
+  --track-tight:    -0.02em;   /* h1, hero numbers */
+  --track-normal:   0;
+  --track-wide:     0.05em;
+  --track-wider:    0.1em;
+  --track-widest:   0.2em;     /* eyebrow / nav category labels */
+  --track-eyebrow:  0.25em;    /* "REQUISITION TO PAY" branding mark */
+
+  /* Line heights */
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.4;
+  --leading-relaxed: 1.6;
+
+  /* ─────────────── RADII ─────────────── */
+  --radius-sm:  6px;     /* xs buttons */
+  --radius-md:  8px;     /* sm buttons, search bar */
+  --radius-lg:  12px;    /* default — buttons, inputs, nav-item, badges' container */
+  --radius-xl:  16px;    /* cards */
+  --radius-2xl: 20px;    /* large cards / hero cards */
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+  --radius-pill: 9999px;
+
+  /* ─────────────── SPACING (4px base) ─────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ─────────────── SHADOWS ─────────────── */
+  --shadow-sm:    0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card:  0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 24px rgba(0, 0, 0, 0.06);
+  --shadow-soft:  0 4px 24px rgba(0, 0, 0, 0.10);
+  --shadow-xl:    0 24px 64px -12px rgba(0, 0, 0, 0.18);
+  --shadow-brand: 0 4px 20px rgba(16, 97, 216, 0.35);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Coloured glows — used on the dashboard's stat-card icons and chart
+     legend dots. These are the system's signature "data-accent" shadows. */
+  --glow-brand:   0 0 28px rgba(16, 97, 216, 0.28);
+  --glow-success: 0 0 24px rgba(16, 185, 129, 0.30);
+  --glow-warn:    0 0 24px rgba(245, 158, 11, 0.30);
+  --glow-danger:  0 0 24px rgba(239, 68, 68, 0.30);
+  --glow-info:    0 0 24px rgba(59, 130, 246, 0.30);
+  --glow-violet:  0 0 24px rgba(139, 92, 246, 0.30);
+  --glow-pink:    0 0 24px rgba(236, 72, 153, 0.30);
+
+  /* ─────────────── MOTION ─────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);   /* slide-up signature */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-xl:   600ms;
+}
+
+/* ─────────────── SEMANTIC TYPE STYLES ───────────────
+   Apply these directly to your prototype HTML. Class names match the
+   patterns we saw in styles.css (h1/h2 are auto-styled via base layer). */
+
+html, body, #root { height: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--fg-2);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-feature-settings: var(--font-features);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--surface);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  color: var(--fg-1);
+  letter-spacing: var(--track-tight);
+  margin: 0;
+}
+
+h1 { font-size: var(--text-3xl); font-weight: var(--weight-extrabold); line-height: var(--leading-tight); }
+h2 { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); line-height: var(--leading-snug); }
+h3 { font-size: var(--text-lg);  font-weight: var(--weight-bold);      line-height: var(--leading-snug); }
+h4 { font-size: var(--text-base);font-weight: var(--weight-bold);      line-height: var(--leading-snug); }
+
+p     { margin: 0; }
+small { font-size: var(--text-xs); color: var(--fg-3); }
+code, kbd, pre, samp { font-family: var(--font-mono); }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-out);
+}
+a:hover { color: var(--link-hover); }
+
+::selection { background: var(--brand-200); color: var(--brand-900); }
+
+/* Eyebrow / kicker — uppercase mini-labels that sit above h1s and section
+   titles. Heavily used in R2P (e.g. "REQUISITION TO PAY", "TOTAL ACUMULADO"). */
+.eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--track-eyebrow);
+  color: var(--fg-4);
+  line-height: 1;
+}
+
+/* Form label style — used as `.label` in styles.css */
+.field-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--track-widest);
+  color: var(--fg-4);
+  margin-bottom: var(--space-2);
+}
+
+/* Section title — used at the top of dashboard cards next to a small icon */
+.section-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--fg-1);
+  letter-spacing: var(--track-tight);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Page title pattern (PageHeader.tsx) */
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+}
+@media (min-width: 1024px) { .page-title { font-size: var(--text-3xl); } }
+
+/* Tabular numerals — required everywhere we show currency, counts, dates */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* The signature gradient text used on hero numbers / brand mark */
+.text-gradient {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
