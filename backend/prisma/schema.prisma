@@ -68,6 +68,7 @@ model Participante {
   delegacia_id  Int?
   municipio     Municipio    @relation(fields: [municipio_id], references: [id])
   municipio_id  Int
+  inscricoes    Inscricao[]
   criado_em     DateTime     @default(now())
   atualizado_em DateTime     @updatedAt
 }
@@ -80,6 +81,7 @@ model Modalidade {
   competicao_id       Int
   tipo_modalidade     TipoModalidade  @relation(fields: [tipo_modalidade_id], references: [id])
   tipo_modalidade_id  Int
+  inscricoes          Inscricao[]
   criado_em           DateTime        @default(now())
   atualizado_em       DateTime        @updatedAt
 
@@ -141,6 +143,7 @@ model Evento {
   competicao_id   Int
   municipio       Municipio     @relation(fields: [municipio_id], references: [id])
   municipio_id    Int
+  inscricoes      Inscricao[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -152,4 +155,19 @@ enum TipoDisputa {
   chaves
   especifico
   ordem_entrada
+}
+
+model Inscricao {
+  id              Int          @id @default(autoincrement())
+  evento          Evento       @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id       Int
+  modalidade      Modalidade   @relation(fields: [modalidade_id], references: [id])
+  modalidade_id   Int
+  participante    Participante @relation(fields: [participante_id], references: [id])
+  participante_id Int
+  criado_em       DateTime     @default(now())
+  atualizado_em   DateTime     @updatedAt
+
+  @@unique([evento_id, modalidade_id, participante_id])
+  @@index([evento_id, modalidade_id])
 }
