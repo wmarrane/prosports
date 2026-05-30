@@ -4,6 +4,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './styles/tokens.css'
 import './styles/prosports-theme.css'
 import App from './App.tsx'
+import { useThemeStore } from './store/themeStore'
+
+// Apply theme before render to avoid flash
+document.documentElement.dataset.theme = useThemeStore.getState().theme
 
 const queryClient = new QueryClient({
   defaultOptions: {
