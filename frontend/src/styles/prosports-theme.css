@@ -658,3 +658,7 @@ body {
 [data-radius="soft"] .btn-lg { border-radius: 16px; }
 [data-radius="soft"] .search input, [data-radius="soft"] .icon-btn, [data-radius="soft"] .collapse-btn { border-radius: 14px; }
 [data-radius="soft"] .sidebar .nav { border-radius: 14px; }
+
+@media (max-width: 900px) {
+  .login-hero { display: none !important; }
+}

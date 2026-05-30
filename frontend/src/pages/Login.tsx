@@ -2,10 +2,15 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
+import { useThemeStore } from '../store/themeStore'
+import {
+  Sun, Moon, Bracket, Groups, Order, Lock, Check, Report, ArrowRight,
+} from '../lib/icons'
 
 export default function Login() {
   const navigate = useNavigate()
   const { login, loading } = useAuthStore()
+  const { theme, toggle } = useThemeStore()
 
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -16,97 +21,167 @@ export default function Login() {
     setErro('')
     try {
       await login({ email, senha })
-      navigate('/', { replace: true })
+      navigate('/painel', { replace: true })
     } catch (err: any) {
-      const msg =
-        err?.response?.data?.message ?? 'Não foi possível conectar. Tente novamente.'
-      setErro(msg)
+      setErro(err?.response?.data?.message ?? 'Não foi possível conectar. Tente novamente.')
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950">
-      <div className="w-full max-w-sm">
-        {/* Logo / Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-600 mb-4">
-            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
-            </svg>
+    <div style={{ width: '100%', height: '100vh', display: 'flex', background: 'var(--card-bg)', overflow: 'hidden' }}>
+      {/* theme toggle, floating top-right */}
+      <button
+        className="icon-btn"
+        onClick={toggle}
+        title={theme === 'dark' ? 'Tema claro' : 'Tema escuro'}
+        style={{ position: 'absolute', top: 22, right: 26, zIndex: 30, background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.18)' }}
+      >
+        {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+      </button>
+
+      {/* Left hero */}
+      <div
+        className="dotgrid login-hero"
+        style={{
+          flex: '0 0 52%',
+          position: 'relative',
+          background: 'var(--grad-brand-deep)',
+          color: '#fff',
+          padding: '54px 60px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ position: 'absolute', width: 440, height: 440, borderRadius: '50%', background: 'rgba(96,165,250,0.40)', filter: 'blur(85px)', top: -130, right: -90, animation: 'floaty 11s ease-in-out infinite' }} />
+        <div style={{ position: 'absolute', width: 320, height: 320, borderRadius: '50%', background: 'rgba(20,184,138,0.30)', filter: 'blur(75px)', bottom: -90, left: 60, animation: 'floaty 8s ease-in-out infinite' }} />
+
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ width: 50, height: 50, borderRadius: 14, background: 'var(--grad-brand)', display: 'grid', placeItems: 'center', color: '#fff', fontWeight: 900, fontSize: 19, letterSpacing: '-0.04em', boxShadow: '0 8px 26px rgba(16,97,216,0.5)' }}>PS</div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em' }}>ProSports</div>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.25em', opacity: 0.55, marginTop: 3 }}>SORTEIOS&nbsp;&amp;&nbsp;COMPETIÇÕES</div>
           </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">ProSports</h1>
-          <p className="text-sm text-gray-400 mt-1">Gestão de competições esportivas</p>
         </div>
 
-        {/* Card */}
-        <div className="bg-gray-900 rounded-2xl border border-gray-800 p-8 shadow-xl">
-          <h2 className="text-lg font-semibold text-white mb-6">Entrar na plataforma</h2>
+        <div style={{ position: 'relative' }}>
+          <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.55)' }}>Plataforma · Sorteios esportivos</div>
+          <h1
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 800,
+              fontSize: 40,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.12,
+              margin: '12px 0 16px',
+              maxWidth: 480,
+              color: '#fff',
+              textWrap: 'balance',
+            }}
+          >
+            Sorteios justos, aleatórios e auditáveis.
+          </h1>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', lineHeight: 1.55, maxWidth: 460 }}>
+            Receba os inscritos e conduza o sorteio de chaves, grupos ou ordem de entrada em segundos —
+            cada resultado com semente registrada e reproduzível.
+          </p>
+          <div style={{ display: 'flex', gap: 10, marginTop: 22 }}>
+            {[
+              { Icon: Bracket, label: 'Chaves' },
+              { Icon: Groups, label: 'Grupos' },
+              { Icon: Order, label: 'Ordem de entrada' },
+            ].map(({ Icon, label }) => (
+              <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.16)', fontSize: 12.5, fontWeight: 600 }}>
+                <Icon size={15} /> {label}
+              </span>
+            ))}
+          </div>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <div style={{ position: 'relative', display: 'flex', gap: 30 }}>
+          {[['1.482', 'Inscritos ativos'], ['47', 'Sorteios realizados'], ['100%', 'Auditados']].map(([v, l]) => (
+            <div key={l}>
+              <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right form */}
+      <div style={{ flex: 1, padding: '56px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--card-bg)' }}>
+        <form onSubmit={handleSubmit} style={{ maxWidth: 380, width: '100%' }}>
+          <div className="eyebrow">Acesso administrativo</div>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 29, letterSpacing: '-0.025em', margin: '8px 0 6px', color: 'var(--t1)' }}>
+            Entrar na plataforma
+          </h2>
+          <p style={{ fontSize: 13.5, color: 'var(--t3)', lineHeight: 1.55, margin: 0 }}>
+            Use suas credenciais de administrador para gerenciar eventos e conduzir sorteios.
+          </p>
+
+          <div style={{ marginTop: 30, display: 'flex', flexDirection: 'column', gap: 15 }}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1.5">
-                E-mail
-              </label>
+              <label className="field-label" style={{ color: 'var(--t3)' }}>E-mail corporativo</label>
               <input
-                id="email"
+                className="lg-input"
                 type="email"
                 autoComplete="email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu@email.com"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                required
               />
             </div>
-
             <div>
-              <label htmlFor="senha" className="block text-sm font-medium text-gray-300 mb-1.5">
-                Senha
-              </label>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                <label className="field-label" style={{ color: 'var(--t3)', margin: 0 }}>Senha</label>
+                <a style={{ fontSize: 11.5, color: 'var(--brand-500)', fontWeight: 600, cursor: 'pointer' }}>Esqueci a senha</a>
+              </div>
               <input
-                id="senha"
+                className="lg-input"
                 type="password"
                 autoComplete="current-password"
-                required
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
-                placeholder="••••••••"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                required
               />
             </div>
 
+            <label style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 12.5, color: 'var(--t2)', marginTop: 2, cursor: 'pointer' }}>
+              <span style={{ width: 17, height: 17, borderRadius: 5, background: 'var(--grad-brand)', display: 'grid', placeItems: 'center' }}>
+                <Check size={11} style={{ color: '#fff', strokeWidth: 3 }} />
+              </span>
+              Manter conectado neste dispositivo
+            </label>
+
             {erro && (
-              <div className="flex items-start gap-2.5 rounded-lg bg-red-950 border border-red-800 px-3.5 py-3 text-sm text-red-300">
-                <svg className="w-4 h-4 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
-                <span>{erro}</span>
+              <div style={{ padding: '10px 12px', borderRadius: 10, background: 'rgba(239,68,68,0.10)', border: '1px solid rgba(239,68,68,0.30)', color: 'var(--danger)', fontSize: 13 }}>
+                {erro}
               </div>
             )}
 
             <button
               type="submit"
+              className="btn btn-primary btn-lg"
               disabled={loading}
-              className="w-full py-2.5 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm transition-colors"
+              style={{ marginTop: 10, justifyContent: 'center', width: '100%' }}
             >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                  </svg>
-                  Entrando...
-                </span>
-              ) : (
-                'Entrar'
-              )}
+              {loading ? <>Entrando…</> : <>Entrar no ProSports <ArrowRight size={16} /></>}
             </button>
-          </form>
-        </div>
+          </div>
 
-        <p className="text-center text-xs text-gray-600 mt-6">
-          © {new Date().getFullYear()} ProSports · Todos os direitos reservados
-        </p>
+          <div style={{ marginTop: 28, display: 'flex', alignItems: 'center', gap: 14, fontSize: 11, color: 'var(--t4)' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <Lock size={12} /> Criptografado
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <Check size={12} /> Acesso por JWT
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+              <Report size={12} /> Logs de auditoria
+            </span>
+          </div>
+        </form>
       </div>
     </div>
   )
