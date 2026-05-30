@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.9.0] - 2026-05-30
+
+### Added
+- Entidade Sorteio: persiste resultado por (evento, modalidade) com seed de auditoria e tipo snapshot. Re-sorteio sobrescreve.
+- Motor de sorteio determinístico (PRNG mulberry32): drawGroups (consulta sistema_disputas_grupos), drawBracket (pad até potência de 2 com byes), shuffleOrder.
+- Endpoints `/sorteios` (GET lista, GET id, DELETE) e `POST /sorteios/executar` (gera + persiste via upsert). Sem UI nesta fase.
+
+### Notes
+- Tipo `especifico` não suporta sorteio automático (retorna 400).
+- Tipo `grupos` exige regra cadastrada em `sistema_disputas_grupos` para o N de inscritos da competição (400 amigável quando ausente).
+
 ## [1.8.0] - 2026-05-30
 
 ### Added
