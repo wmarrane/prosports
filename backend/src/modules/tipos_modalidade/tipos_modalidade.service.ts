@@ -1,5 +1,7 @@
 import prisma from '../../lib/prisma'
 
+type TipoDisputa = 'grupos' | 'chaves' | 'especifico' | 'ordem_entrada'
+
 export async function listar() {
   return prisma.tipoModalidade.findMany({ orderBy: { nome: 'asc' } })
 }
@@ -10,11 +12,11 @@ export async function buscarPorId(id: number) {
   return item
 }
 
-export async function criar(data: { nome: string }) {
+export async function criar(data: { nome: string; tipo?: TipoDisputa }) {
   return prisma.tipoModalidade.create({ data })
 }
 
-export async function editar(id: number, data: { nome?: string }) {
+export async function editar(id: number, data: { nome?: string; tipo?: TipoDisputa }) {
   return prisma.tipoModalidade.update({ where: { id }, data })
 }
 

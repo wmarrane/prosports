@@ -46,6 +46,24 @@ describe('tipos_modalidade.service', () => {
     expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { nome: 'Individual' } })
   })
 
+  it('criar com tipo passa o valor para prisma.create', async () => {
+    mockPrisma.tipoModalidade.create.mockResolvedValue({ id: 1, nome: 'Atletismo', tipo: 'ordem_entrada' })
+    await service.criar({ nome: 'Atletismo', tipo: 'ordem_entrada' })
+    expect(mockPrisma.tipoModalidade.create).toHaveBeenCalledWith({ data: { nome: 'Atletismo', tipo: 'ordem_entrada' } })
+  })
+
+  it('criar sem tipo NÃO inclui a chave no data (deixa default do DB resolver)', async () => {
+    mockPrisma.tipoModalidade.create.mockResolvedValue({ id: 1, nome: 'Vôlei' })
+    await service.criar({ nome: 'Vôlei' })
+    expect(mockPrisma.tipoModalidade.create).toHaveBeenCalledWith({ data: { nome: 'Vôlei' } })
+  })
+
+  it('editar com tipo atualiza o campo', async () => {
+    mockPrisma.tipoModalidade.update.mockResolvedValue({ id: 1, nome: 'X', tipo: 'chaves' })
+    await service.editar(1, { tipo: 'chaves' })
+    expect(mockPrisma.tipoModalidade.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { tipo: 'chaves' } })
+  })
+
   it('remover lança 409 quando há modalidade vinculada', async () => {
     mockPrisma.modalidade.count.mockResolvedValue(3)
     await expect(service.remover(1)).rejects.toMatchObject({ status: 409 })
