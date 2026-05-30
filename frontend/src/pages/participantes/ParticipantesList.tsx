@@ -30,8 +30,8 @@ export default function ParticipantesList() {
       header: 'Ações',
       accessor: (row: Participante) => (
         <div className="flex gap-2">
-          <button onClick={() => navigate(`/participantes/${row.id}/editar`)} className="text-indigo-400 hover:text-indigo-300 text-xs">Editar</button>
-          <button onClick={() => { if (confirm(`Remover "${row.nome}"?`)) remover(row.id) }} className="text-red-400 hover:text-red-300 text-xs">Remover</button>
+          <button onClick={() => navigate(`/participantes/${row.id}/editar`)} className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs">Editar</button>
+          <button onClick={() => { if (confirm(`Remover "${row.nome}"?`)) remover(row.id) }} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs">Remover</button>
         </div>
       ),
       className: 'w-28',
@@ -39,10 +39,10 @@ export default function ParticipantesList() {
   ]
 
   return (
-    <div className="text-white">
+    <div className="text-[var(--t1)]">
       <PageHeader title="Participantes" actionLabel="+ Novo Participante" actionTo="/participantes/novo" />
       <div className="p-6">
-        {isLoading ? <p className="text-gray-400 text-sm">Carregando...</p>
+        {isLoading ? <p className="text-[var(--t3)] text-sm">Carregando...</p>
           : <DataTable columns={columns} data={data} keyExtractor={r => r.id} emptyMessage="Nenhum participante cadastrado." />}
       </div>
     </div>

@@ -39,8 +39,8 @@ export default function MunicipiosList() {
       header: 'Ações',
       accessor: (row: Municipio) => (
         <div className="flex gap-2">
-          <button onClick={() => navigate(`/municipios/${row.id}/editar`)} className="text-indigo-400 hover:text-indigo-300 text-xs">Editar</button>
-          <button onClick={() => confirmarRemocao(row.id, row.nome)} className="text-red-400 hover:text-red-300 text-xs">Remover</button>
+          <button onClick={() => navigate(`/municipios/${row.id}/editar`)} className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs">Editar</button>
+          <button onClick={() => confirmarRemocao(row.id, row.nome)} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs">Remover</button>
         </div>
       ),
       className: 'w-28',
@@ -48,40 +48,40 @@ export default function MunicipiosList() {
   ]
 
   const totalPages = data ? Math.max(1, Math.ceil(data.total / PAGE_SIZE)) : 1
-  const inputClass = 'px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+  const inputClass = 'px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]'
 
   return (
-    <div className="text-white">
+    <div className="text-[var(--t1)]">
       <PageHeader title="Municípios" actionLabel="+ Novo Município" actionTo="/municipios/novo" />
       <div className="p-6 space-y-4">
         <div className="flex flex-wrap items-end gap-3">
           <div>
-            <label className="block text-xs text-gray-400 mb-1">UF</label>
+            <label className="block text-xs text-[var(--t3)] mb-1">UF</label>
             <select value={uf} onChange={(e) => { setUf(e.target.value); setPage(1) }} className={`${inputClass} w-24`}>
               <option value="">Todas</option>
               {UFS.map((u) => <option key={u} value={u}>{u}</option>)}
             </select>
           </div>
           <div className="flex-1 min-w-[240px]">
-            <label className="block text-xs text-gray-400 mb-1">Buscar por nome</label>
+            <label className="block text-xs text-[var(--t3)] mb-1">Buscar por nome</label>
             <input value={q} onChange={(e) => { setQ(e.target.value); setPage(1) }} className={`${inputClass} w-full`} placeholder="Ex.: São Paulo" />
           </div>
-          <button onClick={() => navigate('/municipios/importar')} className="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white text-sm rounded-lg">
+          <button onClick={() => navigate('/municipios/importar')} className="px-4 py-2 bg-[var(--card-bg-2)] hover:bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm rounded-lg">
             Importar CSV
           </button>
         </div>
 
         {isLoading ? (
-          <p className="text-gray-400 text-sm">Carregando...</p>
+          <p className="text-[var(--t3)] text-sm">Carregando...</p>
         ) : (
           <>
             <DataTable columns={columns} data={data?.data ?? []} keyExtractor={(row) => row.id} emptyMessage="Nenhum município encontrado." />
             {data && data.total > PAGE_SIZE && (
-              <div className="flex items-center justify-between text-sm text-gray-400">
+              <div className="flex items-center justify-between text-sm text-[var(--t3)]">
                 <span>{data.total} resultados — página {page} de {totalPages}</span>
                 <div className="flex gap-2">
-                  <button disabled={page === 1} onClick={() => setPage((p) => p - 1)} className="px-3 py-1 rounded bg-gray-800 disabled:opacity-50">Anterior</button>
-                  <button disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)} className="px-3 py-1 rounded bg-gray-800 disabled:opacity-50">Próxima</button>
+                  <button disabled={page === 1} onClick={() => setPage((p) => p - 1)} className="px-3 py-1 rounded bg-[var(--card-bg-2)] disabled:opacity-50">Anterior</button>
+                  <button disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)} className="px-3 py-1 rounded bg-[var(--card-bg-2)] disabled:opacity-50">Próxima</button>
                 </div>
               </div>
             )}
