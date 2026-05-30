@@ -4,6 +4,7 @@ import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
 import { tiposModalidadeService } from '../../services/tipos-modalidade'
 import type { TipoModalidade } from '../../types/modalidade'
+import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
 
 export default function TiposModalidadeList() {
   const navigate = useNavigate()
@@ -22,6 +23,7 @@ export default function TiposModalidadeList() {
 
   const columns = [
     { header: 'Nome', accessor: (row: TipoModalidade) => row.nome },
+    { header: 'Tipo', accessor: (row: TipoModalidade) => TIPO_DISPUTA_LABEL[row.tipo], className: 'w-48' },
     {
       header: 'Ações',
       accessor: (row: TipoModalidade) => (
