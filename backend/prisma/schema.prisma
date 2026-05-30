@@ -116,6 +116,7 @@ model SistemaDisputasGrupos {
 model TipoModalidade {
   id            Int          @id @default(autoincrement())
   nome          String       @unique
+  tipo          TipoDisputa  @default(grupos)
   modalidades   Modalidade[]
   criado_em     DateTime     @default(now())
   atualizado_em DateTime     @updatedAt
@@ -144,4 +145,11 @@ model Evento {
   atualizado_em   DateTime      @updatedAt
 
   @@unique([competicao_id, nome])
+}
+
+enum TipoDisputa {
+  grupos
+  chaves
+  especifico
+  ordem_entrada
 }
