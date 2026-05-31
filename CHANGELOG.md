@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.30.0] - 2026-05-31
+
+### Changed (Tipos de Modalidade)
+- **TiposModalidadeList**: DataTable → **agrupado por tipo de disputa** (Chaves/Grupos/Ordem/Específico). Cada seção tem header com ícone gradient + nome + descrição do tipo + contagem. Cards 280px+ com ícone gradient 42px + nome do tipo + label da disputa + ações. Card todo clicável (vai pra Editar). Empty state amigável.
+- **TipoModalidadeForm**: Form linear → **card seccionado único** (Shapes icon + brand-deep gradient) com:
+  - Nome com hint contextual.
+  - **Seleção visual do tipo de disputa**: cards verticais clicáveis (em vez de dropdown) com ícone gradient 40px + label + descrição + check visual quando ativo (fundo `--brand-50` + borda `--brand-500`).
+- Header com eyebrow "Cadastro" + sub contextual.
+- Asterisco vermelho em campos obrigatórios.
+- Action bar fim: Cancelar (ghost) + Salvar/Criar (primary) com ícones.
+
 ## [1.29.0] - 2026-05-31
 
 ### Changed (Municípios)
