@@ -22,8 +22,8 @@ type MatchLayout = {
   isThirdPlace: boolean
 }
 
-const CARD_WIDTH = 220
-const CARD_HEIGHT = 78
+const CARD_WIDTH = 240
+const CARD_HEIGHT = 90
 const COL_GAP = 80
 const ROW_GAP = 24
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
@@ -36,30 +36,42 @@ function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]
   }
   const totalHeight = N * POS_ROW_HEIGHT
 
-  // 1. Calcula Y "natural" (média dos inputs) só para ordenar visualmente
-  //    dentro de cada rodada — depois reposicionamos por slots iguais.
-  const naturalY: Record<string, number> = {}
+  // Agrupa matches por rodada.
   const matchesByRound: Record<number, typeof graph.matches> = {}
   const matchesSorted = [...graph.matches].sort((a, b) => a.round - b.round)
   for (const m of matchesSorted) {
-    const resolveNatural = (ref: string): number => {
-      if (ref.startsWith('P')) return posY[ref] ?? 0
-      return naturalY[ref.slice(2)] ?? 0
-    }
-    naturalY[m.id] = (resolveNatural(m.top) + resolveNatural(m.bottom)) / 2
     ;(matchesByRound[m.round] ??= []).push(m)
   }
 
-  // 2. Para cada rodada, distribuir matches igualmente na altura total.
-  //    3º lugar fica fora do funil — posicionado ABAIXO do bracket.
+  // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média de inputs).
+  const naturalY: Record<string, number> = {}
+  for (const m of matchesSorted) {
+    const resolve = (ref: string): number => {
+      if (ref.startsWith('P')) return posY[ref] ?? 0
+      return naturalY[ref.slice(2)] ?? 0
+    }
+    naturalY[m.id] = (resolve(m.top) + resolve(m.bottom)) / 2
+  }
+
+  // Layout final:
+  //   - R1: espaçamento igual na altura total (funil-base).
+  //   - R2 em diante: cada match no MEIO entre seus inputs (funil convergente).
+  //   - 3º lugar: abaixo do bracket, alinhado com a Final.
   const matchById: Record<string, MatchLayout> = {}
+  const resolveLaidOutY = (ref: string): number => {
+    if (ref.startsWith('P')) return posY[ref] ?? 0
+    return matchById[ref.slice(2)]?.y ?? 0
+  }
+
   for (const round of Object.keys(matchesByRound).map(Number).sort((a, b) => a - b)) {
     const bracketMatches = matchesByRound[round]
       .filter(m => m.id !== graph.thirdPlace)
       .sort((a, b) => naturalY[a.id] - naturalY[b.id])
     const n = bracketMatches.length
     bracketMatches.forEach((m, i) => {
-      const y = ((i + 0.5) / n) * totalHeight
+      const y = round === 1
+        ? ((i + 0.5) / n) * totalHeight                 // R1: equal spacing
+        : (resolveLaidOutY(m.top) + resolveLaidOutY(m.bottom)) / 2  // R2+: midpoint dos inputs
       const x = (m.round - 1) * (CARD_WIDTH + COL_GAP)
       matchById[m.id] = {
         id: m.id, round: m.round, top: m.top, bottom: m.bottom,
@@ -97,7 +109,7 @@ function renderSlot(
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
-  const nameFontSize = large ? '1.15rem' : '1rem'
+  const nameFontSize = large ? '1.45rem' : '1.2rem'
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
@@ -155,7 +167,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
           viewBox={`0 0 ${layout.width} ${layout.height}`}
         >
           {connectors.map(c => (
-            <path key={c.key} d={c.d} stroke="var(--card-border)" strokeWidth={1.5} fill="none" />
+            <path key={c.key} d={c.d} stroke="var(--t3)" strokeWidth={2.5} fill="none" />
           ))}
         </svg>
         {layout.matches.map(m => (

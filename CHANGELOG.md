@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.5] - 2026-05-31
+
+### Changed (Bracket — refinamento do funil)
+- **R1 com espaçamento igual; R2+ posicionado no meio entre seus inputs** — agora cada rodada converge para o centro (funil verdadeiro). Resolve o problema onde R3 ficava no mesmo Y de R2 e os conectores se sobrepunham.
+- **Conectores mais grossos e escuros**: stroke `1.5px` → `2.5px`, cor `--card-border` → `--t3` (mais legíveis sobre os cards).
+- **Fonte do nome do inscrito ainda maior**: `large` `1.15rem` → `1.45rem`; `small` `1rem` → `1.2rem`. Card: width 220→240, height 78→90.
+
 ## [1.32.4] - 2026-05-31
 
 ### Changed (Bracket de Chaves — funil, fonte, layout)
