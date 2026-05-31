@@ -130,3 +130,22 @@ export async function hashSenha(senha: string) {
 export function verifyAccess(token: string): TokenPayload {
   return jwt.verify(token, ACCESS_SECRET) as unknown as TokenPayload
 }
+
+export async function alterarSenha(userId: number, senhaAtual: string, novaSenha: string) {
+  const user = await prisma.user.findUnique({ where: { id: userId } })
+  if (!user) throw Object.assign(new Error('Usuário não encontrado'), { status: 404 })
+
+  const ok = await bcrypt.compare(senhaAtual, user.senha_hash)
+  if (!ok) {
+    throw Object.assign(new Error('Senha atual incorreta.'), { status: 401 })
+  }
+
+  const senha_hash = await bcrypt.hash(novaSenha, 12)
+  await prisma.user.update({
+    where: { id: userId },
+    data: { senha_hash },
+  })
+  // Revoga todas as sessões — o usuário será deslogado e precisará logar novamente.
+  await revogarTodosRefreshTokens(userId)
+  return { ok: true }
+}
