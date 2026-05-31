@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.3] - 2026-05-31
+
+### Fixed (Bracket Chaves — J-IDs canônicos da planilha)
+- **Extração da planilha CHAVES CT** reescrita para ler os J-IDs do diagrama visual (cols C-I), não da tabela estruturada (cols Q-V). As duas têm numerações distintas — a do diagrama é a que árbitros/atletas leem na chave impressa.
+- Exemplo N=10: R1 agora numera J1, J4, J5, J2 (top→bottom) em vez de J1, J2, J4, J5; R2 (BYEs) J3, J6.
+- Seed `bracket_chaves_matches.sql` regenerado para todos os N suportados.
+- Sorteios já realizados retêm os J-IDs antigos. Para aplicar a nova numeração: apagar + re-sortear a modalidade.
+
 ## [1.32.2] - 2026-05-31
 
 ### Changed (Subtítulo condicional por competição)
