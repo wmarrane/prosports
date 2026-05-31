@@ -5,6 +5,21 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.19.0] - 2026-05-30
+
+### Added
+- Nova tabela `bracket_chaves_matches(numero_inscrito INT PK, matches_graph JSONB)` com grafo completo de matches por N (extraído da planilha CHAVES CT.xlsx).
+- Script `backend/scripts/extract-bracket-graphs.py` combina matches list (Venc/Perd refs) + BYE positions já extraídas (v1.18.0) para reconstruir o grafo. Cobre 29 dos 76 N possíveis (limitação da planilha — outros N têm dados incompletos).
+- Novo componente `BracketTree.tsx` renderiza bracket de chaves como árvore visual: cards de match posicionados por coordenadas (round/y) com conectores SVG L-shape entre vencedores e próximas partidas. Final destacada com borda dourada + 🏆.
+- `Sorteio.resultado` agora inclui `matchesGraph` (nullable — `null` quando N não tem grafo na planilha).
+
+### Changed
+- `SorteioChaves` (frontend) usa `BracketTree` quando `matchesGraph` presente. Para N sem grafo, cai no fallback v1.18.1 (lista vertical com BYEs marcados).
+
+### Notes
+- Sorteios pré-v1.18.0 (sem `byePositions`) continuam renderizando via builder legado.
+- Planilha CHAVES CT.xlsx tem dados completos apenas para N=2-12, 15, 17, 19, 21-28, 31-33 (29 valores). Outros N (incluindo a maioria entre N=34 e N=77) usam fallback de lista vertical. Para extender a cobertura: completar a planilha (preencher matches list direita para os N faltantes) e re-rodar `python backend/scripts/extract-bracket-graphs.py`.
+
 ## [1.18.1] - 2026-05-30
 
 ### Changed
