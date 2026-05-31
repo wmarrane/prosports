@@ -59,4 +59,34 @@ describe('users.service', () => {
       await expect(service.buscarPorId(99)).rejects.toMatchObject({ status: 404 })
     })
   })
+
+  describe('criar', () => {
+    it('cria usuário com senha hash', async () => {
+      mockPrisma.user.findFirst.mockResolvedValue(null)
+      mockPrisma.user.create.mockResolvedValue({
+        id: 1, nome: 'Bob', email: 'b@x.com', role: 'VIEWER', ativo: true,
+      })
+      const result = await service.criar({
+        nome: 'Bob', email: 'b@x.com', role: 'VIEWER', senha: 'segredo123',
+      })
+      expect(mockPrisma.user.create).toHaveBeenCalledWith({
+        data: {
+          nome: 'Bob',
+          email: 'b@x.com',
+          role: 'VIEWER',
+          senha_hash: 'hashed:segredo123',
+        },
+        select: expect.any(Object),
+      })
+      expect(result).not.toHaveProperty('senha_hash')
+    })
+
+    it('falha com 400 se email já existe', async () => {
+      mockPrisma.user.findFirst.mockResolvedValue({ id: 9 })
+      await expect(
+        service.criar({ nome: 'X', email: 'dup@x.com', role: 'VIEWER', senha: 'segredo123' })
+      ).rejects.toMatchObject({ status: 400, message: expect.stringContaining('Email') })
+      expect(mockPrisma.user.create).not.toHaveBeenCalled()
+    })
+  })
 })
