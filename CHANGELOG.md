@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.34.0] - 2026-05-31
+
+### Added (Import CSV de Modalidades)
+- **Backend**: novo endpoint `POST /modalidades/import` (multipart/form-data com `arquivo` + `competicao_id`). Service `importarCsv(competicao_id, content)` faz upsert por `(competicao_id, nome)`: existentes ganham update de sigla/tipo se diferentes; novos são criados. Erros por linha (nome vazio, sigla vazia, tipo_modalidade desconhecido, sigla conflitando) são reportados. CSV parser reutiliza `municipios/csv-parser.ts`.
+- **Frontend**: `ImportModalidadesModal` no padrão dos demais imports (modelo + instruções + upload + resultado). Botão "Importar CSV" no header do `ModalidadesPanel` (dentro do CompeticaoForm edit).
+- **Template**: `nome,sigla,tipo_modalidade` — onde `tipo_modalidade` é o `nome` do `TipoModalidade` cadastrado (case-insensitive).
+
 ## [1.33.1] - 2026-05-31
 
 ### Fixed (Postgres sequences dessincronizadas)
