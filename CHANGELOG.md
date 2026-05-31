@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.24.0] - 2026-05-30
+
+### Changed (Modo Congresso — Master-Detail Modalidade)
+- **CongressoStepModalidade** agora usa layout **master-detail** (`cw-md` grid: 360px sidebar esquerda + painel detalhe direita), substituindo o grid de cards.
+- **Esquerda**: lista vertical compacta (`cw-md-list`/`cw-md-item`) com ícone de tipo gradiente, nome da modalidade, e badge "✓" se já sorteada.
+- **Direita**: card grande (`cw-md-card`) com hero icon 84px, eyebrow do tipo, título display (`clamp(30px, 3.4vw, 46px)`), descrição do tipo de disputa, dois cards de stats (Inscritos / Forma do sorteio), e botão grande "Iniciar" (`cw-btn-xl`) para avançar.
+- Auto-seleção da primeira modalidade ainda não sorteada (ou a primeira da lista se todas já foram).
+- Empty state na direita quando nada selecionado (`cw-md-empty` tracejado).
+
 ## [1.23.0] - 2026-05-30
 
 ### Changed (Modo Congresso — consolidação de Campeões em Sorteio)
