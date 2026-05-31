@@ -1,11 +1,25 @@
 import prisma from '../../lib/prisma'
 import { SIGLAS_VALIDAS } from '../municipios/uf'
 
+export const CAMPOS_VALIDOS = ['subtitulo', 'municipio', 'inspetoria', 'delegacia'] as const
+export type CampoSubtitulo = typeof CAMPOS_VALIDOS[number]
+
 function validateUfs(estados: string[]) {
   for (const uf of estados) {
     if (!SIGLAS_VALIDAS.has(uf)) {
       throw Object.assign(new Error(`UF inválida: '${uf}'`), { status: 400 })
     }
+  }
+}
+
+function validateCampos(campos: string[]) {
+  for (const c of campos) {
+    if (!CAMPOS_VALIDOS.includes(c as CampoSubtitulo)) {
+      throw Object.assign(new Error(`Campo inválido: '${c}'`), { status: 400 })
+    }
+  }
+  if (new Set(campos).size !== campos.length) {
+    throw Object.assign(new Error('subtitulo_campos não pode ter duplicatas'), { status: 400 })
   }
 }
 
@@ -38,22 +52,25 @@ export async function buscarPorId(id: number) {
 export async function criar(input: {
   nome: string
   estados: string[]
-  adicionar_subtitulo?: boolean
+  subtitulo_campos?: string[]
 }) {
   validateUfs(input.estados)
+  const campos = input.subtitulo_campos ?? []
+  validateCampos(campos)
   const data = {
     nome: input.nome,
     estados: input.estados,
-    adicionar_subtitulo: input.adicionar_subtitulo ?? false,
+    subtitulo_campos: campos,
   }
   return mapPrismaError(() => prisma.competicao.create({ data }))
 }
 
 export async function editar(
   id: number,
-  input: Partial<{ nome: string; estados: string[]; adicionar_subtitulo: boolean }>
+  input: Partial<{ nome: string; estados: string[]; subtitulo_campos: string[] }>
 ) {
   if (input.estados !== undefined) validateUfs(input.estados)
+  if (input.subtitulo_campos !== undefined) validateCampos(input.subtitulo_campos)
   return mapPrismaError(() => prisma.competicao.update({ where: { id }, data: input }))
 }
 

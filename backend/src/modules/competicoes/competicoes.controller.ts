@@ -2,10 +2,16 @@ import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './competicoes.service'
 
+const CAMPOS_VALIDOS = ['subtitulo', 'municipio', 'inspetoria', 'delegacia'] as const
+
 const createSchema = z.object({
   nome: z.string().min(1),
   estados: z.array(z.string().length(2)).min(1, 'Selecione ao menos uma UF'),
-  adicionar_subtitulo: z.boolean().optional().default(false),
+  subtitulo_campos: z.array(z.enum(CAMPOS_VALIDOS))
+    .max(4)
+    .refine(arr => new Set(arr).size === arr.length, { message: 'Campos duplicados' })
+    .optional()
+    .default([]),
 })
 
 const updateSchema = createSchema.partial()

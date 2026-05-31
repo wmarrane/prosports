@@ -40,19 +40,19 @@ describe('competicoes.service', () => {
     await expect(service.buscarPorId(99)).rejects.toMatchObject({ status: 404 })
   })
 
-  it('criar aceita UFs válidas e default false em adicionar_subtitulo', async () => {
+  it('criar aceita UFs válidas e default [] em subtitulo_campos', async () => {
     mockPrisma.competicao.create.mockResolvedValue({ id: 1 })
     await service.criar({ nome: 'Copa Brasil', estados: ['SP', 'RJ'] })
     expect(mockPrisma.competicao.create).toHaveBeenCalledWith({
-      data: { nome: 'Copa Brasil', estados: ['SP', 'RJ'], adicionar_subtitulo: false },
+      data: { nome: 'Copa Brasil', estados: ['SP', 'RJ'], subtitulo_campos: [] },
     })
   })
 
-  it('criar respeita adicionar_subtitulo=true quando passado', async () => {
+  it('criar respeita subtitulo_campos quando passado', async () => {
     mockPrisma.competicao.create.mockResolvedValue({ id: 1 })
-    await service.criar({ nome: 'Copa', estados: ['MG'], adicionar_subtitulo: true })
+    await service.criar({ nome: 'Copa', estados: ['MG'], subtitulo_campos: ['municipio'] })
     expect(mockPrisma.competicao.create).toHaveBeenCalledWith({
-      data: { nome: 'Copa', estados: ['MG'], adicionar_subtitulo: true },
+      data: { nome: 'Copa', estados: ['MG'], subtitulo_campos: ['municipio'] },
     })
   })
 
