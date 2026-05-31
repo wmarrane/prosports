@@ -76,8 +76,11 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     return m
   }, [campeoes])
 
-  // Cabeças potenciais = top-4 campeões por posição (independente da inscrição).
-  // Os que não estão inscritos aparecem tachados (não serão semeados como cabeça).
+  // Cabeças potenciais = TODOS os campeões cadastrados, por posição
+  // (independente da inscrição). Os não-inscritos aparecem tachados.
+  // - Grupos: todos visíveis são semeados.
+  // - Chaves: apenas os 4 primeiros INSCRITOS viram cabeça no bracket
+  //   (lógica do backend); o banner mostra todos pra contexto.
   const inscritosSet = useMemo(
     () => new Set(inscricoes.map(i => i.participante_id)),
     [inscricoes]
@@ -85,7 +88,6 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const cabecasInscritas = useMemo(() => {
     return [...campeoes]
       .sort((a, b) => a.posicao - b.posicao)
-      .slice(0, 4) // top 4
       .map(c => ({ ...c, inscrito: inscritosSet.has(c.participante_id) }))
   }, [campeoes, inscritosSet])
 

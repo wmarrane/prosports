@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.10] - 2026-05-31
+
+### Changed (Campeões anteriores — regras por tipo de modalidade)
+- **Banner Cabeças no Modo Congresso** (`CongressoStepSorteio`): mostra TODOS os campeões cadastrados (não mais só os 4 primeiros). Os não-inscritos seguem tachados. Aplicação visual única; backend continua semeando até 4 cabeças no bracket de Chaves e todos no Grupos.
+- **Card "Campeões do ano anterior"** em `EventoInscricoes`: agora só aparece para `tipo === 'chaves'` ou `tipo === 'grupos'`. Antes escondia só para `ordem_entrada` — agora também esconde para `especifico` (não faz sentido seedar por colocação em modalidades sem disputa).
+
 ## [1.32.9] - 2026-05-31
 
 ### Changed (Modo Congresso — banner de Cabeças)

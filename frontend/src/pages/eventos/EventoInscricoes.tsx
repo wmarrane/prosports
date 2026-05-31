@@ -735,7 +735,7 @@ export default function EventoInscricoes() {
                 </section>
 
                 {/* Card: Campeões do ano anterior — só faz sentido para Chaves/Grupos (seeding por colocação) */}
-                {tipoDaModalidade !== 'ordem_entrada' && (
+                {(tipoDaModalidade === 'chaves' || tipoDaModalidade === 'grupos') && (
                 <section style={cardStyle}>
                   <div className="flex items-center gap-3 mb-1">
                     <div
