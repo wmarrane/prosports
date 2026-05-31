@@ -31,4 +31,7 @@ export {
   Shuffle,
   Crown,
   Download,
+  Key,
+  LogOut,
+  UserCog,
 } from 'lucide-react'
