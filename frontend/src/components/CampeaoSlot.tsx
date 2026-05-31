@@ -12,10 +12,10 @@ type Props = {
   onCriar: (participante_id: number) => void
   onRemover: (id: number) => void
   salvando: boolean
-  mostrarSubtitulo?: boolean
+  subtituloLine?: (p: { subtitulo: string | null; municipio: any; inspetoria: any; delegacia: any }) => string | null
 }
 
-export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando, mostrarSubtitulo = false }: Props) {
+export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando, subtituloLine }: Props) {
   const [pickedId, setPickedId] = useState<number | null>(null)
 
   if (campeao) {
@@ -26,9 +26,9 @@ export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onR
           <span className="text-xs text-[var(--t3)]">{posicaoLabel(posicao)}</span>
         </div>
         <div className="text-sm text-[var(--t1)]">{campeao.participante.nome}</div>
-        {mostrarSubtitulo && campeao.participante.subtitulo && (
-          <div className="text-xs text-[var(--t3)] mt-0.5">{campeao.participante.subtitulo}</div>
-        )}
+        {(() => { const l = subtituloLine?.(campeao.participante as any); return l ? (
+          <div className="text-xs text-[var(--t3)] mt-0.5">{l}</div>
+        ) : null })()}
         <button
           onClick={() => { if (confirm(`Remover ${posicaoLabel(posicao)}?`)) onRemover(campeao.id) }}
           className="mt-2 text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"

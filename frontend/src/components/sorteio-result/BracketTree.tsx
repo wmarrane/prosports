@@ -9,6 +9,7 @@ type Props = {
   participantesById: Map<number, Participante>
   campeoesByParticipanteId?: Map<number, number>
   large?: boolean
+  subtituloLine?: (p: Participante) => string | null
 }
 
 type MatchLayout = {
@@ -126,6 +127,7 @@ function renderSlot(
   participantesById: Map<number, Participante>,
   campeoesByParticipanteId: Map<number, number> | undefined,
   large: boolean,
+  subtituloLine?: (p: Participante) => string | null,
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
@@ -140,7 +142,10 @@ function renderSlot(
     return (
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: nameFontSize, color: 'var(--t1)', fontWeight: 600 }}>
         {cp && <CampeaoBadge posicao={cp} large={false} />}
-        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.nome}</span>
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {p.nome}
+          {(() => { const l = subtituloLine?.(p); return l ? <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {l}</span> : null })()}
+        </span>
       </span>
     )
   }
@@ -153,7 +158,7 @@ function renderSlot(
   return null
 }
 
-export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, large = false }: Props) {
+export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, large = false, subtituloLine }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
   // Compute connectors: for each match input that references V:Jx or L:Jx,
@@ -239,10 +244,10 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               </div>
             )}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large)}
+              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large)}
+              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine)}
             </div>
             <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
           </div>
