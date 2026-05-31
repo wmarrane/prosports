@@ -107,6 +107,22 @@ export async function logout(userId: number, jti: string) {
   await redis.del(`refresh:${userId}:${jti}`)
 }
 
+/**
+ * Revoga TODAS as sessões ativas (refresh tokens) de um usuário.
+ * Usado quando: usuário troca senha, admin reseta senha de outro.
+ */
+export async function revogarTodosRefreshTokens(userId: number) {
+  const pattern = `refresh:${userId}:*`
+  const iter = (redis as any).scanIterator({ MATCH: pattern, COUNT: 100 })
+  const keys: string[] = []
+  for await (const k of iter) {
+    keys.push(k)
+  }
+  if (keys.length > 0) {
+    await redis.del(keys)
+  }
+}
+
 export async function hashSenha(senha: string) {
   return bcrypt.hash(senha, 12)
 }
