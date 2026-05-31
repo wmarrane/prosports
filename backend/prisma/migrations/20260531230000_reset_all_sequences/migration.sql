@@ -18,7 +18,8 @@ BEGIN
   LOOP
     EXECUTE format('SELECT COALESCE(MAX(%I), 0) FROM %I', rec.column_name, rec.table_name) INTO max_id;
     IF max_id > 0 THEN
-      EXECUTE format('SELECT setval(%L, %s, true)', rec.seq_name, max_id);
+      -- quote_ident preserva case-sensitivity dos nomes de sequence (ex: "User_id_seq")
+      EXECUTE format('SELECT setval(%L, %s, true)', quote_ident(rec.seq_name), max_id);
     END IF;
   END LOOP;
 END $$;
