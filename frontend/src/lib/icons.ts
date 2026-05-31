@@ -28,4 +28,5 @@ export {
   X,
   Dices as Dice,
   Shuffle,
+  Crown,
 } from 'lucide-react'

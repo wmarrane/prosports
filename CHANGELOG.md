@@ -5,6 +5,20 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.21.0] - 2026-05-30
+
+### Added (Modo Congresso — quick wins funcionais)
+- **Banner de cabeças semeadas** acima do resultado do sorteio (apenas para grupos/chaves quando há campeões inscritos). Mostra ícone Crown + medalha + nome de cada um dos top 4.
+- **Animação de "Sorteando..."** com spinner circular de 1.5s mínimo antes de mostrar o resultado (substitui o "🎲 Sorteando..." imediato que sumia em 100ms).
+- **Modal próprio de confirmação** para "Novo sorteio" com ícone Shuffle, botões Cancelar/Confirmar estilizados (em vez do `window.confirm()` nativo).
+- Ícone Crown adicionado a `lib/icons.ts`.
+
+### Changed (fluxo)
+- Modo Congresso agora **pula Campeões + Sorteio** para modalidades tipo `específico` — após Participantes, volta direto pra próxima modalidade.
+- Modo Congresso agora **pula Campeões** para modalidades tipo `ordem_entrada` — vai direto pra Sorteio (campeões não fazem sentido em ordem de entrada).
+- Botão "Realizar sorteio" inicial ganhou ícone Shuffle e sombra `--shadow-brand`.
+- Confirmação de re-sortear em modal próprio (REMEDIACAO_DESIGN sugeria substituir confirm()).
+
 ## [1.20.1] - 2026-05-30
 
 ### Fixed

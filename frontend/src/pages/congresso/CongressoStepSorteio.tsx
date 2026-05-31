@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
@@ -7,6 +7,8 @@ import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
+import CampeaoBadge from '../../components/CampeaoBadge'
+import { Shuffle, Crown, X } from '../../lib/icons'
 import type { Participante } from '../../types/participante'
 
 type Props = {
@@ -20,9 +22,13 @@ const FG = 'var(--cw-fg)'
 const DIM = 'var(--cw-dim)'
 const DANGER = 'var(--danger)'
 
+const ANIM_MS = 1500
+
 export default function CongressoStepSorteio({ eventoId, modalidadeId, competicaoId, onProxima }: Props) {
   const queryClient = useQueryClient()
   const [erro, setErro] = useState('')
+  const [animating, setAnimating] = useState(false)
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false)
 
   const { data: modalidades = [] } = useQuery({
     queryKey: ['modalidades', competicaoId],
@@ -60,6 +66,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     return m
   }, [campeoes])
 
+  // Cabeças inscritos = campeões cuja inscrição está confirmada nesta modalidade
+  const cabecasInscritas = useMemo(() => {
+    const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
+    return [...campeoes]
+      .filter(c => inscritosSet.has(c.participante_id))
+      .sort((a, b) => a.posicao - b.posicao)
+      .slice(0, 4) // top 4
+  }, [campeoes, inscricoes])
+
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
     onSuccess: () => {
@@ -69,16 +84,29 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao sortear.'),
   })
 
+  // Animação: mantém estado `animating` até mín ANIM_MS após mutate terminar
+  useEffect(() => {
+    if (executando) {
+      setAnimating(true)
+    } else if (animating) {
+      const t = setTimeout(() => setAnimating(false), ANIM_MS)
+      return () => clearTimeout(t)
+    }
+  }, [executando, animating])
+
   function handleSortear() {
     setErro('')
     executar()
   }
 
   function handleNovoSorteio() {
-    if (confirm('Realizar novo sorteio? Isso vai sobrescrever o resultado atual com uma nova seed.')) {
-      setErro('')
-      executar()
-    }
+    setConfirmModalOpen(true)
+  }
+
+  function confirmarNovoSorteio() {
+    setConfirmModalOpen(false)
+    setErro('')
+    executar()
   }
 
   function formatDateBR(iso: string): string {
@@ -102,6 +130,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     >Próxima modalidade →</button>
   )
 
+  // Tipo específico: sem sorteio
   if (tipo === 'especifico') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -117,10 +146,45 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     )
   }
 
+  // Estado animando
+  if (animating) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 24 }}>
+          <div style={{
+            width: 100, height: 100, borderRadius: '50%',
+            background: 'var(--grad-brand)',
+            display: 'grid', placeItems: 'center',
+            animation: 'spin 1s linear infinite',
+            boxShadow: 'var(--shadow-brand)',
+          }}>
+            <Shuffle size={48} color="#fff" />
+          </div>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>
+            Sorteando...
+          </h2>
+          <p style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: DIM }}>
+            embaralhando {inscricoes.length} participantes
+          </p>
+        </div>
+        <style>{`@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }`}</style>
+      </div>
+    )
+  }
+
+  // Sem sorteio ainda: tela inicial com botão grande
   if (!sorteio) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 24 }}>
+          <div style={{
+            width: 96, height: 96, borderRadius: 'var(--radius-2xl)',
+            background: 'var(--grad-brand)',
+            display: 'grid', placeItems: 'center',
+            boxShadow: 'var(--shadow-brand)',
+          }}>
+            <Shuffle size={44} color="#fff" />
+          </div>
           <h2 style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
           <p style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: DIM }}>
             {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
@@ -138,8 +202,9 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
               fontWeight: 700,
               cursor: 'pointer',
               opacity: (executando || inscricoes.length === 0) ? 0.5 : 1,
+              boxShadow: 'var(--shadow-brand)',
             }}
-          >{executando ? '🎲 Sorteando...' : '🎲 Realizar sorteio'}</button>
+          >🎲 Realizar sorteio</button>
           {inscricoes.length === 0 && (
             <p style={{ color: DIM, fontSize: 14 }}>Adicione participantes antes de sortear.</p>
           )}
@@ -155,7 +220,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         <div>
           <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
           <div style={{ fontSize: 13, color: DIM, marginTop: 4 }}>
-            seed: <span style={{ fontFamily: 'monospace' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
+            seed: <span style={{ fontFamily: 'var(--font-mono)' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
           </div>
         </div>
         <button
@@ -175,6 +240,33 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         >{executando ? 'Sorteando...' : 'Novo sorteio'}</button>
       </div>
 
+      {/* Banner de cabeças semeadas (grupos/chaves só, e só se houver campeões inscritos) */}
+      {cabecasInscritas.length > 0 && (sorteio.tipo === 'grupos' || sorteio.tipo === 'chaves') && (
+        <div style={{
+          marginBottom: 20,
+          padding: '14px 18px',
+          background: 'var(--cw-card)',
+          border: '1px solid var(--cw-card-bd)',
+          borderRadius: 'var(--radius-xl)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 16,
+          flexWrap: 'wrap',
+        }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--warn)', fontWeight: 700, fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <Crown size={18} /> Cabeças
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
+            {cabecasInscritas.map(c => (
+              <div key={c.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <CampeaoBadge posicao={c.posicao} />
+                <span style={{ fontSize: 15, color: FG, fontWeight: 600 }}>{c.participante.nome}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         {sorteio.tipo === 'grupos' && (
           <SorteioGrupos resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
@@ -189,6 +281,76 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 16 }}>{proximaBtn}</div>
+
+      {/* Modal de confirmação de novo sorteio */}
+      {confirmModalOpen && (
+        <div
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 300 }}
+          onClick={() => setConfirmModalOpen(false)}
+        >
+          <div
+            style={{
+              background: 'var(--cw-card)',
+              border: '1px solid var(--cw-card-bd)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 480,
+              width: '100%',
+              margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{
+              width: 72, height: 72, margin: '0 auto 16px',
+              borderRadius: '50%', background: 'var(--warn-soft)',
+              display: 'grid', placeItems: 'center', color: 'var(--warn)',
+            }}>
+              <Shuffle size={36} />
+            </div>
+            <h3 style={{ fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG, marginBottom: 8 }}>
+              Realizar novo sorteio?
+            </h3>
+            <p style={{ fontSize: 15, color: DIM, marginBottom: 24 }}>
+              Isso vai sobrescrever o resultado atual com uma nova seed. Esta ação não pode ser desfeita.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button
+                onClick={() => setConfirmModalOpen(false)}
+                style={{
+                  background: 'transparent',
+                  color: FG,
+                  border: '1px solid var(--cw-card-bd)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Cancelar</button>
+              <button
+                onClick={confirmarNovoSorteio}
+                style={{
+                  background: 'var(--brand-500)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><Shuffle size={16} /> Confirmar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

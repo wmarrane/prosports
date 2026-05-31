@@ -7,6 +7,7 @@ import CongressoStepParticipantes from './CongressoStepParticipantes'
 import CongressoStepCampeoes from './CongressoStepCampeoes'
 import CongressoStepSorteio from './CongressoStepSorteio'
 import { eventosService } from '../../services/eventos'
+import { modalidadesService } from '../../services/modalidades'
 import type { CongressoStep } from '../../types/congresso-step'
 
 export default function ModoCongresso() {
@@ -21,17 +22,52 @@ export default function ModoCongresso() {
   })
   const competicaoId = evento?.competicao_id
 
+  const { data: modalidades = [] } = useQuery({
+    queryKey: ['modalidades', competicaoId],
+    queryFn: () => modalidadesService.listar({ competicao_id: competicaoId! }),
+    enabled: !!competicaoId,
+  })
+  const modalidade = modalidades.find(m => m.id === modalidadeId)
+  const tipoAtual = modalidade?.tipo_modalidade?.tipo
+
+  function voltarParaModalidade() {
+    setModalidadeId(null)
+    setStep('modalidade')
+  }
+
   function handleBack() {
-    if (step === 'sorteio') setStep('campeoes')
+    if (step === 'sorteio') {
+      // Para ordem_entrada volta a participantes (sem campeões); resto volta a campeões
+      setStep(tipoAtual === 'ordem_entrada' ? 'participantes' : 'campeoes')
+    }
     else if (step === 'campeoes') setStep('participantes')
-    else if (step === 'participantes') setStep('modalidade')
+    else if (step === 'participantes') voltarParaModalidade()
     else if (step === 'modalidade') { setStep('evento'); setEventoId(null) }
   }
 
   const onBack = step !== 'evento' ? handleBack : undefined
 
+  // Próximo step após Participantes — varia por tipo de modalidade
+  function nextAfterParticipantes() {
+    if (tipoAtual === 'especifico') {
+      // Sem sorteio nem campeões — volta direto pra próxima modalidade
+      voltarParaModalidade()
+    } else if (tipoAtual === 'ordem_entrada') {
+      // Sem campeões — pula direto pro sorteio
+      setStep('sorteio')
+    } else {
+      // grupos / chaves — fluxo completo
+      setStep('campeoes')
+    }
+  }
+
+  const contexto = {
+    evento: evento?.nome,
+    modalidade: modalidade ? `${modalidade.nome} (${modalidade.sigla})` : undefined,
+  }
+
   return (
-    <CongressoShell step={step} onBack={onBack}>
+    <CongressoShell step={step} onBack={onBack} contexto={contexto}>
       {step === 'evento' && (
         <CongressoStepEvento
           onSelect={(id) => { setEventoId(id); setStep('modalidade') }}
@@ -48,7 +84,7 @@ export default function ModoCongresso() {
           eventoId={eventoId}
           modalidadeId={modalidadeId}
           competicaoId={competicaoId}
-          onNext={() => setStep('campeoes')}
+          onNext={nextAfterParticipantes}
         />
       )}
       {step === 'campeoes' && eventoId != null && modalidadeId != null && (
@@ -64,7 +100,7 @@ export default function ModoCongresso() {
           eventoId={eventoId}
           modalidadeId={modalidadeId}
           competicaoId={competicaoId}
-          onProxima={() => { setModalidadeId(null); setStep('modalidade') }}
+          onProxima={voltarParaModalidade}
         />
       )}
     </CongressoShell>
