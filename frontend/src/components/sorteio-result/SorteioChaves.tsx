@@ -1,6 +1,7 @@
 import type { ChavesResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
 import CampeaoBadge from '../CampeaoBadge'
+import BracketTree from './BracketTree'
 
 type Props = {
   resultado: ChavesResultado
@@ -117,6 +118,19 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
 }
 
 export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
+  // v1.19.0: render field via grafo de matches (preferido)
+  if (resultado.matchesGraph && resultado.matchesGraph.matches.length > 0) {
+    return (
+      <BracketTree
+        matchesGraph={resultado.matchesGraph}
+        slots={resultado.slots}
+        participantesById={participantesById}
+        campeoesByParticipanteId={campeoesByParticipanteId}
+        large={large}
+      />
+    )
+  }
+
   // Fallback para sorteios pré-v1.18.0 (sem byePositions)
   if (!resultado.byePositions) {
     const rounds = buildBracketLegacy(resultado.slots)
