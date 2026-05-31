@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.13] - 2026-05-31
+
+### Fixed (Título de Grupo — override de tokens.css)
+- O título "Grupo X" em `SorteioGrupos` continuava cinza no dark mode mesmo após v1.32.12. Causa raiz: `tokens.css` tem `h1..h5 { color: var(--fg-1) }` como regra unlayered, que vence Tailwind utilities (que ficam em `@layer utilities`). Fix: aplicar `color: 'var(--warn)'` via `style` inline (especificidade 1000, sempre vence).
+
 ## [1.32.12] - 2026-05-31
 
 ### Changed (Grupos — legibilidade dark + modal expandido)

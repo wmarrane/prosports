@@ -15,9 +15,11 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
-  // Título do Grupo: âmbar (--warn) — alto contraste em light E dark mode.
+  // Título do Grupo: âmbar (--warn) via inline style para escapar do
+  // override de `h1..h5 { color: var(--fg-1) }` definido em tokens.css.
   // Mesmo amarelo usado em "Cabeças" e badge da Final.
-  const titleClass = large ? 'text-2xl font-bold text-[var(--warn)]' : 'text-base font-semibold text-[var(--warn)]'
+  const titleClass = large ? 'text-2xl font-bold' : 'text-base font-semibold'
+  const titleStyle: React.CSSProperties = { color: 'var(--warn)' }
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
   const subItemClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
@@ -36,7 +38,7 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
             className={`flex justify-between items-center ${large ? 'mb-4 pb-3' : 'mb-3 pb-2'}`}
             style={{ borderBottom: '1px solid var(--t3)' }}
           >
-            <h4 className={titleClass}>Grupo {g.letra}</h4>
+            <h4 className={titleClass} style={titleStyle}>Grupo {g.letra}</h4>
             <span className={subClass}>{resultado.classificados_por_grupo} classificados</span>
           </div>
           <ul className={large ? 'space-y-3' : 'space-y-1.5'}>
