@@ -8,7 +8,6 @@ const STEPS: Array<{ key: CongressoStep; label: string }> = [
   { key: 'evento', label: 'Evento' },
   { key: 'modalidade', label: 'Modalidade' },
   { key: 'participantes', label: 'Participantes' },
-  { key: 'campeoes', label: 'Campeões' },
   { key: 'sorteio', label: 'Sorteio' },
 ]
 
@@ -16,8 +15,8 @@ const STEP_INDEX: Record<CongressoStep, number> = {
   evento: 0,
   modalidade: 1,
   participantes: 2,
-  campeoes: 3,
-  sorteio: 4,
+  campeoes: 3,  // deprecated — não aparece mais no fluxo
+  sorteio: 3,
 }
 
 type ContextoCongresso = {

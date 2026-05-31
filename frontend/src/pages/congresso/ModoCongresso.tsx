@@ -4,7 +4,6 @@ import CongressoShell from './CongressoShell'
 import CongressoStepEvento from './CongressoStepEvento'
 import CongressoStepModalidade from './CongressoStepModalidade'
 import CongressoStepParticipantes from './CongressoStepParticipantes'
-import CongressoStepCampeoes from './CongressoStepCampeoes'
 import CongressoStepSorteio from './CongressoStepSorteio'
 import { eventosService } from '../../services/eventos'
 import { modalidadesService } from '../../services/modalidades'
@@ -36,28 +35,22 @@ export default function ModoCongresso() {
   }
 
   function handleBack() {
-    if (step === 'sorteio') {
-      // Para ordem_entrada volta a participantes (sem campeões); resto volta a campeões
-      setStep(tipoAtual === 'ordem_entrada' ? 'participantes' : 'campeoes')
-    }
-    else if (step === 'campeoes') setStep('participantes')
+    if (step === 'sorteio') setStep('participantes')
     else if (step === 'participantes') voltarParaModalidade()
     else if (step === 'modalidade') { setStep('evento'); setEventoId(null) }
   }
 
   const onBack = step !== 'evento' ? handleBack : undefined
 
-  // Próximo step após Participantes — varia por tipo de modalidade
+  // Próximo step após Participantes — varia por tipo de modalidade.
+  // Campeões viraram parte do Sorteio (idle state), por isso step dedicado removido.
   function nextAfterParticipantes() {
     if (tipoAtual === 'especifico') {
-      // Sem sorteio nem campeões — volta direto pra próxima modalidade
+      // Sem sorteio — volta direto pra próxima modalidade
       voltarParaModalidade()
-    } else if (tipoAtual === 'ordem_entrada') {
-      // Sem campeões — pula direto pro sorteio
-      setStep('sorteio')
     } else {
-      // grupos / chaves — fluxo completo
-      setStep('campeoes')
+      // grupos / chaves / ordem_entrada — Sorteio (com campeões inline quando aplicável)
+      setStep('sorteio')
     }
   }
 
@@ -85,14 +78,6 @@ export default function ModoCongresso() {
           modalidadeId={modalidadeId}
           competicaoId={competicaoId}
           onNext={nextAfterParticipantes}
-        />
-      )}
-      {step === 'campeoes' && eventoId != null && modalidadeId != null && (
-        <CongressoStepCampeoes
-          eventoId={eventoId}
-          modalidadeId={modalidadeId}
-          competicaoId={competicaoId}
-          onNext={() => setStep('sorteio')}
         />
       )}
       {step === 'sorteio' && eventoId != null && modalidadeId != null && (

@@ -8,6 +8,7 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
+import CampeoesPanel from './CampeoesPanel'
 import { Shuffle, Crown, X, Report } from '../../lib/icons'
 import type { Participante } from '../../types/participante'
 
@@ -173,11 +174,25 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     )
   }
 
-  // Sem sorteio ainda: tela inicial com botão grande
+  // Sem sorteio ainda: tela inicial com painel de campeões (grupos/chaves) + botão grande
   if (!sorteio) {
+    const mostraCampeoes = tipo === 'grupos' || tipo === 'chaves'
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 24 }}>
+        <div style={{ marginBottom: 20, textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG, margin: '0 0 8px' }}>
+            {modalidade?.nome}
+          </h2>
+          <p style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: DIM, margin: 0 }}>
+            {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
+          </p>
+        </div>
+
+        {mostraCampeoes && (
+          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} />
+        )}
+
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 24, minHeight: 200 }}>
           <div style={{
             width: 96, height: 96, borderRadius: 'var(--radius-2xl)',
             background: 'var(--grad-brand)',
@@ -186,10 +201,6 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           }}>
             <Shuffle size={44} color="#fff" />
           </div>
-          <h2 style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
-          <p style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: DIM }}>
-            {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
-          </p>
           <button
             onClick={handleSortear}
             disabled={executando || inscricoes.length === 0}

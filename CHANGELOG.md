@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.23.0] - 2026-05-30
+
+### Changed (Modo Congresso — consolidação de Campeões em Sorteio)
+- **Wizard agora tem 4 steps** (Evento, Modalidade, Participantes, Sorteio) em vez de 5. O step dedicado "Campeões" foi removido do fluxo de navegação.
+- **Edição de campeões agora aparece inline no Sorteio idle state** (quando ainda não há sorteio gerado), apenas para modalidades tipo `grupos` ou `chaves`. Mostra lista compacta de campeões cadastrados como pills com badge de posição + status "inscrito"/"não inscrito"; botão "Editar" abre o mesmo modal de 12 slots.
+- Criado componente `CampeoesPanel` reutilizável (`frontend/src/pages/congresso/CampeoesPanel.tsx`) extraído do step dedicado, contendo apenas a lista + botão editar + modal.
+- `ModoCongresso` simplificado: rota direto de Participantes → Sorteio para grupos/chaves/ordem_entrada. Específico continua pulando direto pra próxima modalidade.
+
+### Notes
+- Arquivo `CongressoStepCampeoes.tsx` continua existindo no repo mas não é mais usado no fluxo. Pode ser removido em release futura.
+- Type `CongressoStep` mantém `'campeoes'` por compatibilidade.
+
 ## [1.22.0] - 2026-05-30
 
 ### Added (Modo Congresso)
