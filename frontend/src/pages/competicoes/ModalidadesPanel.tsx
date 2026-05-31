@@ -40,6 +40,7 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
   const [newSigla, setNewSigla] = useState('')
   const [newTipoId, setNewTipoId] = useState<number | ''>('')
   const [addErro, setAddErro] = useState('')
+  const [removerAlvo, setRemoverAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data: modalidades = [], isLoading } = useQuery({
     queryKey: ['modalidades', competicaoId],
@@ -280,7 +281,7 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
                   </Link>
                   <button
                     type="button"
-                    onClick={() => { if (confirm(`Remover modalidade "${m.nome}"?`)) remover(m.id) }}
+                    onClick={() => setRemoverAlvo({ id: m.id, nome: m.nome })}
                     className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
                   >
                     Remover
@@ -338,6 +339,80 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
           onClose={() => setImportOpen(false)}
           onImported={invalidate}
         />
+      )}
+
+      {removerAlvo && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => setRemoverAlvo(null)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 480,
+              width: '100%',
+              margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{
+              width: 72, height: 72, margin: '0 auto 16px',
+              borderRadius: '50%', background: 'var(--danger-soft)',
+              display: 'grid', placeItems: 'center', color: 'var(--danger)',
+            }}>
+              <X size={36} />
+            </div>
+            <h3 style={{ fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--t1)', marginBottom: 8 }}>
+              Remover modalidade?
+            </h3>
+            <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+              A modalidade <b style={{ color: 'var(--t1)' }}>{removerAlvo.nome}</b> será removida desta competição. Esta ação não pode ser desfeita.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setRemoverAlvo(null)}
+                style={{
+                  background: 'transparent',
+                  color: 'var(--t1)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Cancelar</button>
+              <button
+                type="button"
+                onClick={() => { remover(removerAlvo.id); setRemoverAlvo(null) }}
+                style={{
+                  background: 'var(--danger)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Remover</button>
+            </div>
+          </div>
+        </div>
       )}
     </section>
   )

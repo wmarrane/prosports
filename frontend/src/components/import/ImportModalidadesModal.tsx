@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { ChangeEvent, FormEvent } from 'react'
+import type { ChangeEvent } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { modalidadesService } from '../../services/modalidades'
 import { downloadCsvTemplate } from '../../lib/csv-template'
@@ -46,8 +46,7 @@ export default function ImportModalidadesModal({ open, competicaoId, onClose, on
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao importar.'),
   })
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault()
+  function handleEnviar() {
     setErro('')
     setResumo(null)
     if (file) enviar()
@@ -151,7 +150,7 @@ export default function ImportModalidadesModal({ open, competicaoId, onClose, on
               </div>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <div>
               <input
                 type="file"
                 accept=".csv,text/csv"
@@ -182,13 +181,13 @@ export default function ImportModalidadesModal({ open, competicaoId, onClose, on
                   <X size={16} /> {resumo ? 'Fechar' : 'Cancelar'}
                 </button>
                 {!resumo && (
-                  <button type="submit" disabled={!file || isPending} className="btn btn-primary"
+                  <button type="button" onClick={handleEnviar} disabled={!file || isPending} className="btn btn-primary"
                     style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: !file || isPending ? 0.5 : 1 }}>
                     <Upload size={16} /> {isPending ? 'Enviando...' : 'Enviar e processar'}
                   </button>
                 )}
               </div>
-            </form>
+            </div>
           </section>
 
           {/* Resultado */}

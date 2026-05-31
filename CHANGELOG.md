@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.34.2] - 2026-05-31
+
+### Fixed (Import de modalidades deslogava o usuário)
+- Clicar em **Enviar e processar** no `ImportModalidadesModal` causava reload da página e redirect para `/login`. Causa raiz: o `<form>` interno do modal estava aninhado dentro do `<form>` do `CompeticaoForm` — HTML descarta forms aninhados, então o submit disparava o form externo (full-page GET para `/competicoes/:id/editar?`), descartando o accessToken em memória. Fix: substituir o `<form>` interno por `<div>` e invocar a mutation via `onClick` em botão `type="button"`.
+
+### Changed (Confirmação de remoção de modalidade)
+- Substituído `confirm()` nativo do browser em `ModalidadesPanel` pelo modal de confirmação padrão do sistema (ícone X em círculo `--danger-soft`, botão "Cancelar" ghost + "Remover" `--danger`).
+
 ## [1.34.1] - 2026-05-31
 
 ### Fixed (Migration reset_all_sequences quebrada)
