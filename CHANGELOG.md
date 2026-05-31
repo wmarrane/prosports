@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.8] - 2026-05-31
+
+### Changed (Bracket — conectores, bordas dark mode)
+- **Conectores principais**: stroke `2.5px` → `4px` com cor `--t2` + linecap/linejoin `round`.
+- **Conectores do 3º lugar** (refs `L:Jx` ou destino = thirdPlace): stroke `2.5px` com cor `--t4` (mais claro). Visualmente distingue a "disputa do bronze" do caminho principal do bracket.
+- **Borda das caixas** trocada de `--card-border` (≈7% white opacity no dark) para `--t2` (cinza claro) com largura `1.5px`. Borda do divisor interno trocada para `--t3`. Garante leitura em dark mode sem prejudicar light.
+- **Borda da Final** mantida amarela `#f59e0b 2px`.
+
+### Changed (Modo Congresso — confirmar remoção)
+- `CongressoStepParticipantes`: substituído `confirm()` nativo do browser por modal de confirmação seguindo o padrão `.cw-confirm` (mesmo visual do "Realizar novo sorteio"). Ícone X dentro de círculo `--danger-soft`, botão **Remover** em `--danger`, **Cancelar** ghost.
+
 ## [1.32.7] - 2026-05-31
 
 ### Changed (Bracket — BYE alinhado com confronto antecedente)

@@ -22,6 +22,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   const [inscreverOpen, setInscreverOpen] = useState(false)
   const [pickedId, setPickedId] = useState<number | null>(null)
   const [erroModal, setErroModal] = useState('')
+  const [removerAlvo, setRemoverAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data: inscricoesRaw = [], isLoading } = useQuery({
     queryKey: ['inscricoes', eventoId, modalidadeId],
@@ -120,7 +121,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
                 </div>
                 <button
                   className="cw-prow-rm"
-                  onClick={() => { if (confirm(`Remover inscrição de "${i.participante.nome}"?`)) remover(i.id) }}
+                  onClick={() => setRemoverAlvo({ id: i.id, nome: i.participante.nome })}
                   title="Remover"
                 >
                   <X size={18} />
@@ -136,6 +137,79 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
           Próximo <ArrowRight size={20} />
         </button>
       </div>
+
+      {/* Modal: confirmar remoção (padrão cw-confirm) */}
+      {removerAlvo && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => setRemoverAlvo(null)}
+        >
+          <div
+            style={{
+              background: 'var(--cw-card)',
+              border: '1px solid var(--cw-card-bd)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 480,
+              width: '100%',
+              margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{
+              width: 72, height: 72, margin: '0 auto 16px',
+              borderRadius: '50%', background: 'var(--danger-soft)',
+              display: 'grid', placeItems: 'center', color: 'var(--danger)',
+            }}>
+              <X size={36} />
+            </div>
+            <h3 style={{ fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG, marginBottom: 8 }}>
+              Remover participante?
+            </h3>
+            <p style={{ fontSize: 15, color: DIM, marginBottom: 24 }}>
+              A inscrição de <b style={{ color: FG }}>{removerAlvo.nome}</b> será removida desta modalidade. Esta ação não pode ser desfeita.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button
+                onClick={() => setRemoverAlvo(null)}
+                style={{
+                  background: 'transparent',
+                  color: FG,
+                  border: '1px solid var(--cw-card-bd)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Cancelar</button>
+              <button
+                onClick={() => { remover(removerAlvo.id); setRemoverAlvo(null) }}
+                style={{
+                  background: 'var(--danger)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Remover</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal Incluir Participante */}
       {inscreverOpen && (

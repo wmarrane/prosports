@@ -162,7 +162,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
   const matchMap: Record<string, MatchLayout> = {}
   for (const m of layout.matches) matchMap[m.id] = m
 
-  const connectors: Connector[] = []
+  type ConnectorEx = Connector & { isThirdPlace: boolean }
+  const connectors: ConnectorEx[] = []
   for (const m of layout.matches) {
     for (const [slot, ref] of [['top', m.top], ['bottom', m.bottom]] as const) {
       if (!ref.startsWith('V:') && !ref.startsWith('L:')) continue
@@ -175,7 +176,11 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       const y2 = m.y + (slot === 'top' ? -CARD_HEIGHT / 4 : CARD_HEIGHT / 4)
       const xm = (x1 + x2) / 2
       const d = `M ${x1} ${y1} L ${xm} ${y1} L ${xm} ${y2} L ${x2} ${y2}`
-      connectors.push({ d, key: `${srcId}-${m.id}-${slot}` })
+      connectors.push({
+        d,
+        key: `${srcId}-${m.id}-${slot}`,
+        isThirdPlace: m.isThirdPlace || ref.startsWith('L:'),
+      })
     }
   }
 
@@ -187,13 +192,21 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
           viewBox={`0 0 ${layout.width} ${layout.height}`}
         >
           {connectors.map(c => (
-            <path key={c.key} d={c.d} stroke="var(--t3)" strokeWidth={2.5} fill="none" />
+            <path
+              key={c.key}
+              d={c.d}
+              stroke={c.isThirdPlace ? 'var(--t4)' : 'var(--t2)'}
+              strokeWidth={c.isThirdPlace ? 2.5 : 4}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           ))}
         </svg>
         {layout.matches.map(m => (
           <div
             key={m.id}
-            className={`bg-[var(--card-bg-2)] border rounded-lg ${m.isFinal ? 'border-amber-500' : 'border-[var(--card-border)]'}`}
+            className={`bg-[var(--card-bg-2)] rounded-lg ${m.isFinal ? 'border-amber-500' : ''}`}
             style={{
               position: 'absolute',
               left: m.x,
@@ -205,6 +218,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              border: m.isFinal ? '2px solid #f59e0b' : '1.5px solid var(--t2)',
             }}
           >
             {(m.isFinal || m.isThirdPlace) && (
@@ -212,7 +226,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
                 🏆 {m.isThirdPlace ? '3º lugar' : 'Final'}
               </div>
             )}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--card-border)', paddingBottom: 4 }}>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
               {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
