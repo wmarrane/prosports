@@ -11,10 +11,10 @@ type Props = {
   onNext: () => void
 }
 
-const FG = '#f1f5fb'
-const DIM = '#94a3b8'
-const LINE = 'rgba(255,255,255,.08)'
-const DANGER = '#ef4444'
+const FG = 'var(--cw-fg)'
+const DIM = 'var(--cw-dim)'
+const LINE = 'var(--cw-line)'
+const DANGER = 'var(--danger)'
 const MODAL_BG = 'var(--card-bg)'
 const MODAL_BORDER = 'var(--card-border)'
 const BTN_PRIMARY = {

@@ -16,9 +16,9 @@ type Props = {
   onProxima: () => void
 }
 
-const FG = '#f1f5fb'
-const DIM = '#94a3b8'
-const DANGER = '#ef4444'
+const FG = 'var(--cw-fg)'
+const DIM = 'var(--cw-dim)'
+const DANGER = 'var(--danger)'
 
 export default function CongressoStepSorteio({ eventoId, modalidadeId, competicaoId, onProxima }: Props) {
   const queryClient = useQueryClient()

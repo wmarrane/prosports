@@ -13,11 +13,11 @@ type Props = {
   onNext: () => void
 }
 
-const FG = '#f1f5fb'
-const DIM = '#94a3b8'
-const SUCCESS = '#14b88a'
-const CARD_BG = 'rgba(255,255,255,.04)'
-const CARD_BORDER = 'rgba(255,255,255,.1)'
+const FG = 'var(--cw-fg)'
+const DIM = 'var(--cw-dim)'
+const SUCCESS = 'var(--success)'
+const CARD_BG = 'var(--cw-card)'
+const CARD_BORDER = 'var(--cw-card-bd)'
 const MODAL_BG = 'var(--card-bg)'
 const MODAL_BORDER = 'var(--card-border)'
 const BTN_PRIMARY = {

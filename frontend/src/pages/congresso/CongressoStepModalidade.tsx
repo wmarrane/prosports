@@ -9,11 +9,11 @@ type Props = {
   onSelect: (modalidadeId: number) => void
 }
 
-const CARD_BG = 'rgba(255,255,255,.04)'
-const CARD_BORDER = 'rgba(255,255,255,.1)'
-const FG = '#f1f5fb'
-const DIM = '#94a3b8'
-const SUCCESS = '#14b88a'
+const CARD_BG = 'var(--cw-card)'
+const CARD_BORDER = 'var(--cw-card-bd)'
+const FG = 'var(--cw-fg)'
+const DIM = 'var(--cw-dim)'
+const SUCCESS = 'var(--success)'
 
 export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
   const { data: evento } = useQuery({

@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.20.1] - 2026-05-30
+
+### Fixed
+- Modo Congresso ilegível em tema claro: substituídas constantes hardcoded para tema escuro (`#f1f5fb`, `#94a3b8`, `rgba(255,255,255,...)`) por variáveis `var(--cw-fg/dim/card/card-bd/line)` que reagem ao `[data-theme]`. Agora textos e cards têm contraste correto tanto em light quanto dark.
+
 ## [1.20.0] - 2026-05-30
 
 ### Added
