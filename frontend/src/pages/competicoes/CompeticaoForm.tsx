@@ -1,11 +1,34 @@
 import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import { competicoesService } from '../../services/competicoes'
+import { modalidadesService } from '../../services/modalidades'
 import { UFS } from '../../lib/ufs'
-import { Check, X, Trophy } from '../../lib/icons'
+import { Check, X, Trophy, Plus } from '../../lib/icons'
+import { Brackets, Group, ListOrdered, FileText, Shapes } from 'lucide-react'
+
+const TIPO_ICON: Record<string, typeof Brackets> = {
+  chaves: Brackets,
+  grupos: Group,
+  ordem_entrada: ListOrdered,
+  especifico: FileText,
+}
+
+const TIPO_GRAD: Record<string, string> = {
+  chaves: 'linear-gradient(135deg, #1061d8 0%, #4f8ef7 100%)',
+  grupos: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
+  ordem_entrada: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
+  especifico: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+}
+
+const TIPO_LABEL: Record<string, string> = {
+  chaves: 'Chaves',
+  grupos: 'Grupos',
+  ordem_entrada: 'Ordem de entrada',
+  especifico: 'Específico',
+}
 
 // Agrupamento por região para melhor escaneabilidade
 const REGIOES: { titulo: string; ufs: string[] }[] = [
@@ -40,6 +63,22 @@ export default function CompeticaoForm() {
       setAdicionarSubtitulo(existing.adicionar_subtitulo)
     }
   }, [existing])
+
+  // Modalidades vinculadas (modo edição apenas)
+  const { data: modalidades = [], isLoading: loadingMods } = useQuery({
+    queryKey: ['modalidades', Number(id)],
+    queryFn: () => modalidadesService.listar({ competicao_id: Number(id) }),
+    enabled: isEdit,
+  })
+
+  const { mutate: removerModalidade } = useMutation({
+    mutationFn: (modalidadeId: number) => modalidadesService.remover(modalidadeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['modalidades', Number(id)] })
+      queryClient.invalidateQueries({ queryKey: ['competicoes'] })
+    },
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover modalidade.'),
+  })
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
@@ -282,6 +321,141 @@ export default function CompeticaoForm() {
               </div>
             </label>
           </section>
+
+          {/* Card: Modalidades (apenas edição) */}
+          {isEdit && (
+            <section
+              style={{
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 'var(--radius-xl)',
+                padding: 24,
+                marginBottom: 16,
+                boxShadow: 'var(--shadow-card)',
+              }}
+            >
+              <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <div
+                    style={{
+                      width: 36, height: 36, borderRadius: 10,
+                      background: 'var(--grad-brand-deep)', color: '#fff',
+                      display: 'grid', placeItems: 'center',
+                    }}
+                  >
+                    <Shapes size={18} />
+                  </div>
+                  <div>
+                    <div className="eyebrow">Estrutura</div>
+                    <h3 className="sec-title" style={{ fontSize: 17 }}>
+                      Modalidades vinculadas
+                      <span className="text-[var(--t4)] font-normal text-sm ml-2">
+                        ({modalidades.length})
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+                <Link
+                  to={`/modalidades/nova?competicao_id=${id}`}
+                  className="btn btn-primary btn-sm"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                >
+                  <Plus size={14} /> Adicionar modalidade
+                </Link>
+              </div>
+
+              {loadingMods ? (
+                <p className="text-sm text-[var(--t3)]">Carregando modalidades...</p>
+              ) : modalidades.length === 0 ? (
+                <div
+                  className="text-center text-[var(--t3)] py-10"
+                  style={{
+                    background: 'var(--card-bg-2)',
+                    border: '1px dashed var(--card-border)',
+                    borderRadius: 'var(--radius-lg)',
+                  }}
+                >
+                  <Shapes size={36} className="mx-auto mb-3 text-[var(--t4)]" />
+                  <p className="text-sm mb-1">Nenhuma modalidade cadastrada nesta competição.</p>
+                  <p className="text-xs text-[var(--t4)]">
+                    Eventos desta competição não terão modalidades disponíveis até você adicionar.
+                  </p>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {modalidades.map(m => {
+                    const tipo = m.tipo_modalidade?.tipo ?? 'especifico'
+                    const Icon = TIPO_ICON[tipo] ?? FileText
+                    const grad = TIPO_GRAD[tipo]
+                    return (
+                      <div
+                        key={m.id}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 12,
+                          padding: '12px 14px',
+                          background: 'var(--card-bg-2)',
+                          border: '1px solid var(--card-border)',
+                          borderRadius: 'var(--radius-lg)',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: 36, height: 36, borderRadius: 10,
+                            background: grad, color: '#fff',
+                            display: 'grid', placeItems: 'center', flexShrink: 0,
+                          }}
+                        >
+                          <Icon size={18} />
+                        </span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)' }}>
+                              {m.nome}
+                            </span>
+                            <span
+                              style={{
+                                fontFamily: 'var(--font-mono)',
+                                fontSize: 11,
+                                fontWeight: 600,
+                                color: 'var(--t3)',
+                                background: 'var(--card-bg)',
+                                padding: '2px 6px',
+                                borderRadius: 'var(--radius-sm)',
+                              }}
+                            >
+                              {m.sigla}
+                            </span>
+                          </div>
+                          <div className="text-xs text-[var(--t3)] mt-0.5">
+                            {TIPO_LABEL[tipo]}
+                          </div>
+                        </div>
+                        <div className="flex gap-2 flex-shrink-0">
+                          <Link
+                            to={`/modalidades/${m.id}/editar`}
+                            className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs font-semibold"
+                          >
+                            Editar
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm(`Remover modalidade "${m.nome}"?`)) removerModalidade(m.id)
+                            }}
+                            className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </section>
+          )}
 
           {erro && (
             <div

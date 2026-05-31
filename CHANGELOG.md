@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.25.2] - 2026-05-31
+
+### Added (Editar Competição — modalidades vinculadas)
+- `CompeticaoForm` em modo edição agora mostra um **4º card "Modalidades vinculadas"** com a lista de modalidades dessa competição (busca via `modalidadesService.listar({ competicao_id })`).
+- Cada linha mostra: ícone gradient por tipo de disputa (`Brackets`/`Group`/`ListOrdered`/`FileText`), nome, sigla em mono, label do tipo, link "Editar" e botão "Remover" (com confirmação).
+- Botão **"+ Adicionar modalidade"** no header da seção navega para `/modalidades/nova?competicao_id=:id`.
+- Empty state amigável quando não há modalidades.
+- `ModalidadeForm` agora **lê query param `competicao_id`** e pré-seleciona o dropdown ao criar nova modalidade (vindo do form de Competição).
+
+### Notes
+- Resolve relato: "ao editar a competição não localizei as modalidades cadastradas".
+
 ## [1.25.1] - 2026-05-31
 
 ### Changed (Competições — formulário Nova/Editar)

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import { modalidadesService } from '../../services/modalidades'
@@ -9,11 +9,14 @@ import { tiposModalidadeService } from '../../services/tipos-modalidade'
 
 export default function ModalidadeForm() {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
   const isEdit = Boolean(id)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  const [competicaoId, setCompeticaoId] = useState<number | ''>('')
+  // Pré-seleção via query param ?competicao_id=N quando criando nova
+  const competicaoIdFromQuery = !isEdit ? Number(searchParams.get('competicao_id')) || '' : ''
+  const [competicaoId, setCompeticaoId] = useState<number | ''>(competicaoIdFromQuery)
   const [tipoModalidadeId, setTipoModalidadeId] = useState<number | ''>('')
   const [nome, setNome] = useState('')
   const [sigla, setSigla] = useState('')
