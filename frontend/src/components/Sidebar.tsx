@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
@@ -8,6 +8,7 @@ import {
   Panel, Trophy, Cadastro, Evento, Report, Admin,
   ChevR, ChevronDown,
 } from '../lib/icons'
+import UserMenuPopover from './UserMenuPopover'
 
 type NavLeaf = { id: string; label: string; icon: LucideIcon; path: string }
 type NavExpandable = { id: string; label: string; icon: LucideIcon; expandable: true; children: { id: string; label: string; path: string }[] }
@@ -25,6 +26,7 @@ const NAV: NavItem[] = [
   {
     id: 'admin', label: 'Administração', icon: Admin, expandable: true,
     children: [
+      { id: 'usuarios', label: 'Usuários', path: '/usuarios' },
       { id: 'municipios', label: 'Municípios', path: '/municipios' },
       { id: 'inspetorias', label: 'Inspetorias', path: '/inspetorias' },
       { id: 'delegacias', label: 'Delegacias', path: '/delegacias' },
@@ -47,6 +49,8 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
   const initialExpanded = sessionStorage.getItem('prosports:admin-expanded') === 'true'
     || NAV.some((i) => 'children' in i && i.children.some((c) => location.pathname.startsWith(c.path)))
   const [adminExpanded, setAdminExpanded] = useState(initialExpanded)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const userBtnRef = useRef<HTMLButtonElement>(null)
 
   function toggleAdmin() {
     const next = !adminExpanded
@@ -150,14 +154,27 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
             />
           )}
         </NavLink>
-        <div className="sb-user">
-          <div className="av">{userInitials}</div>
-          {!collapsed && (
-            <div className="who">
-              <b>{user?.email ?? '—'}</b>
-              <span>Administrador</span>
-            </div>
-          )}
+        <div style={{ position: 'relative' }}>
+          <button
+            ref={userBtnRef}
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="sb-user"
+            style={{ width: '100%', background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer' }}
+          >
+            <div className="av">{userInitials}</div>
+            {!collapsed && (
+              <div className="who">
+                <b>{user?.email ?? '—'}</b>
+                <span>{user?.role === 'ADMIN' ? 'Administrador' : user?.role === 'PARTICIPANTE' ? 'Participante' : 'Viewer'}</span>
+              </div>
+            )}
+          </button>
+          <UserMenuPopover
+            open={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            anchorRef={userBtnRef}
+          />
         </div>
       </div>
     </aside>
