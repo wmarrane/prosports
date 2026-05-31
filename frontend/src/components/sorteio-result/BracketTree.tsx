@@ -25,22 +25,28 @@ type MatchLayout = {
 const CARD_WIDTH = 240
 const CARD_HEIGHT = 90
 const COL_GAP = 80
-const ROW_GAP = 24
+const ROW_GAP = 14
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
 
 function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
-  // Posições (P1..PN) com espaçamento fixo.
-  const posY: Record<string, number> = {}
-  for (let p = 1; p <= N; p++) {
-    posY[`P${p}`] = (p - 0.5) * POS_ROW_HEIGHT
-  }
-  const totalHeight = N * POS_ROW_HEIGHT
-
   // Agrupa matches por rodada.
   const matchesByRound: Record<number, typeof graph.matches> = {}
   const matchesSorted = [...graph.matches].sort((a, b) => a.round - b.round)
   for (const m of matchesSorted) {
     ;(matchesByRound[m.round] ??= []).push(m)
+  }
+
+  // Altura total é determinada pelo NÚMERO DE R1 MATCHES (não por N de inscritos)
+  // — isso compacta o bracket para que os matches fiquem próximos verticalmente.
+  const r1Count = Math.max(1, (matchesByRound[1] ?? []).filter(m => m.id !== graph.thirdPlace).length)
+  const totalHeight = r1Count * POS_ROW_HEIGHT
+
+  // Posições (P1..PN) mapeadas linearmente em [0, totalHeight] pelo índice.
+  // BYE positions (que não aparecem como card) usam esse Y para o cálculo de
+  // midpoint das R2 BYE matches.
+  const posY: Record<string, number> = {}
+  for (let p = 1; p <= N; p++) {
+    posY[`P${p}`] = ((p - 0.5) / N) * totalHeight
   }
 
   // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média de inputs).

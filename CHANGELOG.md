@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.6] - 2026-05-31
+
+### Changed (Bracket — espaçamento vertical compacto)
+- **Altura total** agora é `r1MatchesCount × (CARD_HEIGHT + ROW_GAP)`, não mais `N × ROW_HEIGHT`. Para N=10 (4 R1 matches), o bracket passa de ~1140px → ~416px (cards quase encostados). Para N=12 (6 R1 matches), ~624px.
+- **Gap entre cards de R1** reduzido para `ROW_GAP=14` (era 24). R2+ funilam automaticamente via midpoint dos inputs.
+- **posY[Px]** agora mapeia linearmente em `[0, totalHeight]` pelo índice, mantendo as BYE positions no topo/fundo proporcional.
+
 ## [1.32.5] - 2026-05-31
 
 ### Changed (Bracket — refinamento do funil)
