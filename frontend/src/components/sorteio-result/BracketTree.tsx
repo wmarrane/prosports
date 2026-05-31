@@ -94,9 +94,40 @@ function renderSlot(
 export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, large = false }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
+  // Compute connectors: for each match input that references V:Jx or L:Jx,
+  // draw L-shape from source match's right edge to destination input edge.
+  type Connector = { d: string; key: string }
+  const matchMap: Record<string, MatchLayout> = {}
+  for (const m of layout.matches) matchMap[m.id] = m
+
+  const connectors: Connector[] = []
+  for (const m of layout.matches) {
+    for (const [slot, ref] of [['top', m.top], ['bottom', m.bottom]] as const) {
+      if (!ref.startsWith('V:') && !ref.startsWith('L:')) continue
+      const srcId = ref.slice(2)
+      const src = matchMap[srcId]
+      if (!src) continue
+      const x1 = src.x + CARD_WIDTH
+      const y1 = src.y
+      const x2 = m.x
+      const y2 = m.y + (slot === 'top' ? -CARD_HEIGHT / 4 : CARD_HEIGHT / 4)
+      const xm = (x1 + x2) / 2
+      const d = `M ${x1} ${y1} L ${xm} ${y1} L ${xm} ${y2} L ${x2} ${y2}`
+      connectors.push({ d, key: `${srcId}-${m.id}-${slot}` })
+    }
+  }
+
   return (
     <div style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
       <div style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
+        <svg
+          style={{ position: 'absolute', inset: 0, width: layout.width, height: layout.height, pointerEvents: 'none' }}
+          viewBox={`0 0 ${layout.width} ${layout.height}`}
+        >
+          {connectors.map(c => (
+            <path key={c.key} d={c.d} stroke="var(--card-border)" strokeWidth={1.5} fill="none" />
+          ))}
+        </svg>
         {layout.matches.map(m => (
           <div
             key={m.id}
@@ -114,7 +145,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               justifyContent: 'center',
             }}
           >
-            {m.isFinal && (
+            {(m.isFinal || m.isThirdPlace) && (
               <div style={{ position: 'absolute', top: -18, left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: '#f59e0b', fontWeight: 600 }}>
                 🏆 {m.isThirdPlace ? '3º lugar' : 'Final'}
               </div>
