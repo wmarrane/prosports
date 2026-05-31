@@ -5,6 +5,27 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.0] - 2026-05-31
+
+### Added (Usuários, perfis, alterar senha, logout)
+- **Backend — módulo `users`** (`backend/src/modules/users/`): endpoints `GET/POST/PATCH/DELETE /users` e `POST /users/:id/resetar-senha`, todos protegidos por `requireAuth + requireRole('ADMIN')`. Service com auto-proteção (não pode remover/desativar/rebaixar a si mesmo) e enforcement de "último ADMIN ativo" (operação recusada se deixar o sistema sem nenhum admin ativo). Validações zod: `nome` 2–80 chars, `email` único, `senha` 8–72 chars, `role` enum (ADMIN/PARTICIPANTE/VIEWER). 18 testes unitários cobrindo todos os caminhos.
+- **Backend — `POST /auth/alterar-senha`**: usuário logado troca a própria senha; valida `senha_atual` com bcrypt antes; após sucesso, revoga TODAS as sessões ativas do usuário no Redis (SCAN `refresh:${id}:*` + DEL). Frontend reage com toast + logout automático. 3 testes unitários.
+- **Backend — helper `revogarTodosRefreshTokens(userId)`** em `auth.service.ts`: usa `redis.scanIterator` (node-redis v4) para listar e deletar todas as chaves `refresh:${userId}:*`. Usado por `users.resetarSenha` e `auth.alterarSenha`.
+- **Frontend — páginas novas**:
+  - `/usuarios` (lista): DataTable em card com busca client-side por nome/email, pill de role colorida (ADMIN brand-deep, PARTICIPANTE verde, VIEWER teal/brand-50), badge Ativo/Inativo, último login em mono. Ações Editar/Senha/Remover por linha.
+  - `/usuarios/novo` e `/usuarios/:id/editar` (form): 2 cards seccionados (**Identificação** com Users/brand-deep + **Acesso** com ShieldCheck/violet), asterisco vermelho em obrigatórios, senha inicial no create / toggle Ativo + botão "Resetar senha" no edit.
+  - `/conta` (Minha conta): card único com avatar grande, role pt-BR, último login formatado, atalho "Trocar senha".
+  - `/conta/senha` (Trocar senha): form com senha atual + nova + confirmar; valida match e mínimo 8 chars; após sucesso desloga e redireciona para `/login`.
+- **Frontend — `ResetSenhaModal`**: modal de admin para resetar senha de outro usuário (campos nova + confirmar). Avisa que o usuário será deslogado.
+- **Frontend — `UserMenuPopover`**: popover ancorado ao card de usuário do rodapé da sidebar. Itens: **Minha conta** (UserCog), **Trocar senha** (Key), divisor, **Sair** (LogOut, vermelho). Fecha com clique fora ou ESC.
+- **Frontend — `Sidebar`**: item "Usuários" como primeiro filho de Administração; card de usuário do rodapé virou botão que abre o popover. Label do role pt-BR (Administrador/Participante/Viewer).
+- **Frontend — rotas em `App.tsx`**: `/usuarios*` aninhadas sob `<ProtectedRoute roles={['ADMIN']} />`; `/conta` e `/conta/senha` para qualquer usuário logado; nova rota `/sem-acesso` (mensagem amigável).
+- **Service `users` + types `User/UserCreatePayload/UserUpdatePayload`** com método `alterarSenha(senha_atual, nova_senha)` que chama `POST /auth/alterar-senha`.
+- **Ícones**: `Key`, `LogOut`, `UserCog` adicionados em `lib/icons.ts`.
+
+### Security
+- Trocar/resetar senha **revoga todas as sessões ativas** do usuário-alvo (não apenas a current). Reset por admin também zera `tentativas_login` e `bloqueado_ate` (libera conta bloqueada).
+
 ## [1.31.0] - 2026-05-31
 
 ### Added (Import CSV — modelo + instruções)
