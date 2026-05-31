@@ -99,7 +99,7 @@ describe('drawGroups', () => {
 describe('drawBracket', () => {
   it('sem campeoes + regra qualquer + 5 inscritos → size=5, todos pids presentes, sem nulls', () => {
     const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 5, posicao_terceiro_cabeca: 4, posicao_quarto_cabeca: 3 }
-    const out = drawBracket([1,2,3,4,5], regra, { numero_inscrito: 5, posicoes_bye: [] }, 'seed-b')
+    const out = drawBracket([1,2,3,4,5], regra, { numero_inscrito: 5, posicoes_bye: [] }, null, 'seed-b')
     expect(out.size).toBe(5)
     expect(out.slots).toHaveLength(5)
     expect(out.slots.filter(s => s === null)).toHaveLength(0)
@@ -109,7 +109,7 @@ describe('drawBracket', () => {
 
   it('4 campeoes inscritos + regra (1,8,5,4): slots fixos preenchidos, outros shuffled', () => {
     const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 8, posicao_terceiro_cabeca: 5, posicao_quarto_cabeca: 4 }
-    const out = drawBracket([1,2,3,4,5,6,7,8], regra, { numero_inscrito: 8, posicoes_bye: [] }, 'seed-b4b', [1, 2, 3, 4])
+    const out = drawBracket([1,2,3,4,5,6,7,8], regra, { numero_inscrito: 8, posicoes_bye: [] }, null, 'seed-b4b', [1, 2, 3, 4])
     expect(out.size).toBe(8)
     expect(out.slots[0]).toBe(1)
     expect(out.slots[7]).toBe(2)
@@ -121,7 +121,7 @@ describe('drawBracket', () => {
 
   it('2 campeoes + regra com terceira_cabeca=0 → só 2 cabeças usadas', () => {
     const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 4, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0 }
-    const out = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, 'seed-b2', [1, 2])
+    const out = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, null, 'seed-b2', [1, 2])
     expect(out.size).toBe(4)
     expect(out.slots[0]).toBe(1)
     expect(out.slots[3]).toBe(2)
@@ -131,8 +131,8 @@ describe('drawBracket', () => {
 
   it('sem campeoes (default) → todos no shuffle, regras ignoradas para fixação', () => {
     const regra = { posicao_primeiro_cabeca: 1, posicao_segundo_cabeca: 4, posicao_terceiro_cabeca: 3, posicao_quarto_cabeca: 2 }
-    const a = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, 'seed-b-equal')
-    const b = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, 'seed-b-equal', [])
+    const a = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, null, 'seed-b-equal')
+    const b = drawBracket([1,2,3,4], regra, { numero_inscrito: 4, posicoes_bye: [] }, null, 'seed-b-equal', [])
     expect(a).toEqual(b)
     expect(a.size).toBe(4)
     const pids = a.slots.filter((s): s is number => s !== null).sort()
@@ -162,7 +162,7 @@ describe('drawBracket — com regraBracket (v1.18.0)', () => {
   it('aloca cabeças nas posições reservadas e retorna byePositions', () => {
     const pids = [101, 102, 103, 104, 105, 106]
     const campeoes = [101, 102]
-    const r = drawBracket(pids, regraChavesN6, regraBracketN6, 'seed-x', campeoes)
+    const r = drawBracket(pids, regraChavesN6, regraBracketN6, null, 'seed-x', campeoes)
     expect(r.size).toBe(6)
     expect(r.slots).toHaveLength(6)
     expect(r.slots[0]).toBe(101)
@@ -172,8 +172,8 @@ describe('drawBracket — com regraBracket (v1.18.0)', () => {
 
   it('preenche posições restantes deterministicamente via seed', () => {
     const pids = [101, 102, 103, 104, 105, 106]
-    const r1 = drawBracket(pids, regraChavesN6, regraBracketN6, 'seed-x', [])
-    const r2 = drawBracket(pids, regraChavesN6, regraBracketN6, 'seed-x', [])
+    const r1 = drawBracket(pids, regraChavesN6, regraBracketN6, null, 'seed-x', [])
+    const r2 = drawBracket(pids, regraChavesN6, regraBracketN6, null, 'seed-x', [])
     expect(r1.slots).toEqual(r2.slots)
   })
 
@@ -187,7 +187,7 @@ describe('drawBracket — com regraBracket (v1.18.0)', () => {
     }
     const regraBracketN8 = { numero_inscrito: 8, posicoes_bye: [] }
     const pids = [11, 22, 33, 44, 55, 66, 77, 88]
-    const r = drawBracket(pids, regraChavesN8, regraBracketN8, 's', [])
+    const r = drawBracket(pids, regraChavesN8, regraBracketN8, null, 's', [])
     expect(r.byePositions).toEqual([])
     expect(r.slots.filter(s => s !== null)).toHaveLength(8)
   })
@@ -203,7 +203,7 @@ describe('drawBracket — com regraBracket (v1.18.0)', () => {
     const regraBracketN22 = { numero_inscrito: 22, posicoes_bye: [1, 6, 11, 12, 17, 22] }
     const pids = Array.from({ length: 22 }, (_, i) => 200 + i)
     const campeoes = [200, 201, 202, 203]
-    const r = drawBracket(pids, regraChavesN22, regraBracketN22, 's', campeoes)
+    const r = drawBracket(pids, regraChavesN22, regraBracketN22, null, 's', campeoes)
     expect(r.slots[0]).toBe(200)
     expect(r.slots[21]).toBe(201)
     expect(r.slots[11]).toBe(202)
@@ -213,5 +213,39 @@ describe('drawBracket — com regraBracket (v1.18.0)', () => {
     expect([200, 201, 202, 203]).not.toContain(r.slots[5])
     expect([200, 201, 202, 203]).not.toContain(r.slots[16])
     expect(r.byePositions).toEqual([1, 6, 11, 12, 17, 22])
+  })
+})
+
+describe('drawBracket — com matchesGraph (v1.19.0)', () => {
+  const regraChavesN6 = {
+    numero_inscrito: 6,
+    posicao_primeiro_cabeca: 1,
+    posicao_segundo_cabeca: 6,
+    posicao_terceiro_cabeca: 4,
+    posicao_quarto_cabeca: 3,
+  }
+  const regraBracketN6 = { numero_inscrito: 6, posicoes_bye: [1, 6] }
+  const matchesGraphN6 = {
+    matches: [
+      { id: 'J1', round: 1, top: 'P2', bottom: 'P3' },
+      { id: 'J2', round: 1, top: 'P4', bottom: 'P5' },
+      { id: 'J3', round: 2, top: 'P1', bottom: 'V:J1' },
+      { id: 'J4', round: 2, top: 'V:J2', bottom: 'P6' },
+      { id: 'J5', round: 3, top: 'V:J3', bottom: 'V:J4' },
+    ],
+    final: 'J5',
+    thirdPlace: null,
+  }
+
+  it('retorna matchesGraph quando fornecido', () => {
+    const pids = [101, 102, 103, 104, 105, 106]
+    const r = drawBracket(pids, regraChavesN6, regraBracketN6, matchesGraphN6, 'seed-x', [])
+    expect(r.matchesGraph).toEqual(matchesGraphN6)
+  })
+
+  it('retorna matchesGraph=null quando não fornecido (fallback)', () => {
+    const pids = [101, 102, 103, 104, 105, 106]
+    const r = drawBracket(pids, regraChavesN6, regraBracketN6, null, 'seed-x', [])
+    expect(r.matchesGraph).toBeNull()
   })
 })

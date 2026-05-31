@@ -29,6 +29,9 @@ vi.mock('../../lib/prisma', () => ({
     bracketChavesByes: {
       findUnique: vi.fn(),
     },
+    bracketChavesMatches: {
+      findUnique: vi.fn(),
+    },
   },
 }))
 
@@ -42,6 +45,7 @@ beforeEach(() => {
   mockPrisma.campeaoAnterior.findMany.mockResolvedValue([])
   // Default: valid bracket structure for N=5 (tests that need different N override this)
   mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 5, posicoes_bye: [] })
+  mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue(null)
 })
 
 describe('sorteios.service', () => {
@@ -242,5 +246,35 @@ describe('sorteios.service', () => {
       status: 400,
       message: expect.stringContaining('estrutura de bracket'),
     })
+  })
+
+  it('executar chaves passa matchesGraph quando disponível', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({
+      id: 1, competicao_id: 10,
+      tipo_modalidade: { tipo: 'chaves' },
+    })
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { participante_id: 100 }, { participante_id: 200 },
+    ])
+    mockPrisma.sistemaDisputasChaves.findFirst.mockResolvedValue({
+      numero_inscrito: 2, posicao_primeiro_cabeca: 1,
+      posicao_segundo_cabeca: 2, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0,
+    })
+    mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 2, posicoes_bye: [] })
+    const fakeGraph = {
+      matches: [{ id: 'J1', round: 1, top: 'P1', bottom: 'P2' }],
+      final: 'J1', thirdPlace: null,
+    }
+    mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue({
+      numero_inscrito: 2, matches_graph: fakeGraph,
+    })
+    mockPrisma.sorteio.upsert.mockResolvedValue({ id: 99 })
+
+    await service.executar({ evento_id: 1, modalidade_id: 1 })
+
+    expect(mockPrisma.sorteio.upsert).toHaveBeenCalled()
+    const callArg = mockPrisma.sorteio.upsert.mock.calls[0][0]
+    expect(callArg.create.resultado.matchesGraph).toEqual(fakeGraph)
   })
 })

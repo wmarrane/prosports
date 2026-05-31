@@ -89,10 +89,24 @@ export function drawGroups(
   }
 }
 
+export type MatchRef = string  // 'P{n}' | 'V:J{x}' | 'L:J{x}'
+
+export type MatchesGraph = {
+  matches: Array<{
+    id: string
+    round: number
+    top: MatchRef
+    bottom: MatchRef
+  }>
+  final: string
+  thirdPlace: string | null
+}
+
 export type BracketResultado = {
   size: number
   slots: (number | null)[]
   byePositions: number[]
+  matchesGraph: MatchesGraph | null
 }
 
 export type RegraChaves = {
@@ -111,6 +125,7 @@ export function drawBracket(
   participantes: readonly number[],
   regra: RegraChaves,
   regraBracket: RegraBracket,
+  matchesGraph: MatchesGraph | null,
   seed: string,
   campeoesPids: readonly number[] = [],
 ): BracketResultado {
@@ -144,7 +159,7 @@ export function drawBracket(
   }
 
   const byePositions = [...regraBracket.posicoes_bye].sort((a, b) => a - b)
-  return { size: N, slots, byePositions }
+  return { size: N, slots, byePositions, matchesGraph }
 }
 
 export type OrdemResultado = { ordem: number[] }

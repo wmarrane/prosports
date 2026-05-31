@@ -100,11 +100,14 @@ export async function executar(input: { evento_id: number; modalidade_id: number
     }
     resultado = engine.drawGroups(pids, regra, seed, campeoesPidsInscritos)
   } else if (tipo === 'chaves') {
-    const [regra, regraBracket] = await Promise.all([
+    const [regra, regraBracket, regraMatches] = await Promise.all([
       prisma.sistemaDisputasChaves.findFirst({
         where: { numero_inscrito: pids.length },
       }),
       prisma.bracketChavesByes.findUnique({
+        where: { numero_inscrito: pids.length },
+      }),
+      prisma.bracketChavesMatches.findUnique({
         where: { numero_inscrito: pids.length },
       }),
     ])
@@ -124,7 +127,9 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         { status: 400 },
       )
     }
-    resultado = engine.drawBracket(pids, regra, regraBracket, seed, campeoesPidsInscritos)
+    // matchesGraph is optional — if missing, frontend falls back to legacy render
+    const matchesGraph = regraMatches?.matches_graph ? (regraMatches.matches_graph as any) : null
+    resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, campeoesPidsInscritos)
   } else if (tipo === 'ordem_entrada') {
     resultado = engine.shuffleOrder(pids, seed)
   } else {
