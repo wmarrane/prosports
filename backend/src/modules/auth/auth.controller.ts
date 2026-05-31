@@ -7,6 +7,11 @@ const loginSchema = z.object({
   senha: z.string().min(6),
 })
 
+const alterarSenhaSchema = z.object({
+  senha_atual: z.string().min(1),
+  nova_senha: z.string().min(8).max(72),
+})
+
 const REFRESH_COOKIE = 'prosports_rt'
 const COOKIE_OPTS = {
   httpOnly: true,
@@ -64,4 +69,15 @@ export async function logoutHandler(req: Request, res: Response, next: NextFunct
 
 export async function meHandler(req: Request, res: Response) {
   res.json((req as any).user)
+}
+
+export async function alterarSenhaHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = alterarSenhaSchema.parse(req.body)
+    const user = (req as any).user as { sub: number }
+    await authService.alterarSenha(user.sub, body.senha_atual, body.nova_senha)
+    res.json({ ok: true })
+  } catch (err) {
+    next(err)
+  }
 }
