@@ -9,6 +9,18 @@ export type CriarPayload = {
   senha: string
 }
 
+export type EditarPayload = {
+  nome?: string
+  email?: string
+  role?: Role
+  ativo?: boolean
+}
+
+export type CallerCtx = {
+  sub: number   // id do usuário autenticado
+  role: string
+}
+
 const USER_SELECT = {
   id: true,
   nome: true,
@@ -52,6 +64,56 @@ export async function criar(payload: CriarPayload) {
       role: payload.role,
       senha_hash,
     },
+    select: USER_SELECT,
+  })
+}
+
+async function ensureNotLastActiveAdmin(targetId: number) {
+  const adminsAtivos = await prisma.user.count({
+    where: { role: 'ADMIN', ativo: true, NOT: { id: targetId } },
+  })
+  if (adminsAtivos === 0) {
+    throw Object.assign(
+      new Error('Operação negada: este é o último ADMIN ativo do sistema.'),
+      { status: 400 }
+    )
+  }
+}
+
+export async function editar(id: number, payload: EditarPayload, caller: CallerCtx) {
+  const alvo = await prisma.user.findUnique({ where: { id } })
+  if (!alvo) throw Object.assign(new Error('Usuário não encontrado'), { status: 404 })
+
+  // Auto-proteções
+  if (caller.sub === id) {
+    if (payload.ativo === false) {
+      throw Object.assign(new Error('Você não pode desativar a si mesmo.'), { status: 400 })
+    }
+    if (payload.role && payload.role !== alvo.role && alvo.role === 'ADMIN') {
+      throw Object.assign(new Error('Você não pode rebaixar a si mesmo.'), { status: 400 })
+    }
+  }
+
+  // Último admin ativo
+  const desativando = payload.ativo === false
+  const rebaixando = payload.role && payload.role !== 'ADMIN'
+  if (alvo.role === 'ADMIN' && alvo.ativo && (desativando || rebaixando)) {
+    await ensureNotLastActiveAdmin(id)
+  }
+
+  // Email único
+  if (payload.email && payload.email !== alvo.email) {
+    const conflict = await prisma.user.findFirst({
+      where: { email: payload.email, NOT: { id } },
+    })
+    if (conflict) {
+      throw Object.assign(new Error('Email já cadastrado'), { status: 400 })
+    }
+  }
+
+  return prisma.user.update({
+    where: { id },
+    data: payload,
     select: USER_SELECT,
   })
 }
