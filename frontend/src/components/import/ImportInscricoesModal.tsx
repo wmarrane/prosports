@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Papa from 'papaparse'
 import { inscricoesService } from '../../services/inscricoes'
 import type { ImportRow, ImportResult } from '../../types/inscricao'
+import { downloadCsvTemplate } from '../../lib/csv-template'
+import { Download, FileSpreadsheet, Upload } from 'lucide-react'
 
 type Props = {
   open: boolean
@@ -13,6 +15,16 @@ type Props = {
 
 const REQUIRED_HEADERS = ['nome', 'municipio_uf', 'municipio_nome'] as const
 type Step = 'upload' | 'review' | 'done'
+
+const TEMPLATE = {
+  filename: 'modelo_inscricoes.csv',
+  headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
+  exampleRows: [
+    ['João Silva', 'Clube Atlético', 'SP', 'São Paulo'],
+    ['Maria Souza', '', 'RJ', 'Rio de Janeiro'],
+    ['Pedro Oliveira', 'Equipe Sub-15', 'MG', 'Belo Horizonte'],
+  ],
+}
 
 function StatusBadge({ status }: { status: 'criada' | 'duplicada' | 'erro' }) {
   const map = {
@@ -148,16 +160,108 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
 
         {step === 'upload' && (
           <div className="space-y-4">
-            <p className="text-sm text-[var(--t2)]">
-              Cabeçalho obrigatório: <code className="font-mono text-xs">nome,municipio_uf,municipio_nome,subtitulo</code> (subtítulo é opcional).
-            </p>
-            <input
-              type="file"
-              accept=".csv,text/csv"
-              onChange={handleFileChange}
-              className="block w-full text-sm text-[var(--t1)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[var(--brand-500)] file:text-white file:cursor-pointer"
-            />
-            {file && <p className="text-xs text-[var(--t3)]">Arquivo: {file.name} · {(file.size / 1024).toFixed(1)} KB</p>}
+            {/* Bloco: Modelo + instruções */}
+            <section
+              style={{
+                background: 'var(--card-bg-2)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 'var(--radius-lg)',
+                padding: 16,
+              }}
+            >
+              <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <div
+                    style={{
+                      width: 32, height: 32, borderRadius: 8,
+                      background: 'var(--grad-brand-deep)', color: '#fff',
+                      display: 'grid', placeItems: 'center',
+                    }}
+                  >
+                    <FileSpreadsheet size={16} />
+                  </div>
+                  <div>
+                    <div className="eyebrow">Passo 1</div>
+                    <div className="text-sm font-semibold text-[var(--t1)]">Baixar modelo + instruções</div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => downloadCsvTemplate(TEMPLATE)}
+                  className="btn btn-primary btn-sm"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                >
+                  <Download size={14} /> Baixar modelo CSV
+                </button>
+              </div>
+
+              <div
+                style={{
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 12,
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 11,
+                  overflowX: 'auto',
+                  marginBottom: 10,
+                }}
+              >
+                <div className="font-bold text-[var(--brand-500)] mb-1">
+                  nome,subtitulo,municipio_uf,municipio_nome
+                </div>
+                <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
+                <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
+              </div>
+
+              <ul className="text-xs text-[var(--t3)] space-y-1 ml-4 list-disc">
+                <li><b>nome</b>: nome do participante (obrigatório).</li>
+                <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>
+                <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
+                <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
+                <li>Participantes já cadastrados são reaproveitados; novos são criados automaticamente.</li>
+                <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
+              </ul>
+            </section>
+
+            {/* Bloco: Upload */}
+            <section
+              style={{
+                background: 'var(--card-bg-2)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 'var(--radius-lg)',
+                padding: 16,
+              }}
+            >
+              <div className="flex items-center gap-2.5 mb-3">
+                <div
+                  style={{
+                    width: 32, height: 32, borderRadius: 8,
+                    background: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
+                    color: '#fff', display: 'grid', placeItems: 'center',
+                  }}
+                >
+                  <Upload size={16} />
+                </div>
+                <div>
+                  <div className="eyebrow">Passo 2</div>
+                  <div className="text-sm font-semibold text-[var(--t1)]">Enviar arquivo preenchido</div>
+                </div>
+              </div>
+
+              <input
+                type="file"
+                accept=".csv,text/csv"
+                onChange={handleFileChange}
+                className="block w-full text-sm text-[var(--t1)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[var(--brand-500)] file:text-white file:cursor-pointer file:font-semibold hover:file:bg-[var(--brand-400)]"
+              />
+              {file && (
+                <p className="text-xs text-[var(--t3)] mt-2">
+                  Selecionado: <b className="text-[var(--t1)]">{file.name}</b> · {(file.size / 1024).toFixed(1)} KB
+                </p>
+              )}
+            </section>
+
             {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}
             <div className="flex justify-end gap-2 pt-2">
               <button onClick={handleClose} className="px-4 py-2 text-sm text-[var(--t2)] hover:text-[var(--t1)]">Cancelar</button>

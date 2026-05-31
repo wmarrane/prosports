@@ -5,6 +5,16 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.31.0] - 2026-05-31
+
+### Added (Import CSV — modelo + instruções)
+- **Novo utilitário `lib/csv-template.ts`**: gera template CSV (UTF-8 com BOM para Excel pt-BR, RFC 4180 com escape de vírgula/aspas/quebra de linha) e dispara o download no browser via Blob. API: `downloadCsvTemplate({ filename, headers, exampleRows })`.
+- **MunicipiosImport** redesenhado em 3 cards seccionados:
+  - **Passo 1 — Baixar modelo + instruções** (FileSpreadsheet/brand-deep): botão "Baixar modelo CSV" + preview do cabeçalho em mono + bullet list explicando cada coluna (`codigo_ibge`, `nome`, `uf`) com aliases aceitos (`Código Município Completo`, `Nome_Município`, `Nome_UF`) e regra upsert por código IBGE.
+  - **Passo 2 — Enviar arquivo** (Upload/amber): file input com nome+tamanho do arquivo selecionado.
+  - **Resultado** (Check/teal): grid de Stats (Criados/Atualizados/Ignorados/Erros) + `<details>` expansível listando erros por linha.
+- **ImportInscricoesModal** com bloco "Passo 1 — Baixar modelo + instruções": botão Baixar + preview de cabeçalho `nome,subtitulo,municipio_uf,municipio_nome` + bullet list de cada campo (obrigatórios marcados; `subtitulo` opcional) + regra de reaproveitamento de participantes.
+
 ## [1.30.2] - 2026-05-31
 
 ### Changed (Participantes)
