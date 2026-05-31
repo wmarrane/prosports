@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.7] - 2026-05-31
+
+### Changed (Bracket — BYE alinhado com confronto antecedente)
+- Em R2+, quando um input é BYE (P ref) e o outro é match real (V:/L:), o card é posicionado de modo que o **slot do BYE fique alinhado horizontalmente com o centro do match antecedente**. Ex.: J3 (P1 BYE + V:J1) → Valinhos aparece na mesma linha de J1. Casos sem BYE seguem midpoint dos inputs.
+
 ## [1.32.6] - 2026-05-31
 
 ### Changed (Bracket — espaçamento vertical compacto)

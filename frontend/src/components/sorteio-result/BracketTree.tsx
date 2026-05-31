@@ -75,9 +75,23 @@ function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]
       .sort((a, b) => naturalY[a.id] - naturalY[b.id])
     const n = bracketMatches.length
     bracketMatches.forEach((m, i) => {
-      const y = round === 1
-        ? ((i + 0.5) / n) * totalHeight                 // R1: equal spacing
-        : (resolveLaidOutY(m.top) + resolveLaidOutY(m.bottom)) / 2  // R2+: midpoint dos inputs
+      let y: number
+      if (round === 1) {
+        y = ((i + 0.5) / n) * totalHeight  // R1: equal spacing
+      } else {
+        // R2+: se um input é BYE (P ref) e o outro é um match real (V:/L:),
+        // alinha o card para que o slot do BYE fique na mesma LINHA do match
+        // que o antecede. Caso contrário, midpoint dos inputs.
+        const topIsP = m.top.startsWith('P')
+        const botIsP = m.bottom.startsWith('P')
+        if (topIsP && !botIsP) {
+          y = resolveLaidOutY(m.bottom) + CARD_HEIGHT / 4
+        } else if (botIsP && !topIsP) {
+          y = resolveLaidOutY(m.top) - CARD_HEIGHT / 4
+        } else {
+          y = (resolveLaidOutY(m.top) + resolveLaidOutY(m.bottom)) / 2
+        }
+      }
       const x = (m.round - 1) * (CARD_WIDTH + COL_GAP)
       matchById[m.id] = {
         id: m.id, round: m.round, top: m.top, bottom: m.bottom,
