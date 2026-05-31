@@ -8,9 +8,10 @@ type Props = {
   large?: boolean
   campeoesByParticipanteId?: Map<number, number>
   onGroupClick?: (letra: string) => void
+  mostrarSubtitulo?: boolean
 }
 
-export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, onGroupClick }: Props) {
+export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, onGroupClick, mostrarSubtitulo = false }: Props) {
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
@@ -41,7 +42,7 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
                   {pos && <CampeaoBadge posicao={pos} large={large} />}
                   <span>
                     {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
-                    {p?.subtitulo && <span className={subItemClass}>— {p.subtitulo}</span>}
+                    {mostrarSubtitulo && p?.subtitulo && <span className={subItemClass}>— {p.subtitulo}</span>}
                   </span>
                 </li>
               )

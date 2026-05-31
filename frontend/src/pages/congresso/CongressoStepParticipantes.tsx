@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
+import { competicoesService } from '../../services/competicoes'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
 import { Plus, X, ArrowRight } from '../../lib/icons'
 
@@ -39,6 +40,13 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   })
 
   const modalidade = modalidades.find(m => m.id === modalidadeId)
+
+  const { data: competicao } = useQuery({
+    queryKey: ['competicoes', competicaoId],
+    queryFn: () => competicoesService.buscar(competicaoId!),
+    enabled: !!competicaoId,
+  })
+  const mostrarSubtitulo = competicao?.adicionar_subtitulo ?? false
 
   const { mutate: criar, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criar({
@@ -106,7 +114,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
                 <span className="cw-prow-n">{String(idx + 1).padStart(2, '0')}</span>
                 <div className="cw-prow-main">
                   <span className="cw-prow-name">{displayNome}</span>
-                  {i.participante.subtitulo && (
+                  {mostrarSubtitulo && i.participante.subtitulo && (
                     <span className="cw-prow-club">{i.participante.subtitulo}</span>
                   )}
                 </div>

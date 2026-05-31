@@ -5,6 +5,16 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.2] - 2026-05-31
+
+### Changed (Subtítulo condicional por competição)
+- **Regra**: o `subtitulo` do participante só aparece em telas vinculadas a evento/competição quando a flag `Competicao.adicionar_subtitulo === true`. Telas globais (ParticipantesList, ParticipanteForm, ParticipanteSelect) seguem mostrando sempre.
+- **Componentes de sorteio** (`SorteioOrdem`, `SorteioGrupos`, `SorteioChaves`, `CampeaoSlot`): nova prop `mostrarSubtitulo?: boolean` (default `false`); quando `false` não renderiza o subtítulo (nem dentro de `SlotRender`/`MatchCard` do bracket).
+- **EventoInscricoes**: deriva `mostrarSubtitulo` de `evento.competicao.adicionar_subtitulo` e propaga para os 3 SorteioX, CampeaoSlot, e o chip de inscritos (a linha de subtítulo + município agora omite o subtítulo quando flag off).
+- **CongressoStepParticipantes / StepSorteio / StepCampeoes**: cada step busca a `Competicao` via service, deriva a flag e condiciona a renderização (lista de inscritos, modal de grupo expandido, lista de campeões, e o que é passado aos componentes de sorteio).
+- **ImportInscricoesModal**: ao abrir, busca o evento → competição. Quando flag off: template CSV cai para 3 colunas (`nome,municipio_uf,municipio_nome`), preview mono espelha, e a bullet list omite a linha sobre `subtitulo`. Quando on: mantém 4 colunas.
+- **Relatorio.tsx**: o CSV exportado omite a coluna `participante_subtitulo` (header + valor por linha) quando flag off.
+
 ## [1.32.1] - 2026-05-31
 
 ### Changed (Sorteio Ordem de Entrada)

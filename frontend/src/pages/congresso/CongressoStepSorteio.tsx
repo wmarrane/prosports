@@ -4,6 +4,7 @@ import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
+import { competicoesService } from '../../services/competicoes'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
@@ -38,6 +39,13 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     enabled: !!competicaoId,
   })
   const modalidade = modalidades.find(m => m.id === modalidadeId)
+
+  const { data: competicao } = useQuery({
+    queryKey: ['competicoes', competicaoId],
+    queryFn: () => competicoesService.buscar(competicaoId!),
+    enabled: !!competicaoId,
+  })
+  const mostrarSubtitulo = competicao?.adicionar_subtitulo ?? false
   const tipo = modalidade?.tipo_modalidade?.tipo
 
   const { data: sorteios = [] } = useQuery({
@@ -306,13 +314,14 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             large
             campeoesByParticipanteId={campeoesByParticipanteId}
             onGroupClick={(letra) => setGrupoExpandido(letra)}
+            mostrarSubtitulo={mostrarSubtitulo}
           />
         )}
         {sorteio.tipo === 'chaves' && (
-          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
+          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} mostrarSubtitulo={mostrarSubtitulo} />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
-          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large />
+          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large mostrarSubtitulo={mostrarSubtitulo} />
         )}
         {erro && <p style={{ color: DANGER, fontSize: 16, marginTop: 12 }}>{erro}</p>}
       </div>
@@ -449,7 +458,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                       {cp && <CampeaoBadge posicao={cp} large />}
                       <span style={{ color: FG, fontWeight: 600 }}>
                         {p ? p.nome : '—'}
-                        {p?.subtitulo && <span style={{ fontSize: '0.7em', color: DIM, marginLeft: 12 }}>— {p.subtitulo}</span>}
+                        {mostrarSubtitulo && p?.subtitulo && <span style={{ fontSize: '0.7em', color: DIM, marginLeft: 12 }}>— {p.subtitulo}</span>}
                       </span>
                     </li>
                   )

@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import Papa from 'papaparse'
 import { inscricoesService } from '../../services/inscricoes'
+import { eventosService } from '../../services/eventos'
 import type { ImportRow, ImportResult } from '../../types/inscricao'
 import { downloadCsvTemplate } from '../../lib/csv-template'
 import { Download, FileSpreadsheet, Upload } from 'lucide-react'
@@ -15,16 +17,6 @@ type Props = {
 
 const REQUIRED_HEADERS = ['nome', 'municipio_uf', 'municipio_nome'] as const
 type Step = 'upload' | 'review' | 'done'
-
-const TEMPLATE = {
-  filename: 'modelo_inscricoes.csv',
-  headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
-  exampleRows: [
-    ['João Silva', 'Clube Atlético', 'SP', 'São Paulo'],
-    ['Maria Souza', '', 'RJ', 'Rio de Janeiro'],
-    ['Pedro Oliveira', 'Equipe Sub-15', 'MG', 'Belo Horizonte'],
-  ],
-}
 
 function StatusBadge({ status }: { status: 'criada' | 'duplicada' | 'erro' }) {
   const map = {
@@ -48,6 +40,33 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
   const [commit, setCommit] = useState<ImportResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [erro, setErro] = useState('')
+
+  const { data: evento } = useQuery({
+    queryKey: ['eventos', eventoId],
+    queryFn: () => eventosService.buscar(eventoId),
+    enabled: open,
+  })
+  const mostrarSubtitulo = evento?.competicao?.adicionar_subtitulo ?? false
+
+  const template = mostrarSubtitulo
+    ? {
+        filename: 'modelo_inscricoes.csv',
+        headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
+        exampleRows: [
+          ['João Silva', 'Clube Atlético', 'SP', 'São Paulo'],
+          ['Maria Souza', '', 'RJ', 'Rio de Janeiro'],
+          ['Pedro Oliveira', 'Equipe Sub-15', 'MG', 'Belo Horizonte'],
+        ],
+      }
+    : {
+        filename: 'modelo_inscricoes.csv',
+        headers: ['nome', 'municipio_uf', 'municipio_nome'],
+        exampleRows: [
+          ['João Silva', 'SP', 'São Paulo'],
+          ['Maria Souza', 'RJ', 'Rio de Janeiro'],
+          ['Pedro Oliveira', 'MG', 'Belo Horizonte'],
+        ],
+      }
 
   function reset() {
     setStep('upload')
@@ -187,7 +206,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 </div>
                 <button
                   type="button"
-                  onClick={() => downloadCsvTemplate(TEMPLATE)}
+                  onClick={() => downloadCsvTemplate(template)}
                   className="btn btn-primary btn-sm"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                 >
@@ -208,15 +227,24 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 }}
               >
                 <div className="font-bold text-[var(--brand-500)] mb-1">
-                  nome,subtitulo,municipio_uf,municipio_nome
+                  {mostrarSubtitulo ? 'nome,subtitulo,municipio_uf,municipio_nome' : 'nome,municipio_uf,municipio_nome'}
                 </div>
-                <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
-                <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
+                {mostrarSubtitulo ? (
+                  <>
+                    <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
+                    <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-[var(--t3)]">João Silva,SP,São Paulo</div>
+                    <div className="text-[var(--t3)]">Maria Souza,RJ,Rio de Janeiro</div>
+                  </>
+                )}
               </div>
 
               <ul className="text-xs text-[var(--t3)] space-y-1 ml-4 list-disc">
                 <li><b>nome</b>: nome do participante (obrigatório).</li>
-                <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>
+                {mostrarSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
                 <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
                 <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
                 <li>Participantes já cadastrados são reaproveitados; novos são criados automaticamente.</li>

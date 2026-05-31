@@ -8,6 +8,7 @@ type Props = {
   participantesById: Map<number, Participante>
   large?: boolean
   campeoesByParticipanteId?: Map<number, number>
+  mostrarSubtitulo?: boolean
 }
 
 type Match = {
@@ -67,9 +68,10 @@ type SlotRenderProps = {
   large: boolean
   participantesById: Map<number, Participante>
   campeoesByParticipanteId?: Map<number, number>
+  mostrarSubtitulo?: boolean
 }
 
-function SlotRender({ pid, fallbackText, large, participantesById, campeoesByParticipanteId }: SlotRenderProps) {
+function SlotRender({ pid, fallbackText, large, participantesById, campeoesByParticipanteId, mostrarSubtitulo = false }: SlotRenderProps) {
   const fontSize = large ? '1.25rem' : '0.95rem'
   if (pid === null) {
     return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize }}>{fallbackText}</span>
@@ -82,7 +84,7 @@ function SlotRender({ pid, fallbackText, large, participantesById, campeoesByPar
       {pos && <CampeaoBadge posicao={pos} large={large} />}
       <span>
         {p.nome}
-        {p.subtitulo && <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {p.subtitulo}</span>}
+        {mostrarSubtitulo && p.subtitulo && <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {p.subtitulo}</span>}
       </span>
     </span>
   )
@@ -95,15 +97,17 @@ type MatchCardProps = {
   campeoesByParticipanteId?: Map<number, number>
   topFallback?: string
   bottomFallback?: string
+  mostrarSubtitulo?: boolean
 }
 
-function MatchCard({ match, large, participantesById, campeoesByParticipanteId, topFallback, bottomFallback }: MatchCardProps) {
+function MatchCard({ match, large, participantesById, campeoesByParticipanteId, topFallback, bottomFallback, mostrarSubtitulo = false }: MatchCardProps) {
   return (
     <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 12 : 8 }}>
       <div style={{ padding: '4px 0' }}>
         <SlotRender
           pid={match.top} fallbackText={topFallback ?? 'BYE'}
           large={large} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
+          mostrarSubtitulo={mostrarSubtitulo}
         />
       </div>
       <div style={{ borderTop: '1px solid var(--card-border)', margin: '4px 0' }} />
@@ -111,13 +115,14 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
         <SlotRender
           pid={match.bottom} fallbackText={bottomFallback ?? 'BYE'}
           large={large} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
+          mostrarSubtitulo={mostrarSubtitulo}
         />
       </div>
     </div>
   )
 }
 
-export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
+export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, mostrarSubtitulo = false }: Props) {
   // v1.19.0: render field via grafo de matches (preferido)
   if (resultado.matchesGraph && resultado.matchesGraph.matches.length > 0) {
     return (
@@ -149,6 +154,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
                 participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
                 topFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 1}`}
                 bottomFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 2}`}
+                mostrarSubtitulo={mostrarSubtitulo}
               />
             ))}
           </div>
@@ -188,7 +194,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
                   {campeaoPos && <CampeaoBadge posicao={campeaoPos} large={large} />}
                   <span className={nameClass}>
                     {participante.nome}
-                    {participante.subtitulo && <span className={subClass}>— {participante.subtitulo}</span>}
+                    {mostrarSubtitulo && participante.subtitulo && <span className={subClass}>— {participante.subtitulo}</span>}
                   </span>
                 </span>
               ) : (

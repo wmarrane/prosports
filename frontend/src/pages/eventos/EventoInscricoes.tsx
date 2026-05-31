@@ -123,6 +123,7 @@ export default function EventoInscricoes() {
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
+  const mostrarSubtitulo = evento?.competicao?.adicionar_subtitulo ?? false
 
   const { mutate: criar, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criar({
@@ -514,7 +515,7 @@ export default function EventoInscricoes() {
                               >
                                 {i.participante.nome}
                               </div>
-                              {(i.participante.subtitulo || i.participante.municipio) && (
+                              {((mostrarSubtitulo && i.participante.subtitulo) || i.participante.municipio) && (
                                 <div
                                   className="text-[var(--t4)] mt-0.5"
                                   style={{
@@ -524,8 +525,8 @@ export default function EventoInscricoes() {
                                     whiteSpace: 'nowrap',
                                   }}
                                 >
-                                  {i.participante.subtitulo ?? ''}
-                                  {i.participante.subtitulo && i.participante.municipio && ' · '}
+                                  {mostrarSubtitulo ? (i.participante.subtitulo ?? '') : ''}
+                                  {mostrarSubtitulo && i.participante.subtitulo && i.participante.municipio && ' · '}
                                   {i.participante.municipio
                                     ? `${i.participante.municipio.nome}/${i.participante.municipio.uf}`
                                     : ''}
@@ -640,6 +641,7 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
+                          mostrarSubtitulo={mostrarSubtitulo}
                         />
                       )}
                       {sorteioDaModalidade.tipo === 'chaves' && (
@@ -647,12 +649,14 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
+                          mostrarSubtitulo={mostrarSubtitulo}
                         />
                       )}
                       {sorteioDaModalidade.tipo === 'ordem_entrada' && (
                         <SorteioOrdem
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
+                          mostrarSubtitulo={mostrarSubtitulo}
                         />
                       )}
                       {erroSorteio && (
@@ -747,6 +751,7 @@ export default function EventoInscricoes() {
                           onCriar={participante_id => criarCampeao({ participante_id, posicao: pos })}
                           onRemover={cid => removerCampeao(cid)}
                           salvando={salvandoCampeao}
+                          mostrarSubtitulo={mostrarSubtitulo}
                         />
                       )
                     })}
