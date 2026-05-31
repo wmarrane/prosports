@@ -54,7 +54,7 @@ export default function CongressoStepEvento({ onSelect }: Props) {
             color: FG,
             transition: 'border-color 150ms ease',
           }}
-          onMouseEnter={e2 => (e2.currentTarget.style.borderColor = '#1061d8')}
+          onMouseEnter={e2 => (e2.currentTarget.style.borderColor = 'var(--brand-500)')}
           onMouseLeave={e2 => (e2.currentTarget.style.borderColor = CARD_BORDER)}
         >
           <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.1em' }}>

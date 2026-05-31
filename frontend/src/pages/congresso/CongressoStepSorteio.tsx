@@ -90,10 +90,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     <button
       onClick={onProxima}
       style={{
-        background: '#1061d8',
+        background: 'var(--brand-500)',
         color: '#fff',
         border: 'none',
-        borderRadius: 10,
+        borderRadius: 'var(--radius-lg)',
         padding: '12px 24px',
         fontSize: 16,
         fontWeight: 600,
@@ -107,8 +107,8 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 16 }}>
           <div style={{ fontSize: 48 }}>📋</div>
-          <h2 style={{ fontSize: 32, color: FG, fontWeight: 700 }}>{modalidade?.nome}</h2>
-          <p style={{ fontSize: 20, color: DIM, maxWidth: 600 }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
+          <p style={{ fontSize: 'clamp(16px, 1.5vw, 20px)', color: DIM, maxWidth: 600 }}>
             Esta modalidade é do tipo "Específico" — sem sorteio automático.
           </p>
         </div>
@@ -121,20 +121,20 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 24 }}>
-          <h2 style={{ fontSize: 36, color: FG, fontWeight: 700 }}>{modalidade?.nome}</h2>
-          <p style={{ fontSize: 18, color: DIM }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3.4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
+          <p style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', color: DIM }}>
             {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
           </p>
           <button
             onClick={handleSortear}
             disabled={executando || inscricoes.length === 0}
             style={{
-              background: '#1061d8',
+              background: 'var(--brand-500)',
               color: '#fff',
               border: 'none',
-              borderRadius: 14,
+              borderRadius: 'var(--radius-xl)',
               padding: '20px 48px',
-              fontSize: 22,
+              fontSize: 'clamp(18px, 1.7vw, 24px)',
               fontWeight: 700,
               cursor: 'pointer',
               opacity: (executando || inscricoes.length === 0) ? 0.5 : 1,
@@ -153,7 +153,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h2 style={{ fontSize: 28, color: FG, fontWeight: 700 }}>{modalidade?.nome}</h2>
+          <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
           <div style={{ fontSize: 13, color: DIM, marginTop: 4 }}>
             seed: <span style={{ fontFamily: 'monospace' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
           </div>
@@ -163,9 +163,9 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           disabled={executando}
           style={{
             background: 'transparent',
-            color: '#1061d8',
-            border: '1px solid #1061d8',
-            borderRadius: 8,
+            color: 'var(--brand-500)',
+            border: '1px solid var(--brand-500)',
+            borderRadius: 'var(--radius-md)',
             padding: '8px 16px',
             fontSize: 14,
             fontWeight: 600,

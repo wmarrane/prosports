@@ -73,7 +73,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
                   justifyContent: 'space-between',
                   gap: 16,
                 }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = '#1061d8')}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--brand-500)')}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = CARD_BORDER)}
               >
                 <div>

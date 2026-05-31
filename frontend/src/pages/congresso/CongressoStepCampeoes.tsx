@@ -18,13 +18,13 @@ const DIM = '#94a3b8'
 const SUCCESS = '#14b88a'
 const CARD_BG = 'rgba(255,255,255,.04)'
 const CARD_BORDER = 'rgba(255,255,255,.1)'
-const MODAL_BG = '#0f1623'
-const MODAL_BORDER = 'rgba(255,255,255,0.1)'
+const MODAL_BG = 'var(--card-bg)'
+const MODAL_BORDER = 'var(--card-border)'
 const BTN_PRIMARY = {
-  background: '#1061d8',
+  background: 'var(--brand-500)',
   color: '#fff',
   border: 'none',
-  borderRadius: 10,
+  borderRadius: 'var(--radius-lg)',
   padding: '12px 24px',
   fontSize: 16,
   fontWeight: 600,
@@ -32,9 +32,9 @@ const BTN_PRIMARY = {
 } as const
 const BTN_GHOST_OUTLINE = {
   background: 'transparent',
-  color: '#1061d8',
-  border: '1px solid #1061d8',
-  borderRadius: 10,
+  color: 'var(--brand-500)',
+  border: '1px solid var(--brand-500)',
+  borderRadius: 'var(--radius-lg)',
   padding: '12px 24px',
   fontSize: 16,
   fontWeight: 600,

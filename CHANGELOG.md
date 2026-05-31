@@ -5,6 +5,16 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.19.1] - 2026-05-30
+
+### Changed
+- Modo Congresso (steps Campeões, Sorteio, Participantes, Evento, Modalidade) agora usa tokens do design system R2P em vez de hex hardcoded: `var(--brand-500)` no lugar de `#1061d8`, `var(--card-bg)` no lugar de `#0f1623` (modal BG), `var(--card-border)` para bordas.
+- Border-radius padronizado nos botões usando `var(--radius-md/lg/xl)` (8/12/16) em vez de px inline.
+- Tipografia das telas Congresso usa `clamp()` responsivo (`clamp(22px, 2.6vw, 32px)` etc.) em vez de px fixos para títulos h2 — corrige o "caos de tamanhos" apontado no guia de remediação de design (REMEDIACAO_DESIGN.md passo 3).
+
+### Notes
+- Audit completo do guia revelou 85% de conformidade. Esta versão fecha os gaps do Modo Congresso. Demais critérios (dark mode, sidebar, ícones lucide, shadows, fonte Inter) já estavam em conformidade.
+
 ## [1.19.0] - 2026-05-30
 
 ### Added

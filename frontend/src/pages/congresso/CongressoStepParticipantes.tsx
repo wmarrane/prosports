@@ -15,23 +15,23 @@ const FG = '#f1f5fb'
 const DIM = '#94a3b8'
 const LINE = 'rgba(255,255,255,.08)'
 const DANGER = '#ef4444'
-const MODAL_BG = '#0f1623'
-const MODAL_BORDER = 'rgba(255,255,255,0.1)'
+const MODAL_BG = 'var(--card-bg)'
+const MODAL_BORDER = 'var(--card-border)'
 const BTN_PRIMARY = {
-  background: '#1061d8',
+  background: 'var(--brand-500)',
   color: '#fff',
   border: 'none',
-  borderRadius: 10,
+  borderRadius: 'var(--radius-lg)',
   padding: '12px 24px',
   fontSize: 16,
   fontWeight: 600,
   cursor: 'pointer',
 } as const
 const BTN_PRIMARY_SM = {
-  background: '#1061d8',
+  background: 'var(--brand-500)',
   color: '#fff',
   border: 'none',
-  borderRadius: 8,
+  borderRadius: 'var(--radius-md)',
   padding: '8px 16px',
   fontSize: 14,
   fontWeight: 600,
@@ -96,7 +96,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
             <div style={{ fontSize: 14, color: DIM, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               Modalidade
             </div>
-            <h2 style={{ fontSize: 28, fontWeight: 700, color: FG, marginTop: 4 }}>
+            <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG, marginTop: 4 }}>
               {modalidade.nome} ({modalidade.sigla})
             </h2>
             <div style={{ fontSize: 16, color: DIM, marginTop: 4 }}>
