@@ -184,9 +184,9 @@ export default function CompeticoesList() {
                     <Users size={14} />
                     {c._count?.modalidades ?? 0} {c._count?.modalidades === 1 ? 'modalidade' : 'modalidades'}
                   </span>
-                  {c.adicionar_subtitulo && (
-                    <span style={{ fontSize: 11, color: 'var(--t4)', fontStyle: 'italic' }}>
-                      com subtítulo
+                  {c.subtitulo_campos && c.subtitulo_campos.length > 0 && (
+                    <span style={{ fontSize: 11, color: 'var(--t4)', fontStyle: 'italic' }} title={`Campos: ${c.subtitulo_campos.join(' | ')}`}>
+                      {c.subtitulo_campos.length === 1 ? '1 campo extra' : `${c.subtitulo_campos.length} campos extras`}
                     </span>
                   )}
                 </div>
