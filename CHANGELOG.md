@@ -5,6 +5,20 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.28.0] - 2026-05-31
+
+### Changed (Modalidades — alinhamento visual)
+- **ModalidadesList** trocou DataTable por **agrupamento por competição**: header por seção (Trophy + nome da competição + contagem) e cards de modalidade abaixo (320px+ grid). Cada card: ícone gradient 46px por tipo, nome, sigla mono pill, tipo label, Editar/Remover.
+  - **Filter chips** no topo (Todos / Chaves / Grupos / Ordem de entrada / Específico) com contadores ao vivo.
+  - Card inteiro clicável (abre Editar); hover muda borda pra brand-400.
+  - Empty state com Shapes icon.
+- **ModalidadeForm** redesenhado em **2 cards seccionados**:
+  - **Vinculação** (Trophy/brand-deep): Competição (bloqueada no Editar) + Tipo de Modalidade. Preview visual do tipo selecionado (ícone gradient + descrição).
+  - **Identificação** (Shapes/violet gradient): grid `1fr / 140px` com Nome (largo) + Sigla (compacta, font-mono uppercase).
+- Header com eyebrow "Operação" + sub contextual.
+- Asterisco vermelho em campos obrigatórios.
+- Action bar fim: Cancelar (ghost) + "Salvar alterações"/"Criar modalidade" (primary, com ícones).
+
 ## [1.27.1] - 2026-05-31
 
 ### Changed (Eventos — formulário Nova/Editar)

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -6,6 +6,29 @@ import PageHeader from '../../components/PageHeader'
 import { modalidadesService } from '../../services/modalidades'
 import { competicoesService } from '../../services/competicoes'
 import { tiposModalidadeService } from '../../services/tipos-modalidade'
+import { Check, X, Trophy } from '../../lib/icons'
+import { Brackets, Group, ListOrdered, FileText, Shapes } from 'lucide-react'
+
+const TIPO_ICON: Record<string, typeof Brackets> = {
+  chaves: Brackets,
+  grupos: Group,
+  ordem_entrada: ListOrdered,
+  especifico: FileText,
+}
+
+const TIPO_GRAD: Record<string, string> = {
+  chaves: 'linear-gradient(135deg, #1061d8 0%, #4f8ef7 100%)',
+  grupos: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
+  ordem_entrada: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
+  especifico: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+}
+
+const TIPO_LABEL: Record<string, string> = {
+  chaves: 'Chaves',
+  grupos: 'Grupos',
+  ordem_entrada: 'Ordem de entrada',
+  especifico: 'Específico',
+}
 
 export default function ModalidadeForm() {
   const { id } = useParams()
@@ -14,7 +37,6 @@ export default function ModalidadeForm() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  // Pré-seleção via query param ?competicao_id=N quando criando nova
   const competicaoIdFromQuery = !isEdit ? Number(searchParams.get('competicao_id')) || '' : ''
   const [competicaoId, setCompeticaoId] = useState<number | ''>(competicaoIdFromQuery)
   const [tipoModalidadeId, setTipoModalidadeId] = useState<number | ''>('')
@@ -47,10 +69,20 @@ export default function ModalidadeForm() {
     }
   }, [existing])
 
+  const tipoSelecionado = useMemo(
+    () => tipos.find(t => t.id === tipoModalidadeId) ?? null,
+    [tipos, tipoModalidadeId]
+  )
+
+  const competicaoSelecionada = useMemo(
+    () => competicoes.find(c => c.id === competicaoId) ?? null,
+    [competicoes, competicaoId]
+  )
+
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
       const payload = {
-        nome,
+        nome: nome.trim(),
         sigla: sigla.trim().toUpperCase(),
         competicao_id: Number(competicaoId),
         tipo_modalidade_id: Number(tipoModalidadeId),
@@ -59,7 +91,11 @@ export default function ModalidadeForm() {
         ? modalidadesService.editar(Number(id), payload)
         : modalidadesService.criar(payload)
     },
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['modalidades'] }); navigate('/modalidades') },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['modalidades'] })
+      queryClient.invalidateQueries({ queryKey: ['competicoes'] })
+      navigate('/modalidades')
+    },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
 
@@ -73,45 +109,234 @@ export default function ModalidadeForm() {
     salvar()
   }
 
-  const inputClass = 'w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]'
+  const inputClass =
+    'w-full px-3 py-2.5 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)] focus:border-transparent'
+
+  const cardStyle = {
+    background: 'var(--card-bg)',
+    border: '1px solid var(--card-border)',
+    borderRadius: 'var(--radius-xl)',
+    padding: 24,
+    marginBottom: 16,
+    boxShadow: 'var(--shadow-card)',
+  } as const
 
   return (
     <div className="text-[var(--t1)]">
-      <PageHeader title={isEdit ? 'Editar Modalidade' : 'Nova Modalidade'} backTo="/modalidades" />
-      <div className="p-6 max-w-lg">
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Competição</label>
-            <select value={competicaoId} onChange={e => setCompeticaoId(e.target.value === '' ? '' : Number(e.target.value))} required className={inputClass}>
-              <option value="">— Selecione —</option>
-              {competicoes.map(c => <option key={c.id} value={c.id}>{c.nome}</option>)}
-            </select>
-          </div>
+      <PageHeader
+        eyebrow="Operação"
+        title={isEdit ? 'Editar Modalidade' : 'Nova Modalidade'}
+        sub={
+          isEdit
+            ? 'Atualize a competição vinculada, o tipo de disputa, nome ou sigla.'
+            : 'Cadastre uma modalidade. Ela ficará disponível em todos os eventos desta competição.'
+        }
+        backTo="/modalidades"
+      />
 
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Tipo de Modalidade</label>
-            <select value={tipoModalidadeId} onChange={e => setTipoModalidadeId(e.target.value === '' ? '' : Number(e.target.value))} required className={inputClass}>
-              <option value="">— Selecione —</option>
-              {tipos.map(t => <option key={t.id} value={t.id}>{t.nome}</option>)}
-            </select>
-          </div>
+      <div className="p-6" style={{ maxWidth: 720 }}>
+        <form onSubmit={handleSubmit}>
+          {/* Card: Vinculação */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'var(--grad-brand-deep)', color: '#fff',
+                  display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Trophy size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Vinculação</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Competição e tipo
+                </h3>
+              </div>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Nome</label>
-            <input value={nome} onChange={e => setNome(e.target.value)} required className={inputClass} />
-          </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Competição <span className="text-[var(--danger)]">*</span>
+                </label>
+                <select
+                  value={competicaoId}
+                  onChange={e => setCompeticaoId(e.target.value === '' ? '' : Number(e.target.value))}
+                  required
+                  disabled={isEdit}
+                  className={inputClass}
+                  style={isEdit ? { opacity: 0.6, cursor: 'not-allowed' } : undefined}
+                >
+                  <option value="">— Selecione —</option>
+                  {competicoes.map(c => (
+                    <option key={c.id} value={c.id}>{c.nome}</option>
+                  ))}
+                </select>
+                {competicaoSelecionada && (
+                  <p className="text-xs text-[var(--t4)] mt-1.5">
+                    {isEdit
+                      ? 'A competição de uma modalidade não pode ser alterada após criação.'
+                      : `Modalidade fará parte de "${competicaoSelecionada.nome}".`}
+                  </p>
+                )}
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Sigla (2 a 6 caracteres)</label>
-            <input value={sigla} onChange={e => setSigla(e.target.value)} required maxLength={6}
-              className={`${inputClass} font-mono uppercase`} placeholder="Ex.: FUT" />
-          </div>
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Tipo de Modalidade <span className="text-[var(--danger)]">*</span>
+                </label>
+                <select
+                  value={tipoModalidadeId}
+                  onChange={e => setTipoModalidadeId(e.target.value === '' ? '' : Number(e.target.value))}
+                  required
+                  className={inputClass}
+                >
+                  <option value="">— Selecione —</option>
+                  {tipos.map(t => (
+                    <option key={t.id} value={t.id}>
+                      {t.nome} ({TIPO_LABEL[t.tipo]})
+                    </option>
+                  ))}
+                </select>
 
-          {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}
-          <button type="submit" disabled={isPending}
-            className="px-6 py-2 bg-[var(--brand-500)] hover:bg-[var(--brand-400)] disabled:opacity-50 text-[var(--t1)] text-sm font-medium rounded-lg transition-colors">
-            {isPending ? 'Salvando...' : 'Salvar'}
-          </button>
+                {/* Preview do tipo selecionado */}
+                {tipoSelecionado && (() => {
+                  const Icon = TIPO_ICON[tipoSelecionado.tipo] ?? FileText
+                  const grad = TIPO_GRAD[tipoSelecionado.tipo]
+                  return (
+                    <div
+                      style={{
+                        marginTop: 12,
+                        padding: 12,
+                        background: 'var(--card-bg-2)',
+                        border: '1px solid var(--card-border)',
+                        borderRadius: 'var(--radius-lg)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: 40, height: 40, borderRadius: 11,
+                          background: grad, color: '#fff',
+                          display: 'grid', placeItems: 'center', flexShrink: 0,
+                        }}
+                      >
+                        <Icon size={20} />
+                      </span>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)' }}>
+                          {tipoSelecionado.nome}
+                        </div>
+                        <div className="text-xs text-[var(--t3)] mt-0.5">
+                          Disputa por <b>{TIPO_LABEL[tipoSelecionado.tipo]}</b> — define como o sorteio será feito.
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })()}
+              </div>
+            </div>
+          </section>
+
+          {/* Card: Identificação */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                  color: '#fff', display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Shapes size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Identificação</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Nome e sigla
+                </h3>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_140px] gap-4">
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Nome <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  value={nome}
+                  onChange={e => setNome(e.target.value)}
+                  required
+                  className={inputClass}
+                  placeholder="Ex.: Futebol de Salão"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Sigla <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  value={sigla}
+                  onChange={e => setSigla(e.target.value.toUpperCase())}
+                  required
+                  maxLength={6}
+                  className={`${inputClass} font-mono uppercase`}
+                  placeholder="Ex.: FUT"
+                />
+                <p className="text-xs text-[var(--t4)] mt-1.5">2 a 6 caracteres.</p>
+              </div>
+            </div>
+          </section>
+
+          {erro && (
+            <div
+              style={{
+                background: 'var(--danger-soft)',
+                color: 'var(--danger)',
+                border: '1px solid var(--danger)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 14px',
+                fontSize: 13,
+                marginBottom: 12,
+              }}
+            >
+              {erro}
+            </div>
+          )}
+
+          {/* Action bar */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: 10,
+              paddingTop: 16,
+              borderTop: '1px solid var(--card-border)',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => navigate('/modalidades')}
+              className="btn btn-ghost"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <X size={16} /> Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: isPending ? 0.5 : 1 }}
+            >
+              <Check size={16} />
+              {isPending ? 'Salvando...' : isEdit ? 'Salvar alterações' : 'Criar modalidade'}
+            </button>
+          </div>
         </form>
       </div>
     </div>
