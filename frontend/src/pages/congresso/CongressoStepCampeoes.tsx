@@ -7,6 +7,7 @@ import { competicoesService } from '../../services/competicoes'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, ArrowRight, X } from '../../lib/icons'
+import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 type Props = {
   eventoId: number
@@ -47,7 +48,7 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
     queryFn: () => competicoesService.buscar(competicaoId!),
     enabled: !!competicaoId,
   })
-  const mostrarSubtitulo = competicao?.adicionar_subtitulo ?? false
+  const camposSubtitulo = competicao?.subtitulo_campos ?? []
   const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
   const ordenados = [...campeoes].sort((a, b) => a.posicao - b.posicao)
 
@@ -120,9 +121,10 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
                 <CampeaoBadge posicao={c.posicao} large />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'clamp(18px, 1.6vw, 22px)', color: FG, fontWeight: 700 }}>{c.participante.nome}</div>
-                  {mostrarSubtitulo && c.participante.subtitulo && (
-                    <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{c.participante.subtitulo}</div>
-                  )}
+                  {(() => {
+                    const l = composeSubtituloLine(c.participante, camposSubtitulo)
+                    return l ? <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{l}</div> : null
+                  })()}
                 </div>
                 <span
                   className={`cw-badge ${inscrito ? 'b-success' : 'b-slate'}`}

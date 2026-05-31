@@ -5,6 +5,7 @@ import { modalidadesService } from '../../services/modalidades'
 import { competicoesService } from '../../services/competicoes'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
 import { Plus, X, ArrowRight } from '../../lib/icons'
+import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 type Props = {
   eventoId: number
@@ -47,7 +48,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
     queryFn: () => competicoesService.buscar(competicaoId!),
     enabled: !!competicaoId,
   })
-  const mostrarSubtitulo = competicao?.adicionar_subtitulo ?? false
+  const camposSubtitulo = competicao?.subtitulo_campos ?? []
 
   const { mutate: criar, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criar({
@@ -115,9 +116,10 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
                 <span className="cw-prow-n">{String(idx + 1).padStart(2, '0')}</span>
                 <div className="cw-prow-main">
                   <span className="cw-prow-name">{displayNome}</span>
-                  {mostrarSubtitulo && i.participante.subtitulo && (
-                    <span className="cw-prow-club">{i.participante.subtitulo}</span>
-                  )}
+                  {(() => {
+                    const l = composeSubtituloLine(i.participante, camposSubtitulo)
+                    return l ? <span className="cw-prow-club">{l}</span> : null
+                  })()}
                 </div>
                 <button
                   className="cw-prow-rm"
