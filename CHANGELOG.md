@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.30.1] - 2026-05-31
+
+### Changed (Inspetorias & Delegacias)
+- **InspetoriasList** e **DelegaciasList**: DataTable → grid de cards 280px+ ordenados alfabeticamente (pt-BR). Cada card: ícone gradient (ShieldCheck brand-deep para Inspetorias; Building2 violet para Delegacias) + nome + ID monospace + ações Editar/Remover. Card todo clicável. Empty state com ícone.
+- **InspetoriaForm** e **DelegaciaForm**: form linear → card seccionado único com ícone gradient + asterisco vermelho obrigatório + action bar Cancelar/Salvar com ícones.
+- Headers com eyebrow "Cadastro" + sub explicativo.
+
 ## [1.30.0] - 2026-05-31
 
 ### Changed (Tipos de Modalidade)

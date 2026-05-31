@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import { delegaciasService } from '../../services/delegacias'
+import { Check, X } from '../../lib/icons'
+import { Building2 } from 'lucide-react'
 
 export default function DelegaciaForm() {
   const { id } = useParams()
@@ -24,27 +26,120 @@ export default function DelegaciaForm() {
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => isEdit
-      ? delegaciasService.editar(Number(id), { nome })
-      : delegaciasService.criar({ nome }),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['delegacias'] }); navigate('/delegacias') },
+      ? delegaciasService.editar(Number(id), { nome: nome.trim() })
+      : delegaciasService.criar({ nome: nome.trim() }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['delegacias'] })
+      navigate('/delegacias')
+    },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
 
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    setErro('')
+    if (!nome.trim()) return setErro('Informe o nome da delegacia.')
+    salvar()
+  }
+
+  const inputClass =
+    'w-full px-3 py-2.5 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)] focus:border-transparent'
+
   return (
     <div className="text-[var(--t1)]">
-      <PageHeader title={isEdit ? 'Editar Delegacia' : 'Nova Delegacia'} backTo="/delegacias" />
-      <div className="p-6 max-w-lg">
-        <form onSubmit={(e: FormEvent) => { e.preventDefault(); setErro(''); salvar() }} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Nome</label>
-            <input value={nome} onChange={e => setNome(e.target.value)} required
-              className="w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]" />
+      <PageHeader
+        eyebrow="Cadastro"
+        title={isEdit ? 'Editar Delegacia' : 'Nova Delegacia'}
+        sub={isEdit ? 'Atualize o nome da delegacia.' : 'Cadastre uma unidade regional de delegação.'}
+        backTo="/delegacias"
+      />
+
+      <div className="p-6" style={{ maxWidth: 540 }}>
+        <form onSubmit={handleSubmit}>
+          <section
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-xl)',
+              padding: 24,
+              marginBottom: 16,
+              boxShadow: 'var(--shadow-card)',
+            }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                  color: '#fff', display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Building2 size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Identificação</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>Dados da delegacia</h3>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                Nome <span className="text-[var(--danger)]">*</span>
+              </label>
+              <input
+                value={nome}
+                onChange={e => setNome(e.target.value)}
+                required
+                className={inputClass}
+                placeholder="Ex.: Delegacia Regional Norte"
+                autoFocus
+              />
+            </div>
+          </section>
+
+          {erro && (
+            <div
+              style={{
+                background: 'var(--danger-soft)',
+                color: 'var(--danger)',
+                border: '1px solid var(--danger)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 14px',
+                fontSize: 13,
+                marginBottom: 12,
+              }}
+            >
+              {erro}
+            </div>
+          )}
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: 10,
+              paddingTop: 16,
+              borderTop: '1px solid var(--card-border)',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => navigate('/delegacias')}
+              className="btn btn-ghost"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <X size={16} /> Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: isPending ? 0.5 : 1 }}
+            >
+              <Check size={16} />
+              {isPending ? 'Salvando...' : isEdit ? 'Salvar alterações' : 'Criar delegacia'}
+            </button>
           </div>
-          {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}
-          <button type="submit" disabled={isPending}
-            className="px-6 py-2 bg-[var(--brand-500)] hover:bg-[var(--brand-400)] disabled:opacity-50 text-[var(--t1)] text-sm font-medium rounded-lg transition-colors">
-            {isPending ? 'Salvando...' : 'Salvar'}
-          </button>
         </form>
       </div>
     </div>
