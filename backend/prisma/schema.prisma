@@ -96,7 +96,7 @@ model Competicao {
   id                       Int                      @id @default(autoincrement())
   nome                     String                   @unique
   estados                  String[]
-  adicionar_subtitulo      Boolean                  @default(false)
+  subtitulo_campos         String[]                 @default([])
   modalidades              Modalidade[]
   eventos                  Evento[]
   sistema_disputas_grupos  SistemaDisputasGrupos[]
