@@ -22,41 +22,69 @@ type MatchLayout = {
   isThirdPlace: boolean
 }
 
-const CARD_WIDTH = 200
-const CARD_HEIGHT = 64
+const CARD_WIDTH = 220
+const CARD_HEIGHT = 78
 const COL_GAP = 80
 const ROW_GAP = 24
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
 
 function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
+  // Posições (P1..PN) com espaçamento fixo.
   const posY: Record<string, number> = {}
   for (let p = 1; p <= N; p++) {
     posY[`P${p}`] = (p - 0.5) * POS_ROW_HEIGHT
   }
+  const totalHeight = N * POS_ROW_HEIGHT
 
+  // 1. Calcula Y "natural" (média dos inputs) só para ordenar visualmente
+  //    dentro de cada rodada — depois reposicionamos por slots iguais.
+  const naturalY: Record<string, number> = {}
+  const matchesByRound: Record<number, typeof graph.matches> = {}
   const matchesSorted = [...graph.matches].sort((a, b) => a.round - b.round)
-  const matchById: Record<string, MatchLayout> = {}
-
-  const resolveY = (ref: string): number => {
-    if (ref.startsWith('P')) return posY[ref] ?? 0
-    const id = ref.slice(2)
-    return matchById[id]?.y ?? 0
+  for (const m of matchesSorted) {
+    const resolveNatural = (ref: string): number => {
+      if (ref.startsWith('P')) return posY[ref] ?? 0
+      return naturalY[ref.slice(2)] ?? 0
+    }
+    naturalY[m.id] = (resolveNatural(m.top) + resolveNatural(m.bottom)) / 2
+    ;(matchesByRound[m.round] ??= []).push(m)
   }
 
-  for (const m of matchesSorted) {
-    const y = (resolveY(m.top) + resolveY(m.bottom)) / 2
-    const x = (m.round - 1) * (CARD_WIDTH + COL_GAP)
-    const isFinal = m.id === graph.final
-    const isThirdPlace = m.id === graph.thirdPlace
-    matchById[m.id] = {
-      id: m.id, round: m.round, top: m.top, bottom: m.bottom,
-      x, y, isFinal, isThirdPlace,
+  // 2. Para cada rodada, distribuir matches igualmente na altura total.
+  //    3º lugar fica fora do funil — posicionado ABAIXO do bracket.
+  const matchById: Record<string, MatchLayout> = {}
+  for (const round of Object.keys(matchesByRound).map(Number).sort((a, b) => a - b)) {
+    const bracketMatches = matchesByRound[round]
+      .filter(m => m.id !== graph.thirdPlace)
+      .sort((a, b) => naturalY[a.id] - naturalY[b.id])
+    const n = bracketMatches.length
+    bracketMatches.forEach((m, i) => {
+      const y = ((i + 0.5) / n) * totalHeight
+      const x = (m.round - 1) * (CARD_WIDTH + COL_GAP)
+      matchById[m.id] = {
+        id: m.id, round: m.round, top: m.top, bottom: m.bottom,
+        x, y, isFinal: m.id === graph.final, isThirdPlace: false,
+      }
+    })
+  }
+
+  // 3º lugar (se houver) — abaixo do bracket, alinhado com a final
+  if (graph.thirdPlace) {
+    const tp = graph.matches.find(m => m.id === graph.thirdPlace)
+    if (tp) {
+      const finalMatch = matchById[graph.final]
+      const x = finalMatch?.x ?? 0
+      const y = totalHeight + CARD_HEIGHT + ROW_GAP
+      matchById[tp.id] = {
+        id: tp.id, round: tp.round, top: tp.top, bottom: tp.bottom,
+        x, y, isFinal: false, isThirdPlace: true,
+      }
     }
   }
 
   const maxRound = Math.max(...matchesSorted.map(m => m.round))
   const width = (maxRound - 1) * (CARD_WIDTH + COL_GAP) + CARD_WIDTH
-  const height = Math.max(N * POS_ROW_HEIGHT, ...Object.values(matchById).map(m => m.y + CARD_HEIGHT))
+  const height = Math.max(totalHeight, ...Object.values(matchById).map(m => m.y + CARD_HEIGHT))
   return { matches: Object.values(matchById), width, height }
 }
 
@@ -67,26 +95,28 @@ function renderSlot(
   campeoesByParticipanteId: Map<number, number> | undefined,
   large: boolean,
 ): React.ReactNode {
-  const fontSize = large ? '1rem' : '0.85rem'
+  // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
+  const labelFontSize = large ? '1rem' : '0.85rem'
+  const nameFontSize = large ? '1.15rem' : '1rem'
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
-    if (pid === null) return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize }}>BYE</span>
+    if (pid === null) return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize: labelFontSize }}>BYE</span>
     const p = participantesById.get(pid)
     const cp = campeoesByParticipanteId?.get(pid)
-    if (!p) return <span style={{ color: 'var(--t4)', fontSize }}>—</span>
+    if (!p) return <span style={{ color: 'var(--t4)', fontSize: labelFontSize }}>—</span>
     return (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize, color: 'var(--t1)' }}>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: nameFontSize, color: 'var(--t1)', fontWeight: 600 }}>
         {cp && <CampeaoBadge posicao={cp} large={false} />}
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.nome}</span>
       </span>
     )
   }
   if (ref.startsWith('V:')) {
-    return <span style={{ color: 'var(--t3)', fontStyle: 'italic', fontSize }}>Vencedor {ref.slice(2)}</span>
+    return <span style={{ color: 'var(--t3)', fontStyle: 'italic', fontSize: labelFontSize }}>Vencedor {ref.slice(2)}</span>
   }
   if (ref.startsWith('L:')) {
-    return <span style={{ color: 'var(--t3)', fontStyle: 'italic', fontSize }}>Perdedor {ref.slice(2)}</span>
+    return <span style={{ color: 'var(--t3)', fontStyle: 'italic', fontSize: labelFontSize }}>Perdedor {ref.slice(2)}</span>
   }
   return null
 }

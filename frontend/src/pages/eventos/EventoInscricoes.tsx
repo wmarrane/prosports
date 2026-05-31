@@ -279,8 +279,16 @@ export default function EventoInscricoes() {
           }}
           className="ei-grid"
         >
-          {/* Sidebar: modalidades */}
-          <aside style={{ ...cardStyle, padding: 16 }}>
+          {/* Sidebar: modalidades — sticky com scroll interno */}
+          <aside style={{
+            ...cardStyle,
+            padding: 16,
+            position: 'sticky',
+            top: 16,
+            maxHeight: 'calc(100vh - 32px)',
+            overflowY: 'auto',
+            alignSelf: 'start',
+          }}>
             <div className="eyebrow mb-3">Modalidades</div>
             {modalidades.length === 0 ? (
               <p className="text-sm text-[var(--t3)]">Nenhuma modalidade nesta competição.</p>
@@ -350,8 +358,18 @@ export default function EventoInscricoes() {
             )}
           </aside>
 
-          {/* Conteúdo principal */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 }}>
+          {/* Conteúdo principal — sticky com scroll interno */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            minWidth: 0,
+            position: 'sticky',
+            top: 16,
+            maxHeight: 'calc(100vh - 32px)',
+            overflowY: 'auto',
+            alignSelf: 'start',
+          }}>
             {modalidadeId == null ? (
               <div
                 style={{

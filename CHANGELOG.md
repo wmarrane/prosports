@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.4] - 2026-05-31
+
+### Changed (Bracket de Chaves — funil, fonte, layout)
+- **BracketTree** agora posiciona matches por **rodada com espaçamento igual** (funil visual): cada rodada divide a altura total em N slots iguais (em vez de calcular Y pela média dos inputs, que puxava os BYEs para os extremos). Matches ordenados dentro da rodada pela Y "natural" preservam o sentido top→bottom da planilha.
+- **3º lugar** posicionado abaixo do bracket, alinhado horizontalmente com a Final.
+- **Fonte do participante inscrito** aumentada (`1.15rem` no large, `1rem` no small, peso 600) — só para nomes reais (P refs). Labels "BYE", "Vencedor JX" e "Perdedor JX" mantêm a fonte original.
+- **Cards do bracket**: `CARD_WIDTH` 200→220 e `CARD_HEIGHT` 64→78 para acomodar a fonte maior.
+
+### Changed (EventoInscricoes — sticky panels)
+- Sidebar de Modalidades (esquerda) e painel principal (direita) agora são **`position: sticky`** com scroll interno (`maxHeight: calc(100vh - 32px)`, `overflowY: auto`). Permite percorrer a lista longa de modalidades sem perder o conteúdo do painel direito.
+
 ## [1.32.3] - 2026-05-31
 
 ### Fixed (Bracket Chaves — J-IDs canônicos da planilha)
