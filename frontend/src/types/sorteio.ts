@@ -4,10 +4,22 @@ export type GruposResultado = {
   grupos: { letra: string; participantes: number[] }[]
 }
 
+export type MatchesGraph = {
+  matches: Array<{
+    id: string
+    round: number
+    top: string   // 'P{n}' | 'V:J{x}' | 'L:J{x}'
+    bottom: string
+  }>
+  final: string
+  thirdPlace: string | null
+}
+
 export type ChavesResultado = {
   size: number
   slots: (number | null)[]
   byePositions?: number[]  // 1-indexed; ausente em sorteios pré-v1.18.0
+  matchesGraph?: MatchesGraph | null   // NOVO
 }
 
 export type OrdemResultado = {
