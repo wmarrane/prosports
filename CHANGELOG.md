@@ -5,6 +5,19 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.27.1] - 2026-05-31
+
+### Changed (Eventos — formulário Nova/Editar)
+- `EventoForm` redesenhado em **3 cards seccionados** alinhados com o padrão visual de `CompeticaoForm`:
+  - **Vinculação** (Trophy/brand-deep): Competição (select bloqueado no Editar) + Município.
+  - **Identificação** (MapPin/violet gradient): Nome + Local + Organizador (opcional).
+  - **Agenda** (Calendar/amber gradient): Data e hora + Status com descrição dinâmica do status selecionado.
+- Indicadores visuais de campo obrigatório (asterisco `*` em vermelho).
+- Texto de ajuda contextual em cada campo (ex.: "evento herda modalidades da competição").
+- Competição não pode mais ser alterada em modo edit (com aviso explicativo) — coerente com a regra de integridade dos dados.
+- **Action bar** no fim: à esquerda "Gerenciar inscrições" (só em edit, vai pra `/eventos/:id/inscricoes`); à direita Cancelar + Salvar com ícones.
+- Header com eyebrow "Operação" + subtítulo contextual.
+
 ## [1.27.0] - 2026-05-31
 
 ### Changed (Competições — alinhamento com design v3 atualizado)

@@ -8,8 +8,18 @@ import { eventosService } from '../../services/eventos'
 import { competicoesService } from '../../services/competicoes'
 import { STATUS_LABEL } from '../../lib/evento-status'
 import type { EventoStatus } from '../../types/evento'
+import { Check, X, Trophy } from '../../lib/icons'
+import { Calendar, MapPin, Users } from 'lucide-react'
 
 const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial']
+
+const STATUS_DESC: Record<EventoStatus, string> = {
+  rascunho: 'Em preparação. Não aparece para o público.',
+  inscricoes: 'Aberto para inscrições de participantes.',
+  pronto: 'Inscrições encerradas, pronto para sorteio.',
+  sorteado: 'Sorteios concluídos para todas as modalidades.',
+  parcial: 'Algumas modalidades já foram sorteadas.',
+}
 
 function toLocalInput(iso: string | null): string {
   if (!iso) return ''
@@ -71,7 +81,10 @@ export default function EventoForm() {
         ? eventosService.editar(Number(id), payload)
         : eventosService.criar(payload)
     },
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); navigate('/eventos') },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['eventos'] })
+      navigate('/eventos')
+    },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
 
@@ -86,58 +99,261 @@ export default function EventoForm() {
     salvar()
   }
 
-  const inputClass = 'w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]'
+  const inputClass =
+    'w-full px-3 py-2.5 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)] focus:border-transparent'
+
+  const cardStyle = {
+    background: 'var(--card-bg)',
+    border: '1px solid var(--card-border)',
+    borderRadius: 'var(--radius-xl)',
+    padding: 24,
+    marginBottom: 16,
+    boxShadow: 'var(--shadow-card)',
+  } as const
 
   return (
     <div className="text-[var(--t1)]">
-      <PageHeader title={isEdit ? 'Editar Evento' : 'Novo Evento'} backTo="/eventos" />
-      <div className="p-6 max-w-2xl">
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Competição</label>
-            <select value={competicaoId} onChange={(e) => setCompeticaoId(e.target.value === '' ? '' : Number(e.target.value))} required className={inputClass}>
-              <option value="">— Selecione —</option>
-              {competicoes.map(c => <option key={c.id} value={c.id}>{c.nome}</option>)}
-            </select>
-          </div>
+      <PageHeader
+        eyebrow="Operação"
+        title={isEdit ? 'Editar Evento' : 'Novo Evento'}
+        sub={
+          isEdit
+            ? 'Atualize a competição vinculada, dados de agenda, local e status.'
+            : 'Crie uma edição de competição. As modalidades cadastradas na competição estarão disponíveis automaticamente.'
+        }
+        backTo="/eventos"
+      />
 
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Município</label>
-            <MunicipioSelect value={municipioId} onChange={setMunicipioId} />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Nome</label>
-            <input value={nome} onChange={e => setNome(e.target.value)} required className={inputClass} placeholder="Ex.: Etapa Inaugural" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-[var(--t2)] mb-1">Data e hora</label>
-              <input type="datetime-local" value={dataHora} onChange={e => setDataHora(e.target.value)} required className={inputClass} />
+      <div className="p-6" style={{ maxWidth: 800 }}>
+        <form onSubmit={handleSubmit}>
+          {/* Card: Vinculação */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'var(--grad-brand-deep)', color: '#fff',
+                  display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Trophy size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Vinculação</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Competição e localidade
+                </h3>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-[var(--t2)] mb-1">Status</label>
-              <select value={status} onChange={e => setStatus(e.target.value as EventoStatus)} className={inputClass}>
-                {STATUS_VALUES.map(s => <option key={s} value={s}>{STATUS_LABEL[s]}</option>)}
-              </select>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Competição <span className="text-[var(--danger)]">*</span>
+                </label>
+                <select
+                  value={competicaoId}
+                  onChange={e => setCompeticaoId(e.target.value === '' ? '' : Number(e.target.value))}
+                  required
+                  disabled={isEdit}
+                  className={inputClass}
+                  style={isEdit ? { opacity: 0.6, cursor: 'not-allowed' } : undefined}
+                >
+                  <option value="">— Selecione uma competição —</option>
+                  {competicoes.map(c => (
+                    <option key={c.id} value={c.id}>{c.nome}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-[var(--t4)] mt-1.5">
+                  {isEdit
+                    ? 'A competição de um evento não pode ser alterada após criação.'
+                    : 'O evento herda automaticamente as modalidades cadastradas na competição.'}
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Município <span className="text-[var(--danger)]">*</span>
+                </label>
+                <MunicipioSelect value={municipioId} onChange={setMunicipioId} />
+              </div>
+            </div>
+          </section>
+
+          {/* Card: Identificação */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                  color: '#fff', display: 'grid', placeItems: 'center',
+                }}
+              >
+                <MapPin size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Identificação</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Nome, local e organizador
+                </h3>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Nome do evento <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  value={nome}
+                  onChange={e => setNome(e.target.value)}
+                  required
+                  className={inputClass}
+                  placeholder="Ex.: Etapa Inaugural 2026"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Local <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  value={local}
+                  onChange={e => setLocal(e.target.value)}
+                  required
+                  className={inputClass}
+                  placeholder="Ex.: Ginásio Tancredão"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Organizador
+                  <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
+                </label>
+                <input
+                  value={organizador}
+                  onChange={e => setOrganizador(e.target.value)}
+                  className={inputClass}
+                  placeholder="Ex.: SEJEL"
+                />
+                <p className="text-xs text-[var(--t4)] mt-1.5">
+                  Entidade responsável pela organização (federação, prefeitura, clube etc.).
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Card: Agenda + Status */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
+                  color: '#fff', display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Calendar size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Agenda</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Data, hora e status
+                </h3>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Data e hora <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  type="datetime-local"
+                  value={dataHora}
+                  onChange={e => setDataHora(e.target.value)}
+                  required
+                  className={inputClass}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">Status</label>
+                <select
+                  value={status}
+                  onChange={e => setStatus(e.target.value as EventoStatus)}
+                  className={inputClass}
+                >
+                  {STATUS_VALUES.map(s => (
+                    <option key={s} value={s}>{STATUS_LABEL[s]}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-[var(--t4)] mt-1.5">{STATUS_DESC[status]}</p>
+              </div>
+            </div>
+          </section>
+
+          {erro && (
+            <div
+              style={{
+                background: 'var(--danger-soft)',
+                color: 'var(--danger)',
+                border: '1px solid var(--danger)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 14px',
+                fontSize: 13,
+                marginBottom: 12,
+              }}
+            >
+              {erro}
+            </div>
+          )}
+
+          {/* Action bar */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: 10,
+              paddingTop: 16,
+              borderTop: '1px solid var(--card-border)',
+              flexWrap: 'wrap',
+            }}
+          >
+            {isEdit ? (
+              <button
+                type="button"
+                onClick={() => navigate(`/eventos/${id}/inscricoes`)}
+                className="btn btn-ghost"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+              >
+                <Users size={16} /> Gerenciar inscrições
+              </button>
+            ) : (
+              <span />
+            )}
+            <div className="flex gap-2.5">
+              <button
+                type="button"
+                onClick={() => navigate('/eventos')}
+                className="btn btn-ghost"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+              >
+                <X size={16} /> Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={isPending}
+                className="btn btn-primary"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: isPending ? 0.5 : 1 }}
+              >
+                <Check size={16} />
+                {isPending ? 'Salvando...' : isEdit ? 'Salvar alterações' : 'Criar evento'}
+              </button>
             </div>
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Local</label>
-            <input value={local} onChange={e => setLocal(e.target.value)} required className={inputClass} placeholder="Ex.: Ginásio Tancredão" />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-[var(--t2)] mb-1">Organizador (opcional)</label>
-            <input value={organizador} onChange={e => setOrganizador(e.target.value)} className={inputClass} placeholder="Ex.: SEJEL" />
-          </div>
-
-          {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}
-          <button type="submit" disabled={isPending} className="btn btn-primary btn-lg" style={{ marginTop: 10 }}>
-            {isPending ? 'Salvando...' : 'Salvar'}
-          </button>
         </form>
       </div>
     </div>
