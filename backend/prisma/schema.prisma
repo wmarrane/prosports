@@ -226,3 +226,9 @@ model BracketChavesByes {
   posicoes_bye    Int[]
   @@map("bracket_chaves_byes")
 }
+
+model BracketChavesMatches {
+  numero_inscrito Int  @id
+  matches_graph   Json
+  @@map("bracket_chaves_matches")
+}
