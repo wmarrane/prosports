@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.11] - 2026-05-31
+
+### Changed (SorteioGrupos — legibilidade dark mode)
+- **Bordas dos cards de Grupo** trocadas de `--card-border` (≈7% white no dark, imperceptível) para `--t2` `1.5px`. Divisor entre título e participantes em `--t3`.
+- **Título "Grupo X"** trocado de `--t1` para `--brand-500` (cor de destaque azul) — sobressai em light e dark, alinhado com o pattern visual do projeto.
+
 ## [1.32.10] - 2026-05-31
 
 ### Changed (Campeões anteriores — regras por tipo de modalidade)

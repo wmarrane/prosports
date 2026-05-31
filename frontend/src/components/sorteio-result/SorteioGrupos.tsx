@@ -15,7 +15,9 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
-  const titleClass = large ? 'text-2xl font-bold text-[var(--t1)]' : 'text-base font-semibold text-[var(--t1)]'
+  // Título do Grupo: cor de destaque (brand-500) para se sobressair tanto em
+  // light quanto em dark mode. Bordas em --t2 (cinza claro) para legibilidade.
+  const titleClass = large ? 'text-2xl font-bold text-[var(--brand-500)]' : 'text-base font-semibold text-[var(--brand-500)]'
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
   const subItemClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
@@ -27,9 +29,13 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
         <div
           key={g.letra}
           onClick={clickable ? () => onGroupClick!(g.letra) : undefined}
-          className={`bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-xl ${cardPad} ${clickable ? 'cursor-pointer hover:border-[var(--brand-500)] transition-colors' : ''}`}
+          className={`bg-[var(--card-bg-2)] rounded-xl ${cardPad} ${clickable ? 'cursor-pointer transition-colors' : ''}`}
+          style={{ border: '1.5px solid var(--t2)' }}
         >
-          <div className={`flex justify-between items-center ${large ? 'mb-4' : 'mb-3'}`}>
+          <div
+            className={`flex justify-between items-center ${large ? 'mb-4 pb-3' : 'mb-3 pb-2'}`}
+            style={{ borderBottom: '1px solid var(--t3)' }}
+          >
             <h4 className={titleClass}>Grupo {g.letra}</h4>
             <span className={subClass}>{resultado.classificados_por_grupo} classificados</span>
           </div>
