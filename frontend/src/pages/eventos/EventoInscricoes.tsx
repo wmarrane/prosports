@@ -18,6 +18,7 @@ import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin } from 'lucide-react'
+import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 function formatDateBR(iso: string): string {
   try {
@@ -123,7 +124,8 @@ export default function EventoInscricoes() {
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
-  const mostrarSubtitulo = evento?.competicao?.adicionar_subtitulo ?? false
+  const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
+  const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
 
   const { mutate: criar, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criar({
@@ -533,23 +535,26 @@ export default function EventoInscricoes() {
                               >
                                 {i.participante.nome}
                               </div>
-                              {((mostrarSubtitulo && i.participante.subtitulo) || i.participante.municipio) && (
-                                <div
-                                  className="text-[var(--t4)] mt-0.5"
-                                  style={{
-                                    fontSize: 11,
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                  }}
-                                >
-                                  {mostrarSubtitulo ? (i.participante.subtitulo ?? '') : ''}
-                                  {mostrarSubtitulo && i.participante.subtitulo && i.participante.municipio && ' · '}
-                                  {i.participante.municipio
-                                    ? `${i.participante.municipio.nome}/${i.participante.municipio.uf}`
-                                    : ''}
-                                </div>
-                              )}
+                              {(() => {
+                                const linha = subtituloLine(i.participante)
+                                const mun = i.participante.municipio ? `${i.participante.municipio.nome}/${i.participante.municipio.uf}` : ''
+                                // Se a linha já inclui municipio (campo selecionado), não duplicar.
+                                const incluiMunicipio = camposSubtitulo.includes('municipio')
+                                const partes = [linha, !incluiMunicipio ? mun : ''].filter(Boolean)
+                                return partes.length > 0 ? (
+                                  <div
+                                    className="text-[var(--t4)] mt-0.5"
+                                    style={{
+                                      fontSize: 11,
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      whiteSpace: 'nowrap',
+                                    }}
+                                  >
+                                    {partes.join(' · ')}
+                                  </div>
+                                ) : null
+                              })()}
                             </div>
                             <button
                               onClick={() => {
@@ -659,7 +664,7 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
-                          mostrarSubtitulo={mostrarSubtitulo}
+                          subtituloLine={subtituloLine}
                         />
                       )}
                       {sorteioDaModalidade.tipo === 'chaves' && (
@@ -667,14 +672,14 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
-                          mostrarSubtitulo={mostrarSubtitulo}
+                          subtituloLine={subtituloLine}
                         />
                       )}
                       {sorteioDaModalidade.tipo === 'ordem_entrada' && (
                         <SorteioOrdem
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
-                          mostrarSubtitulo={mostrarSubtitulo}
+                          subtituloLine={subtituloLine}
                         />
                       )}
                       {erroSorteio && (
@@ -769,7 +774,7 @@ export default function EventoInscricoes() {
                           onCriar={participante_id => criarCampeao({ participante_id, posicao: pos })}
                           onRemover={cid => removerCampeao(cid)}
                           salvando={salvandoCampeao}
-                          mostrarSubtitulo={mostrarSubtitulo}
+                          subtituloLine={subtituloLine}
                         />
                       )
                     })}
