@@ -5,6 +5,22 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.27.0] - 2026-05-31
+
+### Changed (Competições — alinhamento com design v3 atualizado)
+- **Editar Competição** agora usa **layout 2-colunas** (`minmax(0, 1fr) minmax(0, 1.2fr)` no desktop, single-column ≤1100px) alinhado ao `competicoes.jsx` v3:
+  - **Esquerda**: Informações + Estados + Configurações (stack vertical de cards).
+  - **Direita**: novo painel **Modalidades** com CRUD inline.
+- **Nova Competição** mantém single-column (modalidades só após criar).
+- Novo componente `ModalidadesPanel`:
+  - Botão "+ Adicionar" no header revela **inline ADD form** (nome + sigla + dropdown de tipo) — cria modalidade sem sair da tela.
+  - Lista de modalidades existentes com ícone gradient por tipo + nome + sigla mono + tipo label.
+  - Ações por linha: "Editar" (link `/modalidades/:id/editar`) e "Remover" (com confirm).
+  - Empty state com Shapes icon + mensagem amigável.
+  - Legenda de tipos no rodapé.
+- Action bar fim: Cancelar + "Salvar alterações" / "Criar competição".
+- `max-width` da página aumenta para 1400px no modo edição (era 720px).
+
 ## [1.26.0] - 2026-05-31
 
 ### Changed (Eventos — alinhamento com design v3 atualizado)
