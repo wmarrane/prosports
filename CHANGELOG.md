@@ -5,6 +5,23 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.26.0] - 2026-05-31
+
+### Changed (Eventos — alinhamento com design v3 atualizado)
+- **EventosList refeito** alinhado ao `eventos.jsx` da referência v3:
+  - **Filter chips** no topo (Todos / Chaves / Grupos / Ordem de entrada) com contadores ao vivo por tipo. Chip ativo em `--brand-500` sólido, inativos em `--card-bg-2`.
+  - **Cards reformulados**: ribbon top de 4px com gradient (`--grad-brand-deep` para multi-tipo, gradient específico do tipo se único), **multi-tipo icons stack** no topo esquerdo (Brackets/Group/ListOrdered com gradient + sombra), status badge à direita, ID monospace + município com ícone MapPin, nome em sec-title, competição com Trophy, data+local, e **3 metas no footer** (modalidades / inscritos / sorteadas) com mini-cards de ícone.
+  - Hover lift: card eleva 2px + borda muda para `--brand-400`.
+  - Ações Inscrições/Remover continuam disponíveis (rodapé).
+  - Empty state com Trophy + mensagem amigável; filtro vazio mostra texto simples.
+
+### Added (backend)
+- `eventos.service.listar` agora inclui:
+  - `competicao.modalidades` (id + tipo_modalidade.tipo) para derivar tipos disponíveis no evento e mostrar os ícones agregados.
+  - `_count` (inscricoes + sorteios) para os metas dos cards (X inscritos, Y/Total sorteadas).
+- Tipo `Evento` ganhou campo opcional `_count` e `CompeticaoComModalidades` para refletir o include estendido.
+- Teste correspondente atualizado (9/9 passando).
+
 ## [1.25.2] - 2026-05-31
 
 ### Added (Editar Competição — modalidades vinculadas)

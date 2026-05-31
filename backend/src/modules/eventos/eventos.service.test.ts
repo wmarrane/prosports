@@ -19,15 +19,29 @@ const mockPrisma = prisma as any
 beforeEach(() => vi.clearAllMocks())
 
 const INCLUDE = { competicao: true, municipio: true }
+const LIST_INCLUDE = {
+  competicao: {
+    include: {
+      modalidades: {
+        select: {
+          id: true,
+          tipo_modalidade: { select: { tipo: true } },
+        },
+      },
+    },
+  },
+  municipio: true,
+  _count: { select: { inscricoes: true, sorteios: true } },
+}
 
 describe('eventos.service', () => {
-  it('listar sem filtro inclui competicao e municipio ordenado por data_hora desc', async () => {
+  it('listar sem filtro inclui competicao+modalidades+counts ordenado por data_hora desc', async () => {
     mockPrisma.evento.findMany.mockResolvedValue([])
     await service.listar()
     expect(mockPrisma.evento.findMany).toHaveBeenCalledWith({
       where: undefined,
       orderBy: { data_hora: 'desc' },
-      include: INCLUDE,
+      include: LIST_INCLUDE,
     })
   })
 
@@ -37,7 +51,7 @@ describe('eventos.service', () => {
     expect(mockPrisma.evento.findMany).toHaveBeenCalledWith({
       where: { competicao_id: 7 },
       orderBy: { data_hora: 'desc' },
-      include: INCLUDE,
+      include: LIST_INCLUDE,
     })
   })
 

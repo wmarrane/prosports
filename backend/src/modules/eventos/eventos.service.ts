@@ -2,6 +2,23 @@ import prisma from '../../lib/prisma'
 
 const INCLUDE = { competicao: true, municipio: true } as const
 
+// Include estendido para a listagem: inclui modalidades da competição (com tipo)
+// para filtros e contadores (modalidades/inscricoes/sorteios) por evento.
+const LIST_INCLUDE = {
+  competicao: {
+    include: {
+      modalidades: {
+        select: {
+          id: true,
+          tipo_modalidade: { select: { tipo: true } },
+        },
+      },
+    },
+  },
+  municipio: true,
+  _count: { select: { inscricoes: true, sorteios: true } },
+} as const
+
 async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
   try {
     return await fn()
@@ -32,7 +49,7 @@ export async function listar(competicao_id?: number) {
   return prisma.evento.findMany({
     where: competicao_id ? { competicao_id } : undefined,
     orderBy: { data_hora: 'desc' },
-    include: INCLUDE,
+    include: LIST_INCLUDE,
   })
 }
 
