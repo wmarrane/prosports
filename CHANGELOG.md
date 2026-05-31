@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.33.1] - 2026-05-31
+
+### Fixed (Postgres sequences dessincronizadas)
+- Bug: criar modalidade em qualquer competição retornava HTTP 409 "Já existe..." mesmo quando a sigla/nome não conflitava. Causa raiz: `Modalidade_id_seq.last_value = 13` enquanto `MAX(id) = 68` no banco — `nextval()` retornava IDs já existentes, disparando P2002 na PK.
+- Origem provável: seed/restore com IDs explícitos não atualiza a sequence automaticamente no Postgres.
+- Fix imediato em prod: `SELECT setval('"Modalidade_id_seq"', MAX(id), true)`.
+- **Migration preventiva** `20260531230000_reset_all_sequences/migration.sql`: bloco `DO` em PL/pgSQL que itera `pg_class/pg_depend` e reseta TODAS as sequences (autoincrement) para `MAX(id)` da tabela correspondente. **Idempotente** — pode rodar quantas vezes for necessário. Aplicada via `prisma migrate deploy` no CI.
+
 ## [1.33.0] - 2026-05-31
 
 ### Added (Subtítulo parametrizável por Competição)
