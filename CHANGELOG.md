@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.1] - 2026-05-31
+
+### Changed (Sorteio Ordem de Entrada)
+- **SorteioOrdem**: removidas medalhas 🥇🥈🥉 e badges de campeão anterior. Agora renderiza apenas índices numéricos em destaque (`1. 2. 3. ... N.`) para todos os participantes, alinhado ao conceito de "sequência de apresentação" (não pódio).
+- **EventoInscricoes** e **CongressoStepSorteio**: stop de passar `campeoesByParticipanteId` para SorteioOrdem (prop não usada mais).
+- **EventoInscricoes**: card "Campeões do ano anterior" agora é **escondido** quando `modalidade.tipo === 'ordem_entrada'` — campeões só fazem sentido para Chaves/Grupos (seeding por colocação).
+
 ## [1.32.0] - 2026-05-31
 
 ### Added (Usuários, perfis, alterar senha, logout)

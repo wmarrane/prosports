@@ -312,7 +312,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
-          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
+          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large />
         )}
         {erro && <p style={{ color: DANGER, fontSize: 16, marginTop: 12 }}>{erro}</p>}
       </div>

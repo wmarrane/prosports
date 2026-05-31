@@ -653,7 +653,6 @@ export default function EventoInscricoes() {
                         <SorteioOrdem
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
-                          campeoesByParticipanteId={campeoesByParticipanteId}
                         />
                       )}
                       {erroSorteio && (
@@ -713,7 +712,8 @@ export default function EventoInscricoes() {
                   )}
                 </section>
 
-                {/* Card: Campeões do ano anterior */}
+                {/* Card: Campeões do ano anterior — só faz sentido para Chaves/Grupos (seeding por colocação) */}
+                {tipoDaModalidade !== 'ordem_entrada' && (
                 <section style={cardStyle}>
                   <div className="flex items-center gap-3 mb-1">
                     <div
@@ -752,6 +752,7 @@ export default function EventoInscricoes() {
                     })}
                   </div>
                 </section>
+                )}
               </>
             )}
           </div>
