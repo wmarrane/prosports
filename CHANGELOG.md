@@ -5,6 +5,21 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.30.2] - 2026-05-31
+
+### Changed (Participantes)
+- **ParticipantesList** modernizado:
+  - Header eyebrow "Cadastro" + sub explicativo (cadastro global).
+  - Card de filtros com **busca client-side por nome/subtítulo/município** (com ícone Search inline). Contador "X de Y" / "total" com Users icon.
+  - DataTable em card com shadow; nome em bold, subtítulo dim, Inspetoria em pill brand-50, Delegacia em pill violet, Município com sigla UF em pill mono.
+  - Empty/no-result states contextuais.
+  - Ordenação alfabética pt-BR.
+- **ParticipanteForm** redesenhado:
+  - 2 cards seccionados: **Identificação** (Users/brand-deep) com nome + subtítulo (hint explicativo); **Vínculo** (MapPin/violet) com município + grid 2-col Inspetoria/Delegacia.
+  - Asterisco vermelho em obrigatórios (Nome, Município).
+  - Action bar fim: Cancelar + Salvar/Criar com ícones.
+- Header eyebrow "Cadastro" + sub contextual.
+
 ## [1.30.1] - 2026-05-31
 
 ### Changed (Inspetorias & Delegacias)
