@@ -185,4 +185,29 @@ describe('users.service', () => {
       ).rejects.toMatchObject({ status: 404 })
     })
   })
+
+  describe('resetarSenha', () => {
+    it('grava novo hash, reseta tentativas e revoga refresh tokens', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue({ id: 7, email: 'x@x.com' })
+      mockPrisma.user.update.mockResolvedValue({ id: 7 })
+      const auth = await import('../auth/auth.service')
+
+      await service.resetarSenha(7, 'novasenha123')
+
+      expect(mockPrisma.user.update).toHaveBeenCalledWith({
+        where: { id: 7 },
+        data: {
+          senha_hash: 'hashed:novasenha123',
+          tentativas_login: 0,
+          bloqueado_ate: null,
+        },
+      })
+      expect(auth.revogarTodosRefreshTokens).toHaveBeenCalledWith(7)
+    })
+
+    it('lança 404 se usuário não existe', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue(null)
+      await expect(service.resetarSenha(99, 'novasenha123')).rejects.toMatchObject({ status: 404 })
+    })
+  })
 })

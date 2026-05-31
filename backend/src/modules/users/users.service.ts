@@ -1,5 +1,5 @@
 import prisma from '../../lib/prisma'
-import { hashSenha } from '../auth/auth.service'
+import { hashSenha, revogarTodosRefreshTokens } from '../auth/auth.service'
 import type { Role } from '@prisma/client'
 
 export type CriarPayload = {
@@ -130,4 +130,17 @@ export async function remover(id: number, caller: CallerCtx) {
   }
 
   return prisma.user.delete({ where: { id } })
+}
+
+export async function resetarSenha(id: number, novaSenha: string) {
+  const alvo = await prisma.user.findUnique({ where: { id } })
+  if (!alvo) throw Object.assign(new Error('Usuário não encontrado'), { status: 404 })
+
+  const senha_hash = await hashSenha(novaSenha)
+  await prisma.user.update({
+    where: { id },
+    data: { senha_hash, tentativas_login: 0, bloqueado_ate: null },
+  })
+  await revogarTodosRefreshTokens(id)
+  return { ok: true }
 }
