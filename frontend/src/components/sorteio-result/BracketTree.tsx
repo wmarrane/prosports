@@ -162,7 +162,17 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
   const matchMap: Record<string, MatchLayout> = {}
   for (const m of layout.matches) matchMap[m.id] = m
 
-  type ConnectorEx = Connector & { isThirdPlace: boolean }
+  // Color por match-source: hue rotativo HSL para distinguir cada confronto.
+  // Saturação/lightness fixos para combinar com o tom das caixas em ambos os
+  // modos. 3º lugar usa cor neutra (--t4) para se diferenciar.
+  const totalMatches = layout.matches.length
+  const sourceColor = (matchId: string): string => {
+    const n = parseInt(matchId.replace(/\D/g, ''), 10) || 0
+    const hue = ((n - 1) * 360 / Math.max(1, totalMatches)) % 360
+    return `hsl(${hue}deg 65% 60%)`
+  }
+
+  type ConnectorEx = Connector & { stroke: string; isThirdPlace: boolean }
   const connectors: ConnectorEx[] = []
   for (const m of layout.matches) {
     for (const [slot, ref] of [['top', m.top], ['bottom', m.bottom]] as const) {
@@ -176,10 +186,12 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       const y2 = m.y + (slot === 'top' ? -CARD_HEIGHT / 4 : CARD_HEIGHT / 4)
       const xm = (x1 + x2) / 2
       const d = `M ${x1} ${y1} L ${xm} ${y1} L ${xm} ${y2} L ${x2} ${y2}`
+      const isThirdPlace = m.isThirdPlace || ref.startsWith('L:')
       connectors.push({
         d,
         key: `${srcId}-${m.id}-${slot}`,
-        isThirdPlace: m.isThirdPlace || ref.startsWith('L:'),
+        stroke: isThirdPlace ? 'var(--t4)' : sourceColor(srcId),
+        isThirdPlace,
       })
     }
   }
@@ -195,7 +207,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
             <path
               key={c.key}
               d={c.d}
-              stroke={c.isThirdPlace ? 'var(--t4)' : 'var(--t2)'}
+              stroke={c.stroke}
               strokeWidth={c.isThirdPlace ? 2.5 : 4}
               fill="none"
               strokeLinecap="round"

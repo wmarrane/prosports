@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.14] - 2026-05-31
+
+### Changed (Bracket — conectores coloridos por match)
+- Cada conector do bracket agora ganha cor própria com **rotação de hue HSL** baseada no índice do match-source (J1 azul, J2 verde, J3 ciano, ...). Saturação `65%` e lightness `60%` ficam visíveis em light e dark mode, mantendo a paleta dos cards.
+- Permite rastrear visualmente de onde cada linha sai (J3 sai de J1, J7 sai de J3 + J4, etc.).
+- **Conectores do 3º lugar** continuam em `--t4` (cinza neutro) para se diferenciar do caminho principal.
+
 ## [1.32.13] - 2026-05-31
 
 ### Fixed (Título de Grupo — override de tokens.css)
