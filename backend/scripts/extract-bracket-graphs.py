@@ -2,22 +2,26 @@
 """
 Extract full match graph per N from personaladmin/CHAVES CT.xlsx.
 
-Strategy for N=6..22 (sheets with both SQL table and resolved matches list):
-  - Read the matches list on the right side ('Jogos' column): each match has
-    top/bottom raw values (some resolved as 'Venc.Jx'/'Perd.Jx', some as 0 or
-    #REF! placeholders for positions).
-  - Read the SQL-friendly positions table at the bottom: provides per-position
-    info (rodada, primeira_rodada, segunda_rodada, isbye).
-  - Fill in the placeholders from the matches list using the positions table:
-      * R1 match (both top and bottom unknown): both positions from
-        positions_table where primeira == match_id.
-      * R2 BYE match (one side unknown, other is Venc.Jx): unknown side is the
-        BYE position from positions_table where isbye=true and segunda starts
-        with match_id.
-  - The Venc.Jx/Perd.Jx references for R3+ matches are extracted as-is from
-    the matches list right side (they ARE resolved in data_only mode).
+Universal strategy (works for all N=2..77):
 
-For N=2..5 and N=23..77 the SQL table is absent — task 3 will add visual parser.
+1. Read BYE positions per N from backend/prisma/seeds/bracket_chaves_byes.sql
+   (already generated in v1.18.0).
+
+2. Read matches list (right side of each sheet, 'Jogos' column). This list is
+   present for all sheets and exposes the R2+ structure via 'Venc.Jx' and
+   'Perd.Jx' references — these ARE resolved even when position cells show as
+   '#REF!' (because openpyxl data_only=True evaluates the simple text refs).
+
+3. Reconstruct the graph:
+   - R1 matches: matches whose top AND bottom are placeholders. Assign
+     sequential non-BYE positions in pairs (1st R1 match gets first pair, etc.).
+   - R2 BYE matches: matches where one side is a Venc.Jx and other is a
+     placeholder. Assign BYE positions in order (1st BYE match gets 1st BYE,
+     etc.).
+   - R3+ matches: top and bottom are both Venc.Jx/Perd.Jx — used as-is.
+   - 3rd place match: detected via Perd.Jx references.
+
+4. Trivial cases (no matches list): hardcoded for N=2.
 
 Usage:
   cd backend && python scripts/extract-bracket-graphs.py
@@ -29,30 +33,47 @@ import re
 
 ROOT = Path(__file__).resolve().parents[2]
 XLSX = ROOT / 'personaladmin' / 'CHAVES CT.xlsx'
-OUT  = ROOT / 'backend' / 'prisma' / 'seeds' / 'bracket_chaves_matches.sql'
+BYES_SQL = ROOT / 'backend' / 'prisma' / 'seeds' / 'bracket_chaves_byes.sql'
+OUT = ROOT / 'backend' / 'prisma' / 'seeds' / 'bracket_chaves_matches.sql'
+
+def load_bye_positions():
+    """Parse bracket_chaves_byes.sql to map N -> [bye_pos, ...]."""
+    if not BYES_SQL.exists():
+        raise RuntimeError(f'Required seed file missing: {BYES_SQL}. Run v1.18.0 extraction first.')
+    text = BYES_SQL.read_text(encoding='utf-8')
+    out = {}
+    # Match: VALUES (N, '{1,6,12}') or VALUES (N, '{}')
+    for m in re.finditer(r"VALUES\s*\(\s*(\d+)\s*,\s*'\{([\d,\s]*)\}'", text):
+        n = int(m.group(1))
+        arr = m.group(2).strip()
+        positions = [int(x) for x in arr.split(',') if x.strip()] if arr else []
+        out[n] = sorted(positions)
+    return out
 
 def parse_simple_ref(value):
-    """Normalize cell value to graph reference.
+    """Parse cell to ref string. Returns None for unresolved placeholders.
 
-    - Integer or numeric string => 'P{n}' (position).
-    - 'Venc.J{x}' => 'V:J{x}'.
-    - 'Perd.J{x}' => 'L:J{x}'.
-    - None/blank/'null'/'0'/'#REF!' => None (placeholder, unresolved).
+    - 'Venc.Jx' => 'V:Jx'
+    - 'Perd.Jx' => 'L:Jx'
+    - integer => 'P{n}'
+    - 0/#REF!/null/'' => None
     """
     if value is None: return None
     s = str(value).strip()
-    if s in ('', '0', 'null', '#REF!'): return None
-    if re.fullmatch(r'\d+', s):
-        return f'P{s}'
-    m = re.fullmatch(r'Venc\.J(\d+)', s, re.IGNORECASE)
+    if s in ('', '0', 'null', '#REF!', '#N/A'): return None
+    if re.fullmatch(r'\d+', s): return f'P{s}'
+    # Tolerate variations: 'Venc.J5', 'VencJ5', 'venc j 5', etc.
+    m = re.fullmatch(r'Venc\.?\s*J\s*(\d+)', s, re.IGNORECASE)
     if m: return f'V:J{m.group(1)}'
-    m = re.fullmatch(r'Perd\.J(\d+)', s, re.IGNORECASE)
+    m = re.fullmatch(r'Perd\.?\s*J\s*(\d+)', s, re.IGNORECASE)
     if m: return f'L:J{m.group(1)}'
     return None
 
 def find_matches_list(ws):
-    """Locate the matches list (rows with 'J | n | top | x | bottom'). Returns
-    list of (match_id, top_raw, bottom_raw). Header label is 'Jogos'.
+    """Locate the matches list. Returns [(match_id, top_raw, bot_raw)].
+
+    Match numbers in column +1 are sometimes empty (formula returns blank or
+    #N/A). Derive sequentially from row order: 1st 'J' row = J1, etc.
     """
     jogo_row = jogo_col = None
     for r in range(1, ws.max_row + 1):
@@ -63,71 +84,38 @@ def find_matches_list(ws):
         if jogo_row: break
     if not jogo_row: return []
     out = []
+    seq = 0
     for r in range(jogo_row + 1, ws.max_row + 1):
-        prefix = ws.cell(row=r, column=jogo_col).value
-        if prefix != 'J': break
-        n = ws.cell(row=r, column=jogo_col + 1).value
+        if ws.cell(row=r, column=jogo_col).value != 'J': break
+        seq += 1
+        n_cell = ws.cell(row=r, column=jogo_col + 1).value
+        # Prefer explicit number from cell, fall back to sequence.
+        if isinstance(n_cell, int):
+            n = n_cell
+        else:
+            n = seq
         top = ws.cell(row=r, column=jogo_col + 2).value
         bot = ws.cell(row=r, column=jogo_col + 4).value
-        if n is None: continue
-        out.append((f'J{int(n)}', top, bot))
+        out.append((f'J{n}', top, bot))
     return out
 
-def find_positions_table(ws):
-    """Locate the SQL-friendly table with 'Chave' header. Returns
-    (header_row, chave_col) or (None, None).
-    """
-    for r in range(1, ws.max_row + 1):
-        for c in range(1, ws.max_column + 1):
-            if ws.cell(row=r, column=c).value == 'Chave':
-                return r, c
-    return None, None
-
-def parse_positions_table(ws, N):
-    """Read positions table for N. Returns list of dicts or None if absent."""
-    header_row, chave_col = find_positions_table(ws)
-    if header_row is None: return None
-    rows = []
-    for r in range(header_row + 1, header_row + 1 + N):
-        chave = ws.cell(row=r, column=chave_col).value
-        if chave is None: return None
-        posicao = ws.cell(row=r, column=chave_col + 1).value
-        rodada = ws.cell(row=r, column=chave_col + 3).value
-        primeira = ws.cell(row=r, column=chave_col + 4).value
-        segunda = ws.cell(row=r, column=chave_col + 5).value
-        isbye = ws.cell(row=r, column=chave_col + 6).value
-        if not isinstance(posicao, int): return None
-        rows.append({
-            'posicao': posicao,
-            'rodada': int(rodada) if rodada is not None else None,
-            'primeira': str(primeira).strip() if primeira not in (None, 'null') else None,
-            'segunda': str(segunda).strip() if segunda not in (None, 'null') else None,
-            'isbye': bool(isbye) if isinstance(isbye, bool) else str(isbye).lower() == 'true',
-        })
-    return rows
-
 def derive_rounds(matches):
-    """Assign 'round' to each match based on dependencies (topo sort).
-
-    Round 1: both top/bottom are positions (P{n}).
-    Round k: max(round of dep) + 1.
-    """
+    """Topological assignment of round numbers."""
     rounds = {}
     pending = list(matches)
     while pending:
         next_pending = []
         progress = False
         for m in pending:
-            mid = m['id']
             deps = []
             for ref in (m['top'], m['bottom']):
                 if ref.startswith('V:') or ref.startswith('L:'):
                     deps.append(ref[2:])
             if not deps:
-                rounds[mid] = 1
+                rounds[m['id']] = 1
                 progress = True
             elif all(d in rounds for d in deps):
-                rounds[mid] = max(rounds[d] for d in deps) + 1
+                rounds[m['id']] = max(rounds[d] for d in deps) + 1
                 progress = True
             else:
                 next_pending.append(m)
@@ -138,60 +126,73 @@ def derive_rounds(matches):
         m['round'] = rounds[m['id']]
     return matches
 
-def explicit_graph(ws, N):
-    """Combine matches list (right side) + positions table (bottom).
+def build_graph(raw_matches, bye_positions, N):
+    """Build graph from matches list + BYE positions."""
+    bye_set = set(bye_positions)
+    non_bye = [p for p in range(1, N + 1) if p not in bye_set]
 
-    Returns dict or None if either source is incomplete.
-    """
-    raw = find_matches_list(ws)
-    if not raw: return None
-    positions_table = parse_positions_table(ws, N)
-    if positions_table is None: return None
+    # Classify each match by what's known in top/bottom.
+    classified = []  # [(mid, top_parsed, bot_parsed)]
+    for mid, t, b in raw_matches:
+        tp = parse_simple_ref(t)
+        bp = parse_simple_ref(b)
+        classified.append((mid, tp, bp))
 
-    # R1 lookup: match_id -> [pos1, pos2] sorted.
-    r1_lookup = {}
-    for row in positions_table:
-        if row['primeira']:
-            r1_lookup.setdefault(row['primeira'], []).append(row['posicao'])
-    for mid in r1_lookup:
-        r1_lookup[mid].sort()
+    # R1 matches: both top and bottom unresolved.
+    r1_match_ids = [mid for mid, tp, bp in classified if tp is None and bp is None]
+    # BYE matches: exactly one side unresolved AND the other side starts with V:.
+    bye_match_ids = []
+    for mid, tp, bp in classified:
+        if (tp is None) != (bp is None):  # XOR
+            other = bp if tp is None else tp
+            if other and other.startswith('V:'):
+                bye_match_ids.append(mid)
+    # Sort by match number for sequential assignment.
+    r1_match_ids.sort(key=lambda x: int(x[1:]))
+    bye_match_ids.sort(key=lambda x: int(x[1:]))
 
-    # R2 BYE lookup: match_id -> bye_position.
-    r2_bye_lookup = {}
-    for row in positions_table:
-        if row['isbye'] and row['segunda']:
-            parts = [p.strip() for p in row['segunda'].split(',')]
-            if len(parts) != 2: continue
-            match_id, _opp = parts
-            r2_bye_lookup[match_id] = row['posicao']
+    # Assign sequential non-BYE positions to R1 matches.
+    if len(r1_match_ids) * 2 != len(non_bye):
+        raise RuntimeError(
+            f'N={N}: {len(r1_match_ids)} R1 matches need {2*len(r1_match_ids)} non-BYE positions, '
+            f'but {len(non_bye)} available')
+    r1_resolved = {}
+    for i, mid in enumerate(r1_match_ids):
+        r1_resolved[mid] = (f'P{non_bye[2*i]}', f'P{non_bye[2*i+1]}')
 
+    # Assign BYE positions to BYE matches.
+    if len(bye_match_ids) != len(bye_positions):
+        # Some BYEs don't have a corresponding match (theoretical edge case)
+        # or extra matches got classified as BYE. Be tolerant: assign min(len).
+        if len(bye_match_ids) > len(bye_positions):
+            raise RuntimeError(
+                f'N={N}: {len(bye_match_ids)} BYE matches but only {len(bye_positions)} BYE positions')
+    bye_resolved = {}
+    for i, mid in enumerate(bye_match_ids):
+        if i < len(bye_positions):
+            bye_resolved[mid] = f'P{bye_positions[i]}'
+
+    # Now build the final matches array.
     matches = []
     third_place = None
-    for mid, top_raw, bot_raw in raw:
-        top = parse_simple_ref(top_raw)
-        bot = parse_simple_ref(bot_raw)
-        # Fill unresolved sides from positions table.
-        if top is None and bot is None:
-            # R1 match: both positions from r1_lookup.
-            if mid in r1_lookup and len(r1_lookup[mid]) == 2:
-                pa, pb = r1_lookup[mid]
-                top = f'P{pa}'
-                bot = f'P{pb}'
-        elif top is None:
-            # BYE position is the unresolved side.
-            if mid in r2_bye_lookup:
-                top = f'P{r2_bye_lookup[mid]}'
-        elif bot is None:
-            if mid in r2_bye_lookup:
-                bot = f'P{r2_bye_lookup[mid]}'
+    for mid, tp, bp in classified:
+        if mid in r1_resolved:
+            top, bot = r1_resolved[mid]
+        elif mid in bye_resolved:
+            # Whichever side is None becomes the BYE position.
+            if tp is None:
+                top, bot = bye_resolved[mid], bp
+            else:
+                top, bot = tp, bye_resolved[mid]
+        else:
+            top, bot = tp, bp
         if top is None or bot is None:
-            return None  # incomplete data
+            raise RuntimeError(f'N={N} {mid}: unresolved top={tp!r} bot={bp!r}')
         if top.startswith('L:') or bot.startswith('L:'):
             third_place = mid
         matches.append({'id': mid, 'top': top, 'bottom': bot})
 
     derive_rounds(matches)
-
     max_round = max(m['round'] for m in matches if m['id'] != third_place)
     final_match = next(m['id'] for m in matches if m['round'] == max_round and m['id'] != third_place)
 
@@ -201,33 +202,51 @@ def explicit_graph(ws, N):
         'thirdPlace': third_place,
     }
 
+def trivial_graph(N):
+    """Hardcoded for tiny N where matches list may be absent."""
+    if N == 2:
+        return {
+            'matches': [{'id': 'J1', 'round': 1, 'top': 'P1', 'bottom': 'P2'}],
+            'final': 'J1',
+            'thirdPlace': None,
+        }
+    return None
+
 def main():
     wb = load_workbook(XLSX, data_only=True)
     OUT.parent.mkdir(parents=True, exist_ok=True)
+    byes_map = load_bye_positions()
+    print(f'Loaded BYE data for {len(byes_map)} N values')
 
     lines = [
         '-- Auto-generated by backend/scripts/extract-bracket-graphs.py',
         '-- DO NOT EDIT MANUALLY. To regenerate: cd backend && python scripts/extract-bracket-graphs.py',
         '',
     ]
-    missing = []
+    ok = []
+    failed = []
     for n in range(2, 78):
         sn = f'{n:02d}'
         if sn not in wb.sheetnames: continue
         ws = wb[sn]
+        bye_positions = byes_map.get(n, [])
         try:
-            g = explicit_graph(ws, n)
+            raw = find_matches_list(ws)
+            if not raw:
+                g = trivial_graph(n)
+                if g is None:
+                    raise RuntimeError('no matches list and no trivial fallback')
+            else:
+                g = build_graph(raw, bye_positions, n)
+            ok.append(n)
         except Exception as e:
-            print(f'ERROR N={n}: {e}')
-            g = None
-        if g is None:
-            missing.append(n)
-            lines.append(f'-- N={n}: PENDING (visual parser not yet implemented; will add in task 3)')
+            failed.append((n, str(e)))
+            lines.append(f'-- N={n}: FAILED ({e})')
             lines.append('')
             continue
         graph_json = json.dumps(g, separators=(',', ':'))
         escaped = graph_json.replace("'", "''")
-        lines.append(f"-- N={n}: EXPLICIT")
+        lines.append(f'-- N={n}')
         lines.append(
             f"INSERT INTO bracket_chaves_matches (numero_inscrito, matches_graph) "
             f"VALUES ({n}, '{escaped}'::jsonb) "
@@ -237,8 +256,10 @@ def main():
 
     OUT.write_text('\n'.join(lines), encoding='utf-8')
     print(f'Wrote {OUT}')
-    print(f'EXPLICIT: {76 - len(missing)} N values')
-    print(f'PENDING (visual parser): {len(missing)} N values: {missing}')
+    print(f'OK: {len(ok)} N values')
+    print(f'FAILED: {len(failed)} N values')
+    for n, msg in failed:
+        print(f'  N={n}: {msg}')
 
 if __name__ == '__main__':
     main()
