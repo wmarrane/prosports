@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.34.1] - 2026-05-31
+
+### Fixed (Migration reset_all_sequences quebrada)
+- A migration `20260531230000_reset_all_sequences` (v1.33.1) falhava no `prisma migrate deploy` com `relation "user_id_seq" does not exist` — `format('SELECT setval(%L, ...)')` passava o nome cru e Postgres lowercased. Fix: `quote_ident(rec.seq_name)` preserva o case. Migration reaplicada em prod manualmente; CI deploy desbloqueado.
+
 ## [1.34.0] - 2026-05-31
 
 ### Added (Import CSV de Modalidades)
