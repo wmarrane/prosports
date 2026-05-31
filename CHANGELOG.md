@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.12] - 2026-05-31
+
+### Changed (Grupos — legibilidade dark + modal expandido)
+- **Título "Grupo X"** trocado de `--brand-500` (azul escuro, baixo contraste no dark) para `--warn` (âmbar) — alto contraste em light e dark. Visual consistente com o badge "Cabeças" e "Final".
+- **Modal de grupo expandido** (Modo Congresso): título "Grupo X" também em âmbar; borda do modal `1.5px --t2` (era `--card-bd`, invisível); cada participante na lista ganhou borda `1px --t3` para destacar do fundo `--cw-soft`; box-shadow externo mais forte para profundidade.
+
 ## [1.32.11] - 2026-05-31
 
 ### Changed (SorteioGrupos — legibilidade dark mode)

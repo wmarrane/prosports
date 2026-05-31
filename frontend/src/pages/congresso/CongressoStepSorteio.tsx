@@ -426,13 +426,14 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             <div
               style={{
                 background: 'var(--cw-card)',
-                border: '1px solid var(--cw-card-bd)',
+                border: '1.5px solid var(--t2)',
                 borderRadius: 'var(--radius-3xl)',
                 padding: 'clamp(24px, 4vw, 56px)',
                 maxWidth: 900,
                 width: '100%',
                 maxHeight: '90vh',
                 overflowY: 'auto',
+                boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
               }}
               onClick={e => e.stopPropagation()}
             >
@@ -441,7 +442,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                   <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 4 }}>
                     {modalidade?.nome}
                   </div>
-                  <h2 style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: FG, lineHeight: 1 }}>
+                  <h2 style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--warn)', lineHeight: 1 }}>
                     Grupo {grupo.letra}
                   </h2>
                 </div>
@@ -464,6 +465,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                         gap: 16,
                         padding: '16px 20px',
                         background: 'var(--cw-soft)',
+                        border: '1px solid var(--t3)',
                         borderRadius: 'var(--radius-xl)',
                         fontSize: 'clamp(20px, 2.2vw, 28px)',
                       }}

@@ -15,9 +15,9 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
-  // Título do Grupo: cor de destaque (brand-500) para se sobressair tanto em
-  // light quanto em dark mode. Bordas em --t2 (cinza claro) para legibilidade.
-  const titleClass = large ? 'text-2xl font-bold text-[var(--brand-500)]' : 'text-base font-semibold text-[var(--brand-500)]'
+  // Título do Grupo: âmbar (--warn) — alto contraste em light E dark mode.
+  // Mesmo amarelo usado em "Cabeças" e badge da Final.
+  const titleClass = large ? 'text-2xl font-bold text-[var(--warn)]' : 'text-base font-semibold text-[var(--warn)]'
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
   const subItemClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
