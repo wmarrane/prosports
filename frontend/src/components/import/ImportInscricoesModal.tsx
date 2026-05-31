@@ -46,9 +46,10 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
     queryFn: () => eventosService.buscar(eventoId),
     enabled: open,
   })
-  const mostrarSubtitulo = evento?.competicao?.adicionar_subtitulo ?? false
+  const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
+  const incluiSubtitulo = camposSubtitulo.includes('subtitulo')
 
-  const template = mostrarSubtitulo
+  const template = incluiSubtitulo
     ? {
         filename: 'modelo_inscricoes.csv',
         headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
@@ -227,9 +228,9 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 }}
               >
                 <div className="font-bold text-[var(--brand-500)] mb-1">
-                  {mostrarSubtitulo ? 'nome,subtitulo,municipio_uf,municipio_nome' : 'nome,municipio_uf,municipio_nome'}
+                  {incluiSubtitulo ? 'nome,subtitulo,municipio_uf,municipio_nome' : 'nome,municipio_uf,municipio_nome'}
                 </div>
-                {mostrarSubtitulo ? (
+                {incluiSubtitulo ? (
                   <>
                     <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
                     <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
@@ -244,7 +245,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
 
               <ul className="text-xs text-[var(--t3)] space-y-1 ml-4 list-disc">
                 <li><b>nome</b>: nome do participante (obrigatório).</li>
-                {mostrarSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
+                {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
                 <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
                 <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
                 <li>Participantes já cadastrados são reaproveitados; novos são criados automaticamente.</li>
