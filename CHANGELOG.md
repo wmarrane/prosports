@@ -5,6 +5,20 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.28.1] - 2026-05-31
+
+### Changed (Eventos → Inscrições)
+- **EventoInscricoes** redesenhado em **layout master-detail 2-colunas** (sidebar 320px + conteúdo). Single-column ≤1024px.
+- **Banner do evento** no topo: data/hora + local + município com ícones; barra de progresso "X de Y sorteadas" com % monospace; atalho "Editar evento".
+- **Sidebar (esquerda)**: lista de modalidades como botões verticais com ícone gradient 32px por tipo + nome + sigla mono + check verde se sorteada. Item ativo em `--brand-50` com borda `--brand-500`.
+- **Conteúdo (direita)** organizado em 4 cards seccionados:
+  - **Header da modalidade**: ícone gradient 52px + nome + sigla pill + "Disputa por X".
+  - **Inscritos** (Users/brand-deep): contagem no header, botões "Importar CSV" (ghost) + "Inscrever" (primary). Grid 280px+ de cards compactos (em vez de DataTable) com posição mono, badge campeão, nome, subtítulo/município, botão remover hover-danger. Empty state amigável. Ordenação alfabética pt-BR.
+  - **Sorteio** (Shuffle/amber gradient): título dinâmico (Aguardando/Resultado/Modalidade específica). Seed+timestamp em card destacável com ações inline (Re-sortear/Apagar). Estado idle com hero icon + botão grande.
+  - **Campeões do ano anterior** (Crown/golden gradient): mesma grid de 12 slots, descrição mais clara mencionando seeding em Grupos/Chaves.
+- Estado "Selecione uma modalidade" com Trophy icon + mensagem explicativa.
+- Modal "Inscrever" estilizado consistentemente (cards + ícones + action bar).
+
 ## [1.28.0] - 2026-05-31
 
 ### Changed (Modalidades — alinhamento visual)
