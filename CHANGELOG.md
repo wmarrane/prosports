@@ -5,6 +5,17 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.25.1] - 2026-05-31
+
+### Changed (Competições — formulário Nova/Editar)
+- `CompeticaoForm` totalmente refeito em 3 **cards seccionados** (Informações / Estados / Configurações), em vez de form linear básico:
+  - **Informações**: ícone troféu + nome com placeholder + dica explicativa.
+  - **Estados**: UFs agrupadas por **região geográfica** (Norte/Nordeste/Centro-Oeste/Sudeste/Sul) como chips clicáveis (não checkboxes). Cada chip mostra estado ativo (fundo brand-500) ou inativo (card-bg-2). Botões "Toda região" por seção + "Selecionar Brasil"/"Limpar tudo" no header. Mostra contagem `X/Y` por região.
+  - **Configurações**: checkbox de subtítulo em card destacável (muda cor de fundo quando ativo).
+- **Action bar** no fim: Cancelar (ghost) + Salvar (primary com ícone Check). Mensagem de erro em card vermelho destacado.
+- Header com `eyebrow="Operação"` + subtítulo contextual (varia entre Editar/Criar).
+- Action button label dinâmico: "Salvar alterações" (editar) ou "Criar competição" (nova).
+
 ## [1.25.0] - 2026-05-31
 
 ### Changed (Competições)
