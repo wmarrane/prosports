@@ -8,7 +8,7 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
-import { Shuffle, Crown, X } from '../../lib/icons'
+import { Shuffle, Crown, X, Report } from '../../lib/icons'
 import type { Participante } from '../../types/participante'
 
 type Props = {
@@ -29,6 +29,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const [erro, setErro] = useState('')
   const [animating, setAnimating] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
+  const [grupoExpandido, setGrupoExpandido] = useState<string | null>(null)
 
   const { data: modalidades = [] } = useQuery({
     queryKey: ['modalidades', competicaoId],
@@ -223,21 +224,40 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             seed: <span style={{ fontFamily: 'var(--font-mono)' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
           </div>
         </div>
-        <button
-          onClick={handleNovoSorteio}
-          disabled={executando}
-          style={{
-            background: 'transparent',
-            color: 'var(--brand-500)',
-            border: '1px solid var(--brand-500)',
-            borderRadius: 'var(--radius-md)',
-            padding: '8px 16px',
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: 'pointer',
-            opacity: executando ? 0.5 : 1,
-          }}
-        >{executando ? 'Sorteando...' : 'Novo sorteio'}</button>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button
+            onClick={() => window.print()}
+            style={{
+              background: 'transparent',
+              color: 'var(--cw-fg)',
+              border: '1px solid var(--cw-card-bd)',
+              borderRadius: 'var(--radius-md)',
+              padding: '8px 16px',
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+            title="Imprimir / Exportar PDF"
+          ><Report size={16} /> PDF</button>
+          <button
+            onClick={handleNovoSorteio}
+            disabled={executando}
+            style={{
+              background: 'transparent',
+              color: 'var(--brand-500)',
+              border: '1px solid var(--brand-500)',
+              borderRadius: 'var(--radius-md)',
+              padding: '8px 16px',
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: 'pointer',
+              opacity: executando ? 0.5 : 1,
+            }}
+          >{executando ? 'Sorteando...' : 'Novo sorteio'}</button>
+        </div>
       </div>
 
       {/* Banner de cabeças semeadas (grupos/chaves só, e só se houver campeões inscritos) */}
@@ -269,7 +289,13 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
         {sorteio.tipo === 'grupos' && (
-          <SorteioGrupos resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
+          <SorteioGrupos
+            resultado={sorteio.resultado}
+            participantesById={participantesById}
+            large
+            campeoesByParticipanteId={campeoesByParticipanteId}
+            onGroupClick={(letra) => setGrupoExpandido(letra)}
+          />
         )}
         {sorteio.tipo === 'chaves' && (
           <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} />
@@ -351,6 +377,77 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           </div>
         </div>
       )}
+
+      {/* Modal de grupo expandido (apenas grupos) */}
+      {grupoExpandido !== null && sorteio?.tipo === 'grupos' && (() => {
+        const grupo = (sorteio.resultado as any).grupos?.find((g: any) => g.letra === grupoExpandido)
+        if (!grupo) return null
+        return (
+          <div
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 350, padding: 40 }}
+            onClick={() => setGrupoExpandido(null)}
+          >
+            <div
+              style={{
+                background: 'var(--cw-card)',
+                border: '1px solid var(--cw-card-bd)',
+                borderRadius: 'var(--radius-3xl)',
+                padding: 'clamp(24px, 4vw, 56px)',
+                maxWidth: 900,
+                width: '100%',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
+                <div>
+                  <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 4 }}>
+                    {modalidade?.nome}
+                  </div>
+                  <h2 style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: FG, lineHeight: 1 }}>
+                    Grupo {grupo.letra}
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setGrupoExpandido(null)}
+                  className="cw-iconbtn"
+                  title="Fechar"
+                ><X size={22} /></button>
+              </div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {grupo.participantes.map((pid: number, i: number) => {
+                  const p = participantesById.get(pid)
+                  const cp = campeoesByParticipanteId?.get(pid)
+                  return (
+                    <li
+                      key={pid}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 16,
+                        padding: '16px 20px',
+                        background: 'var(--cw-soft)',
+                        borderRadius: 'var(--radius-xl)',
+                        fontSize: 'clamp(20px, 2.2vw, 28px)',
+                      }}
+                    >
+                      <span style={{ fontFamily: 'var(--font-mono)', color: DIM, fontSize: '0.7em', minWidth: 32 }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      {cp && <CampeaoBadge posicao={cp} large />}
+                      <span style={{ color: FG, fontWeight: 600 }}>
+                        {p ? p.nome : '—'}
+                        {p?.subtitulo && <span style={{ fontSize: '0.7em', color: DIM, marginLeft: 12 }}>— {p.subtitulo}</span>}
+                      </span>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }

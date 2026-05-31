@@ -7,9 +7,10 @@ type Props = {
   participantesById: Map<number, Participante>
   large?: boolean
   campeoesByParticipanteId?: Map<number, number>
+  onGroupClick?: (letra: string) => void
 }
 
-export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId }: Props) {
+export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, onGroupClick }: Props) {
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
@@ -17,13 +18,15 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
   const subItemClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
+  const clickable = !!onGroupClick
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${minCol}px, 1fr))`, gap }}>
       {resultado.grupos.map(g => (
         <div
           key={g.letra}
-          className={`bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-xl ${cardPad}`}
+          onClick={clickable ? () => onGroupClick!(g.letra) : undefined}
+          className={`bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-xl ${cardPad} ${clickable ? 'cursor-pointer hover:border-[var(--brand-500)] transition-colors' : ''}`}
         >
           <div className={`flex justify-between items-center ${large ? 'mb-4' : 'mb-3'}`}>
             <h4 className={titleClass}>Grupo {g.letra}</h4>

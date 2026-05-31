@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.22.0] - 2026-05-30
+
+### Added (Modo Congresso)
+- **Modal de grupo expandido**: no resultado do sorteio tipo "grupos", clicar em qualquer card de grupo abre um modal grande (até 900px) mostrando o grupo em letra display gigante + lista vertical de participantes em fonte responsiva (28px+). Útil para apresentação em Datashow.
+- **Botão PDF/Imprimir**: barra de ações do Sorteio ganhou botão "PDF" (ícone Report) que dispara `window.print()` para gerar PDF via diálogo do navegador.
+- `SorteioGrupos` ganhou prop opcional `onGroupClick: (letra: string) => void`; quando fornecido, cards de grupo viram clicáveis com hover destacando borda em `--brand-500`.
+
 ## [1.21.1] - 2026-05-30
 
 ### Changed (Congresso — Phase B visual refactor)
