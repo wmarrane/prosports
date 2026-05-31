@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.24.1] - 2026-05-31
+
+### Changed (Modo Congresso — ajustes UX)
+- **Participantes** agora renderizam em **ordem alfabética** pelo nome (pt-BR, ignorando acentos/caixa). Antes seguiam a ordem de inclusão do backend.
+- **Modalidade master-detail**: painel direito (`.cw-md-detail`) agora é **sticky** (`position: sticky; top: 0`) — fica visível enquanto o usuário rola a lista da esquerda. `max-height: calc(100vh - 200px)` com `overflow-y: auto` permite que o painel role internamente se o card for maior que a viewport.
+
 ## [1.24.0] - 2026-05-30
 
 ### Changed (Modo Congresso — Master-Detail Modalidade)

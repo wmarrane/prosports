@@ -206,7 +206,7 @@
 .cw-md-name { flex: 1; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cw-md-done { width: 26px; height: 26px; border-radius: 9999px; background: var(--success); color: #fff; display: grid; place-items: center; flex-shrink: 0; }
 
-.cw-md-detail { min-height: 420px; }
+.cw-md-detail { min-height: 420px; position: sticky; top: 0; align-self: start; max-height: calc(100vh - 200px); overflow-y: auto; }
 .cw-md-empty { height: 100%; min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: var(--cw-faint); text-align: center; border: 2px dashed var(--cw-card-bd); border-radius: 24px; }
 .cw-md-empty p { font-size: 18px; max-width: 280px; margin: 0; }
 .cw-md-card { background: var(--cw-card); border: 1.5px solid var(--cw-card-bd); border-radius: 24px; padding: 40px; box-shadow: var(--cw-shadow); animation: popIn .32s var(--ease-spring); }

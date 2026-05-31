@@ -22,10 +22,15 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   const [pickedId, setPickedId] = useState<number | null>(null)
   const [erroModal, setErroModal] = useState('')
 
-  const { data: inscricoes = [], isLoading } = useQuery({
+  const { data: inscricoesRaw = [], isLoading } = useQuery({
     queryKey: ['inscricoes', eventoId, modalidadeId],
     queryFn: () => inscricoesService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
   })
+
+  // Ordenar alfabeticamente pelo nome do participante (pt-BR, ignorando acentos/caixa)
+  const inscricoes = [...inscricoesRaw].sort((a, b) =>
+    a.participante.nome.localeCompare(b.participante.nome, 'pt-BR', { sensitivity: 'base' })
+  )
 
   const { data: modalidades = [] } = useQuery({
     queryKey: ['modalidades', competicaoId],
