@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { modalidadesService } from '../../services/modalidades'
 import { tiposModalidadeService } from '../../services/tipos-modalidade'
-import { Plus, X, Check } from '../../lib/icons'
+import { Plus, X, Check, Download } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Shapes } from 'lucide-react'
+import ImportModalidadesModal from '../../components/import/ImportModalidadesModal'
 
 type Props = {
   competicaoId: number
@@ -34,6 +35,7 @@ const TIPO_LABEL: Record<string, string> = {
 export default function ModalidadesPanel({ competicaoId }: Props) {
   const queryClient = useQueryClient()
   const [addOpen, setAddOpen] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const [newNome, setNewNome] = useState('')
   const [newSigla, setNewSigla] = useState('')
   const [newTipoId, setNewTipoId] = useState<number | ''>('')
@@ -118,15 +120,25 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
             </h3>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => { setAddOpen(true); setAddErro('') }}
-          disabled={addOpen}
-          className="btn btn-primary btn-sm"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: addOpen ? 0.5 : 1 }}
-        >
-          <Plus size={14} /> Adicionar
-        </button>
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setImportOpen(true)}
+            className="btn btn-ghost btn-sm"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+          >
+            <Download size={14} /> Importar CSV
+          </button>
+          <button
+            type="button"
+            onClick={() => { setAddOpen(true); setAddErro('') }}
+            disabled={addOpen}
+            className="btn btn-primary btn-sm"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: addOpen ? 0.5 : 1 }}
+          >
+            <Plus size={14} /> Adicionar
+          </button>
+        </div>
       </div>
 
       {/* Inline ADD row */}
@@ -318,6 +330,15 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
           )
         })}
       </div>
+
+      {importOpen && (
+        <ImportModalidadesModal
+          open={importOpen}
+          competicaoId={competicaoId}
+          onClose={() => setImportOpen(false)}
+          onImported={invalidate}
+        />
+      )}
     </section>
   )
 }

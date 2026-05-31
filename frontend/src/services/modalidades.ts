@@ -18,4 +18,12 @@ export const modalidadesService = {
   editar: (id: number, data: Partial<ModalidadePayload>) =>
     api.put<Modalidade>(`${BASE}/${id}`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
+  importar: (competicao_id: number, file: File) => {
+    const fd = new FormData()
+    fd.append('arquivo', file)
+    fd.append('competicao_id', String(competicao_id))
+    return api.post<{ criados: number; atualizados: number; ignorados: number; erros: Array<{ linha: number; motivo: string }> }>(
+      '/modalidades/import', fd, { headers: { 'Content-Type': 'multipart/form-data' } }
+    ).then(r => r.data)
+  },
 }
