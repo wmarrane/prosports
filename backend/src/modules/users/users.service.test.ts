@@ -154,4 +154,35 @@ describe('users.service', () => {
       ).rejects.toMatchObject({ status: 404 })
     })
   })
+
+  describe('remover', () => {
+    it('remove usuário', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue({ id: 2, role: 'VIEWER', ativo: true })
+      mockPrisma.user.delete.mockResolvedValue({ id: 2 })
+      await service.remover(2, { sub: 1, role: 'ADMIN' })
+      expect(mockPrisma.user.delete).toHaveBeenCalledWith({ where: { id: 2 } })
+    })
+
+    it('falha 400 ao tentar remover a si mesmo', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue({ id: 1, role: 'ADMIN', ativo: true })
+      await expect(
+        service.remover(1, { sub: 1, role: 'ADMIN' })
+      ).rejects.toMatchObject({ status: 400, message: expect.stringContaining('remover a si') })
+    })
+
+    it('falha 400 ao remover último admin ativo', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue({ id: 5, role: 'ADMIN', ativo: true })
+      mockPrisma.user.count.mockResolvedValue(0)
+      await expect(
+        service.remover(5, { sub: 9, role: 'ADMIN' })
+      ).rejects.toMatchObject({ status: 400, message: expect.stringContaining('último') })
+    })
+
+    it('lança 404 se usuário não existe', async () => {
+      mockPrisma.user.findUnique.mockResolvedValue(null)
+      await expect(
+        service.remover(99, { sub: 1, role: 'ADMIN' })
+      ).rejects.toMatchObject({ status: 404 })
+    })
+  })
 })

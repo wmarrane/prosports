@@ -117,3 +117,17 @@ export async function editar(id: number, payload: EditarPayload, caller: CallerC
     select: USER_SELECT,
   })
 }
+
+export async function remover(id: number, caller: CallerCtx) {
+  if (caller.sub === id) {
+    throw Object.assign(new Error('Você não pode remover a si mesmo.'), { status: 400 })
+  }
+  const alvo = await prisma.user.findUnique({ where: { id } })
+  if (!alvo) throw Object.assign(new Error('Usuário não encontrado'), { status: 404 })
+
+  if (alvo.role === 'ADMIN' && alvo.ativo) {
+    await ensureNotLastActiveAdmin(id)
+  }
+
+  return prisma.user.delete({ where: { id } })
+}
