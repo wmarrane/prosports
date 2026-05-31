@@ -1,38 +1,43 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { CongressoStep } from '../../types/congresso-step'
-import { Maximize, Minimize, X, Trophy } from '../../lib/icons'
+import { Maximize, Minimize, X, Sun, Moon } from '../../lib/icons'
+import { useThemeStore } from '../../store/themeStore'
 
-const STEP_LABELS: Record<CongressoStep, string> = {
-  evento: 'Selecione o Evento',
-  modalidade: 'Selecione a Modalidade',
-  participantes: 'Participantes Confirmados',
-  campeoes: 'Campeões do Ano Anterior',
-  sorteio: 'Sorteio',
-}
+const STEPS: Array<{ key: CongressoStep; label: string }> = [
+  { key: 'evento', label: 'Evento' },
+  { key: 'modalidade', label: 'Modalidade' },
+  { key: 'participantes', label: 'Participantes' },
+  { key: 'campeoes', label: 'Campeões' },
+  { key: 'sorteio', label: 'Sorteio' },
+]
 
 const STEP_INDEX: Record<CongressoStep, number> = {
-  evento: 1,
-  modalidade: 2,
-  participantes: 3,
-  campeoes: 4,
-  sorteio: 5,
+  evento: 0,
+  modalidade: 1,
+  participantes: 2,
+  campeoes: 3,
+  sorteio: 4,
+}
+
+type ContextoCongresso = {
+  evento?: string
+  modalidade?: string
 }
 
 type Props = {
   step: CongressoStep
   onBack?: () => void
+  contexto?: ContextoCongresso
   children: React.ReactNode
 }
 
-const SHELL_BG = '#0a0e16'
-const SHELL_FG = '#f1f5fb'
-const SHELL_DIM = '#94a3b8'
-const SHELL_LINE = 'rgba(255,255,255,.1)'
-
-export default function CongressoShell({ step, onBack, children }: Props) {
+export default function CongressoShell({ step, onBack, contexto, children }: Props) {
   const navigate = useNavigate()
+  const theme = useThemeStore(s => s.theme)
+  const toggleTheme = useThemeStore(s => s.toggle)
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement)
+  const currentIdx = STEP_INDEX[step]
 
   useEffect(() => {
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement)
@@ -42,14 +47,9 @@ export default function CongressoShell({ step, onBack, children }: Props) {
 
   async function toggleFullscreen() {
     try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen()
-      } else {
-        await document.documentElement.requestFullscreen()
-      }
-    } catch {
-      // negado pelo browser
-    }
+      if (document.fullscreenElement) await document.exitFullscreen()
+      else await document.documentElement.requestFullscreen()
+    } catch { /* negado */ }
   }
 
   async function handleSair() {
@@ -57,52 +57,77 @@ export default function CongressoShell({ step, onBack, children }: Props) {
     navigate('/eventos')
   }
 
+  const showBreadcrumb = !!(contexto?.evento || contexto?.modalidade)
+
   return (
-    <div
-      className="congresso-shell"
-      style={{ background: SHELL_BG, color: SHELL_FG, height: '100vh', display: 'flex', flexDirection: 'column' }}
-    >
-      <header
-        style={{
-          height: 64,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 16,
-          padding: '0 24px',
-          borderBottom: `1px solid ${SHELL_LINE}`,
-          flex: '0 0 auto',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Trophy size={22} />
-          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: '0.02em' }}>Congresso</span>
+    <div className="cw">
+      <div className="cw-blob" style={{ background: 'var(--cw-blob1)', top: -180, right: -180 }} />
+      <div className="cw-blob" style={{ background: 'var(--cw-blob2)', bottom: -220, left: -160, animationDelay: '4s' }} />
+
+      <div className="cw-top">
+        <div className="cw-brand">
+          <div className="cw-glyph">PS</div>
+          <div>
+            <div className="cw-brand-name">ProSports</div>
+            <div className="cw-brand-sub">CONGRESSO</div>
+          </div>
         </div>
-        {onBack && (
+
+        <div className="cw-steps">
+          {STEPS.map((s, i) => {
+            const state = i === currentIdx ? 'on' : i < currentIdx ? 'done' : ''
+            return (
+              <div key={s.key} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div className={`cw-step ${state}`}>
+                  <span className="cw-step-num">{i < currentIdx ? '✓' : i + 1}</span>
+                  <span className="cw-step-label">{s.label}</span>
+                </div>
+                {i < STEPS.length - 1 && (
+                  <span className={`cw-stepline ${i < currentIdx ? 'on' : ''}`} />
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="cw-actions">
           <button
-            onClick={onBack}
-            style={{ marginLeft: 16, color: SHELL_DIM, fontSize: 14, background: 'transparent', border: 'none', cursor: 'pointer' }}
-          >← Voltar</button>
-        )}
-        <div style={{ flex: 1, textAlign: 'center', color: SHELL_DIM, fontSize: 14 }}>
-          Passo {STEP_INDEX[step]} de 5 · {STEP_LABELS[step]}
+            onClick={toggleTheme}
+            className="cw-iconbtn"
+            title={theme === 'dark' ? 'Tema claro' : 'Tema escuro'}
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
+            onClick={toggleFullscreen}
+            className="cw-iconbtn"
+            title={isFullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
+          >
+            {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+          </button>
+          <button onClick={handleSair} className="cw-exit">
+            <X size={16} /> Sair
+          </button>
         </div>
-        <button
-          onClick={toggleFullscreen}
-          style={{ color: SHELL_FG, background: 'transparent', border: 'none', cursor: 'pointer', padding: 6 }}
-          title={isFullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
-        >
-          {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-        </button>
-        <button
-          onClick={handleSair}
-          style={{ color: SHELL_FG, background: 'transparent', border: `1px solid ${SHELL_LINE}`, borderRadius: 8, padding: '6px 12px', cursor: 'pointer', fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 6 }}
-        >
-          <X size={16} /> Sair
-        </button>
-      </header>
-      <main style={{ flex: 1, overflow: 'auto', padding: 32, minHeight: 0 }}>
-        {children}
-      </main>
+      </div>
+
+      {showBreadcrumb && (
+        <div className="cw-ctx">
+          {contexto?.evento && <span>{contexto.evento}</span>}
+          {contexto?.evento && contexto?.modalidade && <span className="cw-ctx-sep">›</span>}
+          {contexto?.modalidade && <span>{contexto.modalidade}</span>}
+          {onBack && (
+            <button
+              onClick={onBack}
+              style={{ marginLeft: 'auto', background: 'transparent', border: 'none', color: 'var(--cw-faint)', cursor: 'pointer', fontSize: 14, fontWeight: 600 }}
+            >← Voltar</button>
+          )}
+        </div>
+      )}
+
+      <div className="cw-main">
+        <div className="cw-panel">{children}</div>
+      </div>
     </div>
   )
 }

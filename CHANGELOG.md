@@ -5,6 +5,21 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.20.0] - 2026-05-30
+
+### Added
+- Importado `congresso-wizard.css` (design system R2P) em `frontend/src/styles/`. Adiciona ~250 classes `cw-*` para wizard fullscreen.
+- Modo Congresso ganhou **stepper horizontal** com bolinhas numeradas no header, mostrando passo atual (`.on`) e passos concluídos (`.done` com check).
+- Modo Congresso ganhou **toggle de tema** (Sol/Lua) na barra de ações.
+- Modo Congresso suporta `contexto` opcional pra mostrar breadcrumb (Evento › Modalidade) abaixo do header.
+
+### Changed
+- `CongressoShell.tsx` reescrita para usar classes `cw-*` (`.cw`, `.cw-top`, `.cw-brand`, `.cw-steps`, `.cw-actions`, `.cw-main`, `.cw-panel`) em vez de inline styles hardcoded. Background dark/light agora segue tokens `--cw-*` que reagem ao `[data-theme]`.
+- `CongressoStepEvento.tsx` refatorada para usar `cw-h1`, `cw-sub`, `cw-grid`, `cw-card`, `cw-card-top`, `cw-card-ic`, `cw-card-title`, `cw-card-meta`, `cw-card-stats`. Tipografia agora responsiva via `clamp()`. Ícone de troféu lucide no card.
+
+### Notes
+- Fase A do alinhamento com `REMEDIACAO_DESIGN.md` + `claudedesign/design_v3/`. Outros steps (Modalidade, Participantes, Campeões, Sorteio) ainda usam inline styles — refatoração em release seguinte. Master-detail no step Modalidade fica para v1.21.0.
+
 ## [1.19.1] - 2026-05-30
 
 ### Changed
