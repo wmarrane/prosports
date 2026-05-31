@@ -93,13 +93,14 @@ export default function Relatorio() {
       const modalidadesById = new Map(modalidades.map(m => [m.id, m]))
       const sorteiosByModalidade = new Map(eventoSorteios.map(s => [s.modalidade_id, s]))
 
-      const mostrarSubtitulo = evento.competicao?.adicionar_subtitulo ?? false
+      const camposSubtitulo = evento.competicao?.subtitulo_campos ?? []
+      const incluiSubtitulo = camposSubtitulo.includes('subtitulo')
 
       const headers = [
         'modalidade_nome',
         'modalidade_sigla',
         'participante_nome',
-        ...(mostrarSubtitulo ? ['participante_subtitulo'] : []),
+        ...(incluiSubtitulo ? ['participante_subtitulo'] : []),
         'participante_municipio',
         'status_sorteio',
       ]
@@ -116,7 +117,7 @@ export default function Relatorio() {
           m?.nome ?? '',
           m?.sigla ?? '',
           ins.participante.nome,
-          ...(mostrarSubtitulo ? [ins.participante.subtitulo ?? ''] : []),
+          ...(incluiSubtitulo ? [ins.participante.subtitulo ?? ''] : []),
           municipio,
           status,
         ])
