@@ -56,6 +56,39 @@ describe('competicoes.service', () => {
     })
   })
 
+  it('criar rejeita campo invalido em subtitulo_campos', async () => {
+    await expect(
+      service.criar({ nome: 'Copa', estados: ['SP'], subtitulo_campos: ['foo'] })
+    ).rejects.toMatchObject({ status: 400, message: expect.stringContaining('foo') })
+    expect(mockPrisma.competicao.create).not.toHaveBeenCalled()
+  })
+
+  it('criar rejeita duplicatas em subtitulo_campos', async () => {
+    await expect(
+      service.criar({
+        nome: 'Copa',
+        estados: ['SP'],
+        subtitulo_campos: ['subtitulo', 'subtitulo'],
+      })
+    ).rejects.toMatchObject({ status: 400, message: expect.stringContaining('duplicatas') })
+    expect(mockPrisma.competicao.create).not.toHaveBeenCalled()
+  })
+
+  it('editar valida subtitulo_campos quando presente', async () => {
+    await expect(
+      service.editar(1, { subtitulo_campos: ['inspetoria', 'xyz'] })
+    ).rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.competicao.update).not.toHaveBeenCalled()
+  })
+
+  it('editar aceita subtitulo_campos vazio', async () => {
+    mockPrisma.competicao.update.mockResolvedValue({ id: 1 })
+    await service.editar(1, { subtitulo_campos: [] })
+    expect(mockPrisma.competicao.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { subtitulo_campos: [] },
+    })
+  })
+
   it('criar rejeita UF inválida com 400', async () => {
     await expect(
       service.criar({ nome: 'Copa', estados: ['SP', 'XX'] })
