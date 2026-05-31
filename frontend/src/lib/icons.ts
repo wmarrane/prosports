@@ -30,4 +30,5 @@ export {
   Dices as Dice,
   Shuffle,
   Crown,
+  Download,
 } from 'lucide-react'

@@ -5,6 +5,26 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.29.0] - 2026-05-31
+
+### Changed (Municípios)
+- **MunicipiosList** modernizado:
+  - Header com eyebrow "Cadastro" + sub explicativo; actions "Importar CSV" (ghost) + "+ Novo Município" (primary) com ícones lucide.
+  - Card de filtros (UF/Buscar) com label uppercase, ícone Search dentro do input, contador total de municípios à direita com Building2 icon e formatação `toLocaleString('pt-BR')`.
+  - DataTable agora dentro de card com shadow; UF como pill (`--brand-50`/`--brand-700`), código IBGE em mono dim, nome em bold.
+  - Paginação melhorada no rodapé do card: "X–Y de N" formato + botões ghost com ↑↓ + indicador `página / total` em mono.
+- **MunicipioForm** redesenhado:
+  - Card seccionado único (Building2 icon brand-deep gradient) "Dados do município".
+  - Grid responsivo `1fr / 120px` (Nome largo + UF compacto).
+  - Código IBGE com font-mono, máscara só dígitos, inputMode numeric, hint contextual.
+  - Asterisco vermelho em campos obrigatórios.
+  - Validação manual no submit (formato IBGE + nome obrigatório).
+  - Action bar fim: Cancelar (ghost) + "Salvar alterações"/"Criar município" (primary) com ícones.
+- Header com eyebrow "Cadastro" + sub contextual.
+
+### Added
+- Ícone `Download` exportado em `lib/icons.ts`.
+
 ## [1.28.1] - 2026-05-31
 
 ### Changed (Eventos → Inscrições)
