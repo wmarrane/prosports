@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './modalidades.service'
+import { importarCsv } from './import.service'
 
 const createSchema = z.object({
   nome: z.string().min(1),
@@ -39,5 +40,22 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
     await service.remover(Number(req.params.id))
     res.status(204).send()
+  } catch (err) { next(err) }
+}
+
+export async function importar(req: Request, res: Response, next: NextFunction) {
+  try {
+    const file = (req as any).file as Express.Multer.File | undefined
+    if (!file) {
+      res.status(400).json({ message: 'Arquivo CSV obrigatório no campo "arquivo".' })
+      return
+    }
+    const competicao_id = Number(req.body.competicao_id ?? req.query.competicao_id)
+    if (!Number.isInteger(competicao_id) || competicao_id <= 0) {
+      res.status(400).json({ message: 'competicao_id é obrigatório.' })
+      return
+    }
+    const content = file.buffer.toString('utf8')
+    res.json(await importarCsv(competicao_id, content))
   } catch (err) { next(err) }
 }
