@@ -76,14 +76,18 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     return m
   }, [campeoes])
 
-  // Cabeças inscritos = campeões cuja inscrição está confirmada nesta modalidade
+  // Cabeças potenciais = top-4 campeões por posição (independente da inscrição).
+  // Os que não estão inscritos aparecem tachados (não serão semeados como cabeça).
+  const inscritosSet = useMemo(
+    () => new Set(inscricoes.map(i => i.participante_id)),
+    [inscricoes]
+  )
   const cabecasInscritas = useMemo(() => {
-    const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
     return [...campeoes]
-      .filter(c => inscritosSet.has(c.participante_id))
       .sort((a, b) => a.posicao - b.posicao)
       .slice(0, 4) // top 4
-  }, [campeoes, inscricoes])
+      .map(c => ({ ...c, inscrito: inscritosSet.has(c.participante_id) }))
+  }, [campeoes, inscritosSet])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -297,9 +301,19 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
             {cabecasInscritas.map(c => (
-              <div key={c.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <div
+                key={c.id}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, opacity: c.inscrito ? 1 : 0.55 }}
+                title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
+              >
                 <CampeaoBadge posicao={c.posicao} />
-                <span style={{ fontSize: 15, color: FG, fontWeight: 600 }}>{c.participante.nome}</span>
+                <span style={{
+                  fontSize: 15,
+                  color: c.inscrito ? FG : DIM,
+                  fontWeight: 600,
+                  textDecoration: c.inscrito ? 'none' : 'line-through',
+                  textDecorationThickness: '2px',
+                }}>{c.participante.nome}</span>
               </div>
             ))}
           </div>

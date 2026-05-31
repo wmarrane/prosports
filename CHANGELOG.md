@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.32.9] - 2026-05-31
+
+### Changed (Modo Congresso — banner de Cabeças)
+- O banner "Cabeças" agora mostra os **top-4 campeões do ano anterior independente da inscrição**. Os que **não estão inscritos** nesta modalidade aparecem **tachados** (line-through) com opacidade reduzida (`0.55`) e tooltip explicativo. Antes só os inscritos eram listados, sem indicação de quem ficou de fora.
+
 ## [1.32.8] - 2026-05-31
 
 ### Changed (Bracket — conectores, bordas dark mode)
