@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.21.1] - 2026-05-30
+
+### Changed (Congresso — Phase B visual refactor)
+- `CongressoStepParticipantes` refatorado para usar classes `cw-parts-head`, `cw-plist`, `cw-prow` (grid 330px+ em vez de lista vertical estreita). Botão "Incluir participante" como `cw-btn-accent`, navegação "Próximo" como `cw-btn-primary`. Empty state com card tracejado. Modal de inclusão com `cw-card` + tokens.
+- `CongressoStepModalidade` refatorado para grid de cards (`cw-grid` + `cw-card`) com ícone gradient por tipo de disputa (`Brackets`, `Group`, `ListOrdered`, `FileText`), título responsivo, badge "Sorteado" quando aplicável. Substitui a lista vertical simples.
+- `CongressoStepCampeoes` refatorado para usar `cw-parts-head` no header, `cw-card` para cards de campeão, `cw-badge b-success/b-slate` para status inscrito/não inscrito. Empty state com ícone Crown. Modal de edição modernizado.
+
 ## [1.21.0] - 2026-05-30
 
 ### Added (Modo Congresso — quick wins funcionais)

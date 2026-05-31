@@ -5,6 +5,7 @@ import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
+import { Crown, Check, ArrowRight, X } from '../../lib/icons'
 
 type Props = {
   eventoId: number
@@ -15,31 +16,6 @@ type Props = {
 
 const FG = 'var(--cw-fg)'
 const DIM = 'var(--cw-dim)'
-const SUCCESS = 'var(--success)'
-const CARD_BG = 'var(--cw-card)'
-const CARD_BORDER = 'var(--cw-card-bd)'
-const MODAL_BG = 'var(--card-bg)'
-const MODAL_BORDER = 'var(--card-border)'
-const BTN_PRIMARY = {
-  background: 'var(--brand-500)',
-  color: '#fff',
-  border: 'none',
-  borderRadius: 'var(--radius-lg)',
-  padding: '12px 24px',
-  fontSize: 16,
-  fontWeight: 600,
-  cursor: 'pointer',
-} as const
-const BTN_GHOST_OUTLINE = {
-  background: 'transparent',
-  color: 'var(--brand-500)',
-  border: '1px solid var(--brand-500)',
-  borderRadius: 'var(--radius-lg)',
-  padding: '12px 24px',
-  fontSize: 16,
-  fontWeight: 600,
-  cursor: 'pointer',
-} as const
 
 const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
@@ -88,92 +64,104 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
   const excludeCampeoesIds = campeoes.map(c => c.participante_id)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {modalidade && (
-        <div style={{ marginBottom: 20 }}>
-          <div style={{ fontSize: 14, color: DIM, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-            Modalidade
-          </div>
-          <h2 style={{ fontSize: 28, fontWeight: 700, color: FG, marginTop: 4 }}>
-            {modalidade.nome} ({modalidade.sigla})
-          </h2>
+    <>
+      <div className="cw-parts-head">
+        <div>
+          <h1 className="cw-h1" style={{ marginBottom: 6 }}>
+            <Crown size={32} style={{ verticalAlign: '-4px', marginRight: 10, color: 'var(--warn)' }} />
+            Campeões do ano anterior
+          </h1>
+          <p className="cw-sub" style={{ margin: 0 }}>
+            {modalidade?.nome} · {ordenados.length} {ordenados.length === 1 ? 'cadastrado' : 'cadastrados'}
+          </p>
+        </div>
+        <button onClick={() => setEditOpen(true)} className="cw-btn cw-btn-ghost">
+          Editar campeões
+        </button>
+      </div>
+
+      {isLoading ? (
+        <p style={{ color: DIM, fontSize: 18 }}>Carregando campeões...</p>
+      ) : ordenados.length === 0 ? (
+        <div style={{
+          padding: '60px 20px', textAlign: 'center', color: DIM,
+          background: 'var(--cw-card)', border: '1px dashed var(--cw-card-bd)',
+          borderRadius: 'var(--radius-xl)',
+        }}>
+          <Crown size={48} style={{ color: 'var(--warn)', marginBottom: 12 }} />
+          <p style={{ fontSize: 18, marginBottom: 8 }}>Nenhum campeão cadastrado para esta modalidade.</p>
+          <p style={{ fontSize: 14 }}>Cabeças não serão semeadas no sorteio.</p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 28 }}>
+          {ordenados.map(c => {
+            const inscrito = inscritosSet.has(c.participante_id)
+            return (
+              <div
+                key={c.id}
+                style={{
+                  background: 'var(--cw-card)',
+                  border: '1px solid var(--cw-card-bd)',
+                  borderRadius: 'var(--radius-xl)',
+                  padding: '16px 20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 16,
+                }}
+              >
+                <CampeaoBadge posicao={c.posicao} large />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 'clamp(18px, 1.6vw, 22px)', color: FG, fontWeight: 700 }}>{c.participante.nome}</div>
+                  {c.participante.subtitulo && (
+                    <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{c.participante.subtitulo}</div>
+                  )}
+                </div>
+                <span
+                  className={`cw-badge ${inscrito ? 'b-success' : 'b-slate'}`}
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  {inscrito ? <><Check size={14} /> Inscrito</> : 'Não inscrito'}
+                </span>
+              </div>
+            )
+          })}
         </div>
       )}
 
-      <div style={{ flex: 1, overflowY: 'auto', minHeight: 0, marginBottom: 16 }}>
-        {isLoading ? (
-          <p style={{ color: DIM, fontSize: 18 }}>Carregando campeões...</p>
-        ) : ordenados.length === 0 ? (
-          <p style={{ color: DIM, fontSize: 18 }}>Nenhum campeão cadastrado para esta modalidade.</p>
-        ) : (
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {ordenados.map(c => {
-              const inscrito = inscritosSet.has(c.participante_id)
-              return (
-                <li
-                  key={c.id}
-                  style={{
-                    background: CARD_BG,
-                    border: `1px solid ${CARD_BORDER}`,
-                    borderRadius: 12,
-                    padding: '16px 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 16,
-                  }}
-                >
-                  <CampeaoBadge posicao={c.posicao} large />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 22, color: FG, fontWeight: 600 }}>{c.participante.nome}</div>
-                    {c.participante.subtitulo && (
-                      <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{c.participante.subtitulo}</div>
-                    )}
-                  </div>
-                  <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                      padding: '6px 14px',
-                      borderRadius: 999,
-                      background: inscrito ? 'rgba(20, 184, 138, 0.15)' : 'rgba(148, 163, 184, 0.15)',
-                      color: inscrito ? SUCCESS : DIM,
-                      border: `1px solid ${inscrito ? SUCCESS : DIM}`,
-                    }}
-                  >
-                    {inscrito ? '✓ Inscrito neste evento' : 'Não inscrito'}
-                  </span>
-                </li>
-              )
-            })}
-          </ul>
-        )}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 12 }}>
+        <button onClick={onNext} className="cw-btn cw-btn-primary">
+          Próximo <ArrowRight size={20} />
+        </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: 12, gap: 12 }}>
-        <button onClick={() => setEditOpen(true)} style={BTN_GHOST_OUTLINE}>Editar campeões</button>
-        <button onClick={onNext} style={BTN_PRIMARY}>Próximo →</button>
-      </div>
-
+      {/* Modal Editar */}
       {editOpen && (
         <div
           style={{
             position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 40,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 300,
           }}
           onClick={() => setEditOpen(false)}
         >
           <div
             style={{
-              background: MODAL_BG, border: `1px solid ${MODAL_BORDER}`,
-              borderRadius: 16, padding: 24, maxWidth: 960, width: '100%', margin: '0 16px',
-              maxHeight: '85vh', overflowY: 'auto',
+              background: 'var(--cw-card)',
+              border: '1px solid var(--cw-card-bd)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 28,
+              maxWidth: 960,
+              width: '100%',
+              margin: '0 16px',
+              maxHeight: '85vh',
+              overflowY: 'auto',
             }}
             onClick={e => e.stopPropagation()}
           >
-            <h3 style={{ fontSize: 20, fontWeight: 600, color: FG, marginBottom: 4 }}>
+            <h3 className="cw-h2" style={{ marginBottom: 4, fontSize: 'clamp(20px, 2.2vw, 26px)' }}>
+              <Crown size={26} style={{ verticalAlign: '-4px', marginRight: 8, color: 'var(--warn)' }} />
               Editar campeões do ano anterior
             </h3>
-            <p style={{ fontSize: 13, color: DIM, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: DIM, marginBottom: 20 }}>
               Cadastre até 12 colocados. Quem se inscrever neste evento recebe o badge correspondente.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -192,12 +180,14 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
                 )
               })}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
-              <button onClick={() => setEditOpen(false)} style={BTN_PRIMARY}>Fechar</button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 24 }}>
+              <button onClick={() => setEditOpen(false)} className="cw-btn cw-btn-primary">
+                <X size={16} /> Fechar
+              </button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

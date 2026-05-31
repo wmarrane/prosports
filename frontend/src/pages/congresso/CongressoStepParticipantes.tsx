@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
+import { Plus, X, ArrowRight } from '../../lib/icons'
 
 type Props = {
   eventoId: number
@@ -13,38 +14,7 @@ type Props = {
 
 const FG = 'var(--cw-fg)'
 const DIM = 'var(--cw-dim)'
-const LINE = 'var(--cw-line)'
 const DANGER = 'var(--danger)'
-const MODAL_BG = 'var(--card-bg)'
-const MODAL_BORDER = 'var(--card-border)'
-const BTN_PRIMARY = {
-  background: 'var(--brand-500)',
-  color: '#fff',
-  border: 'none',
-  borderRadius: 'var(--radius-lg)',
-  padding: '12px 24px',
-  fontSize: 16,
-  fontWeight: 600,
-  cursor: 'pointer',
-} as const
-const BTN_PRIMARY_SM = {
-  background: 'var(--brand-500)',
-  color: '#fff',
-  border: 'none',
-  borderRadius: 'var(--radius-md)',
-  padding: '8px 16px',
-  fontSize: 14,
-  fontWeight: 600,
-  cursor: 'pointer',
-} as const
-const BTN_GHOST = {
-  background: 'transparent',
-  color: DIM,
-  border: 'none',
-  padding: '12px 20px',
-  fontSize: 14,
-  cursor: 'pointer',
-} as const
 
 export default function CongressoStepParticipantes({ eventoId, modalidadeId, competicaoId, onNext }: Props) {
   const queryClient = useQueryClient()
@@ -89,109 +59,112 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   const excludeIds = inscricoes.map(i => i.participante_id)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {modalidade && (
-        <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <div style={{ fontSize: 14, color: DIM, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              Modalidade
-            </div>
-            <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG, marginTop: 4 }}>
-              {modalidade.nome} ({modalidade.sigla})
-            </h2>
-            <div style={{ fontSize: 16, color: DIM, marginTop: 4 }}>
-              {inscricoes.length} {inscricoes.length === 1 ? 'inscrito' : 'inscritos'}
-            </div>
-          </div>
+    <>
+      <div className="cw-parts-head">
+        <div>
+          <h1 className="cw-h1" style={{ marginBottom: 6 }}>Participantes confirmados</h1>
+          <p className="cw-sub" style={{ margin: 0 }}>
+            {modalidade?.nome} · <b style={{ color: FG }}>{inscricoes.length}</b> {inscricoes.length === 1 ? 'confirmado' : 'confirmados'}
+          </p>
+        </div>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
           <button
+            className="cw-btn cw-btn-accent"
             onClick={() => { setInscreverOpen(true); setPickedId(null); setErroModal('') }}
-            style={BTN_PRIMARY_SM}
-          >+ Inscrever</button>
+          >
+            <Plus size={20} /> Incluir participante
+          </button>
+        </div>
+      </div>
+
+      {isLoading ? (
+        <p style={{ color: DIM, fontSize: 18 }}>Carregando inscritos...</p>
+      ) : inscricoes.length === 0 ? (
+        <div style={{
+          padding: '60px 20px',
+          textAlign: 'center',
+          color: DIM,
+          background: 'var(--cw-card)',
+          border: '1px dashed var(--cw-card-bd)',
+          borderRadius: 'var(--radius-xl)',
+        }}>
+          <p style={{ fontSize: 18, marginBottom: 8 }}>Nenhum inscrito nesta modalidade.</p>
+          <p style={{ fontSize: 14 }}>Clique em "Incluir participante" para adicionar.</p>
+        </div>
+      ) : (
+        <div className="cw-plist cw-plist-full">
+          {inscricoes.map((i, idx) => {
+            const nome = i.participante.nome
+            const displayNome = nome.length > 50 ? nome.slice(0, 50) + '…' : nome
+            return (
+              <div className="cw-prow" key={i.id}>
+                <span className="cw-prow-n">{String(idx + 1).padStart(2, '0')}</span>
+                <div className="cw-prow-main">
+                  <span className="cw-prow-name">{displayNome}</span>
+                  {i.participante.subtitulo && (
+                    <span className="cw-prow-club">{i.participante.subtitulo}</span>
+                  )}
+                </div>
+                <button
+                  className="cw-prow-rm"
+                  onClick={() => { if (confirm(`Remover inscrição de "${i.participante.nome}"?`)) remover(i.id) }}
+                  title="Remover"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            )
+          })}
         </div>
       )}
 
-      <div style={{ flex: 1, overflowY: 'auto', minHeight: 0, marginBottom: 16 }}>
-        {isLoading ? (
-          <p style={{ color: DIM, fontSize: 18 }}>Carregando inscritos...</p>
-        ) : inscricoes.length === 0 ? (
-          <p style={{ color: DIM, fontSize: 18 }}>Nenhum inscrito nesta modalidade.</p>
-        ) : (
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {inscricoes.map(i => (
-              <li
-                key={i.id}
-                style={{
-                  borderBottom: `1px solid ${LINE}`,
-                  padding: '12px 8px',
-                  fontSize: 22,
-                  color: FG,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                }}
-              >
-                <span style={{ flex: 1 }}>
-                  {i.participante.nome}
-                  {i.participante.subtitulo && (
-                    <span style={{ fontSize: 16, color: DIM, marginLeft: 12 }}>
-                      — {i.participante.subtitulo}
-                    </span>
-                  )}
-                </span>
-                <button
-                  onClick={() => { if (confirm(`Remover inscrição de "${i.participante.nome}"?`)) remover(i.id) }}
-                  style={{
-                    color: DIM,
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: 22,
-                    padding: '4px 10px',
-                    lineHeight: 1,
-                  }}
-                  title="Remover inscrição"
-                >×</button>
-              </li>
-            ))}
-          </ul>
-        )}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 28 }}>
+        <button onClick={onNext} className="cw-btn cw-btn-primary">
+          Próximo <ArrowRight size={20} />
+        </button>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 12 }}>
-        <button onClick={onNext} style={BTN_PRIMARY}>Próximo →</button>
-      </div>
-
+      {/* Modal Incluir Participante */}
       {inscreverOpen && (
         <div
           style={{
             position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 40,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 300,
           }}
           onClick={() => setInscreverOpen(false)}
         >
           <div
             style={{
-              background: MODAL_BG, border: `1px solid ${MODAL_BORDER}`,
-              borderRadius: 16, padding: 24, maxWidth: 480, width: '100%', margin: '0 16px',
+              background: 'var(--cw-card)',
+              border: '1px solid var(--cw-card-bd)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 28,
+              maxWidth: 520,
+              width: '100%',
+              margin: '0 16px',
             }}
             onClick={e => e.stopPropagation()}
           >
-            <h3 style={{ fontSize: 20, fontWeight: 600, color: FG, marginBottom: 16 }}>
-              Inscrever participante
+            <h3 className="cw-h2" style={{ marginBottom: 16, fontSize: 'clamp(20px, 2.2vw, 26px)' }}>
+              Incluir participante
             </h3>
             <ParticipanteSelect value={pickedId} onChange={(id) => setPickedId(id)} excludeIds={excludeIds} />
             {erroModal && <p style={{ color: DANGER, fontSize: 14, marginTop: 12 }}>{erroModal}</p>}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 20 }}>
-              <button onClick={() => setInscreverOpen(false)} style={BTN_GHOST}>Cancelar</button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, marginTop: 24 }}>
+              <button
+                onClick={() => setInscreverOpen(false)}
+                className="cw-btn cw-btn-ghost"
+              >Cancelar</button>
               <button
                 onClick={() => criar()}
                 disabled={!pickedId || salvando}
-                style={{ ...BTN_PRIMARY_SM, opacity: (!pickedId || salvando) ? 0.5 : 1 }}
+                className="cw-btn cw-btn-primary"
+                style={{ opacity: (!pickedId || salvando) ? 0.5 : 1 }}
               >{salvando ? 'Salvando...' : 'Confirmar'}</button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
