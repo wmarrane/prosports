@@ -5,6 +5,26 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.33.0] - 2026-05-31
+
+### Added (Subtítulo parametrizável por Competição)
+- **Schema**: `Competicao.subtitulo_campos: String[]` substitui o boolean `adicionar_subtitulo`. Migration preserva comportamento atual (`true` → `['subtitulo']`, `false` → `[]`); coluna antiga removida.
+- **Backend**: validação zod aceita enum (`subtitulo | municipio | inspetoria | delegacia`), rejeita duplicatas e máx 4 itens. Service `validateCampos` mantém invariantes.
+- **Frontend — util `composeSubtituloLine(p, campos)`** (em `frontend/src/lib/compose-subtitulo.ts`): junta valores na ordem definida com ` | `, omite vazios silenciosamente, retorna `null` quando nada compõe. 8 testes vitest cobrindo todos os casos.
+- **CompeticaoForm** ganhou seção "Linha de exibição do participante": checkboxes dos 4 campos + reorder via setas ↑↓ + preview ao vivo com dados de exemplo ("João Silva — Clube XYZ | Campinas/SP | ...").
+- **Componentes de sorteio** (`SorteioOrdem`, `SorteioGrupos`, `SorteioChaves`, `BracketTree`, `CampeaoSlot`) trocam prop `mostrarSubtitulo: boolean` por `subtituloLine?: (p) => string | null`.
+- **Pages atualizadas**: `EventoInscricoes`, `CongressoStepParticipantes`, `CongressoStepSorteio`, `CongressoStepCampeoes`, `ImportInscricoesModal`, `Relatorio` derivam `camposSubtitulo` de `evento.competicao.subtitulo_campos` e passam o callback aos children. `ImportInscricoesModal` e `Relatorio` ainda usam `incluiSubtitulo = camposSubtitulo.includes('subtitulo')` para decidir se a coluna `subtitulo` aparece no CSV.
+- **CompeticoesList**: badge "com subtítulo" virou contador `"N campo(s) extra(s)"` com tooltip listando os campos selecionados.
+- **EventoInscricoes** — chip de inscrito: agora compõe a linha pela config; se `municipio` está na config, não duplica com o município mostrado separadamente.
+
+### Migration
+- `adicionar_subtitulo = true` → `subtitulo_campos = ['subtitulo']`
+- `adicionar_subtitulo = false` → `subtitulo_campos = []`
+- Coluna `adicionar_subtitulo` é removida no fim da migration.
+
+### Telas globais (sem mudança)
+- `ParticipantesList`, `ParticipanteForm`, `ParticipanteSelect` continuam exibindo subtítulo sempre — cadastro global não pertence a competição específica.
+
 ## [1.32.14] - 2026-05-31
 
 ### Changed (Bracket — conectores coloridos por match)
