@@ -6,6 +6,17 @@ import PageHeader from '../../components/PageHeader'
 import { competicoesService } from '../../services/competicoes'
 import { UFS } from '../../lib/ufs'
 import { Check, X, Trophy } from '../../lib/icons'
+import { ChevronUp, ChevronDown } from 'lucide-react'
+import type { CampoSubtitulo } from '../../types/competicao'
+import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+
+const CAMPOS_LABELS: Record<CampoSubtitulo, string> = {
+  subtitulo: 'Subtítulo',
+  municipio: 'Município (nome/UF)',
+  inspetoria: 'Inspetoria',
+  delegacia: 'Delegacia',
+}
+const CAMPOS_ORDEM: CampoSubtitulo[] = ['subtitulo', 'municipio', 'inspetoria', 'delegacia']
 import ModalidadesPanel from './ModalidadesPanel'
 
 // Agrupamento por região para melhor escaneabilidade
@@ -25,7 +36,7 @@ export default function CompeticaoForm() {
 
   const [nome, setNome] = useState('')
   const [estados, setEstados] = useState<string[]>([])
-  const [adicionarSubtitulo, setAdicionarSubtitulo] = useState(false)
+  const [campos, setCampos] = useState<CampoSubtitulo[]>([])
   const [erro, setErro] = useState('')
 
   const { data: existing } = useQuery({
@@ -38,13 +49,13 @@ export default function CompeticaoForm() {
     if (existing) {
       setNome(existing.nome)
       setEstados(existing.estados)
-      setAdicionarSubtitulo(existing.adicionar_subtitulo)
+      setCampos(existing.subtitulo_campos ?? [])
     }
   }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
-      const payload = { nome, estados, adicionar_subtitulo: adicionarSubtitulo }
+      const payload = { nome, estados, subtitulo_campos: campos }
       return isEdit
         ? competicoesService.editar(Number(id), payload)
         : competicoesService.criar(payload)
@@ -65,6 +76,20 @@ export default function CompeticaoForm() {
     setEstados(prev =>
       todosSelecionados ? prev.filter(x => !ufs.includes(x)) : Array.from(new Set([...prev, ...ufs]))
     )
+  }
+
+  function toggleCampo(c: CampoSubtitulo) {
+    setCampos(prev => prev.includes(c) ? prev.filter(x => x !== c) : [...prev, c])
+  }
+  function moverCampo(c: CampoSubtitulo, dir: -1 | 1) {
+    setCampos(prev => {
+      const i = prev.indexOf(c)
+      const j = i + dir
+      if (i < 0 || j < 0 || j >= prev.length) return prev
+      const arr = [...prev]
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+      return arr
+    })
   }
 
   function handleSubmit(e: FormEvent) {
@@ -234,36 +259,100 @@ export default function CompeticaoForm() {
         <div className="mb-4">
           <div className="eyebrow">Opções</div>
           <h3 className="sec-title" style={{ fontSize: 17 }}>
-            Configurações
+            Linha de exibição do participante
           </h3>
+          <p className="text-xs text-[var(--t3)] mt-1">
+            Selecione e ordene os campos que aparecerão ao lado do nome do participante nos sorteios.
+          </p>
         </div>
 
-        <label
-          className="flex items-start gap-3 cursor-pointer"
-          style={{
-            padding: 14,
-            background: adicionarSubtitulo ? 'var(--brand-50)' : 'var(--card-bg-2)',
-            border: `1px solid ${adicionarSubtitulo ? 'var(--brand-500)' : 'var(--card-border)'}`,
-            borderRadius: 'var(--radius-lg)',
-            transition: 'all 120ms ease',
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={adicionarSubtitulo}
-            onChange={e => setAdicionarSubtitulo(e.target.checked)}
-            className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)] mt-0.5"
-          />
-          <div>
-            <div className="text-sm font-semibold text-[var(--t1)]">
-              Adicionar subtítulo aos participantes
+        {/* Checkboxes de seleção */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 8, marginBottom: 16 }}>
+          {CAMPOS_ORDEM.map(c => {
+            const ativo = campos.includes(c)
+            return (
+              <label key={c} style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                padding: '10px 12px',
+                background: ativo ? 'var(--brand-50)' : 'var(--card-bg-2)',
+                border: `1px solid ${ativo ? 'var(--brand-500)' : 'var(--card-border)'}`,
+                borderRadius: 'var(--radius-lg)',
+                cursor: 'pointer',
+                transition: 'all 120ms ease',
+              }}>
+                <input
+                  type="checkbox"
+                  checked={ativo}
+                  onChange={() => toggleCampo(c)}
+                  className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)]"
+                />
+                <span className="text-sm font-medium text-[var(--t1)]">{CAMPOS_LABELS[c]}</span>
+              </label>
+            )
+          })}
+        </div>
+
+        {/* Reorder + preview */}
+        {campos.length > 0 ? (
+          <>
+            <div className="eyebrow mb-2">Ordem de exibição</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+              {campos.map((c, i) => (
+                <div key={c} style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  padding: '8px 12px',
+                  background: 'var(--card-bg-2)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-md)',
+                }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--t4)', minWidth: 20 }}>
+                    {i + 1}.
+                  </span>
+                  <span className="text-sm flex-1 text-[var(--t1)]">{CAMPOS_LABELS[c]}</span>
+                  <button
+                    type="button"
+                    onClick={() => moverCampo(c, -1)}
+                    disabled={i === 0}
+                    className="p-1 text-[var(--t3)] hover:text-[var(--brand-500)] disabled:opacity-30 disabled:cursor-not-allowed"
+                    title="Mover para cima"
+                  ><ChevronUp size={16} /></button>
+                  <button
+                    type="button"
+                    onClick={() => moverCampo(c, 1)}
+                    disabled={i === campos.length - 1}
+                    className="p-1 text-[var(--t3)] hover:text-[var(--brand-500)] disabled:opacity-30 disabled:cursor-not-allowed"
+                    title="Mover para baixo"
+                  ><ChevronDown size={16} /></button>
+                </div>
+              ))}
             </div>
-            <p className="text-xs text-[var(--t3)] mt-1">
-              Ativado, permite incluir um subtítulo (clube, equipe, sigla) ao lado do nome do
-              participante. Útil quando a competição reúne atletas de várias equipes.
-            </p>
-          </div>
-        </label>
+            <div style={{
+              padding: '10px 14px',
+              background: 'var(--brand-50)',
+              border: '1px solid var(--brand-500)',
+              borderRadius: 'var(--radius-md)',
+              fontSize: 13,
+            }}>
+              <span className="text-[var(--t3)] mr-2">Preview:</span>
+              <b className="text-[var(--brand-700)]">João Silva</b>
+              <span className="text-[var(--t2)] ml-2">
+                {composeSubtituloLine(
+                  {
+                    subtitulo: 'Clube XYZ',
+                    municipio: { nome: 'Campinas', uf: 'SP' } as any,
+                    inspetoria: { nome: 'Inspetoria Sul' } as any,
+                    delegacia: { nome: 'Delegacia Centro' } as any,
+                  },
+                  campos
+                )}
+              </span>
+            </div>
+          </>
+        ) : (
+          <p className="text-xs text-[var(--t4)] italic">
+            Nenhuma informação adicional será exibida ao lado do nome.
+          </p>
+        )}
       </section>
     </>
   )
