@@ -25,6 +25,10 @@ import EventoInscricoes from './pages/eventos/EventoInscricoes'
 import Relatorio from './pages/Relatorio'
 import Admin from './pages/Admin'
 import ModoCongresso from './pages/congresso/ModoCongresso'
+import UsuariosList from './pages/usuarios/UsuariosList'
+import UsuarioForm from './pages/usuarios/UsuarioForm'
+import MinhaConta from './pages/conta/MinhaConta'
+import TrocarSenha from './pages/conta/TrocarSenha'
 
 export default function App() {
   return (
@@ -74,6 +78,22 @@ export default function App() {
             <Route path="/competicoes/:id/editar" element={<CompeticaoForm />} />
 
             <Route path="/novidades" element={<Novidades />} />
+
+            <Route element={<ProtectedRoute roles={['ADMIN']} />}>
+              <Route path="/usuarios" element={<UsuariosList />} />
+              <Route path="/usuarios/novo" element={<UsuarioForm />} />
+              <Route path="/usuarios/:id/editar" element={<UsuarioForm />} />
+            </Route>
+
+            <Route path="/conta" element={<MinhaConta />} />
+            <Route path="/conta/senha" element={<TrocarSenha />} />
+
+            <Route path="/sem-acesso" element={
+              <div className="p-10 text-[var(--t1)]">
+                <h1 className="text-2xl font-bold mb-2">Acesso negado</h1>
+                <p className="text-[var(--t3)]">Você não tem permissão para acessar essa área.</p>
+              </div>
+            } />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
