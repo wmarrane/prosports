@@ -1,9 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
-import DataTable from '../../components/DataTable'
 import { competicoesService } from '../../services/competicoes'
-import type { Competicao } from '../../types/competicao'
+import { Trophy, Users, ChevR, Plus } from '../../lib/icons'
 
 export default function CompeticoesList() {
   const navigate = useNavigate()
@@ -20,32 +19,217 @@ export default function CompeticoesList() {
     onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
-  const columns = [
-    { header: 'Nome', accessor: (row: Competicao) => row.nome },
-    { header: 'Estados', accessor: (row: Competicao) => row.estados.slice().sort().join(', ') },
-    {
-      header: 'Subtítulo',
-      accessor: (row: Competicao) => row.adicionar_subtitulo ? '✓' : '—',
-      className: 'w-20 text-center',
-    },
-    {
-      header: 'Ações',
-      accessor: (row: Competicao) => (
-        <div className="flex gap-2">
-          <button onClick={() => navigate(`/competicoes/${row.id}/editar`)} className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs">Editar</button>
-          <button onClick={() => { if (confirm(`Remover "${row.nome}"?`)) remover(row.id) }} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs">Remover</button>
-        </div>
-      ),
-      className: 'w-28',
-    },
-  ]
-
   return (
     <div className="text-[var(--t1)]">
-      <PageHeader title="Competições" actionLabel="+ Nova Competição" actionTo="/competicoes/nova" />
+      <PageHeader
+        eyebrow="Operação"
+        title="Competições"
+        sub="Cada competição define um conjunto de modalidades. Os eventos são edições que herdam essas modalidades."
+        actions={
+          <button onClick={() => navigate('/competicoes/nova')} className="btn btn-primary">
+            <Plus size={16} /> Nova Competição
+          </button>
+        }
+      />
+
       <div className="p-6">
-        {isLoading ? <p className="text-[var(--t3)] text-sm">Carregando...</p>
-          : <DataTable columns={columns} data={data} keyExtractor={r => r.id} emptyMessage="Nenhuma competição cadastrada." />}
+        {isLoading ? (
+          <p className="text-[var(--t3)] text-sm">Carregando...</p>
+        ) : data.length === 0 ? (
+          <div
+            className="text-center text-[var(--t3)] py-16"
+            style={{
+              background: 'var(--card-bg-2)',
+              border: '1px dashed var(--card-border)',
+              borderRadius: 'var(--radius-xl)',
+            }}
+          >
+            <Trophy size={40} className="mx-auto mb-3 text-[var(--t4)]" />
+            <p className="text-base mb-1">Nenhuma competição cadastrada.</p>
+            <p className="text-sm">Clique em "+ Nova Competição" para começar.</p>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+              gap: 16,
+            }}
+          >
+            {data.map((c, i) => (
+              <div
+                key={c.id}
+                className="card pad fade-in"
+                style={{
+                  animationDelay: `${i * 40}ms`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 14,
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-xl)',
+                  padding: 20,
+                  boxShadow: 'var(--shadow-card)',
+                }}
+              >
+                {/* Header: icon + nome + counts */}
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+                  <div style={{ display: 'flex', gap: 12, minWidth: 0, flex: 1 }}>
+                    <div
+                      style={{
+                        width: 46,
+                        height: 46,
+                        borderRadius: 13,
+                        background: 'var(--grad-brand-deep)',
+                        color: '#fff',
+                        display: 'grid',
+                        placeItems: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Trophy size={23} />
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: 10.5,
+                          color: 'var(--t4)',
+                          letterSpacing: '0.05em',
+                        }}
+                      >
+                        #{String(c.id).padStart(3, '0')}
+                      </div>
+                      <h3
+                        style={{
+                          fontSize: 16,
+                          fontWeight: 700,
+                          color: 'var(--t1)',
+                          lineHeight: 1.2,
+                          margin: '2px 0 0',
+                          overflowWrap: 'anywhere',
+                        }}
+                      >
+                        {c.nome}
+                      </h3>
+                    </div>
+                  </div>
+                  {c._count && (
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        padding: '4px 10px',
+                        borderRadius: 'var(--radius-pill)',
+                        fontSize: 11,
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        background: 'var(--card-bg-2)',
+                        color: 'var(--t3)',
+                        border: '1px solid var(--card-border)',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {c._count.eventos} {c._count.eventos === 1 ? 'evento' : 'eventos'}
+                    </span>
+                  )}
+                </div>
+
+                {/* Estados */}
+                {c.estados.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                    {c.estados
+                      .slice()
+                      .sort()
+                      .map(uf => (
+                        <span
+                          key={uf}
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: 11,
+                            fontWeight: 700,
+                            padding: '3px 8px',
+                            borderRadius: 'var(--radius-md)',
+                            background: 'var(--brand-50)',
+                            color: 'var(--brand-700)',
+                          }}
+                        >
+                          {uf}
+                        </span>
+                      ))}
+                  </div>
+                )}
+
+                {/* Modalidades + subtítulo flag */}
+                <div
+                  style={{
+                    borderTop: '1px solid var(--card-border)',
+                    paddingTop: 14,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 12,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 12.5,
+                      color: 'var(--t3)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                    }}
+                  >
+                    <Users size={14} />
+                    {c._count?.modalidades ?? 0} {c._count?.modalidades === 1 ? 'modalidade' : 'modalidades'}
+                  </span>
+                  {c.adicionar_subtitulo && (
+                    <span style={{ fontSize: 11, color: 'var(--t4)', fontStyle: 'italic' }}>
+                      com subtítulo
+                    </span>
+                  )}
+                </div>
+
+                {/* Actions */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 8,
+                    marginTop: 'auto',
+                    paddingTop: 6,
+                  }}
+                >
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <button
+                      onClick={() => navigate(`/competicoes/${c.id}/editar`)}
+                      className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs font-semibold"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Remover "${c.nome}"?`)) remover(c.id)
+                      }}
+                      className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
+                    >
+                      Remover
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => navigate(`/eventos?competicao=${c.id}`)}
+                    className="btn btn-ghost btn-sm"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12 }}
+                  >
+                    Ver eventos <ChevR size={14} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

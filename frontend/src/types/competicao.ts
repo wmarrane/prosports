@@ -5,4 +5,8 @@ export type Competicao = {
   adicionar_subtitulo: boolean
   criado_em: string
   atualizado_em: string
+  _count?: {
+    modalidades: number
+    eventos: number
+  }
 }

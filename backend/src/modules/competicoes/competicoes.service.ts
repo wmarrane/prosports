@@ -21,7 +21,12 @@ async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
 }
 
 export async function listar() {
-  return prisma.competicao.findMany({ orderBy: { nome: 'asc' } })
+  return prisma.competicao.findMany({
+    orderBy: { nome: 'asc' },
+    include: {
+      _count: { select: { modalidades: true, eventos: true } },
+    },
+  })
 }
 
 export async function buscarPorId(id: number) {

@@ -29,7 +29,10 @@ describe('competicoes.service', () => {
     mockPrisma.competicao.findMany.mockResolvedValue([{ id: 1, nome: 'Copa A' }])
     const result = await service.listar()
     expect(result).toEqual([{ id: 1, nome: 'Copa A' }])
-    expect(mockPrisma.competicao.findMany).toHaveBeenCalledWith({ orderBy: { nome: 'asc' } })
+    expect(mockPrisma.competicao.findMany).toHaveBeenCalledWith({
+      orderBy: { nome: 'asc' },
+      include: { _count: { select: { modalidades: true, eventos: true } } },
+    })
   })
 
   it('buscarPorId lança 404 quando não encontrado', async () => {

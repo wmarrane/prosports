@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.25.0] - 2026-05-31
+
+### Changed (Competições)
+- **Competições** trocou de DataTable para **grid de cards** (360px+ auto-fill) alinhado com o design de referência (`claudedesign/design_v3/competicoes.jsx`). Cada card mostra: ícone troféu em gradient brand-deep, ID monospace, nome, badge com contagem de eventos, pills de estados UF, contagem de modalidades, indicador de subtítulo, ações (Editar/Remover) + "Ver eventos →".
+- Empty state com ícone Trophy + mensagem amigável (em vez de texto "Nenhuma competição.").
+- Header agora usa eyebrow "Operação" + subtítulo explicativo.
+
+### Added (backend)
+- `competicoesService.listar()` agora inclui `_count` (modalidades + eventos) via Prisma `include`. Atualizado teste correspondente.
+- Tipo `Competicao` frontend ganhou campo opcional `_count`.
+- Ícone `Users` exportado em `frontend/src/lib/icons.ts`.
+
 ## [1.24.1] - 2026-05-31
 
 ### Changed (Modo Congresso — ajustes UX)

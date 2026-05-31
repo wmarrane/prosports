@@ -2,6 +2,7 @@ export {
   LayoutDashboard as Panel,
   Trophy,
   Users as Cadastro,
+  Users,
   Brackets as Bracket,
   Group as Groups,
   ListOrdered as Order,
