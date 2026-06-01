@@ -146,11 +146,32 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
                     >
                       <Icon size={40} />
                     </span>
-                    {sorteada && (
-                      <span className="cw-badge b-success">
-                        <Check size={14} /> Sorteado
-                      </span>
-                    )}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12 }}>
+                      {sorteada && (
+                        <span className="cw-badge b-success">
+                          <Check size={14} /> Sorteado
+                        </span>
+                      )}
+                      {evento?.logo_url && (
+                        <div
+                          style={{
+                            width: 110, height: 110,
+                            display: 'grid', placeItems: 'center',
+                            background: 'rgba(255,255,255,0.04)',
+                            border: '1px solid var(--cw-card-bd)',
+                            borderRadius: 'var(--radius-lg)',
+                            padding: 8, overflow: 'hidden',
+                          }}
+                          title={`Logo de ${evento.nome}`}
+                        >
+                          <img
+                            src={evento.logo_url}
+                            alt={`Logo ${evento.nome}`}
+                            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="cw-md-card-eyebrow">{tipoLabel}</div>
                   <h2 className="cw-md-card-title">{selectedMod.nome}</h2>

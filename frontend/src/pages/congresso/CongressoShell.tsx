@@ -137,7 +137,31 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
       )}
 
       <div className="cw-main">
-        <div className="cw-panel">{children}</div>
+        <div className="cw-panel" style={{ position: 'relative' }}>
+          {eventoLogoUrl && (step === 'participantes' || step === 'sorteio') && (
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute', inset: 0,
+                display: 'grid', placeItems: 'center',
+                pointerEvents: 'none', zIndex: 0,
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={eventoLogoUrl}
+                alt=""
+                style={{
+                  maxWidth: '55%', maxHeight: '60%',
+                  objectFit: 'contain',
+                  opacity: 0.06,
+                  filter: 'grayscale(40%)',
+                }}
+              />
+            </div>
+          )}
+          <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+        </div>
       </div>
     </div>
   )

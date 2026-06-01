@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.43.1] - 2026-06-01
+
+### Added (Logo do evento mais visível no Modo Congresso)
+- **CongressoStepModalidade** (card direito): logo do evento (110×110, padding 8, borda sutil) aparece abaixo do badge "Sorteado" na coluna direita do top do card da modalidade selecionada. Renderiza apenas se o evento tem `logo_url`.
+- **CongressoShell** (etapas Participantes e Sorteio): logo do evento renderizado como **marca d'água centralizada** no fundo do painel (max 55% width / 60% height, opacity 0.06, grayscale 40%, `pointer-events: none`, atrás do conteúdo via `z-index`). Aparece apenas se `eventoLogoUrl` existir e step ∈ {participantes, sorteio}.
+
 ## [1.43.0] - 2026-06-01
 
 ### Added (Logotipo customizado por evento)
