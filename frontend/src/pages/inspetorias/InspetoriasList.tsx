@@ -12,7 +12,7 @@ export default function InspetoriasList() {
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['inspetorias'],
-    queryFn: inspetoriasService.listar,
+    queryFn: () => inspetoriasService.listar(),
   })
 
   const { mutate: remover } = useMutation({
@@ -108,6 +108,9 @@ function Item({ item, index, onEdit, onRemove }: { item: Inspetoria; index: numb
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)' }}>{item.nome}</div>
+        <div className="text-xs text-[var(--t3)] mt-0.5 truncate">
+          {item.delegacia?.nome ?? '—'}
+        </div>
         <div className="text-xs text-[var(--t4)] font-mono mt-0.5">#{String(item.id).padStart(3, '0')}</div>
       </div>
       <div className="flex gap-3 flex-shrink-0" onClick={e => e.stopPropagation()}>

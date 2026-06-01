@@ -2,11 +2,17 @@ import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './inspetorias.service'
 
-const createSchema = z.object({ nome: z.string().min(1) })
+const createSchema = z.object({
+  nome: z.string().min(1),
+  delegacia_id: z.number().int().positive(),
+})
 const updateSchema = createSchema.partial()
 
-export async function listar(_req: Request, res: Response, next: NextFunction) {
-  try { res.json(await service.listar()) } catch (err) { next(err) }
+export async function listar(req: Request, res: Response, next: NextFunction) {
+  try {
+    const delegacia_id = req.query.delegacia_id ? Number(req.query.delegacia_id) : undefined
+    res.json(await service.listar({ delegacia_id }))
+  } catch (err) { next(err) }
 }
 
 export async function buscarPorId(req: Request, res: Response, next: NextFunction) {

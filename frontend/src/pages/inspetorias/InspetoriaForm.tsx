@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import { inspetoriasService } from '../../services/inspetorias'
+import { delegaciasService } from '../../services/delegacias'
 import { Check, X } from '../../lib/icons'
 import { ShieldCheck } from 'lucide-react'
 
@@ -14,6 +15,7 @@ export default function InspetoriaForm() {
   const queryClient = useQueryClient()
 
   const [nome, setNome] = useState('')
+  const [delegaciaId, setDelegaciaId] = useState<number | ''>('')
   const [erro, setErro] = useState('')
 
   const { data: existing } = useQuery({
@@ -22,12 +24,22 @@ export default function InspetoriaForm() {
     enabled: isEdit,
   })
 
-  useEffect(() => { if (existing) setNome(existing.nome) }, [existing])
+  const { data: delegacias = [] } = useQuery({
+    queryKey: ['delegacias'],
+    queryFn: delegaciasService.listar,
+  })
+
+  useEffect(() => {
+    if (existing) {
+      setNome(existing.nome)
+      setDelegaciaId(existing.delegacia_id)
+    }
+  }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => isEdit
-      ? inspetoriasService.editar(Number(id), { nome: nome.trim() })
-      : inspetoriasService.criar({ nome: nome.trim() }),
+      ? inspetoriasService.editar(Number(id), { nome: nome.trim(), delegacia_id: Number(delegaciaId) })
+      : inspetoriasService.criar({ nome: nome.trim(), delegacia_id: Number(delegaciaId) }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['inspetorias'] })
       navigate('/inspetorias')
@@ -39,6 +51,7 @@ export default function InspetoriaForm() {
     e.preventDefault()
     setErro('')
     if (!nome.trim()) return setErro('Informe o nome da inspetoria.')
+    if (!delegaciaId) return setErro('Selecione a delegacia desta inspetoria.')
     salvar()
   }
 
@@ -82,18 +95,38 @@ export default function InspetoriaForm() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
-                Nome <span className="text-[var(--danger)]">*</span>
-              </label>
-              <input
-                value={nome}
-                onChange={e => setNome(e.target.value)}
-                required
-                className={inputClass}
-                placeholder="Ex.: Inspetoria Regional Centro"
-                autoFocus
-              />
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Delegacia <span className="text-[var(--danger)]">*</span>
+                </label>
+                <select
+                  value={delegaciaId}
+                  onChange={e => setDelegaciaId(e.target.value === '' ? '' : Number(e.target.value))}
+                  required
+                  className={inputClass}
+                >
+                  <option value="">— Selecione a delegacia —</option>
+                  {delegacias.map(d => (
+                    <option key={d.id} value={d.id}>{d.nome}</option>
+                  ))}
+                </select>
+                <p className="text-xs text-[var(--t4)] mt-1">A inspetoria precisa pertencer a uma delegacia.</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Nome <span className="text-[var(--danger)]">*</span>
+                </label>
+                <input
+                  value={nome}
+                  onChange={e => setNome(e.target.value)}
+                  required
+                  className={inputClass}
+                  placeholder="Ex.: Inspetoria Regional Centro"
+                  autoFocus
+                />
+              </div>
             </div>
           </section>
 

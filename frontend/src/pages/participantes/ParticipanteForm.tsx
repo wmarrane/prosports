@@ -25,7 +25,7 @@ export default function ParticipanteForm() {
 
   const { data: inspetorias = [] } = useQuery({
     queryKey: ['inspetorias'],
-    queryFn: inspetoriasService.listar,
+    queryFn: () => inspetoriasService.listar(),
   })
 
   const { data: delegacias = [] } = useQuery({
@@ -187,26 +187,18 @@ export default function ParticipanteForm() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
-                    Inspetoria <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
-                  </label>
-                  <select
-                    value={inspetoriaId}
-                    onChange={e => setInspetoriaId(e.target.value === '' ? '' : Number(e.target.value))}
-                    className={inputClass}
-                  >
-                    <option value="">— Sem inspetoria —</option>
-                    {inspetorias.map(i => (
-                      <option key={i.id} value={i.id}>{i.nome}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
                     Delegacia <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
                   </label>
                   <select
                     value={delegaciaId}
-                    onChange={e => setDelegaciaId(e.target.value === '' ? '' : Number(e.target.value))}
+                    onChange={e => {
+                      const nova = e.target.value === '' ? '' : Number(e.target.value)
+                      setDelegaciaId(nova)
+                      if (inspetoriaId !== '') {
+                        const insp = inspetorias.find(i => i.id === inspetoriaId)
+                        if (!insp || insp.delegacia_id !== nova) setInspetoriaId('')
+                      }
+                    }}
                     className={inputClass}
                   >
                     <option value="">— Sem delegacia —</option>
@@ -214,6 +206,30 @@ export default function ParticipanteForm() {
                       <option key={d.id} value={d.id}>{d.nome}</option>
                     ))}
                   </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                    Inspetoria <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
+                  </label>
+                  <select
+                    value={inspetoriaId}
+                    onChange={e => setInspetoriaId(e.target.value === '' ? '' : Number(e.target.value))}
+                    disabled={!delegaciaId}
+                    className={inputClass}
+                    style={{ opacity: !delegaciaId ? 0.5 : 1 }}
+                  >
+                    <option value="">
+                      {!delegaciaId ? '— Selecione a delegacia primeiro —' : '— Sem inspetoria —'}
+                    </option>
+                    {delegaciaId !== '' && inspetorias
+                      .filter(i => i.delegacia_id === delegaciaId)
+                      .map(i => (
+                        <option key={i.id} value={i.id}>{i.nome}</option>
+                      ))}
+                  </select>
+                  {delegaciaId !== '' && inspetorias.filter(i => i.delegacia_id === delegaciaId).length === 0 && (
+                    <p className="text-xs text-[var(--t4)] mt-1">Esta delegacia não possui inspetorias cadastradas.</p>
+                  )}
                 </div>
               </div>
             </div>

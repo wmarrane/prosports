@@ -45,14 +45,19 @@ model Municipio {
 model Inspetoria {
   id            Int            @id @default(autoincrement())
   nome          String         @unique
+  delegacia     Delegacia      @relation(fields: [delegacia_id], references: [id])
+  delegacia_id  Int
   participantes Participante[]
   criado_em     DateTime       @default(now())
   atualizado_em DateTime       @updatedAt
+
+  @@index([delegacia_id])
 }
 
 model Delegacia {
   id            Int            @id @default(autoincrement())
   nome          String         @unique
+  inspetorias   Inspetoria[]
   participantes Participante[]
   criado_em     DateTime       @default(now())
   atualizado_em DateTime       @updatedAt

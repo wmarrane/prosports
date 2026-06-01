@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.38.0] - 2026-05-31
+
+### Added (Inspetoria pertence a Delegacia + filtro em participante)
+- **Schema**: `Inspetoria.delegacia_id` agora é NOT NULL com FK `Delegacia` (`ON DELETE RESTRICT`). Migration tolerante: se houver inspetorias preexistentes assigna ao menor `id` de delegacia (em prod estavam zeradas, sem efeito).
+- **Backend**: `inspetorias.listar` aceita `?delegacia_id=` para filtrar; create/edit exigem `delegacia_id`; responses incluem `delegacia` (nested).
+- **InspetoriaForm**: select de delegacia obrigatório no topo.
+- **InspetoriasList**: cards mostram nome da delegacia abaixo do nome da inspetoria.
+- **ParticipanteForm**: ordem trocada — Delegacia primeiro, Inspetoria depois (disabled enquanto sem delegacia). Mudar delegacia limpa inspetoria se ela não pertencer mais à nova delegacia. Mensagem amigável quando a delegacia não tem inspetorias.
+
 ## [1.37.0] - 2026-05-31
 
 ### Added (Manutenção dos sistemas de disputa + copiar entre competições)

@@ -1,15 +1,17 @@
 import type { Municipio } from './municipio'
 
-export type Inspetoria = {
+export type Delegacia = {
   id: number
   nome: string
   criado_em: string
   atualizado_em: string
 }
 
-export type Delegacia = {
+export type Inspetoria = {
   id: number
   nome: string
+  delegacia_id: number
+  delegacia?: Delegacia
   criado_em: string
   atualizado_em: string
 }

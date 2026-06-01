@@ -57,7 +57,7 @@ export default function Admin() {
   })
   const { data: inspetorias = [] } = useQuery({
     queryKey: ['inspetorias'],
-    queryFn: inspetoriasService.listar,
+    queryFn: () => inspetoriasService.listar(),
   })
   const { data: delegacias = [] } = useQuery({
     queryKey: ['delegacias'],
