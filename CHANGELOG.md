@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.39.0] - 2026-05-31
+
+### Added (Inscritos por modalidade + inscrição múltipla)
+- **Backend**:
+  - `GET /inscricoes/counts?evento_id=N` → `{ [modalidade_id]: count }` via Prisma `groupBy`.
+  - `POST /inscricoes/bulk` aceita `{ evento_id, modalidade_id, participante_ids: [] }` (até 500). Usa `createMany skipDuplicates`, retorna `{ criadas, duplicadas, erros }`.
+- **EventoInscricoes — sidebar**: badge com ícone Users + count ao lado de cada modalidade (preenchida pela nova rota counts; invalida sempre que inscrições mudam).
+- **EventoInscricoes — modal Inscrever**: agora multi-select. Novo componente `ParticipantesMultiSelect` (checklist com busca, "Marcar/Desmarcar visíveis", contagem de selecionados). Após confirmar mostra resumo (Inscritos / Já inscritos / Erros) com opção "Inscrever mais" para continuar na mesma modalidade.
+
 ## [1.38.0] - 2026-05-31
 
 ### Added (Inspetoria pertence a Delegacia + filtro em participante)

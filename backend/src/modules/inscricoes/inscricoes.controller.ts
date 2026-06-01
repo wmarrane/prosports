@@ -27,6 +27,16 @@ const importSchema = z.object({
   rows: z.array(importRowSchema).min(1).max(2000),
 })
 
+const bulkSchema = z.object({
+  evento_id: z.coerce.number().int().positive(),
+  modalidade_id: z.coerce.number().int().positive(),
+  participante_ids: z.array(z.coerce.number().int().positive()).min(1).max(500),
+})
+
+const countsQuerySchema = z.object({
+  evento_id: z.coerce.number().int().positive(),
+})
+
 export async function listar(req: Request, res: Response, next: NextFunction) {
   try {
     const filtros = listQuerySchema.parse(req.query)
@@ -56,5 +66,19 @@ export async function importar(req: Request, res: Response, next: NextFunction) 
   try {
     const body = importSchema.parse(req.body)
     res.json(await service.importar(body))
+  } catch (err) { next(err) }
+}
+
+export async function counts(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { evento_id } = countsQuerySchema.parse(req.query)
+    res.json(await service.contarPorModalidade(evento_id))
+  } catch (err) { next(err) }
+}
+
+export async function criarBulk(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = bulkSchema.parse(req.body)
+    res.status(201).json(await service.criarBulk(body))
   } catch (err) { next(err) }
 }

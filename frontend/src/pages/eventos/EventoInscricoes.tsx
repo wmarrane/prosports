@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
-import ParticipanteSelect from '../../components/ParticipanteSelect'
+import ParticipantesMultiSelect from '../../components/ParticipantesMultiSelect'
 import ImportInscricoesModal from '../../components/import/ImportInscricoesModal'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
@@ -52,6 +52,21 @@ const TIPO_LABEL: Record<TipoDisputa, string> = {
 const NUM_POSICOES = 12
 const POSICOES = Array.from({ length: NUM_POSICOES }, (_, i) => i + 1)
 
+function Stat({ label, value, color }: { label: string; value: number; color: string }) {
+  return (
+    <div style={{
+      background: 'var(--card-bg)',
+      border: '1px solid var(--card-border)',
+      borderRadius: 'var(--radius-md)',
+      padding: 12,
+      textAlign: 'center',
+    }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: 22, color }}>{value}</div>
+      <div className="text-[var(--t3)] mt-1 uppercase tracking-wider font-semibold" style={{ fontSize: 10 }}>{label}</div>
+    </div>
+  )
+}
+
 export default function EventoInscricoes() {
   const { id } = useParams()
   const eventoId = Number(id)
@@ -60,8 +75,9 @@ export default function EventoInscricoes() {
 
   const [modalidadeId, setModalidadeId] = useState<number | null>(null)
   const [inscreverOpen, setInscreverOpen] = useState(false)
-  const [pickedId, setPickedId] = useState<number | null>(null)
+  const [pickedIds, setPickedIds] = useState<number[]>([])
   const [erroModal, setErroModal] = useState('')
+  const [resumoBulk, setResumoBulk] = useState<{ criadas: number; duplicadas: number; erros: number } | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
 
@@ -93,6 +109,11 @@ export default function EventoInscricoes() {
   const { data: sorteios = [] } = useQuery({
     queryKey: ['sorteios', eventoId],
     queryFn: () => sorteiosService.listar({ evento_id: eventoId }),
+  })
+
+  const { data: countsByModalidade = {} } = useQuery({
+    queryKey: ['inscricoes-counts', eventoId],
+    queryFn: () => inscricoesService.counts(eventoId),
   })
 
   const { data: campeoes = [] } = useQuery({
@@ -127,24 +148,27 @@ export default function EventoInscricoes() {
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
 
-  const { mutate: criar, isPending: salvando } = useMutation({
-    mutationFn: () => inscricoesService.criar({
+  const { mutate: criarBulk, isPending: salvando } = useMutation({
+    mutationFn: () => inscricoesService.criarBulk({
       evento_id: eventoId,
       modalidade_id: modalidadeId!,
-      participante_id: pickedId!,
+      participante_ids: pickedIds,
     }),
-    onSuccess: () => {
+    onSuccess: r => {
       queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
-      setInscreverOpen(false)
-      setPickedId(null)
-      setErroModal('')
+      queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+      setResumoBulk({ criadas: r.criadas, duplicadas: r.duplicadas, erros: r.erros.length })
+      setPickedIds([])
     },
     onError: (err: any) => setErroModal(err?.response?.data?.message ?? 'Erro ao inscrever.'),
   })
 
   const { mutate: removerInscricao } = useMutation({
     mutationFn: inscricoesService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+      queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+    },
     onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
@@ -341,6 +365,24 @@ export default function EventoInscricoes() {
                           {m.sigla}
                         </div>
                       </div>
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 4,
+                          padding: '3px 8px',
+                          borderRadius: 'var(--radius-pill)',
+                          background: 'var(--card-bg-2)',
+                          color: 'var(--t2)',
+                          fontSize: 11,
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 700,
+                          flexShrink: 0,
+                        }}
+                        title={`${countsByModalidade[m.id] ?? 0} inscrito(s)`}
+                      >
+                        <Users size={11} /> {countsByModalidade[m.id] ?? 0}
+                      </span>
                       {sorteada && (
                         <span
                           style={{
@@ -462,7 +504,7 @@ export default function EventoInscricoes() {
                         <Download size={14} /> Importar CSV
                       </button>
                       <button
-                        onClick={() => { setInscreverOpen(true); setPickedId(null); setErroModal('') }}
+                        onClick={() => { setInscreverOpen(true); setPickedIds([]); setResumoBulk(null); setErroModal('') }}
                         className="btn btn-primary btn-sm"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
@@ -787,14 +829,19 @@ export default function EventoInscricoes() {
         </div>
       </div>
 
-      {/* Modal: Inscrever */}
+      {/* Modal: Inscrever (multi) */}
       {inscreverOpen && (
         <div
           style={{
             position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 300,
           }}
-          onClick={() => setInscreverOpen(false)}
+          onClick={() => {
+            setInscreverOpen(false)
+            setPickedIds([])
+            setResumoBulk(null)
+            setErroModal('')
+          }}
         >
           <div
             style={{
@@ -802,7 +849,7 @@ export default function EventoInscricoes() {
               border: '1px solid var(--card-border)',
               borderRadius: 'var(--radius-2xl)',
               padding: 28,
-              maxWidth: 520,
+              maxWidth: 640,
               width: '100%',
               margin: '0 16px',
             }}
@@ -810,43 +857,100 @@ export default function EventoInscricoes() {
           >
             <h3 className="sec-title mb-4" style={{ fontSize: 'clamp(18px, 2vw, 24px)' }}>
               <Plus size={20} className="inline mr-2 text-[var(--brand-500)]" />
-              Inscrever participante
+              Inscrever participantes
+              {modalidadeAtual && (
+                <span className="text-[var(--t3)] font-normal text-sm ml-2">
+                  · {modalidadeAtual.nome}
+                </span>
+              )}
             </h3>
-            <ParticipanteSelect value={pickedId} onChange={id => setPickedId(id)} excludeIds={excludeIds} />
-            {erroModal && (
-              <div
-                style={{
-                  background: 'var(--danger-soft)',
-                  color: 'var(--danger)',
-                  border: '1px solid var(--danger)',
-                  borderRadius: 'var(--radius-lg)',
-                  padding: '10px 14px',
-                  fontSize: 13,
-                  marginTop: 12,
-                }}
-              >
-                {erroModal}
+
+            {resumoBulk ? (
+              <div style={{
+                background: 'var(--card-bg-2)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 'var(--radius-lg)',
+                padding: 16,
+              }}>
+                <div className="grid grid-cols-3 gap-3 mb-3">
+                  <Stat label="Inscritos" value={resumoBulk.criadas} color="var(--success)" />
+                  <Stat label="Já inscritos" value={resumoBulk.duplicadas} color="var(--t3)" />
+                  <Stat label="Erros" value={resumoBulk.erros} color="var(--danger)" />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                  <button
+                    onClick={() => { setResumoBulk(null); setPickedIds([]) }}
+                    className="btn btn-ghost"
+                  >
+                    Inscrever mais
+                  </button>
+                  <button
+                    onClick={() => {
+                      setInscreverOpen(false)
+                      setResumoBulk(null)
+                      setPickedIds([])
+                    }}
+                    className="btn btn-primary"
+                  >
+                    <Check size={16} /> Fechar
+                  </button>
+                </div>
               </div>
+            ) : (
+              <>
+                <ParticipantesMultiSelect
+                  selectedIds={pickedIds}
+                  onChange={setPickedIds}
+                  excludeIds={excludeIds}
+                  subtituloLine={subtituloLine}
+                />
+                {erroModal && (
+                  <div
+                    style={{
+                      background: 'var(--danger-soft)',
+                      color: 'var(--danger)',
+                      border: '1px solid var(--danger)',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '10px 14px',
+                      fontSize: 13,
+                      marginTop: 12,
+                    }}
+                  >
+                    {erroModal}
+                  </div>
+                )}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 16 }}>
+                  <button
+                    onClick={() => {
+                      setInscreverOpen(false)
+                      setPickedIds([])
+                      setErroModal('')
+                    }}
+                    className="btn btn-ghost"
+                  >
+                    <X size={16} /> Cancelar
+                  </button>
+                  <button
+                    onClick={() => criarBulk()}
+                    disabled={pickedIds.length === 0 || salvando}
+                    className="btn btn-primary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      opacity: pickedIds.length === 0 || salvando ? 0.5 : 1,
+                    }}
+                  >
+                    <Check size={16} />
+                    {salvando
+                      ? 'Inscrevendo...'
+                      : pickedIds.length === 0
+                      ? 'Selecione participantes'
+                      : `Inscrever ${pickedIds.length}`}
+                  </button>
+                </div>
+              </>
             )}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 24 }}>
-              <button onClick={() => setInscreverOpen(false)} className="btn btn-ghost">
-                <X size={16} /> Cancelar
-              </button>
-              <button
-                onClick={() => criar()}
-                disabled={!pickedId || salvando}
-                className="btn btn-primary"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  opacity: !pickedId || salvando ? 0.5 : 1,
-                }}
-              >
-                <Check size={16} />
-                {salvando ? 'Salvando...' : 'Confirmar'}
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -856,7 +960,10 @@ export default function EventoInscricoes() {
         eventoId={eventoId}
         modalidadeId={modalidadeId ?? 0}
         onClose={() => setImportOpen(false)}
-        onImported={() => queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })}
+        onImported={() => {
+          queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+          queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+        }}
       />
 
       {/* Responsive */}

@@ -59,6 +59,80 @@ export async function remover(id: number) {
   return prisma.inscricao.delete({ where: { id } })
 }
 
+export async function contarPorModalidade(evento_id: number): Promise<Record<number, number>> {
+  const grupos = await prisma.inscricao.groupBy({
+    by: ['modalidade_id'],
+    where: { evento_id },
+    _count: { _all: true },
+  })
+  const out: Record<number, number> = {}
+  for (const g of grupos) out[g.modalidade_id] = g._count._all
+  return out
+}
+
+export type BulkResult = {
+  criadas: number
+  duplicadas: number
+  erros: Array<{ participante_id: number; erro: string }>
+}
+
+export async function criarBulk(input: {
+  evento_id: number
+  modalidade_id: number
+  participante_ids: number[]
+}): Promise<BulkResult> {
+  const [evento, modalidade] = await Promise.all([
+    prisma.evento.findUnique({ where: { id: input.evento_id }, select: { competicao_id: true } }),
+    prisma.modalidade.findUnique({ where: { id: input.modalidade_id }, select: { competicao_id: true } }),
+  ])
+  if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+  if (!modalidade) throw Object.assign(new Error('Modalidade não encontrada'), { status: 404 })
+  if (evento.competicao_id !== modalidade.competicao_id) {
+    throw Object.assign(
+      new Error('A modalidade não pertence à competição deste evento.'),
+      { status: 400 }
+    )
+  }
+
+  const jaInscritos = await prisma.inscricao.findMany({
+    where: {
+      evento_id: input.evento_id,
+      modalidade_id: input.modalidade_id,
+      participante_id: { in: input.participante_ids },
+    },
+    select: { participante_id: true },
+  })
+  const inscritosSet = new Set(jaInscritos.map(i => i.participante_id))
+
+  const novos = input.participante_ids.filter(id => !inscritosSet.has(id))
+  const result: BulkResult = {
+    criadas: 0,
+    duplicadas: input.participante_ids.length - novos.length,
+    erros: [],
+  }
+
+  if (novos.length > 0) {
+    try {
+      const out = await prisma.inscricao.createMany({
+        data: novos.map(participante_id => ({
+          evento_id: input.evento_id,
+          modalidade_id: input.modalidade_id,
+          participante_id,
+        })),
+        skipDuplicates: true,
+      })
+      result.criadas = out.count
+      result.duplicadas += novos.length - out.count
+    } catch (err: any) {
+      for (const pid of novos) {
+        result.erros.push({ participante_id: pid, erro: err?.message ?? 'Erro desconhecido' })
+      }
+    }
+  }
+
+  return result
+}
+
 export type ImportRow = {
   nome: string
   municipio_uf: string

@@ -16,10 +16,25 @@ type ImportPayload = {
   rows: ImportRow[]
 }
 
+type BulkPayload = {
+  evento_id: number
+  modalidade_id: number
+  participante_ids: number[]
+}
+
+export type BulkResult = {
+  criadas: number
+  duplicadas: number
+  erros: Array<{ participante_id: number; erro: string }>
+}
+
 export const inscricoesService = {
   listar: (params?: { evento_id?: number; modalidade_id?: number }) =>
     api.get<Inscricao[]>(BASE, { params }).then(r => r.data),
+  counts: (evento_id: number) =>
+    api.get<Record<number, number>>(`${BASE}/counts`, { params: { evento_id } }).then(r => r.data),
   criar: (data: InscricaoPayload) => api.post<Inscricao>(BASE, data).then(r => r.data),
+  criarBulk: (data: BulkPayload) => api.post<BulkResult>(`${BASE}/bulk`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
   importar: (data: ImportPayload) =>
     api.post<ImportResult>(`${BASE}/import`, data).then(r => r.data),
