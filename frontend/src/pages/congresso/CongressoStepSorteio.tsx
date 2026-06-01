@@ -482,10 +482,12 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       {cp && <CampeaoBadge posicao={cp} large />}
-                      <span style={{ color: FG, fontWeight: 600 }}>
-                        {p ? p.nome : '—'}
-                        {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.7em', color: DIM, marginLeft: 12 }}>— {l}</span> : null })()}
-                      </span>
+                      <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                        <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>
+                          {p ? p.nome : '—'}
+                        </span>
+                        {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.55em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
+                      </div>
                     </li>
                   )
                 })}

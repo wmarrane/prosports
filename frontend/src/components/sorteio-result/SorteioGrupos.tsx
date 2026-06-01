@@ -22,7 +22,7 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const titleStyle: React.CSSProperties = { color: 'var(--warn)' }
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
-  const subItemClass = large ? 'text-base text-[var(--t3)] ml-2' : 'text-xs text-[var(--t3)] ml-1'
+  const subItemClass = large ? 'text-sm text-[var(--t3)] mt-0.5' : 'text-xs text-[var(--t3)] mt-0.5'
   const clickable = !!onGroupClick
 
   return (
@@ -45,13 +45,16 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
             {g.participantes.map(pid => {
               const p = participantesById.get(pid)
               const pos = campeoesByParticipanteId?.get(pid)
+              const linha = p ? subtituloLine?.(p) : null
               return (
-                <li key={pid} className={`${itemClass} inline-flex items-center gap-2 w-full`}>
-                  {pos && <CampeaoBadge posicao={pos} large={large} />}
-                  <span>
-                    {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
-                    {p && (() => { const l = subtituloLine?.(p); return l ? <span className={subItemClass}>— {l}</span> : null })()}
-                  </span>
+                <li key={pid} className={`${itemClass} flex items-start gap-2 w-full`}>
+                  {pos && <span className="flex-shrink-0 mt-0.5"><CampeaoBadge posicao={pos} large={large} /></span>}
+                  <div className="flex flex-col min-w-0">
+                    <span className="leading-tight">
+                      {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
+                    </span>
+                    {linha && <span className={subItemClass}>{linha}</span>}
+                  </div>
                 </li>
               )
             })}

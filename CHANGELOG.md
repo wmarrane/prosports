@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.39.3] - 2026-05-31
+
+### Changed (Linha de exibição abaixo do nome em Sorteio de Grupos)
+- `SorteioGrupos`: linha complementar do participante (delegacia/subtítulo/etc) agora aparece em uma segunda linha abaixo do nome, em fonte menor e cor `--t3`. Antes ficava inline como "Nome — Linha", o que dificultava leitura quando havia muitos itens.
+- Modal de grupo expandido no Modo Congresso: mesmo layout (nome em cima, linha abaixo em fonte menor).
+
 ## [1.39.2] - 2026-05-31
 
 ### Fixed (Linha de exibição vinha vazia nas telas de sorteio)
