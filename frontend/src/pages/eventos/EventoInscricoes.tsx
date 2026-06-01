@@ -565,7 +565,6 @@ export default function EventoInscricoes() {
                             >
                               {String(idx + 1).padStart(2, '0')}
                             </span>
-                            {pos && <CampeaoBadge posicao={pos} />}
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div
                                 style={{
@@ -600,6 +599,7 @@ export default function EventoInscricoes() {
                                 ) : null
                               })()}
                             </div>
+                            {pos && <CampeaoBadge posicao={pos} />}
                             {isAnfitriao && (
                               <span
                                 style={{

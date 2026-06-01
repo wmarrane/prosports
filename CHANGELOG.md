@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.40.3] - 2026-06-01
+
+### Changed (CampeaoBadge alinhado à direita em grupos / chaves / inscritos)
+- Por consistência com o `AnfitriaoBadge`, o `CampeaoBadge` (posição do campeão anterior) também migrou para o lado direito do item.
+- Ordem final dos badges à direita: `... [CampeaoBadge] [AnfitriaoBadge]`.
+- Aplicado em: `SorteioGrupos`, `SorteioChaves` (slot + vertical list), `BracketTree`, lista de inscritos (`EventoInscricoes`).
+- Banner "Cabeças" e `CampeoesPanel` continuam com badge à esquerda (são listas semânticas do campeão, não do participante).
+
 ## [1.40.2] - 2026-05-31
 
 ### Changed (AnfitriaoBadge alinhado à direita)
