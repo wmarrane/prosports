@@ -716,6 +716,7 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
+                          anfitriaoPid={evento?.anfitriao_id ?? null}
                           subtituloLine={subtituloLine}
                         />
                       )}
@@ -724,6 +725,7 @@ export default function EventoInscricoes() {
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
                           campeoesByParticipanteId={campeoesByParticipanteId}
+                          anfitriaoPid={evento?.anfitriao_id ?? null}
                           subtituloLine={subtituloLine}
                         />
                       )}
@@ -731,6 +733,7 @@ export default function EventoInscricoes() {
                         <SorteioOrdem
                           resultado={sorteioDaModalidade.resultado}
                           participantesById={participantesById}
+                          anfitriaoPid={evento?.anfitriao_id ?? null}
                           subtituloLine={subtituloLine}
                         />
                       )}

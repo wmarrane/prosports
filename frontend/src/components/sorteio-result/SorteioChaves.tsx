@@ -1,6 +1,7 @@
 import type { ChavesResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
 import CampeaoBadge from '../CampeaoBadge'
+import AnfitriaoBadge from '../AnfitriaoBadge'
 import BracketTree from './BracketTree'
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   participantesById: Map<number, Participante>
   large?: boolean
   campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid?: number | null
   subtituloLine?: (p: Participante) => string | null
 }
 
@@ -68,20 +70,23 @@ type SlotRenderProps = {
   large: boolean
   participantesById: Map<number, Participante>
   campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid?: number | null
   subtituloLine?: (p: Participante) => string | null
 }
 
-function SlotRender({ pid, fallbackText, large, participantesById, campeoesByParticipanteId, subtituloLine }: SlotRenderProps) {
+function SlotRender({ pid, fallbackText, large, participantesById, campeoesByParticipanteId, anfitriaoPid, subtituloLine }: SlotRenderProps) {
   const fontSize = large ? '1.25rem' : '0.95rem'
   if (pid === null) {
     return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize }}>{fallbackText}</span>
   }
   const p = participantesById.get(pid)
   const pos = campeoesByParticipanteId?.get(pid)
+  const isAnfitriao = anfitriaoPid != null && pid === anfitriaoPid
   if (!p) return <span style={{ color: 'var(--t4)', fontSize }}>—</span>
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize, color: 'var(--t1)' }}>
       {pos && <CampeaoBadge posicao={pos} large={large} />}
+      {isAnfitriao && <AnfitriaoBadge large={large} />}
       <span>
         {p.nome}
         {(() => { const l = subtituloLine?.(p); return l ? <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {l}</span> : null })()}
@@ -95,18 +100,20 @@ type MatchCardProps = {
   large: boolean
   participantesById: Map<number, Participante>
   campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid?: number | null
   topFallback?: string
   bottomFallback?: string
   subtituloLine?: (p: Participante) => string | null
 }
 
-function MatchCard({ match, large, participantesById, campeoesByParticipanteId, topFallback, bottomFallback, subtituloLine }: MatchCardProps) {
+function MatchCard({ match, large, participantesById, campeoesByParticipanteId, anfitriaoPid, topFallback, bottomFallback, subtituloLine }: MatchCardProps) {
   return (
     <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 12 : 8 }}>
       <div style={{ padding: '4px 0' }}>
         <SlotRender
           pid={match.top} fallbackText={topFallback ?? 'BYE'}
           large={large} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
+          anfitriaoPid={anfitriaoPid}
           subtituloLine={subtituloLine}
         />
       </div>
@@ -115,6 +122,7 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
         <SlotRender
           pid={match.bottom} fallbackText={bottomFallback ?? 'BYE'}
           large={large} participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
+          anfitriaoPid={anfitriaoPid}
           subtituloLine={subtituloLine}
         />
       </div>
@@ -122,7 +130,7 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
   )
 }
 
-export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, subtituloLine }: Props) {
+export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, subtituloLine }: Props) {
   // v1.19.0: render field via grafo de matches (preferido)
   if (resultado.matchesGraph && resultado.matchesGraph.matches.length > 0) {
     return (
@@ -131,6 +139,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
         slots={resultado.slots}
         participantesById={participantesById}
         campeoesByParticipanteId={campeoesByParticipanteId}
+        anfitriaoPid={anfitriaoPid}
         large={large}
         subtituloLine={subtituloLine}
       />
@@ -153,6 +162,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
             {roundMatches.map(match => (
               <MatchCard key={match.id} match={match} large={large}
                 participantesById={participantesById} campeoesByParticipanteId={campeoesByParticipanteId}
+                anfitriaoPid={anfitriaoPid}
                 topFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 1}`}
                 bottomFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 2}`}
                 subtituloLine={subtituloLine}
@@ -185,6 +195,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
           const isBye = byeSet.has(pos)
           const campeaoPos = pid !== null ? campeoesByParticipanteId?.get(pid) : undefined
           const participante = pid !== null ? participantesById.get(pid) : null
+          const isAnfitriao = pid !== null && anfitriaoPid != null && pid === anfitriaoPid
           return (
             <li key={pos} className="flex items-center gap-3">
               <span className={indexClass}>{String(pos).padStart(2, '0')}</span>
@@ -193,6 +204,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
               ) : participante ? (
                 <span className="inline-flex items-center gap-2">
                   {campeaoPos && <CampeaoBadge posicao={campeaoPos} large={large} />}
+                  {isAnfitriao && <AnfitriaoBadge large={large} />}
                   <span className={nameClass}>
                     {participante.nome}
                     {(() => { const l = subtituloLine?.(participante); return l ? <span className={subClass}>— {l}</span> : null })()}

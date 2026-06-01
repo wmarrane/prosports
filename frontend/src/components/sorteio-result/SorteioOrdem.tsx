@@ -1,14 +1,16 @@
 import type { OrdemResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
+import AnfitriaoBadge from '../AnfitriaoBadge'
 
 type Props = {
   resultado: OrdemResultado
   participantesById: Map<number, Participante>
   large?: boolean
+  anfitriaoPid?: number | null
   subtituloLine?: (p: Participante) => string | null
 }
 
-export default function SorteioOrdem({ resultado, participantesById, large = false, subtituloLine }: Props) {
+export default function SorteioOrdem({ resultado, participantesById, large = false, anfitriaoPid, subtituloLine }: Props) {
   const cardPad = large ? 'p-6' : 'p-4'
   const itemSpacing = large ? 'space-y-3' : 'space-y-1.5'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
@@ -23,9 +25,11 @@ export default function SorteioOrdem({ resultado, participantesById, large = fal
         {resultado.ordem.map((pid, idx) => {
           const p = participantesById.get(pid)
           const linha = p && subtituloLine ? subtituloLine(p) : null
+          const isAnfitriao = anfitriaoPid != null && pid === anfitriaoPid
           return (
             <li key={pid} className={`flex items-center gap-3 ${itemClass}`}>
               <span className={indexClass}>{idx + 1}.</span>
+              {isAnfitriao && <AnfitriaoBadge large={large} />}
               {p
                 ? <span>{p.nome}{linha ? <span className={subClass}>— {linha}</span> : null}</span>
                 : <span className="text-[var(--t4)]">—</span>}

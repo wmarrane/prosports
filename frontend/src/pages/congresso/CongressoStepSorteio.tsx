@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
+import { eventosService } from '../../services/eventos'
 import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
@@ -9,6 +10,7 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
+import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeoesPanel from './CampeoesPanel'
 import { Shuffle, Crown, X, Report } from '../../lib/icons'
 import type { Participante } from '../../types/participante'
@@ -49,6 +51,12 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const camposSubtitulo = competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
   const tipo = modalidade?.tipo_modalidade?.tipo
+
+  const { data: evento } = useQuery({
+    queryKey: ['eventos', eventoId],
+    queryFn: () => eventosService.buscar(eventoId),
+  })
+  const anfitriaoPid = evento?.anfitriao_id ?? null
 
   const { data: sorteios = [] } = useQuery({
     queryKey: ['sorteios', eventoId],
@@ -205,7 +213,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         </div>
 
         {mostraCampeoes && (
-          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} subtituloLine={subtituloLine} />
+          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} subtituloLine={subtituloLine} anfitriaoPid={anfitriaoPid} />
         )}
 
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 24, minHeight: 200 }}>
@@ -311,6 +319,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                 title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
                 <CampeaoBadge posicao={c.posicao} />
+                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
                 <div style={{
                   display: 'inline-flex', flexDirection: 'column',
                   textDecoration: c.inscrito ? 'none' : 'line-through',
@@ -337,15 +346,16 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             participantesById={participantesById}
             large
             campeoesByParticipanteId={campeoesByParticipanteId}
+            anfitriaoPid={anfitriaoPid}
             onGroupClick={(letra) => setGrupoExpandido(letra)}
             subtituloLine={subtituloLine}
           />
         )}
         {sorteio.tipo === 'chaves' && (
-          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} subtituloLine={subtituloLine} />
+          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} anfitriaoPid={anfitriaoPid} subtituloLine={subtituloLine} />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
-          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large subtituloLine={subtituloLine} />
+          <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large anfitriaoPid={anfitriaoPid} subtituloLine={subtituloLine} />
         )}
         {erro && <p style={{ color: DANGER, fontSize: 16, marginTop: 12 }}>{erro}</p>}
       </div>
@@ -482,6 +492,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       {cp && <CampeaoBadge posicao={cp} large />}
+                      {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
                       <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                         <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>
                           {p ? p.nome : '—'}

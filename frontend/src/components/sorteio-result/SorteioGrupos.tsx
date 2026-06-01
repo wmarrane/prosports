@@ -1,17 +1,19 @@
 import type { GruposResultado } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
 import CampeaoBadge from '../CampeaoBadge'
+import AnfitriaoBadge from '../AnfitriaoBadge'
 
 type Props = {
   resultado: GruposResultado
   participantesById: Map<number, Participante>
   large?: boolean
   campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid?: number | null
   onGroupClick?: (letra: string) => void
   subtituloLine?: (p: Participante) => string | null
 }
 
-export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, onGroupClick, subtituloLine }: Props) {
+export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, onGroupClick, subtituloLine }: Props) {
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
@@ -46,9 +48,11 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
               const p = participantesById.get(pid)
               const pos = campeoesByParticipanteId?.get(pid)
               const linha = p ? subtituloLine?.(p) : null
+              const isAnfitriao = anfitriaoPid != null && pid === anfitriaoPid
               return (
                 <li key={pid} className={`${itemClass} flex items-start gap-2 w-full`}>
                   {pos && <span className="flex-shrink-0 mt-0.5"><CampeaoBadge posicao={pos} large={large} /></span>}
+                  {isAnfitriao && <span className="flex-shrink-0 mt-0.5"><AnfitriaoBadge large={large} /></span>}
                   <div className="flex flex-col min-w-0">
                     <span className="leading-tight">
                       {p ? p.nome : <span className="text-[var(--t4)]">—</span>}

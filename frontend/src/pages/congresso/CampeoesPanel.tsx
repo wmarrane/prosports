@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import { inscricoesService } from '../../services/inscricoes'
 import CampeaoBadge from '../../components/CampeaoBadge'
+import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, X } from '../../lib/icons'
 
@@ -10,6 +11,7 @@ type Props = {
   eventoId: number
   modalidadeId: number
   subtituloLine?: (p: any) => string | null
+  anfitriaoPid?: number | null
 }
 
 const FG = 'var(--cw-fg)'
@@ -17,7 +19,7 @@ const DIM = 'var(--cw-dim)'
 
 const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
-export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine }: Props) {
+export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, anfitriaoPid }: Props) {
   const queryClient = useQueryClient()
   const [editOpen, setEditOpen] = useState(false)
 
@@ -99,6 +101,7 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine }:
                 }}
               >
                 <CampeaoBadge posicao={c.posicao} />
+                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
                 <span style={{ color: FG, fontWeight: 600, fontSize: 14 }}>{c.participante.nome}</span>
                 {(() => {
                   const l = subtituloLine?.(c.participante)

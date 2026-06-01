@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.40.1] - 2026-05-31
+
+### Added (Badge 🏠 do anfitrião nas telas de sorteio)
+- Novo componente `AnfitriaoBadge` (quadrado verde com ícone Home), análogo ao `CampeaoBadge`.
+- Componentes de sorteio (`SorteioGrupos`, `SorteioChaves`, `SorteioOrdem`, `BracketTree`) aceitam prop `anfitriaoPid?: number | null` e exibem o badge ao lado do nome do participante anfitrião.
+- `EventoInscricoes` passa `evento.anfitriao_id` para os 3 renders de sorteio.
+- `CongressoStepSorteio`: carrega `evento` para obter `anfitriao_id`, passa para os renders, para `CampeoesPanel` e mostra o badge no banner "Cabeças" e no modal de grupo expandido.
+- `CampeoesPanel`: badge ao lado do nome do campeão que também é anfitrião.
+
 ## [1.40.0] - 2026-05-31
 
 ### Added (Anfitrião do evento + privilégio de cabeça no sorteio)
