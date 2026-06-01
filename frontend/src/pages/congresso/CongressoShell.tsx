@@ -66,7 +66,9 @@ export default function CongressoShell({ step, onBack, contexto, children }: Pro
 
       <div className="cw-top">
         <div className="cw-brand">
-          <div className="cw-glyph">PS</div>
+          <div className="cw-glyph" style={{ padding: 0, background: 'transparent', display: 'grid', placeItems: 'center' }}>
+            <LogoMontana variant="simbolo" height={40} />
+          </div>
           <div>
             <div className="cw-brand-name">ProSports</div>
             <div className="cw-brand-sub">CONGRESSO</div>
@@ -91,9 +93,6 @@ export default function CongressoShell({ step, onBack, contexto, children }: Pro
         </div>
 
         <div className="cw-actions">
-          <div style={{ display: 'flex', alignItems: 'center', opacity: 0.75, marginRight: 4 }} title="Montana Eventos">
-            <LogoMontana variant="simbolo" height={32} />
-          </div>
           <button
             onClick={toggleTheme}
             className="cw-iconbtn"

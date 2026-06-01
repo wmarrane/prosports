@@ -73,7 +73,9 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
       </button>
 
       <div className="brand">
-        <div className="glyph">PS</div>
+        <div className="glyph" style={{ padding: 0, background: 'transparent', display: 'grid', placeItems: 'center' }}>
+          <LogoMontana variant="simbolo" height={36} />
+        </div>
         <div className="name">
           ProSports<small>Sorteios &amp; Competições</small>
         </div>
@@ -156,16 +158,6 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
             />
           )}
         </NavLink>
-        {!collapsed && (
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 4px 4px', opacity: 0.85 }}>
-            <LogoMontana variant="horizontal-cor" height={32} />
-          </div>
-        )}
-        {collapsed && (
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 4px', opacity: 0.85 }}>
-            <LogoMontana variant="simbolo" height={26} />
-          </div>
-        )}
         <div style={{ position: 'relative' }}>
           <button
             ref={userBtnRef}

@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.42.0] - 2026-06-01
+
+### Changed (Logo V3 oficial + substituição do glyph "PS")
+- Arquivos `LogoMarca/files_V3/simbolo-isolado.png` e `op5B-montana-eventos.png` copiados para `frontend/public/montana/` como `simbolo.png` e `horizontal.png`. Servidos como assets estáticos (cache de browser).
+- `LogoMontana` reescrito: variantes `simbolo` e `horizontal-cor` agora carregam as imagens V3 via `<img>`. Variantes `simbolo-branco` e `horizontal-branco` continuam como SVG procedural (branco, para fundos escuros).
+- **Sidebar — brand**: glyph "PS" no topo substituído pelo símbolo Montana V3 (36px). Removido o logo horizontal duplicado no rodapé (que tinha sido adicionado em v1.41.0).
+- **CongressoShell — brand**: glyph "PS" no topo substituído pelo símbolo Montana V3 (40px). Removido o símbolo duplicado nas ações.
+- **Login**: brand do hero continua com `simbolo-branco` (procedural branco) — V3 colorida não tem contraste suficiente sobre o gradient azul escuro.
+
 ## [1.41.1] - 2026-06-01
 
 ### Changed (Logo Montana no topo do hero do Login)
