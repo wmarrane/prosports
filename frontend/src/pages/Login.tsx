@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useAuthStore } from '../store/authStore'
 import { useThemeStore } from '../store/themeStore'
 import { statsService } from '../services/stats'
+import { APP_VERSION, APP_COMMIT } from '../lib/version'
 import {
   Sun, Moon, Bracket, Groups, Order, Lock, Check, Report, ArrowRight,
 } from '../lib/icons'
@@ -194,6 +195,10 @@ export default function Login() {
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
               <Report size={12} /> Logs de auditoria
             </span>
+          </div>
+
+          <div style={{ marginTop: 18, fontSize: 11, color: 'var(--t4)', fontFamily: 'var(--font-mono)' }}>
+            v{APP_VERSION} <span style={{ opacity: 0.6 }}>({APP_COMMIT})</span>
           </div>
         </form>
       </div>

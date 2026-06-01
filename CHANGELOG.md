@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.36.1] - 2026-05-31
+
+### Added (Versão na tela de login)
+- Linha discreta `v<APP_VERSION> (<APP_COMMIT>)` em fonte mono no final do bloco de credenciais, abaixo dos badges de segurança. Reutiliza as constantes `APP_VERSION`/`APP_COMMIT` (já usadas na Sidebar).
+
 ## [1.36.0] - 2026-05-31
 
 ### Added (Indicadores dinâmicos na tela de login)
