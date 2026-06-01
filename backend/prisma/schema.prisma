@@ -156,6 +156,7 @@ model Evento {
   municipio_id    Int
   anfitriao       Participante? @relation("EventoAnfitriao", fields: [anfitriao_id], references: [id], onDelete: SetNull)
   anfitriao_id    Int?
+  logo_url        String?
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
   campeoes_anteriores CampeaoAnterior[]

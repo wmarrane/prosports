@@ -22,4 +22,10 @@ export const eventosService = {
   editar: (id: number, data: Partial<EventoPayload>) =>
     api.put<Evento>(`${BASE}/${id}`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
+  uploadLogo: (id: number, file: File) => {
+    const fd = new FormData()
+    fd.append('logo', file)
+    return api.post<Evento>(`${BASE}/${id}/logo`, fd).then(r => r.data)
+  },
+  removerLogo: (id: number) => api.delete<Evento>(`${BASE}/${id}/logo`).then(r => r.data),
 }

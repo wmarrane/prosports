@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
+import path from 'path'
 import * as service from './eventos.service'
+import { deleteFile } from '../../lib/upload'
 
 const STATUS_VALUES = ['rascunho','inscricoes','pronto','sorteado','parcial'] as const
 
@@ -48,5 +50,36 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
     await service.remover(Number(req.params.id))
     res.status(204).send()
+  } catch (err) { next(err) }
+}
+
+export async function uploadLogo(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id)
+    const file = (req as any).file as Express.Multer.File | undefined
+    if (!file) {
+      res.status(400).json({ message: 'Arquivo de logo obrigatório no campo "logo".' })
+      return
+    }
+    // Apaga logo antiga se houver, antes de salvar a nova
+    const existente = await service.getLogoUrl(id)
+    if (existente) {
+      try { deleteFile('eventos', path.basename(existente)) } catch { /* ignore */ }
+    }
+    const logo_url = `/uploads/eventos/${file.filename}`
+    const evento = await service.setLogoUrl(id, logo_url)
+    res.json(evento)
+  } catch (err) { next(err) }
+}
+
+export async function removerLogo(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id)
+    const existente = await service.getLogoUrl(id)
+    if (existente) {
+      try { deleteFile('eventos', path.basename(existente)) } catch { /* ignore */ }
+    }
+    const evento = await service.setLogoUrl(id, null)
+    res.json(evento)
   } catch (err) { next(err) }
 }

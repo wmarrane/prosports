@@ -60,7 +60,7 @@ export default function ModoCongresso() {
   }
 
   return (
-    <CongressoShell step={step} onBack={onBack} contexto={contexto}>
+    <CongressoShell step={step} onBack={onBack} contexto={contexto} eventoLogoUrl={evento?.logo_url ?? null}>
       {step === 'evento' && (
         <CongressoStepEvento
           onSelect={(id) => { setEventoId(id); setStep('modalidade') }}

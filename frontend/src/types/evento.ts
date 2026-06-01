@@ -26,6 +26,7 @@ export type Evento = {
   municipio: Municipio
   anfitriao_id: number | null
   anfitriao: Participante | null
+  logo_url: string | null
   criado_em: string
   atualizado_em: string
   _count?: {

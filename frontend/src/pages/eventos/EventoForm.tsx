@@ -10,7 +10,7 @@ import { competicoesService } from '../../services/competicoes'
 import { STATUS_LABEL } from '../../lib/evento-status'
 import type { EventoStatus } from '../../types/evento'
 import { Check, X, Trophy } from '../../lib/icons'
-import { Calendar, MapPin, Users } from 'lucide-react'
+import { Calendar, MapPin, Users, Image as ImageIcon, Upload } from 'lucide-react'
 
 const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial']
 
@@ -43,7 +43,9 @@ export default function EventoForm() {
   const [organizador, setOrganizador] = useState('')
   const [status, setStatus] = useState<EventoStatus>('rascunho')
   const [anfitriaoId, setAnfitriaoId] = useState<number | null>(null)
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [erro, setErro] = useState('')
+  const [erroLogo, setErroLogo] = useState('')
 
   const { data: competicoes = [] } = useQuery({
     queryKey: ['competicoes'],
@@ -66,8 +68,29 @@ export default function EventoForm() {
       setOrganizador(existing.organizador ?? '')
       setStatus(existing.status)
       setAnfitriaoId(existing.anfitriao_id ?? null)
+      setLogoUrl(existing.logo_url ?? null)
     }
   }, [existing])
+
+  const { mutate: uploadLogoMutate, isPending: salvandoLogo } = useMutation({
+    mutationFn: (file: File) => eventosService.uploadLogo(Number(id), file),
+    onSuccess: r => {
+      setLogoUrl(r.logo_url)
+      setErroLogo('')
+      queryClient.invalidateQueries({ queryKey: ['eventos', Number(id)] })
+    },
+    onError: (err: any) => setErroLogo(err?.response?.data?.message ?? 'Erro ao enviar logo.'),
+  })
+
+  const { mutate: removerLogoMutate, isPending: removendoLogo } = useMutation({
+    mutationFn: () => eventosService.removerLogo(Number(id)),
+    onSuccess: () => {
+      setLogoUrl(null)
+      setErroLogo('')
+      queryClient.invalidateQueries({ queryKey: ['eventos', Number(id)] })
+    },
+    onError: (err: any) => setErroLogo(err?.response?.data?.message ?? 'Erro ao remover logo.'),
+  })
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
@@ -288,6 +311,94 @@ export default function EventoForm() {
               )
             })()}
           </section>
+
+          {/* Card: Logotipo do evento */}
+          {isEdit && (
+            <section style={cardStyle}>
+              <div className="flex items-center gap-3 mb-5">
+                <div
+                  style={{
+                    width: 36, height: 36, borderRadius: 10,
+                    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                    color: '#fff', display: 'grid', placeItems: 'center',
+                  }}
+                >
+                  <ImageIcon size={18} />
+                </div>
+                <div>
+                  <div className="eyebrow">Identidade visual</div>
+                  <h3 className="sec-title" style={{ fontSize: 17 }}>
+                    Logotipo do evento
+                  </h3>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div
+                  style={{
+                    width: 140, height: 140, borderRadius: 'var(--radius-lg)',
+                    background: 'var(--card-bg-2)',
+                    border: '1px dashed var(--card-border)',
+                    display: 'grid', placeItems: 'center',
+                    overflow: 'hidden', flexShrink: 0,
+                  }}
+                >
+                  {logoUrl ? (
+                    <img src={logoUrl} alt="Logo do evento" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  ) : (
+                    <ImageIcon size={36} className="text-[var(--t4)]" />
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 200 }}>
+                  <p className="text-sm text-[var(--t2)] mb-2">
+                    {logoUrl
+                      ? 'Logo customizado deste evento. Aparece no Modo Congresso ao lado do título de cada etapa.'
+                      : 'Sem logo customizado. O Modo Congresso usará o logo padrão do sistema.'}
+                  </p>
+                  <p className="text-xs text-[var(--t4)] mb-3">
+                    JPEG, PNG ou WebP · máx 2MB · fundo transparente recomendado
+                  </p>
+
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <label
+                      className="btn btn-primary btn-sm"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 6, cursor: salvandoLogo ? 'wait' : 'pointer', opacity: salvandoLogo ? 0.5 : 1 }}
+                    >
+                      <Upload size={14} /> {salvandoLogo ? 'Enviando...' : logoUrl ? 'Trocar logo' : 'Enviar logo'}
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp"
+                        disabled={salvandoLogo}
+                        onChange={e => {
+                          const f = e.target.files?.[0]
+                          if (f) uploadLogoMutate(f)
+                          e.target.value = ''
+                        }}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                    {logoUrl && (
+                      <button
+                        type="button"
+                        onClick={() => removerLogoMutate()}
+                        disabled={removendoLogo}
+                        className="btn btn-ghost btn-sm"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: removendoLogo ? 0.5 : 1 }}
+                      >
+                        <X size={14} /> {removendoLogo ? 'Removendo...' : 'Remover'}
+                      </button>
+                    )}
+                  </div>
+
+                  {erroLogo && (
+                    <div className="text-xs mt-2" style={{ color: 'var(--danger)' }}>
+                      {erroLogo}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Card: Agenda + Status */}
           <section style={cardStyle}>

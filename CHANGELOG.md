@@ -5,6 +5,18 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.43.0] - 2026-06-01
+
+### Added (Logotipo customizado por evento)
+- **Schema**: `Evento.logo_url String?`. Migration `20260601200000_evento_logo_url`.
+- **Backend**:
+  - `POST /eventos/:id/logo` (multer.single 'logo', até 2MB, JPEG/PNG/WebP) → salva em `uploads/eventos/{uuid}.{ext}`, atualiza `Evento.logo_url = /uploads/eventos/{uuid}.{ext}`. Apaga logo antiga antes de salvar a nova.
+  - `DELETE /eventos/:id/logo` → apaga arquivo + limpa `logo_url`.
+  - Service `setLogoUrl` + `getLogoUrl`.
+- **EventoForm**: novo card "Logotipo do evento" (visível apenas em edição, depois que o evento existe). Mostra preview 140×140, botões "Enviar logo / Trocar logo / Remover", validação de tipo/tamanho exibida ao usuário. Texto explicativo: "Modo Congresso usará logo padrão do sistema" quando ausente.
+- **Modo Congresso (`CongressoShell`)**: a posição do brand glyph (canto superior esquerdo, ao lado de "ProSports / CONGRESSO") agora prioriza o logo do evento. Quando o evento não tem logo customizado, exibe o símbolo Montana padrão (fallback). Funciona em todas as 4 etapas do wizard.
+- **Volume**: `uploads_data` já mapeado em `docker-compose.yml`, persiste entre restarts do container.
+
 ## [1.42.1] - 2026-06-01
 
 ### Changed (Login com logo V3 no formulário)

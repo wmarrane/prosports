@@ -29,10 +29,11 @@ type Props = {
   step: CongressoStep
   onBack?: () => void
   contexto?: ContextoCongresso
+  eventoLogoUrl?: string | null
   children: React.ReactNode
 }
 
-export default function CongressoShell({ step, onBack, contexto, children }: Props) {
+export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, children }: Props) {
   const navigate = useNavigate()
   const theme = useThemeStore(s => s.theme)
   const toggleTheme = useThemeStore(s => s.toggle)
@@ -66,8 +67,16 @@ export default function CongressoShell({ step, onBack, contexto, children }: Pro
 
       <div className="cw-top">
         <div className="cw-brand">
-          <div className="cw-glyph" style={{ padding: 0, background: 'transparent', display: 'grid', placeItems: 'center' }}>
-            <LogoMontana variant="simbolo" height={40} />
+          <div className="cw-glyph" style={{ padding: 0, background: 'transparent', display: 'grid', placeItems: 'center', overflow: 'hidden' }}>
+            {eventoLogoUrl ? (
+              <img
+                src={eventoLogoUrl}
+                alt="Logo do evento"
+                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+              />
+            ) : (
+              <LogoMontana variant="simbolo" height={40} />
+            )}
           </div>
           <div>
             <div className="cw-brand-name">ProSports</div>

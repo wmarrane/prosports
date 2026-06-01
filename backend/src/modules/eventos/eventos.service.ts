@@ -81,3 +81,12 @@ export async function editar(
 export async function remover(id: number) {
   return prisma.evento.delete({ where: { id } })
 }
+
+export async function setLogoUrl(id: number, logo_url: string | null) {
+  return prisma.evento.update({ where: { id }, data: { logo_url }, include: INCLUDE })
+}
+
+export async function getLogoUrl(id: number): Promise<string | null> {
+  const e = await prisma.evento.findUnique({ where: { id }, select: { logo_url: true } })
+  return e?.logo_url ?? null
+}
