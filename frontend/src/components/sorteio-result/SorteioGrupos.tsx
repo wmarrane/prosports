@@ -52,13 +52,13 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
               return (
                 <li key={pid} className={`${itemClass} flex items-start gap-2 w-full`}>
                   {pos && <span className="flex-shrink-0 mt-0.5"><CampeaoBadge posicao={pos} large={large} /></span>}
-                  {isAnfitriao && <span className="flex-shrink-0 mt-0.5"><AnfitriaoBadge large={large} /></span>}
-                  <div className="flex flex-col min-w-0">
+                  <div className="flex flex-col min-w-0 flex-1">
                     <span className="leading-tight">
                       {p ? p.nome : <span className="text-[var(--t4)]">—</span>}
                     </span>
                     {linha && <span className={subItemClass}>{linha}</span>}
                   </div>
+                  {isAnfitriao && <span className="flex-shrink-0 mt-0.5"><AnfitriaoBadge large={large} /></span>}
                 </li>
               )
             })}

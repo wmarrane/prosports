@@ -148,7 +148,6 @@ function renderSlot(
     return (
       <span style={{ display: 'inline-flex', alignItems: 'flex-start', gap: 4, color: 'var(--t1)', minWidth: 0, width: '100%' }}>
         {cp && <span style={{ flexShrink: 0, marginTop: 2 }}><CampeaoBadge posicao={cp} large={false} /></span>}
-        {isAnfitriao && <span style={{ flexShrink: 0, marginTop: 2 }}><AnfitriaoBadge /></span>}
         <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
           <span style={{
             fontSize: nameFontSize, fontWeight: 600, lineHeight: 1.15,
@@ -161,6 +160,7 @@ function renderSlot(
             }}>{linha}</span>
           )}
         </span>
+        {isAnfitriao && <span style={{ flexShrink: 0, marginTop: 2 }}><AnfitriaoBadge /></span>}
       </span>
     )
   }

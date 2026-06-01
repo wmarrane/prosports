@@ -566,18 +566,6 @@ export default function EventoInscricoes() {
                               {String(idx + 1).padStart(2, '0')}
                             </span>
                             {pos && <CampeaoBadge posicao={pos} />}
-                            {isAnfitriao && (
-                              <span
-                                style={{
-                                  width: 22, height: 22, borderRadius: 6,
-                                  background: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
-                                  color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
-                                }}
-                                title="Anfitrião do evento"
-                              >
-                                <Home size={12} />
-                              </span>
-                            )}
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div
                                 style={{
@@ -612,6 +600,18 @@ export default function EventoInscricoes() {
                                 ) : null
                               })()}
                             </div>
+                            {isAnfitriao && (
+                              <span
+                                style={{
+                                  width: 22, height: 22, borderRadius: 6,
+                                  background: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
+                                  color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
+                                }}
+                                title="Anfitrião do evento"
+                              >
+                                <Home size={12} />
+                              </span>
+                            )}
                             <button
                               onClick={() => setRemoverInscricaoAlvo({ id: i.id, nome: i.participante.nome })}
                               style={{

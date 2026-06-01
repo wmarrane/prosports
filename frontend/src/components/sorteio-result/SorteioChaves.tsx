@@ -84,13 +84,13 @@ function SlotRender({ pid, fallbackText, large, participantesById, campeoesByPar
   const isAnfitriao = anfitriaoPid != null && pid === anfitriaoPid
   if (!p) return <span style={{ color: 'var(--t4)', fontSize }}>—</span>
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize, color: 'var(--t1)' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize, color: 'var(--t1)', width: '100%' }}>
       {pos && <CampeaoBadge posicao={pos} large={large} />}
-      {isAnfitriao && <AnfitriaoBadge large={large} />}
-      <span>
+      <span style={{ flex: 1 }}>
         {p.nome}
         {(() => { const l = subtituloLine?.(p); return l ? <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {l}</span> : null })()}
       </span>
+      {isAnfitriao && <AnfitriaoBadge large={large} />}
     </span>
   )
 }
@@ -202,13 +202,13 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
               {pid === null ? (
                 <span className={`${nameClass} text-[var(--t4)]`}>—</span>
               ) : participante ? (
-                <span className="inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 flex-1">
                   {campeaoPos && <CampeaoBadge posicao={campeaoPos} large={large} />}
-                  {isAnfitriao && <AnfitriaoBadge large={large} />}
-                  <span className={nameClass}>
+                  <span className={`${nameClass} flex-1`}>
                     {participante.nome}
                     {(() => { const l = subtituloLine?.(participante); return l ? <span className={subClass}>— {l}</span> : null })()}
                   </span>
+                  {isAnfitriao && <AnfitriaoBadge large={large} />}
                 </span>
               ) : (
                 <span className={`${nameClass} text-[var(--t4)]`}>—</span>

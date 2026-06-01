@@ -29,10 +29,12 @@ export default function SorteioOrdem({ resultado, participantesById, large = fal
           return (
             <li key={pid} className={`flex items-center gap-3 ${itemClass}`}>
               <span className={indexClass}>{idx + 1}.</span>
+              <span className="flex-1">
+                {p
+                  ? <>{p.nome}{linha ? <span className={subClass}>— {linha}</span> : null}</>
+                  : <span className="text-[var(--t4)]">—</span>}
+              </span>
               {isAnfitriao && <AnfitriaoBadge large={large} />}
-              {p
-                ? <span>{p.nome}{linha ? <span className={subClass}>— {linha}</span> : null}</span>
-                : <span className="text-[var(--t4)]">—</span>}
             </li>
           )
         })}

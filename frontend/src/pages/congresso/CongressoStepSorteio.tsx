@@ -319,7 +319,6 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                 title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
                 <CampeaoBadge posicao={c.posicao} />
-                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
                 <div style={{
                   display: 'inline-flex', flexDirection: 'column',
                   textDecoration: c.inscrito ? 'none' : 'line-through',
@@ -333,6 +332,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                     return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
                   })()}
                 </div>
+                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
               </div>
             ))}
           </div>
@@ -492,13 +492,13 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       {cp && <CampeaoBadge posicao={cp} large />}
-                      {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
-                      <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
                         <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>
                           {p ? p.nome : '—'}
                         </span>
                         {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.55em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
                       </div>
+                      {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
                     </li>
                   )
                 })}

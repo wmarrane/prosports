@@ -101,7 +101,6 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, a
                 }}
               >
                 <CampeaoBadge posicao={c.posicao} />
-                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
                 <span style={{ color: FG, fontWeight: 600, fontSize: 14 }}>{c.participante.nome}</span>
                 {(() => {
                   const l = subtituloLine?.(c.participante)
@@ -112,6 +111,7 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, a
                 ) : (
                   <span style={{ color: DIM, fontSize: 11, fontStyle: 'italic' }}>(não inscrito)</span>
                 )}
+                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
               </li>
             )
           })}

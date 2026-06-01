@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.40.2] - 2026-05-31
+
+### Changed (AnfitriaoBadge alinhado à direita)
+- O badge 🏠 verde do anfitrião migrou da posição inicial (após o `CampeaoBadge`) para o final do item (depois do nome + linha complementar). Cada item ganhou um wrapper com `flex: 1` para empurrar o badge para a borda direita.
+- Aplicado em: `SorteioGrupos`, `SorteioChaves` (slot + vertical list), `SorteioOrdem`, `BracketTree`, banner Cabeças e modal de grupo expandido (`CongressoStepSorteio`), `CampeoesPanel` e lista de inscritos (`EventoInscricoes`).
+
 ## [1.40.1] - 2026-05-31
 
 ### Added (Badge 🏠 do anfitrião nas telas de sorteio)
