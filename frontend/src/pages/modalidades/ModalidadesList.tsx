@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import { modalidadesService } from '../../services/modalidades'
 import type { Modalidade, TipoDisputa } from '../../types/modalidade'
-import { Plus, Trophy } from '../../lib/icons'
+import { Plus, Trophy, ChevronDown } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Layers, Shapes } from 'lucide-react'
 
 type FiltroId = 'todos' | TipoDisputa
@@ -42,6 +42,16 @@ export default function ModalidadesList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [filtro, setFiltro] = useState<FiltroId>('todos')
+  const [recolhidas, setRecolhidas] = useState<Set<number>>(new Set())
+
+  function toggleCompeticao(id: number) {
+    setRecolhidas(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['modalidades'],
@@ -156,18 +166,60 @@ export default function ModalidadesList() {
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            {agrupadasPorCompeticao.map(([competicaoId, grupo]) => (
-              <section key={competicaoId}>
-                <div
-                  className="flex items-center gap-2 mb-3"
-                  style={{ paddingBottom: 8, borderBottom: '1px solid var(--card-border)' }}
+            {agrupadasPorCompeticao.length > 1 && (
+              <div style={{ display: 'flex', gap: 12, marginBottom: -8 }}>
+                <button
+                  type="button"
+                  onClick={() => setRecolhidas(new Set(agrupadasPorCompeticao.map(([id]) => id)))}
+                  className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
                 >
+                  Recolher todas
+                </button>
+                <span className="text-xs text-[var(--t4)]">·</span>
+                <button
+                  type="button"
+                  onClick={() => setRecolhidas(new Set())}
+                  className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
+                >
+                  Expandir todas
+                </button>
+              </div>
+            )}
+            {agrupadasPorCompeticao.map(([competicaoId, grupo]) => {
+              const recolhida = recolhidas.has(competicaoId)
+              return (
+              <section key={competicaoId}>
+                <button
+                  type="button"
+                  onClick={() => toggleCompeticao(competicaoId)}
+                  className="flex items-center gap-2 mb-3 w-full text-left"
+                  style={{
+                    paddingBottom: 8,
+                    borderBottom: '1px solid var(--card-border)',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottomWidth: 1,
+                    borderBottomStyle: 'solid',
+                    borderBottomColor: 'var(--card-border)',
+                    cursor: 'pointer',
+                  }}
+                  aria-expanded={!recolhida}
+                >
+                  <ChevronDown
+                    size={16}
+                    className="text-[var(--t3)]"
+                    style={{
+                      transition: 'transform 160ms ease',
+                      transform: recolhida ? 'rotate(-90deg)' : 'rotate(0deg)',
+                    }}
+                  />
                   <Trophy size={15} className="text-[var(--brand-500)]" />
                   <h3 className="text-sm font-bold text-[var(--t1)]">{grupo.competicaoNome}</h3>
                   <span className="text-xs text-[var(--t4)] font-mono">
                     · {grupo.modalidades.length} {grupo.modalidades.length === 1 ? 'modalidade' : 'modalidades'}
                   </span>
-                </div>
+                </button>
+                {!recolhida && (
                 <div
                   style={{
                     display: 'grid',
@@ -252,8 +304,10 @@ export default function ModalidadesList() {
                     )
                   })}
                 </div>
+                )}
               </section>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>

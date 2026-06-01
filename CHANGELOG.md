@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.35.0] - 2026-05-31
+
+### Added (Recolher/expandir competições em Modalidades)
+- `ModalidadesList` (Administração → Modalidades): cabeçalho de cada competição vira botão clicável com chevron que recolhe/expande as modalidades daquela competição. Quando há mais de uma competição, aparece também atalho "Recolher todas / Expandir todas". Estado vive em memória (session-only).
+
 ## [1.34.2] - 2026-05-31
 
 ### Fixed (Import de modalidades deslogava o usuário)
