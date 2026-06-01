@@ -18,6 +18,7 @@ import TiposModalidadeList from './pages/tipos-modalidade/TiposModalidadeList'
 import TipoModalidadeForm from './pages/tipos-modalidade/TipoModalidadeForm'
 import CompeticoesList from './pages/competicoes/CompeticoesList'
 import CompeticaoForm from './pages/competicoes/CompeticaoForm'
+import SistemasDisputa from './pages/sistemas-disputa/SistemasDisputa'
 import Painel from './pages/Painel'
 import EventosList from './pages/eventos/EventosList'
 import EventoForm from './pages/eventos/EventoForm'
@@ -76,6 +77,10 @@ export default function App() {
             <Route path="/competicoes" element={<CompeticoesList />} />
             <Route path="/competicoes/nova" element={<CompeticaoForm />} />
             <Route path="/competicoes/:id/editar" element={<CompeticaoForm />} />
+
+            <Route element={<ProtectedRoute roles={['ADMIN']} />}>
+              <Route path="/sistemas-disputa" element={<SistemasDisputa />} />
+            </Route>
 
             <Route path="/novidades" element={<Novidades />} />
 

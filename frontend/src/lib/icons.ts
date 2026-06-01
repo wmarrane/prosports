@@ -31,6 +31,7 @@ export {
   Shuffle,
   Crown,
   Download,
+  Copy,
   Key,
   LogOut,
   UserCog,

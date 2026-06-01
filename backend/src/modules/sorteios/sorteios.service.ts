@@ -102,7 +102,7 @@ export async function executar(input: { evento_id: number; modalidade_id: number
   } else if (tipo === 'chaves') {
     const [regra, regraBracket, regraMatches] = await Promise.all([
       prisma.sistemaDisputasChaves.findFirst({
-        where: { numero_inscrito: pids.length },
+        where: { competicao_id: evento.competicao_id, numero_inscrito: pids.length },
       }),
       prisma.bracketChavesByes.findUnique({
         where: { numero_inscrito: pids.length },

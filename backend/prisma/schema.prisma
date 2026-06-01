@@ -100,6 +100,7 @@ model Competicao {
   modalidades              Modalidade[]
   eventos                  Evento[]
   sistema_disputas_grupos  SistemaDisputasGrupos[]
+  sistema_disputas_chaves  SistemaDisputasChaves[]
   criado_em                DateTime                 @default(now())
   atualizado_em            DateTime                 @updatedAt
 }
@@ -210,14 +211,17 @@ model CampeaoAnterior {
 }
 
 model SistemaDisputasChaves {
-  id                       Int @id @default(autoincrement())
+  id                       Int        @id @default(autoincrement())
   numero_inscrito          Int
   posicao_primeiro_cabeca  Int
   posicao_segundo_cabeca   Int
   posicao_terceiro_cabeca  Int
   posicao_quarto_cabeca    Int
+  competicao               Competicao @relation(fields: [competicao_id], references: [id], onDelete: Cascade)
+  competicao_id            Int
 
-  @@unique([numero_inscrito])
+  @@unique([competicao_id, numero_inscrito])
+  @@index([competicao_id])
   @@map("sistema_disputas_chaves")
 }
 

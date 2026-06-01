@@ -18,6 +18,7 @@ import campeoesAnterioresRoutes from './modules/campeoes_anteriores/campeoes_ant
 import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.routes'
 import usersRoutes from './modules/users/users.routes'
 import statsRoutes from './modules/stats/stats.routes'
+import sistemasDisputaRoutes from './modules/sistemas_disputa/sistemas_disputa.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -54,6 +55,7 @@ app.use('/campeoes-anteriores', campeoesAnterioresRoutes)
 app.use('/inscricoes', inscricoesRoutes)
 app.use('/eventos', eventosRoutes)
 app.use('/competicoes', competicoesRoutes)
+app.use('/sistemas-disputa', sistemasDisputaRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 

@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.37.0] - 2026-05-31
+
+### Added (Manutenção dos sistemas de disputa + copiar entre competições)
+- **Schema**: `SistemaDisputasChaves` agora é por competição. Migration `20260531235000_sistema_disputas_chaves_per_competicao` adiciona `competicao_id`, replica linhas existentes para TODAS as competições (cada competição herda o template global anterior), troca unique `(numero_inscrito)` por `(competicao_id, numero_inscrito)` e adiciona FK com `ON DELETE CASCADE`.
+- **Backend**: novo módulo `sistemas-disputa` com CRUD admin para `grupos` e `chaves` (filtrados por `competicao_id`) e endpoint `POST /sistemas-disputa/copiar` que dentro de uma transaction faz DELETE+INSERT atômico (substituir destino).
+- **Frontend**: nova página `Administração → Sistemas de disputa` com seletor de competição no topo, tabs Grupos/Chaves, tabelas com add row inline + edit inline + delete por linha, e modal "Copiar de outra competição" (escolhe origem + tipo `grupos | chaves | ambos`, com aviso de substituição).
+- **Sorteios**: query de `sistemaDisputasChaves` agora filtra por `competicao_id` do evento (alinhado com `SistemaDisputasGrupos`).
+
 ## [1.36.1] - 2026-05-31
 
 ### Added (Versão na tela de login)

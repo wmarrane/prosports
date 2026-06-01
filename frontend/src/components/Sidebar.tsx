@@ -32,6 +32,7 @@ const NAV: NavItem[] = [
       { id: 'delegacias', label: 'Delegacias', path: '/delegacias' },
       { id: 'tipos-modalidade', label: 'Tipos de Modalidade', path: '/tipos-modalidade' },
       { id: 'modalidades', label: 'Modalidades', path: '/modalidades' },
+      { id: 'sistemas-disputa', label: 'Sistemas de disputa', path: '/sistemas-disputa' },
     ],
   },
 ]
