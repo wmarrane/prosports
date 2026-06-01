@@ -78,6 +78,7 @@ export default function EventoInscricoes() {
   const [pickedIds, setPickedIds] = useState<number[]>([])
   const [erroModal, setErroModal] = useState('')
   const [resumoBulk, setResumoBulk] = useState<{ criadas: number; duplicadas: number; erros: number } | null>(null)
+  const [removerInscricaoAlvo, setRemoverInscricaoAlvo] = useState<{ id: number; nome: string } | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
 
@@ -599,11 +600,7 @@ export default function EventoInscricoes() {
                               })()}
                             </div>
                             <button
-                              onClick={() => {
-                                if (confirm(`Remover inscrição de "${i.participante.nome}"?`)) {
-                                  removerInscricao(i.id)
-                                }
-                              }}
+                              onClick={() => setRemoverInscricaoAlvo({ id: i.id, nome: i.participante.nome })}
                               style={{
                                 background: 'transparent',
                                 border: 'none',
@@ -965,6 +962,84 @@ export default function EventoInscricoes() {
           queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
         }}
       />
+
+      {/* Modal: confirmar remoção de inscrição */}
+      {removerInscricaoAlvo && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => setRemoverInscricaoAlvo(null)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 480,
+              width: '100%',
+              margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{
+              width: 72, height: 72, margin: '0 auto 16px',
+              borderRadius: '50%', background: 'var(--danger-soft)',
+              display: 'grid', placeItems: 'center', color: 'var(--danger)',
+            }}>
+              <X size={36} />
+            </div>
+            <h3 style={{ fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--t1)', marginBottom: 8 }}>
+              Remover inscrição?
+            </h3>
+            <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+              A inscrição de <b style={{ color: 'var(--t1)' }}>{removerInscricaoAlvo.nome}</b> será removida desta modalidade. Esta ação não pode ser desfeita.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setRemoverInscricaoAlvo(null)}
+                style={{
+                  background: 'transparent',
+                  color: 'var(--t1)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Cancelar</button>
+              <button
+                type="button"
+                onClick={() => {
+                  removerInscricao(removerInscricaoAlvo.id)
+                  setRemoverInscricaoAlvo(null)
+                }}
+                style={{
+                  background: 'var(--danger)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              ><X size={16} /> Remover</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Responsive */}
       <style>{`

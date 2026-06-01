@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.39.2] - 2026-05-31
+
+### Fixed (Linha de exibição vinha vazia nas telas de sorteio)
+- Causa raiz real: `inscricoes.service.ts` e `campeoes_anteriores.service.ts` carregavam `{ participante: true }` sem deep-include de `municipio`/`inspetoria`/`delegacia`. Resultado: a função `composeSubtituloLine` recebia `p.delegacia` undefined e retornava null em todas as telas que reaproveitam essas listas (Inscritos, Sorteio de grupos/chaves/ordem, Cabeças, Campeões anteriores).
+- Fix: deep-include `{ participante: { include: { municipio: true, inspetoria: true, delegacia: true } } }` nos dois services. Testes ajustados (179 passando).
+
+### Changed (Confirmação de remoção de inscrição)
+- `EventoInscricoes`: substituído `confirm()` nativo pelo modal de confirmação padrão do sistema (X em círculo `--danger-soft`, "Cancelar" ghost + "Remover" `--danger`), igual ao usado em `ModalidadesPanel` e `CongressoStepParticipantes`.
+
 ## [1.39.1] - 2026-05-31
 
 ### Fixed (Linha de exibição do participante não propagava em todas as telas de sorteio)

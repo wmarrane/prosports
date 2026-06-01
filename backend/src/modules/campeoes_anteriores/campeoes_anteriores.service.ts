@@ -1,6 +1,8 @@
 import prisma from '../../lib/prisma'
 
-const INCLUDE = { participante: true } as const
+const INCLUDE = {
+  participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
+} as const
 
 async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
   try {

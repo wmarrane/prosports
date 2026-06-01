@@ -30,7 +30,7 @@ import * as service from './inscricoes.service'
 const mockPrisma = prisma as any
 beforeEach(() => vi.clearAllMocks())
 
-const INCLUDE = { participante: true }
+const INCLUDE = { participante: { include: { municipio: true, inspetoria: true, delegacia: true } } }
 
 describe('inscricoes.service', () => {
   it('listar com filtros passa where corretamente', async () => {
