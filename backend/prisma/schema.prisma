@@ -75,6 +75,7 @@ model Participante {
   municipio_id  Int
   inscricoes    Inscricao[]
   campeoes_anteriores CampeaoAnterior[]
+  eventos_anfitriao   Evento[]      @relation("EventoAnfitriao")
   criado_em     DateTime     @default(now())
   atualizado_em DateTime     @updatedAt
 }
@@ -102,6 +103,7 @@ model Competicao {
   nome                     String                   @unique
   estados                  String[]
   subtitulo_campos         String[]                 @default([])
+  considerar_anfitriao     Boolean                  @default(false)
   modalidades              Modalidade[]
   eventos                  Evento[]
   sistema_disputas_grupos  SistemaDisputasGrupos[]
@@ -152,6 +154,8 @@ model Evento {
   competicao_id   Int
   municipio       Municipio     @relation(fields: [municipio_id], references: [id])
   municipio_id    Int
+  anfitriao       Participante? @relation("EventoAnfitriao", fields: [anfitriao_id], references: [id], onDelete: SetNull)
+  anfitriao_id    Int?
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
   campeoes_anteriores CampeaoAnterior[]

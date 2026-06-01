@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
 import MunicipioSelect from '../../components/MunicipioSelect'
+import ParticipanteSelect from '../../components/ParticipanteSelect'
 import { eventosService } from '../../services/eventos'
 import { competicoesService } from '../../services/competicoes'
 import { STATUS_LABEL } from '../../lib/evento-status'
@@ -41,6 +42,7 @@ export default function EventoForm() {
   const [local, setLocal] = useState('')
   const [organizador, setOrganizador] = useState('')
   const [status, setStatus] = useState<EventoStatus>('rascunho')
+  const [anfitriaoId, setAnfitriaoId] = useState<number | null>(null)
   const [erro, setErro] = useState('')
 
   const { data: competicoes = [] } = useQuery({
@@ -63,6 +65,7 @@ export default function EventoForm() {
       setLocal(existing.local)
       setOrganizador(existing.organizador ?? '')
       setStatus(existing.status)
+      setAnfitriaoId(existing.anfitriao_id ?? null)
     }
   }, [existing])
 
@@ -76,6 +79,7 @@ export default function EventoForm() {
         status,
         competicao_id: Number(competicaoId),
         municipio_id: municipioId!,
+        anfitriao_id: anfitriaoId,
       }
       return isEdit
         ? eventosService.editar(Number(id), payload)
@@ -243,6 +247,46 @@ export default function EventoForm() {
                 </p>
               </div>
             </div>
+          </section>
+
+          {/* Card: Anfitrião do evento */}
+          <section style={cardStyle}>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                style={{
+                  width: 36, height: 36, borderRadius: 10,
+                  background: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
+                  color: '#fff', display: 'grid', placeItems: 'center',
+                }}
+              >
+                <Users size={18} />
+              </div>
+              <div>
+                <div className="eyebrow">Anfitrião</div>
+                <h3 className="sec-title" style={{ fontSize: 17 }}>
+                  Participante anfitrião do evento
+                </h3>
+              </div>
+            </div>
+
+            <ParticipanteSelect
+              value={anfitriaoId}
+              onChange={id => setAnfitriaoId(id)}
+              placeholder="Buscar participante anfitrião... (opcional)"
+            />
+            {(() => {
+              const comp = competicoes.find(c => c.id === Number(competicaoId))
+              if (!competicaoId) return null
+              return comp?.considerar_anfitriao ? (
+                <p className="text-xs text-[var(--brand-500)] mt-2">
+                  ⓘ Esta competição considera o anfitrião nos sorteios — se inscrito e fora dos 4 primeiros campeões, vira cabeça do grupo C (3 grupos) / grupo D (4+ grupos) ou 4º cabeça em chaves.
+                </p>
+              ) : (
+                <p className="text-xs text-[var(--t4)] mt-2">
+                  Esta competição <b>não</b> considera o anfitrião nos sorteios. O campo é registrado mas a regra não é aplicada.
+                </p>
+              )
+            })()}
           </section>
 
           {/* Card: Agenda + Status */}

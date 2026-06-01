@@ -37,6 +37,7 @@ export default function CompeticaoForm() {
   const [nome, setNome] = useState('')
   const [estados, setEstados] = useState<string[]>([])
   const [campos, setCampos] = useState<CampoSubtitulo[]>([])
+  const [considerarAnfitriao, setConsiderarAnfitriao] = useState(false)
   const [erro, setErro] = useState('')
 
   const { data: existing } = useQuery({
@@ -50,12 +51,13 @@ export default function CompeticaoForm() {
       setNome(existing.nome)
       setEstados(existing.estados)
       setCampos(existing.subtitulo_campos ?? [])
+      setConsiderarAnfitriao(existing.considerar_anfitriao ?? false)
     }
   }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
-      const payload = { nome, estados, subtitulo_campos: campos }
+      const payload = { nome, estados, subtitulo_campos: campos, considerar_anfitriao: considerarAnfitriao }
       return isEdit
         ? competicoesService.editar(Number(id), payload)
         : competicoesService.criar(payload)
@@ -353,6 +355,32 @@ export default function CompeticaoForm() {
             Nenhuma informação adicional será exibida ao lado do nome.
           </p>
         )}
+
+        <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid var(--card-border)' }}>
+          <div className="eyebrow mb-1">Privilégios</div>
+          <label style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '10px 12px',
+            background: considerarAnfitriao ? 'var(--brand-50)' : 'var(--card-bg-2)',
+            border: `1px solid ${considerarAnfitriao ? 'var(--brand-500)' : 'var(--card-border)'}`,
+            borderRadius: 'var(--radius-lg)',
+            cursor: 'pointer',
+            transition: 'all 120ms ease',
+          }}>
+            <input
+              type="checkbox"
+              checked={considerarAnfitriao}
+              onChange={e => setConsiderarAnfitriao(e.target.checked)}
+              className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)]"
+            />
+            <div style={{ flex: 1 }}>
+              <span className="text-sm font-medium text-[var(--t1)]">Considerar anfitrião do evento</span>
+              <div className="text-xs text-[var(--t3)] mt-0.5">
+                Quando ligado, o participante marcado como anfitrião no evento ganha privilégio de cabeça nos sorteios: vira cabeça do <b>grupo C</b> (3 grupos) ou <b>grupo D</b> (4+ grupos), e <b>4º cabeça</b> em chaves — só se ainda não estiver entre os 4 primeiros campeões.
+              </div>
+            </div>
+          </label>
+        </div>
       </section>
     </>
   )

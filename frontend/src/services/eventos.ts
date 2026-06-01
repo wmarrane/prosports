@@ -11,6 +11,7 @@ type EventoPayload = {
   status?: 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
   competicao_id: number
   municipio_id: number
+  anfitriao_id?: number | null
 }
 
 export const eventosService = {

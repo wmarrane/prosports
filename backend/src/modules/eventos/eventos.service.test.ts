@@ -18,7 +18,11 @@ import * as service from './eventos.service'
 const mockPrisma = prisma as any
 beforeEach(() => vi.clearAllMocks())
 
-const INCLUDE = { competicao: true, municipio: true }
+const INCLUDE = {
+  competicao: true,
+  municipio: true,
+  anfitriao: { include: { municipio: true, inspetoria: true, delegacia: true } },
+}
 const LIST_INCLUDE = {
   competicao: {
     include: {

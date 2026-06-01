@@ -6,6 +6,55 @@ function novaSeed(): string {
   return randomBytes(8).toString('hex')
 }
 
+/**
+ * Aplica regra do anfitrião do evento: se o anfitrião está inscrito e ainda
+ * não é cabeça (top-4), injeta-o numa posição específica de cabeça.
+ *
+ * - Grupos com < 3 grupos: regra não se aplica
+ * - Grupos com == 3 grupos: anfitrião vira cabeça do grupo C (pos 3, 1-indexed)
+ * - Grupos com >= 4 grupos: anfitrião vira cabeça do grupo D (pos 4, 1-indexed)
+ * - Chaves (sempre máx 4 cabeças): anfitrião vira 4º cabeça
+ *
+ * Quem ocupava o slot é deslocado para a posição seguinte. Em chaves, isso
+ * efetivamente "expulsa" o antigo 4º já que o engine só usa as 4 primeiras.
+ */
+export function applyAnfitriaoRule(params: {
+  campeoesPidsInscritos: number[]
+  anfitriaoPid: number | null
+  anfitriaoInscrito: boolean
+  consideraAnfitriao: boolean
+  tipo: 'grupos' | 'chaves'
+  quantidadeGrupos?: number
+}): number[] {
+  const { campeoesPidsInscritos, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, tipo, quantidadeGrupos } = params
+
+  if (!consideraAnfitriao || anfitriaoPid === null || !anfitriaoInscrito) {
+    return campeoesPidsInscritos
+  }
+
+  const idx = campeoesPidsInscritos.indexOf(anfitriaoPid)
+  if (idx >= 0 && idx <= 3) {
+    // Já é top-4 — regra não se aplica, mantém posição
+    return campeoesPidsInscritos
+  }
+
+  let targetPos1Indexed: number
+  if (tipo === 'chaves') {
+    targetPos1Indexed = 4
+  } else {
+    if (quantidadeGrupos === undefined || quantidadeGrupos < 3) {
+      return campeoesPidsInscritos  // < 3 grupos: regra não se aplica
+    }
+    targetPos1Indexed = quantidadeGrupos === 3 ? 3 : 4
+  }
+
+  // Remove anfitrião de qualquer posição atual e insere no target
+  const sem = campeoesPidsInscritos.filter(p => p !== anfitriaoPid)
+  const out = [...sem]
+  out.splice(targetPos1Indexed - 1, 0, anfitriaoPid)
+  return out
+}
+
 export async function listar(filtros: { evento_id?: number; modalidade_id?: number }) {
   const where: { evento_id?: number; modalidade_id?: number } = {}
   if (filtros.evento_id !== undefined) where.evento_id = filtros.evento_id
@@ -27,7 +76,12 @@ export async function executar(input: { evento_id: number; modalidade_id: number
   const [evento, modalidade] = await Promise.all([
     prisma.evento.findUnique({
       where: { id: input.evento_id },
-      select: { id: true, competicao_id: true },
+      select: {
+        id: true,
+        competicao_id: true,
+        anfitriao_id: true,
+        competicao: { select: { considerar_anfitriao: true } },
+      },
     }),
     prisma.modalidade.findUnique({
       where: { id: input.modalidade_id },
@@ -86,6 +140,10 @@ export async function executar(input: { evento_id: number; modalidade_id: number
   const seed = novaSeed()
   let resultado: unknown
 
+  const anfitriaoPid = evento.anfitriao_id
+  const consideraAnfitriao = evento.competicao?.considerar_anfitriao ?? false
+  const anfitriaoInscrito = anfitriaoPid !== null && inscritosSet.has(anfitriaoPid)
+
   if (tipo === 'grupos') {
     const regra = await prisma.sistemaDisputasGrupos.findFirst({
       where: { competicao_id: evento.competicao_id, quantidade_equipes: pids.length },
@@ -98,7 +156,15 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         { status: 400 },
       )
     }
-    resultado = engine.drawGroups(pids, regra, seed, campeoesPidsInscritos)
+    const cabecasFinais = applyAnfitriaoRule({
+      campeoesPidsInscritos,
+      anfitriaoPid,
+      anfitriaoInscrito,
+      consideraAnfitriao,
+      tipo: 'grupos',
+      quantidadeGrupos: regra.quantidade_grupos,
+    })
+    resultado = engine.drawGroups(pids, regra, seed, cabecasFinais)
   } else if (tipo === 'chaves') {
     const [regra, regraBracket, regraMatches] = await Promise.all([
       prisma.sistemaDisputasChaves.findFirst({
@@ -129,7 +195,14 @@ export async function executar(input: { evento_id: number; modalidade_id: number
     }
     // matchesGraph is optional — if missing, frontend falls back to legacy render
     const matchesGraph = regraMatches?.matches_graph ? (regraMatches.matches_graph as any) : null
-    resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, campeoesPidsInscritos)
+    const cabecasFinais = applyAnfitriaoRule({
+      campeoesPidsInscritos,
+      anfitriaoPid,
+      anfitriaoInscrito,
+      consideraAnfitriao,
+      tipo: 'chaves',
+    })
+    resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, cabecasFinais)
   } else if (tipo === 'ordem_entrada') {
     resultado = engine.shuffleOrder(pids, seed)
   } else {

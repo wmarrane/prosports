@@ -5,6 +5,21 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.40.0] - 2026-05-31
+
+### Added (Anfitrião do evento + privilégio de cabeça no sorteio)
+- **Schema**: `Competicao.considerar_anfitriao Boolean @default(false)` e `Evento.anfitriao_id Int?` (FK Participante, `ON DELETE SET NULL`). Migration `20260601010000_anfitriao_evento`.
+- **CompeticaoForm**: novo checkbox "Considerar anfitrião do evento" abaixo da seção "Linha de exibição do participante" com explicação da regra.
+- **EventoForm**: novo card "Participante anfitrião do evento" com `ParticipanteSelect`. Mostra dica se a competição considera ou não a regra.
+- **EventoInscricoes**: ícone 🏠 verde ao lado do participante anfitrião na lista de inscritos da modalidade.
+- **Backend sorteios (engine de cabeças)**: nova função `applyAnfitriaoRule` ativada quando `competicao.considerar_anfitriao === true`, `evento.anfitriao_id != null` e o anfitrião está inscrito na modalidade:
+  - Se anfitrião já é top-4 campeão: regra não se aplica (mantém posição).
+  - **Grupos** com 3 grupos: anfitrião vira cabeça do grupo C (pos 3, deslocando o atual).
+  - **Grupos** com 4+ grupos: anfitrião vira cabeça do grupo D (pos 4).
+  - **Grupos** com < 3 grupos: regra não se aplica.
+  - **Chaves** (sempre máx 4 cabeças): anfitrião vira 4º cabeça, deslocando antigo.
+- **Tests**: 13 novos casos cobrindo todas as combinações da regra. 192 testes passando.
+
 ## [1.39.4] - 2026-05-31
 
 ### Changed (Linha de exibição abaixo do nome em Chaves bracket)

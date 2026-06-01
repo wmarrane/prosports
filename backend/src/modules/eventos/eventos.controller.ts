@@ -12,6 +12,7 @@ const createSchema = z.object({
   status: z.enum(STATUS_VALUES).optional(),
   competicao_id: z.coerce.number().int().positive(),
   municipio_id: z.coerce.number().int().positive(),
+  anfitriao_id: z.coerce.number().int().positive().nullable().optional(),
 })
 const updateSchema = createSchema.partial()
 const listQuerySchema = z.object({

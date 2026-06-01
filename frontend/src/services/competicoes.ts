@@ -6,7 +6,8 @@ const BASE = '/competicoes'
 type CompeticaoPayload = {
   nome: string
   estados: string[]
-  adicionar_subtitulo?: boolean
+  subtitulo_campos?: string[]
+  considerar_anfitriao?: boolean
 }
 
 export const competicoesService = {

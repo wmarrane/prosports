@@ -278,3 +278,107 @@ describe('sorteios.service', () => {
     expect(callArg.create.resultado.matchesGraph).toEqual(fakeGraph)
   })
 })
+
+describe('applyAnfitriaoRule', () => {
+  const base = {
+    consideraAnfitriao: true,
+    anfitriaoInscrito: true,
+    tipo: 'grupos' as const,
+  }
+
+  it('retorna lista intacta quando consideraAnfitriao=false', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, consideraAnfitriao: false,
+      campeoesPidsInscritos: [10, 20, 30], anfitriaoPid: 99, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([10, 20, 30])
+  })
+
+  it('retorna lista intacta quando anfitriao nulo', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20], anfitriaoPid: null, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([10, 20])
+  })
+
+  it('retorna lista intacta quando anfitriao nao esta inscrito', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, anfitriaoInscrito: false,
+      campeoesPidsInscritos: [10, 20], anfitriaoPid: 99, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([10, 20])
+  })
+
+  it('grupos: anfitriao ja na 1a posicao -> mantem', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [99, 10, 20, 30], anfitriaoPid: 99, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([99, 10, 20, 30])
+  })
+
+  it('grupos: anfitriao ja na 4a posicao -> mantem', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20, 30, 99], anfitriaoPid: 99, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([10, 20, 30, 99])
+  })
+
+  it('grupos com < 3 grupos: regra nao se aplica', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20], anfitriaoPid: 99, quantidadeGrupos: 2,
+    })
+    expect(out).toEqual([10, 20])
+  })
+
+  it('grupos == 3 e anfitriao na pos 5 -> vira cabeca do grupo C (pos 3)', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20, 30, 40, 99], anfitriaoPid: 99, quantidadeGrupos: 3,
+    })
+    expect(out).toEqual([10, 20, 99, 30, 40])
+  })
+
+  it('grupos == 3 e anfitriao sem posicao previa -> vira cabeca pos 3', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20, 30], anfitriaoPid: 99, quantidadeGrupos: 3,
+    })
+    expect(out).toEqual([10, 20, 99, 30])
+  })
+
+  it('grupos == 4 e anfitriao sem posicao -> vira cabeca pos 4 (grupo D)', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20, 30], anfitriaoPid: 99, quantidadeGrupos: 4,
+    })
+    expect(out).toEqual([10, 20, 30, 99])
+  })
+
+  it('grupos == 5 e anfitriao na pos 7 -> vira cabeca pos 4', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20, 30, 40, 50, 60, 99], anfitriaoPid: 99, quantidadeGrupos: 5,
+    })
+    expect(out).toEqual([10, 20, 30, 99, 40, 50, 60])
+  })
+
+  it('chaves: anfitriao na pos 5 -> vira 4o cabeca (deslocando antigo 4o)', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, tipo: 'chaves',
+      campeoesPidsInscritos: [10, 20, 30, 40, 99], anfitriaoPid: 99,
+    })
+    expect(out).toEqual([10, 20, 30, 99, 40])
+  })
+
+  it('chaves: anfitriao sem posicao -> vira 4o cabeca', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, tipo: 'chaves',
+      campeoesPidsInscritos: [10, 20, 30], anfitriaoPid: 99,
+    })
+    expect(out).toEqual([10, 20, 30, 99])
+  })
+
+  it('chaves: anfitriao na top-4 -> mantem', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, tipo: 'chaves',
+      campeoesPidsInscritos: [10, 99, 30, 40], anfitriaoPid: 99,
+    })
+    expect(out).toEqual([10, 99, 30, 40])
+  })
+})

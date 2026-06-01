@@ -1,6 +1,7 @@
 import type { Competicao } from './competicao'
 import type { Municipio } from './municipio'
 import type { TipoDisputa } from './modalidade'
+import type { Participante } from './participante'
 
 export type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
 
@@ -23,6 +24,8 @@ export type Evento = {
   competicao: CompeticaoComModalidades
   municipio_id: number
   municipio: Municipio
+  anfitriao_id: number | null
+  anfitriao: Participante | null
   criado_em: string
   atualizado_em: string
   _count?: {

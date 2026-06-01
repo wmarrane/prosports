@@ -1,6 +1,10 @@
 import prisma from '../../lib/prisma'
 
-const INCLUDE = { competicao: true, municipio: true } as const
+const INCLUDE = {
+  competicao: true,
+  municipio: true,
+  anfitriao: { include: { municipio: true, inspetoria: true, delegacia: true } },
+} as const
 
 // Include estendido para a listagem: inclui modalidades da competição (com tipo)
 // para filtros e contadores (modalidades/inscricoes/sorteios) por evento.
@@ -43,6 +47,7 @@ type CreateInput = {
   status?: EventoStatus
   competicao_id: number
   municipio_id: number
+  anfitriao_id?: number | null
 }
 
 export async function listar(competicao_id?: number) {

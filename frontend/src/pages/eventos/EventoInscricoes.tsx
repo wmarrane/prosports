@@ -17,7 +17,7 @@ import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
-import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin } from 'lucide-react'
+import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 function formatDateBR(iso: string): string {
@@ -541,6 +541,7 @@ export default function EventoInscricoes() {
                     >
                       {inscricoes.map((i, idx) => {
                         const pos = campeoesByParticipanteId.get(i.participante_id)
+                        const isAnfitriao = evento?.anfitriao_id === i.participante_id
                         return (
                           <div
                             key={i.id}
@@ -565,6 +566,18 @@ export default function EventoInscricoes() {
                               {String(idx + 1).padStart(2, '0')}
                             </span>
                             {pos && <CampeaoBadge posicao={pos} />}
+                            {isAnfitriao && (
+                              <span
+                                style={{
+                                  width: 22, height: 22, borderRadius: 6,
+                                  background: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
+                                  color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
+                                }}
+                                title="Anfitrião do evento"
+                              >
+                                <Home size={12} />
+                              </span>
+                            )}
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div
                                 style={{

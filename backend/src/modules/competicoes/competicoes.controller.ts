@@ -12,6 +12,7 @@ const createSchema = z.object({
     .refine(arr => new Set(arr).size === arr.length, { message: 'Campos duplicados' })
     .optional()
     .default([]),
+  considerar_anfitriao: z.boolean().optional().default(false),
 })
 
 const updateSchema = createSchema.partial()
