@@ -205,7 +205,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         </div>
 
         {mostraCampeoes && (
-          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} />
+          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} subtituloLine={subtituloLine} />
         )}
 
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 24, minHeight: 200 }}>
@@ -311,13 +311,19 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                 title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
                 <CampeaoBadge posicao={c.posicao} />
-                <span style={{
-                  fontSize: 15,
-                  color: c.inscrito ? FG : DIM,
-                  fontWeight: 600,
+                <div style={{
+                  display: 'inline-flex', flexDirection: 'column',
                   textDecoration: c.inscrito ? 'none' : 'line-through',
                   textDecorationThickness: '2px',
-                }}>{c.participante.nome}</span>
+                }}>
+                  <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
+                    {c.participante.nome}
+                  </span>
+                  {(() => {
+                    const l = subtituloLine(c.participante)
+                    return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
+                  })()}
+                </div>
               </div>
             ))}
           </div>

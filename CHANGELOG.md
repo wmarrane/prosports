@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.39.1] - 2026-05-31
+
+### Fixed (Linha de exibição do participante não propagava em todas as telas de sorteio)
+- **CampeoesPanel** (Modo Congresso → Sorteio): adicionou prop `subtituloLine` e renderiza a linha tanto na lista resumida quanto em cada `CampeaoSlot` do modal de edição. Antes mostrava só `nome`.
+- **CongressoStepSorteio** → banner "Cabeças": agora mostra nome + linha de exibição abaixo (em fonte menor) para cada cabeça inscrita ou não-inscrita.
+- `CongressoStepSorteio` passa `subtituloLine` (já derivado de `competicao.subtitulo_campos`) para o `CampeoesPanel`.
+
 ## [1.39.0] - 2026-05-31
 
 ### Added (Inscritos por modalidade + inscrição múltipla)

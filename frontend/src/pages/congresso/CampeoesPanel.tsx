@@ -9,6 +9,7 @@ import { Crown, Check, X } from '../../lib/icons'
 type Props = {
   eventoId: number
   modalidadeId: number
+  subtituloLine?: (p: any) => string | null
 }
 
 const FG = 'var(--cw-fg)'
@@ -16,7 +17,7 @@ const DIM = 'var(--cw-dim)'
 
 const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
-export default function CampeoesPanel({ eventoId, modalidadeId }: Props) {
+export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine }: Props) {
   const queryClient = useQueryClient()
   const [editOpen, setEditOpen] = useState(false)
 
@@ -99,6 +100,10 @@ export default function CampeoesPanel({ eventoId, modalidadeId }: Props) {
               >
                 <CampeaoBadge posicao={c.posicao} />
                 <span style={{ color: FG, fontWeight: 600, fontSize: 14 }}>{c.participante.nome}</span>
+                {(() => {
+                  const l = subtituloLine?.(c.participante)
+                  return l ? <span style={{ color: DIM, fontSize: 12 }}>— {l}</span> : null
+                })()}
                 {inscrito ? (
                   <Check size={14} style={{ color: 'var(--success)' }} />
                 ) : (
@@ -151,6 +156,7 @@ export default function CampeoesPanel({ eventoId, modalidadeId }: Props) {
                     onCriar={(participante_id) => criarCampeao({ participante_id, posicao: pos })}
                     onRemover={(cid) => removerCampeao(cid)}
                     salvando={salvandoCampeao}
+                    subtituloLine={subtituloLine}
                   />
                 )
               })}
