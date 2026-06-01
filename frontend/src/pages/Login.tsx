@@ -70,8 +70,8 @@ export default function Login() {
         <div style={{ position: 'absolute', width: 320, height: 320, borderRadius: '50%', background: 'rgba(20,184,138,0.30)', filter: 'blur(75px)', bottom: -90, left: 60, animation: 'floaty 8s ease-in-out infinite' }} />
 
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 50, height: 50, borderRadius: 14, background: 'var(--grad-brand)', display: 'grid', placeItems: 'center', boxShadow: '0 8px 26px rgba(16,97,216,0.5)' }}>
-            <LogoMontana variant="simbolo-branco" height={36} />
+          <div style={{ width: 58, height: 58, borderRadius: 14, background: 'rgba(255,255,255,0.96)', display: 'grid', placeItems: 'center', boxShadow: '0 8px 26px rgba(0,0,0,0.25)', padding: 6 }}>
+            <LogoMontana variant="simbolo" height={42} />
           </div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em' }}>ProSports</div>
@@ -113,31 +113,26 @@ export default function Login() {
           </div>
         </div>
 
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 30, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: 30 }}>
-            {[
-              [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
-              [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
-              ['100%', 'Auditados'],
-            ].map(([v, l]) => (
-              <div key={l}>
-                <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
-                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, opacity: 0.85 }}>
-            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
-              powered by
-            </span>
-            <LogoMontana variant="horizontal-branco" height={46} />
-          </div>
+        <div style={{ position: 'relative', display: 'flex', gap: 30 }}>
+          {[
+            [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
+            [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
+            ['100%', 'Auditados'],
+          ].map(([v, l]) => (
+            <div key={l}>
+              <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
+              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Right form */}
       <div style={{ flex: 1, padding: '56px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--card-bg)' }}>
         <form onSubmit={handleSubmit} style={{ maxWidth: 380, width: '100%' }}>
+          <div style={{ marginBottom: 32 }}>
+            <LogoMontana variant="horizontal-cor" height={70} />
+          </div>
           <div className="eyebrow">Acesso administrativo</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 29, letterSpacing: '-0.025em', margin: '8px 0 6px', color: 'var(--t1)' }}>
             Entrar na plataforma

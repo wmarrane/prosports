@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.42.1] - 2026-06-01
+
+### Changed (Login com logo V3 no formulário)
+- **Hero (esquerdo)**: glyph do brand agora usa quadrado branco semi-transparente (rgba 0.96, 58×58, padding 6) com o símbolo V3 colorido dentro (42px), em vez do quadrado azul gradient + símbolo branco procedural — destaca melhor o logo oficial.
+- **Hero (rodapé)**: bloco "powered by" removido (era redundante com o V3 prominente no formulário).
+- **Formulário (direito)**: logo horizontal V3 grande (70px) acima do título "Acesso administrativo". Marca a página com a identidade Montana no lado claro onde o V3 colorido tem contraste perfeito.
+
 ## [1.42.0] - 2026-06-01
 
 ### Changed (Logo V3 oficial + substituição do glyph "PS")
