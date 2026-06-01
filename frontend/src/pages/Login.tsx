@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { useAuthStore } from '../store/authStore'
 import { useThemeStore } from '../store/themeStore'
+import { statsService } from '../services/stats'
 import {
   Sun, Moon, Bracket, Groups, Order, Lock, Check, Report, ArrowRight,
 } from '../lib/icons'
@@ -15,6 +17,14 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState('')
+
+  const { data: stats } = useQuery({
+    queryKey: ['stats', 'public'],
+    queryFn: statsService.publicas,
+    staleTime: 60_000,
+  })
+
+  const fmtNum = (n: number) => n.toLocaleString('pt-BR')
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -100,7 +110,11 @@ export default function Login() {
         </div>
 
         <div style={{ position: 'relative', display: 'flex', gap: 30 }}>
-          {[['1.482', 'Inscritos ativos'], ['47', 'Sorteios realizados'], ['100%', 'Auditados']].map(([v, l]) => (
+          {[
+            [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
+            [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
+            ['100%', 'Auditados'],
+          ].map(([v, l]) => (
             <div key={l}>
               <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
               <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>

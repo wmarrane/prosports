@@ -17,6 +17,7 @@ import sorteiosRoutes from './modules/sorteios/sorteios.routes'
 import campeoesAnterioresRoutes from './modules/campeoes_anteriores/campeoes_anteriores.routes'
 import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.routes'
 import usersRoutes from './modules/users/users.routes'
+import statsRoutes from './modules/stats/stats.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -39,6 +40,7 @@ app.use(express.json({ limit: '1mb' }))
 app.use(cookieParser())
 
 app.use('/uploads', express.static(UPLOADS_DIR))
+app.use('/stats', statsRoutes)
 app.use('/auth', authRateLimit, authRoutes)
 app.use('/users', usersRoutes)
 app.use('/tipos-modalidade', tiposModalidadeRoutes)

@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.36.0] - 2026-05-31
+
+### Added (Indicadores dinâmicos na tela de login)
+- **Backend**: novo endpoint público `GET /stats/public` (sem auth) retornando `{ inscritos_ativos, sorteios_realizados }`. `inscritos_ativos` = `COUNT(inscricoes)` filtrando `evento.data_hora >= hoje (00:00)`. `sorteios_realizados` = `COUNT(sorteios)` total.
+- **Frontend**: `Login` busca via React Query (staleTime 60s) e formata em pt-BR. \"100% Auditados\" continua estático (branding). Enquanto carrega, mostra `—`.
+
 ## [1.35.0] - 2026-05-31
 
 ### Added (Recolher/expandir competições em Modalidades)
