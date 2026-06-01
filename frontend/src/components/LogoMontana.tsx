@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-type Variant = 'horizontal-cor' | 'horizontal-branco' | 'simbolo'
+type Variant = 'horizontal-cor' | 'horizontal-branco' | 'simbolo' | 'simbolo-branco'
 
 type Props = {
   variant?: Variant
@@ -19,7 +19,12 @@ export default function LogoMontana({
   className,
   title = 'Montana Eventos',
 }: Props) {
-  if (variant === 'simbolo') {
+  if (variant === 'simbolo' || variant === 'simbolo-branco') {
+    const sb = variant === 'simbolo-branco'
+    const sCols = sb
+      ? ['#FFFFFF', '#D4E2F1', '#A9C8E8', '#7FB0DA']
+      : ['#1B3A5B', '#20578A', '#2E7DBE', '#5BA3D9']
+    const dot = sb ? '#FFFFFF' : '#1B3A5B'
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -33,11 +38,11 @@ export default function LogoMontana({
       >
         <title>{title}</title>
         <g transform="translate(85,87)" fill="none" strokeLinecap="round">
-          <path d="M16 27.71 A32 32 0 1 1 30.07 -10.94" stroke="#1B3A5B" strokeWidth="6" />
-          <path d="M43.33 7.64 A44 44 0 1 1 15.05 -41.35" stroke="#20578A" strokeWidth="7" />
-          <path d="M42.90 -36.0 A56 56 0 1 1 -28.0 -48.5" stroke="#2E7DBE" strokeWidth="8" />
-          <path d="M0 -68 A68 68 0 1 1 -66.96 -11.80" stroke="#5BA3D9" strokeWidth="9" />
-          <circle cx="0" cy="-68" r="6" fill="#1B3A5B" />
+          <path d="M16 27.71 A32 32 0 1 1 30.07 -10.94" stroke={sCols[0]} strokeWidth="6" />
+          <path d="M43.33 7.64 A44 44 0 1 1 15.05 -41.35" stroke={sCols[1]} strokeWidth="7" />
+          <path d="M42.90 -36.0 A56 56 0 1 1 -28.0 -48.5" stroke={sCols[2]} strokeWidth="8" />
+          <path d="M0 -68 A68 68 0 1 1 -66.96 -11.80" stroke={sCols[3]} strokeWidth="9" />
+          <circle cx="0" cy="-68" r="6" fill={dot} />
         </g>
       </svg>
     )

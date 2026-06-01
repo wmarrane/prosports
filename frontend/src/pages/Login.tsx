@@ -70,7 +70,9 @@ export default function Login() {
         <div style={{ position: 'absolute', width: 320, height: 320, borderRadius: '50%', background: 'rgba(20,184,138,0.30)', filter: 'blur(75px)', bottom: -90, left: 60, animation: 'floaty 8s ease-in-out infinite' }} />
 
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 50, height: 50, borderRadius: 14, background: 'var(--grad-brand)', display: 'grid', placeItems: 'center', color: '#fff', fontWeight: 900, fontSize: 19, letterSpacing: '-0.04em', boxShadow: '0 8px 26px rgba(16,97,216,0.5)' }}>PS</div>
+          <div style={{ width: 50, height: 50, borderRadius: 14, background: 'var(--grad-brand)', display: 'grid', placeItems: 'center', boxShadow: '0 8px 26px rgba(16,97,216,0.5)' }}>
+            <LogoMontana variant="simbolo-branco" height={36} />
+          </div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 19, letterSpacing: '-0.01em' }}>ProSports</div>
             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.25em', opacity: 0.55, marginTop: 3 }}>SORTEIOS&nbsp;&amp;&nbsp;COMPETIÇÕES</div>

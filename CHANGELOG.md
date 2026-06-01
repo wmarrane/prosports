@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.41.1] - 2026-06-01
+
+### Changed (Logo Montana no topo do hero do Login)
+- Substituído o glyph "PS" do brand do Login pelo símbolo Montana (variante branca). O quadrado azul com gradiente foi mantido como moldura.
+- `LogoMontana` ganhou nova variante `simbolo-branco` (arcos em paleta clara para fundos escuros).
+
 ## [1.41.0] - 2026-06-01
 
 ### Added (Logomarca Montana Eventos no sistema)
