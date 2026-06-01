@@ -23,8 +23,8 @@ type MatchLayout = {
   isThirdPlace: boolean
 }
 
-const CARD_WIDTH = 240
-const CARD_HEIGHT = 90
+const CARD_WIDTH = 260
+const CARD_HEIGHT = 120
 const COL_GAP = 80
 const ROW_GAP = 14
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
@@ -131,7 +131,8 @@ function renderSlot(
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
-  const nameFontSize = large ? '1.45rem' : '1.2rem'
+  const nameFontSize = large ? '1.2rem' : '1rem'
+  const subFontSize = large ? '0.8rem' : '0.7rem'
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
@@ -139,12 +140,21 @@ function renderSlot(
     const p = participantesById.get(pid)
     const cp = campeoesByParticipanteId?.get(pid)
     if (!p) return <span style={{ color: 'var(--t4)', fontSize: labelFontSize }}>—</span>
+    const linha = subtituloLine?.(p) ?? null
     return (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: nameFontSize, color: 'var(--t1)', fontWeight: 600 }}>
-        {cp && <CampeaoBadge posicao={cp} large={false} />}
-        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {p.nome}
-          {(() => { const l = subtituloLine?.(p); return l ? <span style={{ fontSize: '0.85em', color: 'var(--t3)', marginLeft: 4 }}>— {l}</span> : null })()}
+      <span style={{ display: 'inline-flex', alignItems: 'flex-start', gap: 4, color: 'var(--t1)', minWidth: 0, width: '100%' }}>
+        {cp && <span style={{ flexShrink: 0, marginTop: 2 }}><CampeaoBadge posicao={cp} large={false} /></span>}
+        <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
+          <span style={{
+            fontSize: nameFontSize, fontWeight: 600, lineHeight: 1.15,
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+          }}>{p.nome}</span>
+          {linha && (
+            <span style={{
+              fontSize: subFontSize, color: 'var(--t3)', lineHeight: 1.2, marginTop: 1,
+              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            }}>{linha}</span>
+          )}
         </span>
       </span>
     )

@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.39.4] - 2026-05-31
+
+### Changed (Linha de exibição abaixo do nome em Chaves bracket)
+- `BracketTree`: linha complementar do participante quebra para uma segunda linha em fonte menor (`0.7rem`/`0.8rem`) e cor `--t3`. Card de match aumentou de 90×240px para 120×260px para acomodar nome + linha em cada slot sem estourar.
+- Nome em `lineHeight 1.15`, ellipsis quando ainda exceder a largura do card.
+
 ## [1.39.3] - 2026-05-31
 
 ### Changed (Linha de exibição abaixo do nome em Sorteio de Grupos)
