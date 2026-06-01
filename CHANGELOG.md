@@ -5,6 +5,15 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.41.0] - 2026-06-01
+
+### Added (Logomarca Montana Eventos no sistema)
+- Novo componente `LogoMontana` (SVG inline em React, ~3 variantes: `horizontal-cor`, `horizontal-branco`, `simbolo`). Aceita prop `height` (largura derivada do aspect 620:180), `style`, `className`, `title`. Escala perfeita, sem request HTTP, herda cores via fill.
+- **Login** (hero esquerdo, rodapé): bloco "powered by [logo branco]" alinhado à direita do bloco de estatísticas, opacidade 0.85.
+- **Sidebar** (rodapé, abaixo da versão): logo horizontal cor (32px) quando expandida; símbolo (26px) quando recolhida.
+- **Modo Congresso → CongressoShell** (top bar, antes das ações): símbolo isolado (32px) com opacidade 0.75, aparece em todas as telas do modo apresentação.
+- **Relatório** (header, lado das ações): logo horizontal cor (36px) com opacidade 0.85.
+
 ## [1.40.3] - 2026-06-01
 
 ### Changed (CampeaoBadge alinhado à direita em grupos / chaves / inscritos)

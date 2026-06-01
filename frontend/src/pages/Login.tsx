@@ -6,6 +6,7 @@ import { useAuthStore } from '../store/authStore'
 import { useThemeStore } from '../store/themeStore'
 import { statsService } from '../services/stats'
 import { APP_VERSION, APP_COMMIT } from '../lib/version'
+import LogoMontana from '../components/LogoMontana'
 import {
   Sun, Moon, Bracket, Groups, Order, Lock, Check, Report, ArrowRight,
 } from '../lib/icons'
@@ -110,17 +111,25 @@ export default function Login() {
           </div>
         </div>
 
-        <div style={{ position: 'relative', display: 'flex', gap: 30 }}>
-          {[
-            [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
-            [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
-            ['100%', 'Auditados'],
-          ].map(([v, l]) => (
-            <div key={l}>
-              <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
-              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>
-            </div>
-          ))}
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 30, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 30 }}>
+            {[
+              [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
+              [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
+              ['100%', 'Auditados'],
+            ].map(([v, l]) => (
+              <div key={l}>
+                <div className="tabular" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 23, letterSpacing: '-0.02em' }}>{v}</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em', marginTop: 3 }}>{l}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, opacity: 0.85 }}>
+            <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+              powered by
+            </span>
+            <LogoMontana variant="horizontal-branco" height={46} />
+          </div>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import PageHeader from '../components/PageHeader'
 import DataTable from '../components/DataTable'
+import LogoMontana from '../components/LogoMontana'
 import { eventosService } from '../services/eventos'
 import { inscricoesService } from '../services/inscricoes'
 import { sorteiosService } from '../services/sorteios'
@@ -184,6 +185,7 @@ export default function Relatorio() {
         eyebrow="GESTÃO"
         title="Relatório"
         sub="Exporte snapshot completo de cada evento (inscrições + resultados de sorteio) em CSV."
+        actions={<LogoMontana variant="horizontal-cor" height={36} style={{ opacity: 0.85 }} />}
       />
       <div className="p-6 space-y-3">
         {erro && <p className="text-sm text-[var(--danger)]">{erro}</p>}

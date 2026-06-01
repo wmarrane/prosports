@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import type { CongressoStep } from '../../types/congresso-step'
 import { Maximize, Minimize, X, Sun, Moon } from '../../lib/icons'
 import { useThemeStore } from '../../store/themeStore'
+import LogoMontana from '../../components/LogoMontana'
 
 const STEPS: Array<{ key: CongressoStep; label: string }> = [
   { key: 'evento', label: 'Evento' },
@@ -90,6 +91,9 @@ export default function CongressoShell({ step, onBack, contexto, children }: Pro
         </div>
 
         <div className="cw-actions">
+          <div style={{ display: 'flex', alignItems: 'center', opacity: 0.75, marginRight: 4 }} title="Montana Eventos">
+            <LogoMontana variant="simbolo" height={32} />
+          </div>
           <button
             onClick={toggleTheme}
             className="cw-iconbtn"

@@ -9,6 +9,7 @@ import {
   ChevR, ChevronDown,
 } from '../lib/icons'
 import UserMenuPopover from './UserMenuPopover'
+import LogoMontana from './LogoMontana'
 
 type NavLeaf = { id: string; label: string; icon: LucideIcon; path: string }
 type NavExpandable = { id: string; label: string; icon: LucideIcon; expandable: true; children: { id: string; label: string; path: string }[] }
@@ -155,6 +156,16 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
             />
           )}
         </NavLink>
+        {!collapsed && (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 4px 4px', opacity: 0.85 }}>
+            <LogoMontana variant="horizontal-cor" height={32} />
+          </div>
+        )}
+        {collapsed && (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 4px', opacity: 0.85 }}>
+            <LogoMontana variant="simbolo" height={26} />
+          </div>
+        )}
         <div style={{ position: 'relative' }}>
           <button
             ref={userBtnRef}
