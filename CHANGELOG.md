@@ -5,6 +5,24 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.45.0] - 2026-06-01
+
+### Changed (EventoInscricoes — modal re-sortear padrão do sistema)
+- Substituído `confirm()` nativo pelo modal padrão: ícone Shuffle em círculo `--warn-soft`, mostra nome da modalidade, botões Cancelar (ghost) + Confirmar (brand).
+
+### Changed (CongressoStepEvento — usa logo do evento)
+- Cards de evento na primeira etapa do Modo Congresso priorizam `evento.logo_url`: quando ausente exibe o badge Troféu atual. Quando presente, renderiza o logo dentro de um quadrado com fundo neutro + borda sutil.
+
+### Added (InspetoriasList — agrupar por delegacia + side panel)
+- Lista agora agrupa inspetorias por delegacia, com cabeçalho clicável (chevron + ícone Building2 + contador). Recolhidas por padrão. Atalhos "Expandir todas / Recolher todas" quando há mais de uma delegacia.
+- Layout 2-colunas: lista à esquerda + `ParticipantesAssociadosPanel` à direita (sticky) mostrando participantes da inspetoria selecionada.
+
+### Added (DelegaciasList — side panel)
+- Layout 2-colunas: grid de delegacias à esquerda + `ParticipantesAssociadosPanel` à direita (sticky). Cards clicáveis selecionam (borda highlight); links Editar/Remover preservados.
+
+### Added (componente reutilizável)
+- `ParticipantesAssociadosPanel` aceita filtro por delegacia ou inspetoria, mostra count, lista sortable, botões clicáveis abrem ParticipanteForm. Estado vazio amigável quando nada selecionado.
+
 ## [1.44.1] - 2026-06-01
 
 ### Changed (Login: logo Montana maior e centralizado)

@@ -81,6 +81,7 @@ export default function EventoInscricoes() {
   const [removerInscricaoAlvo, setRemoverInscricaoAlvo] = useState<{ id: number; nome: string } | null>(null)
   const [apagarTodosOpen, setApagarTodosOpen] = useState(false)
   const [apagarTodosResumo, setApagarTodosResumo] = useState<{ count: number } | null>(null)
+  const [resortearOpen, setResortearOpen] = useState(false)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
 
@@ -218,11 +219,8 @@ export default function EventoInscricoes() {
   })
 
   function handleSortear() { setErroSorteio(''); executarSorteio() }
-  function handleResortear() {
-    if (confirm('Re-sortear esta modalidade? Isso vai sobrescrever o resultado atual com uma nova seed.')) {
-      setErroSorteio(''); executarSorteio()
-    }
-  }
+  function handleResortear() { setResortearOpen(true) }
+  function confirmarResortear() { setResortearOpen(false); setErroSorteio(''); executarSorteio() }
   function handleApagarSorteio(sid: number) {
     if (confirm('Apagar o sorteio? A próxima execução vai gerar um novo do zero.')) apagarSorteio(sid)
   }
@@ -1176,6 +1174,65 @@ export default function EventoInscricoes() {
                 </div>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Modal: re-sortear modalidade */}
+      {resortearOpen && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => setResortearOpen(false)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 480, width: '100%', margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{
+              width: 72, height: 72, margin: '0 auto 16px',
+              borderRadius: '50%', background: 'var(--warn-soft, rgba(245,158,11,0.15))',
+              display: 'grid', placeItems: 'center', color: 'var(--warn, #f59e0b)',
+            }}>
+              <Shuffle size={36} />
+            </div>
+            <h3 style={{ fontSize: 'clamp(20px, 2.2vw, 26px)', fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>
+              Re-sortear modalidade?
+            </h3>
+            <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+              O resultado atual de <b style={{ color: 'var(--t1)' }}>{modalidadeAtual?.nome}</b> será sobrescrito com uma nova seed. Esta ação não pode ser desfeita.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setResortearOpen(false)}
+                style={{
+                  background: 'transparent', color: 'var(--t1)',
+                  border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                }}
+              ><X size={16} /> Cancelar</button>
+              <button
+                type="button"
+                onClick={confirmarResortear}
+                style={{
+                  background: 'var(--brand-500)', color: '#fff',
+                  border: 'none', borderRadius: 'var(--radius-lg)',
+                  padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
+                  display: 'inline-flex', alignItems: 'center', gap: 6,
+                }}
+              ><Shuffle size={16} /> Confirmar</button>
+            </div>
           </div>
         </div>
       )}

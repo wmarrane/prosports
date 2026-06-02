@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import ParticipantesAssociadosPanel from '../../components/ParticipantesAssociadosPanel'
 import { delegaciasService } from '../../services/delegacias'
 import type { Delegacia } from '../../types/participante'
 import { Plus } from '../../lib/icons'
@@ -9,6 +11,7 @@ import { Building2 } from 'lucide-react'
 export default function DelegaciasList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const [selecionadaId, setSelecionadaId] = useState<number | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['delegacias'],
@@ -22,13 +25,14 @@ export default function DelegaciasList() {
   })
 
   const ordenadas = [...data].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' }))
+  const selecionada = ordenadas.find(d => d.id === selecionadaId) ?? null
 
   return (
     <div className="text-[var(--t1)]">
       <PageHeader
         eyebrow="Cadastro"
         title="Delegacias"
-        sub="Unidades regionais de delegação vinculadas aos participantes."
+        sub="Unidades regionais de delegação vinculadas aos participantes. Selecione uma delegacia para ver seus participantes."
         actions={
           <button onClick={() => navigate('/delegacias/nova')} className="btn btn-primary">
             <Plus size={16} /> Nova Delegacia
@@ -54,29 +58,62 @@ export default function DelegaciasList() {
           </div>
         ) : (
           <div
+            className="dl-grid"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: 12,
+              gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)',
+              gap: 16,
+              alignItems: 'start',
             }}
           >
-            {ordenadas.map((d, idx) => (
-              <Item
-                key={d.id}
-                item={d}
-                index={idx}
-                onEdit={() => navigate(`/delegacias/${d.id}/editar`)}
-                onRemove={() => { if (confirm(`Remover "${d.nome}"?`)) remover(d.id) }}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+                gap: 12,
+              }}
+            >
+              {ordenadas.map((d, idx) => (
+                <Item
+                  key={d.id}
+                  item={d}
+                  index={idx}
+                  selected={selecionadaId === d.id}
+                  onSelect={() => setSelecionadaId(d.id)}
+                  onEdit={() => navigate(`/delegacias/${d.id}/editar`)}
+                  onRemove={() => { if (confirm(`Remover "${d.nome}"?`)) remover(d.id) }}
+                />
+              ))}
+            </div>
+
+            <div style={{ position: 'sticky', top: 16, alignSelf: 'start' }}>
+              <ParticipantesAssociadosPanel
+                filtro={{ tipo: 'delegacia', id: selecionadaId, nome: selecionada?.nome }}
               />
-            ))}
+            </div>
           </div>
         )}
       </div>
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .dl-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   )
 }
 
-function Item({ item, index, onEdit, onRemove }: { item: Delegacia; index: number; onEdit: () => void; onRemove: () => void }) {
+function Item({
+  item, index, selected, onSelect, onEdit, onRemove,
+}: {
+  item: Delegacia
+  index: number
+  selected: boolean
+  onSelect: () => void
+  onEdit: () => void
+  onRemove: () => void
+}) {
   return (
     <div
       className="fade-in"
@@ -86,16 +123,16 @@ function Item({ item, index, onEdit, onRemove }: { item: Delegacia; index: numbe
         gap: 12,
         padding: 14,
         background: 'var(--card-bg)',
-        border: '1px solid var(--card-border)',
+        border: `1px solid ${selected ? 'var(--brand-500)' : 'var(--card-border)'}`,
         borderRadius: 'var(--radius-xl)',
         boxShadow: 'var(--shadow-card)',
         cursor: 'pointer',
         transition: 'border-color 140ms ease',
         animationDelay: `${index * 25}ms`,
       }}
-      onClick={onEdit}
-      onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--brand-400)')}
-      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--card-border)')}
+      onClick={onSelect}
+      onMouseEnter={e => { if (!selected) e.currentTarget.style.borderColor = 'var(--brand-400)' }}
+      onMouseLeave={e => { if (!selected) e.currentTarget.style.borderColor = 'var(--card-border)' }}
     >
       <span
         style={{

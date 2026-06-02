@@ -52,9 +52,27 @@ export default function CongressoStepEvento({ onSelect }: Props) {
         {ativos.map(e => (
           <button key={e.id} className="cw-card" onClick={() => onSelect(e.id)}>
             <div className="cw-card-top">
-              <span className="cw-card-ic" style={{ background: 'var(--grad-brand)' }}>
-                <Trophy size={28} />
-              </span>
+              {e.logo_url ? (
+                <span
+                  className="cw-card-ic"
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid var(--cw-card-bd)',
+                    display: 'grid', placeItems: 'center',
+                    padding: 6, overflow: 'hidden',
+                  }}
+                >
+                  <img
+                    src={e.logo_url}
+                    alt={`Logo ${e.nome}`}
+                    style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                  />
+                </span>
+              ) : (
+                <span className="cw-card-ic" style={{ background: 'var(--grad-brand)' }}>
+                  <Trophy size={28} />
+                </span>
+              )}
               <span className="cw-badge b-info">#{e.id}</span>
             </div>
             <div className="cw-card-title">{e.nome}</div>
