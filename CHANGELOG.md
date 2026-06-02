@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.43.2] - 2026-06-01
+
+### Changed (Login: logo Montana mais visível)
+- Logo horizontal V3 acima dos campos de e-mail/senha aumentou de 70px para 120px de altura.
+
 ## [1.43.1] - 2026-06-01
 
 ### Added (Logo do evento mais visível no Modo Congresso)

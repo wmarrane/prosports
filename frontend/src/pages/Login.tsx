@@ -131,7 +131,7 @@ export default function Login() {
       <div style={{ flex: 1, padding: '56px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--card-bg)' }}>
         <form onSubmit={handleSubmit} style={{ maxWidth: 380, width: '100%' }}>
           <div style={{ marginBottom: 32 }}>
-            <LogoMontana variant="horizontal-cor" height={70} />
+            <LogoMontana variant="horizontal-cor" height={120} />
           </div>
           <div className="eyebrow">Acesso administrativo</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 29, letterSpacing: '-0.025em', margin: '8px 0 6px', color: 'var(--t1)' }}>
