@@ -42,7 +42,7 @@ CREATE UNIQUE INDEX "Modalidade_competicao_id_nome_key" ON "Modalidade"("competi
 CREATE UNIQUE INDEX "Modalidade_competicao_id_sigla_key" ON "Modalidade"("competicao_id", "sigla");
 
 -- AddForeignKey
-ALTER TABLE "Modalidade" ADD CONSTRAINT "Modalidade_competicao_id_fkey" FOREIGN KEY ("competicao_id") REFERENCES "Competicao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Modalidade" ADD CONSTRAINT "Modalidade_tipo_modalidade_id_fkey" FOREIGN KEY ("tipo_modalidade_id") REFERENCES "TipoModalidade"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- Modalidade_competicao_id_fkey movido para 20260529034014_add_competicao
+-- (Competicao ainda nao existe neste ponto da historia)
