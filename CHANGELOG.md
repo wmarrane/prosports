@@ -5,6 +5,12 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.45.1] - 2026-06-02
+
+### Fixed (Build CI quebrava com "npm error Exit handler never called")
+- `node:22-alpine` atual tem bug onde `npm ci` falha silenciosamente com "Exit handler never called!" (sem mensagem real do erro). Reproduzível em ambiente do runner do prosports.
+- `frontend/Dockerfile` e `backend/Dockerfile` voltaram para **`node:20-alpine`** (LTS estável). Builds voltaram a passar em ~1m20s no docker compose.
+
 ## [1.45.0] - 2026-06-01
 
 ### Changed (EventoInscricoes — modal re-sortear padrão do sistema)
