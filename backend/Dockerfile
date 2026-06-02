@@ -11,6 +11,8 @@ RUN npm run build
 
 # Estágio 2: runtime mínimo
 FROM node:20-alpine
+# Prisma schema-engine precisa de openssl em runtime no Alpine.
+RUN apk add --no-cache openssl
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
