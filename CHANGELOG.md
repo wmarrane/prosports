@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.46.1] - 2026-06-02
+
+### Fixed (Security — Acesso mobile via chave)
+- **C1 (Critical)**: `requireEventoKey` agora valida `payload.deviceFp` contra `key.device_fp` do banco. Após `reset-device`, token antigo de outro device retorna 401 "Dispositivo não reconhecido". `device_fp = null` (nunca usado) continua passando — lock é feito no login.
+- **C2 (Critical)**: `revogar`, `resetDevice` e `apagar` em `evento_keys.service` recebem `evento_id` e verificam que a chave pertence ao evento antes de agir (404 se mismatch), impedindo que admin de um evento manipule chaves de outro. `resetDevice` também zera `last_seen_at`.
+- **I1 (Important)**: `requireAuth` rejeita tokens com `type === 'event-key'`, impedindo que keyTokens de convidado mobile acessem rotas admin protegidas apenas por `requireAuth`.
+
 ## [1.46.0] - 2026-06-02
 
 ### Added (Acesso mobile via chave)
