@@ -5,6 +5,11 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.44.1] - 2026-06-01
+
+### Changed (Login: logo Montana maior e centralizado)
+- Logo horizontal V3 acima do formulário aumentou de 120px → **160px** de altura, com `justify-content: center` no wrapper.
+
 ## [1.44.0] - 2026-06-01
 
 ### Added (Apagar todos os sorteios de um evento)
