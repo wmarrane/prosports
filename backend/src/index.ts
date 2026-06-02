@@ -19,6 +19,7 @@ import tiposModalidadeRoutes from './modules/tipos_modalidade/tipos_modalidade.r
 import usersRoutes from './modules/users/users.routes'
 import statsRoutes from './modules/stats/stats.routes'
 import sistemasDisputaRoutes from './modules/sistemas_disputa/sistemas_disputa.routes'
+import keyAccessRoutes from './modules/key_access/key_access.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -56,6 +57,7 @@ app.use('/inscricoes', inscricoesRoutes)
 app.use('/eventos', eventosRoutes)
 app.use('/competicoes', competicoesRoutes)
 app.use('/sistemas-disputa', sistemasDisputaRoutes)
+app.use('/key-access', keyAccessRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
