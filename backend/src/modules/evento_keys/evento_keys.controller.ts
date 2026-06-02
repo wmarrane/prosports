@@ -24,19 +24,22 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
 
 export async function revogar(req: Request, res: Response, next: NextFunction) {
   try {
-    res.json(await service.revogar(Number(req.params.keyId)))
+    const evento_id = Number(req.params.evento_id)
+    res.json(await service.revogar(Number(req.params.keyId), evento_id))
   } catch (err) { next(err) }
 }
 
 export async function resetDevice(req: Request, res: Response, next: NextFunction) {
   try {
-    res.json(await service.resetDevice(Number(req.params.keyId)))
+    const evento_id = Number(req.params.evento_id)
+    res.json(await service.resetDevice(Number(req.params.keyId), evento_id))
   } catch (err) { next(err) }
 }
 
 export async function apagar(req: Request, res: Response, next: NextFunction) {
   try {
-    await service.apagar(Number(req.params.keyId))
+    const evento_id = Number(req.params.evento_id)
+    await service.apagar(Number(req.params.keyId), evento_id)
     res.status(204).send()
   } catch (err) { next(err) }
 }

@@ -11,6 +11,10 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   try {
     const token = header.slice(7)
     const payload = verifyAccess(token)
+    if ((payload as any).type === 'event-key') {
+      res.status(401).json({ message: 'Token inválido' })
+      return
+    }
     ;(req as any).user = payload
     next()
   } catch {

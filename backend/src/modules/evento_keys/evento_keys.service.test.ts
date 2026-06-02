@@ -45,33 +45,53 @@ describe('evento_keys.service', () => {
   })
 
   it('revogar preenche revogado_em', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 5 })
     mockPrisma.eventoKey.update.mockResolvedValue({ id: 1 })
-    await service.revogar(1)
+    await service.revogar(1, 5)
     expect(mockPrisma.eventoKey.update).toHaveBeenCalledWith({
       where: { id: 1 },
       data: { revogado_em: expect.any(Date) },
     })
   })
 
-  it('resetDevice zera device_fp/label/first_used_at', async () => {
+  it('resetDevice zera device_fp/label/first_used_at/last_seen_at', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 5 })
     mockPrisma.eventoKey.update.mockResolvedValue({ id: 1 })
-    await service.resetDevice(1)
+    await service.resetDevice(1, 5)
     expect(mockPrisma.eventoKey.update).toHaveBeenCalledWith({
       where: { id: 1 },
-      data: { device_fp: null, device_label: null, first_used_at: null },
+      data: { device_fp: null, device_label: null, first_used_at: null, last_seen_at: null },
     })
   })
 
   it('apagar lança 409 se key já foi usada (device_fp != null)', async () => {
-    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, device_fp: 'abc' })
-    await expect(service.apagar(1)).rejects.toMatchObject({ status: 409 })
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 5, device_fp: 'abc' })
+    await expect(service.apagar(1, 5)).rejects.toMatchObject({ status: 409 })
     expect(mockPrisma.eventoKey.delete).not.toHaveBeenCalled()
   })
 
   it('apagar deleta quando nunca usada', async () => {
-    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, device_fp: null })
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 5, device_fp: null })
     mockPrisma.eventoKey.delete.mockResolvedValue({ id: 1 })
-    await service.apagar(1)
+    await service.apagar(1, 5)
     expect(mockPrisma.eventoKey.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+
+  it('revogar lança 404 quando key não pertence ao evento', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 99 })
+    await expect(service.revogar(1, 5)).rejects.toMatchObject({ status: 404 })
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
+  })
+
+  it('resetDevice lança 404 quando key não pertence ao evento', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 99 })
+    await expect(service.resetDevice(1, 5)).rejects.toMatchObject({ status: 404 })
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
+  })
+
+  it('apagar lança 404 quando key não pertence ao evento', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({ id: 1, evento_id: 99, device_fp: null })
+    await expect(service.apagar(1, 5)).rejects.toMatchObject({ status: 404 })
+    expect(mockPrisma.eventoKey.delete).not.toHaveBeenCalled()
   })
 })

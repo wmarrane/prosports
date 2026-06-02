@@ -40,23 +40,33 @@ export async function criar(input: { evento_id: number; email: string; criada_po
   )
 }
 
-export async function revogar(id: number) {
+export async function revogar(id: number, evento_id: number) {
+  const existing = await prisma.eventoKey.findUnique({ where: { id } })
+  if (!existing || existing.evento_id !== evento_id) {
+    throw Object.assign(new Error('Chave não encontrada'), { status: 404 })
+  }
   return prisma.eventoKey.update({
     where: { id },
     data: { revogado_em: new Date() },
   })
 }
 
-export async function resetDevice(id: number) {
+export async function resetDevice(id: number, evento_id: number) {
+  const existing = await prisma.eventoKey.findUnique({ where: { id } })
+  if (!existing || existing.evento_id !== evento_id) {
+    throw Object.assign(new Error('Chave não encontrada'), { status: 404 })
+  }
   return prisma.eventoKey.update({
     where: { id },
-    data: { device_fp: null, device_label: null, first_used_at: null },
+    data: { device_fp: null, device_label: null, first_used_at: null, last_seen_at: null },
   })
 }
 
-export async function apagar(id: number) {
+export async function apagar(id: number, evento_id: number) {
   const key = await prisma.eventoKey.findUnique({ where: { id } })
-  if (!key) throw Object.assign(new Error('Chave não encontrada'), { status: 404 })
+  if (!key || key.evento_id !== evento_id) {
+    throw Object.assign(new Error('Chave não encontrada'), { status: 404 })
+  }
   if (key.device_fp !== null) {
     throw Object.assign(
       new Error('Esta chave já foi usada. Use Revogar ao invés de Apagar.'),

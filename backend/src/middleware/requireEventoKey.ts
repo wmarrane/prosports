@@ -27,6 +27,11 @@ export async function requireEventoKey(req: Request, res: Response, next: NextFu
     return
   }
 
+  if (key.device_fp && key.device_fp !== payload.deviceFp) {
+    res.status(401).json({ message: 'Dispositivo não reconhecido' })
+    return
+  }
+
   // Atualiza last_seen_at sincronamente (admin precisa ver atividade ao vivo).
   // O custo é 1 UPDATE por request — aceitável no volume atual; reavaliar se virar gargalo.
   await prisma.eventoKey.update({
