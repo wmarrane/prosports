@@ -32,6 +32,13 @@ export async function requireEventoKey(req: Request, res: Response, next: NextFu
     return
   }
 
+  // Acesso expira 24h após o início do evento
+  const expiraEm = new Date(key.evento.data_hora.getTime() + 24 * 60 * 60 * 1000)
+  if (expiraEm < new Date()) {
+    res.status(401).json({ message: 'Acesso ao evento encerrado.', code: 'event_expired' })
+    return
+  }
+
   // Atualiza last_seen_at sincronamente (admin precisa ver atividade ao vivo).
   // O custo é 1 UPDATE por request — aceitável no volume atual; reavaliar se virar gargalo.
   await prisma.eventoKey.update({

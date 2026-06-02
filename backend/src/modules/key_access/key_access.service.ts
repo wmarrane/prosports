@@ -12,6 +12,15 @@ export async function login(input: { token: string; device_fp: string; device_la
     throw Object.assign(new Error('Chave inválida ou revogada.'), { status: 401, code: 'invalid_or_revoked' })
   }
 
+  // Acesso expira 24h após o início do evento
+  const expiraEm = new Date(key.evento.data_hora.getTime() + 24 * 60 * 60 * 1000)
+  if (expiraEm < new Date()) {
+    throw Object.assign(
+      new Error('Acesso ao evento encerrado.'),
+      { status: 401, code: 'event_expired' }
+    )
+  }
+
   const now = new Date()
   const firstUse = key.device_fp === null
 

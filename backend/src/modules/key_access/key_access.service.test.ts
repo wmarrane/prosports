@@ -68,10 +68,21 @@ describe('key_access.service', () => {
   it('login com device_fp diferente lança 403', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 1, evento_id: 5, device_fp: 'fp1', revogado_em: null,
-      evento: { id: 5 },
+      evento: { id: 5, data_hora: new Date() },
     })
     await expect(service.login({ token: 'x', device_fp: 'fpOUTRO', device_label: 'X' }))
       .rejects.toMatchObject({ status: 403 })
+  })
+
+  it('login 401 com code event_expired quando evento começou há mais de 24h', async () => {
+    const ontem = new Date(Date.now() - 25 * 60 * 60 * 1000)
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({
+      id: 1, evento_id: 5, device_fp: null, revogado_em: null,
+      evento: { id: 5, data_hora: ontem, competicao: { subtitulo_campos: [] } },
+    })
+    await expect(service.login({ token: 'x', device_fp: 'fp', device_label: 'iPhone' }))
+      .rejects.toMatchObject({ status: 401, code: 'event_expired' })
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
   })
 
   it('getModalidades lista do evento, ordenadas', async () => {

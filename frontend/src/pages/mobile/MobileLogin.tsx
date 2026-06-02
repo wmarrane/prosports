@@ -27,6 +27,8 @@ export default function MobileLogin() {
         const msg = e?.response?.data?.message
         if (code === 'device_mismatch') {
           setErro(msg ?? 'Esta chave já está em uso em outro aparelho. Solicite ao organizador o reset.')
+        } else if (code === 'event_expired') {
+          setErro(msg ?? 'Acesso ao evento encerrado.')
         } else {
           setErro(msg ?? 'Chave inválida ou revogada.')
         }

@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.47.0] - 2026-06-02
+
+### Added (Expiração do acesso mobile 24h após início do evento)
+- `requireEventoKey` e `key_access.service.login` agora retornam 401 com `code: 'event_expired'` quando `now > evento.data_hora + 24h`. Aplica-se tanto em re-acesso quanto em primeira tentativa de login.
+- Frontend `MobileLogin` mostra mensagem amigável "Acesso ao evento encerrado." quando recebe `event_expired`.
+- 3 novos testes (222 total): 2 no middleware (expirado bloqueia / dentro da janela passa) + 1 no service login (event_expired no login).
+- Revogação manual + reset device continuam funcionando independente dessa janela.
+
 ## [1.46.1] - 2026-06-02
 
 ### Fixed (Security — Acesso mobile via chave)

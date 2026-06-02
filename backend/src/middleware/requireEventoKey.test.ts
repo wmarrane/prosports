@@ -19,6 +19,9 @@ function mkRes() {
   return { status: vi.fn().mockReturnThis(), json: vi.fn() } as any
 }
 
+// Data_hora futura para tests que não estão validando expiração
+const futuro = () => new Date(Date.now() + 60 * 60 * 1000)
+
 describe('requireEventoKey', () => {
   it('401 sem header Authorization', async () => {
     const req = mkReq(), res = mkRes(), next = vi.fn()
@@ -44,7 +47,7 @@ describe('requireEventoKey', () => {
   })
 
   it('next() + req.eventoKey populado quando ativa, touch last_seen_at', async () => {
-    const key = { id: 1, evento_id: 5, revogado_em: null, device_fp: 'fp1', evento: { id: 5, nome: 'X' } }
+    const key = { id: 1, evento_id: 5, revogado_em: null, device_fp: 'fp1', evento: { id: 5, nome: 'X', data_hora: futuro() } }
     mockPrisma.eventoKey.findUnique.mockResolvedValue(key)
     mockPrisma.eventoKey.update.mockResolvedValue({})
     const token = signKeyToken({ keyId: 1, eventoId: 5, deviceFp: 'fp1' })
@@ -61,7 +64,7 @@ describe('requireEventoKey', () => {
   it('401 quando deviceFp do JWT não bate com device_fp do banco', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 1, evento_id: 5, revogado_em: null, device_fp: 'fp-CORRETO',
-      evento: { id: 5, nome: 'X' },
+      evento: { id: 5, nome: 'X', data_hora: futuro() },
     })
     const token = signKeyToken({ keyId: 1, eventoId: 5, deviceFp: 'fp-OUTRO' })
     const req = mkReq(token), res = mkRes(), next = vi.fn()
@@ -71,9 +74,36 @@ describe('requireEventoKey', () => {
     expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
   })
 
+  it('401 quando evento.data_hora + 24h < agora (acesso expirado)', async () => {
+    const ontem = new Date(Date.now() - 25 * 60 * 60 * 1000) // 25h atrás
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({
+      id: 1, evento_id: 5, revogado_em: null, device_fp: 'fp1',
+      evento: { id: 5, nome: 'X', data_hora: ontem },
+    })
+    const token = signKeyToken({ keyId: 1, eventoId: 5, deviceFp: 'fp1' })
+    const req = mkReq(token), res = mkRes(), next = vi.fn()
+    await requireEventoKey(req, res, next)
+    expect(res.status).toHaveBeenCalledWith(401)
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ code: 'event_expired' }))
+    expect(next).not.toHaveBeenCalled()
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
+  })
+
+  it('OK quando evento começou há menos de 24h', async () => {
+    const horaAtras = new Date(Date.now() - 60 * 60 * 1000) // 1h atrás
+    const key = { id: 1, evento_id: 5, revogado_em: null, device_fp: 'fp1',
+                  evento: { id: 5, nome: 'X', data_hora: horaAtras } }
+    mockPrisma.eventoKey.findUnique.mockResolvedValue(key)
+    mockPrisma.eventoKey.update.mockResolvedValue({})
+    const token = signKeyToken({ keyId: 1, eventoId: 5, deviceFp: 'fp1' })
+    const req = mkReq(token), res = mkRes(), next = vi.fn()
+    await requireEventoKey(req, res, next)
+    expect(next).toHaveBeenCalled()
+  })
+
   it('OK quando device_fp ainda é null (nunca usado) — o login que faz first-use lock', async () => {
     const key = { id: 1, evento_id: 5, revogado_em: null, device_fp: null,
-                  evento: { id: 5, nome: 'X' } }
+                  evento: { id: 5, nome: 'X', data_hora: futuro() } }
     mockPrisma.eventoKey.findUnique.mockResolvedValue(key)
     mockPrisma.eventoKey.update.mockResolvedValue({})
     const token = signKeyToken({ keyId: 1, eventoId: 5, deviceFp: 'fp-qualquer' })
