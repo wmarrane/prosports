@@ -1,9 +1,66 @@
-# Placeholder para deploy GCP — configurado em spec separado
-# Referencia imagens do Artifact Registry em vez de builds locais
+# Produção — VM única no Compute Engine
+# Frontend NÃO está aqui: vai para Firebase Hosting.
+# Stack na VM: Caddy (TLS) → backend → (Redis + Cloud SQL Proxy)
+# Banco: Cloud SQL Postgres via Auth Proxy (host "cloud-sql-proxy", porta 5432).
+
 services:
+  # Proxy do Cloud SQL. Usa a Service Account anexada à VM
+  # (lê credenciais do metadata server — nenhum arquivo de chave necessário).
+  cloud-sql-proxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.3
+    command:
+      - "--address=0.0.0.0"
+      - "--port=5432"
+      # Se a instância usa SOMENTE IP privado, descomente abaixo
+      # e garanta que a VM está na mesma VPC:
+      # - "--private-ip"
+      - "${INSTANCE_CONNECTION_NAME}"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
   backend:
     image: ${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/prosports/backend:${IMAGE_TAG}
+    depends_on:
+      - cloud-sql-proxy
+      - redis
     environment:
       - DATABASE_URL=${PROD_DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
       - JWT_SECRET=${PROD_JWT_SECRET}
       - NODE_ENV=production
+      - CORS_ORIGINS=${CORS_ORIGINS}
+    volumes:
+      - uploads_data:/app/uploads
+    restart: unless-stopped
+
+  # Reverse proxy com HTTPS automático (Let's Encrypt).
+  # Expõe ${CADDY_API_DOMAIN} → backend:3000.
+  # Requer:
+  #   1. Subdomínio (ex.: api.seudominio.com OU <nome>.duckdns.org)
+  #      com A-record apontando para o IP externo da VM.
+  #   2. Portas 80 e 443 abertas no firewall do projeto GCP.
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - CADDY_API_DOMAIN=${CADDY_API_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  uploads_data:
+  caddy_data:
+  caddy_config:

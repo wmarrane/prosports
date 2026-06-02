@@ -1,14 +1,14 @@
-name: Deploy → Main (GCP Cloud Run)
+name: Deploy → Main (GCP VM + Firebase Hosting)
 
 on:
   push:
     branches: [main]
 
 jobs:
-  deploy:
+  # 1) Build do backend fora da VM (e2-micro não tem RAM para buildar TS).
+  build-backend:
     runs-on: ubuntu-latest
     environment: production
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,27 +22,97 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Configurar Docker para Artifact Registry
-        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
+        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
 
-      - name: Build e push imagem backend
+      - name: Build e push do backend
         run: |
-          docker build \
-            -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/prosports/backend:${{ github.sha }} \
-            ./backend
-          docker push \
-            ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/prosports/backend:${{ github.sha }}
+          IMG=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/prosports/backend:${{ github.sha }}
+          docker build -t "$IMG" ./backend
+          docker push "$IMG"
 
-      - name: Instalar dependências e rodar migrations
-        run: |
-          cd backend
-          npm ci
-          DATABASE_URL=${{ secrets.PROD_DATABASE_URL }} npx prisma migrate deploy
+  # 2) Build do frontend e deploy no Firebase Hosting (paralelo ao backend).
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Deploy no Cloud Run
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Instalar deps do frontend
+        run: cd frontend && npm ci
+
+      - name: Build do frontend
+        env:
+          VITE_API_URL: https://${{ secrets.CADDY_API_DOMAIN }}
+          APP_COMMIT: ${{ github.sha }}
+        run: cd frontend && npm run build
+
+      - name: Autenticar Firebase
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SA_KEY }}
+
+      - name: Deploy Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SA_KEY }}
+          projectId: ${{ secrets.GCP_PROJECT }}
+          entryPoint: ./frontend
+          channelId: live
+
+  # 3) Deploy do backend na VM: pull, migrations, up.
+  #    Runner self-hosted roda dentro da própria VM.
+  deploy-backend:
+    needs: build-backend
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Gerar .env
         run: |
-          gcloud run deploy prosports-backend \
-            --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/prosports/backend:${{ github.sha }} \
-            --region ${{ secrets.GCP_REGION }} \
-            --set-env-vars "DATABASE_URL=${{ secrets.PROD_DATABASE_URL }},JWT_SECRET=${{ secrets.PROD_JWT_SECRET }},NODE_ENV=production" \
-            --allow-unauthenticated \
-            --platform managed
+          cat > .env << EOF
+          GCP_REGION=${{ secrets.GCP_REGION }}
+          GCP_PROJECT=${{ secrets.GCP_PROJECT }}
+          IMAGE_TAG=${{ github.sha }}
+          INSTANCE_CONNECTION_NAME=${{ secrets.INSTANCE_CONNECTION_NAME }}
+          PROD_DATABASE_URL=${{ secrets.PROD_DATABASE_URL }}
+          PROD_JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
+          CADDY_API_DOMAIN=${{ secrets.CADDY_API_DOMAIN }}
+          CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
+          EOF
+
+      - name: Autenticar Docker no Artifact Registry
+        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - name: Pull das imagens
+        run: docker compose -f docker-compose.prod.yml pull
+
+      - name: Subir proxy e Redis
+        run: docker compose -f docker-compose.prod.yml up -d cloud-sql-proxy redis
+
+      - name: Rodar migrations do Prisma
+        run: |
+          for i in $(seq 1 10); do
+            if docker compose -f docker-compose.prod.yml run --rm backend npx prisma migrate deploy; then
+              echo "Migrations aplicadas."
+              exit 0
+            fi
+            echo "Proxy/DB ainda não pronto — tentativa $i/10"; sleep 3
+          done
+          echo "Falha ao aplicar migrations."; exit 1
+
+      - name: Subir backend + Caddy
+        run: docker compose -f docker-compose.prod.yml up -d
+
+      - name: Limpar imagens antigas
+        run: docker image prune -f
