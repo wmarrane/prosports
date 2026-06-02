@@ -1,0 +1,6 @@
+# Caddy faz TLS automático via Let's Encrypt.
+# A variável CADDY_API_DOMAIN é injetada via env do compose.
+{$CADDY_API_DOMAIN} {
+	encode gzip
+	reverse_proxy backend:3000
+}
