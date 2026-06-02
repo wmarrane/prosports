@@ -5,6 +5,33 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.46.0] - 2026-06-02
+
+### Added (Acesso mobile via chave)
+- **Schema**: novo model `EventoKey` com unique `(evento_id, email)`. Migration `20260602000000_evento_keys`.
+- **Backend**:
+  - 5 rotas admin em `/eventos/:id/keys` (listar/criar/revogar/reset-device/apagar)
+  - 4 rotas públicas em `/key-access/*` (login + me + modalidades + modalidade/:id)
+  - `key-jwt.ts` (sign/verify com `type: 'event-key'`), `requireEventoKey` middleware
+  - **First-use device lock**: primeiro acesso grava `device_fp` no banco; tentativas em outro device retornam 403 "Esta chave já está em uso em outro aparelho"
+  - 19 novos testes (192 → 214 passing): 3 key-jwt + 4 middleware + 7 evento_keys + 8 key_access (-2 de testes obsoletos)
+- **Admin UI**: novo card "Acesso mobile" no `EventoForm` (visível em edição) com:
+  - Geração de chave por email
+  - Modal QR code (`qrcode.react`) + link copiável
+  - Lista com auditoria (device_label + last_seen relativo)
+  - Modais de confirmação para Revogar / Reset device / Apagar
+  - Estados visuais: nunca usada / ativa+device / revogada (riscado)
+- **Mobile UI** (rotas `/e/:token` + `/m` + `/m/:id`, mobile-first, fora do Layout admin):
+  - `MobileLogin` valida chave, gera device fingerprint (localStorage UUID + UA parse), salva keyToken
+  - `MobileModalidades` lista modalidades do evento com cards coloridos por tipo, polling 15s
+  - `MobileModalidade` 3 tabs (Inscritos / Campeões / Sorteio) — Sorteio disabled quando não realizado ou tipo='especifico'
+  - Reusa `SorteioGrupos/Chaves/Ordem` (`large={false}`) — mesmo render que admin
+  - `MobileShell` header sticky com logo do evento (fallback Montana), botões refresh + sair
+  - Polling 15s read-only via React Query (`refetchInterval` + `refetchIntervalInBackground: false`)
+- **Lib nova**: `qrcode.react ^4.2.0` no frontend
+- **Sessão**: JWT do convidado expira em 365 dias, mas é invalidada na hora por `revogado_em` checado em cada request
+- **Sem envio automático de email**: admin gera chave e copia link/QR manualmente para enviar (WhatsApp, etc)
+
 ## [1.45.1] - 2026-06-02
 
 ### Fixed (Build CI quebrava com "npm error Exit handler never called")
