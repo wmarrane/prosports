@@ -9,14 +9,18 @@ jobs:
   build-backend:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      id-token: write   # necessário para Workload Identity Federation
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Autenticar no GCP
+      - name: Autenticar no GCP (Workload Identity Federation)
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SA_GITHUB }}
 
       - name: Configurar gcloud
         uses: google-github-actions/setup-gcloud@v2
@@ -34,6 +38,9 @@ jobs:
   deploy-frontend:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      id-token: write   # necessário para Workload Identity Federation
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,19 +61,18 @@ jobs:
           APP_COMMIT: ${{ github.sha }}
         run: cd frontend && npm run build
 
-      - name: Autenticar Firebase
+      - name: Autenticar GCP via WIF (Firebase)
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.FIREBASE_SA_KEY }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SA_FIREBASE }}
+
+      - name: Instalar Firebase CLI
+        run: npm install -g firebase-tools
 
       - name: Deploy Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SA_KEY }}
-          projectId: ${{ secrets.GCP_PROJECT }}
-          entryPoint: ./frontend
-          channelId: live
+        working-directory: ./frontend
+        run: firebase deploy --only hosting --project ${{ secrets.GCP_PROJECT }} --non-interactive
 
   # 3) Deploy do backend na VM: pull, migrations, up.
   #    Runner self-hosted roda dentro da própria VM.
