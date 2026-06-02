@@ -30,12 +30,18 @@ import UsuariosList from './pages/usuarios/UsuariosList'
 import UsuarioForm from './pages/usuarios/UsuarioForm'
 import MinhaConta from './pages/conta/MinhaConta'
 import TrocarSenha from './pages/conta/TrocarSenha'
+import MobileLogin from './pages/mobile/MobileLogin'
+import MobileModalidades from './pages/mobile/MobileModalidades'
+import MobileModalidade from './pages/mobile/MobileModalidade'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/e/:token" element={<MobileLogin />} />
+        <Route path="/m" element={<MobileModalidades />} />
+        <Route path="/m/:id" element={<MobileModalidade />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/congresso" element={<ModoCongresso />} />
           <Route element={<Layout />}>
