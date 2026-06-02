@@ -5,6 +5,14 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.43.3] - 2026-06-01
+
+### Fixed (Banner Olá no Painel)
+- Título "Olá, …" estava ilegível (cor escura sobre fundo azul) — `h1` global em `tokens.css` sobrescrevia a cor branca herdada. Cor explícita `#fff` aplicada inline.
+- Padding do banner aumentou de `32px 36px` para `44px 48px` (mais respiro lateral/vertical).
+- Espaçamento entre elementos: eyebrow→título 12px, título→parágrafo 10px, parágrafo→botões 24px (antes era inconsistente).
+- Título com `letter-spacing: -0.02em` para um look mais display.
+
 ## [1.43.2] - 2026-06-01
 
 ### Changed (Login: logo Montana mais visível)

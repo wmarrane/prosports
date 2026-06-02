@@ -96,15 +96,15 @@ export default function Painel() {
         style={{
           background: 'var(--grad-brand-deep)',
           borderRadius: 22,
-          padding: '32px 36px',
+          padding: '44px 48px',
           color: '#fff',
         }}
       >
-        <div className="eyebrow mb-2" style={{ color: 'rgba(255,255,255,0.8)' }}>VISÃO GERAL</div>
-        <h1 className="text-3xl font-bold mb-2">
+        <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.75)', marginBottom: 12 }}>VISÃO GERAL</div>
+        <h1 className="text-3xl font-bold" style={{ color: '#fff', marginBottom: 10, letterSpacing: '-0.02em' }}>
           Olá, {user?.nome ?? user?.email ?? 'admin'}!
         </h1>
-        <p className="text-sm mb-5 max-w-xl" style={{ color: 'rgba(255,255,255,0.85)' }}>
+        <p className="text-sm max-w-xl" style={{ color: 'rgba(255,255,255,0.85)', marginBottom: 24, lineHeight: 1.55 }}>
           Acompanhe o estado das competições e prepare o próximo sorteio.
         </p>
         <div className="flex flex-wrap gap-3">
