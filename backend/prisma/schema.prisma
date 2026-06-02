@@ -24,6 +24,7 @@ model User {
   tentativas_login  Int       @default(0)
   bloqueado_ate     DateTime?
   ultimo_login      DateTime?
+  event_keys_criadas EventoKey[]
   criado_em         DateTime  @default(now())
   atualizado_em     DateTime  @updatedAt
 }
@@ -160,6 +161,7 @@ model Evento {
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
   campeoes_anteriores CampeaoAnterior[]
+  event_keys      EventoKey[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -245,4 +247,24 @@ model BracketChavesMatches {
   numero_inscrito Int  @id
   matches_graph   Json
   @@map("bracket_chaves_matches")
+}
+
+model EventoKey {
+  id              Int       @id @default(autoincrement())
+  token           String    @unique
+  email           String
+  evento          Evento    @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id       Int
+  device_fp       String?
+  device_label    String?
+  first_used_at   DateTime?
+  last_seen_at    DateTime?
+  revogado_em     DateTime?
+  criado_em       DateTime  @default(now())
+  criada_por      Int
+  criador         User      @relation(fields: [criada_por], references: [id])
+
+  @@unique([evento_id, email])
+  @@index([evento_id])
+  @@index([token])
 }
