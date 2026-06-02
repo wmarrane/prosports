@@ -5,6 +5,13 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.44.0] - 2026-06-01
+
+### Added (Apagar todos os sorteios de um evento)
+- **Backend**: novo endpoint `DELETE /sorteios/evento/:evento_id` (admin). Usa `prisma.sorteio.deleteMany({ where: { evento_id } })` e retorna `{ count }`.
+- **Frontend (EventoInscricoes — banner de progresso)**: botão "Apagar sorteios" (vermelho, com ícone Trash) aparece ao lado de "Editar evento" **apenas se houver sorteios executados** (`sorteadas > 0`).
+- **Modal de confirmação** (padrão do sistema): ícone Trash em círculo `--danger-soft`, mostra nome do evento + quantidade que será apagada, aviso "inscrições e campeões anteriores permanecem", botões Cancelar/Apagar N. Após sucesso mostra tela de confirmação com ícone Check verde + contador.
+
 ## [1.43.3] - 2026-06-01
 
 ### Fixed (Banner Olá no Painel)

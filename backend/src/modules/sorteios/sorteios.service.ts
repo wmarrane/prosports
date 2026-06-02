@@ -72,6 +72,11 @@ export async function remover(id: number) {
   return prisma.sorteio.delete({ where: { id } })
 }
 
+export async function removerTodosDoEvento(evento_id: number): Promise<{ count: number }> {
+  const r = await prisma.sorteio.deleteMany({ where: { evento_id } })
+  return { count: r.count }
+}
+
 export async function executar(input: { evento_id: number; modalidade_id: number }) {
   const [evento, modalidade] = await Promise.all([
     prisma.evento.findUnique({

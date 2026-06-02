@@ -17,7 +17,7 @@ import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
-import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home } from 'lucide-react'
+import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2 } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 function formatDateBR(iso: string): string {
@@ -79,6 +79,8 @@ export default function EventoInscricoes() {
   const [erroModal, setErroModal] = useState('')
   const [resumoBulk, setResumoBulk] = useState<{ criadas: number; duplicadas: number; erros: number } | null>(null)
   const [removerInscricaoAlvo, setRemoverInscricaoAlvo] = useState<{ id: number; nome: string } | null>(null)
+  const [apagarTodosOpen, setApagarTodosOpen] = useState(false)
+  const [apagarTodosResumo, setApagarTodosResumo] = useState<{ count: number } | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
 
@@ -188,6 +190,15 @@ export default function EventoInscricoes() {
     onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao apagar sorteio.'),
   })
 
+  const { mutate: apagarTodosSorteios, isPending: apagandoTodos } = useMutation({
+    mutationFn: () => sorteiosService.removerTodosDoEvento(eventoId),
+    onSuccess: r => {
+      setApagarTodosResumo(r)
+      queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
+    },
+    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao apagar sorteios.'),
+  })
+
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
     mutationFn: (data: { participante_id: number; posicao: number }) =>
       campeoesAnterioresService.criar({
@@ -291,6 +302,16 @@ export default function EventoInscricoes() {
               >
                 Editar evento
               </button>
+              {sorteadas > 0 && (
+                <button
+                  onClick={() => { setApagarTodosOpen(true); setApagarTodosResumo(null) }}
+                  className="text-xs hover:text-[var(--danger-700)] font-semibold"
+                  style={{ color: 'var(--danger)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                  title="Apagar todos os sorteios deste evento"
+                >
+                  <Trash2 size={12} /> Apagar sorteios
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -1053,6 +1074,108 @@ export default function EventoInscricoes() {
                 }}
               ><X size={16} /> Remover</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: apagar todos os sorteios do evento */}
+      {apagarTodosOpen && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => !apagandoTodos && setApagarTodosOpen(false)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 32,
+              maxWidth: 520,
+              width: '100%',
+              margin: '0 16px',
+              textAlign: 'center',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {apagarTodosResumo ? (
+              <>
+                <div style={{
+                  width: 72, height: 72, margin: '0 auto 16px',
+                  borderRadius: '50%', background: 'var(--success-soft, rgba(20,184,138,0.15))',
+                  display: 'grid', placeItems: 'center', color: 'var(--success)',
+                }}>
+                  <Check size={36} />
+                </div>
+                <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>
+                  Sorteios apagados
+                </h3>
+                <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+                  <b style={{ color: 'var(--t1)' }}>{apagarTodosResumo.count}</b> {apagarTodosResumo.count === 1 ? 'sorteio foi apagado' : 'sorteios foram apagados'}. Você pode realizar novos sorteios para cada modalidade.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setApagarTodosOpen(false); setApagarTodosResumo(null) }}
+                  className="btn btn-primary"
+                >
+                  <Check size={16} /> Fechar
+                </button>
+              </>
+            ) : (
+              <>
+                <div style={{
+                  width: 72, height: 72, margin: '0 auto 16px',
+                  borderRadius: '50%', background: 'var(--danger-soft)',
+                  display: 'grid', placeItems: 'center', color: 'var(--danger)',
+                }}>
+                  <Trash2 size={36} />
+                </div>
+                <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>
+                  Apagar todos os sorteios?
+                </h3>
+                <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+                  Os <b style={{ color: 'var(--t1)' }}>{sorteadas}</b> {sorteadas === 1 ? 'sorteio' : 'sorteios'} de <b style={{ color: 'var(--t1)' }}>{evento?.nome}</b> serão apagados. As inscrições e campeões anteriores permanecem. Esta ação não pode ser desfeita.
+                </p>
+                <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+                  <button
+                    type="button"
+                    onClick={() => setApagarTodosOpen(false)}
+                    disabled={apagandoTodos}
+                    style={{
+                      background: 'transparent',
+                      color: 'var(--t1)',
+                      border: '1px solid var(--card-border)',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '12px 24px',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      cursor: apagandoTodos ? 'wait' : 'pointer',
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      opacity: apagandoTodos ? 0.5 : 1,
+                    }}
+                  ><X size={16} /> Cancelar</button>
+                  <button
+                    type="button"
+                    onClick={() => apagarTodosSorteios()}
+                    disabled={apagandoTodos}
+                    style={{
+                      background: 'var(--danger)',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '12px 24px',
+                      fontSize: 14,
+                      fontWeight: 600,
+                      cursor: apagandoTodos ? 'wait' : 'pointer',
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      opacity: apagandoTodos ? 0.5 : 1,
+                    }}
+                  ><Trash2 size={16} /> {apagandoTodos ? 'Apagando...' : `Apagar ${sorteadas}`}</button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -14,4 +14,6 @@ export const sorteiosService = {
   executar: (data: ExecutarPayload) =>
     api.post<Sorteio>(`${BASE}/executar`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
+  removerTodosDoEvento: (evento_id: number) =>
+    api.delete<{ count: number }>(`${BASE}/evento/${evento_id}`).then(r => r.data),
 }

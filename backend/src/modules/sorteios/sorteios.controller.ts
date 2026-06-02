@@ -36,3 +36,14 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
     res.status(204).send()
   } catch (err) { next(err) }
 }
+
+export async function removerTodosDoEvento(req: Request, res: Response, next: NextFunction) {
+  try {
+    const evento_id = Number(req.params.evento_id)
+    if (!Number.isInteger(evento_id) || evento_id <= 0) {
+      res.status(400).json({ message: 'evento_id inválido.' })
+      return
+    }
+    res.json(await service.removerTodosDoEvento(evento_id))
+  } catch (err) { next(err) }
+}
