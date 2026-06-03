@@ -14,6 +14,13 @@ vi.mock('../../lib/prisma', () => ({
     },
     sorteio: {
       deleteMany: vi.fn(),
+      count: vi.fn(),
+    },
+    inscricao: {
+      count: vi.fn(),
+    },
+    campeaoAnterior: {
+      count: vi.fn(),
     },
     $transaction: vi.fn(),
   },
@@ -127,9 +134,33 @@ describe('modalidades.service', () => {
     ).rejects.toMatchObject({ status: 409 })
   })
 
-  it('remover deleta direto', async () => {
+  it('remover deleta quando nao ha dependentes', async () => {
+    mockPrisma.inscricao.count.mockResolvedValue(0)
+    mockPrisma.sorteio.count.mockResolvedValue(0)
+    mockPrisma.campeaoAnterior.count.mockResolvedValue(0)
     mockPrisma.modalidade.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.modalidade.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+
+  it('remover lanca 409 com mensagem detalhada quando ha inscricoes', async () => {
+    mockPrisma.inscricao.count.mockResolvedValue(3)
+    mockPrisma.sorteio.count.mockResolvedValue(0)
+    mockPrisma.campeaoAnterior.count.mockResolvedValue(0)
+    await expect(service.remover(1)).rejects.toMatchObject({
+      status: 409,
+      message: expect.stringContaining('3 inscrições'),
+    })
+    expect(mockPrisma.modalidade.delete).not.toHaveBeenCalled()
+  })
+
+  it('remover lanca 409 listando inscricoes + sorteios + campeoes', async () => {
+    mockPrisma.inscricao.count.mockResolvedValue(1)
+    mockPrisma.sorteio.count.mockResolvedValue(1)
+    mockPrisma.campeaoAnterior.count.mockResolvedValue(2)
+    await expect(service.remover(1)).rejects.toMatchObject({
+      status: 409,
+      message: expect.stringMatching(/1 inscrição.*1 sorteio.*2 campeões anteriores/),
+    })
   })
 })
