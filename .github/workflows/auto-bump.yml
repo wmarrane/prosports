@@ -7,10 +7,13 @@ name: Auto Version Bump
 #   feat!: ou BREAKING CHANGE → major (X.0.0)
 #   chore/docs/etc → no-op
 #
-# O commit de bump traz "[skip ci]" pra evitar disparar este workflow
-# (ou deploy-develop) em loop. A versão nova aparece em prod quando você
-# promover develop → main; a dev VM continua com a versão antiga até o
-# próximo merge (lag aceitável pra um ambiente de testes).
+# O commit de bump traz "[skip auto-bump]" pra evitar auto-bump bumpar
+# o próprio commit em loop. Esse marker NÃO é reconhecido pelo GitHub
+# Actions (diferente de [skip ci]), então:
+#   - deploy-develop.yml roda no commit de bump (deploy redundante na
+#     dev VM, ~3min wasted — aceitável pra refletir versão nova em dev)
+#   - deploy-main.yml roda normalmente quando develop é promovido pra
+#     main (problema antigo do [skip ci] global, corrigido)
 
 on:
   push:
@@ -22,7 +25,7 @@ permissions:
 jobs:
   bump:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!contains(github.event.head_commit.message, '[skip auto-bump]')"
     steps:
       - name: Checkout (full history + tags)
         uses: actions/checkout@v4
@@ -99,7 +102,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json
-          git commit -m "chore(release): bump ${{ steps.ver.outputs.current }} → ${{ steps.ver.outputs.new }} [skip ci]"
+          git commit -m "chore(release): bump ${{ steps.ver.outputs.current }} → ${{ steps.ver.outputs.new }} [skip auto-bump]"
           # Annotated tag (--follow-tags so push leva junto)
           git tag -a "v${{ steps.ver.outputs.new }}" -m "Release v${{ steps.ver.outputs.new }}"
           git push origin develop
