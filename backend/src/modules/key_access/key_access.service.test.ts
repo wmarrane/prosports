@@ -42,16 +42,15 @@ describe('key_access.service', () => {
     const r = await service.login({ token: 'x', device_fp: 'fp1', device_label: 'iPhone' })
     expect(r.keyToken).toBeTruthy()
     expect(r.evento.id).toBe(5)
-    expect(mockPrisma.eventoKey.update).toHaveBeenCalledWith({
-      where: { id: 1 },
-      data: {
-        device_fp: 'fp1', device_label: 'iPhone',
-        first_used_at: expect.any(Date), last_seen_at: expect.any(Date),
-      },
-    })
+    const call = mockPrisma.eventoKey.update.mock.calls[0][0]
+    expect(call.where).toEqual({ id: 1 })
+    expect(call.data.device_fp).toBe('fp1')
+    expect(call.data.device_label).toBe('iPhone')
+    expect(call.data.first_used_at).toBeInstanceOf(Date)
+    expect(call.data.last_seen_at).toBeInstanceOf(Date)
   })
 
-  it('login re-acesso com mesmo device_fp sucesso, atualiza só last_seen_at', async () => {
+  it('login com mesmo device_fp regrava device_fp/label e atualiza last_seen_at (sem first_used_at)', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 1, evento_id: 5, device_fp: 'fp1', revogado_em: null,
       evento: { id: 5, nome: 'E', data_hora: new Date(), local: 'L', logo_url: null,
@@ -61,17 +60,24 @@ describe('key_access.service', () => {
     const r = await service.login({ token: 'x', device_fp: 'fp1', device_label: 'iPhone' })
     expect(r.keyToken).toBeTruthy()
     const call = mockPrisma.eventoKey.update.mock.calls[0][0]
-    expect(call.data.device_fp).toBeUndefined()
+    expect(call.data.device_fp).toBe('fp1')
+    expect(call.data.device_label).toBe('iPhone')
     expect(call.data.last_seen_at).toBeInstanceOf(Date)
+    expect(call.data.first_used_at).toBeUndefined()
   })
 
-  it('login com device_fp diferente lança 403', async () => {
+  it('login com device_fp diferente faz takeover (sobrescreve device_fp, invalida sessao antiga)', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
-      id: 1, evento_id: 5, device_fp: 'fp1', revogado_em: null,
-      evento: { id: 5, data_hora: new Date() },
+      id: 1, evento_id: 5, device_fp: 'fp-ANTIGO', revogado_em: null,
+      evento: { id: 5, data_hora: new Date(), competicao: { subtitulo_campos: [] } },
     })
-    await expect(service.login({ token: 'x', device_fp: 'fpOUTRO', device_label: 'X' }))
-      .rejects.toMatchObject({ status: 403 })
+    mockPrisma.eventoKey.update.mockResolvedValue({})
+    const r = await service.login({ token: 'x', device_fp: 'fp-NOVO', device_label: 'Android Chrome' })
+    expect(r.keyToken).toBeTruthy()
+    const call = mockPrisma.eventoKey.update.mock.calls[0][0]
+    expect(call.data.device_fp).toBe('fp-NOVO')
+    expect(call.data.device_label).toBe('Android Chrome')
+    expect(call.data.first_used_at).toBeUndefined()
   })
 
   it('login 401 com code event_expired quando evento começou há mais de 24h', async () => {
