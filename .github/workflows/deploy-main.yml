@@ -78,7 +78,7 @@ jobs:
   #    Runner self-hosted roda dentro da própria VM.
   deploy-backend:
     needs: build-backend
-    runs-on: self-hosted
+    runs-on: [self-hosted, gcp]
     environment: production
     steps:
       - name: Checkout
