@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { QRCodeSVG } from 'qrcode.react'
 import { eventoKeysService } from '../../services/evento-keys'
 import { useToast } from '../../components/Toast'
+import { useAuthStore } from '../../store/authStore'
 import type { EventoKey } from '../../types/evento-key'
 import { Plus, X, Check } from '../../lib/icons'
 import { Key, Smartphone, Copy, QrCode, RotateCcw, Ban, Trash2 } from 'lucide-react'
@@ -24,10 +25,14 @@ function formatRelativo(iso: string | null): string {
 export default function AcessoMobileCard({ eventoId }: Props) {
   const qc = useQueryClient()
   const toast = useToast()
+  const user = useAuthStore((s) => s.user)
   const [email, setEmail] = useState('')
   const [erro, setErro] = useState('')
   const [qrAlvo, setQrAlvo] = useState<EventoKey | null>(null)
   const [confirmAlvo, setConfirmAlvo] = useState<{ acao: 'revogar' | 'reset' | 'apagar'; key: EventoKey } | null>(null)
+
+  // Acesso restrito ao perfil ADMIN. Backend tambem enforça via requireRole('ADMIN').
+  if (user?.role !== 'ADMIN') return null
 
   const { data: keys = [], isLoading } = useQuery({
     queryKey: ['evento-keys', eventoId],

@@ -6,8 +6,12 @@ vi.mock('../../lib/prisma', () => ({
       findMany: vi.fn(), findUnique: vi.fn(),
       create: vi.fn(), update: vi.fn(), delete: vi.fn(),
     },
+    evento: { findUnique: vi.fn() },
   },
 }))
+
+const FUTURO = new Date(Date.now() + 60 * 60 * 1000) // 1h no futuro
+const PASSADO_24H = new Date(Date.now() - 25 * 60 * 60 * 1000) // 25h atrás
 
 import prisma from '../../lib/prisma'
 import * as service from './evento_keys.service'
@@ -27,6 +31,7 @@ describe('evento_keys.service', () => {
   })
 
   it('criar gera token único e grava email + criada_por quando nao existe', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: FUTURO })
     mockPrisma.eventoKey.findUnique.mockResolvedValue(null)
     mockPrisma.eventoKey.create.mockResolvedValue({ id: 99, token: 'xyz' })
     const r = await service.criar({ evento_id: 5, email: 'a@b.com', criada_por: 3 })
@@ -40,6 +45,7 @@ describe('evento_keys.service', () => {
   })
 
   it('criar rejeita 409 quando ja existe chave ATIVA pro mesmo email/evento', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: FUTURO })
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 1, evento_id: 5, email: 'a@b.com', revogado_em: null,
     })
@@ -50,6 +56,7 @@ describe('evento_keys.service', () => {
   })
 
   it('criar reativa chave revogada com token novo e zera device', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: FUTURO })
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 7, evento_id: 5, email: 'a@b.com',
       revogado_em: new Date('2026-01-01'),
@@ -72,10 +79,32 @@ describe('evento_keys.service', () => {
   })
 
   it('criar mapeia P2002 (race condition) para 409 ao tentar criar', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: FUTURO })
     mockPrisma.eventoKey.findUnique.mockResolvedValue(null)
     mockPrisma.eventoKey.create.mockRejectedValue({ code: 'P2002' })
     await expect(service.criar({ evento_id: 5, email: 'a@b.com', criada_por: 3 }))
       .rejects.toMatchObject({ status: 409 })
+  })
+
+  it('criar rejeita 403 event_expired quando evento ja passou 24h (mesmo se chave nova)', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: PASSADO_24H })
+    await expect(service.criar({ evento_id: 5, email: 'a@b.com', criada_por: 3 }))
+      .rejects.toMatchObject({ status: 403, code: 'event_expired' })
+    expect(mockPrisma.eventoKey.findUnique).not.toHaveBeenCalled()
+    expect(mockPrisma.eventoKey.create).not.toHaveBeenCalled()
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
+  })
+
+  it('criar rejeita 403 event_expired mesmo se ja existir chave revogada (nao reativa)', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ data_hora: PASSADO_24H })
+    await expect(service.criar({ evento_id: 5, email: 'a@b.com', criada_por: 3 }))
+      .rejects.toMatchObject({ status: 403, code: 'event_expired' })
+  })
+
+  it('criar 404 quando evento nao existe', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue(null)
+    await expect(service.criar({ evento_id: 999, email: 'a@b.com', criada_por: 3 }))
+      .rejects.toMatchObject({ status: 404 })
   })
 
   it('revogar preenche revogado_em', async () => {
