@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import ParticipantesAssociadosPanel from '../../components/ParticipantesAssociadosPanel'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { delegaciasService } from '../../services/delegacias'
 import type { Delegacia } from '../../types/participante'
 import { Plus } from '../../lib/icons'
@@ -11,17 +13,22 @@ import { Building2 } from 'lucide-react'
 export default function DelegaciasList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [selecionadaId, setSelecionadaId] = useState<number | null>(null)
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['delegacias'],
     queryFn: delegaciasService.listar,
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: delegaciasService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['delegacias'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['delegacias'] })
+      toast.success('Delegacia removida.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const ordenadas = [...data].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' }))
@@ -81,7 +88,7 @@ export default function DelegaciasList() {
                   selected={selecionadaId === d.id}
                   onSelect={() => setSelecionadaId(d.id)}
                   onEdit={() => navigate(`/delegacias/${d.id}/editar`)}
-                  onRemove={() => { if (confirm(`Remover "${d.nome}"?`)) remover(d.id) }}
+                  onRemove={() => setAlvo({ id: d.id, nome: d.nome })}
                 />
               ))}
             </div>
@@ -100,6 +107,18 @@ export default function DelegaciasList() {
           .dl-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover delegacia"
+        title={alvo?.nome ?? ''}
+        description="Participantes vinculados a esta delegacia precisarão ser reatribuídos."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

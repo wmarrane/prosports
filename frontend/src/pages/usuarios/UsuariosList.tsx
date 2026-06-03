@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { usersService } from '../../services/users'
 import type { User } from '../../types/user'
 import { Plus, Key, Users, Search } from '../../lib/icons'
@@ -17,18 +19,23 @@ const ROLE_PILL: Record<string, { label: string; bg: string; color: string }> = 
 export default function UsuariosList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [q, setQ] = useState('')
   const [resetTarget, setResetTarget] = useState<User | null>(null)
+  const [alvo, setAlvo] = useState<User | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['users'],
     queryFn: usersService.listar,
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: usersService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] })
+      toast.success('Usuário removido.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const filtered = useMemo(() => {
@@ -105,7 +112,7 @@ export default function UsuariosList() {
             <Key size={12} /> Senha
           </button>
           <button
-            onClick={() => { if (confirm(`Remover usuário ${row.nome}?`)) remover(row.id) }}
+            onClick={() => setAlvo(row)}
             className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
           >
             Remover
@@ -218,6 +225,18 @@ export default function UsuariosList() {
       {resetTarget && (
         <ResetSenhaModal user={resetTarget} onClose={() => setResetTarget(null)} />
       )}
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover usuário"
+        title={alvo?.nome ?? ''}
+        description={`O acesso de ${alvo?.email ?? ''} será revogado imediatamente.`}
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

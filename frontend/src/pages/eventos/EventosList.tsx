@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
 import type { Evento } from '../../types/evento'
 import type { TipoDisputa } from '../../types/modalidade'
@@ -59,17 +61,22 @@ function eventoTipos(ev: Evento): TipoDisputa[] {
 export default function EventosList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [filtro, setFiltro] = useState<FiltroId>('todos')
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data: eventos = [], isLoading } = useQuery({
     queryKey: ['eventos'],
     queryFn: () => eventosService.listar(),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: eventosService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['eventos'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['eventos'] })
+      toast.success('Evento removido.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const lista = useMemo(
@@ -89,7 +96,7 @@ export default function EventosList() {
 
   function handleRemove(e: React.MouseEvent, ev: Evento) {
     e.stopPropagation()
-    if (confirm(`Remover "${ev.nome}"?`)) remover(ev.id)
+    setAlvo({ id: ev.id, nome: ev.nome })
   }
 
   return (
@@ -375,6 +382,18 @@ export default function EventosList() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover evento"
+        title={alvo?.nome ?? ''}
+        description="Essa ação não pode ser desfeita. Inscrições e sorteios vinculados serão perdidos."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

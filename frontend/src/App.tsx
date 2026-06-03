@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { ToastProvider } from './components/Toast'
 import Login from './pages/Login'
 import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -37,6 +38,7 @@ import MobileModalidade from './pages/mobile/MobileModalidade'
 export default function App() {
   return (
     <BrowserRouter>
+      <ToastProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/e/:token" element={<MobileLogin />} />
@@ -109,6 +111,7 @@ export default function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </ToastProvider>
     </BrowserRouter>
   )
 }

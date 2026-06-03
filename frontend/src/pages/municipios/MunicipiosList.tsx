@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { municipiosService } from '../../services/municipios'
 import type { Municipio } from '../../types/municipio'
 import { UFS } from '../../lib/ufs'
@@ -14,24 +16,25 @@ const PAGE_SIZE = 50
 export default function MunicipiosList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [uf, setUf] = useState('')
   const [q, setQ] = useState('')
   const [page, setPage] = useState(1)
+  const [alvo, setAlvo] = useState<{ id: number; nome: string; uf: string } | null>(null)
 
   const { data, isLoading } = useQuery({
     queryKey: ['municipios', { uf, q, page }],
     queryFn: () => municipiosService.listar({ uf: uf || undefined, q: q || undefined, page, limit: PAGE_SIZE }),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: municipiosService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['municipios'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['municipios'] })
+      toast.success('Município removido.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
-
-  function confirmarRemocao(id: number, nome: string) {
-    if (confirm(`Remover município "${nome}"?`)) remover(id)
-  }
 
   const columns = [
     {
@@ -75,7 +78,7 @@ export default function MunicipiosList() {
             Editar
           </button>
           <button
-            onClick={() => confirmarRemocao(row.id, row.nome)}
+            onClick={() => setAlvo({ id: row.id, nome: row.nome, uf: row.uf })}
             className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
           >
             Remover
@@ -244,6 +247,18 @@ export default function MunicipiosList() {
           </section>
         )}
       </div>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover município"
+        title={alvo ? `${alvo.nome} / ${alvo.uf}` : ''}
+        description="Participantes vinculados a este município ficarão sem município associado."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }
