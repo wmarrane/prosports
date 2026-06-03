@@ -71,5 +71,22 @@ export async function editar(
 }
 
 export async function remover(id: number) {
+  const [inscricoes, sorteios, campeoes] = await Promise.all([
+    prisma.inscricao.count({ where: { modalidade_id: id } }),
+    prisma.sorteio.count({ where: { modalidade_id: id } }),
+    prisma.campeaoAnterior.count({ where: { modalidade_id: id } }),
+  ])
+
+  if (inscricoes + sorteios + campeoes > 0) {
+    const partes: string[] = []
+    if (inscricoes > 0) partes.push(`${inscricoes} inscriç${inscricoes === 1 ? 'ão' : 'ões'}`)
+    if (sorteios > 0) partes.push(`${sorteios} sorteio${sorteios === 1 ? '' : 's'}`)
+    if (campeoes > 0) partes.push(`${campeoes} campe${campeoes === 1 ? 'ão' : 'ões'} anterior${campeoes === 1 ? '' : 'es'}`)
+    throw Object.assign(
+      new Error(`Não é possível remover: há ${partes.join(', ')} vinculados a esta modalidade.`),
+      { status: 409 }
+    )
+  }
+
   return prisma.modalidade.delete({ where: { id } })
 }
