@@ -24,18 +24,17 @@ export async function login(input: { token: string; device_fp: string; device_la
   const now = new Date()
   const firstUse = key.device_fp === null
 
-  if (!firstUse && key.device_fp !== input.device_fp) {
-    throw Object.assign(
-      new Error('Esta chave já está em uso em outro aparelho. Solicite ao organizador o reset.'),
-      { status: 403, code: 'device_mismatch' }
-    )
-  }
-
+  // Regra: 1 sessão ativa por chave. Cada login sobrescreve device_fp/label.
+  // Aparelho anterior que ainda tenha um JWT vivo terá o token rejeitado
+  // por requireEventoKey na próxima request (deviceFp do JWT antigo != DB).
   await prisma.eventoKey.update({
     where: { id: key.id },
-    data: firstUse
-      ? { device_fp: input.device_fp, device_label: input.device_label, first_used_at: now, last_seen_at: now }
-      : { last_seen_at: now },
+    data: {
+      device_fp: input.device_fp,
+      device_label: input.device_label,
+      last_seen_at: now,
+      ...(firstUse ? { first_used_at: now } : {}),
+    },
   })
 
   const keyToken = signKeyToken({ keyId: key.id, eventoId: key.evento_id, deviceFp: input.device_fp })
