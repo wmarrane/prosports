@@ -28,6 +28,34 @@ export async function listarPorEvento(evento_id: number) {
 }
 
 export async function criar(input: { evento_id: number; email: string; criada_por: number }) {
+  // Se existe chave revogada pra esse email, reativa com token novo
+  // (invalida link/QR antigos sem precisar apagar o registro histórico).
+  const existing = await prisma.eventoKey.findUnique({
+    where: { evento_id_email: { evento_id: input.evento_id, email: input.email } },
+  })
+
+  if (existing) {
+    if (existing.revogado_em === null) {
+      throw Object.assign(
+        new Error('Já existe chave ativa para este email neste evento.'),
+        { status: 409 }
+      )
+    }
+    return prisma.eventoKey.update({
+      where: { id: existing.id },
+      data: {
+        token: novoToken(),
+        revogado_em: null,
+        device_fp: null,
+        device_label: null,
+        first_used_at: null,
+        last_seen_at: null,
+        criada_por: input.criada_por,
+        criado_em: new Date(),
+      },
+    })
+  }
+
   return mapPrismaError(() =>
     prisma.eventoKey.create({
       data: {
