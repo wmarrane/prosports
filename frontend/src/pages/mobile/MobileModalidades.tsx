@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { keyAccessService } from '../../services/key-access'
 import MobileShell from './MobileShell'
-import { Brackets, Group, ListOrdered, FileText, Check } from 'lucide-react'
+import { Brackets, Group, ListOrdered, FileText, Check, Users } from 'lucide-react'
 
 const TIPO_ICON: Record<string, any> = {
   chaves: Brackets, grupos: Group, ordem_entrada: ListOrdered, especifico: FileText,
@@ -73,7 +73,20 @@ export default function MobileModalidades() {
                     {m.sigla} · {tipo === 'especifico' ? 'Específico' : tipo === 'ordem_entrada' ? 'Ordem' : tipo[0].toUpperCase() + tipo.slice(1)}
                   </div>
                 </div>
-                <Check size={16} style={{ color: 'var(--t4)' }} />
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  padding: '4px 8px',
+                  background: 'var(--card-bg-2)',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-pill)',
+                  flexShrink: 0,
+                }}>
+                  <Users size={12} style={{ color: 'var(--t3)' }} />
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--t1)', fontFamily: 'var(--font-mono)' }}>
+                    {m.inscritos_count ?? 0}
+                  </span>
+                </div>
+                <Check size={14} style={{ color: 'var(--t4)', flexShrink: 0 }} />
               </button>
             )
           })}
