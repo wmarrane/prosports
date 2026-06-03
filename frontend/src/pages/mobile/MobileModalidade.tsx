@@ -9,6 +9,7 @@ import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import type { Participante } from '../../types/participante'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Tab = 'inscritos' | 'campeoes' | 'sorteio'
 
@@ -30,6 +31,18 @@ export default function MobileModalidade() {
     refetchInterval: 15_000,
     refetchIntervalInBackground: false,
   })
+
+  // Lista completa de modalidades pra navegação anterior/próxima.
+  // Compartilha cache com MobileModalidades (mesma queryKey).
+  const { data: modalidades = [] } = useQuery({
+    queryKey: ['key-access', 'modalidades'],
+    queryFn: keyAccessService.modalidades,
+  })
+
+  const idxAtual = modalidades.findIndex((m: any) => m.id === modalidadeId)
+  const total = modalidades.length
+  const anterior = idxAtual > 0 ? modalidades[idxAtual - 1] : null
+  const proxima = idxAtual >= 0 && idxAtual < total - 1 ? modalidades[idxAtual + 1] : null
 
   const campos = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, campos)
@@ -63,6 +76,64 @@ export default function MobileModalidade() {
               {data.modalidade.sigla}
             </div>
           </div>
+
+          {/* Navegação entre modalidades */}
+          {total > 1 && idxAtual >= 0 && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12,
+            }}>
+              <button
+                onClick={() => anterior && navigate(`/m/${anterior.id}`)}
+                disabled={!anterior}
+                title={anterior ? `Anterior: ${anterior.nome}` : 'Já está no primeiro'}
+                style={{
+                  flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+                  padding: '10px 8px',
+                  background: anterior ? 'var(--card-bg)' : 'transparent',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-lg)',
+                  color: anterior ? 'var(--t1)' : 'var(--t4)',
+                  fontSize: 12, fontWeight: 600,
+                  cursor: anterior ? 'pointer' : 'not-allowed',
+                  opacity: anterior ? 1 : 0.5,
+                  minWidth: 0,
+                }}
+              >
+                <ChevronLeft size={16} style={{ flexShrink: 0 }} />
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {anterior?.nome ?? 'Anterior'}
+                </span>
+              </button>
+              <div style={{
+                fontSize: 11, color: 'var(--t3)', fontFamily: 'var(--font-mono)',
+                padding: '0 4px', flexShrink: 0,
+              }}>
+                {idxAtual + 1}/{total}
+              </div>
+              <button
+                onClick={() => proxima && navigate(`/m/${proxima.id}`)}
+                disabled={!proxima}
+                title={proxima ? `Próxima: ${proxima.nome}` : 'Já está na última'}
+                style={{
+                  flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+                  padding: '10px 8px',
+                  background: proxima ? 'var(--card-bg)' : 'transparent',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: 'var(--radius-lg)',
+                  color: proxima ? 'var(--t1)' : 'var(--t4)',
+                  fontSize: 12, fontWeight: 600,
+                  cursor: proxima ? 'pointer' : 'not-allowed',
+                  opacity: proxima ? 1 : 0.5,
+                  minWidth: 0,
+                }}
+              >
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {proxima?.nome ?? 'Próxima'}
+                </span>
+                <ChevronRight size={16} style={{ flexShrink: 0 }} />
+              </button>
+            </div>
+          )}
 
           {/* Tabs */}
           <div style={{
