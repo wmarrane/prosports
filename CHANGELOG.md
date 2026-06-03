@@ -5,6 +5,31 @@ Todos os releases notáveis deste projeto.
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 Versionamento: [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.48.0] - 2026-06-03
+
+### Added (Design system + acesso mobile)
+- **`ConfirmDialog`** reutilizável (`frontend/src/components/ConfirmDialog.tsx`) com backdrop escuro + blur, ícone gradient, variantes danger/primary, loading state automático. Substitui `window.confirm` em ~10 telas (competições, eventos, usuários, municípios, delegacias, inspetorias, tipos-modalidade, modalidades, sistemas-disputa grupos/chaves).
+- **Toast system** (`Toast.tsx` + `useToast()`) com auto-dismiss 3.5s, variantes success/error, empilhamento. Substitui `alert()` nativo em todas as mutations (criar/editar/remover/revogar/resetar) com feedback consistente.
+- **MobileModalidade — navegação Anterior/Próxima** entre modalidades sem voltar à lista. Indicador `idx/total` no centro. Aba ativa (Inscritos/Campeões/Sorteio) persiste ao navegar.
+- **EventoKey — reativação de chave revogada**: ao gerar chave para email com chave revogada, agora reativa o registro existente com **token novo** (invalida link/QR antigos) em vez de bloquear com 409 "já existe". Histórico de auditoria preservado (mesmo `id`).
+
+### Changed
+- **Modais do Modo Congresso** ("Grupo X expandido" em `CongressoStepSorteio` e "Editar campeões anteriores" em `CampeoesPanel`) com backdrop `rgba(0,0,0,0.92)` + `backdrop-filter: blur(4px)` para melhor contraste em dark mode.
+- **Identidade visual**: favicon agora é símbolo Montana (`/montana/simbolo.png`), title "Prosports — Montana", HTML lang `pt-BR`.
+- **Sidebar**: versão + commit hash em 2 linhas com `word-break` (SHA completo do `github.sha` em prod estourava largura).
+
+### Fixed
+- **MobileShell scroll bloqueado**: `body { overflow: hidden }` global (necessário para layout admin desktop com sidebar fixa) impedia rolar conteúdo em mobile. Listas grandes (65+ modalidades) ficavam cortadas. Shell agora usa `position: fixed; inset: 0` com `overflowY: auto` interno isolando do global. Admin desktop não afetado.
+- **Acesso mobile — feedback silencioso ao revogar**: mutations `revogar`/`resetDevice` em `AcessoMobileCard` não tinham `onError`. Falhas (ex.: 401 do JWT admin expirado em sessão longa) eram engolidas. Admin clicava Revogar, modal fechava e nada mudava. Agora todas as 4 mutations têm `toast.success` e `toast.error`.
+- **Migration FK Modalidade→Competicao**: `20260529000000_drop_categoria_restruct_modalidade` referenciava `Competicao` antes da migration que cria a tabela. Quebrava em DB limpo (prod, novos devs). FK movida para `20260529034014_add_competicao` após o `CREATE TABLE`. `prisma migrate deploy` não verifica checksum, então ambientes já aplicados não precisam de ação.
+
+### Infra (não afeta UX, documentado em `personaladmin/gcp_deploy/MANUAL-DEPLOY.md`)
+- **Produção entrou no ar em GCP** (Compute Engine e2-micro + Cloud SQL cross-project + Firebase Hosting + Caddy/Let's Encrypt via DuckDNS).
+- **CI/CD com Workload Identity Federation** (sem service-account keys, contornando `constraints/iam.disableServiceAccountKeyCreation`).
+- **Runners self-hosted** com labels dedicados (`dev`/`gcp`) — antes ambos compartilhavam `self-hosted` e GitHub jogava jobs em runner errado.
+- **Dockerfile runtime**: instala `openssl` (necessário para Prisma schema-engine em Alpine) e copia `package.json` + `tsconfig.json` (necessário para `prisma db seed`).
+- **Backups Cloud SQL**: 7d retention + PITR confirmados.
+
 ## [1.47.0] - 2026-06-02
 
 ### Added (Expiração do acesso mobile 24h após início do evento)
