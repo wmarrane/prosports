@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { QRCodeSVG } from 'qrcode.react'
 import { eventoKeysService } from '../../services/evento-keys'
+import { useToast } from '../../components/Toast'
 import type { EventoKey } from '../../types/evento-key'
 import { Plus, X, Check } from '../../lib/icons'
 import { Key, Smartphone, Copy, QrCode, RotateCcw, Ban, Trash2 } from 'lucide-react'
@@ -22,6 +23,7 @@ function formatRelativo(iso: string | null): string {
 
 export default function AcessoMobileCard({ eventoId }: Props) {
   const qc = useQueryClient()
+  const toast = useToast()
   const [email, setEmail] = useState('')
   const [erro, setErro] = useState('')
   const [qrAlvo, setQrAlvo] = useState<EventoKey | null>(null)
@@ -42,16 +44,18 @@ export default function AcessoMobileCard({ eventoId }: Props) {
 
   const { mutate: revogar } = useMutation({
     mutationFn: (id: number) => eventoKeysService.revogar(eventoId, id),
-    onSuccess: invalidate,
+    onSuccess: () => { invalidate(); toast.success('Chave revogada.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao revogar.'),
   })
   const { mutate: resetDevice } = useMutation({
     mutationFn: (id: number) => eventoKeysService.resetDevice(eventoId, id),
-    onSuccess: invalidate,
+    onSuccess: () => { invalidate(); toast.success('Device resetado. Chave liberada para novo aparelho.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao resetar device.'),
   })
   const { mutate: apagar } = useMutation({
     mutationFn: (id: number) => eventoKeysService.apagar(eventoId, id),
-    onSuccess: invalidate,
-    onError: (e: any) => alert(e?.response?.data?.message ?? 'Erro ao apagar.'),
+    onSuccess: () => { invalidate(); toast.success('Chave apagada.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao apagar.'),
   })
 
   function linkDe(key: EventoKey): string {
