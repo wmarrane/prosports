@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { competicoesService } from '../../services/competicoes'
 import {
   sistemasDisputaService,
@@ -130,10 +132,12 @@ const GRUPOS_VAZIO = {
 
 function GruposTabela({ competicaoId }: { competicaoId: number }) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [adicionando, setAdicionando] = useState(false)
   const [novo, setNovo] = useState<Record<string, string>>(GRUPOS_VAZIO)
   const [editando, setEditando] = useState<number | null>(null)
   const [edicao, setEdicao] = useState<Record<string, string>>({})
+  const [alvo, setAlvo] = useState<{ id: number; quantidade_equipes: number } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['sistemas-disputa-grupos', competicaoId],
@@ -152,20 +156,20 @@ function GruposTabela({ competicaoId }: { competicaoId: number }) {
       numero_classificados: Number(novo.numero_classificados),
     }),
     onSuccess: () => { invalidate(); setAdicionando(false); setNovo(GRUPOS_VAZIO) },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao criar.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao criar.'),
   })
 
   const { mutate: salvar, isPending: salvandoEdit } = useMutation({
     mutationFn: ({ id, dados }: { id: number; dados: Partial<SistemaGrupos> }) =>
       sistemasDisputaService.grupos.editar(id, dados),
     onSuccess: () => { invalidate(); setEditando(null) },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: sistemasDisputaService.grupos.remover,
-    onSuccess: invalidate,
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => { invalidate(); toast.success('Regra removida.') },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   function iniciarEdicao(r: SistemaGrupos) {
@@ -264,7 +268,7 @@ function GruposTabela({ competicaoId }: { competicaoId: number }) {
                         ) : (
                           <>
                             <button onClick={() => iniciarEdicao(r)} className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs font-semibold mr-3">Editar</button>
-                            <button onClick={() => { if (confirm(`Remover regra para ${r.quantidade_equipes} equipes?`)) remover(r.id) }} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold">Remover</button>
+                            <button onClick={() => setAlvo({ id: r.id, quantidade_equipes: r.quantidade_equipes })} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold">Remover</button>
                           </>
                         )}
                       </td>
@@ -276,6 +280,18 @@ function GruposTabela({ competicaoId }: { competicaoId: number }) {
           </table>
         </div>
       )}
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover regra (Grupos)"
+        title={alvo ? `${alvo.quantidade_equipes} equipes` : ''}
+        description="A regra de composição de grupos para essa quantidade será apagada."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }
@@ -292,10 +308,12 @@ const CHAVES_VAZIO = {
 
 function ChavesTabela({ competicaoId }: { competicaoId: number }) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [adicionando, setAdicionando] = useState(false)
   const [novo, setNovo] = useState<Record<string, string>>(CHAVES_VAZIO)
   const [editando, setEditando] = useState<number | null>(null)
   const [edicao, setEdicao] = useState<Record<string, string>>({})
+  const [alvo, setAlvo] = useState<{ id: number; numero_inscrito: number } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['sistemas-disputa-chaves', competicaoId],
@@ -314,20 +332,20 @@ function ChavesTabela({ competicaoId }: { competicaoId: number }) {
       posicao_quarto_cabeca: Number(novo.posicao_quarto_cabeca),
     }),
     onSuccess: () => { invalidate(); setAdicionando(false); setNovo(CHAVES_VAZIO) },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao criar.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao criar.'),
   })
 
   const { mutate: salvar, isPending: salvandoEdit } = useMutation({
     mutationFn: ({ id, dados }: { id: number; dados: Partial<SistemaChaves> }) =>
       sistemasDisputaService.chaves.editar(id, dados),
     onSuccess: () => { invalidate(); setEditando(null) },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar.'),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: sistemasDisputaService.chaves.remover,
-    onSuccess: invalidate,
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => { invalidate(); toast.success('Regra removida.') },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   function iniciarEdicao(r: SistemaChaves) {
@@ -426,7 +444,7 @@ function ChavesTabela({ competicaoId }: { competicaoId: number }) {
                         ) : (
                           <>
                             <button onClick={() => iniciarEdicao(r)} className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs font-semibold mr-3">Editar</button>
-                            <button onClick={() => { if (confirm(`Remover regra para ${r.numero_inscrito} inscritos?`)) remover(r.id) }} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold">Remover</button>
+                            <button onClick={() => setAlvo({ id: r.id, numero_inscrito: r.numero_inscrito })} className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold">Remover</button>
                           </>
                         )}
                       </td>
@@ -438,6 +456,18 @@ function ChavesTabela({ competicaoId }: { competicaoId: number }) {
           </table>
         </div>
       )}
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover regra (Chaves)"
+        title={alvo ? `${alvo.numero_inscrito} inscritos` : ''}
+        description="A regra de posicionamento de cabeças-de-chave para essa quantidade será apagada."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }
