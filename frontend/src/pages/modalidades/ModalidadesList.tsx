@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { modalidadesService } from '../../services/modalidades'
 import type { Modalidade, TipoDisputa } from '../../types/modalidade'
 import { Plus, Trophy, ChevronDown } from '../../lib/icons'
@@ -41,8 +43,10 @@ const FILTROS: Array<{ id: FiltroId; label: string; icon: typeof Brackets }> = [
 export default function ModalidadesList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [filtro, setFiltro] = useState<FiltroId>('todos')
   const [recolhidas, setRecolhidas] = useState<Set<number>>(new Set())
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   function toggleCompeticao(id: number) {
     setRecolhidas(prev => {
@@ -58,10 +62,13 @@ export default function ModalidadesList() {
     queryFn: () => modalidadesService.listar(),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: modalidadesService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['modalidades'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['modalidades'] })
+      toast.success('Modalidade removida.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const countPorFiltro = useMemo(() => {
@@ -294,7 +301,7 @@ export default function ModalidadesList() {
                             Editar
                           </button>
                           <button
-                            onClick={() => { if (confirm(`Remover "${m.nome}"?`)) remover(m.id) }}
+                            onClick={() => setAlvo({ id: m.id, nome: m.nome })}
                             className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
                           >
                             Remover
@@ -311,6 +318,18 @@ export default function ModalidadesList() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover modalidade"
+        title={alvo?.nome ?? ''}
+        description="Inscrições e sorteios vinculados a esta modalidade serão perdidos."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

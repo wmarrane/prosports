@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useMutation } from '@tanstack/react-query'
+import { useToast } from '../../components/Toast'
 import { usersService } from '../../services/users'
 import type { User } from '../../types/user'
 import { X, Check, Key } from '../../lib/icons'
@@ -11,6 +12,7 @@ type Props = {
 }
 
 export default function ResetSenhaModal({ user, onClose }: Props) {
+  const toast = useToast()
   const [nova, setNova] = useState('')
   const [confirma, setConfirma] = useState('')
   const [erro, setErro] = useState('')
@@ -18,7 +20,7 @@ export default function ResetSenhaModal({ user, onClose }: Props) {
   const { mutate, isPending } = useMutation({
     mutationFn: () => usersService.resetarSenha(user.id, nova),
     onSuccess: () => {
-      alert(`Senha de ${user.nome} redefinida. O usuário foi deslogado.`)
+      toast.success(`Senha de ${user.nome} redefinida. O usuário foi deslogado.`)
       onClose()
     },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao redefinir.'),

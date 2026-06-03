@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { tiposModalidadeService } from '../../services/tipos-modalidade'
 import type { TipoModalidade, TipoDisputa } from '../../types/modalidade'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
@@ -31,16 +34,21 @@ const TIPO_DESC: Record<TipoDisputa, string> = {
 export default function TiposModalidadeList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['tipos-modalidade'],
     queryFn: tiposModalidadeService.listar,
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: tiposModalidadeService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tipos-modalidade'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tipos-modalidade'] })
+      toast.success('Tipo de modalidade removido.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   // Agrupa por tipo de disputa para mostrar mais visual
@@ -154,7 +162,7 @@ export default function TiposModalidadeList() {
                             Editar
                           </button>
                           <button
-                            onClick={() => { if (confirm(`Remover "${t.nome}"?`)) remover(t.id) }}
+                            onClick={() => setAlvo({ id: t.id, nome: t.nome })}
                             className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
                           >
                             Remover
@@ -169,6 +177,18 @@ export default function TiposModalidadeList() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover tipo de modalidade"
+        title={alvo?.nome ?? ''}
+        description="Modalidades que usam este tipo precisarão ser reatribuídas."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

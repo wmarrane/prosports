@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import ParticipantesAssociadosPanel from '../../components/ParticipantesAssociadosPanel'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { inspetoriasService } from '../../services/inspetorias'
 import type { Inspetoria } from '../../types/participante'
 import { Plus, ChevronDown } from '../../lib/icons'
@@ -11,18 +13,23 @@ import { ShieldCheck, Building2 } from 'lucide-react'
 export default function InspetoriasList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [selecionadaId, setSelecionadaId] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<Set<number | 'sem-delegacia'>>(new Set())
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['inspetorias'],
     queryFn: () => inspetoriasService.listar(),
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: inspetoriasService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['inspetorias'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['inspetorias'] })
+      toast.success('Inspetoria removida.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   type Grupo = { delegaciaId: number | 'sem-delegacia'; delegaciaNome: string; itens: Inspetoria[] }
@@ -157,7 +164,7 @@ export default function InspetoriasList() {
                               selected={selecionadaId === i.id}
                               onSelect={() => setSelecionadaId(i.id)}
                               onEdit={() => navigate(`/inspetorias/${i.id}/editar`)}
-                              onRemove={() => { if (confirm(`Remover "${i.nome}"?`)) remover(i.id) }}
+                              onRemove={() => setAlvo({ id: i.id, nome: i.nome })}
                             />
                           ))}
                         </div>
@@ -182,6 +189,18 @@ export default function InspetoriasList() {
           .il-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover inspetoria"
+        title={alvo?.nome ?? ''}
+        description="Participantes vinculados a esta inspetoria precisarão ser reatribuídos."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }

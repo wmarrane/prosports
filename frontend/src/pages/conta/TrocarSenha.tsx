@@ -3,12 +3,14 @@ import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
+import { useToast } from '../../components/Toast'
 import { useAuthStore } from '../../store/authStore'
 import { usersService } from '../../services/users'
 import { Check, X, Key } from '../../lib/icons'
 
 export default function TrocarSenha() {
   const navigate = useNavigate()
+  const toast = useToast()
   const { logout } = useAuthStore()
   const [atual, setAtual] = useState('')
   const [nova, setNova] = useState('')
@@ -18,7 +20,7 @@ export default function TrocarSenha() {
   const { mutate, isPending } = useMutation({
     mutationFn: () => usersService.alterarSenha(atual, nova),
     onSuccess: async () => {
-      alert('Senha alterada. Por segurança, faça login novamente.')
+      toast.success('Senha alterada. Por segurança, faça login novamente.')
       await logout()
       navigate('/login', { replace: true })
     },

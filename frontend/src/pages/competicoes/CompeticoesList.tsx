@@ -1,22 +1,30 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { competicoesService } from '../../services/competicoes'
 import { Trophy, Users, ChevR, Plus } from '../../lib/icons'
 
 export default function CompeticoesList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
+  const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['competicoes'],
     queryFn: competicoesService.listar,
   })
 
-  const { mutate: remover } = useMutation({
+  const { mutateAsync: remover } = useMutation({
     mutationFn: competicoesService.remover,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['competicoes'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['competicoes'] })
+      toast.success('Competição removida.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   return (
@@ -210,9 +218,7 @@ export default function CompeticoesList() {
                       Editar
                     </button>
                     <button
-                      onClick={() => {
-                        if (confirm(`Remover "${c.nome}"?`)) remover(c.id)
-                      }}
+                      onClick={() => setAlvo({ id: c.id, nome: c.nome })}
                       className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
                     >
                       Remover
@@ -231,6 +237,18 @@ export default function CompeticoesList() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={alvo !== null}
+        onClose={() => setAlvo(null)}
+        onConfirm={() => alvo && remover(alvo.id)}
+        eyebrow="Remover competição"
+        title={alvo?.nome ?? ''}
+        description="Essa ação não pode ser desfeita. Eventos vinculados a esta competição podem ser afetados."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
     </div>
   )
 }
