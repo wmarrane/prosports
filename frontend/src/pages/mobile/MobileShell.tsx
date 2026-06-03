@@ -23,11 +23,12 @@ export default function MobileShell({ evento, showBack, onBack, onRefresh, child
 
   return (
     <div style={{
-      minHeight: '100vh', background: 'var(--card-bg-2)',
+      position: 'fixed', inset: 0,
+      background: 'var(--card-bg-2)',
       display: 'flex', flexDirection: 'column',
     }}>
       <header style={{
-        position: 'sticky', top: 0, zIndex: 50,
+        flexShrink: 0, zIndex: 50,
         background: 'var(--grad-brand-deep)', color: '#fff',
         padding: '12px 16px',
         display: 'flex', alignItems: 'center', gap: 12,
@@ -66,8 +67,16 @@ export default function MobileShell({ evento, showBack, onBack, onRefresh, child
         </button>
       </header>
 
-      <main style={{ flex: 1, padding: 12, maxWidth: 720, margin: '0 auto', width: '100%' }}>
-        {children}
+      <main style={{
+        flex: 1, minHeight: 0,
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        padding: 12,
+        width: '100%',
+      }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', width: '100%' }}>
+          {children}
+        </div>
       </main>
     </div>
   )
