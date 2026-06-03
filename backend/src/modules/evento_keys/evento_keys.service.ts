@@ -28,6 +28,23 @@ export async function listarPorEvento(evento_id: number) {
 }
 
 export async function criar(input: { evento_id: number; email: string; criada_por: number }) {
+  // Após 24h da data/hora do evento, nenhuma nova chave pode ser gerada
+  // (acesso mobile encerrou). Vale tanto pra nova quanto pra reativação.
+  const evento = await prisma.evento.findUnique({
+    where: { id: input.evento_id },
+    select: { data_hora: true },
+  })
+  if (!evento) {
+    throw Object.assign(new Error('Evento não encontrado.'), { status: 404 })
+  }
+  const expiraEm = new Date(evento.data_hora.getTime() + 24 * 60 * 60 * 1000)
+  if (expiraEm < new Date()) {
+    throw Object.assign(
+      new Error('Evento já encerrado (mais de 24h da data/hora). Não é possível gerar acesso mobile.'),
+      { status: 403, code: 'event_expired' }
+    )
+  }
+
   // Se existe chave revogada pra esse email, reativa com token novo
   // (invalida link/QR antigos sem precisar apagar o registro histórico).
   const existing = await prisma.eventoKey.findUnique({
