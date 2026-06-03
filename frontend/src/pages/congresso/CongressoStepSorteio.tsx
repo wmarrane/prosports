@@ -438,7 +438,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         if (!grupo) return null
         return (
           <div
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 350, padding: 40 }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 350, padding: 40 }}
             onClick={() => setGrupoExpandido(null)}
           >
             <div

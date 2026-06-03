@@ -121,7 +121,10 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, a
       {editOpen && (
         <div
           style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            position: 'fixed', inset: 0,
+            background: 'rgba(0,0,0,0.92)',
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 300,
           }}
           onClick={() => setEditOpen(false)}
