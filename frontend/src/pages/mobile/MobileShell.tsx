@@ -35,7 +35,7 @@ export default function MobileShell({ evento, showBack, onBack, onRefresh, child
         boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
       }}>
         {showBack ? (
-          <button onClick={onBack} style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }}>
+          <button onClick={onBack} aria-label="Voltar" style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }}>
             <ArrowLeft size={22} />
           </button>
         ) : evento?.logo_url ? (
@@ -58,11 +58,11 @@ export default function MobileShell({ evento, showBack, onBack, onRefresh, child
           )}
         </div>
         {onRefresh && (
-          <button onClick={onRefresh} style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }} title="Atualizar">
+          <button onClick={onRefresh} aria-label="Atualizar" style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }} title="Atualizar">
             <RefreshCw size={20} />
           </button>
         )}
-        <button onClick={sair} style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }} title="Sair">
+        <button onClick={sair} aria-label="Sair" style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', padding: 4 }} title="Sair">
           <LogOut size={20} />
         </button>
       </header>
