@@ -146,8 +146,17 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
           className="flex items-center justify-between text-xs text-[var(--sb-text-dim)] hover:text-[var(--sb-text)] transition-colors px-2 py-1.5"
         >
           {!collapsed && (
-            <span>
-              v{APP_VERSION} <span style={{ opacity: 0.6 }}>({APP_COMMIT})</span>
+            <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, lineHeight: 1.35 }}>
+              <span>v{APP_VERSION}</span>
+              <span
+                style={{
+                  opacity: 0.6,
+                  fontSize: '0.85em',
+                  wordBreak: 'break-all',
+                }}
+              >
+                ({APP_COMMIT})
+              </span>
             </span>
           )}
           {temNovidade && (
