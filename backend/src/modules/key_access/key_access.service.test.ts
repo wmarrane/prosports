@@ -5,7 +5,7 @@ vi.mock('../../lib/prisma', () => ({
   default: {
     eventoKey: { findUnique: vi.fn(), update: vi.fn() },
     modalidade: { findMany: vi.fn(), findUnique: vi.fn() },
-    inscricao: { findMany: vi.fn() },
+    inscricao: { findMany: vi.fn(), groupBy: vi.fn() },
     campeaoAnterior: { findMany: vi.fn() },
     sorteio: { findUnique: vi.fn() },
   },
@@ -91,15 +91,34 @@ describe('key_access.service', () => {
     expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
   })
 
-  it('getModalidades lista do evento, ordenadas', async () => {
+  it('getModalidades lista do evento ordenadas com inscritos_count por modalidade', async () => {
     const evento = { id: 5, competicao_id: 10 } as any
-    mockPrisma.modalidade.findMany.mockResolvedValue([{ id: 1, nome: 'A' }])
-    await service.getModalidades(evento)
+    mockPrisma.modalidade.findMany.mockResolvedValue([
+      { id: 1, nome: 'A' },
+      { id: 2, nome: 'B' },
+      { id: 3, nome: 'C' },
+    ])
+    mockPrisma.inscricao.groupBy.mockResolvedValue([
+      { modalidade_id: 1, _count: { _all: 7 } },
+      { modalidade_id: 3, _count: { _all: 12 } },
+      // id 2 ausente -> 0 inscritos
+    ])
+    const r = await service.getModalidades(evento)
     expect(mockPrisma.modalidade.findMany).toHaveBeenCalledWith({
       where: { competicao_id: 10 },
       orderBy: { nome: 'asc' },
       include: { tipo_modalidade: { select: { tipo: true } } },
     })
+    expect(mockPrisma.inscricao.groupBy).toHaveBeenCalledWith({
+      by: ['modalidade_id'],
+      where: { evento_id: 5 },
+      _count: { _all: true },
+    })
+    expect(r).toEqual([
+      { id: 1, nome: 'A', inscritos_count: 7 },
+      { id: 2, nome: 'B', inscritos_count: 0 },
+      { id: 3, nome: 'C', inscritos_count: 12 },
+    ])
   })
 
   it('getModalidadeDetail 404 quando modalidade não é da competição do evento', async () => {

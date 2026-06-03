@@ -42,11 +42,24 @@ export async function login(input: { token: string; device_fp: string; device_la
 }
 
 export async function getModalidades(evento: Evento) {
-  return prisma.modalidade.findMany({
-    where: { competicao_id: evento.competicao_id },
-    orderBy: { nome: 'asc' },
-    include: { tipo_modalidade: { select: { tipo: true } } },
-  })
+  const [modalidades, counts] = await Promise.all([
+    prisma.modalidade.findMany({
+      where: { competicao_id: evento.competicao_id },
+      orderBy: { nome: 'asc' },
+      include: { tipo_modalidade: { select: { tipo: true } } },
+    }),
+    prisma.inscricao.groupBy({
+      by: ['modalidade_id'],
+      where: { evento_id: evento.id },
+      _count: { _all: true },
+    }),
+  ])
+
+  const countMap = new Map(counts.map((c) => [c.modalidade_id, c._count._all]))
+  return modalidades.map((m) => ({
+    ...m,
+    inscritos_count: countMap.get(m.id) ?? 0,
+  }))
 }
 
 export async function getModalidadeDetail(evento: Evento, modalidade_id: number) {
