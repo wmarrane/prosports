@@ -101,6 +101,19 @@ function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]
         x, y, isFinal: m.id === graph.final, isThirdPlace: false,
       }
     })
+
+    // Anti-overlap pass: garante separação vertical mínima entre matches
+    // da mesma rodada. O snap-BYE (CARD_HEIGHT/4) pode aproximar demais
+    // dois cards. Empurra cada match pra baixo se colidir com o anterior,
+    // mantendo a ordem natural (funil preservado).
+    const sorted = bracketMatches.map(bm => matchById[bm.id]).sort((a, b) => a.y - b.y)
+    const MIN_SEPARATION = CARD_HEIGHT + ROW_GAP
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = sorted[i - 1]
+      const cur = sorted[i]
+      const minY = prev.y + MIN_SEPARATION
+      if (cur.y < minY) cur.y = minY
+    }
   }
 
   // 3º lugar (se houver) — abaixo do bracket, alinhado com a final
