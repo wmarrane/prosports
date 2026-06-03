@@ -7,7 +7,7 @@ type ConfirmVariant = 'danger' | 'primary'
 type Props = {
   open: boolean
   onClose: () => void
-  onConfirm: () => void | Promise<void>
+  onConfirm: () => unknown | Promise<unknown>
   title: string
   description?: string
   eyebrow?: string
