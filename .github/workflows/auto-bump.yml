@@ -1,0 +1,104 @@
+name: Auto Version Bump
+
+# Após cada merge na develop, analisa os commits desde a última tag e
+# bumpa package.json + cria tag git conforme convenção:
+#   feat:        → minor (1.X.0)
+#   fix:         → patch (1.0.X)
+#   feat!: ou BREAKING CHANGE → major (X.0.0)
+#   chore/docs/etc → no-op
+#
+# O commit de bump traz "[skip ci]" pra evitar disparar este workflow
+# (ou deploy-develop) em loop. A versão nova aparece em prod quando você
+# promover develop → main; a dev VM continua com a versão antiga até o
+# próximo merge (lag aceitável pra um ambiente de testes).
+
+on:
+  push:
+    branches: [develop]
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout (full history + tags)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Determine bump type
+        id: bump
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            COMMITS=$(git log --format=%s%n%b)
+            echo "Sem tag anterior — analisando todo histórico"
+          else
+            COMMITS=$(git log ${LAST_TAG}..HEAD --format=%s%n%b)
+            echo "Commits desde $LAST_TAG:"
+            git log ${LAST_TAG}..HEAD --format='  %s'
+          fi
+
+          BUMP="none"
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            # BREAKING: tipo seguido de ! ou linha "BREAKING CHANGE"
+            if echo "$line" | grep -qE '^[a-z]+(\(.*\))?!:' || echo "$line" | grep -q "BREAKING CHANGE"; then
+              BUMP="major"
+              break
+            elif echo "$line" | grep -qE '^feat(\(.*\))?:'; then
+              [ "$BUMP" != "major" ] && BUMP="minor"
+            elif echo "$line" | grep -qE '^fix(\(.*\))?:'; then
+              [ "$BUMP" = "none" ] && BUMP="patch"
+            fi
+          done <<< "$COMMITS"
+
+          echo "bump=$BUMP" >> $GITHUB_OUTPUT
+          echo "Tipo de bump determinado: $BUMP"
+
+      - name: Skip if no bump
+        if: steps.bump.outputs.bump == 'none'
+        run: echo "Nenhum feat/fix nos commits — pulando bump."
+
+      - name: Compute new version
+        if: steps.bump.outputs.bump != 'none'
+        id: ver
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+          NEW=$(node -e "
+            const [maj, min, pat] = '$CURRENT'.split('.').map(Number);
+            const b = '${{ steps.bump.outputs.bump }}';
+            console.log(b === 'major' ? \`\${maj+1}.0.0\` : b === 'minor' ? \`\${maj}.\${min+1}.0\` : \`\${maj}.\${min}.\${pat+1}\`);
+          ")
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "new=$NEW" >> $GITHUB_OUTPUT
+          echo "Bumpando $CURRENT → $NEW (${{ steps.bump.outputs.bump }})"
+
+      - name: Bump package.json
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          node -e "
+            const fs = require('fs');
+            const p = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            p.version = '${{ steps.ver.outputs.new }}';
+            fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');
+          "
+
+      - name: Commit + tag + push
+        if: steps.bump.outputs.bump != 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore(release): bump ${{ steps.ver.outputs.current }} → ${{ steps.ver.outputs.new }} [skip ci]"
+          git tag "v${{ steps.ver.outputs.new }}"
+          git push origin develop --follow-tags
