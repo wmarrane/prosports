@@ -66,8 +66,29 @@ export default function AcessoMobileCard({ eventoId }: Props) {
   function linkDe(key: EventoKey): string {
     return `${window.location.origin}/e/${key.token}`
   }
-  function copiarLink(key: EventoKey) {
-    navigator.clipboard.writeText(linkDe(key))
+  async function copiarLink(key: EventoKey) {
+    const link = linkDe(key)
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(link)
+      } else {
+        // navigator.clipboard só funciona em secure context (HTTPS/localhost).
+        // Em HTTP (ex.: dev em rede interna), usa fallback execCommand.
+        const ta = document.createElement('textarea')
+        ta.value = link
+        ta.style.position = 'fixed'
+        ta.style.left = '-9999px'
+        ta.setAttribute('readonly', '')
+        document.body.appendChild(ta)
+        ta.select()
+        const ok = document.execCommand('copy')
+        document.body.removeChild(ta)
+        if (!ok) throw new Error('execCommand failed')
+      }
+      toast.success('Link copiado.')
+    } catch {
+      toast.error('Não foi possível copiar. Selecione o link no QR e copie manualmente.')
+    }
   }
 
   return (
@@ -165,23 +186,23 @@ export default function AcessoMobileCard({ eventoId }: Props) {
                 </div>
                 {!revogada && (
                   <div className="flex gap-1 flex-shrink-0">
-                    <button onClick={() => copiarLink(k)} title="Copiar link" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--t3)]">
+                    <button type="button" onClick={() => copiarLink(k)} title="Copiar link" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--t3)]">
                       <Copy size={14} />
                     </button>
-                    <button onClick={() => setQrAlvo(k)} title="QR code" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--t3)]">
+                    <button type="button" onClick={() => setQrAlvo(k)} title="QR code" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--t3)]">
                       <QrCode size={14} />
                     </button>
                     {ativada && (
-                      <button onClick={() => setConfirmAlvo({ acao: 'reset', key: k })} title="Reset device" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--brand-500)]">
+                      <button type="button" onClick={() => setConfirmAlvo({ acao: 'reset', key: k })} title="Reset device" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--brand-500)]">
                         <RotateCcw size={14} />
                       </button>
                     )}
                     {ativada ? (
-                      <button onClick={() => setConfirmAlvo({ acao: 'revogar', key: k })} title="Revogar" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--danger)]">
+                      <button type="button" onClick={() => setConfirmAlvo({ acao: 'revogar', key: k })} title="Revogar" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--danger)]">
                         <Ban size={14} />
                       </button>
                     ) : (
-                      <button onClick={() => setConfirmAlvo({ acao: 'apagar', key: k })} title="Apagar" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--danger)]">
+                      <button type="button" onClick={() => setConfirmAlvo({ acao: 'apagar', key: k })} title="Apagar" className="p-1.5 rounded hover:bg-[var(--card-bg)] text-[var(--danger)]">
                         <Trash2 size={14} />
                       </button>
                     )}
@@ -214,10 +235,10 @@ export default function AcessoMobileCard({ eventoId }: Props) {
               fontSize: 12, fontFamily: 'var(--font-mono)', wordBreak: 'break-all',
             }}>{linkDe(qrAlvo)}</div>
             <div className="flex justify-center gap-2 mt-4">
-              <button onClick={() => copiarLink(qrAlvo)} className="btn btn-ghost btn-sm">
+              <button type="button" onClick={() => copiarLink(qrAlvo)} className="btn btn-ghost btn-sm">
                 <Copy size={14} /> Copiar link
               </button>
-              <button onClick={() => setQrAlvo(null)} className="btn btn-primary btn-sm">
+              <button type="button" onClick={() => setQrAlvo(null)} className="btn btn-primary btn-sm">
                 <Check size={14} /> Fechar
               </button>
             </div>
@@ -253,10 +274,11 @@ export default function AcessoMobileCard({ eventoId }: Props) {
               <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>{cfg.t}</h3>
               <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>{cfg.d}</p>
               <div className="flex justify-center gap-3">
-                <button onClick={() => setConfirmAlvo(null)} className="btn btn-ghost">
+                <button type="button" onClick={() => setConfirmAlvo(null)} className="btn btn-ghost">
                   <X size={16} /> Cancelar
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     if (acao === 'revogar') revogar(key.id)
                     else if (acao === 'reset') resetDevice(key.id)
