@@ -66,8 +66,29 @@ export default function AcessoMobileCard({ eventoId }: Props) {
   function linkDe(key: EventoKey): string {
     return `${window.location.origin}/e/${key.token}`
   }
-  function copiarLink(key: EventoKey) {
-    navigator.clipboard.writeText(linkDe(key))
+  async function copiarLink(key: EventoKey) {
+    const link = linkDe(key)
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(link)
+      } else {
+        // navigator.clipboard só funciona em secure context (HTTPS/localhost).
+        // Em HTTP (ex.: dev em rede interna), usa fallback execCommand.
+        const ta = document.createElement('textarea')
+        ta.value = link
+        ta.style.position = 'fixed'
+        ta.style.left = '-9999px'
+        ta.setAttribute('readonly', '')
+        document.body.appendChild(ta)
+        ta.select()
+        const ok = document.execCommand('copy')
+        document.body.removeChild(ta)
+        if (!ok) throw new Error('execCommand failed')
+      }
+      toast.success('Link copiado.')
+    } catch {
+      toast.error('Não foi possível copiar. Selecione o link no QR e copie manualmente.')
+    }
   }
 
   return (
