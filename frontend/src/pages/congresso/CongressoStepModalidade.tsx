@@ -5,7 +5,7 @@ import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
 import { inscricoesService } from '../../services/inscricoes'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
-import { Check, ArrowRight } from 'lucide-react'
+import { Check, ArrowRight, FileText } from 'lucide-react'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 
 type Props = {
