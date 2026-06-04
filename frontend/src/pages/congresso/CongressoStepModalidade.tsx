@@ -5,25 +5,12 @@ import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
 import { inscricoesService } from '../../services/inscricoes'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
-import { Brackets, Group, ListOrdered, FileText, Check, ArrowRight } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
+import ModalityBadge from '../../components/modalities/ModalityBadge'
 
 type Props = {
   eventoId: number
   onSelect: (modalidadeId: number) => void
-}
-
-const TIPO_ICON: Record<string, typeof Brackets> = {
-  chaves: Brackets,
-  grupos: Group,
-  ordem_entrada: ListOrdered,
-  especifico: FileText,
-}
-
-const TIPO_GRAD: Record<string, string> = {
-  chaves: 'linear-gradient(135deg, #1061d8 0%, #4f8ef7 100%)',
-  grupos: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)',
-  ordem_entrada: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
-  especifico: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
 }
 
 const TIPO_DESC: Record<string, string> = {
@@ -107,18 +94,13 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
         <div className="cw-md-list">
           {modalidades.map(m => {
             const sorteada = sorteadasIds.has(m.id)
-            const tipo = m.tipo_modalidade?.tipo ?? 'especifico'
-            const Icon = TIPO_ICON[tipo] ?? FileText
-            const grad = TIPO_GRAD[tipo]
             return (
               <button
                 key={m.id}
                 className={`cw-md-item ${selectedId === m.id ? 'sel' : ''}`}
                 onClick={() => setSelectedId(m.id)}
               >
-                <span className="cw-md-ic" style={{ background: grad }}>
-                  <Icon size={20} />
-                </span>
+                <ModalityBadge name={m.nome} size={40} showGender />
                 <span className="cw-md-name">{m.nome}</span>
                 {sorteada && (
                   <span className="cw-md-done"><Check size={15} /></span>
@@ -133,19 +115,12 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
           {selectedMod ? (
             (() => {
               const tipo = selectedMod.tipo_modalidade?.tipo ?? 'especifico'
-              const Icon = TIPO_ICON[tipo] ?? FileText
-              const grad = TIPO_GRAD[tipo]
               const sorteada = sorteadasIds.has(selectedMod.id)
               const tipoLabel = selectedMod.tipo_modalidade ? TIPO_DISPUTA_LABEL[selectedMod.tipo_modalidade.tipo] : '—'
               return (
                 <div className="cw-md-card">
                   <div className="cw-md-card-top">
-                    <span
-                      className="cw-card-ic cw-big-ic"
-                      style={{ background: grad, width: 84, height: 84, borderRadius: 22, margin: 0 }}
-                    >
-                      <Icon size={40} />
-                    </span>
+                    <ModalityBadge name={selectedMod.nome} size={84} showGender />
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12 }}>
                       {sorteada && (
                         <span className="cw-badge b-success">
