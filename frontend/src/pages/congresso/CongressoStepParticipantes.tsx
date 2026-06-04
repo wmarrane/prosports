@@ -4,6 +4,7 @@ import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
 import { competicoesService } from '../../services/competicoes'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
+import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Plus, X, ArrowRight } from '../../lib/icons'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
@@ -76,11 +77,16 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   return (
     <>
       <div className="cw-parts-head">
-        <div>
-          <h1 className="cw-h1" style={{ marginBottom: 6 }}>Participantes confirmados</h1>
-          <p className="cw-sub" style={{ margin: 0 }}>
-            {modalidade?.nome} · <b style={{ color: FG }}>{inscricoes.length}</b> {inscricoes.length === 1 ? 'confirmado' : 'confirmados'}
-          </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, minWidth: 0 }}>
+          {modalidade && (
+            <ModalityBadge name={modalidade.nome} size={64} showGender />
+          )}
+          <div style={{ minWidth: 0 }}>
+            <h1 className="cw-h1" style={{ marginBottom: 6 }}>Participantes confirmados</h1>
+            <p className="cw-sub" style={{ margin: 0 }}>
+              {modalidade?.nome} · <b style={{ color: FG }}>{inscricoes.length}</b> {inscricoes.length === 1 ? 'confirmado' : 'confirmados'}
+            </p>
+          </div>
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
           <button
