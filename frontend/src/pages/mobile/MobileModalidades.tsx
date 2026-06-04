@@ -2,17 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { keyAccessService } from '../../services/key-access'
 import MobileShell from './MobileShell'
-import { Brackets, Group, ListOrdered, FileText, Check, Users } from 'lucide-react'
-
-const TIPO_ICON: Record<string, any> = {
-  chaves: Brackets, grupos: Group, ordem_entrada: ListOrdered, especifico: FileText,
-}
-const TIPO_GRAD: Record<string, string> = {
-  chaves: 'linear-gradient(135deg,#1061d8,#4f8ef7)',
-  grupos: 'linear-gradient(135deg,#0d9488,#14b88a)',
-  ordem_entrada: 'linear-gradient(135deg,#d97706,#f59e0b)',
-  especifico: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
-}
+import ModalityBadge from '../../components/modalities/ModalityBadge'
+import { Check, Users } from 'lucide-react'
 
 export default function MobileModalidades() {
   const navigate = useNavigate()
@@ -46,8 +37,6 @@ export default function MobileModalidades() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {modalidades.map((m: any) => {
             const tipo = m.tipo_modalidade?.tipo ?? 'especifico'
-            const Icon = TIPO_ICON[tipo] ?? FileText
-            const grad = TIPO_GRAD[tipo]
             return (
               <button
                 key={m.id}
@@ -61,12 +50,7 @@ export default function MobileModalidades() {
                   textAlign: 'left', cursor: 'pointer', width: '100%',
                 }}
               >
-                <span style={{
-                  width: 40, height: 40, borderRadius: 10, background: grad,
-                  color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
-                }}>
-                  <Icon size={20} />
-                </span>
+                <ModalityBadge name={m.nome} size={40} showGender />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--t1)' }}>{m.nome}</div>
                   <div style={{ fontSize: 11, color: 'var(--t3)', marginTop: 2 }}>

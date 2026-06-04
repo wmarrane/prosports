@@ -7,6 +7,7 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
+import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import type { Participante } from '../../types/participante'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -68,12 +69,15 @@ export default function MobileModalidade() {
         <p className="text-sm text-[var(--t3)]">Carregando...</p>
       ) : (
         <>
-          <div style={{ marginBottom: 12 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--t1)', margin: 0 }}>
-              {data.modalidade.nome}
-            </h2>
-            <div style={{ fontSize: 12, color: 'var(--t3)', marginTop: 2 }}>
-              {data.modalidade.sigla}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, minWidth: 0 }}>
+            <ModalityBadge name={data.modalidade.nome} size={48} showGender />
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--t1)', margin: 0 }}>
+                {data.modalidade.nome}
+              </h2>
+              <div style={{ fontSize: 12, color: 'var(--t3)', marginTop: 2 }}>
+                {data.modalidade.sigla}
+              </div>
             </div>
           </div>
 
