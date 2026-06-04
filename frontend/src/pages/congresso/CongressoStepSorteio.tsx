@@ -12,6 +12,7 @@ import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeoesPanel from './CampeoesPanel'
+import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Shuffle, Crown, X, Report } from '../../lib/icons'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
@@ -253,10 +254,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
-        <div>
-          <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
-          <div style={{ fontSize: 13, color: DIM, marginTop: 4 }}>
-            seed: <span style={{ fontFamily: 'var(--font-mono)' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, minWidth: 0 }}>
+          {modalidade && (
+            <ModalityBadge name={modalidade.nome} size={64} showGender />
+          )}
+          <div style={{ minWidth: 0 }}>
+            <h2 style={{ fontSize: 'clamp(22px, 2.6vw, 32px)', fontWeight: 800, letterSpacing: '-0.02em', color: FG }}>{modalidade?.nome}</h2>
+            <div style={{ fontSize: 13, color: DIM, marginTop: 4 }}>
+              seed: <span style={{ fontFamily: 'var(--font-mono)' }}>{sorteio.seed}</span> · gerado em {formatDateBR(sorteio.gerado_em)}
+            </div>
           </div>
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
