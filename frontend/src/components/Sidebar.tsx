@@ -23,7 +23,13 @@ const NAV: NavItem[] = [
   { id: 'eventos', label: 'Eventos', icon: Evento, path: '/eventos' },
   { id: 'participantes', label: 'Participantes', icon: Cadastro, path: '/participantes' },
   { cat: 'Gestão' },
-  { id: 'relatorio', label: 'Relatório', icon: Report, path: '/relatorio' },
+  {
+    id: 'relatorios', label: 'Relatórios', icon: Report, expandable: true,
+    children: [
+      { id: 'relatorio-painel', label: 'Visão geral', path: '/relatorio' },
+      { id: 'relatorio-congresso', label: 'Congresso técnico', path: '/relatorios/congresso' },
+    ],
+  },
   {
     id: 'admin', label: 'Administração', icon: Admin, expandable: true,
     children: [
