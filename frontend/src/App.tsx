@@ -25,6 +25,7 @@ import EventosList from './pages/eventos/EventosList'
 import EventoForm from './pages/eventos/EventoForm'
 import EventoInscricoes from './pages/eventos/EventoInscricoes'
 import Relatorio from './pages/Relatorio'
+import RelatorioCongresso from './pages/RelatorioCongresso'
 import Admin from './pages/Admin'
 import ModoCongresso from './pages/congresso/ModoCongresso'
 import UsuariosList from './pages/usuarios/UsuariosList'
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="/eventos/:id/editar"       element={<EventoForm />} />
             <Route path="/eventos/:id/inscricoes"   element={<EventoInscricoes />} />
             <Route path="/relatorio" element={<Relatorio />} />
+            <Route path="/relatorios/congresso" element={<RelatorioCongresso />} />
             <Route path="/admin"     element={<Admin />} />
 
             <Route path="/inspetorias" element={<InspetoriasList />} />
