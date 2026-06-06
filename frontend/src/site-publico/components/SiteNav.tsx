@@ -1,4 +1,4 @@
-const LOGIN_URL = 'https://newprosports.web.app/login'
+import { LOGIN_URL } from '../constants'
 
 export default function SiteNav({ active }: { active: 'inicio' | 'eventos' | 'sobre' }) {
   return (
