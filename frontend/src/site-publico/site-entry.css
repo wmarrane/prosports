@@ -1,0 +1,33 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   site-entry.css — Tailwind v4 entry para o site público estático (SSG).
+   Compõe três fontes no bundle final (dist-site/site-bundle.css):
+     1. Tailwind v4 (base/preflight + utilitários gerados sob demanda)
+     2. As variáveis de design (tokens.css + prosports-theme.css via theme-vars.css)
+     3. As classes "bespoke" do site (site.css)
+
+   NOTA sobre import duplo do Tailwind: prosports-theme.css contém o seu
+   próprio `@import "tailwindcss"`. Para evitar gerar preflight/utilitários
+   duplicados, NÃO importamos prosports-theme.css aqui — usamos theme-vars.css,
+   uma cópia enxuta contendo apenas as declarações de variáveis (:root +
+   [data-theme="dark"]) extraídas de prosports-theme.css, sem o import do
+   Tailwind. tokens.css não importa Tailwind, então pode entrar direto. */
+
+/* Web fonts primeiro: regras @import devem preceder todo o resto.
+   (tokens.css também declara este @import, mas, vindo depois do Tailwind,
+   ele seria descartado pelo otimizador — por isso o repetimos aqui no topo.) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+/* variáveis de design (base R2P + camada semântica ProSports, só vars) */
+@import "../styles/tokens.css";
+@import "./theme-vars.css";
+
+/* utilitários Tailwind: escaneia onde as classes realmente aparecem */
+@source "../site-publico";
+@source "../components/sorteio-result";
+@source "../components/CampeaoBadge.tsx";
+@source "../components/AnfitriaoBadge.tsx";
+
+/* classes bespoke do site */
+@import "./site.css";

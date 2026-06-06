@@ -79,6 +79,17 @@ export default function EventosList() {
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
+  const { mutate: publicarSite, isPending: publicandoSite } = useMutation({
+    mutationFn: (id: number) => eventosService.publicar(id),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); alert('Publicação disparada. O site público será atualizado em ~1-2 min.') },
+    onError: (e: any) => alert(e?.response?.data?.message ?? 'Erro ao publicar.'),
+  })
+  const { mutate: despublicarSite, isPending: despublicandoSite } = useMutation({
+    mutationFn: (id: number) => eventosService.despublicar(id),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); alert('Despublicação disparada.') },
+    onError: (e: any) => alert(e?.response?.data?.message ?? 'Erro ao despublicar.'),
+  })
+
   const lista = useMemo(
     () => (filtro === 'todos' ? eventos : eventos.filter(e => eventoTipos(e).includes(filtro))),
     [eventos, filtro]
@@ -369,6 +380,19 @@ export default function EventosList() {
                     >
                       Inscrições
                     </button>
+                    {ev.site_publicado_em ? (
+                      <button
+                        onClick={e => { e.stopPropagation(); despublicarSite(ev.id) }}
+                        disabled={despublicandoSite}
+                        className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
+                      >Despublicar</button>
+                    ) : (
+                      <button
+                        onClick={e => { e.stopPropagation(); publicarSite(ev.id) }}
+                        disabled={publicandoSite}
+                        className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold"
+                      >Publicar no site</button>
+                    )}
                     <button
                       onClick={e => handleRemove(e, ev)}
                       className="text-xs text-[var(--danger)] hover:text-[var(--danger-700)] font-semibold"
