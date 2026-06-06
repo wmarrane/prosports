@@ -140,15 +140,24 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const consideraAnfitriao = (competicao as any)?.considerar_anfitriao ?? false
   const anfitriaoInscrito = anfitriaoPid != null && inscritosSet.has(anfitriaoPid)
 
+  // Cabeças "reais": vindas das regras (campeão do ano anterior +
+  // anfitrião). Cabeças que sao 1o de grupo por puro sorteio (quando
+  // ha mais grupos do que campeoes) NAO entram aqui -- viram visual
+  // de participante normal.
   const cabecasPids = useMemo(() => {
     if (!sorteio) return new Set<number>()
+    const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
     if (sorteio.tipo === 'grupos') {
       const grupos: any[] = (sorteio.resultado as any).grupos ?? []
-      return new Set<number>(grupos.map((g: any) => g.participantes?.[0]).filter((p: any) => p != null))
+      const qtd = grupos.length
+      const cabecasFinais = applyAnfitriaoRuleFront(
+        campeoesInscritosPids, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, 'grupos', qtd
+      )
+      // Limita ao numero de grupos (cabecas que efetivamente foram
+      // semeados em A, B, C, ... pela regra).
+      return new Set<number>(cabecasFinais.slice(0, qtd))
     }
     if (sorteio.tipo === 'chaves') {
-      // Lista os top-4 com regra anfitriao (replica do backend).
-      const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
       const cabecasFinais = applyAnfitriaoRuleFront(
         campeoesInscritosPids, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, 'chaves'
       )
@@ -199,12 +208,14 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     if (!sorteio) return items
     if (sorteio.tipo === 'grupos') {
       const grupos: any[] = (sorteio.resultado as any).grupos ?? []
+      // Chip "Grupo X" apenas para quem foi cabeça por regra
+      // (oriundos do sorteio puro NAO recebem chip).
       for (const it of items) {
+        if (!cabecasPids.has(it.participante_id)) continue
         const g = grupos.find((g: any) => g.participantes?.[0] === it.participante_id)
         if (g) it.slotLabel = `Grupo ${g.letra}`
       }
     } else if (sorteio.tipo === 'chaves') {
-      // Ordem dos chaves segue a regra anfitrião (mesma do cabecasPids).
       const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
       const cabecasFinais = applyAnfitriaoRuleFront(
         campeoesInscritosPids, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, 'chaves'
@@ -215,7 +226,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       }
     }
     return items
-  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById])
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, cabecasPids])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
