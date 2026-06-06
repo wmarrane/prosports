@@ -17,34 +17,7 @@ import { Shuffle, Crown, X, Report } from '../../lib/icons'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
-
-// Espelho da regra do backend (applyAnfitriaoRule).
-// Define quem sao os cabecas finais para chaves apos a regra anfitriao.
-function applyAnfitriaoRuleFront(
-  campeoesPidsInscritos: number[],
-  anfitriaoPid: number | null,
-  anfitriaoInscrito: boolean,
-  consideraAnfitriao: boolean,
-  tipo: 'chaves' | 'grupos',
-  quantidadeGrupos?: number
-): number[] {
-  if (!consideraAnfitriao || anfitriaoPid === null || !anfitriaoInscrito) {
-    return campeoesPidsInscritos
-  }
-  let targetIdx: number
-  if (tipo === 'chaves') {
-    targetIdx = 3
-  } else {
-    if (quantidadeGrupos === undefined || quantidadeGrupos < 3) return campeoesPidsInscritos
-    targetIdx = quantidadeGrupos === 3 ? 2 : 3
-  }
-  const currentIdx = campeoesPidsInscritos.indexOf(anfitriaoPid)
-  if (currentIdx >= 0 && currentIdx < targetIdx) return campeoesPidsInscritos
-  const sem = campeoesPidsInscritos.filter((p) => p !== anfitriaoPid)
-  const out = [...sem]
-  out.splice(targetIdx, 0, anfitriaoPid)
-  return out
-}
+import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
 
 type Props = {
   eventoId: number
@@ -340,7 +313,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         </div>
 
         {mostraCampeoes && (
-          <CampeoesPanel eventoId={eventoId} modalidadeId={modalidadeId} subtituloLine={subtituloLine} anfitriaoPid={anfitriaoPid} />
+          <CampeoesPanel
+            eventoId={eventoId}
+            modalidadeId={modalidadeId}
+            subtituloLine={subtituloLine}
+            anfitriaoPid={anfitriaoPid}
+            competicaoId={competicaoId}
+            tipo={tipo as 'grupos' | 'chaves'}
+            consideraAnfitriao={consideraAnfitriao}
+          />
         )}
 
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 24, minHeight: 200 }}>
