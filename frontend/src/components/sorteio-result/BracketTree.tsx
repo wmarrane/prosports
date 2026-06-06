@@ -12,6 +12,7 @@ type Props = {
   anfitriaoPid?: number | null
   large?: boolean
   subtituloLine?: (p: Participante) => string | null
+  onMatchClick?: (matchId: string) => void
 }
 
 type MatchLayout = {
@@ -186,7 +187,7 @@ function renderSlot(
   return null
 }
 
-export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine }: Props) {
+export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
   // Compute connectors: for each match input that references V:Jx or L:Jx,
@@ -252,6 +253,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
           <div
             key={m.id}
             className={`bg-[var(--card-bg-2)] rounded-lg ${m.isFinal ? 'border-amber-500' : ''}`}
+            onClick={onMatchClick ? () => onMatchClick(m.id) : undefined}
+            title={onMatchClick ? 'Clique para expandir' : undefined}
             style={{
               position: 'absolute',
               left: m.x,
@@ -264,6 +267,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               flexDirection: 'column',
               justifyContent: 'center',
               border: m.isFinal ? '2px solid #f59e0b' : '1.5px solid var(--t2)',
+              cursor: onMatchClick ? 'pointer' : 'default',
             }}
           >
             {(m.isFinal || m.isThirdPlace) && (

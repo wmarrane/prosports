@@ -11,6 +11,7 @@ type Props = {
   campeoesByParticipanteId?: Map<number, number>
   anfitriaoPid?: number | null
   subtituloLine?: (p: Participante) => string | null
+  onMatchClick?: (matchId: string) => void
 }
 
 type Match = {
@@ -130,7 +131,7 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
   )
 }
 
-export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, subtituloLine }: Props) {
+export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, subtituloLine, onMatchClick }: Props) {
   // v1.19.0: render field via grafo de matches (preferido)
   if (resultado.matchesGraph && resultado.matchesGraph.matches.length > 0) {
     return (
@@ -142,6 +143,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
         anfitriaoPid={anfitriaoPid}
         large={large}
         subtituloLine={subtituloLine}
+        onMatchClick={onMatchClick}
       />
     )
   }
