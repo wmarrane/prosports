@@ -3,7 +3,7 @@ import { putSnapshotLocal, deleteSnapshotLocal, buildLocal } from './local-store
 
 function localDir(): string | undefined {
   const d = process.env.SITE_SNAPSHOT_LOCAL_DIR
-  return d && d.trim() !== '' ? d : undefined
+  return d && d.trim() !== '' ? d.trim() : undefined
 }
 
 export async function putSnapshot(eventoId: number, snapshot: unknown): Promise<void> {
