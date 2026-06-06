@@ -1,7 +1,8 @@
 # Estágio 1: build TypeScript
-# node:22-alpine atual quebra com "npm error Exit handler never called"
-# durante npm ci no runner. Mantemos 20-alpine LTS estável.
-FROM node:20-alpine AS builder
+# node:24-alpine (npm 11) — node 20 entrou em maintenance/EOL (abr/2026).
+# Obs.: node:22-alpine antigo quebrava com "npm error Exit handler never
+# called" no npm ci (bug do npm já resolvido nas versões mais novas).
+FROM node:24-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -10,7 +11,7 @@ RUN if grep -q "^model " prisma/schema.prisma 2>/dev/null; then npx prisma gener
 RUN npm run build
 
 # Estágio 2: runtime mínimo
-FROM node:20-alpine
+FROM node:24-alpine
 # Prisma schema-engine precisa de openssl em runtime no Alpine.
 RUN apk add --no-cache openssl
 WORKDIR /app

@@ -1,8 +1,8 @@
 # Estágio 1: build Vite
-# node:22-alpine atual quebra com "npm error Exit handler never called"
-# durante npm ci no runner (bug do npm com network/dns nessa imagem).
-# Mantemos 20-alpine LTS estável.
-FROM node:20-alpine AS builder
+# node:24-alpine (npm 11) — node 20 entrou em maintenance/EOL (abr/2026).
+# Obs.: node:22-alpine antigo quebrava com "npm error Exit handler never
+# called" no npm ci (bug do npm já resolvido nas versões mais novas).
+FROM node:24-alpine AS builder
 ARG APP_COMMIT=unknown
 ENV APP_COMMIT=$APP_COMMIT
 WORKDIR /app
