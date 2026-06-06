@@ -58,3 +58,18 @@ it('despublicar remove snapshot, dispara e limpa', async () => {
   expect(github.dispatchBuild).toHaveBeenCalledTimes(1)
   expect(mp.evento.update).toHaveBeenCalledWith({ where: { id: 10 }, data: { site_publicado_em: null } })
 })
+
+it('publicar compõe subtitulo a partir de subtitulo_campos', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7,
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: ['municipio'] },
+    municipio: { nome: 'São Manuel' },
+  })
+  mp.inscricao.findMany.mockResolvedValue([
+    { modalidade_id: 1, participante: { id: 100, nome: 'Tigres', subtitulo: null, municipio: { nome: 'Bauru', uf: 'SP' } } },
+  ])
+  await service.publicar(10)
+  const [, snap] = (github.putSnapshot as any).mock.calls[0]
+  expect(snap.modalidades[0].participantes[0].subtitulo).toBe('Bauru/SP')
+})

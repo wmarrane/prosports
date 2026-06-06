@@ -6,7 +6,7 @@ import type {
 type EventoRow = {
   id: number; nome: string; local: string; organizador: string | null
   data_hora: Date; anfitriao_id: number | null
-  competicao: { nome: string; considerar_anfitriao: boolean }
+  competicao: { nome: string; considerar_anfitriao: boolean; subtitulo_campos?: string[] }
   municipio: { nome: string }
 }
 type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string } }

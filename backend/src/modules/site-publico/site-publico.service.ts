@@ -1,7 +1,7 @@
 import prisma from '../../lib/prisma'
 import { montaSnapshot } from './snapshot'
 import { putSnapshot, deleteSnapshot, dispatchBuild } from './github'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
 
 export async function publicar(eventoId: number): Promise<void> {
   const evento = await prisma.evento.findUnique({
@@ -17,7 +17,7 @@ export async function publicar(eventoId: number): Promise<void> {
 
   const modalidades = await prisma.modalidade.findMany({
     where: { competicao_id: evento.competicao_id },
-    select: { id: true, nome: true, sigla: true, tipo_modalidade: { select: { tipo: true } } },
+    select: { id: true, nome: true, tipo_modalidade: { select: { tipo: true } } },
     orderBy: { nome: 'asc' },
   })
 
@@ -50,10 +50,10 @@ export async function publicar(eventoId: number): Promise<void> {
   const sorteiosPorModalidade = new Map<number, any>()
   for (const s of sorteios) sorteiosPorModalidade.set(s.modalidade_id, s)
 
-  const campos = (evento.competicao.subtitulo_campos as any[]) ?? []
+  const campos = (evento.competicao.subtitulo_campos as CampoSubtitulo[]) ?? []
   const snapshot = montaSnapshot({
-    evento: evento as any,
-    modalidades: modalidades as any,
+    evento,
+    modalidades,
     inscricoesPorModalidade,
     campeoesPorModalidade,
     sorteiosPorModalidade,
@@ -62,6 +62,9 @@ export async function publicar(eventoId: number): Promise<void> {
 
   await putSnapshot(eventoId, snapshot)
   await dispatchBuild()
+  // Trailing write: marca a flag no DB só depois do commit + dispatch no GitHub.
+  // Se este update falhar, o site já está publicado e um retry é idempotente
+  // (re-commita o snapshot idêntico), apenas reescrevendo a mesma data.
   await prisma.evento.update({ where: { id: eventoId }, data: { site_publicado_em: new Date() } })
 }
 
