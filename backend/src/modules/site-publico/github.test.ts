@@ -40,7 +40,7 @@ it('putSnapshot envia sha quando arquivo ja existe', async () => {
 
 it('dispatchBuild faz POST em /dispatches com event_type', async () => {
   let url = '', body: any
-  globalThis.fetch = vi.fn(async (u: any, o: any) => { url = String(u); body = JSON.parse(o.body); return new Response('', { status: 204 }) }) as any
+  globalThis.fetch = vi.fn(async (u: any, o: any) => { url = String(u); body = JSON.parse(o.body); return new Response(null, { status: 204 }) }) as any
   await dispatchBuild()
   expect(url).toContain('/dispatches')
   expect(body.event_type).toBe('publicar-site')
