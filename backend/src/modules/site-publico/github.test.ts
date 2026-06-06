@@ -7,7 +7,13 @@ beforeEach(() => {
   process.env.GITHUB_REPO = 'owner/repo'
   process.env.GITHUB_SNAPSHOT_BRANCH = 'develop'
 })
-afterEach(() => { globalThis.fetch = realFetch; vi.restoreAllMocks() })
+afterEach(() => {
+  globalThis.fetch = realFetch
+  vi.restoreAllMocks()
+  delete process.env.GITHUB_PAT
+  delete process.env.GITHUB_REPO
+  delete process.env.GITHUB_SNAPSHOT_BRANCH
+})
 
 it('putSnapshot cria arquivo novo (sem sha) com conteudo base64', async () => {
   const calls: any[] = []
@@ -39,9 +45,38 @@ it('putSnapshot envia sha quando arquivo ja existe', async () => {
 })
 
 it('dispatchBuild faz POST em /dispatches com event_type', async () => {
-  let url = '', body: any
-  globalThis.fetch = vi.fn(async (u: any, o: any) => { url = String(u); body = JSON.parse(o.body); return new Response(null, { status: 204 }) }) as any
+  let url = '', body: any, opts: any
+  globalThis.fetch = vi.fn(async (u: any, o: any) => { url = String(u); opts = o; body = JSON.parse(o.body); return new Response(null, { status: 204 }) }) as any
   await dispatchBuild()
   expect(url).toContain('/dispatches')
   expect(body.event_type).toBe('publicar-site')
+  expect(opts.headers.Authorization).toBe('Bearer tok')
+})
+
+it('deleteSnapshot nao faz DELETE quando arquivo nao existe', async () => {
+  const spy = vi.fn(async (_url: any, _opts: any) => new Response(null, { status: 404 }))
+  globalThis.fetch = spy as any
+  await deleteSnapshot(10)
+  expect(spy).toHaveBeenCalledTimes(1)
+  expect(spy.mock.calls[0][1].method).toBe('GET')
+})
+
+it('deleteSnapshot envia DELETE com sha quando arquivo existe', async () => {
+  const spy = vi.fn(async (_url: any, opts: any) => {
+    if (opts.method === 'GET') return new Response(JSON.stringify({ sha: 'oldsha' }), { status: 200 })
+    return new Response('', { status: 200 })
+  })
+  globalThis.fetch = spy as any
+  await deleteSnapshot(10)
+  const del = spy.mock.calls.find((c: any) => c[1].method === 'DELETE')!
+  expect(del).toBeTruthy()
+  expect(String(del[0])).toContain('/contents/frontend/public-site-snapshots/evento-10.json')
+  const body = JSON.parse(del[1].body)
+  expect(body.sha).toBe('oldsha')
+  expect(body.branch).toBe('develop')
+})
+
+it('dispatchBuild rejeita com status 500 quando config ausente', async () => {
+  delete process.env.GITHUB_PAT
+  await expect(dispatchBuild()).rejects.toMatchObject({ status: 500 })
 })
