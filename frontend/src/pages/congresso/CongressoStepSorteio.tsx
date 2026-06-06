@@ -14,6 +14,7 @@ import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeoesPanel from './CampeoesPanel'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Shuffle, Crown, X, Report } from '../../lib/icons'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
@@ -36,6 +37,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const [animating, setAnimating] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
   const [grupoExpandido, setGrupoExpandido] = useState<string | null>(null)
+  const [matchExpandido, setMatchExpandido] = useState<string | null>(null)
 
   const { data: modalidades = [] } = useQuery({
     queryKey: ['modalidades', competicaoId],
@@ -358,7 +360,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           />
         )}
         {sorteio.tipo === 'chaves' && (
-          <SorteioChaves resultado={sorteio.resultado} participantesById={participantesById} large campeoesByParticipanteId={campeoesByParticipanteId} anfitriaoPid={anfitriaoPid} subtituloLine={subtituloLine} />
+          <SorteioChaves
+            resultado={sorteio.resultado}
+            participantesById={participantesById}
+            large
+            campeoesByParticipanteId={campeoesByParticipanteId}
+            anfitriaoPid={anfitriaoPid}
+            subtituloLine={subtituloLine}
+            onMatchClick={(matchId) => setMatchExpandido(matchId)}
+          />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
           <SorteioOrdem resultado={sorteio.resultado} participantesById={participantesById} large anfitriaoPid={anfitriaoPid} subtituloLine={subtituloLine} />
@@ -440,79 +450,328 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
       {/* Modal de grupo expandido (apenas grupos) */}
       {grupoExpandido !== null && sorteio?.tipo === 'grupos' && (() => {
-        const grupo = (sorteio.resultado as any).grupos?.find((g: any) => g.letra === grupoExpandido)
-        if (!grupo) return null
+        const grupos: any[] = (sorteio.resultado as any).grupos ?? []
+        const idx = grupos.findIndex((g: any) => g.letra === grupoExpandido)
+        if (idx === -1) return null
+        const grupo = grupos[idx]
+        const goPrev = idx > 0 ? () => setGrupoExpandido(grupos[idx - 1].letra) : null
+        const goNext = idx < grupos.length - 1 ? () => setGrupoExpandido(grupos[idx + 1].letra) : null
         return (
-          <div
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 350, padding: 40 }}
-            onClick={() => setGrupoExpandido(null)}
-          >
-            <div
-              style={{
-                background: 'var(--cw-card)',
-                border: '1.5px solid var(--t2)',
-                borderRadius: 'var(--radius-3xl)',
-                padding: 'clamp(24px, 4vw, 56px)',
-                maxWidth: 900,
-                width: '100%',
-                maxHeight: '90vh',
-                overflowY: 'auto',
-                boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
-              }}
-              onClick={e => e.stopPropagation()}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
-                <div>
-                  <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 4 }}>
-                    {modalidade?.nome}
-                  </div>
-                  <h2 style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--warn)', lineHeight: 1 }}>
-                    Grupo {grupo.letra}
-                  </h2>
-                </div>
-                <button
-                  onClick={() => setGrupoExpandido(null)}
-                  className="cw-iconbtn"
-                  title="Fechar"
-                ><X size={22} /></button>
-              </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {grupo.participantes.map((pid: number, i: number) => {
-                  const p = participantesById.get(pid)
-                  const cp = campeoesByParticipanteId?.get(pid)
-                  return (
-                    <li
-                      key={pid}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 16,
-                        padding: '16px 20px',
-                        background: 'var(--cw-soft)',
-                        border: '1px solid var(--t3)',
-                        borderRadius: 'var(--radius-xl)',
-                        fontSize: 'clamp(20px, 2.2vw, 28px)',
-                      }}
-                    >
-                      <span style={{ fontFamily: 'var(--font-mono)', color: DIM, fontSize: '0.7em', minWidth: 32 }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      {cp && <CampeaoBadge posicao={cp} large />}
-                      <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
-                        <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>
-                          {p ? p.nome : '—'}
-                        </span>
-                        {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.55em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
-                      </div>
-                      {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          </div>
+          <ExpandedGrupoModal
+            modalidadeNome={modalidade?.nome ?? ''}
+            grupo={grupo}
+            indice={idx}
+            total={grupos.length}
+            participantesById={participantesById}
+            campeoesByParticipanteId={campeoesByParticipanteId}
+            anfitriaoPid={anfitriaoPid ?? null}
+            subtituloLine={subtituloLine}
+            onClose={() => setGrupoExpandido(null)}
+            onPrev={goPrev}
+            onNext={goNext}
+          />
         )
       })()}
+
+      {matchExpandido !== null && sorteio?.tipo === 'chaves' && (() => {
+        const graph = (sorteio.resultado as any).matchesGraph
+        if (!graph) return null
+        const current = graph.matches.find((m: any) => m.id === matchExpandido)
+        if (!current) return null
+        // Proximo match: aquele cuja referencia (top ou bottom) eh "V:<currentId>"
+        const next = graph.matches.find(
+          (m: any) => m.top === `V:${current.id}` || m.bottom === `V:${current.id}`
+        )
+        return (
+          <ExpandedChavesMatchModal
+            modalidadeNome={modalidade?.nome ?? ''}
+            current={current}
+            next={next ?? null}
+            slots={(sorteio.resultado as any).slots ?? []}
+            participantesById={participantesById}
+            campeoesByParticipanteId={campeoesByParticipanteId}
+            anfitriaoPid={anfitriaoPid ?? null}
+            subtituloLine={subtituloLine}
+            isFinal={current.id === graph.final}
+            isThirdPlace={current.id === graph.thirdPlace}
+            onClose={() => setMatchExpandido(null)}
+          />
+        )
+      })()}
+    </div>
+  )
+}
+
+// ── Modal: grupo expandido com carrousel (prev/next) ─────────────────
+
+type ExpandedGrupoModalProps = {
+  modalidadeNome: string
+  grupo: { letra: string; participantes: number[] }
+  indice: number
+  total: number
+  participantesById: Map<number, Participante>
+  campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid: number | null
+  subtituloLine: (p: Participante) => string | null
+  onClose: () => void
+  onPrev: (() => void) | null
+  onNext: (() => void) | null
+}
+
+function ExpandedGrupoModal({
+  modalidadeNome,
+  grupo,
+  indice,
+  total,
+  participantesById,
+  campeoesByParticipanteId,
+  anfitriaoPid,
+  subtituloLine,
+  onClose,
+  onPrev,
+  onNext,
+}: ExpandedGrupoModalProps) {
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+      else if (e.key === 'ArrowLeft' && onPrev) onPrev()
+      else if (e.key === 'ArrowRight' && onNext) onNext()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [onClose, onPrev, onNext])
+
+  return (
+    <div
+      style={{
+        position: 'fixed', inset: 0,
+        background: 'rgba(0,0,0,0.92)',
+        backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        zIndex: 350, padding: 40,
+      }}
+    >
+      {onPrev && (
+        <button
+          type="button"
+          onClick={onPrev}
+          className="cw-iconbtn"
+          title="Grupo anterior (←)"
+          style={{ position: 'absolute', left: 24, top: '50%', transform: 'translateY(-50%)', width: 56, height: 56 }}
+        ><ChevronLeft size={32} /></button>
+      )}
+      <div
+        style={{
+          background: 'var(--cw-card)',
+          border: '1.5px solid var(--t2)',
+          borderRadius: 'var(--radius-3xl)',
+          padding: 'clamp(24px, 4vw, 56px)',
+          maxWidth: 900,
+          width: '100%',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
+          <div>
+            <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 4 }}>
+              {modalidadeNome} · {indice + 1} de {total}
+            </div>
+            <h2 style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--warn)', lineHeight: 1 }}>
+              Grupo {grupo.letra}
+            </h2>
+          </div>
+          <button type="button" onClick={onClose} className="cw-iconbtn" title="Fechar (Esc)">
+            <X size={22} />
+          </button>
+        </div>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {grupo.participantes.map((pid: number, i: number) => {
+            const p = participantesById.get(pid)
+            const cp = campeoesByParticipanteId?.get(pid)
+            return (
+              <li
+                key={pid}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 16,
+                  padding: '16px 20px',
+                  background: 'var(--cw-soft)',
+                  border: '1px solid var(--t3)',
+                  borderRadius: 'var(--radius-xl)',
+                  fontSize: 'clamp(20px, 2.2vw, 28px)',
+                }}
+              >
+                <span style={{ fontFamily: 'var(--font-mono)', color: DIM, fontSize: '0.7em', minWidth: 32 }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {cp && <CampeaoBadge posicao={cp} large />}
+                <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
+                  <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>{p ? p.nome : '—'}</span>
+                  {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.55em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
+                </div>
+                {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+      {onNext && (
+        <button
+          type="button"
+          onClick={onNext}
+          className="cw-iconbtn"
+          title="Próximo grupo (→)"
+          style={{ position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)', width: 56, height: 56 }}
+        ><ChevronRight size={32} /></button>
+      )}
+    </div>
+  )
+}
+
+// ── Modal: jogo expandido (chaves) + proxima rodada ────────────────
+
+type ExpandedChavesMatchModalProps = {
+  modalidadeNome: string
+  current: { id: string; round: number; top: string; bottom: string }
+  next: { id: string; round: number; top: string; bottom: string } | null
+  slots: (number | null)[]
+  participantesById: Map<number, Participante>
+  campeoesByParticipanteId?: Map<number, number>
+  anfitriaoPid: number | null
+  subtituloLine: (p: Participante) => string | null
+  isFinal: boolean
+  isThirdPlace: boolean
+  onClose: () => void
+}
+
+function ExpandedChavesMatchModal({
+  modalidadeNome,
+  current,
+  next,
+  slots,
+  participantesById,
+  campeoesByParticipanteId,
+  anfitriaoPid,
+  subtituloLine,
+  isFinal,
+  isThirdPlace,
+  onClose,
+}: ExpandedChavesMatchModalProps) {
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [onClose])
+
+  function resolveLabel(ref: string): { pid: number | null; label?: string } {
+    if (ref.startsWith('P')) {
+      const pos = parseInt(ref.slice(1), 10)
+      const pid = slots[pos - 1] ?? null
+      return { pid }
+    }
+    if (ref.startsWith('V:')) return { pid: null, label: `Vencedor ${ref.slice(2).toUpperCase()}` }
+    if (ref.startsWith('L:')) return { pid: null, label: `Perdedor ${ref.slice(2).toUpperCase()}` }
+    return { pid: null, label: ref }
+  }
+
+  function renderSlot(ref: string) {
+    const { pid, label } = resolveLabel(ref)
+    if (pid != null) {
+      const p = participantesById.get(pid)
+      const cp = campeoesByParticipanteId?.get(pid)
+      return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          {cp && <CampeaoBadge posicao={cp} large />}
+          <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
+            <span style={{ color: FG, fontWeight: 700, lineHeight: 1.15, fontSize: 'clamp(20px, 2.2vw, 28px)' }}>
+              {p ? p.nome : '—'}
+            </span>
+            {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.7em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
+          </div>
+          {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
+        </div>
+      )
+    }
+    return (
+      <span style={{ color: DIM, fontStyle: 'italic', fontSize: 'clamp(18px, 2vw, 24px)' }}>{label}</span>
+    )
+  }
+
+  function MatchCard({ matchId, top, bottom, eyebrow }: { matchId: string; top: string; bottom: string; eyebrow: string }) {
+    return (
+      <div
+        style={{
+          background: 'var(--cw-soft)',
+          border: '1.5px solid var(--t3)',
+          borderRadius: 'var(--radius-xl)',
+          padding: '20px 24px',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>
+          <span style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700 }}>
+            {eyebrow}
+          </span>
+          <span style={{ fontSize: 12, color: DIM, fontFamily: 'var(--font-mono)' }}>{matchId.toUpperCase()}</span>
+        </div>
+        <div style={{ padding: '12px 0' }}>{renderSlot(top)}</div>
+        <div style={{ borderTop: '1px dashed var(--t3)', margin: '4px 0' }} />
+        <div style={{ padding: '12px 0' }}>{renderSlot(bottom)}</div>
+      </div>
+    )
+  }
+
+  const eyebrowAtual = isFinal ? '🏆 Final' : isThirdPlace ? '🥉 3º lugar' : `Rodada ${current.round}`
+
+  return (
+    <div
+      style={{
+        position: 'fixed', inset: 0,
+        background: 'rgba(0,0,0,0.92)',
+        backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        zIndex: 350, padding: 40,
+      }}
+    >
+      <div
+        style={{
+          background: 'var(--cw-card)',
+          border: '1.5px solid var(--t2)',
+          borderRadius: 'var(--radius-3xl)',
+          padding: 'clamp(24px, 4vw, 48px)',
+          maxWidth: 720,
+          width: '100%',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 24 }}>
+          <div style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700 }}>
+            {modalidadeNome}
+          </div>
+          <button type="button" onClick={onClose} className="cw-iconbtn" title="Fechar (Esc)">
+            <X size={22} />
+          </button>
+        </div>
+
+        <MatchCard matchId={current.id} top={current.top} bottom={current.bottom} eyebrow={eyebrowAtual} />
+
+        {next ? (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 0', color: DIM }}>
+              <div style={{ width: 2, height: 24, background: 'var(--t3)' }} />
+            </div>
+            <MatchCard matchId={next.id} top={next.top} bottom={next.bottom} eyebrow={`Próxima rodada · Rodada ${next.round}`} />
+          </>
+        ) : (
+          <div style={{ marginTop: 16, padding: 12, textAlign: 'center', fontSize: 13, color: DIM, fontStyle: 'italic' }}>
+            Sem próxima rodada (jogo final).
+          </div>
+        )}
+      </div>
     </div>
   )
 }
