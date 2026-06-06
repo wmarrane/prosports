@@ -9,14 +9,14 @@ vi.mock('../../lib/prisma', () => ({
     sorteio: { findMany: vi.fn() },
   },
 }))
-vi.mock('./github', () => ({
+vi.mock('./snapshot-store', () => ({
   putSnapshot: vi.fn(async () => {}),
   deleteSnapshot: vi.fn(async () => {}),
   dispatchBuild: vi.fn(async () => {}),
 }))
 
 import prisma from '../../lib/prisma'
-import * as github from './github'
+import * as store from './snapshot-store'
 import * as service from './site-publico.service'
 
 const mp = prisma as any
@@ -37,11 +37,11 @@ beforeEach(() => {
 
 it('publicar monta snapshot, commita, dispara e marca publicado', async () => {
   await service.publicar(10)
-  expect(github.putSnapshot).toHaveBeenCalledTimes(1)
-  const [eid, snap] = (github.putSnapshot as any).mock.calls[0]
+  expect(store.putSnapshot).toHaveBeenCalledTimes(1)
+  const [eid, snap] = (store.putSnapshot as any).mock.calls[0]
   expect(eid).toBe(10)
   expect(snap.modalidades[0].status).toBe('sorteado')
-  expect(github.dispatchBuild).toHaveBeenCalledTimes(1)
+  expect(store.dispatchBuild).toHaveBeenCalledTimes(1)
   expect(mp.evento.update).toHaveBeenCalledWith(expect.objectContaining({
     where: { id: 10 }, data: expect.objectContaining({ site_publicado_em: expect.any(Date) }),
   }))
@@ -54,8 +54,8 @@ it('publicar 404 se evento inexistente', async () => {
 
 it('despublicar remove snapshot, dispara e limpa', async () => {
   await service.despublicar(10)
-  expect(github.deleteSnapshot).toHaveBeenCalledWith(10)
-  expect(github.dispatchBuild).toHaveBeenCalledTimes(1)
+  expect(store.deleteSnapshot).toHaveBeenCalledWith(10)
+  expect(store.dispatchBuild).toHaveBeenCalledTimes(1)
   expect(mp.evento.update).toHaveBeenCalledWith({ where: { id: 10 }, data: { site_publicado_em: null } })
 })
 
@@ -70,6 +70,6 @@ it('publicar compõe subtitulo a partir de subtitulo_campos', async () => {
     { modalidade_id: 1, participante: { id: 100, nome: 'Tigres', subtitulo: null, municipio: { nome: 'Bauru', uf: 'SP' } } },
   ])
   await service.publicar(10)
-  const [, snap] = (github.putSnapshot as any).mock.calls[0]
+  const [, snap] = (store.putSnapshot as any).mock.calls[0]
   expect(snap.modalidades[0].participantes[0].subtitulo).toBe('Bauru/SP')
 })

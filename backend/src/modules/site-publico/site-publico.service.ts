@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma'
 import { montaSnapshot } from './snapshot'
-import { putSnapshot, deleteSnapshot, dispatchBuild } from './github'
+import { putSnapshot, deleteSnapshot, dispatchBuild } from './snapshot-store'
 import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
 
 export async function publicar(eventoId: number): Promise<void> {
