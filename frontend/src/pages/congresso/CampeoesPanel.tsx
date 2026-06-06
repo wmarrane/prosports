@@ -1,17 +1,23 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import { inscricoesService } from '../../services/inscricoes'
+import { sistemasDisputaService } from '../../services/sistemas-disputa'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, X } from '../../lib/icons'
+import { applyAnfitriaoRuleFront, grupoLetra } from '../../lib/anfitriao-rule'
+import type { Participante } from '../../types/participante'
 
 type Props = {
   eventoId: number
   modalidadeId: number
   subtituloLine?: (p: any) => string | null
   anfitriaoPid?: number | null
+  competicaoId?: number
+  tipo?: 'grupos' | 'chaves'
+  consideraAnfitriao?: boolean
 }
 
 const FG = 'var(--cw-fg)'
@@ -19,7 +25,15 @@ const DIM = 'var(--cw-dim)'
 
 const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
-export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, anfitriaoPid }: Props) {
+export default function CampeoesPanel({
+  eventoId,
+  modalidadeId,
+  subtituloLine,
+  anfitriaoPid,
+  competicaoId,
+  tipo,
+  consideraAnfitriao = false,
+}: Props) {
   const queryClient = useQueryClient()
   const [editOpen, setEditOpen] = useState(false)
 
@@ -33,8 +47,93 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, a
     queryFn: () => inscricoesService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
   })
 
-  const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
-  const ordenados = [...campeoes].sort((a, b) => a.posicao - b.posicao)
+  // Regras de grupos da competição (para descobrir quantidade_grupos
+  // que será usada quando o sorteio for executado, baseado no nº de inscritos).
+  const { data: regrasGrupos = [] } = useQuery({
+    queryKey: ['sistemas-disputa-grupos', competicaoId],
+    queryFn: () => sistemasDisputaService.grupos.listar(competicaoId!),
+    enabled: !!competicaoId && tipo === 'grupos',
+  })
+
+  const inscritosSet = useMemo(() => new Set(inscricoes.map(i => i.participante_id)), [inscricoes])
+  const ordenados = useMemo(() => [...campeoes].sort((a, b) => a.posicao - b.posicao), [campeoes])
+
+  // Mapeia participante_id -> Participante (apenas inscritos têm dado completo).
+  const participantesById = useMemo(() => {
+    const m = new Map<number, Participante>()
+    for (const i of inscricoes) m.set(i.participante_id, i.participante)
+    return m
+  }, [inscricoes])
+
+  // Quantidade de grupos prevista pra esse nº de inscritos (se aplicável).
+  const quantidadeGrupos = useMemo(() => {
+    if (tipo !== 'grupos') return undefined
+    const r = regrasGrupos.find(r => r.quantidade_equipes === inscricoes.length)
+    return r?.quantidade_grupos
+  }, [tipo, regrasGrupos, inscricoes.length])
+
+  const anfitriaoInscrito = anfitriaoPid != null && inscritosSet.has(anfitriaoPid)
+
+  // Cabeças finais previstas (campeões inscritos + regra do anfitrião).
+  // Limitadas a N (= qtd grupos ou 4 cabeças no chaves).
+  const cabecasFinais = useMemo(() => {
+    if (!tipo) return [] as number[]
+    const campeoesInscritosPids = ordenados.filter(c => inscritosSet.has(c.participante_id)).map(c => c.participante_id)
+    if (tipo === 'grupos') {
+      if (quantidadeGrupos === undefined) return []
+      return applyAnfitriaoRuleFront(
+        campeoesInscritosPids, anfitriaoPid ?? null, anfitriaoInscrito, consideraAnfitriao, 'grupos', quantidadeGrupos,
+      ).slice(0, quantidadeGrupos)
+    }
+    return applyAnfitriaoRuleFront(
+      campeoesInscritosPids, anfitriaoPid ?? null, anfitriaoInscrito, consideraAnfitriao, 'chaves',
+    ).slice(0, 4)
+  }, [tipo, ordenados, inscritosSet, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, quantidadeGrupos])
+
+  const cabecasPidSet = useMemo(() => new Set(cabecasFinais), [cabecasFinais])
+
+  // Lista de itens pra renderizar no painel: todos campeões + anfitrião
+  // sintético (quando aplica e ele não é campeão).
+  type Item = {
+    key: string
+    participante_id: number
+    participante: Participante | undefined
+    posicao: number | null
+    inscrito: boolean
+    slotLabel: string | null
+    campeaoId?: number
+  }
+  const itens = useMemo<Item[]>(() => {
+    const items: Item[] = ordenados.map(c => ({
+      key: `c-${c.id}`,
+      participante_id: c.participante_id,
+      participante: c.participante as Participante,
+      posicao: c.posicao,
+      inscrito: inscritosSet.has(c.participante_id),
+      slotLabel: null,
+      campeaoId: c.id,
+    }))
+    if (
+      consideraAnfitriao && anfitriaoInscrito && anfitriaoPid != null &&
+      !ordenados.some(c => c.participante_id === anfitriaoPid)
+    ) {
+      items.push({
+        key: `anf-${anfitriaoPid}`,
+        participante_id: anfitriaoPid,
+        participante: participantesById.get(anfitriaoPid),
+        posicao: null,
+        inscrito: true,
+        slotLabel: null,
+      })
+    }
+    // Anexa slotLabel para quem vai virar cabeça pela regra
+    for (const it of items) {
+      const idx = cabecasFinais.indexOf(it.participante_id)
+      if (idx === -1) continue
+      it.slotLabel = tipo === 'grupos' ? `Grupo ${grupoLetra(idx)}` : `${idx + 1}ª cabeça`
+    }
+    return items
+  }, [ordenados, inscritosSet, consideraAnfitriao, anfitriaoInscrito, anfitriaoPid, participantesById, cabecasFinais, tipo])
 
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
     mutationFn: (data: { participante_id: number; posicao: number }) =>
@@ -79,39 +178,73 @@ export default function CampeoesPanel({ eventoId, modalidadeId, subtituloLine, a
 
       {isLoading ? (
         <p style={{ color: DIM, fontSize: 14 }}>Carregando…</p>
-      ) : ordenados.length === 0 ? (
+      ) : itens.length === 0 ? (
         <p style={{ color: DIM, fontSize: 14, fontStyle: 'italic' }}>
           Nenhum campeão cadastrado. As cabeças não serão semeadas no sorteio.
         </p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-          {ordenados.map(c => {
-            const inscrito = inscritosSet.has(c.participante_id)
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: 14, alignItems: 'flex-end' }}>
+          {itens.map(it => {
+            const ehCabeca = cabecasPidSet.has(it.participante_id)
             return (
               <li
-                key={c.id}
+                key={it.key}
                 style={{
                   display: 'inline-flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
-                  gap: 8,
-                  padding: '8px 12px',
-                  background: 'var(--cw-soft)',
-                  border: '1px solid var(--cw-card-bd)',
-                  borderRadius: 'var(--radius-pill)',
+                  gap: 4,
+                  opacity: it.inscrito ? 1 : 0.55,
                 }}
+                title={it.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
-                <CampeaoBadge posicao={c.posicao} />
-                <span style={{ color: FG, fontWeight: 600, fontSize: 14 }}>{c.participante.nome}</span>
-                {(() => {
-                  const l = subtituloLine?.(c.participante)
-                  return l ? <span style={{ color: DIM, fontSize: 12 }}>— {l}</span> : null
-                })()}
-                {inscrito ? (
-                  <Check size={14} style={{ color: 'var(--success)' }} />
-                ) : (
-                  <span style={{ color: DIM, fontSize: 11, fontStyle: 'italic' }}>(não inscrito)</span>
+                {it.slotLabel && (
+                  <span style={{
+                    fontSize: 11,
+                    fontWeight: 800,
+                    letterSpacing: '0.06em',
+                    color: 'var(--warn)',
+                    textTransform: 'uppercase',
+                    padding: '2px 8px',
+                    background: 'var(--warn-soft)',
+                    border: '1px solid var(--warn)',
+                    borderRadius: 'var(--radius-pill)',
+                    lineHeight: 1.2,
+                  }}>{it.slotLabel}</span>
                 )}
-                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '8px 12px',
+                    background: ehCabeca ? 'var(--warn-soft)' : 'var(--cw-soft)',
+                    border: ehCabeca ? '2px solid var(--warn)' : '1px solid var(--cw-card-bd)',
+                    borderRadius: 'var(--radius-pill)',
+                    boxShadow: ehCabeca ? '0 0 0 3px rgba(245, 158, 11, 0.18)' : 'none',
+                  }}
+                >
+                  {it.posicao != null && <CampeaoBadge posicao={it.posicao} />}
+                  <span
+                    style={{
+                      color: ehCabeca ? 'var(--warn)' : FG,
+                      fontWeight: ehCabeca ? 800 : 600,
+                      fontSize: 14,
+                      textDecoration: it.inscrito ? 'none' : 'line-through',
+                      textDecorationThickness: '2px',
+                    }}
+                  >{it.participante?.nome ?? '—'}</span>
+                  {(() => {
+                    const l = it.participante ? subtituloLine?.(it.participante) : null
+                    return l ? <span style={{ color: DIM, fontSize: 12 }}>— {l}</span> : null
+                  })()}
+                  {it.inscrito ? (
+                    <Check size={14} style={{ color: 'var(--success)' }} />
+                  ) : (
+                    <span style={{ color: DIM, fontSize: 11, fontStyle: 'italic' }}>(não inscrito)</span>
+                  )}
+                  {anfitriaoPid != null && it.participante_id === anfitriaoPid && <AnfitriaoBadge />}
+                </div>
               </li>
             )
           })}

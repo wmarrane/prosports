@@ -32,26 +32,33 @@ export function applyAnfitriaoRule(params: {
     return campeoesPidsInscritos
   }
 
-  const idx = campeoesPidsInscritos.indexOf(anfitriaoPid)
-  if (idx >= 0 && idx <= 3) {
-    // Já é top-4 — regra não se aplica, mantém posição
+  // Posição alvo (0-indexed) do anfitrião:
+  //   - 3 grupos:  idx 2 (grupo C)
+  //   - 4+ grupos: idx 3 (grupo D)
+  //   - chaves:    idx 3 (4ª cabeça)
+  //   - <3 grupos: regra não se aplica
+  let targetIdx: number
+  if (tipo === 'chaves') {
+    targetIdx = 3
+  } else {
+    if (quantidadeGrupos === undefined || quantidadeGrupos < 3) {
+      return campeoesPidsInscritos
+    }
+    targetIdx = quantidadeGrupos === 3 ? 2 : 3
+  }
+
+  // Posições ANTES do alvo: regra do campeão do ano anterior prevalece
+  // (anfitrião mantém posição se for um campeão melhor colocado que o alvo).
+  // Caso contrário (anfitrião já está no alvo ou depois, ou não é campeão):
+  // força ele pra posição alvo, deslocando quem estava lá.
+  const currentIdx = campeoesPidsInscritos.indexOf(anfitriaoPid)
+  if (currentIdx >= 0 && currentIdx < targetIdx) {
     return campeoesPidsInscritos
   }
 
-  let targetPos1Indexed: number
-  if (tipo === 'chaves') {
-    targetPos1Indexed = 4
-  } else {
-    if (quantidadeGrupos === undefined || quantidadeGrupos < 3) {
-      return campeoesPidsInscritos  // < 3 grupos: regra não se aplica
-    }
-    targetPos1Indexed = quantidadeGrupos === 3 ? 3 : 4
-  }
-
-  // Remove anfitrião de qualquer posição atual e insere no target
-  const sem = campeoesPidsInscritos.filter(p => p !== anfitriaoPid)
+  const sem = campeoesPidsInscritos.filter((p) => p !== anfitriaoPid)
   const out = [...sem]
-  out.splice(targetPos1Indexed - 1, 0, anfitriaoPid)
+  out.splice(targetIdx, 0, anfitriaoPid)
   return out
 }
 

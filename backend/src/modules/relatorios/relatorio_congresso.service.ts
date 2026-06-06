@@ -87,6 +87,16 @@ function clearRange(sheet: ExcelJS.Worksheet, row1: number, col1: number, row2: 
   }
 }
 
+// Limpa header (rows 2-3 cols E em diante) que tinha formulas cross-sheet
+// quebradas (=Especifico!D2 -> #REF! apos remocao do template original).
+// Tambem zera valores estaticos repetidos no merge.
+function limparHeaderCidadeSede(sheet: ExcelJS.Worksheet, cidadeSede: string) {
+  // Limpa E2 ate P2 e E3 ate P3 (cidade sede stays only in D2)
+  clearRange(sheet, 2, 5, 3, 16)
+  // Reescreve cidade sede em D2 como string estatica
+  sheet.getCell('D2').value = cidadeSede
+}
+
 type ModalidadeCompleta = Awaited<ReturnType<typeof loadEventoComModalidades>>['modalidades'][number]
 
 async function loadEventoComModalidades(evento_id: number) {
@@ -239,11 +249,14 @@ function fillEspecifico(
   inscritos: any[],
   _sorteio: any
 ) {
-  // B5 / B6 = nome modalidade
+  // Template tinha esquema "Atletismo dividido em 7 sub-grupos A-G".
+  // Como simplificamos para "1 modalidade flat", limpamos os sub-headers
+  // (A-G + COUNTA por coluna) e o nome distribuido em B5:H5/B6:H6.
+  clearRange(sheet, 5, 2, 8, 8) // B5:H8 (nomes repetidos + A..G + COUNTA)
+  // Mantem so o nome em B5 (cell ancora do merge)
   setStaticValue(sheet, 'B5', mod.nome.toUpperCase())
-  setStaticValue(sheet, 'B6', mod.nome.toUpperCase())
 
-  // Lista todos os inscritos na col B a partir de B9
+  // Lista inscritos col B a partir de B9
   for (let r = 9; r <= 80; r++) {
     for (let c = 2; c <= 8; c++) sheet.getRow(r).getCell(c).value = null
   }
@@ -286,8 +299,9 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
     const newName = uniqueSheetName(wb, sigla)
     const sheet = cloneSheet(wb, tplSheet, newName)
 
-    // Header comum: cidade sede em D2 (estatico, substitui formula cross-sheet)
-    setStaticValue(sheet, 'D2', cidadeSede)
+    // Header comum: substitui formulas cross-sheet (=Especifico!D2) e
+    // valores estaticos espalhados pelos merges por strings limpas.
+    limparHeaderCidadeSede(sheet, cidadeSede)
 
     const inscritos = inscritosByMod.get(mod.id) ?? []
     const sorteio = sorteiosByMod.get(mod.id)
