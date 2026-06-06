@@ -309,18 +309,36 @@ describe('applyAnfitriaoRule', () => {
     expect(out).toEqual([10, 20])
   })
 
-  it('grupos: anfitriao ja na 1a posicao -> mantem', () => {
+  it('grupos == 4: anfitriao ja na 1a posicao -> move pra 4a (anfitriao tem prioridade)', () => {
     const out = service.applyAnfitriaoRule({
       ...base, campeoesPidsInscritos: [99, 10, 20, 30], anfitriaoPid: 99, quantidadeGrupos: 4,
     })
-    expect(out).toEqual([99, 10, 20, 30])
+    // 99 era cabeca 1; com a regra, vai pra pos 4 (grupo D) deslocando os demais
+    expect(out).toEqual([10, 20, 30, 99])
   })
 
-  it('grupos: anfitriao ja na 4a posicao -> mantem', () => {
+  it('grupos == 4: anfitriao ja na 4a posicao -> permanece na 4a', () => {
     const out = service.applyAnfitriaoRule({
       ...base, campeoesPidsInscritos: [10, 20, 30, 99], anfitriaoPid: 99, quantidadeGrupos: 4,
     })
     expect(out).toEqual([10, 20, 30, 99])
+  })
+
+  it('grupos == 3: anfitriao campeao na 1a -> move pra 3a (grupo C)', () => {
+    // Cenario do bug: Basquete 3x3 Feminino Livre em Campinas. Anfitriao era
+    // tambem um dos campeoes anteriores e estava sendo seedado em A em vez de C.
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [99, 10, 20], anfitriaoPid: 99, quantidadeGrupos: 3,
+    })
+    expect(out).toEqual([10, 20, 99])
+  })
+
+  it('grupos == 3: anfitriao nao campeao -> entra na 3a (grupo C)', () => {
+    // Cenario do bug do usuario: anfitriao inscrito mas nao era campeao.
+    const out = service.applyAnfitriaoRule({
+      ...base, campeoesPidsInscritos: [10, 20], anfitriaoPid: 99, quantidadeGrupos: 3,
+    })
+    expect(out).toEqual([10, 20, 99])
   })
 
   it('grupos com < 3 grupos: regra nao se aplica', () => {
@@ -374,11 +392,20 @@ describe('applyAnfitriaoRule', () => {
     expect(out).toEqual([10, 20, 30, 99])
   })
 
-  it('chaves: anfitriao na top-4 -> mantem', () => {
+  it('chaves: anfitriao na 2a posicao -> move pra 4a cabeca (anfitriao tem prioridade)', () => {
     const out = service.applyAnfitriaoRule({
       ...base, tipo: 'chaves',
       campeoesPidsInscritos: [10, 99, 30, 40], anfitriaoPid: 99,
     })
-    expect(out).toEqual([10, 99, 30, 40])
+    // 99 era 2a cabeca; com a regra vira 4a, deslocando 30 e 40 pra cima
+    expect(out).toEqual([10, 30, 40, 99])
+  })
+
+  it('chaves: anfitriao ja na 4a posicao -> permanece na 4a', () => {
+    const out = service.applyAnfitriaoRule({
+      ...base, tipo: 'chaves',
+      campeoesPidsInscritos: [10, 20, 30, 99], anfitriaoPid: 99,
+    })
+    expect(out).toEqual([10, 20, 30, 99])
   })
 })
