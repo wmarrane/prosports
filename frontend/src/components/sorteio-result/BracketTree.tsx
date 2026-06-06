@@ -13,6 +13,7 @@ type Props = {
   large?: boolean
   subtituloLine?: (p: Participante) => string | null
   onMatchClick?: (matchId: string) => void
+  cabecasPids?: Set<number>
 }
 
 type MatchLayout = {
@@ -145,6 +146,7 @@ function renderSlot(
   large: boolean,
   subtituloLine?: (p: Participante) => string | null,
   anfitriaoPid?: number | null,
+  cabecasPids?: Set<number>,
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
@@ -159,11 +161,15 @@ function renderSlot(
     if (!p) return <span style={{ color: 'var(--t4)', fontSize: labelFontSize }}>—</span>
     const linha = subtituloLine?.(p) ?? null
     const isAnfitriao = anfitriaoPid != null && pid === anfitriaoPid
+    const isCabeca = cabecasPids?.has(pid) ?? false
     return (
       <span style={{ display: 'inline-flex', alignItems: 'flex-start', gap: 4, color: 'var(--t1)', minWidth: 0, width: '100%' }}>
         <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
           <span style={{
-            fontSize: nameFontSize, fontWeight: 600, lineHeight: 1.15,
+            fontSize: nameFontSize,
+            fontWeight: isCabeca ? 800 : 600,
+            color: isCabeca ? 'var(--warn)' : 'var(--t1)',
+            lineHeight: 1.15,
             whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
           }}>{p.nome}</span>
           {linha && (
@@ -187,7 +193,7 @@ function renderSlot(
   return null
 }
 
-export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick }: Props) {
+export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick, cabecasPids }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
   // Compute connectors: for each match input that references V:Jx or L:Jx,
@@ -276,10 +282,10 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               </div>
             )}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid)}
+              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid)}
+              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
             </div>
             <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
           </div>

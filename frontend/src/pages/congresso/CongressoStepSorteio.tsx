@@ -104,6 +104,48 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       .map(c => ({ ...c, inscrito: inscritosSet.has(c.participante_id) }))
   }, [campeoes, inscritosSet])
 
+  // Para cada cabeça, descobre qual grupo foi definido pelo sorteio
+  // (so para tipo grupos; o primeiro participante de cada grupo é a cabeça).
+  // Em chaves, mostra "Nª cabeça" ate o numero de cabecas usadas no bracket.
+  const cabecasComGrupo = useMemo(() => {
+    if (!sorteio) {
+      return cabecasInscritas.map(c => ({ ...c, slotLabel: null as string | null }))
+    }
+    if (sorteio.tipo === 'grupos') {
+      const grupos: any[] = (sorteio.resultado as any).grupos ?? []
+      return cabecasInscritas.map(c => {
+        const grupo = grupos.find((g: any) => g.participantes?.[0] === c.participante_id)
+        return { ...c, slotLabel: grupo ? `Grupo ${grupo.letra}` : null }
+      })
+    }
+    if (sorteio.tipo === 'chaves') {
+      // Conta quantos campeoes inscritos viraram cabeças (max 4).
+      let cabecaCount = 0
+      return cabecasInscritas.map(c => {
+        if (!c.inscrito) return { ...c, slotLabel: null }
+        if (cabecaCount >= 4) return { ...c, slotLabel: null }
+        cabecaCount += 1
+        return { ...c, slotLabel: `${cabecaCount}ª cabeça` }
+      })
+    }
+    return cabecasInscritas.map(c => ({ ...c, slotLabel: null }))
+  }, [cabecasInscritas, sorteio])
+
+  // Set de pids que são cabeça (pra destacar em grupos modal + bracket)
+  const cabecasPids = useMemo(() => {
+    if (!sorteio) return new Set<number>()
+    if (sorteio.tipo === 'grupos') {
+      const grupos: any[] = (sorteio.resultado as any).grupos ?? []
+      return new Set<number>(grupos.map((g: any) => g.participantes?.[0]).filter((p: any) => p != null))
+    }
+    if (sorteio.tipo === 'chaves') {
+      return new Set<number>(
+        cabecasInscritas.filter(c => c.inscrito).slice(0, 4).map(c => c.participante_id)
+      )
+    }
+    return new Set<number>()
+  }, [sorteio, cabecasInscritas])
+
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
     onSuccess: () => {
@@ -319,28 +361,44 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--warn)', fontWeight: 700, fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <Crown size={18} /> Cabeças
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
-            {cabecasInscritas.map(c => (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'flex-end' }}>
+            {cabecasComGrupo.map(c => (
               <div
                 key={c.id}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, opacity: c.inscrito ? 1 : 0.55 }}
+                style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4, opacity: c.inscrito ? 1 : 0.55 }}
                 title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
-                <CampeaoBadge posicao={c.posicao} />
-                <div style={{
-                  display: 'inline-flex', flexDirection: 'column',
-                  textDecoration: c.inscrito ? 'none' : 'line-through',
-                  textDecorationThickness: '2px',
-                }}>
-                  <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
-                    {c.participante.nome}
-                  </span>
-                  {(() => {
-                    const l = subtituloLine(c.participante)
-                    return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
-                  })()}
+                {c.slotLabel && (
+                  <span style={{
+                    fontSize: 12,
+                    fontWeight: 800,
+                    letterSpacing: '0.06em',
+                    color: 'var(--warn)',
+                    textTransform: 'uppercase',
+                    padding: '2px 8px',
+                    background: 'var(--warn-soft)',
+                    border: '1px solid var(--warn)',
+                    borderRadius: 'var(--radius-pill)',
+                    lineHeight: 1.2,
+                  }}>{c.slotLabel}</span>
+                )}
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <CampeaoBadge posicao={c.posicao} />
+                  <div style={{
+                    display: 'inline-flex', flexDirection: 'column',
+                    textDecoration: c.inscrito ? 'none' : 'line-through',
+                    textDecorationThickness: '2px',
+                  }}>
+                    <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
+                      {c.participante.nome}
+                    </span>
+                    {(() => {
+                      const l = subtituloLine(c.participante)
+                      return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
+                    })()}
+                  </div>
+                  {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
                 </div>
-                {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
               </div>
             ))}
           </div>
@@ -368,6 +426,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             anfitriaoPid={anfitriaoPid}
             subtituloLine={subtituloLine}
             onMatchClick={(matchId) => setMatchExpandido(matchId)}
+            cabecasPids={cabecasPids}
           />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
@@ -466,6 +525,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             campeoesByParticipanteId={campeoesByParticipanteId}
             anfitriaoPid={anfitriaoPid ?? null}
             subtituloLine={subtituloLine}
+            cabecasPids={cabecasPids}
             onClose={() => setGrupoExpandido(null)}
             onPrev={goPrev}
             onNext={goNext}
@@ -513,6 +573,7 @@ type ExpandedGrupoModalProps = {
   campeoesByParticipanteId?: Map<number, number>
   anfitriaoPid: number | null
   subtituloLine: (p: Participante) => string | null
+  cabecasPids: Set<number>
   onClose: () => void
   onPrev: (() => void) | null
   onNext: (() => void) | null
@@ -527,6 +588,7 @@ function ExpandedGrupoModal({
   campeoesByParticipanteId,
   anfitriaoPid,
   subtituloLine,
+  cabecasPids,
   onClose,
   onPrev,
   onNext,
@@ -590,16 +652,18 @@ function ExpandedGrupoModal({
           {grupo.participantes.map((pid: number, i: number) => {
             const p = participantesById.get(pid)
             const cp = campeoesByParticipanteId?.get(pid)
+            const ehCabeca = cabecasPids.has(pid)
             return (
               <li
                 key={pid}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 16,
                   padding: '16px 20px',
-                  background: 'var(--cw-soft)',
-                  border: '1px solid var(--t3)',
+                  background: ehCabeca ? 'var(--warn-soft)' : 'var(--cw-soft)',
+                  border: ehCabeca ? '2px solid var(--warn)' : '1px solid var(--t3)',
                   borderRadius: 'var(--radius-xl)',
                   fontSize: 'clamp(20px, 2.2vw, 28px)',
+                  boxShadow: ehCabeca ? '0 0 0 4px rgba(245, 158, 11, 0.18)' : 'none',
                 }}
               >
                 <span style={{ fontFamily: 'var(--font-mono)', color: DIM, fontSize: '0.7em', minWidth: 32 }}>
@@ -607,9 +671,24 @@ function ExpandedGrupoModal({
                 </span>
                 {cp && <CampeaoBadge posicao={cp} large />}
                 <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
-                  <span style={{ color: FG, fontWeight: 600, lineHeight: 1.15 }}>{p ? p.nome : '—'}</span>
+                  <span style={{ color: ehCabeca ? 'var(--warn)' : FG, fontWeight: ehCabeca ? 800 : 600, lineHeight: 1.15 }}>
+                    {p ? p.nome : '—'}
+                  </span>
                   {(() => { const l = p ? subtituloLine(p) : null; return l ? <span style={{ fontSize: '0.55em', color: DIM, marginTop: 4 }}>{l}</span> : null })()}
                 </div>
+                {ehCabeca && (
+                  <span style={{
+                    fontSize: '0.45em',
+                    fontWeight: 800,
+                    letterSpacing: '0.08em',
+                    color: 'var(--warn)',
+                    textTransform: 'uppercase',
+                    padding: '4px 10px',
+                    background: 'var(--cw-card)',
+                    border: '1.5px solid var(--warn)',
+                    borderRadius: 'var(--radius-pill)',
+                  }}>👑 Cabeça</span>
+                )}
                 {anfitriaoPid != null && pid === anfitriaoPid && <AnfitriaoBadge large />}
               </li>
             )
