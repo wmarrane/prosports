@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:site": "tsx --tsconfig tsconfig.app.json scripts/build-site-publico.tsx",
+    "build:site": "node -e \"require('fs').mkdirSync('dist-site',{recursive:true})\" && npx @tailwindcss/cli -i src/site-publico/site-entry.css -o dist-site/site-bundle.css --minify && tsx --tsconfig tsconfig.app.json scripts/build-site-publico.tsx",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run"
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/cli": "^4.3.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^24.12.3",
     "@types/react": "^18.3.0",
