@@ -27,6 +27,14 @@ services:
       - uploads_data:/app/uploads
     restart: unless-stopped
 
+  site-publico:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.site
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+
   redis:
     image: redis:7-alpine
     ports:
