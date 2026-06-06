@@ -32,25 +32,33 @@ export function applyAnfitriaoRule(params: {
     return campeoesPidsInscritos
   }
 
-  // Regra do anfitrião tem prioridade sobre a ordenação das cabeças.
-  // Mesmo se o anfitrião ja for campeao em posicao 0/1/2, ele DEVE ser
-  // movido pra posicao alvo (ultimo grupo / 4a cabeca em chaves), pra
-  // garantir que vai pro grupo final mesmo que isso "desloque" um campeao.
-  let targetPos1Indexed: number
+  // Posição alvo (0-indexed) do anfitrião:
+  //   - 3 grupos:  idx 2 (grupo C)
+  //   - 4+ grupos: idx 3 (grupo D)
+  //   - chaves:    idx 3 (4ª cabeça)
+  //   - <3 grupos: regra não se aplica
+  let targetIdx: number
   if (tipo === 'chaves') {
-    targetPos1Indexed = 4
+    targetIdx = 3
   } else {
     if (quantidadeGrupos === undefined || quantidadeGrupos < 3) {
-      return campeoesPidsInscritos  // < 3 grupos: regra não se aplica
+      return campeoesPidsInscritos
     }
-    targetPos1Indexed = quantidadeGrupos === 3 ? 3 : 4
+    targetIdx = quantidadeGrupos === 3 ? 2 : 3
   }
 
-  // Remove anfitrião de qualquer posição atual e insere no target.
-  // Funciona tanto se ele ja era campeao (move) quanto se nao (insere).
-  const sem = campeoesPidsInscritos.filter(p => p !== anfitriaoPid)
+  // Posições ANTES do alvo: regra do campeão do ano anterior prevalece
+  // (anfitrião mantém posição se for um campeão melhor colocado que o alvo).
+  // Caso contrário (anfitrião já está no alvo ou depois, ou não é campeão):
+  // força ele pra posição alvo, deslocando quem estava lá.
+  const currentIdx = campeoesPidsInscritos.indexOf(anfitriaoPid)
+  if (currentIdx >= 0 && currentIdx < targetIdx) {
+    return campeoesPidsInscritos
+  }
+
+  const sem = campeoesPidsInscritos.filter((p) => p !== anfitriaoPid)
   const out = [...sem]
-  out.splice(targetPos1Indexed - 1, 0, anfitriaoPid)
+  out.splice(targetIdx, 0, anfitriaoPid)
   return out
 }
 
