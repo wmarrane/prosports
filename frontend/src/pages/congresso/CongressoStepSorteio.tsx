@@ -710,11 +710,20 @@ function ExpandedChavesMatchModal({
           padding: '20px 24px',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12, gap: 12 }}>
           <span style={{ fontSize: 12, color: DIM, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700 }}>
             {eyebrow}
           </span>
-          <span style={{ fontSize: 12, color: DIM, fontFamily: 'var(--font-mono)' }}>{matchId.toUpperCase()}</span>
+          <span style={{
+            fontSize: 'clamp(22px, 2.4vw, 32px)',
+            fontWeight: 900,
+            letterSpacing: '-0.02em',
+            color: 'var(--warn)',
+            fontFamily: 'var(--font-mono)',
+            lineHeight: 1,
+          }}>
+            {matchId.toUpperCase()}
+          </span>
         </div>
         <div style={{ padding: '12px 0' }}>{renderSlot(top)}</div>
         <div style={{ borderTop: '1px dashed var(--t3)', margin: '4px 0' }} />
