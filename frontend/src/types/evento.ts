@@ -27,6 +27,7 @@ export type Evento = {
   anfitriao_id: number | null
   anfitriao: Participante | null
   logo_url: string | null
+  site_publicado_em: string | null
   criado_em: string
   atualizado_em: string
   _count?: {
