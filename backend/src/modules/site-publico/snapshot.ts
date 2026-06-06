@@ -32,6 +32,7 @@ function calcCabecas(
   consideraAnfitriao: boolean,
 ): number[] {
   if (tipo === 'grupos') {
+    // Nº de grupos é inferido do resultado salvo do sorteio (uma entrada por grupo), espelhando o que o engine produziu.
     const qtd = (resultado?.grupos ?? []).length
     if (qtd === 0) return []
     const finais = applyAnfitriaoRule({
@@ -98,7 +99,6 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
     id: evento.id,
     nome: evento.nome,
     competicao: evento.competicao.nome,
-    esporte: evento.competicao.nome,
     cidade: evento.municipio.nome,
     local: evento.local,
     data: evento.data_hora.toISOString(),

@@ -9,7 +9,7 @@ export type SnapModalidade = {
   cabecasPids: number[]; resultado: unknown | null
 }
 export type SnapEvento = {
-  id: number; nome: string; competicao: string; esporte: string
+  id: number; nome: string; competicao: string
   cidade: string; local: string; data: string; organizador: string | null
   publicadoEm: string; modalidades: SnapModalidade[]
 }

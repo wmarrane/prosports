@@ -63,3 +63,36 @@ it('marca modalidade sem sorteio como aguardando', () => {
   expect(m.resultado).toBeNull()
   expect(m.cabecasPids).toEqual([])
 })
+
+it('insere anfitrião na 4ª cabeça em chaves quando considerar_anfitriao', () => {
+  const eventoAnfitriao = {
+    ...baseEvento,
+    competicao: { nome: 'Jogos Regionais', considerar_anfitriao: true },
+    anfitriao_id: 999,
+  }
+  const snap = montaSnapshot({
+    evento: eventoAnfitriao as any,
+    modalidades: [{ id: 3, nome: 'Vôlei', sigla: 'VOL', tipo_modalidade: { tipo: 'chaves' } } as any],
+    inscricoesPorModalidade: new Map([[3, [
+      { participante: { id: 1, nome: 'A', subtitulo: null } },
+      { participante: { id: 2, nome: 'B', subtitulo: null } },
+      { participante: { id: 3, nome: 'C', subtitulo: null } },
+      { participante: { id: 999, nome: 'Anfitrião', subtitulo: null } },
+    ]]]) as any,
+    campeoesPorModalidade: new Map([[3, [
+      { participante_id: 1, posicao: 1 },
+      { participante_id: 2, posicao: 2 },
+      { participante_id: 3, posicao: 3 },
+    ]]]) as any,
+    sorteiosPorModalidade: new Map([[3, {
+      tipo: 'chaves', seed: 'CHAV-9999',
+      resultado: { size: 4, slots: [1, 2, 3, 999], byePositions: [], matchesGraph: null },
+    }]]) as any,
+    subtituloFn: (p: any) => p.subtitulo ?? null,
+  })
+  const m = snap.modalidades[0]
+  // applyAnfitriaoRule injeta o anfitrião no índice 3 (4ª cabeça) para chaves,
+  // deslocando quem estava lá: campeões [1,2,3] + anfitrião 999 → [1,2,3,999].
+  expect(m.cabecasPids[3]).toBe(999)
+  expect(m.cabecasPids).toContain(999)
+})
