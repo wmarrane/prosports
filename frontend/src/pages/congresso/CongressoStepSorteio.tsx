@@ -18,6 +18,34 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
+// Espelho da regra do backend (applyAnfitriaoRule).
+// Define quem sao os cabecas finais para chaves apos a regra anfitriao.
+function applyAnfitriaoRuleFront(
+  campeoesPidsInscritos: number[],
+  anfitriaoPid: number | null,
+  anfitriaoInscrito: boolean,
+  consideraAnfitriao: boolean,
+  tipo: 'chaves' | 'grupos',
+  quantidadeGrupos?: number
+): number[] {
+  if (!consideraAnfitriao || anfitriaoPid === null || !anfitriaoInscrito) {
+    return campeoesPidsInscritos
+  }
+  let targetIdx: number
+  if (tipo === 'chaves') {
+    targetIdx = 3
+  } else {
+    if (quantidadeGrupos === undefined || quantidadeGrupos < 3) return campeoesPidsInscritos
+    targetIdx = quantidadeGrupos === 3 ? 2 : 3
+  }
+  const currentIdx = campeoesPidsInscritos.indexOf(anfitriaoPid)
+  if (currentIdx >= 0 && currentIdx < targetIdx) return campeoesPidsInscritos
+  const sem = campeoesPidsInscritos.filter((p) => p !== anfitriaoPid)
+  const out = [...sem]
+  out.splice(targetIdx, 0, anfitriaoPid)
+  return out
+}
+
 type Props = {
   eventoId: number
   modalidadeId: number
@@ -104,34 +132,14 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       .map(c => ({ ...c, inscrito: inscritosSet.has(c.participante_id) }))
   }, [campeoes, inscritosSet])
 
-  // Para cada cabeça, descobre qual grupo foi definido pelo sorteio
-  // (so para tipo grupos; o primeiro participante de cada grupo é a cabeça).
-  // Em chaves, mostra "Nª cabeça" ate o numero de cabecas usadas no bracket.
-  const cabecasComGrupo = useMemo(() => {
-    if (!sorteio) {
-      return cabecasInscritas.map(c => ({ ...c, slotLabel: null as string | null }))
-    }
-    if (sorteio.tipo === 'grupos') {
-      const grupos: any[] = (sorteio.resultado as any).grupos ?? []
-      return cabecasInscritas.map(c => {
-        const grupo = grupos.find((g: any) => g.participantes?.[0] === c.participante_id)
-        return { ...c, slotLabel: grupo ? `Grupo ${grupo.letra}` : null }
-      })
-    }
-    if (sorteio.tipo === 'chaves') {
-      // Conta quantos campeoes inscritos viraram cabeças (max 4).
-      let cabecaCount = 0
-      return cabecasInscritas.map(c => {
-        if (!c.inscrito) return { ...c, slotLabel: null }
-        if (cabecaCount >= 4) return { ...c, slotLabel: null }
-        cabecaCount += 1
-        return { ...c, slotLabel: `${cabecaCount}ª cabeça` }
-      })
-    }
-    return cabecasInscritas.map(c => ({ ...c, slotLabel: null }))
-  }, [cabecasInscritas, sorteio])
+  // Set de pids que são cabeça (deriva direto do resultado do sorteio).
+  // Em grupos: cabeça = 1o participante de cada grupo.
+  // Em chaves: cabeças = pids ja consolidados pela regra anfitrião no
+  // backend; pra UI usamos a heuristica top-N inscritos com regra
+  // anfitrião aplicada client-side.
+  const consideraAnfitriao = (competicao as any)?.considerar_anfitriao ?? false
+  const anfitriaoInscrito = anfitriaoPid != null && inscritosSet.has(anfitriaoPid)
 
-  // Set de pids que são cabeça (pra destacar em grupos modal + bracket)
   const cabecasPids = useMemo(() => {
     if (!sorteio) return new Set<number>()
     if (sorteio.tipo === 'grupos') {
@@ -139,12 +147,75 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       return new Set<number>(grupos.map((g: any) => g.participantes?.[0]).filter((p: any) => p != null))
     }
     if (sorteio.tipo === 'chaves') {
-      return new Set<number>(
-        cabecasInscritas.filter(c => c.inscrito).slice(0, 4).map(c => c.participante_id)
+      // Lista os top-4 com regra anfitriao (replica do backend).
+      const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
+      const cabecasFinais = applyAnfitriaoRuleFront(
+        campeoesInscritosPids, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, 'chaves'
       )
+      return new Set<number>(cabecasFinais.slice(0, 4))
     }
     return new Set<number>()
-  }, [sorteio, cabecasInscritas])
+  }, [sorteio, cabecasInscritas, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao])
+
+  // Lista de "campeoes + anfitrião" pra apresentar no banner.
+  // Sempre mostra todos campeoes do ano anterior, sorted by posicao.
+  // Se anfitriao inscrito e nao eh campeao, adiciona ele no fim como
+  // entrada sintetica (posicao = null). Cada item recebe slotLabel se
+  // ele eh cabeça atribuida pelo sorteio.
+  const cabecasComGrupo = useMemo(() => {
+    type Item = {
+      key: string
+      participante_id: number
+      participante: Participante | undefined
+      posicao: number | null
+      inscrito: boolean
+      slotLabel: string | null
+    }
+    const items: Item[] = cabecasInscritas.map(c => ({
+      key: `c-${c.id}`,
+      participante_id: c.participante_id,
+      participante: c.participante,
+      posicao: c.posicao,
+      inscrito: c.inscrito,
+      slotLabel: null,
+    }))
+    // Adiciona o anfitrião como entrada sintetica se ele se aplica
+    // pela regra mas nao eh campeao.
+    if (
+      consideraAnfitriao && anfitriaoInscrito && anfitriaoPid != null &&
+      !cabecasInscritas.some(c => c.participante_id === anfitriaoPid)
+    ) {
+      const pAnf = participantesById.get(anfitriaoPid)
+      items.push({
+        key: `anf-${anfitriaoPid}`,
+        participante_id: anfitriaoPid,
+        participante: pAnf,
+        posicao: null,
+        inscrito: true,
+        slotLabel: null,
+      })
+    }
+    // Computa slotLabel
+    if (!sorteio) return items
+    if (sorteio.tipo === 'grupos') {
+      const grupos: any[] = (sorteio.resultado as any).grupos ?? []
+      for (const it of items) {
+        const g = grupos.find((g: any) => g.participantes?.[0] === it.participante_id)
+        if (g) it.slotLabel = `Grupo ${g.letra}`
+      }
+    } else if (sorteio.tipo === 'chaves') {
+      // Ordem dos chaves segue a regra anfitrião (mesma do cabecasPids).
+      const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
+      const cabecasFinais = applyAnfitriaoRuleFront(
+        campeoesInscritosPids, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, 'chaves'
+      ).slice(0, 4)
+      for (const it of items) {
+        const idx = cabecasFinais.indexOf(it.participante_id)
+        if (idx !== -1) it.slotLabel = `${idx + 1}ª cabeça`
+      }
+    }
+    return items
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -364,7 +435,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'flex-end' }}>
             {cabecasComGrupo.map(c => (
               <div
-                key={c.id}
+                key={c.key}
                 style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4, opacity: c.inscrito ? 1 : 0.55 }}
                 title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
               >
@@ -383,17 +454,17 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                   }}>{c.slotLabel}</span>
                 )}
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                  <CampeaoBadge posicao={c.posicao} />
+                  {c.posicao != null && <CampeaoBadge posicao={c.posicao} />}
                   <div style={{
                     display: 'inline-flex', flexDirection: 'column',
                     textDecoration: c.inscrito ? 'none' : 'line-through',
                     textDecorationThickness: '2px',
                   }}>
                     <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
-                      {c.participante.nome}
+                      {c.participante?.nome ?? '—'}
                     </span>
                     {(() => {
-                      const l = subtituloLine(c.participante)
+                      const l = c.participante ? subtituloLine(c.participante) : null
                       return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
                     })()}
                   </div>
