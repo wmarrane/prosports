@@ -8,12 +8,18 @@ export async function publicar(eventoId: number): Promise<void> {
     where: { id: eventoId },
     select: {
       id: true, nome: true, local: true, organizador: true, data_hora: true,
-      anfitriao_id: true, competicao_id: true,
+      anfitriao_id: true, competicao_id: true, status: true,
       competicao: { select: { nome: true, considerar_anfitriao: true, subtitulo_campos: true } },
       municipio: { select: { nome: true } },
     },
   })
   if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+  if (evento.status !== 'sorteado') {
+    throw Object.assign(
+      new Error('Só é possível publicar eventos com status "Sorteado".'),
+      { status: 400 },
+    )
+  }
 
   const modalidades = await prisma.modalidade.findMany({
     where: { competicao_id: evento.competicao_id },

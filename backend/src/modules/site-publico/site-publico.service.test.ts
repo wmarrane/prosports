@@ -24,7 +24,7 @@ beforeEach(() => {
   vi.clearAllMocks()
   mp.evento.findUnique.mockResolvedValue({
     id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
-    anfitriao_id: null, competicao_id: 7,
+    anfitriao_id: null, competicao_id: 7, status: 'sorteado',
     competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
     municipio: { nome: 'São Manuel' },
   })
@@ -52,6 +52,18 @@ it('publicar 404 se evento inexistente', async () => {
   await expect(service.publicar(999)).rejects.toMatchObject({ status: 404 })
 })
 
+it('publicar 400 se evento nao esta sorteado', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'inscricoes',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10)).rejects.toMatchObject({ status: 400 })
+  expect(store.putSnapshot).not.toHaveBeenCalled()
+  expect(store.dispatchBuild).not.toHaveBeenCalled()
+})
+
 it('despublicar remove snapshot, dispara e limpa', async () => {
   await service.despublicar(10)
   expect(store.deleteSnapshot).toHaveBeenCalledWith(10)
@@ -62,7 +74,7 @@ it('despublicar remove snapshot, dispara e limpa', async () => {
 it('publicar compõe subtitulo a partir de subtitulo_campos', async () => {
   mp.evento.findUnique.mockResolvedValue({
     id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
-    anfitriao_id: null, competicao_id: 7,
+    anfitriao_id: null, competicao_id: 7, status: 'sorteado',
     competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: ['municipio'] },
     municipio: { nome: 'São Manuel' },
   })
