@@ -95,6 +95,9 @@ jobs:
           PROD_JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
           CADDY_API_DOMAIN=${{ secrets.CADDY_API_DOMAIN }}
           CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
+          GITHUB_PAT=${{ secrets.SITE_GH_PAT }}
+          GITHUB_REPO=wmarrane/prosports
+          GITHUB_SNAPSHOT_BRANCH=develop
           EOF
 
       - name: Autenticar Docker no Artifact Registry
