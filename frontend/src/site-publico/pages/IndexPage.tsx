@@ -79,7 +79,7 @@ export default function IndexPage({ eventos }: { eventos: SnapEvento[] }) {
                 <a className="btn btn-primary btn-lg" href={LOGIN_URL}>Acessar a plataforma</a>
               </div>
             </div>
-            <div className="ph"><span className="ph-tag">captura · painel ProSports</span></div>
+            <img src="/captura-plataforma.png" alt="Captura da plataforma ProSports" className="plataforma-shot" />
           </div>
         </div>
       </section>

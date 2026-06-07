@@ -6,7 +6,10 @@ export default function SiteFooter() {
       <div className="container">
         <div className="footer-inner">
           <div>
-            <a className="brand-mark" href="/index.html"><b>Montana Eventos</b><small>Congressos esportivos</small></a>
+            <a className="brand-mark" href="/index.html">
+              <img src="/montana/simbolo.png" alt="" className="footer-logo" />
+              <span><b>Montana Eventos</b><small>Congressos esportivos</small></span>
+            </a>
             <p className="f-about">Há mais de 20 anos organizando congressos e competições esportivas por todo o Brasil, com inovação e tecnologia na formação de grupos, chaves e sorteios.</p>
           </div>
           <div>

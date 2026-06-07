@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs'
+import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, cpSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -13,6 +13,7 @@ import type { SnapEvento } from '../src/site-publico/snapshot-types'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const SNAP_DIR = join(ROOT, 'public-site-snapshots')
+const STATIC_DIR = join(ROOT, 'public-site-static')
 const OUT = join(ROOT, 'dist-site')
 const CSS_HREF = '/site-bundle.css'
 
@@ -32,6 +33,8 @@ function emit(name: string, title: string, el: React.ReactElement) {
 function main() {
   const eventos = loadSnapshots()
   mkdirSync(OUT, { recursive: true })
+  // Copia assets estáticos (logos, captura da plataforma) para o output.
+  if (existsSync(STATIC_DIR)) cpSync(STATIC_DIR, OUT, { recursive: true })
   emit('index.html', 'Montana Eventos', React.createElement(IndexPage, { eventos }))
   emit('eventos.html', 'Eventos · Montana', React.createElement(EventosPage, { eventos }))
   emit('sobre.html', 'Sobre · Montana', React.createElement(SobrePage))
