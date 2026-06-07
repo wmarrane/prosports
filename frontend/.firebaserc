@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "newprosports"
+  "projects": { "default": "newprosports" },
+  "targets": {
+    "newprosports": {
+      "hosting": {
+        "admin": ["newprosports"],
+        "publico": ["newprosports-publico"]
+      }
+    }
   }
 }

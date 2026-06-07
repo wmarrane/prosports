@@ -72,7 +72,7 @@ jobs:
 
       - name: Deploy Firebase Hosting
         working-directory: ./frontend
-        run: firebase deploy --only hosting --project ${{ secrets.GCP_PROJECT }} --non-interactive
+        run: firebase deploy --only hosting:admin --project ${{ secrets.GCP_PROJECT }} --non-interactive
 
   # 3) Deploy do backend na VM: pull, migrations, up.
   #    Runner self-hosted roda dentro da própria VM.
@@ -95,6 +95,9 @@ jobs:
           PROD_JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
           CADDY_API_DOMAIN=${{ secrets.CADDY_API_DOMAIN }}
           CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
+          GITHUB_PAT=${{ secrets.SITE_GH_PAT }}
+          GITHUB_REPO=wmarrane/prosports
+          GITHUB_SNAPSHOT_BRANCH=develop
           EOF
 
       - name: Autenticar Docker no Artifact Registry

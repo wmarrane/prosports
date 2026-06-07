@@ -28,4 +28,6 @@ export const eventosService = {
     return api.post<Evento>(`${BASE}/${id}/logo`, fd).then(r => r.data)
   },
   removerLogo: (id: number) => api.delete<Evento>(`${BASE}/${id}/logo`).then(r => r.data),
+  publicar: (id: number) => api.post(`${BASE}/${id}/publicar`).then(r => r.data),
+  despublicar: (id: number) => api.post(`${BASE}/${id}/despublicar`).then(r => r.data),
 }

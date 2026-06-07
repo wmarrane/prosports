@@ -1,0 +1,96 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   theme-vars.css — cópia enxuta da camada semântica do ProSports.
+   Contém SOMENTE as declarações de variáveis (:root + [data-theme="dark"])
+   extraídas de src/styles/prosports-theme.css, SEM o `@import "tailwindcss"`
+   e SEM as regras de shell de app (.app/.sidebar/etc.), que não se aplicam
+   ao site público e causariam import duplo do Tailwind no bundle.
+
+   Mantenha em sincronia com src/styles/prosports-theme.css se as variáveis
+   semânticas mudarem.
+   ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* sports accent — emerald, used sparingly alongside brand blue */
+  --accent:        #14b88a;
+  --accent-soft:   #d2f5ea;
+  --accent-700:    #0c7a5b;
+  --grad-accent:   linear-gradient(135deg, #0e9e76 0%, #2dd4a7 100%);
+  --glow-accent:   0 0 26px rgba(20, 184, 138, 0.32);
+
+  /* ── Semantic, theme-aware surfaces & text (LIGHT defaults) ── */
+  --app-bg:        #eef1f7;
+  --app-bg-2:      #e7ebf3;       /* subtle gradient anchor */
+  --card-bg:       #ffffff;
+  --card-bg-2:     #f8fafc;       /* nested / table head */
+  --card-border:   #e7ecf3;
+  --card-border-2: #eef2f7;
+  --hairline:      #eef2f7;
+
+  --t1: var(--slate-900);         /* headings */
+  --t2: var(--slate-700);         /* body */
+  --t3: var(--slate-500);         /* secondary */
+  --t4: var(--slate-400);         /* tertiary / captions */
+
+  --sidebar-bg:    var(--grad-sidebar);
+  --sidebar-flat:  #0c0f1c;
+  --sb-text:       rgba(255,255,255,0.70);
+  --sb-text-dim:   rgba(255,255,255,0.42);
+  --sb-hover:      rgba(255,255,255,0.05);
+  --sb-line:       rgba(255,255,255,0.07);
+
+  --topbar-bg:     rgba(255,255,255,0.86);
+  --topbar-border: var(--slate-200);
+  --input-bg:      #ffffff;
+  --input-border:  var(--slate-200);
+
+  --shadow-e1: 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-e2: 0 1px 3px rgba(15,23,42,0.05), 0 8px 28px -8px rgba(15,23,42,0.10);
+  --shadow-e3: 0 18px 50px -16px rgba(15,23,42,0.22);
+  --ring:      0 0 0 4px rgba(16,97,216,0.14);
+
+  --grid-dot:  rgba(15,23,42,0.045);
+  --skel:      linear-gradient(90deg, #eef2f7 25%, #e2e8f0 37%, #eef2f7 63%);
+}
+
+[data-theme="dark"] {
+  --app-bg:        #090c15;
+  --app-bg-2:      #0c1019;
+  --card-bg:       #121622;
+  --card-bg-2:     #0e131e;
+  --card-border:   rgba(255,255,255,0.07);
+  --card-border-2: rgba(255,255,255,0.05);
+  --hairline:      rgba(255,255,255,0.06);
+
+  --t1: #f1f5fb;
+  --t2: #c4cdde;
+  --t3: #8b97ad;
+  --t4: #5d6679;
+
+  --sidebar-bg:    linear-gradient(175deg, #0a0d16 0%, #06080f 100%);
+  --sidebar-flat:  #0a0d16;
+  --sb-text:       rgba(255,255,255,0.66);
+  --sb-text-dim:   rgba(255,255,255,0.38);
+  --sb-hover:      rgba(255,255,255,0.045);
+  --sb-line:       rgba(255,255,255,0.06);
+
+  --topbar-bg:     rgba(13,17,26,0.82);
+  --topbar-border: rgba(255,255,255,0.07);
+  --input-bg:      #161b28;
+  --input-border:  rgba(255,255,255,0.10);
+
+  --brand-50:  rgba(16,97,216,0.16);     /* re-tint soft blue chips for dark */
+  --accent-soft: rgba(20,184,138,0.16);
+  --success-soft: rgba(16,185,129,0.15);
+  --warn-soft:   rgba(245,158,11,0.16);
+  --danger-soft: rgba(239,68,68,0.16);
+  --info-soft:   rgba(59,130,246,0.16);
+  --violet-soft: rgba(139,92,246,0.16);
+
+  --shadow-e1: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-e2: 0 1px 3px rgba(0,0,0,0.4), 0 10px 32px -10px rgba(0,0,0,0.6);
+  --shadow-e3: 0 22px 60px -18px rgba(0,0,0,0.7);
+  --ring:      0 0 0 4px rgba(94,142,255,0.20);
+
+  --grid-dot:  rgba(255,255,255,0.04);
+  --skel:      linear-gradient(90deg, #161b28 25%, #1d2535 37%, #161b28 63%);
+}
