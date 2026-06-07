@@ -389,8 +389,9 @@ export default function EventosList() {
                     ) : (
                       <button
                         onClick={e => { e.stopPropagation(); publicarSite(ev.id) }}
-                        disabled={publicandoSite}
-                        className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold"
+                        disabled={publicandoSite || ev.status !== 'sorteado'}
+                        title={ev.status !== 'sorteado' ? 'Disponível apenas quando o evento estiver Sorteado' : undefined}
+                        className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-[var(--brand-500)]"
                       >Publicar no site</button>
                     )}
                     <button
