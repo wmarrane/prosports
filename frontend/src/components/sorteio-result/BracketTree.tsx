@@ -159,7 +159,7 @@ function renderSlot(
   const nameFontSize = large ? '1.2rem' : '1rem'
   const subFontSize = large ? '0.8rem' : '0.7rem'
   if (ref === 'BYE') {
-    return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize: labelFontSize }}>BYE</span>
+    return <span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 700, fontSize: labelFontSize }}>BYE</span>
   }
   // V2: V:B{k} é a vitória automática de um BYE — mostra o nome do jogador que avançou.
   if (ref.startsWith('V:') && byeStubTop && byeStubTop[ref.slice(2)]) {
@@ -168,7 +168,7 @@ function renderSlot(
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
-    if (pid === null) return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize: labelFontSize }}>BYE</span>
+    if (pid === null) return <span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 700, fontSize: labelFontSize }}>BYE</span>
     const p = participantesById.get(pid)
     const cp = campeoesByParticipanteId?.get(pid)
     if (!p) return <span style={{ color: 'var(--t4)', fontSize: labelFontSize }}>—</span>
