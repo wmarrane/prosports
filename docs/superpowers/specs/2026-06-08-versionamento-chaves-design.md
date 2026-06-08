@@ -106,7 +106,10 @@ Tela do resultado (`SorteioChaves`) e PDF do sorteio (`SorteioPrint` → `Sortei
 `frontend/src/pages/modalidades/ModalidadeForm.tsx`:
 
 - Adicionar seletor **Versão da chave** (`V1` / `V2`), visível **somente** quando o tipo selecionado é `chaves`.
-- Modalidade nova: default `V2`. Edição: carrega o valor salvo.
+- O seletor é **editável tanto em modalidade nova quanto existente** — o usuário pode escolher/alterar a versão a qualquer momento, independente de já existir sorteio.
+  - Modalidade nova: default `V2`.
+  - Edição: carrega o valor salvo e permite trocar.
+- Texto de apoio no seletor (quando em edição com sorteio já feito): avisar que a troca de versão **só passa a valer após re-sortear** a modalidade (o grafo é congelado no sorteio — decisão #2).
 - Enviar `chave_versao` no payload de criar/editar.
 - `frontend/src/services/modalidades.ts` e tipos: incluir `chave_versao`.
 
