@@ -100,6 +100,7 @@ export async function executar(input: { evento_id: number; modalidade_id: number
       select: {
         id: true,
         competicao_id: true,
+        chave_versao: true,
         tipo_modalidade: { select: { tipo: true } },
       },
     }),
@@ -206,7 +207,11 @@ export async function executar(input: { evento_id: number; modalidade_id: number
       )
     }
     // matchesGraph is optional — if missing, frontend falls back to legacy render
-    const matchesGraph = regraMatches?.matches_graph ? (regraMatches.matches_graph as any) : null
+    let matchesGraph = regraMatches?.matches_graph ? (regraMatches.matches_graph as any) : null
+    // V2: leva os BYEs para a linha da 1ª rodada (congelado no resultado do sorteio)
+    if (matchesGraph && modalidade.chave_versao === 'V2') {
+      matchesGraph = engine.liftByesToFirstRoundV2(matchesGraph)
+    }
     const cabecasFinais = applyAnfitriaoRule({
       campeoesPidsInscritos,
       anfitriaoPid,
