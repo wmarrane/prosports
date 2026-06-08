@@ -10,10 +10,13 @@ export type TipoModalidade = {
   atualizado_em: string
 }
 
+export type ChaveVersao = 'V1' | 'V2'
+
 export type Modalidade = {
   id: number
   nome: string
   sigla: string
+  chave_versao: ChaveVersao
   competicao_id: number
   competicao: Competicao
   tipo_modalidade_id: number
