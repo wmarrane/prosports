@@ -5,6 +5,7 @@ export const COR = {
   preto: 'FF000000',
   azul: 'FF156082',
   cinza: 'FFD9D9D9',
+  vermelho: 'FFFF0000',
 } as const
 
 type Estilo = {
