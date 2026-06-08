@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import type { FormEvent } from 'react'
+import type { ChaveVersao } from '../../types/modalidade'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
@@ -42,6 +43,7 @@ export default function ModalidadeForm() {
   const [tipoModalidadeId, setTipoModalidadeId] = useState<number | ''>('')
   const [nome, setNome] = useState('')
   const [sigla, setSigla] = useState('')
+  const [chaveVersao, setChaveVersao] = useState<ChaveVersao>('V2')
   const [erro, setErro] = useState('')
 
   const { data: competicoes = [] } = useQuery({
@@ -66,6 +68,7 @@ export default function ModalidadeForm() {
       setTipoModalidadeId(existing.tipo_modalidade_id)
       setNome(existing.nome)
       setSigla(existing.sigla)
+      setChaveVersao(existing.chave_versao ?? 'V1')
     }
   }, [existing])
 
@@ -86,6 +89,7 @@ export default function ModalidadeForm() {
         sigla: sigla.trim().toUpperCase(),
         competicao_id: Number(competicaoId),
         tipo_modalidade_id: Number(tipoModalidadeId),
+        chave_versao: chaveVersao,
       }
       return isEdit
         ? modalidadesService.editar(Number(id), payload)
@@ -291,6 +295,26 @@ export default function ModalidadeForm() {
                 <p className="text-xs text-[var(--t4)] mt-1.5">2 a 6 caracteres.</p>
               </div>
             </div>
+
+            {tipoSelecionado?.tipo === 'chaves' && (
+              <div style={{ marginTop: 16 }}>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Versão da chave
+                </label>
+                <select
+                  value={chaveVersao}
+                  onChange={e => setChaveVersao(e.target.value as ChaveVersao)}
+                  className={inputClass}
+                >
+                  <option value="V1">V1 — BYE entra na 2ª rodada</option>
+                  <option value="V2">V2 — BYE na 1ª rodada (vs BYE)</option>
+                </select>
+                <p className="text-xs text-[var(--t4)] mt-1.5">
+                  Define o desenho do bracket. Trocar a versão de uma modalidade já sorteada
+                  só passa a valer após <b>re-sortear</b>.
+                </p>
+              </div>
+            )}
           </section>
 
           {erro && (
