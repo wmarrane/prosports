@@ -220,13 +220,12 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
   const matchMap: Record<string, MatchLayout> = {}
   for (const m of layout.matches) matchMap[m.id] = m
 
-  // Color por match-source: hue rotativo HSL para distinguir cada confronto.
-  // Saturação/lightness fixos para combinar com o tom das caixas em ambos os
-  // modos. 3º lugar usa cor neutra (--t4) para se diferenciar.
-  const totalMatches = layout.matches.length
-  const sourceColor = (matchId: string): string => {
-    const n = parseInt(matchId.replace(/\D/g, ''), 10) || 0
-    const hue = ((n - 1) * 360 / Math.max(1, totalMatches)) % 360
+  // Cor por RODADA: todos os conectores que saem de uma mesma rodada compartilham
+  // a cor, e ela muda a cada rodada. Hue rotativo HSL com saturação/lightness fixos
+  // (tom médio que combina em light e dark). 3º lugar usa cor neutra (--t4).
+  const maxRound = Math.max(1, ...layout.matches.map(m => m.round))
+  const roundColor = (round: number): string => {
+    const hue = ((round - 1) * 360 / maxRound) % 360
     return `hsl(${hue}deg 65% 60%)`
   }
 
@@ -248,7 +247,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       connectors.push({
         d,
         key: `${srcId}-${m.id}-${slot}`,
-        stroke: isThirdPlace ? 'var(--t4)' : sourceColor(srcId),
+        stroke: isThirdPlace ? 'var(--t4)' : roundColor(src.round),
         isThirdPlace,
       })
     }
