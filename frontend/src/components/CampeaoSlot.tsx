@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ParticipanteSelect from './ParticipanteSelect'
 import CampeaoBadge from './CampeaoBadge'
+import ConfirmDialog from './ConfirmDialog'
 import type { CampeaoAnterior } from '../types/campeao-anterior'
 
 function posicaoLabel(n: number): string { return `${n}º lugar` }
@@ -17,6 +18,7 @@ type Props = {
 
 export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando, subtituloLine }: Props) {
   const [pickedId, setPickedId] = useState<number | null>(null)
+  const [confirmRemover, setConfirmRemover] = useState(false)
 
   if (campeao) {
     return (
@@ -30,9 +32,17 @@ export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onR
           <div className="text-xs text-[var(--t3)] mt-0.5">{l}</div>
         ) : null })()}
         <button
-          onClick={() => { if (confirm(`Remover ${posicaoLabel(posicao)}?`)) onRemover(campeao.id) }}
+          onClick={() => setConfirmRemover(true)}
           className="mt-2 text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"
         >Remover</button>
+        <ConfirmDialog
+          open={confirmRemover}
+          onClose={() => setConfirmRemover(false)}
+          onConfirm={() => onRemover(campeao.id)}
+          title={`Remover ${posicaoLabel(posicao)}?`}
+          description="Esta ação não pode ser desfeita."
+          confirmLabel="Remover"
+        />
       </div>
     )
   }

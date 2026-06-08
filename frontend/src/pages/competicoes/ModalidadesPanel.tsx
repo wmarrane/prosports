@@ -6,6 +6,7 @@ import { tiposModalidadeService } from '../../services/tipos-modalidade'
 import { Plus, X, Check, Download } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Shapes } from 'lucide-react'
 import ImportModalidadesModal from '../../components/import/ImportModalidadesModal'
+import { useToast } from '../../components/Toast'
 
 type Props = {
   competicaoId: number
@@ -34,6 +35,7 @@ const TIPO_LABEL: Record<string, string> = {
 
 export default function ModalidadesPanel({ competicaoId }: Props) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [addOpen, setAddOpen] = useState(false)
   const [importOpen, setImportOpen] = useState(false)
   const [newNome, setNewNome] = useState('')
@@ -80,7 +82,7 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
   const { mutate: remover } = useMutation({
     mutationFn: (modalidadeId: number) => modalidadesService.remover(modalidadeId),
     onSuccess: invalidate,
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover modalidade.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover modalidade.'),
   })
 
   function handleAdd() {

@@ -10,6 +10,8 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import SorteioPrint from './SorteioPrint'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
 import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
@@ -73,6 +75,7 @@ export default function EventoInscricoes() {
   const eventoId = Number(id)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
 
   const [modalidadeId, setModalidadeId] = useState<number | null>(null)
   const [inscreverOpen, setInscreverOpen] = useState(false)
@@ -83,6 +86,7 @@ export default function EventoInscricoes() {
   const [apagarTodosOpen, setApagarTodosOpen] = useState(false)
   const [apagarTodosResumo, setApagarTodosResumo] = useState<{ count: number } | null>(null)
   const [resortearOpen, setResortearOpen] = useState(false)
+  const [apagarSorteioAlvo, setApagarSorteioAlvo] = useState<number | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
 
@@ -174,7 +178,7 @@ export default function EventoInscricoes() {
       queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
       queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
     },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const { mutate: executarSorteio, isPending: executandoSorteio } = useMutation({
@@ -189,7 +193,7 @@ export default function EventoInscricoes() {
   const { mutate: apagarSorteio } = useMutation({
     mutationFn: (sid: number) => sorteiosService.remover(sid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao apagar sorteio.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao apagar sorteio.'),
   })
 
   const { mutate: apagarTodosSorteios, isPending: apagandoTodos } = useMutation({
@@ -198,7 +202,7 @@ export default function EventoInscricoes() {
       setApagarTodosResumo(r)
       queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
     },
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao apagar sorteios.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao apagar sorteios.'),
   })
 
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
@@ -210,20 +214,20 @@ export default function EventoInscricoes() {
         posicao: data.posicao,
       }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
   })
 
   const { mutate: removerCampeao } = useMutation({
     mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
   })
 
   function handleSortear() { setErroSorteio(''); executarSorteio() }
   function handleResortear() { setResortearOpen(true) }
   function confirmarResortear() { setResortearOpen(false); setErroSorteio(''); executarSorteio() }
   function handleApagarSorteio(sid: number) {
-    if (confirm('Apagar o sorteio? A próxima execução vai gerar um novo do zero.')) apagarSorteio(sid)
+    setApagarSorteioAlvo(sid)
   }
 
   const excludeIds = inscricoes.map(i => i.participante_id)
@@ -1257,6 +1261,15 @@ export default function EventoInscricoes() {
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        open={apagarSorteioAlvo !== null}
+        onClose={() => setApagarSorteioAlvo(null)}
+        onConfirm={() => { if (apagarSorteioAlvo !== null) apagarSorteio(apagarSorteioAlvo) }}
+        title="Apagar o sorteio?"
+        description="A próxima execução vai gerar um novo do zero."
+        confirmLabel="Apagar"
+      />
 
       {/* Responsive */}
       <style>{`

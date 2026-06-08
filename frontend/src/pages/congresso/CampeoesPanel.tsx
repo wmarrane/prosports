@@ -9,6 +9,7 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, X } from '../../lib/icons'
 import { applyAnfitriaoRuleFront, grupoLetra } from '../../lib/anfitriao-rule'
 import type { Participante } from '../../types/participante'
+import { useToast } from '../../components/Toast'
 
 type Props = {
   eventoId: number
@@ -35,6 +36,7 @@ export default function CampeoesPanel({
   consideraAnfitriao = false,
 }: Props) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [editOpen, setEditOpen] = useState(false)
 
   const { data: campeoes = [], isLoading } = useQuery({
@@ -144,13 +146,13 @@ export default function CampeoesPanel({
         posicao: data.posicao,
       }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
   })
 
   const { mutate: removerCampeao } = useMutation({
     mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
   })
 
   const excludeCampeoesIds = campeoes.map(c => c.participante_id)

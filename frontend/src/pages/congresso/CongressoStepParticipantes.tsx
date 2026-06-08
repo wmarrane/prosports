@@ -7,6 +7,7 @@ import ParticipanteSelect from '../../components/ParticipanteSelect'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Plus, X, ArrowRight } from '../../lib/icons'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { useToast } from '../../components/Toast'
 
 type Props = {
   eventoId: number
@@ -21,6 +22,7 @@ const DANGER = 'var(--danger)'
 
 export default function CongressoStepParticipantes({ eventoId, modalidadeId, competicaoId, onNext }: Props) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [inscreverOpen, setInscreverOpen] = useState(false)
   const [pickedId, setPickedId] = useState<number | null>(null)
   const [erroModal, setErroModal] = useState('')
@@ -69,7 +71,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   const { mutate: remover } = useMutation({
     mutationFn: (id: number) => inscricoesService.remover(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   const excludeIds = inscricoes.map(i => i.participante_id)
