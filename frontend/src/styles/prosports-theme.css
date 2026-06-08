@@ -663,14 +663,17 @@ body {
   .login-hero { display: none !important; }
 }
 
-/* ── Impressão do sorteio (EventoInscricoes) ── */
+/* ── Impressão do sorteio (EventoInscricoes) ──
+   .sorteio-print é renderizado via portal como filho direto do <body>.
+   Na impressão escondemos os demais filhos do body e mostramos só ele,
+   em fluxo normal (sem position:absolute), pra paginar e não cortar. */
 .sorteio-print { display: none; }
 @media print {
-  body * { visibility: hidden !important; }
-  .sorteio-print, .sorteio-print * { visibility: visible !important; }
+  @page { margin: 12mm; }
+  body > *:not(.sorteio-print) { display: none !important; }
   .sorteio-print {
     display: block !important;
-    position: absolute; left: 0; top: 0; width: 100%; padding: 24px;
+    width: 100%;
     background: #fff; color: #0f172a;
     --t1: #0f172a; --t2: #1e293b; --t3: #475569; --t4: #94a3b8;
     --card-bg: #ffffff; --card-bg-2: #f8fafc; --card-border: #e2e8f0;

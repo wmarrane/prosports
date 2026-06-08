@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 import LogoMontana from '../../components/LogoMontana'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
@@ -22,7 +23,7 @@ type Props = {
 }
 
 export default function SorteioPrint(p: Props) {
-  return (
+  const content = (
     <div className="sorteio-print">
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, borderBottom: '2px solid #156082', paddingBottom: 12, marginBottom: 16 }}>
         <LogoMontana variant="simbolo" height={56} />
@@ -64,4 +65,11 @@ export default function SorteioPrint(p: Props) {
       </div>
     </div>
   )
+  // Renderiza via portal no <body> para o print isolar com display:none nos
+  // demais filhos do body (sem position:absolute relativo a ancestral).
+  // No SSR (renderToStaticMarkup, sem document) retorna inline.
+  if (typeof document !== 'undefined' && document.body) {
+    return createPortal(content, document.body)
+  }
+  return content
 }
