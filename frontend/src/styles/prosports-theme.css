@@ -671,6 +671,9 @@ body {
 @media print {
   @page { margin: 12mm; }
   body > *:not(.sorteio-print) { display: none !important; }
+  /* Restaura visibilidade do conteúdo (o bloco .print-doc acima faz
+     `body * { visibility: hidden }` em toda impressão). */
+  .sorteio-print, .sorteio-print * { visibility: visible !important; }
   .sorteio-print {
     display: block !important;
     width: 100%;
