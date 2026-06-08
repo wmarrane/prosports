@@ -167,3 +167,22 @@ export type OrdemResultado = { ordem: number[] }
 export function shuffleOrder(participantes: readonly number[], seed: string): OrdemResultado {
   return { ordem: shuffleSeeded(participantes, seed) }
 }
+
+// V2: leva cada BYE (P-ref em rodada >= 2) para uma linha "vs BYE" na 1ª rodada.
+// Função pura — não muta o grafo de entrada. IDs de stub usam prefixo 'B'.
+export function liftByesToFirstRoundV2(graph: MatchesGraph): MatchesGraph {
+  let counter = 0
+  const stubs: MatchesGraph['matches'] = []
+  const lift = (ref: MatchRef): MatchRef => {
+    if (!ref.startsWith('P')) return ref
+    counter += 1
+    const id = `B${counter}`
+    stubs.push({ id, round: 1, top: ref, bottom: 'BYE' })
+    return `V:${id}`
+  }
+  const matches = graph.matches.map(m => {
+    if (m.round < 2) return { ...m }
+    return { ...m, top: lift(m.top), bottom: lift(m.bottom) }
+  })
+  return { ...graph, matches: [...matches, ...stubs] }
+}
