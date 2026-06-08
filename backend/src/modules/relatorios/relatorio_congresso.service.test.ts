@@ -158,9 +158,9 @@ describe('gerarCongressoXlsx', () => {
     // bordas pretas: grade dos jogos (G20) e faixa Data (G16)
     expect((ws.getCell('G20').border as any).top.color.argb).toBe('FF000000')
     expect((ws.getCell('G16').border as any).top.color.argb).toBe('FF000000')
-    // aviso de revisão em G13 (grupos), vermelho
-    expect(ws.getCell('G13').value).toBe('RELATÓRIO REQUER REVISÃO. REVISE ANTES DE PUBLICAR')
-    expect((ws.getCell('G13').font.color as any).argb).toBe('FFFF0000')
+    // aviso de revisão em G2 (grupos), vermelho
+    expect(ws.getCell('G2').value).toBe('RELATÓRIO REQUER REVISÃO. REVISE ANTES DE PUBLICAR')
+    expect((ws.getCell('G2').font.color as any).argb).toBe('FFFF0000')
   })
 
   it('ordem: E6 == # , F7 primeiro municipio e E7 == 1', async () => {

@@ -316,9 +316,8 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
     }
     aplicarCabecalho(sheet, logoId, anfitriao)
 
-    // Aviso de revisão (vermelho, caixa alta): G13 em grupos; G2 nos demais.
-    const avisoAddr = tipo === 'grupos' ? 'G13' : 'G2'
-    const aviso = sheet.getCell(avisoAddr)
+    // Aviso de revisão (vermelho, caixa alta) em G2 para todos os tipos.
+    const aviso = sheet.getCell('G2')
     aviso.value = 'RELATÓRIO REQUER REVISÃO. REVISE ANTES DE PUBLICAR'
     aplicarEstilo(aviso, { fontSize: 12, fontColor: COR.vermelho })
   }
