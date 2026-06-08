@@ -1,0 +1,26 @@
+import { describe, it, expect } from 'vitest'
+import { renderToStaticMarkup } from 'react-dom/server'
+import SorteioPrint from './SorteioPrint'
+
+const base = {
+  eventoNome: 'Jogos 2026', anfitriao: 'São Manuel',
+  modalidadeNome: 'Futsal', modalidadeTipo: 'grupos' as const, sigla: 'FUT',
+  cidadeLocalData: 'São Manuel · Ginásio · 10/05/2026',
+  seed: 'ABC-123',
+  resultado: { regra_id: 1, classificados_por_grupo: 2, grupos: [{ letra: 'A', participantes: [100] }] },
+  participantesById: new Map([[100, { id: 100, nome: 'Tigres', subtitulo: null } as any]]),
+  campeoesByParticipanteId: new Map<number, number>(),
+  anfitriaoPid: null as number | null,
+  subtituloLine: () => null,
+  inscritos: [{ id: 100, nome: 'Tigres' }],
+  campeoes: [] as { posicao: number; nome: string }[],
+}
+
+it('renderiza cabecalho, seed e o sorteio', () => {
+  const html = renderToStaticMarkup(<SorteioPrint {...base} />)
+  expect(html).toContain('class="sorteio-print"')
+  expect(html).toContain('Jogos 2026')
+  expect(html).toContain('Futsal')
+  expect(html).toContain('ABC-123')
+  expect(html).toContain('Tigres')
+})

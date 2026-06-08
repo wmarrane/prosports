@@ -9,6 +9,7 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
+import SorteioPrint from './SorteioPrint'
 import { eventosService } from '../../services/eventos'
 import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
@@ -728,6 +729,7 @@ export default function EventoInscricoes() {
                           >
                             Apagar
                           </button>
+                          <button onClick={() => window.print()} className="text-xs text-[var(--t2)] hover:text-[var(--t1)] font-semibold no-print" title="Imprimir / Exportar PDF">PDF</button>
                         </div>
                       </div>
                       {sorteioDaModalidade.tipo === 'grupos' && (
@@ -812,6 +814,25 @@ export default function EventoInscricoes() {
                     </div>
                   )}
                 </section>
+
+                {sorteioDaModalidade && tipoDaModalidade !== 'especifico' && modalidadeAtual && (
+                  <SorteioPrint
+                    eventoNome={evento?.nome ?? ''}
+                    anfitriao={evento?.anfitriao?.nome ?? '—'}
+                    modalidadeNome={modalidadeAtual.nome}
+                    modalidadeTipo={tipoDaModalidade as 'grupos' | 'chaves' | 'ordem_entrada' | 'especifico' | undefined}
+                    sigla={modalidadeAtual.sigla ?? ''}
+                    cidadeLocalData={[evento?.municipio?.nome, evento?.local, evento ? formatDateBR(evento.data_hora) : ''].filter(Boolean).join(' · ')}
+                    seed={sorteioDaModalidade.seed}
+                    resultado={sorteioDaModalidade.resultado}
+                    participantesById={participantesById}
+                    campeoesByParticipanteId={campeoesByParticipanteId}
+                    anfitriaoPid={evento?.anfitriao_id ?? null}
+                    subtituloLine={subtituloLine}
+                    inscritos={inscricoes.map((i: any) => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
+                    campeoes={[...campeoes].sort((a: any, b: any) => a.posicao - b.posicao).map((c: any) => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+                  />
+                )}
 
                 {/* Card: Campeões do ano anterior — só faz sentido para Chaves/Grupos (seeding por colocação) */}
                 {(tipoDaModalidade === 'chaves' || tipoDaModalidade === 'grupos') && (

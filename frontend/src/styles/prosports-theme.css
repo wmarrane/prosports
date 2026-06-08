@@ -662,3 +662,19 @@ body {
 @media (max-width: 900px) {
   .login-hero { display: none !important; }
 }
+
+/* ── Impressão do sorteio (EventoInscricoes) ── */
+.sorteio-print { display: none; }
+@media print {
+  body * { visibility: hidden !important; }
+  .sorteio-print, .sorteio-print * { visibility: visible !important; }
+  .sorteio-print {
+    display: block !important;
+    position: absolute; left: 0; top: 0; width: 100%; padding: 24px;
+    background: #fff; color: #0f172a;
+    --t1: #0f172a; --t2: #1e293b; --t3: #475569; --t4: #94a3b8;
+    --card-bg: #ffffff; --card-bg-2: #f8fafc; --card-border: #e2e8f0;
+    --warn: #b45309; --brand-500: #1061d8; --success: #15803d;
+  }
+  .no-print { display: none !important; }
+}
