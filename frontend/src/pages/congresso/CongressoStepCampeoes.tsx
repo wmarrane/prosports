@@ -8,6 +8,7 @@ import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, ArrowRight, X } from '../../lib/icons'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { useToast } from '../../components/Toast'
 
 type Props = {
   eventoId: number
@@ -23,6 +24,7 @@ const POSICOES = Array.from({ length: 12 }, (_, i) => i + 1)
 
 export default function CongressoStepCampeoes({ eventoId, modalidadeId, competicaoId, onNext }: Props) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [editOpen, setEditOpen] = useState(false)
 
   const { data: campeoes = [], isLoading } = useQuery({
@@ -61,13 +63,13 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
         posicao: data.posicao,
       }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar campeão.'),
   })
 
   const { mutate: removerCampeao } = useMutation({
     mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
   })
 
   const excludeCampeoesIds = campeoes.map(c => c.participante_id)

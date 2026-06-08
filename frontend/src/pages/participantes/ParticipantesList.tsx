@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
 import DataTable from '../../components/DataTable'
+import ConfirmDialog from '../../components/ConfirmDialog'
+import { useToast } from '../../components/Toast'
 import { participantesService } from '../../services/participantes'
 import type { Participante } from '../../types/participante'
 import { Plus } from '../../lib/icons'
@@ -11,7 +13,9 @@ import { Users, Search } from 'lucide-react'
 export default function ParticipantesList() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [q, setQ] = useState('')
+  const [removerAlvo, setRemoverAlvo] = useState<{ id: number; nome: string } | null>(null)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['participantes'],
@@ -21,7 +25,7 @@ export default function ParticipantesList() {
   const { mutate: remover } = useMutation({
     mutationFn: participantesService.remover,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['participantes'] }),
-    onError: (err: any) => alert(err?.response?.data?.message ?? 'Erro ao remover.'),
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
   })
 
   // Filtragem client-side por nome / subtitulo / municipio
@@ -127,9 +131,7 @@ export default function ParticipantesList() {
             Editar
           </button>
           <button
-            onClick={() => {
-              if (confirm(`Remover "${row.nome}"?`)) remover(row.id)
-            }}
+            onClick={() => setRemoverAlvo({ id: row.id, nome: row.nome })}
             className="text-[var(--danger)] hover:text-[var(--danger-700)] text-xs font-semibold"
           >
             Remover
@@ -239,6 +241,15 @@ export default function ParticipantesList() {
           </section>
         )}
       </div>
+
+      <ConfirmDialog
+        open={removerAlvo !== null}
+        onClose={() => setRemoverAlvo(null)}
+        onConfirm={() => { if (removerAlvo) remover(removerAlvo.id) }}
+        title={removerAlvo ? `Remover "${removerAlvo.nome}"?` : ''}
+        description="Esta ação não pode ser desfeita."
+        confirmLabel="Remover"
+      />
     </div>
   )
 }

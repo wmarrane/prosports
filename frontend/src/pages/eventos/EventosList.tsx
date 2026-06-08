@@ -81,13 +81,13 @@ export default function EventosList() {
 
   const { mutate: publicarSite, isPending: publicandoSite } = useMutation({
     mutationFn: (id: number) => eventosService.publicar(id),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); alert('Publicação disparada. O site público será atualizado em ~1-2 min.') },
-    onError: (e: any) => alert(e?.response?.data?.message ?? 'Erro ao publicar.'),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); toast.success('Publicação disparada. O site público será atualizado em ~1-2 min.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao publicar.'),
   })
   const { mutate: despublicarSite, isPending: despublicandoSite } = useMutation({
     mutationFn: (id: number) => eventosService.despublicar(id),
-    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); alert('Despublicação disparada.') },
-    onError: (e: any) => alert(e?.response?.data?.message ?? 'Erro ao despublicar.'),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); toast.success('Despublicação disparada.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao despublicar.'),
   })
 
   const lista = useMemo(
