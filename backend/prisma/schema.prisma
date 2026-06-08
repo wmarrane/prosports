@@ -85,6 +85,7 @@ model Modalidade {
   id                  Int             @id @default(autoincrement())
   nome                String
   sigla               String
+  chave_versao        String          @default("V1")
   competicao          Competicao      @relation(fields: [competicao_id], references: [id])
   competicao_id       Int
   tipo_modalidade     TipoModalidade  @relation(fields: [tipo_modalidade_id], references: [id])

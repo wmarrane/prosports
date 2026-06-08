@@ -4,6 +4,7 @@ import {
   drawGroups,
   drawBracket,
   shuffleOrder,
+  liftByesToFirstRoundV2,
 } from './engine'
 
 describe('shuffleSeeded', () => {
@@ -247,5 +248,76 @@ describe('drawBracket — com matchesGraph (v1.19.0)', () => {
     const pids = [101, 102, 103, 104, 105, 106]
     const r = drawBracket(pids, regraChavesN6, regraBracketN6, null, 'seed-x', [])
     expect(r.matchesGraph).toBeNull()
+  })
+})
+
+describe('liftByesToFirstRoundV2', () => {
+  // Grafo real N=6: byes nas posições 1 e 6 (P1 em J3/r2, P6 em J4/r2)
+  const graphN6 = {
+    matches: [
+      { id: 'J1', top: 'P2', bottom: 'P3', round: 1 },
+      { id: 'J2', top: 'P4', bottom: 'P5', round: 1 },
+      { id: 'J3', top: 'P1', bottom: 'V:J1', round: 2 },
+      { id: 'J4', top: 'V:J2', bottom: 'P6', round: 2 },
+      { id: 'J6', top: 'V:J3', bottom: 'V:J4', round: 3 },
+      { id: 'J5', top: 'L:J3', bottom: 'L:J4', round: 3 },
+    ],
+    final: 'J6',
+    thirdPlace: 'J5',
+  }
+
+  it('cria um stub B* de 1ª rodada para cada BYE (P-ref em rodada >= 2)', () => {
+    const out = liftByesToFirstRoundV2(graphN6)
+    const stubs = out.matches.filter(m => m.id.startsWith('B'))
+    expect(stubs).toHaveLength(2)
+    for (const s of stubs) {
+      expect(s.round).toBe(1)
+      expect(s.bottom).toBe('BYE')
+      expect(s.top).toMatch(/^P\d+$/)
+    }
+  })
+
+  it('nenhum P-ref permanece em rodada >= 2 e as refs viram V:B*', () => {
+    const out = liftByesToFirstRoundV2(graphN6)
+    const r2plus = out.matches.filter(m => m.round >= 2)
+    for (const m of r2plus) {
+      expect(m.top.startsWith('P')).toBe(false)
+      expect(m.bottom.startsWith('P')).toBe(false)
+    }
+    const j3 = out.matches.find(m => m.id === 'J3')!
+    const j4 = out.matches.find(m => m.id === 'J4')!
+    expect(j3.top).toBe('V:B1')
+    expect(j4.bottom).toBe('V:B2')
+  })
+
+  it('preserva jogos reais (J*), final e thirdPlace', () => {
+    const out = liftByesToFirstRoundV2(graphN6)
+    const reais = out.matches.filter(m => m.id.startsWith('J'))
+    expect(reais).toHaveLength(6)
+    expect(out.final).toBe('J6')
+    expect(out.thirdPlace).toBe('J5')
+  })
+
+  it('não muta o grafo de entrada', () => {
+    const snapshot = JSON.parse(JSON.stringify(graphN6))
+    liftByesToFirstRoundV2(graphN6)
+    expect(graphN6).toEqual(snapshot)
+  })
+
+  it('lida com dois BYEs no mesmo jogo de 2ª rodada (gera dois stubs)', () => {
+    const g = {
+      matches: [
+        { id: 'J1', top: 'P1', bottom: 'P2', round: 2 },
+        { id: 'J2', top: 'V:J1', bottom: 'V:J1', round: 3 },
+      ],
+      final: 'J2',
+      thirdPlace: null,
+    }
+    const out = liftByesToFirstRoundV2(g)
+    const stubs = out.matches.filter(m => m.id.startsWith('B'))
+    expect(stubs).toHaveLength(2)
+    const j1 = out.matches.find(m => m.id === 'J1')!
+    expect(j1.top).toBe('V:B1')
+    expect(j1.bottom).toBe('V:B2')
   })
 })

@@ -8,6 +8,7 @@ const createSchema = z.object({
   sigla: z.string().min(1),
   competicao_id: z.number().int().positive(),
   tipo_modalidade_id: z.number().int().positive(),
+  chave_versao: z.enum(['V1', 'V2']).optional(),
 })
 const updateSchema = createSchema.partial()
 
