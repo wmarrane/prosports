@@ -33,7 +33,7 @@ const COL_GAP = 80
 const ROW_GAP = 14
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
 
-function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
+export function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
   // Agrupa matches por rodada.
   const matchesByRound: Record<number, typeof graph.matches> = {}
   const matchesSorted = [...graph.matches].sort((a, b) => a.round - b.round)
@@ -54,14 +54,19 @@ function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]
     posY[`P${p}`] = ((p - 0.5) / N) * totalHeight
   }
 
-  // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média de inputs).
+  // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média dos inputs
+  // resolvíveis). O lado 'BYE' (V2) NÃO conta: assim um stub "Pn vs BYE" usa a posição
+  // de Pn e fica na linha correta da planilha CHAVES CT — senão o BYE puxaria o naturalY
+  // para 0, jogando os byes pro topo e cruzando os conectores.
   const naturalY: Record<string, number> = {}
   for (const m of matchesSorted) {
-    const resolve = (ref: string): number => {
+    const resolve = (ref: string): number | null => {
+      if (ref === 'BYE') return null
       if (ref.startsWith('P')) return posY[ref] ?? 0
       return naturalY[ref.slice(2)] ?? 0
     }
-    naturalY[m.id] = (resolve(m.top) + resolve(m.bottom)) / 2
+    const vals = [resolve(m.top), resolve(m.bottom)].filter((v): v is number => v !== null)
+    naturalY[m.id] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0
   }
 
   // Layout final:
