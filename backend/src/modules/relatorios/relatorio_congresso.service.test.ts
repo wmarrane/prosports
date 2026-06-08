@@ -69,12 +69,14 @@ describe('gerarCongressoXlsx', () => {
     const ws = wb2.getWorksheet('XAD')!
     expect(ws).toBeTruthy()
     expect(ws.getCell('B6').value).toBe('XADREZ')
+    expect((ws.getCell('B6').fill as any).fgColor.argb).toBe('FF156082')
     expect(ws.getCell('C6').value).toBe(2)
     expect(ws.getCell('B7').value).toBe('Ana')
     expect(ws.getCell('B8').value).toBe('Carlos')
     // cabeçalho
     expect(ws.getCell('C2').value).toBe('Cidade Sede')
-    expect(ws.getCell('D4').value).toBe('Cidade Anfitriã')
+    expect(ws.getCell('D2').value).toBe('Cidade Anfitriã')
+    expect(ws.getCell('D4').value).toBeFalsy()
     expect(ws.getCell('B5').value).toBe('Modalidade (Inscritos)')
   })
 
@@ -116,6 +118,16 @@ describe('gerarCongressoXlsx', () => {
     expect(ws.getCell('G8').value).toBe('Carlos') // grupo A, pid 1
     expect(ws.getCell('H6').value).toBe('GRUPO B')
     expect(ws.getCell('F7').value).toBe(1)
+    // formatação: F6 fundo #156082
+    expect((ws.getCell('F6').fill as any).fgColor.argb).toBe('FF156082')
+    // cabeçalho do grupo G6: bold, branco sobre #156082
+    expect(ws.getCell('G6').font.bold).toBe(true)
+    expect((ws.getCell('G6').font.color as any).argb).toBe('FFFFFFFF')
+    expect((ws.getCell('G6').fill as any).fgColor.argb).toBe('FF156082')
+    // bordas #156082 no bloco de grupos
+    const bord = ws.getCell('F6').border as any
+    expect(bord.top.color.argb).toBe('FF156082')
+    expect(bord.left.color.argb).toBe('FF156082')
   })
 
   it('ordem: E6 == # , F7 primeiro municipio e E7 == 1', async () => {

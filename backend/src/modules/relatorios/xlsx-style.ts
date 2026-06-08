@@ -25,3 +25,14 @@ export function aplicarEstilo(cell: ExcelJS.Cell, e: Estilo): void {
     cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: e.fill } }
   }
 }
+
+export function aplicarBordas(
+  sheet: ExcelJS.Worksheet, r1: number, c1: number, r2: number, c2: number, argb: string,
+): void {
+  const edge = { style: 'thin' as const, color: { argb } }
+  for (let r = r1; r <= r2; r++) {
+    for (let c = c1; c <= c2; c++) {
+      sheet.getRow(r).getCell(c).border = { top: edge, left: edge, bottom: edge, right: edge }
+    }
+  }
+}
