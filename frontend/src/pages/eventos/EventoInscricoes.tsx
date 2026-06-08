@@ -820,7 +820,7 @@ export default function EventoInscricoes() {
                     eventoNome={evento?.nome ?? ''}
                     anfitriao={evento?.anfitriao?.nome ?? '—'}
                     modalidadeNome={modalidadeAtual.nome}
-                    modalidadeTipo={tipoDaModalidade as any}
+                    modalidadeTipo={tipoDaModalidade as 'grupos' | 'chaves' | 'ordem_entrada' | 'especifico' | undefined}
                     sigla={modalidadeAtual.sigla ?? ''}
                     cidadeLocalData={[evento?.municipio?.nome, evento?.local, evento ? formatDateBR(evento.data_hora) : ''].filter(Boolean).join(' · ')}
                     seed={sorteioDaModalidade.seed}
