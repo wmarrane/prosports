@@ -39,6 +39,10 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
   const toggleTheme = useThemeStore(s => s.toggle)
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement)
   const currentIdx = STEP_INDEX[step]
+  // No passo de sorteio, o passo gerencia o próprio scroll (header fixo + resultado
+  // rolando), então propagamos a altura por toda a cadeia até o conteúdo. Nos demais
+  // passos o scroll continua no .cw-main (conteúdo de altura natural).
+  const fillHeight = step === 'sorteio'
 
   useEffect(() => {
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement)
@@ -137,7 +141,7 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
       )}
 
       <div className="cw-main">
-        <div className="cw-panel" style={{ position: 'relative' }}>
+        <div className="cw-panel" style={{ position: 'relative', ...(fillHeight ? { height: '100%' } : null) }}>
           {eventoLogoUrl && (step === 'participantes' || step === 'sorteio') && (
             <div
               aria-hidden="true"
@@ -160,7 +164,7 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
               />
             </div>
           )}
-          <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+          <div style={{ position: 'relative', zIndex: 1, ...(fillHeight ? { height: '100%' } : null) }}>{children}</div>
         </div>
       </div>
     </div>
