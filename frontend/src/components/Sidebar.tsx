@@ -54,16 +54,27 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
   const { temNovidade } = useNovidades()
   const location = useLocation()
 
-  const initialExpanded = sessionStorage.getItem('prosports:admin-expanded') === 'true'
-    || NAV.some((i) => 'children' in i && i.children.some((c) => location.pathname.startsWith(c.path)))
-  const [adminExpanded, setAdminExpanded] = useState(initialExpanded)
+  // Cada grupo expansível tem seu próprio estado aberto/fechado (por id).
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
+    const map: Record<string, boolean> = {}
+    for (const item of NAV) {
+      if (!('expandable' in item)) continue
+      const stored = sessionStorage.getItem(`prosports:nav-expanded:${item.id}`)
+      map[item.id] = stored !== null
+        ? stored === 'true'
+        : item.children.some((c) => location.pathname.startsWith(c.path))
+    }
+    return map
+  })
   const [menuOpen, setMenuOpen] = useState(false)
   const userBtnRef = useRef<HTMLButtonElement>(null)
 
-  function toggleAdmin() {
-    const next = !adminExpanded
-    setAdminExpanded(next)
-    sessionStorage.setItem('prosports:admin-expanded', String(next))
+  function toggleGroup(id: string) {
+    setExpanded((prev) => {
+      const next = { ...prev, [id]: !prev[id] }
+      sessionStorage.setItem(`prosports:nav-expanded:${id}`, String(next[id]))
+      return next
+    })
   }
 
   const userInitials = (user?.email ?? 'U').slice(0, 2).toUpperCase()
@@ -98,7 +109,7 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
               <div key={item.id}>
                 <button
                   className="nav w-full"
-                  onClick={toggleAdmin}
+                  onClick={() => toggleGroup(item.id)}
                   title={collapsed ? item.label : undefined}
                 >
                   <Icon size={18} />
@@ -108,13 +119,13 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
                       size={14}
                       style={{
                         marginLeft: 'auto',
-                        transform: adminExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
+                        transform: expanded[item.id] ? 'rotate(0deg)' : 'rotate(-90deg)',
                         transition: 'transform 200ms',
                       }}
                     />
                   )}
                 </button>
-                {adminExpanded && !collapsed && (
+                {expanded[item.id] && !collapsed && (
                   <div style={{ paddingLeft: 28 }}>
                     {item.children.map((c) => (
                       <NavLink
