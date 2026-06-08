@@ -38,13 +38,14 @@ export async function criar(data: {
   sigla: string
   competicao_id: number
   tipo_modalidade_id: number
+  chave_versao?: string
 }) {
   return mapPrismaError(() => prisma.modalidade.create({ data, include: INCLUDE }))
 }
 
 export async function editar(
   id: number,
-  data: Partial<{ nome: string; sigla: string; competicao_id: number; tipo_modalidade_id: number }>
+  data: Partial<{ nome: string; sigla: string; competicao_id: number; tipo_modalidade_id: number; chave_versao: string }>
 ) {
   return mapPrismaError(async () => {
     if (data.tipo_modalidade_id !== undefined) {
