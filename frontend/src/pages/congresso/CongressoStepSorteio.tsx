@@ -501,7 +501,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
       {/* Documento de impressão (portal p/ <body> via .sorteio-print). O CSS global
           de print esconde tudo menos .sorteio-print, então window.print() exporta isto. */}
-      {tipo !== 'especifico' && modalidade && (
+      {modalidade && (
         <SorteioPrint
           eventoNome={evento?.nome ?? ''}
           anfitriao={evento?.anfitriao?.nome ?? '—'}
