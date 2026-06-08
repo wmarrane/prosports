@@ -179,6 +179,10 @@ describe('gerarCongressoXlsx', () => {
     })
     expect(linhaPos1).not.toBeNull()
     expect(ws.getRow(linhaPos1!).getCell(5).value).toBe('Ana') // slots[0] = pid 2
+    // copiarAba deve preservar bordas/estilos da chave (deep-copy cross-workbook):
+    // P5 é uma célula estrutural da chave (não sobrescrita pelo filler) e tem borda no template
+    const b = ws.getCell('P5').border
+    expect(b && (b.top || b.bottom || b.left || b.right)).toBeTruthy()
   })
 
   it('chaves sem aba correspondente: fallback para especifico', async () => {
