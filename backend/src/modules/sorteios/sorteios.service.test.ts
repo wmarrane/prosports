@@ -277,6 +277,41 @@ describe('sorteios.service', () => {
     const callArg = mockPrisma.sorteio.upsert.mock.calls[0][0]
     expect(callArg.create.resultado.matchesGraph).toEqual(fakeGraph)
   })
+
+  it('executar chaves aplica transform V2 quando modalidade.chave_versao === V2', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({
+      id: 1, competicao_id: 10, chave_versao: 'V2',
+      tipo_modalidade: { tipo: 'chaves' },
+    })
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { participante_id: 100 }, { participante_id: 200 }, { participante_id: 300 },
+    ])
+    mockPrisma.sistemaDisputasChaves.findFirst.mockResolvedValue({
+      numero_inscrito: 3, posicao_primeiro_cabeca: 1,
+      posicao_segundo_cabeca: 2, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0,
+    })
+    mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 3, posicoes_bye: [1] })
+    const v1Graph = {
+      matches: [
+        { id: 'J1', top: 'P2', bottom: 'P3', round: 1 },
+        { id: 'J2', top: 'P1', bottom: 'V:J1', round: 2 },
+      ],
+      final: 'J2', thirdPlace: null,
+    }
+    mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue({
+      numero_inscrito: 3, matches_graph: v1Graph,
+    })
+    mockPrisma.sorteio.upsert.mockImplementation(async (args: any) => ({ id: 1, ...args.create }))
+
+    await service.executar({ evento_id: 1, modalidade_id: 1 })
+
+    const call = mockPrisma.sorteio.upsert.mock.calls[0][0]
+    const graph = call.create.resultado.matchesGraph
+    expect(graph.matches.some((m: any) => m.id === 'B1' && m.round === 1 && m.bottom === 'BYE')).toBe(true)
+    const j2 = graph.matches.find((m: any) => m.id === 'J2')
+    expect(j2.top).toBe('V:B1')
+  })
 })
 
 describe('applyAnfitriaoRule', () => {

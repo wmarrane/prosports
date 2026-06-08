@@ -33,7 +33,7 @@ const COL_GAP = 80
 const ROW_GAP = 14
 const POS_ROW_HEIGHT = CARD_HEIGHT + ROW_GAP
 
-function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
+export function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]; width: number; height: number } {
   // Agrupa matches por rodada.
   const matchesByRound: Record<number, typeof graph.matches> = {}
   const matchesSorted = [...graph.matches].sort((a, b) => a.round - b.round)
@@ -54,14 +54,19 @@ function computeLayout(graph: MatchesGraph, N: number): { matches: MatchLayout[]
     posY[`P${p}`] = ((p - 0.5) / N) * totalHeight
   }
 
-  // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média de inputs).
+  // Para ORDENAR matches dentro de cada rodada, usamos Y "natural" (média dos inputs
+  // resolvíveis). O lado 'BYE' (V2) NÃO conta: assim um stub "Pn vs BYE" usa a posição
+  // de Pn e fica na linha correta da planilha CHAVES CT — senão o BYE puxaria o naturalY
+  // para 0, jogando os byes pro topo e cruzando os conectores.
   const naturalY: Record<string, number> = {}
   for (const m of matchesSorted) {
-    const resolve = (ref: string): number => {
+    const resolve = (ref: string): number | null => {
+      if (ref === 'BYE') return null
       if (ref.startsWith('P')) return posY[ref] ?? 0
       return naturalY[ref.slice(2)] ?? 0
     }
-    naturalY[m.id] = (resolve(m.top) + resolve(m.bottom)) / 2
+    const vals = [resolve(m.top), resolve(m.bottom)].filter((v): v is number => v !== null)
+    naturalY[m.id] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0
   }
 
   // Layout final:
@@ -147,15 +152,23 @@ function renderSlot(
   subtituloLine?: (p: Participante) => string | null,
   anfitriaoPid?: number | null,
   cabecasPids?: Set<number>,
+  byeStubTop?: Record<string, string>,
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
   const nameFontSize = large ? '1.2rem' : '1rem'
   const subFontSize = large ? '0.8rem' : '0.7rem'
+  if (ref === 'BYE') {
+    return <span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 700, fontSize: labelFontSize }}>BYE</span>
+  }
+  // V2: V:B{k} é a vitória automática de um BYE — mostra o nome do jogador que avançou.
+  if (ref.startsWith('V:') && byeStubTop && byeStubTop[ref.slice(2)]) {
+    ref = byeStubTop[ref.slice(2)]
+  }
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
-    if (pid === null) return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize: labelFontSize }}>BYE</span>
+    if (pid === null) return <span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 700, fontSize: labelFontSize }}>BYE</span>
     const p = participantesById.get(pid)
     const cp = campeoesByParticipanteId?.get(pid)
     if (!p) return <span style={{ color: 'var(--t4)', fontSize: labelFontSize }}>—</span>
@@ -196,19 +209,23 @@ function renderSlot(
 export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick, cabecasPids }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
+  const byeStubTop: Record<string, string> = {}
+  for (const m of matchesGraph.matches) {
+    if (m.id.startsWith('B')) byeStubTop[m.id] = m.top
+  }
+
   // Compute connectors: for each match input that references V:Jx or L:Jx,
   // draw L-shape from source match's right edge to destination input edge.
   type Connector = { d: string; key: string }
   const matchMap: Record<string, MatchLayout> = {}
   for (const m of layout.matches) matchMap[m.id] = m
 
-  // Color por match-source: hue rotativo HSL para distinguir cada confronto.
-  // Saturação/lightness fixos para combinar com o tom das caixas em ambos os
-  // modos. 3º lugar usa cor neutra (--t4) para se diferenciar.
-  const totalMatches = layout.matches.length
-  const sourceColor = (matchId: string): string => {
-    const n = parseInt(matchId.replace(/\D/g, ''), 10) || 0
-    const hue = ((n - 1) * 360 / Math.max(1, totalMatches)) % 360
+  // Cor por RODADA: todos os conectores que saem de uma mesma rodada compartilham
+  // a cor, e ela muda a cada rodada. Hue rotativo HSL com saturação/lightness fixos
+  // (tom médio que combina em light e dark). 3º lugar usa cor neutra (--t4).
+  const maxRound = Math.max(1, ...layout.matches.map(m => m.round))
+  const roundColor = (round: number): string => {
+    const hue = ((round - 1) * 360 / maxRound) % 360
     return `hsl(${hue}deg 65% 60%)`
   }
 
@@ -230,7 +247,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       connectors.push({
         d,
         key: `${srcId}-${m.id}-${slot}`,
-        stroke: isThirdPlace ? 'var(--t4)' : sourceColor(srcId),
+        stroke: isThirdPlace ? 'var(--t4)' : roundColor(src.round),
         isThirdPlace,
       })
     }
@@ -282,12 +299,14 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               </div>
             )}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
+              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
+              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
             </div>
-            <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
+            {!m.id.startsWith('B') && (
+              <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
+            )}
           </div>
         ))}
       </div>

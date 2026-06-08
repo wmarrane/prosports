@@ -67,6 +67,21 @@ describe('modalidades.service', () => {
     expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
   })
 
+  it('criar repassa chave_versao para prisma.create', async () => {
+    const data = { nome: 'Judo', sigla: 'JUD', competicao_id: 1, tipo_modalidade_id: 2, chave_versao: 'V2' }
+    mockPrisma.modalidade.create.mockResolvedValue({ id: 1, ...data })
+    await service.criar(data)
+    expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
+  })
+
+  it('editar repassa chave_versao para prisma.update', async () => {
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
+    await service.editar(1, { chave_versao: 'V1' })
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { chave_versao: 'V1' }, include: INCLUDE,
+    })
+  })
+
   it('criar mapeia P2002 para 409', async () => {
     mockPrisma.modalidade.create.mockRejectedValue(Object.assign(new Error('dup'), { code: 'P2002' }))
     await expect(
