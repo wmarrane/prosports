@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import ExcelJS from 'exceljs'
 import prisma from '../../lib/prisma'
-import { aplicarEstilo, COR } from './xlsx-style'
+import { aplicarEstilo, aplicarBordas, COR } from './xlsx-style'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -69,9 +69,9 @@ function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitri
   sheet.mergeCells('A1:B3')
   sheet.addImage(logoImageId, 'A1:B3')
   sheet.getCell('C2').value = 'Cidade Sede'
-  const d4 = sheet.getCell('D4')
-  d4.value = anfitriao
-  aplicarEstilo(d4, { bold: true, fontColor: COR.branco, fill: COR.azul })
+  const d2 = sheet.getCell('D2')
+  d2.value = anfitriao
+  aplicarEstilo(d2, { bold: true, fontColor: COR.branco, fill: COR.azul })
   sheet.getCell('B5').value = 'Modalidade (Inscritos)'
 }
 
@@ -80,7 +80,7 @@ function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitri
 function fillEspecifico(sheet: ExcelJS.Worksheet, nome: string, inscritos: string[]) {
   const b6 = sheet.getCell('B6')
   b6.value = nome.toUpperCase()
-  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.azul })
   const c6 = sheet.getCell('C6')
   c6.value = inscritos.length
   aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
@@ -102,7 +102,7 @@ function fillGrupos(
   sheet.getCell('F5').value = 'Grupos'
   const f6 = sheet.getCell('F6')
   f6.value = '#'
-  aplicarEstilo(f6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  aplicarEstilo(f6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.azul })
   for (let i = 0; i < 4; i++) {
     const c = sheet.getRow(7 + i).getCell(6)
     c.value = i + 1
@@ -112,13 +112,15 @@ function fillGrupos(
     const col = 7 + gi // G=7
     const head = sheet.getRow(6).getCell(col)
     head.value = `GRUPO ${g.letra}`
-    aplicarEstilo(head, { bold: true, fontSize: 11, fontColor: COR.preto, fill: COR.branco })
+    aplicarEstilo(head, { bold: true, fontSize: 11, fontColor: COR.branco, fill: COR.azul })
     g.participantes.slice(0, 4).forEach((pid, pi) => {
       const c = sheet.getRow(7 + pi).getCell(col)
       c.value = nomePorPid.get(pid) ?? '—'
       aplicarEstilo(c, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
     })
   })
+  // Bordas #156082 no bloco de grupos (grade interna + externa) a partir de F6
+  aplicarBordas(sheet, 6, 6, 10, 6 + grupos.length, COR.azul)
 }
 
 function fillOrdem(
@@ -195,7 +197,7 @@ function fillChaves(
 ) {
   const b6 = sheet.getCell('B6')
   b6.value = nome.toUpperCase()
-  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.azul })
   const c6 = sheet.getCell('C6')
   c6.value = inscritos.length
   aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
