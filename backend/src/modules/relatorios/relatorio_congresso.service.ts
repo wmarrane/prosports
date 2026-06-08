@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import ExcelJS from 'exceljs'
 import prisma from '../../lib/prisma'
-import { aplicarEstilo, aplicarBordas, COR } from './xlsx-style'
+import { aplicarEstilo, aplicarBordas, aplicarBordaExterna, COR } from './xlsx-style'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -125,6 +125,55 @@ function fillGrupos(
   })
   // Bordas #156082 no bloco de grupos (grade interna + externa) a partir de F6
   aplicarBordas(sheet, 6, 6, 10, 6 + grupos.length, COR.azul)
+
+  fillProgramacao(sheet, grupos, nomePorPid)
+}
+
+// Quadro de Programação de jogos (3 rodadas) para modalidades de grupo.
+// Rodada 1: cols G–K | Rodada 2: cols M–Q | Rodada 3: cols S–W.
+function fillProgramacao(
+  sheet: ExcelJS.Worksheet,
+  grupos: { letra: string; participantes: number[] }[],
+  nomePorPid: Map<number, string>
+) {
+  const rodadas = [
+    { titulo: '1ª Rodada', colBase: 7, pares: [[1, 4], [2, 3]] },   // G
+    { titulo: '2ª Rodada', colBase: 13, pares: [[3, 1], [4, 2]] },  // M
+    { titulo: '3ª Rodada', colBase: 19, pares: [[1, 2], [3, 4]] },  // S
+  ] as const
+
+  for (const rod of rodadas) {
+    const cb = rod.colBase
+    // Títulos
+    sheet.getRow(14).getCell(cb).value = 'Programação'
+    sheet.getRow(15).getCell(cb).value = rod.titulo
+    sheet.getRow(16).getCell(cb).value = 'Data'
+    sheet.getRow(17).getCell(cb).value = 'Local'
+    sheet.getRow(18).getCell(cb).value = 'Endereço'
+    // Bordas externas pretas nas faixas Data/Local/Endereço (cb..cb+4)
+    for (const r of [16, 17, 18]) aplicarBordaExterna(sheet, r, cb, r, cb + 4, COR.preto)
+    // Cabeçalhos da tabela (linha 19) com fundo #D9D9D9
+    const heads = ['Horário', 'Modalidade', 'Equipe', 'x', 'Equipe']
+    heads.forEach((h, i) => {
+      const c = sheet.getRow(19).getCell(cb + i)
+      c.value = h
+      aplicarEstilo(c, { fill: COR.cinza })
+    })
+    // Jogos: por grupo, 2 linhas (um par por linha), começando na linha 20
+    let row = 20
+    for (const g of grupos) {
+      for (const [pe, pd] of rod.pares) {
+        const pidE = g.participantes[pe - 1]
+        const pidD = g.participantes[pd - 1]
+        sheet.getRow(row).getCell(cb + 2).value = pidE != null ? (nomePorPid.get(pidE) ?? '-') : '-'
+        sheet.getRow(row).getCell(cb + 3).value = 'x'
+        sheet.getRow(row).getCell(cb + 4).value = pidD != null ? (nomePorPid.get(pidD) ?? '-') : '-'
+        row++
+      }
+    }
+    // Grade preta (internas + externas) da área de jogos: cb..cb+4, linhas 20..55
+    aplicarBordas(sheet, 20, cb, 55, cb + 4, COR.preto)
+  }
 }
 
 function fillOrdem(

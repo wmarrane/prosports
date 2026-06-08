@@ -129,6 +129,33 @@ describe('gerarCongressoXlsx', () => {
     const bord = ws.getCell('F6').border as any
     expect(bord.top.color.argb).toBe('FF156082')
     expect(bord.left.color.argb).toBe('FF156082')
+
+    // ── Programação (3 rodadas) ──
+    expect(ws.getCell('G14').value).toBe('Programação')
+    expect(ws.getCell('G15').value).toBe('1ª Rodada')
+    expect(ws.getCell('M15').value).toBe('2ª Rodada')
+    expect(ws.getCell('S15').value).toBe('3ª Rodada')
+    expect(ws.getCell('G16').value).toBe('Data')
+    expect(ws.getCell('G18').value).toBe('Endereço')
+    // cabeçalhos da tabela linha 19 (#D9D9D9)
+    expect(ws.getCell('G19').value).toBe('Horário')
+    expect(ws.getCell('J19').value).toBe('x')
+    expect((ws.getCell('G19').fill as any).fgColor.argb).toBe('FFD9D9D9')
+    // Rodada 1: Grupo A -> pos1(Ana) x pos4(-); pos2(Carlos) x pos3(-)
+    expect(ws.getCell('I20').value).toBe('Ana')
+    expect(ws.getCell('J20').value).toBe('x')
+    expect(ws.getCell('K20').value).toBe('-')
+    expect(ws.getCell('I21').value).toBe('Carlos')
+    // Rodada 2 (cols M–Q): Grupo A -> pos3(-) x pos1(Ana)
+    expect(ws.getCell('O20').value).toBe('-')
+    expect(ws.getCell('Q20').value).toBe('Ana')
+    expect(ws.getCell('P20').value).toBe('x')
+    // Rodada 3 (cols S–W): Grupo A -> pos1(Ana) x pos2(Carlos)
+    expect(ws.getCell('U20').value).toBe('Ana')
+    expect(ws.getCell('W20').value).toBe('Carlos')
+    // bordas pretas: grade dos jogos (G20) e faixa Data (G16)
+    expect((ws.getCell('G20').border as any).top.color.argb).toBe('FF000000')
+    expect((ws.getCell('G16').border as any).top.color.argb).toBe('FF000000')
   })
 
   it('ordem: E6 == # , F7 primeiro municipio e E7 == 1', async () => {
