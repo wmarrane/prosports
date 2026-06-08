@@ -11,6 +11,7 @@ import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import AnfitriaoBadge from '../../components/AnfitriaoBadge'
+import SorteioPrint from '../eventos/SorteioPrint'
 import CampeoesPanel from './CampeoesPanel'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Shuffle, Crown, X, Report } from '../../lib/icons'
@@ -497,6 +498,27 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         )}
         {erro && <p style={{ color: DANGER, fontSize: 16, marginTop: 12 }}>{erro}</p>}
       </div>
+
+      {/* Documento de impressão (portal p/ <body> via .sorteio-print). O CSS global
+          de print esconde tudo menos .sorteio-print, então window.print() exporta isto. */}
+      {tipo !== 'especifico' && modalidade && (
+        <SorteioPrint
+          eventoNome={evento?.nome ?? ''}
+          anfitriao={evento?.anfitriao?.nome ?? '—'}
+          modalidadeNome={modalidade.nome}
+          modalidadeTipo={tipo as 'grupos' | 'chaves' | 'ordem_entrada' | 'especifico' | undefined}
+          sigla={modalidade.sigla ?? ''}
+          cidadeLocalData={[evento?.municipio?.nome, evento?.local, evento ? formatDateBR(evento.data_hora) : ''].filter(Boolean).join(' · ')}
+          seed={sorteio.seed}
+          resultado={sorteio.resultado}
+          participantesById={participantesById}
+          campeoesByParticipanteId={campeoesByParticipanteId}
+          anfitriaoPid={anfitriaoPid}
+          subtituloLine={subtituloLine}
+          inscritos={inscricoes.map((i: any) => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
+          campeoes={[...campeoes].sort((a: any, b: any) => a.posicao - b.posicao).map((c: any) => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+        />
+      )}
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 16 }}>{proximaBtn}</div>
 
