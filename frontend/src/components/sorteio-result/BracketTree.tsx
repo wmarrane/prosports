@@ -147,11 +147,19 @@ function renderSlot(
   subtituloLine?: (p: Participante) => string | null,
   anfitriaoPid?: number | null,
   cabecasPids?: Set<number>,
+  byeStubTop?: Record<string, string>,
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
   const nameFontSize = large ? '1.2rem' : '1rem'
   const subFontSize = large ? '0.8rem' : '0.7rem'
+  if (ref === 'BYE') {
+    return <span style={{ color: 'var(--t4)', fontStyle: 'italic', fontSize: labelFontSize }}>BYE</span>
+  }
+  // V2: V:B{k} é a vitória automática de um BYE — mostra o nome do jogador que avançou.
+  if (ref.startsWith('V:') && byeStubTop && byeStubTop[ref.slice(2)]) {
+    ref = byeStubTop[ref.slice(2)]
+  }
   if (ref.startsWith('P')) {
     const pos = parseInt(ref.slice(1), 10)
     const pid = slots[pos - 1] ?? null
@@ -195,6 +203,11 @@ function renderSlot(
 
 export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick, cabecasPids }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
+
+  const byeStubTop: Record<string, string> = {}
+  for (const m of matchesGraph.matches) {
+    if (m.id.startsWith('B')) byeStubTop[m.id] = m.top
+  }
 
   // Compute connectors: for each match input that references V:Jx or L:Jx,
   // draw L-shape from source match's right edge to destination input edge.
@@ -282,12 +295,14 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               </div>
             )}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
+              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids)}
+              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
             </div>
-            <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
+            {!m.id.startsWith('B') && (
+              <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
+            )}
           </div>
         ))}
       </div>
