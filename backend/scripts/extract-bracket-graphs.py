@@ -370,41 +370,56 @@ def build_visual_graph(ws, N, bye_positions):
     position_rows = get_position_rows(ws)
     position_rows_inv = {v: k for k, v in position_rows.items()}
 
-    # Separa celula visual do 3rd-place. Marcador "3o/4o" fica na celula
-    # imediatamente a esquerda do j (col-1) na mesma linha. Detecta presenca
-    # dos digitos '3' E '4' juntos.
-    visual_rows = {}
-    third_visual_id = None
+    # Detecta a CELULA do 3rd-place (jid,row,col). Marcador "3o/4o" fica na
+    # celula imediatamente a esquerda do j (col-1), com os digitos '3' e '4'.
+    third_cell = None
     for jid, r, c in visual_cells:
         marker_val = ws.cell(row=r, column=c - 1).value if c > 1 else None
-        is_third = isinstance(marker_val, str) and '3' in marker_val and '4' in marker_val
-        if is_third:
-            if third_visual_id is not None:
-                raise RuntimeError(f'multiple 3rd-place markers: j{third_visual_id} and j{jid}')
-            third_visual_id = jid
+        if isinstance(marker_val, str) and '3' in marker_val and '4' in marker_val:
+            if third_cell is not None:
+                raise RuntimeError(f'multiple 3rd-place markers: j{third_cell[0]} and j{jid}')
+            third_cell = (jid, r, c)
+    if has_third and third_cell is None and visual_cells:
+        # Fallback: 3rd-place eh a celula de MAIOR linha (isolada abaixo).
+        third_cell = max(visual_cells, key=lambda t: t[1])
+    if has_third and third_cell is None:
+        raise RuntimeError('has 3rd-place estrutural mas nenhuma celula visual marcada')
+
+    # Colisao de numero: se um jogo do bracket usa o MESMO numero do 3rd-place
+    # (erro de rotulo na planilha — ex. N=22 semifinal e 3rd ambos "j19"),
+    # renumera o jogo do bracket para o menor id livre. Senao ele seria
+    # descartado junto com o 3rd (vira jogo faltante/orfao).
+    if third_cell is not None:
+        used = {jid for jid, _, _ in visual_cells}
+
+        def next_free(used_set):
+            k = 1
+            while k in used_set:
+                k += 1
+            return k
+
+        new_cells = []
+        for cell in visual_cells:
+            jid, r, c = cell
+            if cell != third_cell and jid == third_cell[0]:
+                nf = next_free(used)
+                used.add(nf)
+                new_cells.append((nf, r, c))
+            else:
+                new_cells.append(cell)
+        visual_cells = new_cells
+        third_visual_id = third_cell[0]
+    else:
+        third_visual_id = None
+
+    # Apos a renumeracao, nenhum winner deve compartilhar numero (alem do 3rd).
+    seen = {}
+    for jid, r, c in visual_cells:
+        if (jid, r, c) == third_cell:
             continue
-        if jid in visual_rows:
-            raise RuntimeError(f'duplicate visual j{jid} (rows {visual_rows[jid]} and {r})')
-        visual_rows[jid] = r
-
-    # Fallback: se estrutural tem 3rd-place mas marcador visual nao foi
-    # detectado, assume que o 3rd-place eh a celula j de MAIOR linha (visual-
-    # mente isolada abaixo do bracket).
-    if has_third and third_visual_id is None and visual_rows:
-        # Pega o de maior row
-        third_visual_id = max(visual_rows, key=lambda k: visual_rows[k])
-        del visual_rows[third_visual_id]
-
-    # Sanity: numero de jogadores N deve casar com (#visual non-3rd) - #BYEs + #BYEs * 0...
-    # Mais simples: cada P aparece em algum feeder, e total feeder count = 2 * #visual non-3rd.
-    # Skip por hora — vamos confiar no consume logic.
-
-    if has_third and third_visual_id is None:
-        raise RuntimeError('has 3rd-place estructural mas nenhuma visual marcada')
-    if not has_third and third_visual_id is not None:
-        # Visualmente marcada como 3rd-place mas estrutural nao tem — deve ser
-        # OK; mantem visual como 3rd.
-        pass
+        if jid in seen:
+            raise RuntimeError(f'duplicate visual j{jid} (rows {seen[jid]} and {r})')
+        seen[jid] = r
 
     # Organiza visual cells por coluna para processamento col-asc.
     cells_by_col = {}
@@ -441,6 +456,17 @@ def build_visual_graph(ws, N, bye_positions):
         matches.append({'id': third_id, 'top': third_top, 'bottom': third_bot})
         derive_rounds(matches)
         third_place = third_id
+
+    # Guard: o winners bracket deve ter N-1 jogos e nenhum jogo orfao (vencedor
+    # nao consumido). Falha alto em vez de emitir grafo quebrado em silencio.
+    winners = [m for m in matches if m['id'] != third_place]
+    if len(winners) != N - 1:
+        raise RuntimeError(
+            f'grafo invalido: {len(winners)} jogos no winners bracket (esperado {N - 1})')
+    referenced = {m[s][2:] for m in matches for s in ('top', 'bottom') if m[s].startswith('V:')}
+    orphans = [m['id'] for m in winners if m['id'] != final_match and m['id'] not in referenced]
+    if orphans:
+        raise RuntimeError(f'grafo invalido: jogos orfaos {orphans}')
 
     return {
         'matches': matches,
