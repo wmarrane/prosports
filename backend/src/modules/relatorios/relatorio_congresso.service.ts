@@ -1,16 +1,8 @@
+import fs from 'fs'
 import path from 'path'
 import ExcelJS from 'exceljs'
 import prisma from '../../lib/prisma'
-
-const TEMPLATE_PATH = path.resolve(__dirname, '../../../templates/Congresso.xlsx')
-
-// Mapeia tipo de modalidade -> nome da aba template
-const TIPO_TO_SHEET: Record<string, string> = {
-  especifico: 'Especifico',
-  grupos: 'Grupos',
-  ordem_entrada: 'Ordem Entrada',
-  chaves: 'Chaves',
-}
+import { aplicarEstilo, COR } from './xlsx-style'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -26,78 +18,6 @@ function uniqueSheetName(wb: ExcelJS.Workbook, base: string): string {
   }
   return name
 }
-
-function cloneSheet(
-  wb: ExcelJS.Workbook,
-  source: ExcelJS.Worksheet,
-  newName: string
-): ExcelJS.Worksheet {
-  const target = wb.addWorksheet(newName, {
-    properties: { ...source.properties },
-    pageSetup: { ...source.pageSetup },
-    views: source.views,
-  } as any)
-
-  // Larguras de coluna
-  source.columns?.forEach((c: any, i: number) => {
-    const col = target.getColumn(i + 1)
-    if (c.width) col.width = c.width
-    if (c.hidden) col.hidden = c.hidden
-  })
-
-  // Linhas, valores e estilos
-  source.eachRow({ includeEmpty: true }, (row, rowNum) => {
-    const trow = target.getRow(rowNum)
-    if (row.height) trow.height = row.height
-
-    row.eachCell({ includeEmpty: true }, (cell, colNum) => {
-      const tc = trow.getCell(colNum)
-      tc.value = cell.value
-      if (cell.style && Object.keys(cell.style).length) {
-        tc.style = JSON.parse(JSON.stringify(cell.style))
-      }
-    })
-  })
-
-  // Merges
-  const merges = (source as any)._merges ?? {}
-  for (const range of Object.keys(merges)) {
-    try {
-      target.mergeCells(range)
-    } catch {
-      /* ignora overlap */
-    }
-  }
-
-  return target
-}
-
-function setStaticValue(sheet: ExcelJS.Worksheet, addr: string, value: any) {
-  const cell = sheet.getCell(addr)
-  cell.value = value
-}
-
-// Limpa range de cells (preserva estilos, zera valor)
-function clearRange(sheet: ExcelJS.Worksheet, row1: number, col1: number, row2: number, col2: number) {
-  for (let r = row1; r <= row2; r++) {
-    for (let c = col1; c <= col2; c++) {
-      const cell = sheet.getRow(r).getCell(c)
-      cell.value = null
-    }
-  }
-}
-
-// Limpa header (rows 2-3 cols E em diante) que tinha formulas cross-sheet
-// quebradas (=Especifico!D2 -> #REF! apos remocao do template original).
-// Tambem zera valores estaticos repetidos no merge.
-function limparHeaderCidadeSede(sheet: ExcelJS.Worksheet, cidadeSede: string) {
-  // Limpa E2 ate P2 e E3 ate P3 (cidade sede stays only in D2)
-  clearRange(sheet, 2, 5, 3, 16)
-  // Reescreve cidade sede em D2 como string estatica
-  sheet.getCell('D2').value = cidadeSede
-}
-
-type ModalidadeCompleta = Awaited<ReturnType<typeof loadEventoComModalidades>>['modalidades'][number]
 
 async function loadEventoComModalidades(evento_id: number) {
   const evento = await prisma.evento.findUnique({
@@ -143,131 +63,159 @@ async function loadSorteiosByModalidade(evento_id: number) {
   return new Map(sorteios.map((s) => [s.modalidade_id, s]))
 }
 
-function nomeParticipante(p: any): string {
-  return p?.nome ?? '—'
+// ── Cabeçalho comum ────────────────────────────────────────────────────
+
+function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitriao: string) {
+  sheet.mergeCells('A1:B3')
+  sheet.addImage(logoImageId, 'A1:B3')
+  sheet.getCell('C2').value = 'Cidade Sede'
+  const d4 = sheet.getCell('D4')
+  d4.value = anfitriao
+  aplicarEstilo(d4, { bold: true, fontColor: COR.branco, fill: COR.azul })
+  sheet.getCell('B5').value = 'Modalidade (Inscritos)'
 }
 
 // ── Renderizadores por tipo ────────────────────────────────────────────
 
+function fillEspecifico(sheet: ExcelJS.Worksheet, nome: string, inscritos: string[]) {
+  const b6 = sheet.getCell('B6')
+  b6.value = nome.toUpperCase()
+  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  const c6 = sheet.getCell('C6')
+  c6.value = inscritos.length
+  aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
+  inscritos.forEach((n, i) => {
+    const cell = sheet.getRow(7 + i).getCell(2)
+    cell.value = n
+    aplicarEstilo(cell, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
+  })
+}
+
 function fillGrupos(
   sheet: ExcelJS.Worksheet,
-  mod: ModalidadeCompleta,
-  inscritos: any[],
-  sorteio: any
+  nome: string,
+  inscritos: string[],
+  grupos: { letra: string; participantes: number[] }[],
+  nomePorPid: Map<number, string>
 ) {
-  // B6 = nome modalidade (sample tem BOCHA)
-  setStaticValue(sheet, 'B6', mod.nome.toUpperCase())
-
-  // Lista de inscritos: B7..B(n+6). Template tem ate B80.
-  // Limpa lista atual (B7:B40)
-  for (let r = 7; r <= 80; r++) sheet.getRow(r).getCell(2).value = null
-  inscritos.forEach((i, idx) => {
-    sheet.getRow(7 + idx).getCell(2).value = nomeParticipante(i.participante)
-  })
-
-  // Grupos do sorteio em G7:M10 (Grupo A na col G, B na H, ...)
-  // Template tem ate Grupo F (col 12). Limpa G7:M40 antes
-  for (let r = 7; r <= 40; r++) {
-    for (let c = 7; c <= 13; c++) sheet.getRow(r).getCell(c).value = null
+  fillEspecifico(sheet, nome, inscritos) // B6/C6/B7+
+  sheet.getCell('F5').value = 'Grupos'
+  const f6 = sheet.getCell('F6')
+  f6.value = '#'
+  aplicarEstilo(f6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  for (let i = 0; i < 4; i++) {
+    const c = sheet.getRow(7 + i).getCell(6)
+    c.value = i + 1
+    aplicarEstilo(c, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
   }
-  if (sorteio?.resultado?.grupos) {
-    const grupos: any[] = sorteio.resultado.grupos
-    grupos.forEach((g: any, gi: number) => {
-      // Header "Grupo X" ja existe no template em row 6 cols G..L
-      // Posicoes (numericos) ja em F7:F10
-      const colG = 7 + gi // col index 7 = G
-      const pids: number[] = g.participantes ?? []
-      pids.forEach((pid, pi) => {
-        const insc = inscritos.find((i) => i.participante_id === pid)
-        if (insc) sheet.getRow(7 + pi).getCell(colG).value = nomeParticipante(insc.participante)
-      })
+  grupos.forEach((g, gi) => {
+    const col = 7 + gi // G=7
+    const head = sheet.getRow(6).getCell(col)
+    head.value = `GRUPO ${g.letra}`
+    aplicarEstilo(head, { bold: true, fontSize: 11, fontColor: COR.preto, fill: COR.branco })
+    g.participantes.slice(0, 4).forEach((pid, pi) => {
+      const c = sheet.getRow(7 + pi).getCell(col)
+      c.value = nomePorPid.get(pid) ?? '—'
+      aplicarEstilo(c, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
     })
+  })
+}
+
+function fillOrdem(
+  sheet: ExcelJS.Worksheet,
+  nome: string,
+  inscritos: string[],
+  ordem: number[],
+  nomePorPid: Map<number, string>
+) {
+  fillEspecifico(sheet, nome, inscritos)
+  const e5 = sheet.getCell('E5')
+  e5.value = 'ORDEM DE ENTRADA'
+  aplicarEstilo(e5, { fontSize: 11, fontColor: COR.branco, fill: COR.azul })
+  const e6 = sheet.getCell('E6')
+  e6.value = '#'
+  aplicarEstilo(e6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
+  const f6 = sheet.getCell('F6')
+  f6.value = nome.toUpperCase()
+  aplicarEstilo(f6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
+  ordem.forEach((pid, i) => {
+    const pos = sheet.getRow(7 + i).getCell(5)
+    pos.value = i + 1
+    aplicarEstilo(pos, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
+    const mun = sheet.getRow(7 + i).getCell(6)
+    mun.value = nomePorPid.get(pid) ?? '—'
+    aplicarEstilo(mun, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
+  })
+}
+
+// Copia cross-workbook a aba `source` para `wbOut` com o nome `newName`.
+function copiarAba(
+  wbOut: ExcelJS.Workbook,
+  source: ExcelJS.Worksheet,
+  newName: string
+): ExcelJS.Worksheet {
+  const target = wbOut.addWorksheet(newName, {
+    properties: { ...source.properties },
+    pageSetup: { ...source.pageSetup },
+    views: source.views,
+  } as any)
+  source.columns?.forEach((c: any, i: number) => {
+    const col = target.getColumn(i + 1)
+    if (c.width) col.width = c.width
+    if (c.hidden) col.hidden = c.hidden
+  })
+  source.eachRow({ includeEmpty: true }, (row, rn) => {
+    const trow = target.getRow(rn)
+    if (row.height) trow.height = row.height
+    row.eachCell({ includeEmpty: true }, (cell, cn) => {
+      const tc = trow.getCell(cn)
+      tc.value = cell.value
+      if (cell.style && Object.keys(cell.style).length) {
+        tc.style = JSON.parse(JSON.stringify(cell.style))
+      }
+    })
+  })
+  const merges = (source as any)._merges ?? {}
+  for (const range of Object.keys(merges)) {
+    try {
+      target.mergeCells(range)
+    } catch {
+      /* overlap */
+    }
   }
+  return target
 }
 
 function fillChaves(
   sheet: ExcelJS.Worksheet,
-  mod: ModalidadeCompleta,
-  inscritos: any[],
-  _sorteio: any
+  nome: string,
+  inscritos: string[],
+  slots: (number | null)[],
+  nomePorPid: Map<number, string>
 ) {
-  // B7 = nome modalidade
-  setStaticValue(sheet, 'B7', mod.nome.toUpperCase())
-
-  // Lista inscritos em B8..B80
-  for (let r = 8; r <= 80; r++) {
-    sheet.getRow(r).getCell(2).value = null
-    sheet.getRow(r).getCell(4).value = null
-  }
-  inscritos.forEach((i, idx) => {
-    const nome = nomeParticipante(i.participante)
-    sheet.getRow(8 + idx).getCell(2).value = nome
-    sheet.getRow(8 + idx).getCell(4).value = nome
+  const b6 = sheet.getCell('B6')
+  b6.value = nome.toUpperCase()
+  aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.preto })
+  const c6 = sheet.getCell('C6')
+  c6.value = inscritos.length
+  aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
+  inscritos.forEach((n, i) => {
+    const cell = sheet.getRow(7 + i).getCell(2)
+    cell.value = n
+    aplicarEstilo(cell, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
   })
-
-  // Bracket complexo: deixamos a estrutura template intacta.
-  // Os slots (D6, D8..) tem formulas que referenciam a lista de B/D.
-  // Cabe ao usuario consolidar manualmente conforme o sorteio.
-}
-
-function fillOrdemEntrada(
-  sheet: ExcelJS.Worksheet,
-  mod: ModalidadeCompleta,
-  inscritos: any[],
-  sorteio: any
-) {
-  // B6 = nome modalidade (sample COREOGRAFIA A)
-  setStaticValue(sheet, 'B6', mod.nome.toUpperCase())
-
-  // Lista inscritos em B7..B80
-  for (let r = 7; r <= 80; r++) {
-    sheet.getRow(r).getCell(2).value = null
-    sheet.getRow(r).getCell(6).value = null // Coluna F: nome ordenado
-  }
-  inscritos.forEach((i, idx) => {
-    sheet.getRow(7 + idx).getCell(2).value = nomeParticipante(i.participante)
+  // mapa posição->linha lendo a coluna D
+  const linhaPorPos = new Map<number, number>()
+  sheet.eachRow({ includeEmpty: false }, (row, rn) => {
+    const d = row.getCell(4).value
+    if (typeof d === 'number') linhaPorPos.set(d, rn)
   })
-
-  // Ordem do sorteio em F7..F80 (col 6)
-  if (sorteio?.resultado?.ordem) {
-    const ordem: number[] = sorteio.resultado.ordem
-    ordem.forEach((pid, idx) => {
-      const insc = inscritos.find((i) => i.participante_id === pid)
-      if (insc) sheet.getRow(7 + idx).getCell(6).value = nomeParticipante(insc.participante)
-    })
-  }
-
-  // Limpa lado direito (col J..N) que era a 2a modalidade do template
-  for (let r = 6; r <= 80; r++) {
-    for (let c = 10; c <= 15; c++) sheet.getRow(r).getCell(c).value = null
-  }
-}
-
-function fillEspecifico(
-  sheet: ExcelJS.Worksheet,
-  mod: ModalidadeCompleta,
-  inscritos: any[],
-  _sorteio: any
-) {
-  // Template tinha esquema "Atletismo dividido em 7 sub-grupos A-G".
-  // Como simplificamos para "1 modalidade flat", limpamos os sub-headers
-  // (A-G + COUNTA por coluna) e o nome distribuido em B5:H5/B6:H6.
-  clearRange(sheet, 5, 2, 8, 8) // B5:H8 (nomes repetidos + A..G + COUNTA)
-  // Mantem so o nome em B5 (cell ancora do merge)
-  setStaticValue(sheet, 'B5', mod.nome.toUpperCase())
-
-  // Lista inscritos col B a partir de B9
-  for (let r = 9; r <= 80; r++) {
-    for (let c = 2; c <= 8; c++) sheet.getRow(r).getCell(c).value = null
-  }
-  inscritos.forEach((i, idx) => {
-    sheet.getRow(9 + idx).getCell(2).value = nomeParticipante(i.participante)
+  slots.forEach((pid, idx) => {
+    if (pid == null) return
+    const pos = idx + 1
+    const rn = linhaPorPos.get(pos)
+    if (rn) sheet.getRow(rn).getCell(5).value = nomePorPid.get(pid) ?? '—'
   })
-
-  // Limpa lado direito (col J..P) — 2a modalidade do template
-  for (let r = 5; r <= 80; r++) {
-    for (let c = 10; c <= 16; c++) sheet.getRow(r).getCell(c).value = null
-  }
 }
 
 // ── Entrypoint ─────────────────────────────────────────────────────────
@@ -276,47 +224,42 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
   const { evento, modalidades } = await loadEventoComModalidades(evento_id)
   const inscritosByMod = await loadInscritosByModalidade(evento_id)
   const sorteiosByMod = await loadSorteiosByModalidade(evento_id)
-
-  const cidadeSede =
-    evento.anfitriao?.municipio?.nome ?? evento.anfitriao?.nome ?? ''
+  const anfitriao = evento.anfitriao?.nome ?? ''
 
   const wb = new ExcelJS.Workbook()
-  await wb.xlsx.readFile(TEMPLATE_PATH)
-
-  const tplSheets: Record<string, ExcelJS.Worksheet | undefined> = {
-    especifico: wb.getWorksheet('Especifico'),
-    grupos: wb.getWorksheet('Grupos'),
-    ordem_entrada: wb.getWorksheet('Ordem Entrada'),
-    chaves: wb.getWorksheet('Chaves'),
-  }
+  const chavesWb = new ExcelJS.Workbook()
+  await chavesWb.xlsx.readFile(path.resolve(__dirname, '../../../templates/CHAVES CT.xlsx'))
+  const logoBuf = fs.readFileSync(path.resolve(__dirname, '../../../templates/montana-simbolo.png'))
+  const logoId = wb.addImage({ buffer: logoBuf as unknown as ExcelJS.Buffer, extension: 'png' })
 
   for (const mod of modalidades) {
     const tipo = mod.tipo_modalidade?.tipo ?? 'especifico'
-    const tplSheet = tplSheets[tipo]
-    if (!tplSheet) continue
-
-    const sigla = mod.sigla || `MOD${mod.id}`
-    const newName = uniqueSheetName(wb, sigla)
-    const sheet = cloneSheet(wb, tplSheet, newName)
-
-    // Header comum: substitui formulas cross-sheet (=Especifico!D2) e
-    // valores estaticos espalhados pelos merges por strings limpas.
-    limparHeaderCidadeSede(sheet, cidadeSede)
-
-    const inscritos = inscritosByMod.get(mod.id) ?? []
+    const inscr = inscritosByMod.get(mod.id) ?? []
+    const nomes = inscr.map((i) => i.participante?.nome ?? '—') // já alfabético
+    const nomePorPid = new Map(inscr.map((i) => [i.participante_id, i.participante?.nome ?? '—']))
     const sorteio = sorteiosByMod.get(mod.id)
-    const resultado = sorteio ? { resultado: sorteio.resultado as any } : null
+    const sigla = uniqueSheetName(wb, mod.sigla || `MOD${mod.id}`)
 
-    if (tipo === 'grupos') fillGrupos(sheet, mod, inscritos, resultado)
-    else if (tipo === 'chaves') fillChaves(sheet, mod, inscritos, resultado)
-    else if (tipo === 'ordem_entrada') fillOrdemEntrada(sheet, mod, inscritos, resultado)
-    else fillEspecifico(sheet, mod, inscritos, resultado)
-  }
-
-  // Remove templates originais
-  for (const name of Object.values(TIPO_TO_SHEET)) {
-    const ws = wb.getWorksheet(name)
-    if (ws) wb.removeWorksheet(ws.id)
+    let sheet: ExcelJS.Worksheet
+    if (tipo === 'chaves') {
+      const n = String(inscr.length).padStart(2, '0')
+      const src = chavesWb.getWorksheet(n)
+      if (src) {
+        sheet = copiarAba(wb, src, sigla)
+        fillChaves(sheet, mod.nome, nomes, (sorteio?.resultado as any)?.slots ?? [], nomePorPid)
+      } else {
+        sheet = wb.addWorksheet(sigla)
+        fillEspecifico(sheet, mod.nome, nomes) // fallback
+      }
+    } else {
+      sheet = wb.addWorksheet(sigla)
+      if (tipo === 'grupos')
+        fillGrupos(sheet, mod.nome, nomes, (sorteio?.resultado as any)?.grupos ?? [], nomePorPid)
+      else if (tipo === 'ordem_entrada')
+        fillOrdem(sheet, mod.nome, nomes, (sorteio?.resultado as any)?.ordem ?? [], nomePorPid)
+      else fillEspecifico(sheet, mod.nome, nomes)
+    }
+    aplicarCabecalho(sheet, logoId, anfitriao)
   }
 
   const buf = await wb.xlsx.writeBuffer()
