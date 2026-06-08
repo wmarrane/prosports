@@ -70,6 +70,7 @@ describe('gerarCongressoXlsx', () => {
     expect(ws).toBeTruthy()
     expect(ws.getCell('B6').value).toBe('XADREZ')
     expect((ws.getCell('B6').fill as any).fgColor.argb).toBe('FF156082')
+    expect((ws.views?.[0] as any)?.showGridLines).toBe(false)
     expect(ws.getCell('C6').value).toBe(2)
     expect(ws.getCell('B7').value).toBe('Ana')
     expect(ws.getCell('B8').value).toBe('Carlos')

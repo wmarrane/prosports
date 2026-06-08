@@ -73,6 +73,10 @@ function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitri
   d2.value = anfitriao
   aplicarEstilo(d2, { bold: true, fontColor: COR.branco, fill: COR.azul })
   sheet.getCell('B5').value = 'Modalidade (Inscritos)'
+  // Remove as linhas de grade (gridlines) — só bordas explícitas aparecem.
+  // Preserva demais props da view (ex.: panes congelados das abas de chaves).
+  const view = sheet.views?.[0] ?? {}
+  sheet.views = [{ ...view, showGridLines: false }]
 }
 
 // ── Renderizadores por tipo ────────────────────────────────────────────
