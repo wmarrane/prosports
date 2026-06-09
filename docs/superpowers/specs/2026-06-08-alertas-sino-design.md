@@ -42,7 +42,10 @@ export type Alerta = {
 
 ## Dados (react-query)
 
-- `eventosService.listar()` — **sempre** (1 query cacheada; compartilhada com EventosList). Traz `id`, `nome`, `status`, `competicao_id`, `competicao.modalidades[{ id, nome, sigla, tipo_modalidade.tipo }]`, `data_hora`.
+> **Nota de tipo:** no payload de `eventosService.listar()`, `competicao.modalidades` só traz `{ id, tipo_modalidade.tipo }` (sem `nome`). Por isso os detalhes de modalidade (nome/tipo) vêm de `modalidadesService.listar()`, não do evento.
+
+- `eventosService.listar()` — **sempre** (1 query cacheada; compartilhada com EventosList). Usamos `id`, `nome`, `status`, `competicao_id`.
+- `modalidadesService.listar()` — **sempre** (1 query cacheada; já usada em outras telas). Traz `Modalidade[]` com `id`, `nome`, `sigla`, `competicao_id`, `tipo_modalidade.tipo`. Vira `modalidadesById`.
 - Para o item 4, sobre os **eventos ativos** (status ∈ {inscricoes, pronto, parcial}):
   - `inscricoesService.counts(eventoId)` → `Record<modalidade_id, number>` — via `useQueries` (uma por evento ativo), key `['inscricoes-counts', eventoId]`, `staleTime: 60_000`.
   - regras por competição dos eventos ativos: `sistemasDisputaService.grupos.listar(cid)` e `.chaves.listar(cid)` — via `useQueries` (deduplicado por competição), keys `['sistemas-grupos', cid]` / `['sistemas-chaves', cid]`, `staleTime: 60_000`.
@@ -60,27 +63,29 @@ export type Alerta = {
 Entrada:
 ```ts
 {
-  eventosAtivos: Array<{ id:number; nome:string; competicao_id:number;
-    modalidades: Array<{ id:number; nome:string; tipo:'grupos'|'chaves'|'especifico'|'ordem_entrada' }> }>,
+  eventosAtivos: Array<{ id:number; nome:string; competicao_id:number }>,
+  modalidadesById: Record<number, { id:number; nome:string; tipo:'grupos'|'chaves'|'especifico'|'ordem_entrada' }>,
   countsByEvento: Record<number, Record<number, number>>,   // eventoId -> (modalidadeId -> N)
   rulesByCompeticao: Record<number, { grupos:number[]; chaves:number[] }>, // cid -> Ns com regra
 }
 ```
-Lógica: para cada evento ativo, para cada modalidade com `tipo ∈ {grupos,chaves}` e `N = counts[modId] > 0`:
+Lógica: para cada evento ativo, para cada `[modId, N]` em `countsByEvento[evId]` com `N > 0`:
+- `mod = modalidadesById[modId]`; se ausente, ignora.
+- só considera `mod.tipo ∈ {grupos, chaves}` (especifico/ordem_entrada ignorados).
 - `grupos`: tem regra se `rulesByCompeticao[cid].grupos.includes(N)`.
 - `chaves`: tem regra se `rulesByCompeticao[cid].chaves.includes(N)`.
-- Se **não** tem regra → `{ id:`semregra-${evId}-${modId}`, tipo:'sem_regra', titulo:'Modalidade sem regra', descricao:`${eventoNome} · ${modNome} (${N})`, to:`/eventos/${evId}/inscricoes` }`.
-- Modalidades `especifico`/`ordem_entrada` e N=0 são ignoradas.
+- Se **não** tem regra → `{ id:`semregra-${evId}-${modId}`, tipo:'sem_regra', titulo:'Modalidade sem regra', descricao:`${eventoNome} · ${mod.nome} (${N})`, to:`/eventos/${evId}/inscricoes` }`.
 
 ## Montagem no componente
 
-1. `eventos = useQuery(eventosService.listar)`.
+1. `eventos = useQuery(eventosService.listar)`; `modalidades = useQuery(modalidadesService.listar)`.
 2. `alertasStatus = deriveEventoAlerts(eventos)`.
 3. `eventosAtivos = eventos.filter(status ∈ ativos)`.
-4. `countsQueries = useQueries(eventosAtivos.map(e => counts(e.id)))`; monta `countsByEvento`.
-5. `competicoesAtivas = unique(eventosAtivos.map(e => competicao_id))`; `rulesQueries = useQueries(...)`; monta `rulesByCompeticao` (extraindo os Ns: grupos→`quantidade_equipes`, chaves→`numero_inscrito`).
-6. `alertasSemRegra = deriveSemRegraAlerts(...)` (só quando as queries resolveram; enquanto carrega, considera vazio).
-7. `todos = [...alertasStatus, ...alertasSemRegra]`; badge = `todos.length`.
+4. `modalidadesById` = `Object.fromEntries(modalidades.map(m => [m.id, { id:m.id, nome:m.nome, tipo:m.tipo_modalidade.tipo }]))`.
+5. `countsQueries = useQueries(eventosAtivos.map(e => counts(e.id)))`; monta `countsByEvento`.
+6. `competicoesAtivas = unique(eventosAtivos.map(e => competicao_id))`; `rulesQueries = useQueries(...)` (grupos+chaves por competição); monta `rulesByCompeticao` (Ns: grupos→`quantidade_equipes`, chaves→`numero_inscrito`).
+7. `alertasSemRegra = deriveSemRegraAlerts({ eventosAtivos, modalidadesById, countsByEvento, rulesByCompeticao })` (enquanto as queries carregam, considera vazio).
+8. `todos = [...alertasStatus, ...alertasSemRegra]`; badge = `todos.length`.
 
 ## UI do popover
 
