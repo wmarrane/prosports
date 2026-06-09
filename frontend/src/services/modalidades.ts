@@ -20,6 +20,8 @@ export const modalidadesService = {
   criar: (data: ModalidadePayload) => api.post<Modalidade>(BASE, data).then(r => r.data),
   editar: (id: number, data: Partial<ModalidadePayload>) =>
     api.put<Modalidade>(`${BASE}/${id}`, data).then(r => r.data),
+  replicarMensagens: (data: { origem_id: number; destino_ids: number[]; mensagens: MensagemInscritos[] }) =>
+    api.post<{ replicadas: number }>(`${BASE}/replicar-mensagens`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
   importar: (competicao_id: number, file: File) => {
     const fd = new FormData()
