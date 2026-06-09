@@ -8,7 +8,8 @@ import { modalidadesService } from '../../services/modalidades'
 import { competicoesService } from '../../services/competicoes'
 import { tiposModalidadeService } from '../../services/tipos-modalidade'
 import { Check, X, Trophy } from '../../lib/icons'
-import { Brackets, Group, ListOrdered, FileText, Shapes } from 'lucide-react'
+import { Brackets, Group, ListOrdered, FileText, Shapes, Plus } from 'lucide-react'
+import type { MensagemInscritos } from '../../lib/mensagens-inscritos'
 
 const TIPO_ICON: Record<string, typeof Brackets> = {
   chaves: Brackets,
@@ -44,6 +45,7 @@ export default function ModalidadeForm() {
   const [nome, setNome] = useState('')
   const [sigla, setSigla] = useState('')
   const [chaveVersao, setChaveVersao] = useState<ChaveVersao>('V2')
+  const [mensagens, setMensagens] = useState<MensagemInscritos[]>([])
   const [erro, setErro] = useState('')
 
   const { data: competicoes = [] } = useQuery({
@@ -69,6 +71,7 @@ export default function ModalidadeForm() {
       setNome(existing.nome)
       setSigla(existing.sigla)
       setChaveVersao(existing.chave_versao ?? 'V1')
+      setMensagens(existing.mensagens_inscritos ?? [])
     }
   }, [existing])
 
@@ -90,6 +93,9 @@ export default function ModalidadeForm() {
         competicao_id: Number(competicaoId),
         tipo_modalidade_id: Number(tipoModalidadeId),
         chave_versao: chaveVersao,
+        mensagens_inscritos: mensagens
+          .filter(m => m.mensagem.trim() !== '')
+          .map(m => ({ ...m, mensagem: m.mensagem.trim() })),
       }
       return isEdit
         ? modalidadesService.editar(Number(id), payload)
@@ -111,6 +117,16 @@ export default function ModalidadeForm() {
     if (!nome.trim()) return setErro('Informe o nome.')
     if (sigla.trim().length < 2) return setErro('Sigla deve ter ao menos 2 caracteres.')
     salvar()
+  }
+
+  function addMensagem() {
+    setMensagens(prev => [...prev, { min: 1, max: null, mensagem: '', pular_sorteio: false }])
+  }
+  function updateMensagem(i: number, patch: Partial<MensagemInscritos>) {
+    setMensagens(prev => prev.map((m, idx) => (idx === i ? { ...m, ...patch } : m)))
+  }
+  function removeMensagem(i: number) {
+    setMensagens(prev => prev.filter((_, idx) => idx !== i))
   }
 
   const inputClass =
@@ -316,6 +332,60 @@ export default function ModalidadeForm() {
               </div>
             )}
           </section>
+
+          {(tipoSelecionado?.tipo === 'grupos' || tipoSelecionado?.tipo === 'chaves') && (
+            <section style={cardStyle}>
+              <div className="flex items-center gap-3 mb-1">
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, #0d9488 0%, #14b88a 100%)', color: '#fff', display: 'grid', placeItems: 'center' }}>
+                  <FileText size={18} />
+                </div>
+                <div>
+                  <div className="eyebrow">Modo Congresso</div>
+                  <h3 className="sec-title" style={{ fontSize: 17 }}>Mensagens por nº de inscritos</h3>
+                </div>
+              </div>
+              <p className="text-xs text-[var(--t3)] mb-4 ml-12">
+                Exibidas na tela "Inscritos" do Modo Congresso quando o nº de inscritos cair na faixa. "Pular sorteio" faz a próxima etapa voltar para a tela de modalidade.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {mensagens.map((m, i) => (
+                  <div key={i} style={{ border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)', padding: 12, background: 'var(--card-bg-2)' }}>
+                    <div className="grid grid-cols-2 gap-3" style={{ marginBottom: 8 }}>
+                      <div>
+                        <label className="block text-xs font-medium text-[var(--t2)] mb-1">De (mín.)</label>
+                        <input type="number" min={1} value={m.min}
+                          onChange={e => updateMensagem(i, { min: Math.max(1, Number(e.target.value) || 1) })}
+                          className={inputClass} />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-[var(--t2)] mb-1">Até (vazio = sem limite)</label>
+                        <input type="number" min={1} value={m.max ?? ''}
+                          onChange={e => updateMensagem(i, { max: e.target.value === '' ? null : Number(e.target.value) })}
+                          className={inputClass} />
+                      </div>
+                    </div>
+                    <label className="block text-xs font-medium text-[var(--t2)] mb-1">Mensagem</label>
+                    <textarea value={m.mensagem} rows={2}
+                      onChange={e => updateMensagem(i, { mensagem: e.target.value })}
+                      className={inputClass} style={{ resize: 'vertical' }} />
+                    <div className="flex items-center justify-between" style={{ marginTop: 8 }}>
+                      <label className="inline-flex items-center gap-2 text-sm text-[var(--t2)]">
+                        <input type="checkbox" checked={m.pular_sorteio}
+                          onChange={e => updateMensagem(i, { pular_sorteio: e.target.checked })} />
+                        Pular sorteio (voltar para modalidade)
+                      </label>
+                      <button type="button" onClick={() => removeMensagem(i)} className="text-[var(--danger)] text-xs font-semibold">Remover</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button type="button" onClick={addMensagem} className="btn btn-ghost btn-sm" style={{ marginTop: 12, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <Plus size={16} /> Adicionar mensagem
+              </button>
+            </section>
+          )}
 
           {erro && (
             <div
