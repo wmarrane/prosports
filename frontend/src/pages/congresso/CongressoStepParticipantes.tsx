@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { modalidadesService } from '../../services/modalidades'
@@ -7,13 +7,14 @@ import ParticipanteSelect from '../../components/ParticipanteSelect'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Plus, X, ArrowRight } from '../../lib/icons'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { useToast } from '../../components/Toast'
 
 type Props = {
   eventoId: number
   modalidadeId: number
   competicaoId: number | undefined
-  onNext: () => void
+  onNext: (opts?: { pularSorteio?: boolean }) => void
 }
 
 const FG = 'var(--cw-fg)'
@@ -75,6 +76,11 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
   })
 
   const excludeIds = inscricoes.map(i => i.participante_id)
+
+  const regraMensagem = useMemo(
+    () => matchMensagem(modalidade?.mensagens_inscritos ?? [], inscricoes.length),
+    [modalidade, inscricoes.length],
+  )
 
   return (
     <>
@@ -142,8 +148,16 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
         </div>
       )}
 
+      {regraMensagem && (
+        <div style={{ marginTop: 24, padding: '20px 24px', background: 'var(--cw-card)', border: '2px solid var(--brand-500)', borderRadius: 'var(--radius-xl)', textAlign: 'center' }}>
+          <p style={{ margin: 0, textTransform: 'uppercase', fontWeight: 800, fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.25, color: FG }}>
+            {regraMensagem.mensagem}
+          </p>
+        </div>
+      )}
+
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: 28 }}>
-        <button onClick={onNext} className="cw-btn cw-btn-primary">
+        <button onClick={() => onNext({ pularSorteio: regraMensagem?.pular_sorteio === true })} className="cw-btn cw-btn-primary">
           Próximo <ArrowRight size={20} />
         </button>
       </div>
