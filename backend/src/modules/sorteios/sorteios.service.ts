@@ -221,7 +221,23 @@ export async function executar(input: { evento_id: number; modalidade_id: number
     })
     resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, cabecasFinais)
   } else if (tipo === 'ordem_entrada') {
-    resultado = engine.shuffleOrder(pids, seed)
+    const cfg = (consideraAnfitriao && anfitriaoInscrito && anfitriaoPid != null)
+      ? await prisma.eventoModalidadeAnfitriao.findUnique({
+          where: { evento_id_modalidade_id: { evento_id: input.evento_id, modalidade_id: input.modalidade_id } },
+          select: { posicao: true },
+        })
+      : null
+    if (cfg && anfitriaoPid != null) {
+      if (cfg.posicao > pids.length) {
+        throw Object.assign(
+          new Error(`A posição do anfitrião (${cfg.posicao}) excede o nº de inscritos (${pids.length}).`),
+          { status: 400 },
+        )
+      }
+      resultado = engine.shuffleOrderAnfitriao(pids, seed, anfitriaoPid, cfg.posicao)
+    } else {
+      resultado = engine.shuffleOrder(pids, seed)
+    }
   } else {
     throw Object.assign(new Error(`Tipo desconhecido: ${tipo}`), { status: 500 })
   }
