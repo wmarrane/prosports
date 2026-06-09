@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useThemeStore } from '../store/themeStore'
 import { useAuthStore } from '../store/authStore'
 import {
-  Collapse, Sun, Moon, Bell, Settings, Search, Trophy, ChevR,
+  Collapse, Sun, Moon, Settings, Search, Trophy, ChevR,
 } from '../lib/icons'
+import NotificationBell from './NotificationBell'
 
 const PATH_LABELS: Record<string, string> = {
   painel: 'Painel',
@@ -80,10 +81,7 @@ export default function Topbar({ onToggleCollapse }: Props) {
       >
         {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
       </button>
-      <button className="icon-btn" style={{ position: 'relative' }} title="Notificações">
-        <Bell size={19} />
-        <span className="notif-dot" />
-      </button>
+      <NotificationBell />
       <button className="icon-btn" title="Configurações" onClick={() => navigate('/admin')}>
         <Settings size={19} />
       </button>
