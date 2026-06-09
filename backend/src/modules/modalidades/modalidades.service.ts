@@ -64,11 +64,11 @@ export async function editar(
       if (novo.tipo !== atual.tipo_modalidade.tipo) {
         return prisma.$transaction(async tx => {
           await tx.sorteio.deleteMany({ where: { modalidade_id: id } })
-          return tx.modalidade.update({ where: { id }, data, include: INCLUDE })
+          return tx.modalidade.update({ where: { id }, data: data as any, include: INCLUDE })
         })
       }
     }
-    return prisma.modalidade.update({ where: { id }, data, include: INCLUDE })
+    return prisma.modalidade.update({ where: { id }, data: data as any, include: INCLUDE })
   })
 }
 
