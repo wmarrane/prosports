@@ -22,6 +22,7 @@ const uploadCsv = multer({
 router.get('/', ...admin, ctrl.listar)
 router.get('/:id', ...admin, ctrl.buscarPorId)
 router.post('/', ...admin, ctrl.criar)
+router.post('/replicar-mensagens', ...admin, ctrl.replicarMensagens)
 router.put('/:id', ...admin, ctrl.editar)
 router.delete('/:id', ...admin, ctrl.remover)
 router.post('/import', ...admin, uploadCsv.single('arquivo'), ctrl.importar)

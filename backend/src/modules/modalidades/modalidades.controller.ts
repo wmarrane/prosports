@@ -18,6 +18,17 @@ const createSchema = z.object({
 })
 const updateSchema = createSchema.partial()
 
+const replicarSchema = z.object({
+  origem_id: z.number().int().positive(),
+  destino_ids: z.array(z.number().int().positive()).min(1),
+  mensagens: z.array(z.object({
+    min: z.number().int().min(1),
+    max: z.number().int().min(1).nullable(),
+    mensagem: z.string(),
+    pular_sorteio: z.boolean(),
+  })),
+})
+
 export async function listar(req: Request, res: Response, next: NextFunction) {
   try {
     const competicao_id = req.query.competicao_id ? Number(req.query.competicao_id) : undefined
@@ -40,6 +51,13 @@ export async function editar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = updateSchema.parse(req.body)
     res.json(await service.editar(Number(req.params.id), body))
+  } catch (err) { next(err) }
+}
+
+export async function replicarMensagens(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = replicarSchema.parse(req.body)
+    res.json(await service.replicarMensagens(body.origem_id, body.destino_ids, body.mensagens))
   } catch (err) { next(err) }
 }
 
