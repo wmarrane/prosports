@@ -22,6 +22,7 @@ import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2 } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { isSorteavel } from '../../lib/sorteaveis'
 
 function formatDateBR(iso: string): string {
   try {
@@ -232,7 +233,19 @@ export default function EventoInscricoes() {
 
   const excludeIds = inscricoes.map(i => i.participante_id)
   const excludeCampeoesIds = campeoes.map(c => c.participante_id)
-  const totalModalidades = modalidades.length
+  // Total considera só modalidades "sorteáveis" (exclui específico, sem inscritos
+  // e com regra "pular sorteio"); inclui as já sorteadas p/ garantir total ≥ sorteadas.
+  const totalModalidades = useMemo(() => {
+    const counts = countsByModalidade as Record<number, number>
+    const ids = new Set<number>(modalidadesSorteadasIds)
+    for (const m of modalidades) {
+      const n = counts[m.id] ?? 0
+      if (isSorteavel({ id: m.id, tipo: m.tipo_modalidade?.tipo ?? 'especifico', mensagens_inscritos: m.mensagens_inscritos }, n)) {
+        ids.add(m.id)
+      }
+    }
+    return ids.size
+  }, [modalidades, countsByModalidade, modalidadesSorteadasIds])
   const sorteadas = modalidadesSorteadasIds.size
   const pct = totalModalidades > 0 ? Math.round((sorteadas / totalModalidades) * 100) : 0
 
