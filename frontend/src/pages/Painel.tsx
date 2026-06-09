@@ -1,14 +1,18 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueries } from '@tanstack/react-query'
 import { useAuthStore } from '../store/authStore'
 import { competicoesService } from '../services/competicoes'
 import { eventosService } from '../services/eventos'
 import { participantesService } from '../services/participantes'
 import { modalidadesService } from '../services/modalidades'
 import { sorteiosService } from '../services/sorteios'
+import { inscricoesService } from '../services/inscricoes'
+import { isSorteavel } from '../lib/sorteaveis'
 import { Trophy, Evento as EventoIcon, Cadastro, Dice, Plus } from '../lib/icons'
 import type { LucideIcon } from 'lucide-react'
+
+const ATIVOS_STATUS = new Set(['inscricoes', 'pronto', 'parcial'])
 
 function formatDateBR(iso: string): string {
   try {
@@ -64,21 +68,41 @@ export default function Painel() {
     queryFn: () => modalidadesService.listar(),
   })
 
+  const eventosAtivos = useMemo(() => eventos.filter(e => ATIVOS_STATUS.has(e.status)), [eventos])
+
+  const countsQueries = useQueries({
+    queries: eventosAtivos.map(e => ({
+      queryKey: ['inscricoes-counts', e.id],
+      queryFn: () => inscricoesService.counts(e.id),
+      staleTime: 60_000,
+    })),
+  })
+  const countsByEvento = useMemo(() => {
+    const map: Record<number, Record<number, number>> = {}
+    eventosAtivos.forEach((e, i) => { map[e.id] = countsQueries[i]?.data ?? {} })
+    return map
+  }, [eventosAtivos, countsQueries])
+
   const proximos = useMemo(() => {
-    const ATIVOS = new Set(['inscricoes', 'pronto', 'parcial'])
-    return eventos
-      .filter(e => ATIVOS.has(e.status))
+    return eventosAtivos
       .map(e => {
+        const counts = countsByEvento[e.id] ?? {}
         const modsDaCompeticao = modalidades.filter(m => m.competicao_id === e.competicao_id)
         const sorteadasIds = new Set(
           sorteios.filter(s => s.evento_id === e.id).map(s => s.modalidade_id)
         )
-        const pendentes = modsDaCompeticao.filter(m => !sorteadasIds.has(m.id)).length
+        const pendentes = modsDaCompeticao.filter(m =>
+          !sorteadasIds.has(m.id)
+          && isSorteavel(
+            { id: m.id, tipo: m.tipo_modalidade?.tipo ?? 'especifico', mensagens_inscritos: m.mensagens_inscritos },
+            counts[m.id] ?? 0,
+          )
+        ).length
         return { evento: e, pendentes }
       })
       .filter(p => p.pendentes > 0)
       .sort((a, b) => new Date(a.evento.data_hora).getTime() - new Date(b.evento.data_hora).getTime())
-  }, [eventos, modalidades, sorteios])
+  }, [eventosAtivos, modalidades, sorteios, countsByEvento])
 
   async function handleCongresso() {
     try {
