@@ -195,4 +195,25 @@ describe('modalidades.service', () => {
       message: expect.stringMatching(/1 inscrição.*1 sorteio.*2 campeões anteriores/),
     })
   })
+
+  it('replicarMensagens aplica só nos destinos de mesmo tipo e retorna contagem', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ tipo_modalidade: { tipo: 'grupos' } })
+    mockPrisma.modalidade.findMany.mockResolvedValue([
+      { id: 2, tipo_modalidade: { tipo: 'grupos' } },
+      { id: 3, tipo_modalidade: { tipo: 'chaves' } },
+      { id: 1, tipo_modalidade: { tipo: 'grupos' } },
+    ])
+    mockPrisma.modalidade.update.mockReturnValue('upd' as any)
+    mockPrisma.$transaction.mockResolvedValue([])
+    const msgs = [{ min: 2, max: 2, mensagem: 'x', pular_sorteio: true }]
+    const r = await service.replicarMensagens(1, [2, 3, 1], msgs)
+    expect(r).toEqual({ replicadas: 1 })
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledTimes(1)
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({ where: { id: 2 }, data: { mensagens_inscritos: msgs } })
+  })
+
+  it('replicarMensagens lança 404 se origem não existe', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue(null)
+    await expect(service.replicarMensagens(99, [2], [])).rejects.toMatchObject({ status: 404 })
+  })
 })

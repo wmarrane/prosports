@@ -92,3 +92,30 @@ export async function remover(id: number) {
 
   return prisma.modalidade.delete({ where: { id } })
 }
+
+export async function replicarMensagens(
+  origem_id: number,
+  destino_ids: number[],
+  mensagens: unknown,
+): Promise<{ replicadas: number }> {
+  const origem = await prisma.modalidade.findUnique({
+    where: { id: origem_id },
+    select: { tipo_modalidade: { select: { tipo: true } } },
+  })
+  if (!origem) throw Object.assign(new Error('Modalidade de origem não encontrada'), { status: 404 })
+  const tipo = origem.tipo_modalidade.tipo
+
+  const destinos = await prisma.modalidade.findMany({
+    where: { id: { in: destino_ids } },
+    select: { id: true, tipo_modalidade: { select: { tipo: true } } },
+  })
+  const validos = destinos.filter(d => d.id !== origem_id && d.tipo_modalidade.tipo === tipo)
+
+  await prisma.$transaction(
+    validos.map(d => prisma.modalidade.update({
+      where: { id: d.id },
+      data: { mensagens_inscritos: mensagens } as any,
+    })),
+  )
+  return { replicadas: validos.length }
+}
