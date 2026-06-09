@@ -32,6 +32,9 @@ vi.mock('../../lib/prisma', () => ({
     bracketChavesMatches: {
       findUnique: vi.fn(),
     },
+    eventoModalidadeAnfitriao: {
+      findUnique: vi.fn(),
+    },
   },
 }))
 
@@ -46,6 +49,7 @@ beforeEach(() => {
   // Default: valid bracket structure for N=5 (tests that need different N override this)
   mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 5, posicoes_bye: [] })
   mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue(null)
+  mockPrisma.eventoModalidadeAnfitriao.findUnique.mockResolvedValue(null)
 })
 
 describe('sorteios.service', () => {
@@ -171,6 +175,29 @@ describe('sorteios.service', () => {
     expect(call.create.tipo).toBe('ordem_entrada')
     expect(call.create.resultado.ordem).toHaveLength(3)
     expect(call.create.resultado.ordem.sort()).toEqual([1,2,3])
+  })
+
+  it('executar (ordem_entrada) posiciona o anfitrião quando configurado', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 1, anfitriao_id: 30, competicao: { considerar_anfitriao: true } })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 1, tipo_modalidade: { tipo: 'ordem_entrada' } })
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { participante_id: 10 }, { participante_id: 20 }, { participante_id: 30 }, { participante_id: 40 },
+    ])
+    mockPrisma.eventoModalidadeAnfitriao.findUnique.mockResolvedValue({ posicao: 2 })
+    mockPrisma.sorteio.upsert.mockImplementation(async (args: any) => ({ id: 1, ...args.create }))
+    await service.executar({ evento_id: 1, modalidade_id: 2 })
+    const call = mockPrisma.sorteio.upsert.mock.calls[0][0]
+    expect(call.create.resultado.ordem[1]).toBe(30)
+    expect(call.create.resultado.ordem).toHaveLength(4)
+  })
+
+  it('executar (ordem_entrada) falha se posição > nº de inscritos', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 1, anfitriao_id: 30, competicao: { considerar_anfitriao: true } })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 1, tipo_modalidade: { tipo: 'ordem_entrada' } })
+    mockPrisma.inscricao.findMany.mockResolvedValue([{ participante_id: 10 }, { participante_id: 30 }])
+    mockPrisma.eventoModalidadeAnfitriao.findUnique.mockResolvedValue({ posicao: 5 })
+    await expect(service.executar({ evento_id: 1, modalidade_id: 2 }))
+      .rejects.toMatchObject({ status: 400, message: expect.stringContaining('excede') })
   })
 
   it('executar (chaves) lança 400 amigável se sem regra na tabela sistema_disputas_chaves', async () => {

@@ -94,6 +94,7 @@ model Modalidade {
   inscricoes          Inscricao[]
   sorteios            Sorteio[]
   campeoes_anteriores CampeaoAnterior[]
+  anfitriao_ordem     EventoModalidadeAnfitriao[]
   criado_em           DateTime        @default(now())
   atualizado_em       DateTime        @updatedAt
 
@@ -165,6 +166,7 @@ model Evento {
   sorteios        Sorteio[]
   campeoes_anteriores CampeaoAnterior[]
   event_keys      EventoKey[]
+  anfitriao_ordem EventoModalidadeAnfitriao[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -270,4 +272,17 @@ model EventoKey {
   @@unique([evento_id, email])
   @@index([evento_id])
   @@index([token])
+}
+
+model EventoModalidadeAnfitriao {
+  id            Int        @id @default(autoincrement())
+  evento        Evento     @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id     Int
+  modalidade    Modalidade @relation(fields: [modalidade_id], references: [id], onDelete: Cascade)
+  modalidade_id Int
+  posicao       Int
+
+  @@unique([evento_id, modalidade_id])
+  @@index([evento_id])
+  @@map("evento_modalidade_anfitriao")
 }

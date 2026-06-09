@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
@@ -126,6 +126,19 @@ export default function EventoInscricoes() {
     queryFn: () => inscricoesService.counts(eventoId),
   })
 
+  const { data: anfitriaoOrdemMap = {} } = useQuery({
+    queryKey: ['anfitriao-ordem', eventoId],
+    queryFn: () => eventosService.getAnfitriaoOrdem(eventoId),
+  })
+
+  const [posAnfitriao, setPosAnfitriao] = useState('')
+  useEffect(() => {
+    if (modalidadeId != null) {
+      const v = (anfitriaoOrdemMap as Record<number, number>)[modalidadeId]
+      setPosAnfitriao(v != null ? String(v) : '')
+    }
+  }, [modalidadeId, anfitriaoOrdemMap])
+
   const { data: campeoes = [] } = useQuery({
     queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId! }),
@@ -222,6 +235,15 @@ export default function EventoInscricoes() {
     mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+  })
+
+  const { mutate: salvarPosAnfitriao } = useMutation({
+    mutationFn: (posicao: number | null) => eventosService.setAnfitriaoOrdem(eventoId, modalidadeId!, posicao),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['anfitriao-ordem', eventoId] })
+      toast.success('Posição do anfitrião salva.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar posição.'),
   })
 
   function handleSortear() { setErroSorteio(''); executarSorteio() }
@@ -697,6 +719,36 @@ export default function EventoInscricoes() {
                       </h3>
                     </div>
                   </div>
+
+                  {tipoDaModalidade === 'ordem_entrada' && (
+                    <div style={{ marginBottom: 14, padding: '12px 14px', background: 'var(--card-bg-2)', border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)' }}>
+                      <label className="block text-sm font-medium text-[var(--t2)]" style={{ marginBottom: 6 }}>Posição do anfitrião</label>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <input
+                          type="number" min={1} max={inscricoes.length}
+                          value={posAnfitriao}
+                          onChange={e => setPosAnfitriao(e.target.value)}
+                          placeholder="—"
+                          style={{ width: 120, padding: '8px 10px', borderRadius: 'var(--radius-md)', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--t1)', fontSize: 14 }}
+                        />
+                        <button
+                          type="button"
+                          className="btn btn-ghost btn-sm"
+                          onClick={() => {
+                            const v = posAnfitriao.trim() === '' ? null : Number(posAnfitriao)
+                            if (v != null && (!Number.isInteger(v) || v < 1 || v > inscricoes.length)) {
+                              toast.error(`A posição deve estar entre 1 e ${inscricoes.length}.`)
+                              return
+                            }
+                            salvarPosAnfitriao(v)
+                          }}
+                        >Salvar</button>
+                      </div>
+                      <p className="text-xs text-[var(--t4)]" style={{ marginTop: 6 }}>
+                        Reservada ao anfitrião do evento na ordem sorteada. Requer "Considerar anfitrião" na competição e anfitrião inscrito. Vazio = sorteio normal.
+                      </p>
+                    </div>
+                  )}
 
                   {tipoDaModalidade === 'especifico' ? (
                     <p className="text-sm text-[var(--t3)] italic">
