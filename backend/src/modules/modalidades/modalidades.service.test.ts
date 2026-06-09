@@ -74,6 +74,23 @@ describe('modalidades.service', () => {
     expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
   })
 
+  it('criar repassa mensagens_inscritos para prisma.create', async () => {
+    const regras = [{ min: 2, max: 2, mensagem: 'Final direta', pular_sorteio: true }]
+    const data = { nome: 'Judo', sigla: 'JUD', competicao_id: 1, tipo_modalidade_id: 2, mensagens_inscritos: regras }
+    mockPrisma.modalidade.create.mockResolvedValue({ id: 1, ...data })
+    await service.criar(data)
+    expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
+  })
+
+  it('editar repassa mensagens_inscritos para prisma.update', async () => {
+    const regras = [{ min: 1, max: null, mensagem: 'Sem disputa', pular_sorteio: true }]
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
+    await service.editar(1, { mensagens_inscritos: regras })
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { mensagens_inscritos: regras }, include: INCLUDE,
+    })
+  })
+
   it('editar repassa chave_versao para prisma.update', async () => {
     mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
     await service.editar(1, { chave_versao: 'V1' })
@@ -177,5 +194,26 @@ describe('modalidades.service', () => {
       status: 409,
       message: expect.stringMatching(/1 inscrição.*1 sorteio.*2 campeões anteriores/),
     })
+  })
+
+  it('replicarMensagens aplica só nos destinos de mesmo tipo e retorna contagem', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ tipo_modalidade: { tipo: 'grupos' } })
+    mockPrisma.modalidade.findMany.mockResolvedValue([
+      { id: 2, tipo_modalidade: { tipo: 'grupos' } },
+      { id: 3, tipo_modalidade: { tipo: 'chaves' } },
+      { id: 1, tipo_modalidade: { tipo: 'grupos' } },
+    ])
+    mockPrisma.modalidade.update.mockReturnValue('upd' as any)
+    mockPrisma.$transaction.mockResolvedValue([])
+    const msgs = [{ min: 2, max: 2, mensagem: 'x', pular_sorteio: true }]
+    const r = await service.replicarMensagens(1, [2, 3, 1], msgs)
+    expect(r).toEqual({ replicadas: 1 })
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledTimes(1)
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({ where: { id: 2 }, data: { mensagens_inscritos: msgs } })
+  })
+
+  it('replicarMensagens lança 404 se origem não existe', async () => {
+    mockPrisma.modalidade.findUnique.mockResolvedValue(null)
+    await expect(service.replicarMensagens(99, [2], [])).rejects.toMatchObject({ status: 404 })
   })
 })

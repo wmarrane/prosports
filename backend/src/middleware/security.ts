@@ -18,9 +18,15 @@ export const helmetMiddleware = helmet({
 
 const allowedOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:8080').split(',')
 
+// Fora de produção, libera qualquer origem de LAN privada (localhost/10.x/172.16-31.x/
+// 192.168.x) — assim celular e outras máquinas na wifi acessam o dev sem precisar
+// reconfigurar CORS_ORIGINS a cada troca de IP. Produção segue só na allowlist.
+const PRIVATE_LAN_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1|10(\.\d{1,3}){3}|172\.(1[6-9]|2\d|3[01])(\.\d{1,3}){2}|192\.168(\.\d{1,3}){2})(:\d+)?$/i
+const allowLanOrigins = process.env.NODE_ENV !== 'production'
+
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || (allowLanOrigins && PRIVATE_LAN_ORIGIN.test(origin))) {
       callback(null, true)
     } else {
       callback(new Error('CORS: origem não permitida'))

@@ -39,13 +39,14 @@ export async function criar(data: {
   competicao_id: number
   tipo_modalidade_id: number
   chave_versao?: string
+  mensagens_inscritos?: unknown
 }) {
-  return mapPrismaError(() => prisma.modalidade.create({ data, include: INCLUDE }))
+  return mapPrismaError(() => prisma.modalidade.create({ data: data as any, include: INCLUDE }))
 }
 
 export async function editar(
   id: number,
-  data: Partial<{ nome: string; sigla: string; competicao_id: number; tipo_modalidade_id: number; chave_versao: string }>
+  data: Partial<{ nome: string; sigla: string; competicao_id: number; tipo_modalidade_id: number; chave_versao: string; mensagens_inscritos: unknown }>
 ) {
   return mapPrismaError(async () => {
     if (data.tipo_modalidade_id !== undefined) {
@@ -63,11 +64,11 @@ export async function editar(
       if (novo.tipo !== atual.tipo_modalidade.tipo) {
         return prisma.$transaction(async tx => {
           await tx.sorteio.deleteMany({ where: { modalidade_id: id } })
-          return tx.modalidade.update({ where: { id }, data, include: INCLUDE })
+          return tx.modalidade.update({ where: { id }, data: data as any, include: INCLUDE })
         })
       }
     }
-    return prisma.modalidade.update({ where: { id }, data, include: INCLUDE })
+    return prisma.modalidade.update({ where: { id }, data: data as any, include: INCLUDE })
   })
 }
 
@@ -90,4 +91,31 @@ export async function remover(id: number) {
   }
 
   return prisma.modalidade.delete({ where: { id } })
+}
+
+export async function replicarMensagens(
+  origem_id: number,
+  destino_ids: number[],
+  mensagens: unknown,
+): Promise<{ replicadas: number }> {
+  const origem = await prisma.modalidade.findUnique({
+    where: { id: origem_id },
+    select: { tipo_modalidade: { select: { tipo: true } } },
+  })
+  if (!origem) throw Object.assign(new Error('Modalidade de origem não encontrada'), { status: 404 })
+  const tipo = origem.tipo_modalidade.tipo
+
+  const destinos = await prisma.modalidade.findMany({
+    where: { id: { in: destino_ids } },
+    select: { id: true, tipo_modalidade: { select: { tipo: true } } },
+  })
+  const validos = destinos.filter(d => d.id !== origem_id && d.tipo_modalidade.tipo === tipo)
+
+  await prisma.$transaction(
+    validos.map(d => prisma.modalidade.update({
+      where: { id: d.id },
+      data: { mensagens_inscritos: mensagens } as any,
+    })),
+  )
+  return { replicadas: validos.length }
 }

@@ -9,8 +9,25 @@ const createSchema = z.object({
   competicao_id: z.number().int().positive(),
   tipo_modalidade_id: z.number().int().positive(),
   chave_versao: z.enum(['V1', 'V2']).optional(),
+  mensagens_inscritos: z.array(z.object({
+    min: z.number().int().min(1),
+    max: z.number().int().min(1).nullable(),
+    mensagem: z.string(),
+    pular_sorteio: z.boolean(),
+  })).optional(),
 })
 const updateSchema = createSchema.partial()
+
+const replicarSchema = z.object({
+  origem_id: z.number().int().positive(),
+  destino_ids: z.array(z.number().int().positive()).min(1),
+  mensagens: z.array(z.object({
+    min: z.number().int().min(1),
+    max: z.number().int().min(1).nullable(),
+    mensagem: z.string(),
+    pular_sorteio: z.boolean(),
+  })),
+})
 
 export async function listar(req: Request, res: Response, next: NextFunction) {
   try {
@@ -34,6 +51,13 @@ export async function editar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = updateSchema.parse(req.body)
     res.json(await service.editar(Number(req.params.id), body))
+  } catch (err) { next(err) }
+}
+
+export async function replicarMensagens(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = replicarSchema.parse(req.body)
+    res.json(await service.replicarMensagens(body.origem_id, body.destino_ids, body.mensagens))
   } catch (err) { next(err) }
 }
 

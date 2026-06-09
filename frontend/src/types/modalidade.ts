@@ -1,4 +1,5 @@
 import type { Competicao } from './competicao'
+import type { MensagemInscritos } from '../lib/mensagens-inscritos'
 
 export type TipoDisputa = 'grupos' | 'chaves' | 'especifico' | 'ordem_entrada'
 
@@ -17,6 +18,7 @@ export type Modalidade = {
   nome: string
   sigla: string
   chave_versao: ChaveVersao
+  mensagens_inscritos: MensagemInscritos[]
   competicao_id: number
   competicao: Competicao
   tipo_modalidade_id: number

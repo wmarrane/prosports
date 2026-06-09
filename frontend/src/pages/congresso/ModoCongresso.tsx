@@ -44,8 +44,8 @@ export default function ModoCongresso() {
 
   // Próximo step após Participantes — varia por tipo de modalidade.
   // Campeões viraram parte do Sorteio (idle state), por isso step dedicado removido.
-  function nextAfterParticipantes() {
-    if (tipoAtual === 'especifico') {
+  function nextAfterParticipantes(opts?: { pularSorteio?: boolean }) {
+    if (opts?.pularSorteio || tipoAtual === 'especifico') {
       // Sem sorteio — volta direto pra próxima modalidade
       voltarParaModalidade()
     } else {
