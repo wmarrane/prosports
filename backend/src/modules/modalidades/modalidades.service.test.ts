@@ -74,6 +74,23 @@ describe('modalidades.service', () => {
     expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
   })
 
+  it('criar repassa mensagens_inscritos para prisma.create', async () => {
+    const regras = [{ min: 2, max: 2, mensagem: 'Final direta', pular_sorteio: true }]
+    const data = { nome: 'Judo', sigla: 'JUD', competicao_id: 1, tipo_modalidade_id: 2, mensagens_inscritos: regras }
+    mockPrisma.modalidade.create.mockResolvedValue({ id: 1, ...data })
+    await service.criar(data)
+    expect(mockPrisma.modalidade.create).toHaveBeenCalledWith({ data, include: INCLUDE })
+  })
+
+  it('editar repassa mensagens_inscritos para prisma.update', async () => {
+    const regras = [{ min: 1, max: null, mensagem: 'Sem disputa', pular_sorteio: true }]
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
+    await service.editar(1, { mensagens_inscritos: regras })
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 1 }, data: { mensagens_inscritos: regras }, include: INCLUDE,
+    })
+  })
+
   it('editar repassa chave_versao para prisma.update', async () => {
     mockPrisma.modalidade.update.mockResolvedValue({ id: 1 })
     await service.editar(1, { chave_versao: 'V1' })
