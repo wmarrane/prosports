@@ -1,5 +1,6 @@
 import api from './api'
 import type { Modalidade, ChaveVersao } from '../types/modalidade'
+import type { MensagemInscritos } from '../lib/mensagens-inscritos'
 
 const BASE = '/modalidades'
 
@@ -9,6 +10,7 @@ type ModalidadePayload = {
   competicao_id: number
   tipo_modalidade_id: number
   chave_versao?: ChaveVersao
+  mensagens_inscritos?: MensagemInscritos[]
 }
 
 export const modalidadesService = {

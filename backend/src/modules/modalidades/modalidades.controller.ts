@@ -9,6 +9,12 @@ const createSchema = z.object({
   competicao_id: z.number().int().positive(),
   tipo_modalidade_id: z.number().int().positive(),
   chave_versao: z.enum(['V1', 'V2']).optional(),
+  mensagens_inscritos: z.array(z.object({
+    min: z.number().int().min(1),
+    max: z.number().int().min(1).nullable(),
+    mensagem: z.string(),
+    pular_sorteio: z.boolean(),
+  })).optional(),
 })
 const updateSchema = createSchema.partial()
 

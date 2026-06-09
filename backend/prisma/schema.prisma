@@ -86,6 +86,7 @@ model Modalidade {
   nome                String
   sigla               String
   chave_versao        String          @default("V1")
+  mensagens_inscritos Json            @default("[]")
   competicao          Competicao      @relation(fields: [competicao_id], references: [id])
   competicao_id       Int
   tipo_modalidade     TipoModalidade  @relation(fields: [tipo_modalidade_id], references: [id])
