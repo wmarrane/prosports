@@ -10,6 +10,7 @@ import { tiposModalidadeService } from '../../services/tipos-modalidade'
 import { Check, X, Trophy } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Shapes, Plus } from 'lucide-react'
 import type { MensagemInscritos } from '../../lib/mensagens-inscritos'
+import ReplicarMensagensModal from '../../components/ReplicarMensagensModal'
 
 const TIPO_ICON: Record<string, typeof Brackets> = {
   chaves: Brackets,
@@ -46,6 +47,7 @@ export default function ModalidadeForm() {
   const [sigla, setSigla] = useState('')
   const [chaveVersao, setChaveVersao] = useState<ChaveVersao>('V2')
   const [mensagens, setMensagens] = useState<MensagemInscritos[]>([])
+  const [replicarOpen, setReplicarOpen] = useState(false)
   const [erro, setErro] = useState('')
 
   const { data: competicoes = [] } = useQuery({
@@ -381,9 +383,16 @@ export default function ModalidadeForm() {
                 ))}
               </div>
 
-              <button type="button" onClick={addMensagem} className="btn btn-ghost btn-sm" style={{ marginTop: 12, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <Plus size={16} /> Adicionar mensagem
-              </button>
+              <div style={{ marginTop: 12, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                <button type="button" onClick={addMensagem} className="btn btn-ghost btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                  <Plus size={16} /> Adicionar mensagem
+                </button>
+                {isEdit && (
+                  <button type="button" onClick={() => setReplicarOpen(true)} className="btn btn-ghost btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    Replicar para outras modalidades…
+                  </button>
+                )}
+              </div>
             </section>
           )}
 
@@ -431,6 +440,15 @@ export default function ModalidadeForm() {
               {isPending ? 'Salvando...' : isEdit ? 'Salvar alterações' : 'Criar modalidade'}
             </button>
           </div>
+          {isEdit && tipoSelecionado && (
+            <ReplicarMensagensModal
+              open={replicarOpen}
+              onClose={() => setReplicarOpen(false)}
+              tipo={tipoSelecionado.tipo}
+              origemId={Number(id)}
+              mensagens={mensagens.filter(m => m.mensagem.trim() !== '').map(m => ({ ...m, mensagem: m.mensagem.trim() }))}
+            />
+          )}
         </form>
       </div>
     </div>
