@@ -20,7 +20,7 @@ export default function CongressoStepEvento({ onSelect }: Props) {
     queryFn: () => eventosService.listar(),
   })
 
-  const ativos = eventos.filter(e => e.status !== 'rascunho')
+  const ativos = eventos.filter(e => e.status === 'pronto' || e.status === 'parcial')
 
   if (isLoading) {
     return (
@@ -36,7 +36,7 @@ export default function CongressoStepEvento({ onSelect }: Props) {
       <>
         <h1 className="cw-h1">Selecione o evento</h1>
         <p className="cw-sub">
-          Nenhum evento ativo. Crie um evento e mude o status para "Inscrições" no painel administrativo.
+          Nenhum evento pronto para sorteio. Mude o status de um evento para "Pronto p/ sorteio" no painel administrativo.
         </p>
       </>
     )
@@ -46,7 +46,7 @@ export default function CongressoStepEvento({ onSelect }: Props) {
     <>
       <h1 className="cw-h1">Selecione o evento</h1>
       <p className="cw-sub">
-        {ativos.length} {ativos.length === 1 ? 'evento ativo' : 'eventos ativos'}. O congresso inicia ao selecionar um evento.
+        {ativos.length} {ativos.length === 1 ? 'evento pronto para sorteio' : 'eventos prontos para sorteio'}. O congresso inicia ao selecionar um evento.
       </p>
       <div className="cw-grid">
         {ativos.map(e => (
