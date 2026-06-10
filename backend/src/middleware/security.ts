@@ -37,9 +37,14 @@ export const corsMiddleware = cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 })
 
-export const authRateLimit = rateLimit({
+// Limite estrito SÓ no login, e contando apenas tentativas que falham
+// (skipSuccessfulRequests). Logins bem-sucedidos e o /auth/refresh automático
+// não consomem o balde — evita falso positivo de "Muitas tentativas" em uso
+// legítimo, sem enfraquecer a proteção contra força bruta.
+export const loginRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 20,
+  skipSuccessfulRequests: true,
   message: { message: 'Muitas tentativas. Aguarde 15 minutos.' },
   standardHeaders: true,
   legacyHeaders: false,

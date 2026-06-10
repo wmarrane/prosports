@@ -25,7 +25,6 @@ import {
   helmetMiddleware,
   corsMiddleware,
   globalRateLimit,
-  authRateLimit,
   errorHandler,
 } from './middleware/security'
 
@@ -44,7 +43,7 @@ app.use(cookieParser())
 
 app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/stats', statsRoutes)
-app.use('/auth', authRateLimit, authRoutes)
+app.use('/auth', authRoutes)
 app.use('/users', usersRoutes)
 app.use('/tipos-modalidade', tiposModalidadeRoutes)
 app.use('/modalidades', modalidadesRoutes)
