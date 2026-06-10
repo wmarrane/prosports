@@ -9,6 +9,8 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
+    inscricao: { groupBy: vi.fn() },
+    sorteio: { findMany: vi.fn() },
   },
 }))
 
@@ -29,6 +31,7 @@ const LIST_INCLUDE = {
       modalidades: {
         select: {
           id: true,
+          mensagens_inscritos: true,
           tipo_modalidade: { select: { tipo: true } },
         },
       },
@@ -124,5 +127,28 @@ describe('eventos.service', () => {
     mockPrisma.evento.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.evento.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+
+  it('listar computa modalidades_sorteaveis por evento (ignora especifico/sem-inscritos/pular; inclui sorteadas)', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([
+      {
+        id: 1,
+        competicao: { modalidades: [
+          { id: 10, tipo_modalidade: { tipo: 'grupos' }, mensagens_inscritos: [] },
+          { id: 11, tipo_modalidade: { tipo: 'especifico' }, mensagens_inscritos: [] },
+          { id: 12, tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [{ min: 2, max: 2, mensagem: 'x', pular_sorteio: true }] },
+        ] },
+        _count: { inscricoes: 0, sorteios: 1 },
+      },
+    ])
+    mockPrisma.inscricao.groupBy.mockResolvedValue([
+      { evento_id: 1, modalidade_id: 10, _count: { _all: 8 } },
+      { evento_id: 1, modalidade_id: 11, _count: { _all: 5 } },
+      { evento_id: 1, modalidade_id: 12, _count: { _all: 2 } },
+    ])
+    mockPrisma.sorteio.findMany.mockResolvedValue([{ evento_id: 1, modalidade_id: 10 }])
+
+    const out = await service.listar()
+    expect((out[0] as any).modalidades_sorteaveis).toBe(1)
   })
 })

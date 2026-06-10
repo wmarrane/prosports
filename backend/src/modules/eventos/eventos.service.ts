@@ -1,4 +1,5 @@
 import prisma from '../../lib/prisma'
+import { isSorteavel } from '../../lib/sorteaveis'
 
 const INCLUDE = {
   competicao: true,
@@ -14,6 +15,7 @@ const LIST_INCLUDE = {
       modalidades: {
         select: {
           id: true,
+          mensagens_inscritos: true,
           tipo_modalidade: { select: { tipo: true } },
         },
       },
@@ -51,10 +53,42 @@ type CreateInput = {
 }
 
 export async function listar(competicao_id?: number) {
-  return prisma.evento.findMany({
+  const eventos = await prisma.evento.findMany({
     where: competicao_id ? { competicao_id } : undefined,
     orderBy: { data_hora: 'desc' },
     include: LIST_INCLUDE,
+  })
+  if (eventos.length === 0) return eventos
+
+  const eventIds = eventos.map(e => e.id)
+  const grouped = await prisma.inscricao.groupBy({
+    by: ['evento_id', 'modalidade_id'],
+    where: { evento_id: { in: eventIds } },
+    _count: { _all: true },
+  })
+  const countsByEvento: Record<number, Record<number, number>> = {}
+  for (const g of grouped) {
+    ;(countsByEvento[g.evento_id] ??= {})[g.modalidade_id] = g._count._all
+  }
+
+  const sorteios = await prisma.sorteio.findMany({
+    where: { evento_id: { in: eventIds } },
+    select: { evento_id: true, modalidade_id: true },
+  })
+  const sorteadasByEvento: Record<number, Set<number>> = {}
+  for (const s of sorteios) {
+    ;(sorteadasByEvento[s.evento_id] ??= new Set()).add(s.modalidade_id)
+  }
+
+  return eventos.map(e => {
+    const counts = countsByEvento[e.id] ?? {}
+    const ids = new Set<number>(sorteadasByEvento[e.id] ?? [])
+    for (const m of (e as any).competicao?.modalidades ?? []) {
+      if (isSorteavel({ tipo: m.tipo_modalidade.tipo, mensagens_inscritos: m.mensagens_inscritos }, counts[m.id] ?? 0)) {
+        ids.add(m.id)
+      }
+    }
+    return { ...e, modalidades_sorteaveis: ids.size }
   })
 }
 
