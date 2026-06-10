@@ -34,4 +34,5 @@ export type Evento = {
     inscricoes: number
     sorteios: number
   }
+  modalidades_sorteaveis?: number
 }

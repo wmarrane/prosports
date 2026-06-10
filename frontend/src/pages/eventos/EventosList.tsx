@@ -206,6 +206,7 @@ export default function EventosList() {
               const totalModalidades = ev.competicao?.modalidades?.length ?? 0
               const inscritos = ev._count?.inscricoes ?? 0
               const sorteadas = ev._count?.sorteios ?? 0
+              const sorteaveis = ev.modalidades_sorteaveis ?? totalModalidades
               const ribbonGrad = tipos.length > 1
                 ? 'var(--grad-brand-deep)'
                 : tipos.length === 1
@@ -359,7 +360,7 @@ export default function EventosList() {
                   >
                     <Meta icon={Layers} label={String(totalModalidades)} sub="modalidades" />
                     <Meta icon={Users} label={inscritos.toLocaleString('pt-BR')} sub="inscritos" />
-                    <Meta icon={Dices} label={`${sorteadas}/${totalModalidades}`} sub="sorteadas" />
+                    <Meta icon={Dices} label={`${sorteadas}/${sorteaveis}`} sub="sorteadas" />
                   </div>
 
                   {/* Actions */}
