@@ -35,11 +35,13 @@ import TrocarSenha from './pages/conta/TrocarSenha'
 import MobileLogin from './pages/mobile/MobileLogin'
 import MobileModalidades from './pages/mobile/MobileModalidades'
 import MobileModalidade from './pages/mobile/MobileModalidade'
+import GlobalLoadingBar from './components/GlobalLoadingBar'
 
 export default function App() {
   return (
     <BrowserRouter>
       <ToastProvider>
+      <GlobalLoadingBar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/e/:token" element={<MobileLogin />} />
