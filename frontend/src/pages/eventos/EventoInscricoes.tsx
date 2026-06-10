@@ -9,7 +9,7 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
-import SorteioPrint, { SorteioPrintContent } from './SorteioPrint'
+import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
@@ -307,12 +307,17 @@ export default function EventoInscricoes() {
             campeoes={[...camps]
               .sort((a, b) => a.posicao - b.posicao)
               .map(c => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+            omitEventoHeader
           />
         )
       })
 
+      const headerHtml = `<div class="sorteio-print export-header">${renderToStaticMarkup(
+        <SorteioPrintHeader eventoNome={evento.nome} anfitriao={evento.anfitriao?.nome ?? '—'} cidadeLocalData={cidadeLocalData} />
+      )}</div>`
+
       const css = serializeLoadedStyles()
-      const bodyHtml = await inlineRootImages(secoes.join('\n'))
+      const bodyHtml = await inlineRootImages([headerHtml, ...secoes].join('\n'))
       const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml })
       downloadHtmlFile(`evento-${slugify(evento.nome)}.html`, html)
       toast.success('HTML exportado.')

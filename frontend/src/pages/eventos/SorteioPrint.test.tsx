@@ -1,6 +1,6 @@
 import { it, expect } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import SorteioPrint, { SorteioPrintContent } from './SorteioPrint'
+import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
 
 const base = {
   eventoNome: 'Jogos 2026', anfitriao: 'São Manuel',
@@ -38,4 +38,21 @@ it('SorteioPrintContent omite seed e bloco de sorteio quando nao ha sorteio', ()
   )
   expect(html).not.toContain('seed:')
   expect(html).toContain('Tigres')
+})
+
+it('SorteioPrintContent com omitEventoHeader nao repete dados do evento', () => {
+  const html = renderToStaticMarkup(<SorteioPrintContent {...base} omitEventoHeader />)
+  expect(html).not.toContain('Jogos 2026')
+  expect(html).not.toContain('Cidade Sede')
+  expect(html).toContain('Futsal')
+  expect(html).toContain('Tigres')
+})
+
+it('SorteioPrintHeader renderiza nome e dados do evento uma vez', () => {
+  const html = renderToStaticMarkup(
+    <SorteioPrintHeader eventoNome="Jogos 2026" anfitriao="São Manuel" cidadeLocalData="São Manuel · Ginásio · 10/05/2026" />
+  )
+  expect(html).toContain('Jogos 2026')
+  expect(html).toContain('Cidade Sede')
+  expect(html).toContain('São Manuel')
 })
