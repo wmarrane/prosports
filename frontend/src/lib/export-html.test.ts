@@ -21,6 +21,7 @@ describe('buildExportDocument', () => {
     expect(html).toContain('data-theme="light"')
     expect(html).toContain('.x{color:red}')
     expect(html).toContain('.sorteio-print { display: block !important; }')
+    expect(html).toContain('overflow: visible !important')
     expect(html).toContain('<div class="sorteio-print">ok</div>')
   })
   it('escapa caracteres especiais no titulo', () => {

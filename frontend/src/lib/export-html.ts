@@ -13,6 +13,7 @@ function escapeHtml(s: string): string {
 }
 
 const EXPORT_OVERRIDE_CSS = `
+html, body, #root { height: auto !important; overflow: visible !important; }
 body { background: #fff; margin: 24px; }
 .sorteio-print { display: block !important; }
 .sorteio-print + .sorteio-print { margin-top: 24px; }
