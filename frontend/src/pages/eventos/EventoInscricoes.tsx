@@ -23,6 +23,7 @@ import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2 } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import { isSorteavel } from '../../lib/sorteaveis'
+import { matchMensagem } from '../../lib/mensagens-inscritos'
 
 function formatDateBR(iso: string): string {
   try {
@@ -168,6 +169,10 @@ export default function EventoInscricoes() {
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
+  const regraMensagem = useMemo(
+    () => matchMensagem(modalidadeAtual?.mensagens_inscritos ?? [], inscricoes.length),
+    [modalidadeAtual, inscricoes.length],
+  )
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
 
@@ -720,6 +725,14 @@ export default function EventoInscricoes() {
                     </div>
                   </div>
 
+                  {regraMensagem && (
+                    <div style={{ marginBottom: 14, padding: '16px 18px', background: 'var(--card-bg-2)', border: '2px solid var(--brand-500)', borderRadius: 'var(--radius-lg)', textAlign: 'center' }}>
+                      <p style={{ margin: 0, textTransform: 'uppercase', fontWeight: 800, fontSize: 'clamp(16px, 1.6vw, 22px)', lineHeight: 1.25, color: 'var(--t1)' }}>
+                        {regraMensagem.mensagem}
+                      </p>
+                    </div>
+                  )}
+
                   {tipoDaModalidade === 'ordem_entrada' && (
                     <div style={{ marginBottom: 14, padding: '12px 14px', background: 'var(--card-bg-2)', border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)' }}>
                       <label className="block text-sm font-medium text-[var(--t2)]" style={{ marginBottom: 6 }}>Posição do anfitrião</label>
@@ -854,24 +867,28 @@ export default function EventoInscricoes() {
                     >
                       <Shuffle size={36} className="mx-auto mb-3 text-[var(--t4)]" />
                       <p className="text-sm text-[var(--t3)] mb-3">
-                        {inscricoes.length === 0
+                        {regraMensagem?.pular_sorteio
+                          ? 'Esta modalidade não vai a sorteio (regra de inscritos).'
+                          : inscricoes.length === 0
                           ? 'Adicione participantes antes de sortear.'
                           : 'Sorteio ainda não realizado.'}
                       </p>
-                      <button
-                        onClick={handleSortear}
-                        disabled={inscricoes.length === 0 || executandoSorteio}
-                        className="btn btn-primary"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 6,
-                          opacity: inscricoes.length === 0 || executandoSorteio ? 0.5 : 1,
-                        }}
-                      >
-                        <Shuffle size={16} />
-                        {executandoSorteio ? 'Sorteando...' : 'Realizar sorteio'}
-                      </button>
+                      {!regraMensagem?.pular_sorteio && (
+                        <button
+                          onClick={handleSortear}
+                          disabled={inscricoes.length === 0 || executandoSorteio}
+                          className="btn btn-primary"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 6,
+                            opacity: inscricoes.length === 0 || executandoSorteio ? 0.5 : 1,
+                          }}
+                        >
+                          <Shuffle size={16} />
+                          {executandoSorteio ? 'Sorteando...' : 'Realizar sorteio'}
+                        </button>
+                      )}
                       {erroSorteio && (
                         <p
                           className="mt-3 text-sm"
