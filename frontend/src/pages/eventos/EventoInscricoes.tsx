@@ -18,7 +18,7 @@ import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, slugify } from '../../lib/export-html'
+import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, slugify, inlineRootImages } from '../../lib/export-html'
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
@@ -312,7 +312,8 @@ export default function EventoInscricoes() {
       })
 
       const css = serializeLoadedStyles()
-      const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml: secoes.join('\n') })
+      const bodyHtml = await inlineRootImages(secoes.join('\n'))
+      const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml })
       downloadHtmlFile(`evento-${slugify(evento.nome)}.html`, html)
       toast.success('HTML exportado.')
     } catch (err: any) {

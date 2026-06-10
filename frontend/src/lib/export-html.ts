@@ -56,6 +56,35 @@ export function serializeLoadedStyles(): string {
   return css
 }
 
+// Converte imagens com src raiz-relativo (ex.: "/montana/simbolo.png") em data
+// URIs base64, para o HTML exportado abrir offline (file://) com as imagens.
+// Falha de fetch em uma imagem é ignorada (mantém o src original).
+export async function inlineRootImages(html: string): Promise<string> {
+  const urls = new Set<string>()
+  const re = /src="(\/[^"]+)"/g
+  let m: RegExpExecArray | null
+  while ((m = re.exec(html)) !== null) urls.add(m[1])
+
+  let out = html
+  for (const url of urls) {
+    try {
+      const res = await fetch(url)
+      if (!res.ok) continue
+      const blob = await res.blob()
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+      })
+      out = out.split(`src="${url}"`).join(`src="${dataUrl}"`)
+    } catch {
+      // mantém o src original se a imagem não puder ser carregada
+    }
+  }
+  return out
+}
+
 export function downloadHtmlFile(filename: string, html: string): void {
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
   const url = URL.createObjectURL(blob)
