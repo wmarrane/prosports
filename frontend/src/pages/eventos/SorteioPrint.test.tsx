@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { it, expect } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import SorteioPrint from './SorteioPrint'
+import SorteioPrint, { SorteioPrintContent } from './SorteioPrint'
 
 const base = {
   eventoNome: 'Jogos 2026', anfitriao: 'São Manuel',
@@ -16,11 +16,26 @@ const base = {
   campeoes: [] as { posicao: number; nome: string }[],
 }
 
-it('renderiza cabecalho, seed e o sorteio', () => {
+it('SorteioPrint renderiza cabecalho, seed e o sorteio', () => {
   const html = renderToStaticMarkup(<SorteioPrint {...base} />)
   expect(html).toContain('class="sorteio-print"')
   expect(html).toContain('Jogos 2026')
   expect(html).toContain('Futsal')
   expect(html).toContain('ABC-123')
+  expect(html).toContain('Tigres')
+})
+
+it('SorteioPrintContent renderiza inline com a classe sorteio-print', () => {
+  const html = renderToStaticMarkup(<SorteioPrintContent {...base} />)
+  expect(html).toContain('class="sorteio-print"')
+  expect(html).toContain('Jogos 2026')
+  expect(html).toContain('Tigres')
+})
+
+it('SorteioPrintContent omite seed e bloco de sorteio quando nao ha sorteio', () => {
+  const html = renderToStaticMarkup(
+    <SorteioPrintContent {...base} resultado={null} seed="" />
+  )
+  expect(html).not.toContain('seed:')
   expect(html).toContain('Tigres')
 })
