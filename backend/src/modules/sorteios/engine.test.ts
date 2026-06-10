@@ -4,6 +4,7 @@ import {
   drawGroups,
   drawBracket,
   shuffleOrder,
+  shuffleOrderAnfitriao,
   liftByesToFirstRoundV2,
 } from './engine'
 
@@ -319,5 +320,26 @@ describe('liftByesToFirstRoundV2', () => {
     const j1 = out.matches.find(m => m.id === 'J1')!
     expect(j1.top).toBe('V:B1')
     expect(j1.bottom).toBe('V:B2')
+  })
+})
+
+describe('shuffleOrderAnfitriao', () => {
+  it('coloca o anfitrião na posição (1-based) e mantém todos', () => {
+    const out = shuffleOrderAnfitriao([1, 2, 3, 4, 5], 'seed', 3, 2)
+    expect(out.ordem[1]).toBe(3)
+    expect(out.ordem).toHaveLength(5)
+    expect([...out.ordem].sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5])
+  })
+
+  it('determinístico para a mesma seed', () => {
+    const a = shuffleOrderAnfitriao([1, 2, 3, 4, 5], 's', 1, 1)
+    const b = shuffleOrderAnfitriao([1, 2, 3, 4, 5], 's', 1, 1)
+    expect(a).toEqual(b)
+  })
+
+  it('posição 1 e última', () => {
+    expect(shuffleOrderAnfitriao([10, 20, 30], 's', 20, 1).ordem[0]).toBe(20)
+    const ult = shuffleOrderAnfitriao([10, 20, 30], 's', 20, 3)
+    expect(ult.ordem[2]).toBe(20)
   })
 })

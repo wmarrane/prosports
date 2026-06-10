@@ -168,6 +168,23 @@ export function shuffleOrder(participantes: readonly number[], seed: string): Or
   return { ordem: shuffleSeeded(participantes, seed) }
 }
 
+export function shuffleOrderAnfitriao(
+  participantes: readonly number[],
+  seed: string,
+  anfitriaoPid: number,
+  posicao: number,
+): OrdemResultado {
+  const others = participantes.filter(p => p !== anfitriaoPid)
+  const shuffled = shuffleSeeded(others, seed)
+  const ordem: number[] = []
+  let j = 0
+  for (let i = 0; i < participantes.length; i++) {
+    if (i === posicao - 1) ordem.push(anfitriaoPid)
+    else ordem.push(shuffled[j++])
+  }
+  return { ordem }
+}
+
 // V2: leva cada BYE (P-ref em rodada >= 2) para uma linha "vs BYE" na 1ª rodada.
 // Função pura — não muta o grafo de entrada. IDs de stub usam prefixo 'B'.
 export function liftByesToFirstRoundV2(graph: MatchesGraph): MatchesGraph {

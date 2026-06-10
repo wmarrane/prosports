@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
@@ -22,6 +22,8 @@ import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2 } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { isSorteavel } from '../../lib/sorteaveis'
+import { matchMensagem } from '../../lib/mensagens-inscritos'
 
 function formatDateBR(iso: string): string {
   try {
@@ -125,6 +127,19 @@ export default function EventoInscricoes() {
     queryFn: () => inscricoesService.counts(eventoId),
   })
 
+  const { data: anfitriaoOrdemMap = {} } = useQuery({
+    queryKey: ['anfitriao-ordem', eventoId],
+    queryFn: () => eventosService.getAnfitriaoOrdem(eventoId),
+  })
+
+  const [posAnfitriao, setPosAnfitriao] = useState('')
+  useEffect(() => {
+    if (modalidadeId != null) {
+      const v = (anfitriaoOrdemMap as Record<number, number>)[modalidadeId]
+      setPosAnfitriao(v != null ? String(v) : '')
+    }
+  }, [modalidadeId, anfitriaoOrdemMap])
+
   const { data: campeoes = [] } = useQuery({
     queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId! }),
@@ -154,6 +169,10 @@ export default function EventoInscricoes() {
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
+  const regraMensagem = useMemo(
+    () => matchMensagem(modalidadeAtual?.mensagens_inscritos ?? [], inscricoes.length),
+    [modalidadeAtual, inscricoes.length],
+  )
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
 
@@ -223,6 +242,15 @@ export default function EventoInscricoes() {
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
   })
 
+  const { mutate: salvarPosAnfitriao } = useMutation({
+    mutationFn: (posicao: number | null) => eventosService.setAnfitriaoOrdem(eventoId, modalidadeId!, posicao),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['anfitriao-ordem', eventoId] })
+      toast.success('Posição do anfitrião salva.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar posição.'),
+  })
+
   function handleSortear() { setErroSorteio(''); executarSorteio() }
   function handleResortear() { setResortearOpen(true) }
   function confirmarResortear() { setResortearOpen(false); setErroSorteio(''); executarSorteio() }
@@ -232,7 +260,19 @@ export default function EventoInscricoes() {
 
   const excludeIds = inscricoes.map(i => i.participante_id)
   const excludeCampeoesIds = campeoes.map(c => c.participante_id)
-  const totalModalidades = modalidades.length
+  // Total considera só modalidades "sorteáveis" (exclui específico, sem inscritos
+  // e com regra "pular sorteio"); inclui as já sorteadas p/ garantir total ≥ sorteadas.
+  const totalModalidades = useMemo(() => {
+    const counts = countsByModalidade as Record<number, number>
+    const ids = new Set<number>(modalidadesSorteadasIds)
+    for (const m of modalidades) {
+      const n = counts[m.id] ?? 0
+      if (isSorteavel({ id: m.id, tipo: m.tipo_modalidade?.tipo ?? 'especifico', mensagens_inscritos: m.mensagens_inscritos }, n)) {
+        ids.add(m.id)
+      }
+    }
+    return ids.size
+  }, [modalidades, countsByModalidade, modalidadesSorteadasIds])
   const sorteadas = modalidadesSorteadasIds.size
   const pct = totalModalidades > 0 ? Math.round((sorteadas / totalModalidades) * 100) : 0
 
@@ -685,6 +725,44 @@ export default function EventoInscricoes() {
                     </div>
                   </div>
 
+                  {regraMensagem && (
+                    <div style={{ marginBottom: 14, padding: '16px 18px', background: 'var(--card-bg-2)', border: '2px solid var(--brand-500)', borderRadius: 'var(--radius-lg)', textAlign: 'center' }}>
+                      <p style={{ margin: 0, textTransform: 'uppercase', fontWeight: 800, fontSize: 'clamp(16px, 1.6vw, 22px)', lineHeight: 1.25, color: 'var(--t1)' }}>
+                        {regraMensagem.mensagem}
+                      </p>
+                    </div>
+                  )}
+
+                  {tipoDaModalidade === 'ordem_entrada' && (
+                    <div style={{ marginBottom: 14, padding: '12px 14px', background: 'var(--card-bg-2)', border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)' }}>
+                      <label className="block text-sm font-medium text-[var(--t2)]" style={{ marginBottom: 6 }}>Posição do anfitrião</label>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <input
+                          type="number" min={1} max={inscricoes.length}
+                          value={posAnfitriao}
+                          onChange={e => setPosAnfitriao(e.target.value)}
+                          placeholder="—"
+                          style={{ width: 120, padding: '8px 10px', borderRadius: 'var(--radius-md)', background: 'var(--card-bg)', border: '1px solid var(--card-border)', color: 'var(--t1)', fontSize: 14 }}
+                        />
+                        <button
+                          type="button"
+                          className="btn btn-ghost btn-sm"
+                          onClick={() => {
+                            const v = posAnfitriao.trim() === '' ? null : Number(posAnfitriao)
+                            if (v != null && (!Number.isInteger(v) || v < 1 || v > inscricoes.length)) {
+                              toast.error(`A posição deve estar entre 1 e ${inscricoes.length}.`)
+                              return
+                            }
+                            salvarPosAnfitriao(v)
+                          }}
+                        >Salvar</button>
+                      </div>
+                      <p className="text-xs text-[var(--t4)]" style={{ marginTop: 6 }}>
+                        Reservada ao anfitrião do evento na ordem sorteada. Requer "Considerar anfitrião" na competição e anfitrião inscrito. Vazio = sorteio normal.
+                      </p>
+                    </div>
+                  )}
+
                   {tipoDaModalidade === 'especifico' ? (
                     <p className="text-sm text-[var(--t3)] italic">
                       Esta modalidade é do tipo "Específico" e não possui sorteio automático.
@@ -789,24 +867,28 @@ export default function EventoInscricoes() {
                     >
                       <Shuffle size={36} className="mx-auto mb-3 text-[var(--t4)]" />
                       <p className="text-sm text-[var(--t3)] mb-3">
-                        {inscricoes.length === 0
+                        {regraMensagem?.pular_sorteio
+                          ? 'Esta modalidade não vai a sorteio (regra de inscritos).'
+                          : inscricoes.length === 0
                           ? 'Adicione participantes antes de sortear.'
                           : 'Sorteio ainda não realizado.'}
                       </p>
-                      <button
-                        onClick={handleSortear}
-                        disabled={inscricoes.length === 0 || executandoSorteio}
-                        className="btn btn-primary"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 6,
-                          opacity: inscricoes.length === 0 || executandoSorteio ? 0.5 : 1,
-                        }}
-                      >
-                        <Shuffle size={16} />
-                        {executandoSorteio ? 'Sorteando...' : 'Realizar sorteio'}
-                      </button>
+                      {!regraMensagem?.pular_sorteio && (
+                        <button
+                          onClick={handleSortear}
+                          disabled={inscricoes.length === 0 || executandoSorteio}
+                          className="btn btn-primary"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 6,
+                            opacity: inscricoes.length === 0 || executandoSorteio ? 0.5 : 1,
+                          }}
+                        >
+                          <Shuffle size={16} />
+                          {executandoSorteio ? 'Sorteando...' : 'Realizar sorteio'}
+                        </button>
+                      )}
                       {erroSorteio && (
                         <p
                           className="mt-3 text-sm"
