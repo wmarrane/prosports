@@ -9,7 +9,7 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
-import SorteioPrint from './SorteioPrint'
+import SorteioPrint, { SorteioPrintContent } from './SorteioPrint'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
@@ -17,6 +17,8 @@ import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, slugify, inlineRootImages } from '../../lib/export-html'
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
@@ -91,6 +93,7 @@ export default function EventoInscricoes() {
   const [apagarSorteioAlvo, setApagarSorteioAlvo] = useState<number | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
+  const [exportandoHtml, setExportandoHtml] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -251,6 +254,75 @@ export default function EventoInscricoes() {
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar posição.'),
   })
 
+  async function handleExportarHtml() {
+    if (!evento) return
+    setExportandoHtml(true)
+    try {
+      const counts = countsByModalidade as Record<number, number>
+      const comInscritos = modalidades.filter(m => (counts[m.id] ?? 0) > 0)
+      if (comInscritos.length === 0) {
+        toast.error('Nenhuma modalidade com inscritos para exportar.')
+        return
+      }
+
+      const dados = await Promise.all(
+        comInscritos.map(async m => {
+          const [insc, camps] = await Promise.all([
+            inscricoesService.listar({ evento_id: eventoId, modalidade_id: m.id }),
+            campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: m.id }),
+          ])
+          return { modalidade: m, inscricoes: insc, campeoes: camps }
+        })
+      )
+
+      const cidadeLocalData = [evento.municipio?.nome, evento.local, formatDateBR(evento.data_hora)]
+        .filter(Boolean)
+        .join(' · ')
+
+      const secoes = dados.map(({ modalidade: m, inscricoes: insc, campeoes: camps }) => {
+        const ordenadas = [...insc].sort((a, b) =>
+          a.participante.nome.localeCompare(b.participante.nome, 'pt-BR', { sensitivity: 'base' })
+        )
+        const pById = new Map<number, Participante>()
+        for (const i of ordenadas) pById.set(i.participante_id, i.participante)
+        const cByPid = new Map<number, number>()
+        for (const c of camps) cByPid.set(c.participante_id, c.posicao)
+        const sorteio = sorteios.find(s => s.modalidade_id === m.id) ?? null
+        const tipo = m.tipo_modalidade?.tipo as 'grupos' | 'chaves' | 'ordem_entrada' | 'especifico' | undefined
+        return renderToStaticMarkup(
+          <SorteioPrintContent
+            eventoNome={evento.nome}
+            anfitriao={evento.anfitriao?.nome ?? '—'}
+            modalidadeNome={m.nome}
+            modalidadeTipo={tipo}
+            sigla={m.sigla ?? ''}
+            cidadeLocalData={cidadeLocalData}
+            seed={sorteio?.seed ?? ''}
+            resultado={sorteio?.resultado ?? null}
+            participantesById={pById}
+            campeoesByParticipanteId={cByPid}
+            anfitriaoPid={evento.anfitriao_id ?? null}
+            subtituloLine={subtituloLine}
+            inscritos={ordenadas.map(i => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
+            campeoes={[...camps]
+              .sort((a, b) => a.posicao - b.posicao)
+              .map(c => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+          />
+        )
+      })
+
+      const css = serializeLoadedStyles()
+      const bodyHtml = await inlineRootImages(secoes.join('\n'))
+      const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml })
+      downloadHtmlFile(`evento-${slugify(evento.nome)}.html`, html)
+      toast.success('HTML exportado.')
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message ?? 'Erro ao exportar HTML.')
+    } finally {
+      setExportandoHtml(false)
+    }
+  }
+
   function handleSortear() { setErroSorteio(''); executarSorteio() }
   function handleResortear() { setResortearOpen(true) }
   function confirmarResortear() { setResortearOpen(false); setErroSorteio(''); executarSorteio() }
@@ -344,6 +416,15 @@ export default function EventoInscricoes() {
                 className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
               >
                 Editar evento
+              </button>
+              <button
+                onClick={handleExportarHtml}
+                disabled={exportandoHtml}
+                className="text-xs text-[var(--t2)] hover:text-[var(--t1)] font-semibold disabled:opacity-50"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                title="Exportar todas as modalidades (inscritos, campeões e sorteio) em HTML"
+              >
+                <Download size={12} /> {exportandoHtml ? 'Exportando...' : 'Exportar HTML'}
               </button>
               {sorteadas > 0 && (
                 <button

@@ -22,8 +22,8 @@ type Props = {
   campeoes: { posicao: number; nome: string }[]
 }
 
-export default function SorteioPrint(p: Props) {
-  const content = (
+export function SorteioPrintContent(p: Props) {
+  return (
     <div className="sorteio-print">
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, borderBottom: '2px solid #156082', paddingBottom: 12, marginBottom: 16 }}>
         <LogoMontana variant="simbolo" height={56} />
@@ -35,16 +35,16 @@ export default function SorteioPrint(p: Props) {
       </div>
       <div style={{ marginBottom: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a' }}>{p.modalidadeNome} <span style={{ color: '#475569', fontWeight: 600 }}>({p.sigla})</span></div>
-        <div style={{ fontSize: 12, color: '#475569' }}>seed: <span style={{ fontFamily: 'monospace' }}>{p.seed}</span></div>
+        {p.seed && <div style={{ fontSize: 12, color: '#475569' }}>seed: <span style={{ fontFamily: 'monospace' }}>{p.seed}</span></div>}
       </div>
 
-      {p.modalidadeTipo === 'grupos' && (
+      {p.modalidadeTipo === 'grupos' && p.resultado && (
         <SorteioGrupos resultado={p.resultado} participantesById={p.participantesById} campeoesByParticipanteId={p.campeoesByParticipanteId} anfitriaoPid={p.anfitriaoPid} subtituloLine={p.subtituloLine} />
       )}
-      {p.modalidadeTipo === 'chaves' && (
+      {p.modalidadeTipo === 'chaves' && p.resultado && (
         <SorteioChaves resultado={p.resultado} participantesById={p.participantesById} campeoesByParticipanteId={p.campeoesByParticipanteId} anfitriaoPid={p.anfitriaoPid} subtituloLine={p.subtituloLine} />
       )}
-      {p.modalidadeTipo === 'ordem_entrada' && (
+      {p.modalidadeTipo === 'ordem_entrada' && p.resultado && (
         <SorteioOrdem resultado={p.resultado} participantesById={p.participantesById} anfitriaoPid={p.anfitriaoPid} subtituloLine={p.subtituloLine} />
       )}
 
@@ -65,9 +65,12 @@ export default function SorteioPrint(p: Props) {
       </div>
     </div>
   )
+}
+
+export default function SorteioPrint(p: Props) {
   // Renderiza via portal no <body> para o print isolar com display:none nos
-  // demais filhos do body (sem position:absolute relativo a ancestral).
-  // No SSR (renderToStaticMarkup, sem document) retorna inline.
+  // demais filhos do body. No SSR (renderToStaticMarkup, sem document) retorna inline.
+  const content = <SorteioPrintContent {...p} />
   if (typeof document !== 'undefined' && document.body) {
     return createPortal(content, document.body)
   }
