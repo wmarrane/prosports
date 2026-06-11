@@ -14,15 +14,25 @@ type Props = {
   onRemover: (id: number) => void
   salvando: boolean
   subtituloLine?: (p: { subtitulo: string | null; municipio: any; inspetoria: any; delegacia: any }) => string | null
+  // IDs dos participantes inscritos na modalidade atual. Quando fornecido,
+  // sinaliza (fundo diferente + aviso) o campeão que NÃO está inscrito.
+  inscritoIds?: number[]
 }
 
-export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando, subtituloLine }: Props) {
+export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onRemover, salvando, subtituloLine, inscritoIds }: Props) {
   const [pickedId, setPickedId] = useState<number | null>(null)
   const [confirmRemover, setConfirmRemover] = useState(false)
 
   if (campeao) {
+    const naoInscrito = inscritoIds != null && !inscritoIds.includes(campeao.participante_id)
     return (
-      <div className="border border-[var(--card-border)] rounded-lg p-3 bg-[var(--card-bg-2)]">
+      <div
+        className="border rounded-lg p-3"
+        style={{
+          borderColor: naoInscrito ? 'var(--warn, #f59e0b)' : 'var(--card-border)',
+          background: naoInscrito ? 'var(--warn-soft, rgba(245,158,11,0.15))' : 'var(--card-bg-2)',
+        }}
+      >
         <div className="flex items-center gap-2 mb-2">
           <CampeaoBadge posicao={posicao} />
           <span className="text-xs text-[var(--t3)]">{posicaoLabel(posicao)}</span>
@@ -31,6 +41,11 @@ export default function CampeaoSlot({ posicao, campeao, excludeIds, onCriar, onR
         {(() => { const l = subtituloLine?.(campeao.participante as any); return l ? (
           <div className="text-xs text-[var(--t3)] mt-0.5">{l}</div>
         ) : null })()}
+        {naoInscrito && (
+          <div className="text-xs mt-1" style={{ color: 'var(--warn, #f59e0b)', fontWeight: 600 }}>
+            Não inscrito nesta modalidade
+          </div>
+        )}
         <button
           onClick={() => setConfirmRemover(true)}
           className="mt-2 text-xs text-[var(--danger)] hover:text-[var(--danger-700)]"

@@ -1049,6 +1049,7 @@ export default function EventoInscricoes() {
                           onRemover={cid => removerCampeao(cid)}
                           salvando={salvandoCampeao}
                           subtituloLine={subtituloLine}
+                          inscritoIds={excludeIds}
                         />
                       )
                     })}
