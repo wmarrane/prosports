@@ -14,7 +14,6 @@ import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
-import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
@@ -103,8 +102,8 @@ export default function EventoInscricoes() {
   })
 
   const { data: modalidades = [] } = useQuery({
-    queryKey: ['modalidades', evento?.competicao_id],
-    queryFn: () => modalidadesService.listar({ competicao_id: evento!.competicao_id }),
+    queryKey: ['evento-modalidades', eventoId],
+    queryFn: () => eventosService.getModalidadesDoEvento(eventoId),
     enabled: !!evento,
   })
 

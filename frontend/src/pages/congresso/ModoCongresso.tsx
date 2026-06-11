@@ -6,7 +6,6 @@ import CongressoStepModalidade from './CongressoStepModalidade'
 import CongressoStepParticipantes from './CongressoStepParticipantes'
 import CongressoStepSorteio from './CongressoStepSorteio'
 import { eventosService } from '../../services/eventos'
-import { modalidadesService } from '../../services/modalidades'
 import type { CongressoStep } from '../../types/congresso-step'
 
 export default function ModoCongresso() {
@@ -22,9 +21,9 @@ export default function ModoCongresso() {
   const competicaoId = evento?.competicao_id
 
   const { data: modalidades = [] } = useQuery({
-    queryKey: ['modalidades', competicaoId],
-    queryFn: () => modalidadesService.listar({ competicao_id: competicaoId! }),
-    enabled: !!competicaoId,
+    queryKey: ['evento-modalidades', eventoId],
+    queryFn: () => eventosService.getModalidadesDoEvento(eventoId!),
+    enabled: eventoId != null,
   })
   const modalidade = modalidades.find(m => m.id === modalidadeId)
   const tipoAtual = modalidade?.tipo_modalidade?.tipo
