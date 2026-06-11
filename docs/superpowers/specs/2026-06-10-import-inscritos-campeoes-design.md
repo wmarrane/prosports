@@ -1,21 +1,23 @@
-# Remover inscritos + import com validação (inscritos e campeões) — Design
+# Remover inscritos + import com validação (participantes, inscritos e campeões) — Design
 
 **Data:** 2026-06-10
 **Status:** Aprovado (aguardando revisão da spec)
 
 ## Objetivo
 
-Três melhorias no cadastro de eventos, ligadas à gestão de inscritos/campeões por modalidade:
+Quatro melhorias ligadas à gestão de participantes/inscritos/campeões:
 
 1. **Remover todos os inscritos** de uma modalidade de uma vez.
 2. **Import CSV de inscritos** deixa de criar participantes automaticamente: participante não cadastrado vira erro, sinalizando que é preciso cadastrá-lo em "Participantes" primeiro.
 3. **Import CSV de campeões do ano anterior** por modalidade, com a mesma validação de participante e um template.
+4. **Import CSV de Participantes** no cadastro de Participantes, com template (este import **cria** participantes; municípios precisam existir).
 
 ## Decisões (do brainstorming)
 
 - Item 1: **bloquear** a remoção se a modalidade já tiver sorteio (apagar o sorteio antes).
 - Item 2: **import parcial** — importa os participantes válidos e lista os não cadastrados como erro.
 - Item 3: posição já preenchida (ou repetida no arquivo) → **duplicada (pula)**.
+- Item 4: colunas `nome, municipio_uf, municipio_nome, subtitulo` (sem inspetoria/delegacia); participante já existente (mesmo município+nome) → **duplicada (pula)**.
 - CSV de campeões: cabeçalho `posicao,nome,municipio_uf,municipio_nome` (+ `subtitulo` quando a competição usa).
 - Sem migration.
 
@@ -72,6 +74,26 @@ Local: `backend/src/modules/participantes/resolver-participantes.service.ts` (co
 - Novo componente `ImportCampeoesModal.tsx` (espelha `ImportInscricoesModal`: passo 1 template+instruções, passo 2 upload + parse client-side via PapaParse, passo 3 preview dry-run; commit). Headers obrigatórios: `posicao,nome,municipio_uf,municipio_nome` (subtitulo opcional). Template `modelo_campeoes.csv` via `downloadCsvTemplate`.
 - Botão "Importar CSV" no card **"Campeões do ano anterior"** de `EventoInscricoes.tsx` (que já só aparece para Chaves/Grupos). Ao concluir, invalida `['campeoes-anteriores', eventoId, modalidadeId]`.
 
+## Item 4 — Import de Participantes (cadastro de Participantes)
+
+Diferente dos itens 2 e 3 (que exigem participante já cadastrado), este import **cria** participantes — é o propósito da tela. Municípios continuam tendo que existir (não são criados).
+
+**Backend** (`participantes.service.ts` + controller + routes):
+- Tipos `ImportParticipanteRow = { nome: string; municipio_uf: string; municipio_nome: string; subtitulo?: string }` e `ImportResult` (mesma forma: `contadores: { criadas, duplicadas, erros }`).
+- `importar({ dry_run, rows })`:
+  - Casa o município por `UF:nome` (case-insensitive); inexistente → `erro` "Município '<nome>/<uf>' não encontrado".
+  - Identidade do participante = `municipio_id:nome` (case-insensitive). Já existe no banco **ou** já visto antes no próprio arquivo → `duplicada` (pula).
+  - Senão `criada` (no commit, `participante.create({ nome, municipio_id, subtitulo }))`).
+  - Retorna `{ rows, contadores }`.
+- Rota `POST /participantes/import` (admin).
+- Service frontend: `participantesService.importar(...)`.
+
+A resolução de município (UF:nome) é a mesma lógica usada no `resolverParticipantes` (itens 2/3); pode ser extraída como um sub-helper `resolverMunicipios(rows)` reutilizado pelos três imports, ou mantida no helper compartilhado. O que **não** se compartilha é a política sobre participante inexistente: itens 2/3 → erro; item 4 → cria.
+
+**Frontend**:
+- Novo componente `ImportParticipantesModal.tsx` (espelha `ImportInscricoesModal`: template+instruções, upload + parse client-side via PapaParse, preview dry-run, commit). Headers obrigatórios: `nome,municipio_uf,municipio_nome` (subtitulo opcional). Template `modelo_participantes.csv` via `downloadCsvTemplate`.
+- Botão "Importar CSV" no cabeçalho da página **Participantes** (`ParticipantesList.tsx`), ao lado das ações existentes. Ao concluir, invalida `['participantes']`.
+
 ## Tratamento de erros
 
 - Remover-todos com sorteio → 400 (toast).
@@ -85,7 +107,8 @@ Local: `backend/src/modules/participantes/resolver-participantes.service.ts` (co
   - `removerTodosDaModalidade`: bloqueia (400) com sorteio; deleta sem sorteio.
   - inscritos `importar`: não cria participante; linha não cadastrada vira erro; conta `nao_cadastrados`; importa os válidos.
   - campeões `importar`: pula posição já preenchida/repetida; erro para não cadastrado e posição inválida; cria os válidos.
-- **Frontend:** `npm run build` (`tsc -b && vite build`) + teste manual (remover todos com/sem sorteio; importar inscritos com não cadastrados; importar campeões).
+  - participantes `importar`: cria os novos; pula duplicado (mesmo município+nome, do banco ou do arquivo); erro para município inexistente.
+- **Frontend:** `npm run build` (`tsc -b && vite build`) + teste manual (remover todos com/sem sorteio; importar inscritos com não cadastrados; importar campeões; importar participantes).
 
 ## Fora de escopo
 
