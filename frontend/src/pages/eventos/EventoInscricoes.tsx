@@ -10,6 +10,7 @@ import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
+import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
@@ -94,6 +95,7 @@ export default function EventoInscricoes() {
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
+  const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -421,6 +423,12 @@ export default function EventoInscricoes() {
                 className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
               >
                 Editar evento
+              </button>
+              <button
+                onClick={() => setModalidadesModalOpen(true)}
+                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+              >
+                Modalidades do evento
               </button>
               <button
                 onClick={handleExportarHtml}
@@ -1438,6 +1446,15 @@ export default function EventoInscricoes() {
         description="A próxima execução vai gerar um novo do zero."
         confirmLabel="Apagar"
       />
+
+      {evento && (
+        <ModalidadesDoEventoModal
+          open={modalidadesModalOpen}
+          eventoId={eventoId}
+          competicaoId={evento.competicao_id}
+          onClose={() => setModalidadesModalOpen(false)}
+        />
+      )}
 
       {/* Responsive */}
       <style>{`
