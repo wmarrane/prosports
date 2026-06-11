@@ -11,6 +11,7 @@ import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
 import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
+import ImportCampeoesModal from '../../components/import/ImportCampeoesModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
@@ -96,6 +97,7 @@ export default function EventoInscricoes() {
   const [exportandoHtml, setExportandoHtml] = useState(false)
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
   const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
+  const [importCampeoesOpen, setImportCampeoesOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -1054,6 +1056,13 @@ export default function EventoInscricoes() {
                         Campeões do ano anterior
                       </h3>
                     </div>
+                    <button
+                      onClick={() => setImportCampeoesOpen(true)}
+                      className="btn btn-ghost btn-sm ml-auto"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                    >
+                      <Download size={14} /> Importar CSV
+                    </button>
                   </div>
                   <p className="text-xs text-[var(--t3)] mb-4 ml-12">
                     Cadastre até 12 colocados. Quem se inscrever neste evento recebe o badge correspondente — e, em Grupos/Chaves, é semeado como cabeça.
@@ -1484,6 +1493,16 @@ export default function EventoInscricoes() {
           eventoId={eventoId}
           competicaoId={evento.competicao_id}
           onClose={() => setModalidadesModalOpen(false)}
+        />
+      )}
+
+      {modalidadeId != null && (
+        <ImportCampeoesModal
+          open={importCampeoesOpen}
+          eventoId={eventoId}
+          modalidadeId={modalidadeId}
+          onClose={() => setImportCampeoesOpen(false)}
+          onImported={() => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] })}
         />
       )}
 
