@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { eventosService } from '../../services/eventos'
-import { modalidadesService } from '../../services/modalidades'
 import { sorteiosService } from '../../services/sorteios'
 import { inscricoesService } from '../../services/inscricoes'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
@@ -29,8 +28,8 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
   })
 
   const { data: modalidades = [], isLoading } = useQuery({
-    queryKey: ['modalidades', evento?.competicao_id],
-    queryFn: () => modalidadesService.listar({ competicao_id: evento!.competicao_id }),
+    queryKey: ['evento-modalidades', eventoId],
+    queryFn: () => eventosService.getModalidadesDoEvento(eventoId),
     enabled: !!evento,
   })
 

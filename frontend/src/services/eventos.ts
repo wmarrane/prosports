@@ -1,5 +1,6 @@
 import api from './api'
 import type { Evento } from '../types/evento'
+import type { Modalidade } from '../types/modalidade'
 
 const BASE = '/eventos'
 
@@ -34,4 +35,10 @@ export const eventosService = {
     api.get<Record<number, number>>(`${BASE}/${eventoId}/anfitriao-ordem`).then(r => r.data),
   setAnfitriaoOrdem: (eventoId: number, modalidade_id: number, posicao: number | null) =>
     api.put<{ posicao: number | null }>(`${BASE}/${eventoId}/anfitriao-ordem`, { modalidade_id, posicao }).then(r => r.data),
+  getModalidadesDoEvento: (eventoId: number) =>
+    api.get<Modalidade[]>(`${BASE}/${eventoId}/modalidades`).then(r => r.data),
+  getModalidadesExcluidas: (eventoId: number) =>
+    api.get<number[]>(`${BASE}/${eventoId}/modalidades-excluidas`).then(r => r.data),
+  setModalidadesExcluidas: (eventoId: number, excluidas: number[]) =>
+    api.put<{ excluidas: number[] }>(`${BASE}/${eventoId}/modalidades-excluidas`, { excluidas }).then(r => r.data),
 }

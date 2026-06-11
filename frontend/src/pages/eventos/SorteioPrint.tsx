@@ -20,19 +20,30 @@ type Props = {
   subtituloLine: (p: Participante) => string | null
   inscritos: { id: number; nome: string }[]
   campeoes: { posicao: number; nome: string }[]
+  // Quando true, não renderiza o cabeçalho do evento (usado no export HTML,
+  // onde o cabeçalho aparece uma única vez no topo do documento).
+  omitEventoHeader?: boolean
+}
+
+export function SorteioPrintHeader(p: { eventoNome: string; anfitriao: string; cidadeLocalData: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16, borderBottom: '2px solid #156082', paddingBottom: 12, marginBottom: 16 }}>
+      <LogoMontana variant="simbolo" height={56} />
+      <div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: '#0f172a' }}>{p.eventoNome}</div>
+        <div style={{ fontSize: 13, color: '#475569' }}>Cidade Sede: <b>{p.anfitriao}</b></div>
+        <div style={{ fontSize: 13, color: '#475569' }}>{p.cidadeLocalData}</div>
+      </div>
+    </div>
+  )
 }
 
 export function SorteioPrintContent(p: Props) {
   return (
     <div className="sorteio-print">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, borderBottom: '2px solid #156082', paddingBottom: 12, marginBottom: 16 }}>
-        <LogoMontana variant="simbolo" height={56} />
-        <div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: '#0f172a' }}>{p.eventoNome}</div>
-          <div style={{ fontSize: 13, color: '#475569' }}>Cidade Sede: <b>{p.anfitriao}</b></div>
-          <div style={{ fontSize: 13, color: '#475569' }}>{p.cidadeLocalData}</div>
-        </div>
-      </div>
+      {!p.omitEventoHeader && (
+        <SorteioPrintHeader eventoNome={p.eventoNome} anfitriao={p.anfitriao} cidadeLocalData={p.cidadeLocalData} />
+      )}
       <div style={{ marginBottom: 12 }}>
         <div style={{ fontSize: 18, fontWeight: 800, color: '#0f172a' }}>{p.modalidadeNome} <span style={{ color: '#475569', fontWeight: 600 }}>({p.sigla})</span></div>
         {p.seed && <div style={{ fontSize: 12, color: '#475569' }}>seed: <span style={{ fontFamily: 'monospace' }}>{p.seed}</span></div>}

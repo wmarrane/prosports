@@ -5,6 +5,7 @@ import * as ctrl from './eventos.controller'
 import eventoKeysRoutes from '../evento_keys/evento_keys.routes'
 import * as sitePublico from '../site-publico/site-publico.controller'
 import * as anfitriaoOrdem from './anfitriao-ordem.controller'
+import * as modalidadesExcluidas from './modalidades-excluidas.controller'
 
 const router = Router()
 const admin = [requireAuth, requireRole('ADMIN')]
@@ -22,6 +23,10 @@ router.post('/:id/despublicar', ...admin, sitePublico.despublicar)
 
 router.get('/:id/anfitriao-ordem', requireAuth, anfitriaoOrdem.getAnfitriaoOrdem)
 router.put('/:id/anfitriao-ordem', ...admin, anfitriaoOrdem.setAnfitriaoOrdem)
+
+router.get('/:id/modalidades', requireAuth, modalidadesExcluidas.getModalidadesDoEvento)
+router.get('/:id/modalidades-excluidas', requireAuth, modalidadesExcluidas.getExcluidas)
+router.put('/:id/modalidades-excluidas', ...admin, modalidadesExcluidas.setExcluidas)
 
 router.use('/:evento_id/keys', eventoKeysRoutes)
 

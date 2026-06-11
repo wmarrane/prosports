@@ -1,5 +1,6 @@
 import prisma from '../../lib/prisma'
 import { signKeyToken } from '../../lib/key-jwt'
+import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 
 type Evento = { id: number; competicao_id: number; [k: string]: any }
 
@@ -42,7 +43,7 @@ export async function login(input: { token: string; device_fp: string; device_la
 }
 
 export async function getModalidades(evento: Evento) {
-  const [modalidades, counts] = await Promise.all([
+  const [modalidades, counts, excluidas] = await Promise.all([
     prisma.modalidade.findMany({
       where: { competicao_id: evento.competicao_id },
       orderBy: { nome: 'asc' },
@@ -53,13 +54,16 @@ export async function getModalidades(evento: Evento) {
       where: { evento_id: evento.id },
       _count: { _all: true },
     }),
+    getModalidadeIdsExcluidas(evento.id),
   ])
 
   const countMap = new Map(counts.map((c) => [c.modalidade_id, c._count._all]))
-  return modalidades.map((m) => ({
-    ...m,
-    inscritos_count: countMap.get(m.id) ?? 0,
-  }))
+  return modalidades
+    .filter((m) => !excluidas.has(m.id))
+    .map((m) => ({
+      ...m,
+      inscritos_count: countMap.get(m.id) ?? 0,
+    }))
 }
 
 export async function getModalidadeDetail(evento: Evento, modalidade_id: number) {

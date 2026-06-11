@@ -9,11 +9,11 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import SorteioGrupos from '../../components/sorteio-result/SorteioGrupos'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
-import SorteioPrint, { SorteioPrintContent } from './SorteioPrint'
+import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
+import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
-import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
@@ -94,6 +94,7 @@ export default function EventoInscricoes() {
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
+  const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -101,8 +102,8 @@ export default function EventoInscricoes() {
   })
 
   const { data: modalidades = [] } = useQuery({
-    queryKey: ['modalidades', evento?.competicao_id],
-    queryFn: () => modalidadesService.listar({ competicao_id: evento!.competicao_id }),
+    queryKey: ['evento-modalidades', eventoId],
+    queryFn: () => eventosService.getModalidadesDoEvento(eventoId),
     enabled: !!evento,
   })
 
@@ -307,12 +308,17 @@ export default function EventoInscricoes() {
             campeoes={[...camps]
               .sort((a, b) => a.posicao - b.posicao)
               .map(c => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+            omitEventoHeader
           />
         )
       })
 
+      const headerHtml = `<div class="sorteio-print export-header">${renderToStaticMarkup(
+        <SorteioPrintHeader eventoNome={evento.nome} anfitriao={evento.anfitriao?.nome ?? '—'} cidadeLocalData={cidadeLocalData} />
+      )}</div>`
+
       const css = serializeLoadedStyles()
-      const bodyHtml = await inlineRootImages(secoes.join('\n'))
+      const bodyHtml = await inlineRootImages([headerHtml, ...secoes].join('\n'))
       const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml })
       downloadHtmlFile(`evento-${slugify(evento.nome)}.html`, html)
       toast.success('HTML exportado.')
@@ -416,6 +422,12 @@ export default function EventoInscricoes() {
                 className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
               >
                 Editar evento
+              </button>
+              <button
+                onClick={() => setModalidadesModalOpen(true)}
+                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+              >
+                Modalidades do evento
               </button>
               <button
                 onClick={handleExportarHtml}
@@ -1433,6 +1445,15 @@ export default function EventoInscricoes() {
         description="A próxima execução vai gerar um novo do zero."
         confirmLabel="Apagar"
       />
+
+      {evento && (
+        <ModalidadesDoEventoModal
+          open={modalidadesModalOpen}
+          eventoId={eventoId}
+          competicaoId={evento.competicao_id}
+          onClose={() => setModalidadesModalOpen(false)}
+        />
+      )}
 
       {/* Responsive */}
       <style>{`

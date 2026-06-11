@@ -20,6 +20,7 @@ body { background: #fff; margin: 24px; }
 @media print {
   .sorteio-print { page-break-after: always; }
   .sorteio-print:last-child { page-break-after: auto; }
+  .export-header { page-break-after: auto !important; }
 }
 `
 
