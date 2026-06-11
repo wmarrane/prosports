@@ -7,6 +7,10 @@ vi.mock('../../lib/prisma', () => ({
       findUnique: vi.fn(),
       create: vi.fn(),
       delete: vi.fn(),
+      deleteMany: vi.fn(),
+    },
+    sorteio: {
+      findFirst: vi.fn(),
     },
     evento: {
       findUnique: vi.fn(),
@@ -103,6 +107,20 @@ describe('inscricoes.service', () => {
     mockPrisma.inscricao.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.inscricao.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+
+  it('removerTodosDaModalidade bloqueia quando há sorteio', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue({ id: 1 })
+    await expect(service.removerTodosDaModalidade(5, 2)).rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.inscricao.deleteMany).not.toHaveBeenCalled()
+  })
+
+  it('removerTodosDaModalidade deleta quando não há sorteio', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue(null)
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 4 })
+    const r = await service.removerTodosDaModalidade(5, 2)
+    expect(r).toEqual({ count: 4 })
+    expect(mockPrisma.inscricao.deleteMany).toHaveBeenCalledWith({ where: { evento_id: 5, modalidade_id: 2 } })
   })
 
   describe('importar', () => {

@@ -62,6 +62,14 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
   } catch (err) { next(err) }
 }
 
+export async function removerTodosDaModalidade(req: Request, res: Response, next: NextFunction) {
+  try {
+    const evento_id = Number(req.params.eventoId)
+    const modalidade_id = Number(req.params.modalidadeId)
+    res.json(await service.removerTodosDaModalidade(evento_id, modalidade_id))
+  } catch (err) { next(err) }
+}
+
 export async function importar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = importSchema.parse(req.body)

@@ -61,6 +61,23 @@ export async function remover(id: number) {
   return prisma.inscricao.delete({ where: { id } })
 }
 
+export async function removerTodosDaModalidade(
+  evento_id: number,
+  modalidade_id: number,
+): Promise<{ count: number }> {
+  const sorteio = await prisma.sorteio.findFirst({
+    where: { evento_id, modalidade_id },
+    select: { id: true },
+  })
+  if (sorteio) {
+    throw Object.assign(
+      new Error('Apague o sorteio desta modalidade antes de remover os inscritos.'),
+      { status: 400 },
+    )
+  }
+  return prisma.inscricao.deleteMany({ where: { evento_id, modalidade_id } })
+}
+
 export async function contarPorModalidade(evento_id: number): Promise<Record<number, number>> {
   const grupos = await prisma.inscricao.groupBy({
     by: ['modalidade_id'],

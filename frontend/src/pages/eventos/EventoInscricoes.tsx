@@ -95,6 +95,7 @@ export default function EventoInscricoes() {
   const [importOpen, setImportOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
+  const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -202,6 +203,17 @@ export default function EventoInscricoes() {
       queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
     },
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
+  })
+
+  const { mutate: removerTodosInscritos, isPending: removendoInscritos } = useMutation({
+    mutationFn: () => inscricoesService.removerTodosDaModalidade(eventoId, modalidadeId!),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+      queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+      setRemoverInscritosOpen(false)
+      toast.success('Inscritos removidos.')
+    },
+    onError: (err: any) => { setRemoverInscritosOpen(false); toast.error(err?.response?.data?.message ?? 'Erro ao remover inscritos.') },
   })
 
   const { mutate: executarSorteio, isPending: executandoSorteio } = useMutation({
@@ -654,6 +666,16 @@ export default function EventoInscricoes() {
                       </div>
                     </div>
                     <div className="flex gap-2 flex-wrap">
+                      {inscricoes.length > 0 && (
+                        <button
+                          onClick={() => setRemoverInscritosOpen(true)}
+                          className="btn btn-ghost btn-sm"
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--danger)' }}
+                          title="Remover todos os inscritos desta modalidade"
+                        >
+                          <Trash2 size={14} /> Remover todos
+                        </button>
+                      )}
                       <button
                         onClick={() => setImportOpen(true)}
                         className="btn btn-ghost btn-sm"
@@ -1445,6 +1467,15 @@ export default function EventoInscricoes() {
         title="Apagar o sorteio?"
         description="A próxima execução vai gerar um novo do zero."
         confirmLabel="Apagar"
+      />
+
+      <ConfirmDialog
+        open={removerInscritosOpen}
+        onClose={() => setRemoverInscritosOpen(false)}
+        onConfirm={() => removerTodosInscritos()}
+        title="Remover todos os inscritos?"
+        description={`Os ${inscricoes.length} inscritos desta modalidade serão removidos. Esta ação não pode ser desfeita.`}
+        confirmLabel={removendoInscritos ? 'Removendo...' : 'Remover todos'}
       />
 
       {evento && (
