@@ -18,7 +18,11 @@ const COOKIE_OPTS = {
   secure: process.env.NODE_ENV === 'production',
   sameSite: 'strict' as const,
   maxAge: 7 * 24 * 60 * 60 * 1000,
-  path: '/auth/refresh',
+  // Path '/' para o cookie acompanhar a requisição real de refresh, que o
+  // browser faz em /api/auth/refresh (o proxy remove o /api antes do backend).
+  // Com path '/auth/refresh' o cookie nunca era enviado → refresh sempre 401
+  // → logout após ~1h (expiração do access token).
+  path: '/',
 }
 
 export async function loginHandler(req: Request, res: Response, next: NextFunction) {
@@ -60,7 +64,7 @@ export async function logoutHandler(req: Request, res: Response, next: NextFunct
       }
     }
 
-    res.clearCookie(REFRESH_COOKIE, { path: '/auth/refresh' })
+    res.clearCookie(REFRESH_COOKIE, { path: '/' })
     res.json({ message: 'Logout realizado' })
   } catch (err) {
     next(err)
