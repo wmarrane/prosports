@@ -2,6 +2,7 @@ import prisma from '../../lib/prisma'
 import { montaSnapshot } from './snapshot'
 import { putSnapshot, deleteSnapshot, dispatchBuild } from './snapshot-store'
 import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
+import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 
 export async function publicar(eventoId: number): Promise<void> {
   const evento = await prisma.evento.findUnique({
@@ -26,6 +27,9 @@ export async function publicar(eventoId: number): Promise<void> {
     select: { id: true, nome: true, tipo_modalidade: { select: { tipo: true } } },
     orderBy: { nome: 'asc' },
   })
+
+  const excluidasIds = await getModalidadeIdsExcluidas(eventoId)
+  const modalidadesFiltradas = modalidades.filter(m => !excluidasIds.has(m.id))
 
   const [inscricoes, campeoes, sorteios] = await Promise.all([
     prisma.inscricao.findMany({
@@ -59,7 +63,7 @@ export async function publicar(eventoId: number): Promise<void> {
   const campos = (evento.competicao.subtitulo_campos as CampoSubtitulo[]) ?? []
   const snapshot = montaSnapshot({
     evento,
-    modalidades,
+    modalidades: modalidadesFiltradas,
     inscricoesPorModalidade,
     campeoesPorModalidade,
     sorteiosPorModalidade,

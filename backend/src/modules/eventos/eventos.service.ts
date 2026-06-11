@@ -80,15 +80,34 @@ export async function listar(competicao_id?: number) {
     ;(sorteadasByEvento[s.evento_id] ??= new Set()).add(s.modalidade_id)
   }
 
+  const exclusoes = await prisma.eventoModalidadeExcluida.findMany({
+    where: { evento_id: { in: eventIds } },
+    select: { evento_id: true, modalidade_id: true },
+  })
+  const excludedByEvento: Record<number, Set<number>> = {}
+  for (const x of exclusoes) {
+    ;(excludedByEvento[x.evento_id] ??= new Set()).add(x.modalidade_id)
+  }
+
   return eventos.map(e => {
     const counts = countsByEvento[e.id] ?? {}
-    const ids = new Set<number>(sorteadasByEvento[e.id] ?? [])
+    const sorteadas = sorteadasByEvento[e.id] ?? new Set<number>()
+    const excluidas = excludedByEvento[e.id] ?? new Set<number>()
+    const sorteaveisIds = new Set<number>()
+    let pendentes = 0
     for (const m of (e as any).competicao?.modalidades ?? []) {
-      if (isSorteavel({ tipo: m.tipo_modalidade.tipo, mensagens_inscritos: m.mensagens_inscritos }, counts[m.id] ?? 0)) {
-        ids.add(m.id)
+      if (excluidas.has(m.id)) continue
+      if (sorteadas.has(m.id)) sorteaveisIds.add(m.id)
+      const sorteavel = isSorteavel(
+        { tipo: m.tipo_modalidade.tipo, mensagens_inscritos: m.mensagens_inscritos },
+        counts[m.id] ?? 0,
+      )
+      if (sorteavel) {
+        sorteaveisIds.add(m.id)
+        if (!sorteadas.has(m.id)) pendentes++
       }
     }
-    return { ...e, modalidades_sorteaveis: ids.size }
+    return { ...e, modalidades_sorteaveis: sorteaveisIds.size, modalidades_pendentes: pendentes }
   })
 }
 
