@@ -36,7 +36,9 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
 }
 
 const importRowSchema = z.object({
-  posicao: z.coerce.number().int().min(1).max(12),
+  // Não restringe aqui: o service valida posição por linha (1-12) p/ permitir
+  // import parcial (linha inválida vira erro, sem derrubar o arquivo todo).
+  posicao: z.coerce.number(),
   nome: z.string().min(1).max(200),
   municipio_uf: z.string().length(2),
   municipio_nome: z.string().min(1).max(120),
