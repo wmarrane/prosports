@@ -113,7 +113,7 @@ export default function ModalidadesDoEventoModal({ open, eventoId, competicaoId,
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 18 }}>
           <button onClick={onClose} className="btn btn-ghost"><X size={16} /> Cancelar</button>
-          <button onClick={() => salvar()} disabled={isPending} className="btn btn-primary">
+          <button onClick={() => salvar()} disabled={isPending || modalidades.length === 0} className="btn btn-primary">
             <Check size={16} /> {isPending ? 'Salvando...' : 'Salvar'}
           </button>
         </div>
