@@ -35,4 +35,5 @@ export type Evento = {
     sorteios: number
   }
   modalidades_sorteaveis?: number
+  modalidades_pendentes?: number
 }
