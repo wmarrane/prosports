@@ -8,7 +8,8 @@ import { useToast } from '../../components/Toast'
 import { participantesService } from '../../services/participantes'
 import type { Participante } from '../../types/participante'
 import { Plus } from '../../lib/icons'
-import { Users, Search } from 'lucide-react'
+import { Users, Search, Download } from 'lucide-react'
+import ImportParticipantesModal from '../../components/import/ImportParticipantesModal'
 
 export default function ParticipantesList() {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ export default function ParticipantesList() {
   const toast = useToast()
   const [q, setQ] = useState('')
   const [removerAlvo, setRemoverAlvo] = useState<{ id: number; nome: string } | null>(null)
+  const [importOpen, setImportOpen] = useState(false)
 
   const { data = [], isLoading } = useQuery({
     queryKey: ['participantes'],
@@ -154,9 +156,14 @@ export default function ParticipantesList() {
         title="Participantes"
         sub="Cadastro global de participantes — um cadastro serve para qualquer competição e evento."
         actions={
-          <button onClick={() => navigate('/participantes/novo')} className="btn btn-primary">
-            <Plus size={16} /> Novo Participante
-          </button>
+          <div className="flex gap-2">
+            <button onClick={() => setImportOpen(true)} className="btn btn-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+              <Download size={16} /> Importar CSV
+            </button>
+            <button onClick={() => navigate('/participantes/novo')} className="btn btn-primary">
+              <Plus size={16} /> Novo Participante
+            </button>
+          </div>
         }
       />
 
@@ -249,6 +256,12 @@ export default function ParticipantesList() {
         title={removerAlvo ? `Remover "${removerAlvo.nome}"?` : ''}
         description="Esta ação não pode ser desfeita."
         confirmLabel="Remover"
+      />
+
+      <ImportParticipantesModal
+        open={importOpen}
+        onClose={() => setImportOpen(false)}
+        onImported={() => queryClient.invalidateQueries({ queryKey: ['participantes'] })}
       />
     </div>
   )

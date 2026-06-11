@@ -11,6 +11,7 @@ router.get('/:id', requireAuth, ctrl.buscarPorId)
 router.post('/', ...admin, ctrl.criar)
 router.post('/bulk', ...admin, ctrl.criarBulk)
 router.post('/import', ...admin, ctrl.importar)
+router.delete('/evento/:eventoId/modalidade/:modalidadeId', ...admin, ctrl.removerTodosDaModalidade)
 router.delete('/:id', ...admin, ctrl.remover)
 
 export default router

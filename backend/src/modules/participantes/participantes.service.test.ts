@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 vi.mock('../../lib/prisma', () => ({
   default: {
+    municipio: { findMany: vi.fn() },
     participante: {
       findMany: vi.fn(),
       findUnique: vi.fn(),
@@ -77,5 +78,50 @@ describe('participantes.service', () => {
     mockPrisma.participante.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.participante.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+})
+
+describe('participantes importar', () => {
+  beforeEach(() => {
+    mockPrisma.municipio.findMany.mockResolvedValue([{ id: 7, nome: 'São Paulo', uf: 'SP' }])
+    mockPrisma.participante.create.mockResolvedValue({})
+  })
+
+  it('cria novo e pula existente (mesmo município+nome)', async () => {
+    mockPrisma.participante.findMany.mockResolvedValue([{ id: 99, nome: 'João', municipio_id: 7 }])
+    const res = await service.importar({
+      dry_run: false,
+      rows: [
+        { nome: 'João', municipio_uf: 'SP', municipio_nome: 'São Paulo' },
+        { nome: 'Novo', municipio_uf: 'SP', municipio_nome: 'São Paulo' },
+      ],
+    })
+    expect(res.contadores.criadas).toBe(1)
+    expect(res.contadores.duplicadas).toBe(1)
+    expect(mockPrisma.participante.create).toHaveBeenCalledTimes(1)
+  })
+
+  it('município inexistente vira erro', async () => {
+    mockPrisma.municipio.findMany.mockResolvedValue([])
+    mockPrisma.participante.findMany.mockResolvedValue([])
+    const res = await service.importar({
+      dry_run: false,
+      rows: [{ nome: 'X', municipio_uf: 'ZZ', municipio_nome: 'Inexistente' }],
+    })
+    expect(res.contadores.erros).toBe(1)
+    expect(mockPrisma.participante.create).not.toHaveBeenCalled()
+  })
+
+  it('pula duplicado dentro do próprio arquivo', async () => {
+    mockPrisma.participante.findMany.mockResolvedValue([])
+    const res = await service.importar({
+      dry_run: false,
+      rows: [
+        { nome: 'Ana', municipio_uf: 'SP', municipio_nome: 'São Paulo' },
+        { nome: 'ana', municipio_uf: 'SP', municipio_nome: 'são paulo' },
+      ],
+    })
+    expect(res.contadores.criadas).toBe(1)
+    expect(res.contadores.duplicadas).toBe(1)
   })
 })

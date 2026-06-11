@@ -248,7 +248,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
                 <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
                 <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
-                <li>Participantes já cadastrados são reaproveitados; novos são criados automaticamente.</li>
+                <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
                 <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
               </ul>
             </section>
@@ -319,8 +319,8 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 <div className="text-xs text-[var(--t3)]">Erros</div>
               </div>
               <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg p-3">
-                <div className="text-2xl font-bold text-[var(--brand-500)]">{preview.contadores.participantes_criados}</div>
-                <div className="text-xs text-[var(--t3)]">Participantes novos</div>
+                <div className="text-2xl font-bold text-[var(--danger)]">{preview.contadores.nao_cadastrados}</div>
+                <div className="text-xs text-[var(--t3)]">Não cadastrados</div>
               </div>
             </div>
 
@@ -341,7 +341,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                       <td className="px-3 py-2 text-[var(--t1)]">{r.nome}</td>
                       <td className="px-3 py-2"><StatusBadge status={r.status} /></td>
                       <td className="px-3 py-2 text-xs text-[var(--t3)]">
-                        {r.erro ?? (r.participante_criado ? 'Novo participante' : '')}
+                        {r.erro ?? ''}
                       </td>
                     </tr>
                   ))}
@@ -386,8 +386,8 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 <div className="text-xs text-[var(--t3)]">Erros</div>
               </div>
               <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg p-3">
-                <div className="text-2xl font-bold text-[var(--brand-500)]">{commit.contadores.participantes_criados}</div>
-                <div className="text-xs text-[var(--t3)]">Participantes novos</div>
+                <div className="text-2xl font-bold text-[var(--danger)]">{commit.contadores.nao_cadastrados}</div>
+                <div className="text-xs text-[var(--t3)]">Não cadastrados</div>
               </div>
             </div>
             <div className="pt-2">

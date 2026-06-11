@@ -11,6 +11,7 @@ import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import SorteioPrint, { SorteioPrintContent, SorteioPrintHeader } from './SorteioPrint'
 import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
+import ImportCampeoesModal from '../../components/import/ImportCampeoesModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
 import { eventosService } from '../../services/eventos'
@@ -95,6 +96,8 @@ export default function EventoInscricoes() {
   const [importOpen, setImportOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
+  const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
+  const [importCampeoesOpen, setImportCampeoesOpen] = useState(false)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -202,6 +205,17 @@ export default function EventoInscricoes() {
       queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
     },
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover.'),
+  })
+
+  const { mutate: removerTodosInscritos, isPending: removendoInscritos } = useMutation({
+    mutationFn: () => inscricoesService.removerTodosDaModalidade(eventoId, modalidadeId!),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+      queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+      setRemoverInscritosOpen(false)
+      toast.success('Inscritos removidos.')
+    },
+    onError: (err: any) => { setRemoverInscritosOpen(false); toast.error(err?.response?.data?.message ?? 'Erro ao remover inscritos.') },
   })
 
   const { mutate: executarSorteio, isPending: executandoSorteio } = useMutation({
@@ -654,6 +668,16 @@ export default function EventoInscricoes() {
                       </div>
                     </div>
                     <div className="flex gap-2 flex-wrap">
+                      {inscricoes.length > 0 && (
+                        <button
+                          onClick={() => setRemoverInscritosOpen(true)}
+                          className="btn btn-ghost btn-sm"
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--danger)' }}
+                          title="Remover todos os inscritos desta modalidade"
+                        >
+                          <Trash2 size={14} /> Remover todos
+                        </button>
+                      )}
                       <button
                         onClick={() => setImportOpen(true)}
                         className="btn btn-ghost btn-sm"
@@ -1032,6 +1056,13 @@ export default function EventoInscricoes() {
                         Campeões do ano anterior
                       </h3>
                     </div>
+                    <button
+                      onClick={() => setImportCampeoesOpen(true)}
+                      className="btn btn-ghost btn-sm ml-auto"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                    >
+                      <Download size={14} /> Importar CSV
+                    </button>
                   </div>
                   <p className="text-xs text-[var(--t3)] mb-4 ml-12">
                     Cadastre até 12 colocados. Quem se inscrever neste evento recebe o badge correspondente — e, em Grupos/Chaves, é semeado como cabeça.
@@ -1447,12 +1478,31 @@ export default function EventoInscricoes() {
         confirmLabel="Apagar"
       />
 
+      <ConfirmDialog
+        open={removerInscritosOpen}
+        onClose={() => setRemoverInscritosOpen(false)}
+        onConfirm={() => removerTodosInscritos()}
+        title="Remover todos os inscritos?"
+        description={`Os ${inscricoes.length} inscritos desta modalidade serão removidos. Esta ação não pode ser desfeita.`}
+        confirmLabel={removendoInscritos ? 'Removendo...' : 'Remover todos'}
+      />
+
       {evento && (
         <ModalidadesDoEventoModal
           open={modalidadesModalOpen}
           eventoId={eventoId}
           competicaoId={evento.competicao_id}
           onClose={() => setModalidadesModalOpen(false)}
+        />
+      )}
+
+      {modalidadeId != null && (
+        <ImportCampeoesModal
+          open={importCampeoesOpen}
+          eventoId={eventoId}
+          modalidadeId={modalidadeId}
+          onClose={() => setImportCampeoesOpen(false)}
+          onImported={() => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] })}
         />
       )}
 

@@ -13,6 +13,8 @@ vi.mock('../../lib/prisma', () => ({
     modalidade: {
       findUnique: vi.fn(),
     },
+    municipio: { findMany: vi.fn() },
+    participante: { findMany: vi.fn() },
   },
 }))
 
@@ -87,5 +89,45 @@ describe('campeoes_anteriores.service', () => {
     mockPrisma.campeaoAnterior.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.campeaoAnterior.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+})
+
+describe('campeoes importar', () => {
+  beforeEach(() => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.municipio.findMany.mockResolvedValue([{ id: 7, nome: 'São Paulo', uf: 'SP' }])
+    mockPrisma.participante.findMany.mockResolvedValue([{ id: 99, nome: 'João', municipio_id: 7 }])
+    mockPrisma.campeaoAnterior.findMany.mockResolvedValue([])
+    mockPrisma.campeaoAnterior.create.mockResolvedValue({})
+  })
+
+  it('cria campeão válido', async () => {
+    const res = await service.importar({
+      evento_id: 5, modalidade_id: 2, dry_run: false,
+      rows: [{ posicao: 1, nome: 'João', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
+    })
+    expect(res.contadores.criadas).toBe(1)
+    expect(mockPrisma.campeaoAnterior.create).toHaveBeenCalledTimes(1)
+  })
+
+  it('pula posição já ocupada (duplicada)', async () => {
+    mockPrisma.campeaoAnterior.findMany.mockResolvedValue([{ posicao: 1 }])
+    const res = await service.importar({
+      evento_id: 5, modalidade_id: 2, dry_run: false,
+      rows: [{ posicao: 1, nome: 'João', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
+    })
+    expect(res.contadores.duplicadas).toBe(1)
+    expect(res.contadores.criadas).toBe(0)
+    expect(mockPrisma.campeaoAnterior.create).not.toHaveBeenCalled()
+  })
+
+  it('participante não cadastrado vira erro', async () => {
+    const res = await service.importar({
+      evento_id: 5, modalidade_id: 2, dry_run: false,
+      rows: [{ posicao: 2, nome: 'Maria', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
+    })
+    expect(res.contadores.erros).toBe(1)
+    expect(res.rows[0].erro).toContain('não cadastrado')
   })
 })

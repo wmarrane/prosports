@@ -36,6 +36,8 @@ export const inscricoesService = {
   criar: (data: InscricaoPayload) => api.post<Inscricao>(BASE, data).then(r => r.data),
   criarBulk: (data: BulkPayload) => api.post<BulkResult>(`${BASE}/bulk`, data).then(r => r.data),
   remover: (id: number) => api.delete(`${BASE}/${id}`),
+  removerTodosDaModalidade: (evento_id: number, modalidade_id: number) =>
+    api.delete<{ count: number }>(`${BASE}/evento/${evento_id}/modalidade/${modalidade_id}`).then(r => r.data),
   importar: (data: ImportPayload) =>
     api.post<ImportResult>(`${BASE}/import`, data).then(r => r.data),
 }
