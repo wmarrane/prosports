@@ -8,6 +8,7 @@ vi.mock('../../lib/prisma', () => ({
     inscricao: { findMany: vi.fn(), groupBy: vi.fn() },
     campeaoAnterior: { findMany: vi.fn() },
     sorteio: { findUnique: vi.fn() },
+    eventoModalidadeExcluida: { findMany: vi.fn().mockResolvedValue([]) },
   },
 }))
 

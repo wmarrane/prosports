@@ -3,6 +3,7 @@ import path from 'path'
 import ExcelJS from 'exceljs'
 import prisma from '../../lib/prisma'
 import { aplicarEstilo, aplicarBordas, aplicarBordaExterna, COR } from './xlsx-style'
+import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -38,7 +39,8 @@ async function loadEventoComModalidades(evento_id: number) {
     throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
   }
 
-  const modalidades = evento.competicao?.modalidades ?? []
+  const excluidasIds = await getModalidadeIdsExcluidas(evento_id)
+  const modalidades = (evento.competicao?.modalidades ?? []).filter(m => !excluidasIds.has(m.id))
   return { evento, modalidades }
 }
 
