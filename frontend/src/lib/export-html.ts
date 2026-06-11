@@ -15,6 +15,9 @@ function escapeHtml(s: string): string {
 const EXPORT_OVERRIDE_CSS = `
 html, body, #root { height: auto !important; overflow: visible !important; }
 body { background: #fff; margin: 24px; }
+/* Chaves: não prender o bracket num scroll interno — deixa a página rolar/expandir
+   na horizontal e evita corte na impressão. */
+.stage-scroll { overflow-x: visible !important; }
 .sorteio-print { display: block !important; }
 .sorteio-print + .sorteio-print { margin-top: 24px; }
 @media print {

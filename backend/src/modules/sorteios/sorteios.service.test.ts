@@ -62,6 +62,52 @@ describe('sorteios.service', () => {
     })
   })
 
+  it('dois eventos diferentes sorteados em paralelo não interferem (Modo Congresso simultâneo)', async () => {
+    // Mocks "input-aware": cada evento/modalidade tem seus próprios dados.
+    mockPrisma.evento.findUnique.mockImplementation(({ where }: any) =>
+      Promise.resolve(
+        where.id === 1
+          ? { id: 1, competicao_id: 100, anfitriao_id: null, competicao: { considerar_anfitriao: false } }
+          : { id: 2, competicao_id: 200, anfitriao_id: null, competicao: { considerar_anfitriao: false } },
+      ),
+    )
+    mockPrisma.modalidade.findUnique.mockImplementation(({ where }: any) =>
+      Promise.resolve(
+        where.id === 11
+          ? { id: 11, competicao_id: 100, chave_versao: 'V1', tipo_modalidade: { tipo: 'ordem_entrada' } }
+          : { id: 22, competicao_id: 200, chave_versao: 'V1', tipo_modalidade: { tipo: 'ordem_entrada' } },
+      ),
+    )
+    mockPrisma.inscricao.findMany.mockImplementation(({ where }: any) =>
+      Promise.resolve(
+        where.evento_id === 1
+          ? [{ participante_id: 101 }, { participante_id: 102 }, { participante_id: 103 }]
+          : [{ participante_id: 201 }, { participante_id: 202 }, { participante_id: 203 }],
+      ),
+    )
+    // upsert ecoa o payload de create para inspeção
+    mockPrisma.sorteio.upsert.mockImplementation(({ create }: any) => Promise.resolve(create))
+
+    // Executa os dois "congressos" ao mesmo tempo
+    const [a, b] = await Promise.all([
+      service.executar({ evento_id: 1, modalidade_id: 11 }),
+      service.executar({ evento_id: 2, modalidade_id: 22 }),
+    ])
+
+    // Cada sorteio gravou no seu próprio evento/modalidade
+    expect(a.evento_id).toBe(1)
+    expect(a.modalidade_id).toBe(11)
+    expect(b.evento_id).toBe(2)
+    expect(b.modalidade_id).toBe(22)
+
+    // Seeds independentes (sem estado compartilhado)
+    expect(a.seed).not.toBe(b.seed)
+
+    // Sem contaminação cruzada: A só tem os inscritos do evento 1; B do evento 2
+    expect([...(a.resultado as any).ordem].sort()).toEqual([101, 102, 103])
+    expect([...(b.resultado as any).ordem].sort()).toEqual([201, 202, 203])
+  })
+
   it('buscarPorId lança 404 quando não encontrado', async () => {
     mockPrisma.sorteio.findUnique.mockResolvedValue(null)
     await expect(service.buscarPorId(99)).rejects.toMatchObject({ status: 404 })
