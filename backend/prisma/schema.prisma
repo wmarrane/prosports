@@ -95,6 +95,7 @@ model Modalidade {
   sorteios            Sorteio[]
   campeoes_anteriores CampeaoAnterior[]
   anfitriao_ordem     EventoModalidadeAnfitriao[]
+  modalidades_excluidas EventoModalidadeExcluida[]
   criado_em           DateTime        @default(now())
   atualizado_em       DateTime        @updatedAt
 
@@ -167,6 +168,7 @@ model Evento {
   campeoes_anteriores CampeaoAnterior[]
   event_keys      EventoKey[]
   anfitriao_ordem EventoModalidadeAnfitriao[]
+  modalidades_excluidas EventoModalidadeExcluida[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -285,4 +287,16 @@ model EventoModalidadeAnfitriao {
   @@unique([evento_id, modalidade_id])
   @@index([evento_id])
   @@map("evento_modalidade_anfitriao")
+}
+
+model EventoModalidadeExcluida {
+  id            Int        @id @default(autoincrement())
+  evento        Evento     @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id     Int
+  modalidade    Modalidade @relation(fields: [modalidade_id], references: [id], onDelete: Cascade)
+  modalidade_id Int
+
+  @@unique([evento_id, modalidade_id])
+  @@index([evento_id])
+  @@map("evento_modalidade_excluida")
 }
