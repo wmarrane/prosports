@@ -22,7 +22,6 @@ export type ImportRowResult = {
   nome: string
   status: 'criada' | 'duplicada' | 'erro'
   erro?: string
-  participante_criado?: boolean
 }
 
 export type ImportResult = {
@@ -31,6 +30,6 @@ export type ImportResult = {
     criadas: number
     duplicadas: number
     erros: number
-    participantes_criados: number
+    nao_cadastrados: number
   }
 }
