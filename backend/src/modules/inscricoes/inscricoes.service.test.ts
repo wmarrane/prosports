@@ -7,6 +7,10 @@ vi.mock('../../lib/prisma', () => ({
       findUnique: vi.fn(),
       create: vi.fn(),
       delete: vi.fn(),
+      deleteMany: vi.fn(),
+    },
+    sorteio: {
+      findFirst: vi.fn(),
     },
     evento: {
       findUnique: vi.fn(),
@@ -105,6 +109,20 @@ describe('inscricoes.service', () => {
     expect(mockPrisma.inscricao.delete).toHaveBeenCalledWith({ where: { id: 1 } })
   })
 
+  it('removerTodosDaModalidade bloqueia quando há sorteio', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue({ id: 1 })
+    await expect(service.removerTodosDaModalidade(5, 2)).rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.inscricao.deleteMany).not.toHaveBeenCalled()
+  })
+
+  it('removerTodosDaModalidade deleta quando não há sorteio', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue(null)
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 4 })
+    const r = await service.removerTodosDaModalidade(5, 2)
+    expect(r).toEqual({ count: 4 })
+    expect(mockPrisma.inscricao.deleteMany).toHaveBeenCalledWith({ where: { evento_id: 5, modalidade_id: 2 } })
+  })
+
   describe('importar', () => {
     const baseInput = (overrides: any = {}) => ({
       evento_id: 1,
@@ -152,7 +170,7 @@ describe('inscricoes.service', () => {
         rows: [{ nome: 'João', municipio_uf: 'SP', municipio_nome: 'Cidade Inexistente' }],
       }))
       expect(result.rows[0]).toMatchObject({ linha: 1, status: 'erro', erro: expect.stringContaining('Município') })
-      expect(result.contadores).toEqual({ criadas: 0, duplicadas: 0, erros: 1, participantes_criados: 0 })
+      expect(result.contadores).toEqual({ criadas: 0, duplicadas: 0, erros: 1, nao_cadastrados: 0 })
       expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
     })
@@ -167,7 +185,7 @@ describe('inscricoes.service', () => {
         rows: [{ nome: 'João', municipio_uf: 'SP', municipio_nome: 'são paulo' }],
       }))
       expect(result.rows[0]).toMatchObject({ status: 'duplicada' })
-      expect(result.contadores).toEqual({ criadas: 0, duplicadas: 1, erros: 0, participantes_criados: 0 })
+      expect(result.contadores).toEqual({ criadas: 0, duplicadas: 1, erros: 0, nao_cadastrados: 0 })
       expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
     })
@@ -182,48 +200,40 @@ describe('inscricoes.service', () => {
       const result = await service.importar(baseInput({
         rows: [{ nome: 'João Silva', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
       }))
-      expect(result.rows[0]).toMatchObject({ status: 'criada', participante_criado: false })
+      expect(result.rows[0]).toMatchObject({ status: 'criada' })
       expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
         data: { evento_id: 1, modalidade_id: 2, participante_id: 500 },
       })
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
     })
 
-    it('participante novo → criada (criando participante)', async () => {
-      setupOk()
-      mockPrisma.participante.create.mockResolvedValue({ id: 777 })
-      mockPrisma.inscricao.create.mockResolvedValue({ id: 998 })
-      const result = await service.importar(baseInput({
-        rows: [{ nome: 'Maria', municipio_uf: 'RJ', municipio_nome: 'Rio de Janeiro', subtitulo: 'Atleta B' }],
-      }))
-      expect(result.rows[0]).toMatchObject({ status: 'criada', participante_criado: true })
-      expect(mockPrisma.participante.create).toHaveBeenCalledWith({
-        data: { nome: 'Maria', municipio_id: 101, subtitulo: 'Atleta B' },
-      })
-      expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
-        data: { evento_id: 1, modalidade_id: 2, participante_id: 777 },
-      })
-      expect(result.contadores).toEqual({ criadas: 1, duplicadas: 0, erros: 0, participantes_criados: 1 })
-    })
+    it('importar NÃO cria participante; não cadastrado vira erro e conta nao_cadastrados', async () => {
+      mockPrisma.evento.findUnique.mockResolvedValue({ id: 5, competicao_id: 1 })
+      mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 1 })
+      mockPrisma.municipio.findMany.mockResolvedValue([{ id: 7, nome: 'São Paulo', uf: 'SP' }])
+      mockPrisma.participante.findMany.mockResolvedValue([{ id: 99, nome: 'João', municipio_id: 7 }])
+      mockPrisma.inscricao.findMany.mockResolvedValue([])
+      mockPrisma.inscricao.create.mockResolvedValue({})
 
-    it('2 linhas com mesmo participante novo → 1 criada + 1 duplicada (index em memória)', async () => {
-      setupOk()
-      mockPrisma.participante.create.mockResolvedValue({ id: 777 })
-      mockPrisma.inscricao.create.mockResolvedValue({ id: 998 })
-      const result = await service.importar(baseInput({
+      const res = await service.importar({
+        evento_id: 5, modalidade_id: 2, dry_run: false,
         rows: [
-          { nome: 'Maria', municipio_uf: 'RJ', municipio_nome: 'Rio de Janeiro' },
-          { nome: 'maria', municipio_uf: 'RJ', municipio_nome: 'Rio de Janeiro' },
+          { nome: 'João', municipio_uf: 'SP', municipio_nome: 'São Paulo' },
+          { nome: 'Maria', municipio_uf: 'SP', municipio_nome: 'São Paulo' },
         ],
-      }))
-      expect(result.rows[0]).toMatchObject({ status: 'criada', participante_criado: true })
-      expect(result.rows[1]).toMatchObject({ status: 'duplicada' })
-      expect(mockPrisma.participante.create).toHaveBeenCalledTimes(1)
+      })
+      expect(res.contadores.criadas).toBe(1)
+      expect(res.contadores.nao_cadastrados).toBe(1)
+      expect(res.contadores.erros).toBe(1)
       expect(mockPrisma.inscricao.create).toHaveBeenCalledTimes(1)
     })
 
     it('dry_run não chama nenhum create', async () => {
       setupOk()
+      mockPrisma.participante.findMany.mockResolvedValue([
+        { id: 500, nome: 'Maria', municipio_id: 101 },
+        { id: 501, nome: 'João Silva', municipio_id: 100 },
+      ])
       const result = await service.importar(baseInput({
         dry_run: true,
         rows: [
@@ -234,7 +244,7 @@ describe('inscricoes.service', () => {
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
       expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
       expect(result.contadores.criadas).toBe(2)
-      expect(result.contadores.participantes_criados).toBe(2)
+      expect(result.contadores.nao_cadastrados).toBe(0)
     })
 
     it('match case-insensitive em participante.nome (evita duplicata por capitalização)', async () => {
@@ -246,7 +256,7 @@ describe('inscricoes.service', () => {
         dry_run: true,
         rows: [{ nome: 'joão silva', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
       }))
-      expect(result.rows[0]).toMatchObject({ status: 'criada', participante_criado: false })
+      expect(result.rows[0]).toMatchObject({ status: 'criada' })
     })
   })
 })

@@ -1,4 +1,5 @@
 import prisma from '../../lib/prisma'
+import { resolverParticipantes } from '../participantes/resolver-participantes.service'
 
 const INCLUDE = {
   participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
@@ -59,6 +60,23 @@ export async function criar(data: CreateInput) {
 
 export async function remover(id: number) {
   return prisma.inscricao.delete({ where: { id } })
+}
+
+export async function removerTodosDaModalidade(
+  evento_id: number,
+  modalidade_id: number,
+): Promise<{ count: number }> {
+  const sorteio = await prisma.sorteio.findFirst({
+    where: { evento_id, modalidade_id },
+    select: { id: true },
+  })
+  if (sorteio) {
+    throw Object.assign(
+      new Error('Apague o sorteio desta modalidade antes de remover os inscritos.'),
+      { status: 400 },
+    )
+  }
+  return prisma.inscricao.deleteMany({ where: { evento_id, modalidade_id } })
 }
 
 export async function contarPorModalidade(evento_id: number): Promise<Record<number, number>> {
@@ -147,7 +165,6 @@ export type ImportRowResult = {
   nome: string
   status: 'criada' | 'duplicada' | 'erro'
   erro?: string
-  participante_criado?: boolean
 }
 
 export type ImportResult = {
@@ -156,7 +173,7 @@ export type ImportResult = {
     criadas: number
     duplicadas: number
     erros: number
-    participantes_criados: number
+    nao_cadastrados: number
   }
 }
 
@@ -185,27 +202,7 @@ export async function importar(input: {
     )
   }
 
-  const ufsSet = new Set(input.rows.map(r => r.municipio_uf.toUpperCase()))
-  const municipios = await prisma.municipio.findMany({
-    where: { uf: { in: Array.from(ufsSet) } },
-    select: { id: true, nome: true, uf: true },
-  })
-  const municipiosByKey = new Map<string, number>()
-  for (const m of municipios) {
-    municipiosByKey.set(`${m.uf.toUpperCase()}:${m.nome.toLowerCase()}`, m.id)
-  }
-
-  const municipioIds = municipios.map(m => m.id)
-  const participantes = municipioIds.length > 0
-    ? await prisma.participante.findMany({
-        where: { municipio_id: { in: municipioIds } },
-        select: { id: true, nome: true, municipio_id: true },
-      })
-    : []
-  const participantesByKey = new Map<string, number>()
-  for (const p of participantes) {
-    participantesByKey.set(`${p.municipio_id}:${p.nome.toLowerCase()}`, p.id)
-  }
+  const resolucoes = await resolverParticipantes(input.rows)
 
   const inscricoes = await prisma.inscricao.findMany({
     where: { evento_id: input.evento_id, modalidade_id: input.modalidade_id },
@@ -214,59 +211,37 @@ export async function importar(input: {
   const inscritosSet = new Set<number>(inscricoes.map(i => i.participante_id))
 
   const results: ImportRowResult[] = []
-  const contadores = { criadas: 0, duplicadas: 0, erros: 0, participantes_criados: 0 }
+  const contadores = { criadas: 0, duplicadas: 0, erros: 0, nao_cadastrados: 0 }
 
   for (let i = 0; i < input.rows.length; i++) {
     const row = input.rows[i]
     const linha = i + 1
     const nome = row.nome.trim()
-    const uf = row.municipio_uf.trim().toUpperCase()
-    const munNome = row.municipio_nome.trim()
-    const subtitulo = row.subtitulo?.trim() || undefined
+    const r = resolucoes[i]
 
-    const munKey = `${uf}:${munNome.toLowerCase()}`
-    const municipio_id = municipiosByKey.get(munKey)
-    if (!municipio_id) {
-      results.push({ linha, nome, status: 'erro', erro: `Município '${munNome}/${uf}' não encontrado` })
+    if (r.municipio_id == null) {
+      results.push({ linha, nome, status: 'erro', erro: `Município '${row.municipio_nome}/${row.municipio_uf}' não encontrado` })
       contadores.erros++
       continue
     }
-
-    const partKey = `${municipio_id}:${nome.toLowerCase()}`
-    let participante_id = participantesByKey.get(partKey)
-    let participante_criado = false
-
-    if (!participante_id) {
-      if (input.dry_run) {
-        participante_id = -linha
-      } else {
-        const created = await prisma.participante.create({
-          data: { nome, municipio_id, subtitulo },
-        })
-        participante_id = created.id
-      }
-      participantesByKey.set(partKey, participante_id)
-      participante_criado = true
-      contadores.participantes_criados++
+    if (r.participante_id == null) {
+      results.push({ linha, nome, status: 'erro', erro: "Participante não cadastrado. Cadastre em 'Participantes' primeiro." })
+      contadores.erros++
+      contadores.nao_cadastrados++
+      continue
     }
-
-    if (inscritosSet.has(participante_id)) {
+    if (inscritosSet.has(r.participante_id)) {
       results.push({ linha, nome, status: 'duplicada' })
       contadores.duplicadas++
       continue
     }
-
     if (!input.dry_run) {
       await prisma.inscricao.create({
-        data: {
-          evento_id: input.evento_id,
-          modalidade_id: input.modalidade_id,
-          participante_id,
-        },
+        data: { evento_id: input.evento_id, modalidade_id: input.modalidade_id, participante_id: r.participante_id },
       })
     }
-    inscritosSet.add(participante_id)
-    results.push({ linha, nome, status: 'criada', participante_criado })
+    inscritosSet.add(r.participante_id)
+    results.push({ linha, nome, status: 'criada' })
     contadores.criadas++
   }
 
