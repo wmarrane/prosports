@@ -104,8 +104,8 @@ describe('sorteios.service', () => {
     expect(a.seed).not.toBe(b.seed)
 
     // Sem contaminação cruzada: A só tem os inscritos do evento 1; B do evento 2
-    expect([...a.resultado.ordem].sort()).toEqual([101, 102, 103])
-    expect([...b.resultado.ordem].sort()).toEqual([201, 202, 203])
+    expect([...(a.resultado as any).ordem].sort()).toEqual([101, 102, 103])
+    expect([...(b.resultado as any).ordem].sort()).toEqual([201, 202, 203])
   })
 
   it('buscarPorId lança 404 quando não encontrado', async () => {
