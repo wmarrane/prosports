@@ -6,7 +6,7 @@ import redis from '../../lib/redis'
 
 const ACCESS_SECRET = process.env.JWT_SECRET!
 const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? ACCESS_SECRET + '_refresh'
-const ACCESS_EXPIRES = '1h'
+const ACCESS_EXPIRES = '3h'
 const REFRESH_EXPIRES_SEC = 7 * 24 * 60 * 60 // 7 dias
 const MAX_TENTATIVAS = 5
 const BLOQUEIO_MINUTOS = 15
