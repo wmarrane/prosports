@@ -139,7 +139,8 @@ async function validarComissaoIds(ids: number[]) {
 }
 
 export async function criar(data: CreateInput) {
-  const { comissao_ids, ...rest } = data
+  const { comissao_ids: comissaoRaw, ...rest } = data
+  const comissao_ids = comissaoRaw ? [...new Set(comissaoRaw)] : undefined
   if (comissao_ids) await validarComissaoIds(comissao_ids)
   return mapPrismaError(async () => {
     const evento = await prisma.evento.create({ data: rest, include: INCLUDE })
@@ -152,7 +153,8 @@ export async function criar(data: CreateInput) {
 }
 
 export async function editar(id: number, data: Partial<CreateInput>) {
-  const { comissao_ids, ...rest } = data
+  const { comissao_ids: comissaoRaw, ...rest } = data
+  const comissao_ids = comissaoRaw ? [...new Set(comissaoRaw)] : undefined
   if (comissao_ids) await validarComissaoIds(comissao_ids)
   return mapPrismaError(async () => {
     await prisma.evento.update({ where: { id }, data: rest })

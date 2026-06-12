@@ -171,6 +171,37 @@ describe('eventos.service', () => {
     expect((out[0] as any).modalidades_sorteaveis).toBe(1)
   })
 
+  it('criar sincroniza comissão (createMany) e valida ids como COMISSAO_TECNICA', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 10, role: 'COMISSAO_TECNICA' }, { id: 11, role: 'COMISSAO_TECNICA' }])
+    mockPrisma.evento.create.mockResolvedValue({ id: 99 })
+    mockPrisma.eventoComissao.createMany.mockResolvedValue({ count: 2 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 99 })
+    await service.criar({ nome: 'E', data_hora: new Date(), local: 'L', competicao_id: 1, municipio_id: 1, comissao_ids: [10, 11, 10] } as any)
+    // dedupe: 10 e 11 (sem o 10 repetido)
+    expect(mockPrisma.eventoComissao.createMany).toHaveBeenCalledWith({ data: [
+      { evento_id: 99, usuario_id: 10 },
+      { evento_id: 99, usuario_id: 11 },
+    ] })
+  })
+
+  it('criar rejeita (400) comissao_ids que não são COMISSAO_TECNICA', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 10, role: 'ADMIN' }])
+    await expect(service.criar({ nome: 'E', data_hora: new Date(), local: 'L', competicao_id: 1, municipio_id: 1, comissao_ids: [10] } as any))
+      .rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.evento.create).not.toHaveBeenCalled()
+  })
+
+  it('editar substitui a comissão (deleteMany + createMany)', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 20, role: 'COMISSAO_TECNICA' }])
+    mockPrisma.evento.update.mockResolvedValue({ id: 5 })
+    mockPrisma.eventoComissao.deleteMany.mockResolvedValue({ count: 1 })
+    mockPrisma.eventoComissao.createMany.mockResolvedValue({ count: 1 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 5 })
+    await service.editar(5, { comissao_ids: [20] } as any)
+    expect(mockPrisma.eventoComissao.deleteMany).toHaveBeenCalledWith({ where: { evento_id: 5 } })
+    expect(mockPrisma.eventoComissao.createMany).toHaveBeenCalledWith({ data: [{ evento_id: 5, usuario_id: 20 }] })
+  })
+
   it('listar exclui modalidades excluidas do contador e calcula pendentes', async () => {
     mockPrisma.evento.findMany.mockResolvedValue([
       { id: 1, competicao: { modalidades: [
