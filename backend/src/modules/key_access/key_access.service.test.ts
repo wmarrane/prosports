@@ -106,7 +106,7 @@ describe('key_access.service', () => {
     ])
     const r = await service.getModalidades(evento)
     expect(mockPrisma.modalidade.findMany).toHaveBeenCalledWith({
-      where: { competicao_id: 10 },
+      where: { competicao_id: 10, ativa: true },
       orderBy: { nome: 'asc' },
       include: { tipo_modalidade: { select: { tipo: true } } },
     })

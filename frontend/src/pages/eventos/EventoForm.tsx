@@ -13,7 +13,7 @@ import { Check, X, Trophy } from '../../lib/icons'
 import { Calendar, MapPin, Users, Image as ImageIcon, Upload } from 'lucide-react'
 import AcessoMobileCard from './AcessoMobileCard'
 
-const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial']
+const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial', 'suspenso']
 
 const STATUS_DESC: Record<EventoStatus, string> = {
   rascunho: 'Em preparação. Não aparece para o público.',
@@ -21,6 +21,7 @@ const STATUS_DESC: Record<EventoStatus, string> = {
   pronto: 'Inscrições encerradas, pronto para sorteio.',
   sorteado: 'Sorteios concluídos para todas as modalidades.',
   parcial: 'Algumas modalidades já foram sorteadas.',
+  suspenso: 'Evento pausado — ações bloqueadas até reativar.',
 }
 
 function toLocalInput(iso: string | null): string {

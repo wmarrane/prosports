@@ -3,7 +3,7 @@ import type { Municipio } from './municipio'
 import type { TipoDisputa } from './modalidade'
 import type { Participante } from './participante'
 
-export type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
+export type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial' | 'suspenso'
 
 // Competicao com modalidades incluídas (para o list view)
 export type CompeticaoComModalidades = Competicao & {

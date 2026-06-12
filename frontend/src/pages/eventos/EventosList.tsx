@@ -242,6 +242,7 @@ export default function EventosList() {
                           : tipos.length === 1
                           ? TIPO_GRAD[tipos[0]]
                           : 'var(--grad-brand)'
+                        const suspenso = ev.status === 'suspenso'
                         return (
                           <div
                             key={ev.id}
@@ -249,8 +250,8 @@ export default function EventosList() {
                             className="fade-in"
                             style={{
                               position: 'relative',
-                              background: 'var(--card-bg)',
-                              border: '1px solid var(--card-border)',
+                              background: suspenso ? 'var(--warn-soft)' : 'var(--card-bg)',
+                              border: suspenso ? '1px solid var(--warn)' : '1px solid var(--card-border)',
                               borderRadius: 'var(--radius-xl)',
                               padding: 20,
                               cursor: 'pointer',
@@ -264,7 +265,7 @@ export default function EventosList() {
                               e.currentTarget.style.transform = 'translateY(-2px)'
                             }}
                             onMouseLeave={e => {
-                              e.currentTarget.style.borderColor = 'var(--card-border)'
+                              e.currentTarget.style.borderColor = suspenso ? 'var(--warn)' : 'var(--card-border)'
                               e.currentTarget.style.transform = 'translateY(0)'
                             }}
                           >

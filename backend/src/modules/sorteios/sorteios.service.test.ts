@@ -351,6 +351,12 @@ describe('sorteios.service', () => {
     expect(callArg.create.resultado.matchesGraph).toEqual(fakeGraph)
   })
 
+  it('executar bloqueia evento suspenso', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 5, competicao_id: 1, anfitriao_id: null, status: 'suspenso', competicao: { considerar_anfitriao: false } })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 1, chave_versao: 'V1', tipo_modalidade: { tipo: 'ordem_entrada' } })
+    await expect(service.executar({ evento_id: 5, modalidade_id: 2 })).rejects.toMatchObject({ status: 400 })
+  })
+
   it('executar chaves aplica transform V2 quando modalidade.chave_versao === V2', async () => {
     mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
     mockPrisma.modalidade.findUnique.mockResolvedValue({

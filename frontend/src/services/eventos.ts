@@ -1,5 +1,5 @@
 import api from './api'
-import type { Evento } from '../types/evento'
+import type { Evento, EventoStatus } from '../types/evento'
 import type { Modalidade } from '../types/modalidade'
 
 const BASE = '/eventos'
@@ -9,7 +9,7 @@ type EventoPayload = {
   data_hora: string
   local: string
   organizador?: string
-  status?: 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
+  status?: EventoStatus
   competicao_id: number
   municipio_id: number
   anfitriao_id?: number | null

@@ -4,7 +4,7 @@ import path from 'path'
 import * as service from './eventos.service'
 import { deleteFile } from '../../lib/upload'
 
-const STATUS_VALUES = ['rascunho','inscricoes','pronto','sorteado','parcial'] as const
+const STATUS_VALUES = ['rascunho','inscricoes','pronto','sorteado','parcial','suspenso'] as const
 
 const createSchema = z.object({
   nome: z.string().min(1),

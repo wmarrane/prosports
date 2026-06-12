@@ -86,6 +86,7 @@ model Modalidade {
   nome                String
   sigla               String
   chave_versao        String          @default("V1")
+  ativa               Boolean         @default(true)
   mensagens_inscritos Json            @default("[]")
   competicao          Competicao      @relation(fields: [competicao_id], references: [id])
   competicao_id       Int
@@ -146,6 +147,7 @@ enum EventoStatus {
   pronto
   sorteado
   parcial
+  suspenso
 }
 
 model Evento {

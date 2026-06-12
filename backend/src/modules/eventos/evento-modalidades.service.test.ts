@@ -43,4 +43,14 @@ describe('modalidadesDoEvento', () => {
     mockPrisma.evento.findUnique.mockResolvedValue(null)
     await expect(service.modalidadesDoEvento(99)).rejects.toMatchObject({ status: 404 })
   })
+
+  it('modalidadesDoEvento filtra apenas modalidades ativas', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 10, competicao_id: 7 })
+    mockPrisma.modalidade.findMany.mockResolvedValue([])
+    mockPrisma.eventoModalidadeExcluida.findMany.mockResolvedValue([])
+    await service.modalidadesDoEvento(10)
+    expect(mockPrisma.modalidade.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { competicao_id: 7, ativa: true } }),
+    )
+  })
 })
