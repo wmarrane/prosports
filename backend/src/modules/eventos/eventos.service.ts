@@ -40,7 +40,7 @@ async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
   }
 }
 
-type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
+type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial' | 'suspenso'
 
 type CreateInput = {
   nome: string
