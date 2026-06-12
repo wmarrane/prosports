@@ -13,15 +13,16 @@ const alterarSenhaSchema = z.object({
 })
 
 const REFRESH_COOKIE = 'prosports_rt'
+// Em produção o frontend (Firebase) chama o backend em outra origem (cross-site),
+// então o cookie precisa de SameSite=None + Secure para ser enviado no refresh.
+// Em dev é mesma origem (proxy /api), onde Lax funciona e Secure não pode (http).
+const COOKIE_PROD = process.env.NODE_ENV === 'production'
 const COOKIE_OPTS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
+  secure: COOKIE_PROD,
+  sameSite: (COOKIE_PROD ? 'none' : 'lax') as 'none' | 'lax',
   maxAge: 7 * 24 * 60 * 60 * 1000,
-  // Path '/' para o cookie acompanhar a requisição real de refresh, que o
-  // browser faz em /api/auth/refresh (o proxy remove o /api antes do backend).
-  // Com path '/auth/refresh' o cookie nunca era enviado → refresh sempre 401
-  // → logout após ~1h (expiração do access token).
+  // Path '/' para o cookie acompanhar a requisição real de refresh.
   path: '/',
 }
 
@@ -64,7 +65,7 @@ export async function logoutHandler(req: Request, res: Response, next: NextFunct
       }
     }
 
-    res.clearCookie(REFRESH_COOKIE, { path: '/' })
+    res.clearCookie(REFRESH_COOKIE, { path: '/', sameSite: COOKIE_OPTS.sameSite, secure: COOKIE_OPTS.secure })
     res.json({ message: 'Logout realizado' })
   } catch (err) {
     next(err)
