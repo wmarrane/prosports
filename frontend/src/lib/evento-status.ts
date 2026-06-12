@@ -6,6 +6,7 @@ export const STATUS_LABEL: Record<EventoStatus, string> = {
   pronto: 'Pronto p/ sorteio',
   sorteado: 'Sorteado',
   parcial: 'Parcial',
+  suspenso: 'Suspenso',
 }
 
 export const STATUS_COLOR: Record<EventoStatus, string> = {
@@ -14,4 +15,5 @@ export const STATUS_COLOR: Record<EventoStatus, string> = {
   pronto: 'bg-[var(--warn-soft)] text-[var(--warn-700)] border border-[var(--warn)]',
   sorteado: 'bg-[var(--success-soft)] text-[var(--success-700)] border border-[var(--success)]',
   parcial: 'bg-[var(--info-soft)] text-[var(--info-700)] border border-[var(--info)]',
+  suspenso: 'bg-[var(--warn-soft)] text-[var(--warn-700)] border border-[var(--warn)]',
 }

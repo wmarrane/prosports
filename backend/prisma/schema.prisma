@@ -147,6 +147,7 @@ enum EventoStatus {
   pronto
   sorteado
   parcial
+  suspenso
 }
 
 model Evento {
