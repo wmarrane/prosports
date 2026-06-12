@@ -52,43 +52,47 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/painel" replace />} />
 
-            <Route path="/painel"    element={<Painel />} />
             <Route path="/eventos"                  element={<EventosList />} />
             <Route path="/eventos/novo"             element={<EventoForm />} />
             <Route path="/eventos/:id/editar"       element={<EventoForm />} />
             <Route path="/eventos/:id/inscricoes"   element={<EventoInscricoes />} />
             <Route path="/relatorio" element={<Relatorio />} />
             <Route path="/relatorios/congresso" element={<RelatorioCongresso />} />
-            <Route path="/admin"     element={<Admin />} />
 
-            <Route path="/inspetorias" element={<InspetoriasList />} />
-            <Route path="/inspetorias/novo" element={<InspetoriaForm />} />
-            <Route path="/inspetorias/:id/editar" element={<InspetoriaForm />} />
+            {/* Rotas administrativas: barradas para COMISSAO_TECNICA */}
+            <Route element={<ProtectedRoute roles={['ADMIN', 'PARTICIPANTE', 'VIEWER']} />}>
+              <Route path="/painel"    element={<Painel />} />
+              <Route path="/admin"     element={<Admin />} />
 
-            <Route path="/delegacias" element={<DelegaciasList />} />
-            <Route path="/delegacias/nova" element={<DelegaciaForm />} />
-            <Route path="/delegacias/:id/editar" element={<DelegaciaForm />} />
+              <Route path="/inspetorias" element={<InspetoriasList />} />
+              <Route path="/inspetorias/novo" element={<InspetoriaForm />} />
+              <Route path="/inspetorias/:id/editar" element={<InspetoriaForm />} />
 
-            <Route path="/participantes" element={<ParticipantesList />} />
-            <Route path="/participantes/novo" element={<ParticipanteForm />} />
-            <Route path="/participantes/:id/editar" element={<ParticipanteForm />} />
+              <Route path="/delegacias" element={<DelegaciasList />} />
+              <Route path="/delegacias/nova" element={<DelegaciaForm />} />
+              <Route path="/delegacias/:id/editar" element={<DelegaciaForm />} />
 
-            <Route path="/tipos-modalidade"            element={<TiposModalidadeList />} />
-            <Route path="/tipos-modalidade/novo"       element={<TipoModalidadeForm />} />
-            <Route path="/tipos-modalidade/:id/editar" element={<TipoModalidadeForm />} />
+              <Route path="/participantes" element={<ParticipantesList />} />
+              <Route path="/participantes/novo" element={<ParticipanteForm />} />
+              <Route path="/participantes/:id/editar" element={<ParticipanteForm />} />
 
-            <Route path="/modalidades" element={<ModalidadesList />} />
-            <Route path="/modalidades/nova" element={<ModalidadeForm />} />
-            <Route path="/modalidades/:id/editar" element={<ModalidadeForm />} />
+              <Route path="/tipos-modalidade"            element={<TiposModalidadeList />} />
+              <Route path="/tipos-modalidade/novo"       element={<TipoModalidadeForm />} />
+              <Route path="/tipos-modalidade/:id/editar" element={<TipoModalidadeForm />} />
 
-            <Route path="/municipios" element={<MunicipiosList />} />
-            <Route path="/municipios/novo" element={<MunicipioForm />} />
-            <Route path="/municipios/:id/editar" element={<MunicipioForm />} />
-            <Route path="/municipios/importar" element={<MunicipiosImport />} />
+              <Route path="/modalidades" element={<ModalidadesList />} />
+              <Route path="/modalidades/nova" element={<ModalidadeForm />} />
+              <Route path="/modalidades/:id/editar" element={<ModalidadeForm />} />
 
-            <Route path="/competicoes" element={<CompeticoesList />} />
-            <Route path="/competicoes/nova" element={<CompeticaoForm />} />
-            <Route path="/competicoes/:id/editar" element={<CompeticaoForm />} />
+              <Route path="/municipios" element={<MunicipiosList />} />
+              <Route path="/municipios/novo" element={<MunicipioForm />} />
+              <Route path="/municipios/:id/editar" element={<MunicipioForm />} />
+              <Route path="/municipios/importar" element={<MunicipiosImport />} />
+
+              <Route path="/competicoes" element={<CompeticoesList />} />
+              <Route path="/competicoes/nova" element={<CompeticaoForm />} />
+              <Route path="/competicoes/:id/editar" element={<CompeticaoForm />} />
+            </Route>
 
             <Route element={<ProtectedRoute roles={['ADMIN']} />}>
               <Route path="/sistemas-disputa" element={<SistemasDisputa />} />
