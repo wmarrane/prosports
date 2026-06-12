@@ -13,6 +13,7 @@ const LIST_INCLUDE = {
   competicao: {
     include: {
       modalidades: {
+        where: { ativa: true },
         select: {
           id: true,
           mensagens_inscritos: true,

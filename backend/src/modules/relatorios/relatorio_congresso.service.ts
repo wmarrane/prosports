@@ -27,6 +27,7 @@ async function loadEventoComModalidades(evento_id: number) {
       competicao: {
         include: {
           modalidades: {
+            where: { ativa: true },
             include: { tipo_modalidade: true },
             orderBy: { nome: 'asc' },
           },
