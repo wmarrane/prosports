@@ -15,9 +15,11 @@ vi.mock('../../lib/prisma', () => ({
     sorteio: {
       deleteMany: vi.fn(),
       count: vi.fn(),
+      findFirst: vi.fn(),
     },
     inscricao: {
       count: vi.fn(),
+      findFirst: vi.fn(),
     },
     campeaoAnterior: {
       count: vi.fn(),
@@ -215,5 +217,46 @@ describe('modalidades.service', () => {
   it('replicarMensagens lança 404 se origem não existe', async () => {
     mockPrisma.modalidade.findUnique.mockResolvedValue(null)
     await expect(service.replicarMensagens(99, [2], [])).rejects.toMatchObject({ status: 404 })
+  })
+
+  it('setAtiva atualiza o flag ativa', async () => {
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 3, ativa: false })
+    const r = await service.setAtiva(3, false)
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 3 },
+      data: { ativa: false },
+      include: { competicao: true, tipo_modalidade: true },
+    })
+    expect(r).toEqual({ id: 3, ativa: false })
+  })
+
+  it('setAtiva(false) bloqueia (400) se há sorteio em evento sorteado/parcial', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue({ id: 1 })
+    mockPrisma.inscricao.findFirst.mockResolvedValue(null)
+    await expect(service.setAtiva(3, false)).rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.modalidade.update).not.toHaveBeenCalled()
+  })
+
+  it('setAtiva(false) bloqueia (400) se há inscritos em evento sorteado/parcial', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue(null)
+    mockPrisma.inscricao.findFirst.mockResolvedValue({ id: 2 })
+    await expect(service.setAtiva(3, false)).rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.modalidade.update).not.toHaveBeenCalled()
+  })
+
+  it('setAtiva(false) permite quando não há dados em evento sorteado/parcial', async () => {
+    mockPrisma.sorteio.findFirst.mockResolvedValue(null)
+    mockPrisma.inscricao.findFirst.mockResolvedValue(null)
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 3, ativa: false })
+    await service.setAtiva(3, false)
+    expect(mockPrisma.modalidade.update).toHaveBeenCalled()
+  })
+
+  it('setAtiva(true) sempre permite reativar (sem checar dados)', async () => {
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 3, ativa: true })
+    await service.setAtiva(3, true)
+    expect(mockPrisma.sorteio.findFirst).not.toHaveBeenCalled()
+    expect(mockPrisma.inscricao.findFirst).not.toHaveBeenCalled()
+    expect(mockPrisma.modalidade.update).toHaveBeenCalled()
   })
 })

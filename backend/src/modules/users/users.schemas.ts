@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const roleEnum = z.enum(['ADMIN', 'PARTICIPANTE', 'VIEWER'])
+const roleEnum = z.enum(['ADMIN', 'PARTICIPANTE', 'VIEWER', 'COMISSAO_TECNICA'])
 
 export const createSchema = z.object({
   nome: z.string().min(2).max(80),

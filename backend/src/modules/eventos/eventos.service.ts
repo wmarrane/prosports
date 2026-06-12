@@ -5,6 +5,7 @@ const INCLUDE = {
   competicao: true,
   municipio: true,
   anfitriao: { include: { municipio: true, inspetoria: true, delegacia: true } },
+  comissao: { select: { usuario: { select: { id: true, nome: true } } } },
 } as const
 
 // Include estendido para a listagem: inclui modalidades da competição (com tipo)
@@ -13,6 +14,7 @@ const LIST_INCLUDE = {
   competicao: {
     include: {
       modalidades: {
+        where: { ativa: true },
         select: {
           id: true,
           mensagens_inscritos: true,
@@ -39,7 +41,7 @@ async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
   }
 }
 
-type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial'
+type EventoStatus = 'rascunho' | 'inscricoes' | 'pronto' | 'sorteado' | 'parcial' | 'suspenso'
 
 type CreateInput = {
   nome: string
@@ -50,11 +52,17 @@ type CreateInput = {
   competicao_id: number
   municipio_id: number
   anfitriao_id?: number | null
+  comissao_ids?: number[]
 }
 
-export async function listar(competicao_id?: number) {
+export async function listar(competicao_id?: number, user?: { sub: number; role: string }) {
+  const where: any = {}
+  if (competicao_id) where.competicao_id = competicao_id
+  if (user && user.role === 'COMISSAO_TECNICA') {
+    where.comissao = { some: { usuario_id: user.sub } }
+  }
   const eventos = await prisma.evento.findMany({
-    where: competicao_id ? { competicao_id } : undefined,
+    where,
     orderBy: { data_hora: 'desc' },
     include: LIST_INCLUDE,
   })
@@ -120,15 +128,46 @@ export async function buscarPorId(id: number) {
   return item
 }
 
-export async function criar(data: CreateInput) {
-  return mapPrismaError(() => prisma.evento.create({ data, include: INCLUDE }))
+async function validarComissaoIds(ids: number[]) {
+  if (ids.length === 0) return
+  const users = await prisma.user.findMany({ where: { id: { in: ids } }, select: { id: true, role: true } })
+  const validos = new Set(users.filter(u => u.role === 'COMISSAO_TECNICA').map(u => u.id))
+  const invalidos = ids.filter(id => !validos.has(id))
+  if (invalidos.length > 0) {
+    throw Object.assign(new Error(`Usuário(s) inválido(s) para comissão técnica: ${invalidos.join(', ')}.`), { status: 400 })
+  }
 }
 
-export async function editar(
-  id: number,
-  data: Partial<CreateInput>
-) {
-  return mapPrismaError(() => prisma.evento.update({ where: { id }, data, include: INCLUDE }))
+export async function criar(data: CreateInput) {
+  const { comissao_ids: comissaoRaw, ...rest } = data
+  const comissao_ids = comissaoRaw ? [...new Set(comissaoRaw)] : undefined
+  if (comissao_ids) await validarComissaoIds(comissao_ids)
+  return mapPrismaError(async () => {
+    const evento = await prisma.evento.create({ data: rest, include: INCLUDE })
+    if (comissao_ids && comissao_ids.length > 0) {
+      await prisma.eventoComissao.createMany({ data: comissao_ids.map(usuario_id => ({ evento_id: evento.id, usuario_id })) })
+      return prisma.evento.findUnique({ where: { id: evento.id }, include: INCLUDE })
+    }
+    return evento
+  })
+}
+
+export async function editar(id: number, data: Partial<CreateInput>) {
+  const { comissao_ids: comissaoRaw, ...rest } = data
+  const comissao_ids = comissaoRaw ? [...new Set(comissaoRaw)] : undefined
+  if (comissao_ids) await validarComissaoIds(comissao_ids)
+  return mapPrismaError(async () => {
+    await prisma.evento.update({ where: { id }, data: rest })
+    if (comissao_ids) {
+      await prisma.$transaction([
+        prisma.eventoComissao.deleteMany({ where: { evento_id: id } }),
+        ...(comissao_ids.length > 0
+          ? [prisma.eventoComissao.createMany({ data: comissao_ids.map(usuario_id => ({ evento_id: id, usuario_id })) })]
+          : []),
+      ])
+    }
+    return prisma.evento.findUnique({ where: { id }, include: INCLUDE })
+  })
 }
 
 export async function remover(id: number) {

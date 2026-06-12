@@ -39,13 +39,15 @@ export default function ModalidadesDoEventoModal({ open, eventoId, competicaoId,
     enabled: open,
   })
 
+  const modalidadesAtivas = modalidades.filter(m => m.ativa)
+
   // participa = true quando NÃO está em "excluidas"
   const [participa, setParticipa] = useState<Record<number, boolean>>({})
   useEffect(() => {
     if (!open) return
     const excl = new Set(excluidas)
     const map: Record<number, boolean> = {}
-    for (const m of modalidades) map[m.id] = !excl.has(m.id)
+    for (const m of modalidadesAtivas) map[m.id] = !excl.has(m.id)
     setParticipa(map)
   }, [open, modalidades, excluidas])
 
@@ -56,7 +58,7 @@ export default function ModalidadesDoEventoModal({ open, eventoId, competicaoId,
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
-      const ids = modalidades.filter(m => !participa[m.id]).map(m => m.id)
+      const ids = modalidadesAtivas.filter(m => !participa[m.id]).map(m => m.id)
       return eventosService.setModalidadesExcluidas(eventoId, ids)
     },
     onSuccess: () => {
@@ -86,7 +88,7 @@ export default function ModalidadesDoEventoModal({ open, eventoId, competicaoId,
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {modalidades.map(m => {
+          {modalidadesAtivas.map(m => {
             const travada = temDados(m.id)
             const checked = participa[m.id] ?? true
             return (

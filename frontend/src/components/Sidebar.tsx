@@ -21,6 +21,7 @@ const NAV: NavItem[] = [
   { cat: 'Operação' },
   { id: 'competicoes', label: 'Competições', icon: Trophy, path: '/competicoes' },
   { id: 'eventos', label: 'Eventos', icon: Evento, path: '/eventos' },
+  { id: 'congresso', label: 'Modo Congresso', icon: Trophy, path: '/congresso' },
   { id: 'participantes', label: 'Participantes', icon: Cadastro, path: '/participantes' },
   { cat: 'Gestão' },
   {
@@ -51,6 +52,13 @@ type Props = {
 
 export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
   const { user } = useAuthStore()
+  const isCT = user?.role === 'COMISSAO_TECNICA'
+  const CT_VISIBLE = new Set(['eventos', 'congresso', 'relatorios'])
+  const navItems = NAV.filter(item => {
+    if (!isCT) return true
+    if ('cat' in item) return false
+    return CT_VISIBLE.has((item as any).id)
+  })
   const { temNovidade } = useNovidades()
   const location = useLocation()
 
@@ -77,7 +85,7 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
     })
   }
 
-  const userInitials = (user?.email ?? 'U').slice(0, 2).toUpperCase()
+  const userInitials = (user?.nome ?? user?.email ?? 'U').slice(0, 2).toUpperCase()
 
   return (
     <aside className={'sidebar' + (collapsed ? ' collapsed' : '')}>
@@ -99,7 +107,7 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 py-3">
-        {NAV.map((item, i) => {
+        {navItems.map((item, i) => {
           if ('cat' in item) {
             return <div className="cat" key={'c' + i}>{item.cat}</div>
           }
@@ -195,8 +203,8 @@ export default function Sidebar({ collapsed, onToggleCollapse }: Props) {
             <div className="av">{userInitials}</div>
             {!collapsed && (
               <div className="who">
-                <b>{user?.email ?? '—'}</b>
-                <span>{user?.role === 'ADMIN' ? 'Administrador' : user?.role === 'PARTICIPANTE' ? 'Participante' : 'Viewer'}</span>
+                <b>{user?.nome ?? user?.email ?? '—'}</b>
+                <span>{user?.role === 'ADMIN' ? 'Administrador' : user?.role === 'COMISSAO_TECNICA' ? 'Comissão Técnica' : user?.role === 'PARTICIPANTE' ? 'Participante' : 'Viewer'}</span>
               </div>
             )}
           </button>

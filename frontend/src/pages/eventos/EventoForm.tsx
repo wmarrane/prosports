@@ -7,13 +7,14 @@ import MunicipioSelect from '../../components/MunicipioSelect'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
 import { eventosService } from '../../services/eventos'
 import { competicoesService } from '../../services/competicoes'
+import { usersService } from '../../services/users'
 import { STATUS_LABEL } from '../../lib/evento-status'
 import type { EventoStatus } from '../../types/evento'
 import { Check, X, Trophy } from '../../lib/icons'
 import { Calendar, MapPin, Users, Image as ImageIcon, Upload } from 'lucide-react'
 import AcessoMobileCard from './AcessoMobileCard'
 
-const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial']
+const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial', 'suspenso']
 
 const STATUS_DESC: Record<EventoStatus, string> = {
   rascunho: 'Em preparação. Não aparece para o público.',
@@ -21,6 +22,7 @@ const STATUS_DESC: Record<EventoStatus, string> = {
   pronto: 'Inscrições encerradas, pronto para sorteio.',
   sorteado: 'Sorteios concluídos para todas as modalidades.',
   parcial: 'Algumas modalidades já foram sorteadas.',
+  suspenso: 'Evento pausado — ações bloqueadas até reativar.',
 }
 
 function toLocalInput(iso: string | null): string {
@@ -44,6 +46,7 @@ export default function EventoForm() {
   const [organizador, setOrganizador] = useState('')
   const [status, setStatus] = useState<EventoStatus>('rascunho')
   const [anfitriaoId, setAnfitriaoId] = useState<number | null>(null)
+  const [comissaoIds, setComissaoIds] = useState<number[]>([])
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [erro, setErro] = useState('')
   const [erroLogo, setErroLogo] = useState('')
@@ -52,6 +55,12 @@ export default function EventoForm() {
     queryKey: ['competicoes'],
     queryFn: competicoesService.listar,
   })
+
+  const { data: usuarios = [] } = useQuery({
+    queryKey: ['usuarios'],
+    queryFn: usersService.listar,
+  })
+  const usuariosCT = usuarios.filter((u: any) => u.role === 'COMISSAO_TECNICA')
 
   const { data: existing } = useQuery({
     queryKey: ['eventos', Number(id)],
@@ -69,6 +78,7 @@ export default function EventoForm() {
       setOrganizador(existing.organizador ?? '')
       setStatus(existing.status)
       setAnfitriaoId(existing.anfitriao_id ?? null)
+      setComissaoIds(existing.comissao?.map(c => c.usuario.id) ?? [])
       setLogoUrl(existing.logo_url ?? null)
     }
   }, [existing])
@@ -104,6 +114,7 @@ export default function EventoForm() {
         competicao_id: Number(competicaoId),
         municipio_id: municipioId!,
         anfitriao_id: anfitriaoId,
+        comissao_ids: comissaoIds,
       }
       return isEdit
         ? eventosService.editar(Number(id), payload)
@@ -311,6 +322,26 @@ export default function EventoForm() {
                 </p>
               )
             })()}
+
+            <div style={{ marginTop: 20 }}>
+              <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">Comissão Técnica (usuários que operam este evento)</label>
+              {usuariosCT.length === 0 ? (
+                <p className="text-xs text-[var(--t4)]">Nenhum usuário com perfil "Comissão Técnica" cadastrado.</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {usuariosCT.map((u: any) => (
+                    <label key={u.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--t1)' }}>
+                      <input
+                        type="checkbox"
+                        checked={comissaoIds.includes(u.id)}
+                        onChange={e => setComissaoIds(prev => e.target.checked ? [...prev, u.id] : prev.filter(id => id !== u.id))}
+                      />
+                      {u.nome}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
           </section>
 
           {/* Card: Logotipo do evento */}

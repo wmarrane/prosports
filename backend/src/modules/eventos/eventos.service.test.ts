@@ -12,6 +12,9 @@ vi.mock('../../lib/prisma', () => ({
     inscricao: { groupBy: vi.fn() },
     sorteio: { findMany: vi.fn() },
     eventoModalidadeExcluida: { findMany: vi.fn() },
+    eventoComissao: { createMany: vi.fn(), deleteMany: vi.fn() },
+    user: { findMany: vi.fn() },
+    $transaction: vi.fn(async (ops: any) => Promise.all(ops)),
   },
 }))
 
@@ -25,11 +28,13 @@ const INCLUDE = {
   competicao: true,
   municipio: true,
   anfitriao: { include: { municipio: true, inspetoria: true, delegacia: true } },
+  comissao: { select: { usuario: { select: { id: true, nome: true } } } },
 }
 const LIST_INCLUDE = {
   competicao: {
     include: {
       modalidades: {
+        where: { ativa: true },
         select: {
           id: true,
           mensagens_inscritos: true,
@@ -47,10 +52,18 @@ describe('eventos.service', () => {
     mockPrisma.evento.findMany.mockResolvedValue([])
     await service.listar()
     expect(mockPrisma.evento.findMany).toHaveBeenCalledWith({
-      where: undefined,
+      where: {},
       orderBy: { data_hora: 'desc' },
       include: LIST_INCLUDE,
     })
+  })
+
+  it('listar filtra por comissão quando role COMISSAO_TECNICA', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([])
+    await service.listar(undefined, { sub: 7, role: 'COMISSAO_TECNICA' })
+    expect(mockPrisma.evento.findMany).toHaveBeenCalledWith(expect.objectContaining({
+      where: { comissao: { some: { usuario_id: 7 } } },
+    }))
   })
 
   it('listar filtra por competicao_id quando passado', async () => {
@@ -109,12 +122,16 @@ describe('eventos.service', () => {
     ).rejects.toMatchObject({ status: 409, message: expect.stringContaining('Já existe') })
   })
 
-  it('editar chama prisma.update com include', async () => {
+  it('editar chama prisma.update e retorna via findUnique com include', async () => {
     mockPrisma.evento.update.mockResolvedValue({ id: 1 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1 })
     await service.editar(1, { nome: 'Renomeado' })
     expect(mockPrisma.evento.update).toHaveBeenCalledWith({
       where: { id: 1 },
       data: { nome: 'Renomeado' },
+    })
+    expect(mockPrisma.evento.findUnique).toHaveBeenCalledWith({
+      where: { id: 1 },
       include: INCLUDE,
     })
   })
@@ -152,6 +169,37 @@ describe('eventos.service', () => {
 
     const out = await service.listar()
     expect((out[0] as any).modalidades_sorteaveis).toBe(1)
+  })
+
+  it('criar sincroniza comissão (createMany) e valida ids como COMISSAO_TECNICA', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 10, role: 'COMISSAO_TECNICA' }, { id: 11, role: 'COMISSAO_TECNICA' }])
+    mockPrisma.evento.create.mockResolvedValue({ id: 99 })
+    mockPrisma.eventoComissao.createMany.mockResolvedValue({ count: 2 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 99 })
+    await service.criar({ nome: 'E', data_hora: new Date(), local: 'L', competicao_id: 1, municipio_id: 1, comissao_ids: [10, 11, 10] } as any)
+    // dedupe: 10 e 11 (sem o 10 repetido)
+    expect(mockPrisma.eventoComissao.createMany).toHaveBeenCalledWith({ data: [
+      { evento_id: 99, usuario_id: 10 },
+      { evento_id: 99, usuario_id: 11 },
+    ] })
+  })
+
+  it('criar rejeita (400) comissao_ids que não são COMISSAO_TECNICA', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 10, role: 'ADMIN' }])
+    await expect(service.criar({ nome: 'E', data_hora: new Date(), local: 'L', competicao_id: 1, municipio_id: 1, comissao_ids: [10] } as any))
+      .rejects.toMatchObject({ status: 400 })
+    expect(mockPrisma.evento.create).not.toHaveBeenCalled()
+  })
+
+  it('editar substitui a comissão (deleteMany + createMany)', async () => {
+    mockPrisma.user.findMany.mockResolvedValue([{ id: 20, role: 'COMISSAO_TECNICA' }])
+    mockPrisma.evento.update.mockResolvedValue({ id: 5 })
+    mockPrisma.eventoComissao.deleteMany.mockResolvedValue({ count: 1 })
+    mockPrisma.eventoComissao.createMany.mockResolvedValue({ count: 1 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 5 })
+    await service.editar(5, { comissao_ids: [20] } as any)
+    expect(mockPrisma.eventoComissao.deleteMany).toHaveBeenCalledWith({ where: { evento_id: 5 } })
+    expect(mockPrisma.eventoComissao.createMany).toHaveBeenCalledWith({ data: [{ evento_id: 5, usuario_id: 20 }] })
   })
 
   it('listar exclui modalidades excluidas do contador e calcula pendentes', async () => {

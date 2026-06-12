@@ -92,6 +92,7 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         id: true,
         competicao_id: true,
         anfitriao_id: true,
+        status: true,
         competicao: { select: { considerar_anfitriao: true } },
       },
     }),
@@ -112,6 +113,9 @@ export async function executar(input: { evento_id: number; modalidade_id: number
       new Error('A modalidade não pertence à competição deste evento.'),
       { status: 400 },
     )
+  }
+  if ((evento as any).status === 'suspenso') {
+    throw Object.assign(new Error('Evento suspenso — reative o evento para sortear.'), { status: 400 })
   }
 
   const tipo = modalidade.tipo_modalidade.tipo

@@ -61,6 +61,15 @@ export async function replicarMensagens(req: Request, res: Response, next: NextF
   } catch (err) { next(err) }
 }
 
+const ativaSchema = z.object({ ativa: z.boolean() })
+
+export async function setAtiva(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { ativa } = ativaSchema.parse(req.body)
+    res.json(await service.setAtiva(Number(req.params.id), ativa))
+  } catch (err) { next(err) }
+}
+
 export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
     await service.remover(Number(req.params.id))

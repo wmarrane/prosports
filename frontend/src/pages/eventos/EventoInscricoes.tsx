@@ -14,6 +14,7 @@ import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
 import ImportCampeoesModal from '../../components/import/ImportCampeoesModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
+import { useAuthStore } from '../../store/authStore'
 import { eventosService } from '../../services/eventos'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
@@ -81,6 +82,7 @@ export default function EventoInscricoes() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const toast = useToast()
+  const isAdmin = useAuthStore(s => s.user?.role === 'ADMIN')
 
   const [modalidadeId, setModalidadeId] = useState<number | null>(null)
   const [inscreverOpen, setInscreverOpen] = useState(false)
@@ -182,6 +184,7 @@ export default function EventoInscricoes() {
   )
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
+  const eventoSuspenso = evento?.status === 'suspenso'
 
   const { mutate: criarBulk, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criarBulk({
@@ -398,6 +401,11 @@ export default function EventoInscricoes() {
               flexWrap: 'wrap',
             }}
           >
+            {eventoSuspenso && (
+              <div style={{ width: '100%', padding: '10px 14px', background: 'var(--warn-soft)', border: '1px solid var(--warn)', borderRadius: 'var(--radius-lg)', color: 'var(--warn-700)', fontSize: 13, fontWeight: 600 }}>
+                Evento suspenso — ações bloqueadas. Reative no formulário do evento (“Editar evento”) para liberar.
+              </div>
+            )}
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, flex: 1, minWidth: 280 }}>
               <div className="text-xs text-[var(--t3)] flex items-center gap-1.5">
                 <Calendar size={14} className="text-[var(--brand-500)]" />
@@ -431,18 +439,22 @@ export default function EventoInscricoes() {
                 />
               </div>
               <span className="text-xs text-[var(--t4)] font-mono">{pct}%</span>
-              <button
-                onClick={() => navigate(`/eventos/${eventoId}/editar`)}
-                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
-              >
-                Editar evento
-              </button>
-              <button
-                onClick={() => setModalidadesModalOpen(true)}
-                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
-              >
-                Modalidades do evento
-              </button>
+              {isAdmin && (
+                <>
+                  <button
+                    onClick={() => navigate(`/eventos/${eventoId}/editar`)}
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+                  >
+                    Editar evento
+                  </button>
+                  <button
+                    onClick={() => setModalidadesModalOpen(true)}
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+                  >
+                    Modalidades do evento
+                  </button>
+                </>
+              )}
               <button
                 onClick={handleExportarHtml}
                 disabled={exportandoHtml}
@@ -455,7 +467,8 @@ export default function EventoInscricoes() {
               {sorteadas > 0 && (
                 <button
                   onClick={() => { setApagarTodosOpen(true); setApagarTodosResumo(null) }}
-                  className="text-xs hover:text-[var(--danger-700)] font-semibold"
+                  disabled={eventoSuspenso}
+                  className="text-xs hover:text-[var(--danger-700)] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ color: 'var(--danger)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                   title="Apagar todos os sorteios deste evento"
                 >
@@ -671,7 +684,8 @@ export default function EventoInscricoes() {
                       {inscricoes.length > 0 && (
                         <button
                           onClick={() => setRemoverInscritosOpen(true)}
-                          className="btn btn-ghost btn-sm"
+                          disabled={eventoSuspenso}
+                          className="btn btn-ghost btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
                           style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--danger)' }}
                           title="Remover todos os inscritos desta modalidade"
                         >
@@ -680,14 +694,16 @@ export default function EventoInscricoes() {
                       )}
                       <button
                         onClick={() => setImportOpen(true)}
-                        className="btn btn-ghost btn-sm"
+                        disabled={eventoSuspenso}
+                        className="btn btn-ghost btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
                         <Download size={14} /> Importar CSV
                       </button>
                       <button
                         onClick={() => { setInscreverOpen(true); setPickedIds([]); setResumoBulk(null); setErroModal('') }}
-                        className="btn btn-primary btn-sm"
+                        disabled={eventoSuspenso}
+                        className="btn btn-primary btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
                         <Plus size={14} /> Inscrever
@@ -917,7 +933,7 @@ export default function EventoInscricoes() {
                         <div className="flex gap-3">
                           <button
                             onClick={handleResortear}
-                            disabled={executandoSorteio}
+                            disabled={executandoSorteio || eventoSuspenso}
                             className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] disabled:opacity-50 font-semibold"
                           >
                             {executandoSorteio ? 'Sorteando...' : 'Re-sortear'}
@@ -993,13 +1009,13 @@ export default function EventoInscricoes() {
                       {!regraMensagem?.pular_sorteio && (
                         <button
                           onClick={handleSortear}
-                          disabled={inscricoes.length === 0 || executandoSorteio}
+                          disabled={inscricoes.length === 0 || executandoSorteio || eventoSuspenso}
                           className="btn btn-primary"
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: 6,
-                            opacity: inscricoes.length === 0 || executandoSorteio ? 0.5 : 1,
+                            opacity: inscricoes.length === 0 || executandoSorteio || eventoSuspenso ? 0.5 : 1,
                           }}
                         >
                           <Shuffle size={16} />
@@ -1058,7 +1074,8 @@ export default function EventoInscricoes() {
                     </div>
                     <button
                       onClick={() => setImportCampeoesOpen(true)}
-                      className="btn btn-ghost btn-sm ml-auto"
+                      disabled={eventoSuspenso}
+                      className="btn btn-ghost btn-sm ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                     >
                       <Download size={14} /> Importar CSV

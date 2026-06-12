@@ -21,7 +21,7 @@ export async function modalidadesDoEvento(evento_id: number) {
 
   const [modalidades, excluidas] = await Promise.all([
     prisma.modalidade.findMany({
-      where: { competicao_id: evento.competicao_id },
+      where: { competicao_id: evento.competicao_id, ativa: true },
       orderBy: { nome: 'asc' },
       include: MOD_INCLUDE,
     }),
