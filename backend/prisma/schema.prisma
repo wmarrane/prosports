@@ -12,6 +12,7 @@ enum Role {
   ADMIN
   PARTICIPANTE
   VIEWER
+  COMISSAO_TECNICA
 }
 
 model User {
@@ -25,6 +26,7 @@ model User {
   bloqueado_ate     DateTime?
   ultimo_login      DateTime?
   event_keys_criadas EventoKey[]
+  eventos_comissao  EventoComissao[]
   criado_em         DateTime  @default(now())
   atualizado_em     DateTime  @updatedAt
 }
@@ -171,6 +173,7 @@ model Evento {
   event_keys      EventoKey[]
   anfitriao_ordem EventoModalidadeAnfitriao[]
   modalidades_excluidas EventoModalidadeExcluida[]
+  comissao        EventoComissao[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -301,4 +304,16 @@ model EventoModalidadeExcluida {
   @@unique([evento_id, modalidade_id])
   @@index([evento_id])
   @@map("evento_modalidade_excluida")
+}
+
+model EventoComissao {
+  id         Int    @id @default(autoincrement())
+  evento     Evento @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id  Int
+  usuario    User   @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuario_id Int
+
+  @@unique([evento_id, usuario_id])
+  @@index([usuario_id])
+  @@map("evento_comissao")
 }
