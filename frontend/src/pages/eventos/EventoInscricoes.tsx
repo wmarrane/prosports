@@ -14,6 +14,7 @@ import ModalidadesDoEventoModal from './ModalidadesDoEventoModal'
 import ImportCampeoesModal from '../../components/import/ImportCampeoesModal'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
+import { useAuthStore } from '../../store/authStore'
 import { eventosService } from '../../services/eventos'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
@@ -81,6 +82,7 @@ export default function EventoInscricoes() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const toast = useToast()
+  const isAdmin = useAuthStore(s => s.user?.role === 'ADMIN')
 
   const [modalidadeId, setModalidadeId] = useState<number | null>(null)
   const [inscreverOpen, setInscreverOpen] = useState(false)
@@ -437,18 +439,22 @@ export default function EventoInscricoes() {
                 />
               </div>
               <span className="text-xs text-[var(--t4)] font-mono">{pct}%</span>
-              <button
-                onClick={() => navigate(`/eventos/${eventoId}/editar`)}
-                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
-              >
-                Editar evento
-              </button>
-              <button
-                onClick={() => setModalidadesModalOpen(true)}
-                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
-              >
-                Modalidades do evento
-              </button>
+              {isAdmin && (
+                <>
+                  <button
+                    onClick={() => navigate(`/eventos/${eventoId}/editar`)}
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+                  >
+                    Editar evento
+                  </button>
+                  <button
+                    onClick={() => setModalidadesModalOpen(true)}
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
+                  >
+                    Modalidades do evento
+                  </button>
+                </>
+              )}
               <button
                 onClick={handleExportarHtml}
                 disabled={exportandoHtml}
