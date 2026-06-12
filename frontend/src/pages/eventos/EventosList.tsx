@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { agruparEventosPorCompeticao } from '../../lib/agrupar-eventos'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../store/authStore'
 import PageHeader from '../../components/PageHeader'
 import ConfirmDialog from '../../components/ConfirmDialog'
 import { useToast } from '../../components/Toast'
@@ -66,6 +67,7 @@ export default function EventosList() {
   const [filtro, setFiltro] = useState<FiltroId>('todos')
   const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
   const [recolhidas, setRecolhidas] = useState<Set<number>>(new Set())
+  const isAdmin = useAuthStore(s => s.user?.role === 'ADMIN')
   function toggleGrupo(id: number) {
     setRecolhidas(prev => { const n = new Set(prev); if (n.has(id)) n.delete(id); else n.add(id); return n })
   }
@@ -167,7 +169,7 @@ export default function EventosList() {
                     return (
                       <div
                         key={ev.id}
-                        onClick={() => navigate(`/eventos/${ev.id}/editar`)}
+                        onClick={() => navigate(`/eventos/${ev.id}/${isAdmin ? 'editar' : 'inscricoes'}`)}
                         className="fade-in"
                         style={{
                           position: 'relative',
