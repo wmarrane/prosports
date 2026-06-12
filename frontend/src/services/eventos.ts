@@ -13,6 +13,7 @@ type EventoPayload = {
   competicao_id: number
   municipio_id: number
   anfitriao_id?: number | null
+  comissao_ids?: number[]
 }
 
 export const eventosService = {

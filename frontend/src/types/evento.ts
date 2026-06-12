@@ -36,4 +36,5 @@ export type Evento = {
   }
   modalidades_sorteaveis?: number
   modalidades_pendentes?: number
+  comissao?: { usuario: { id: number; nome: string } }[]
 }

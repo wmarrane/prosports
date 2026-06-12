@@ -13,6 +13,7 @@ const ROLE_OPTIONS: { value: Role; label: string }[] = [
   { value: 'ADMIN', label: 'Admin — acesso total' },
   { value: 'PARTICIPANTE', label: 'Participante — uso operacional' },
   { value: 'VIEWER', label: 'Viewer — apenas leitura' },
+  { value: 'COMISSAO_TECNICA', label: 'Comissão Técnica — opera eventos atribuídos' },
 ]
 
 export default function UsuarioForm() {

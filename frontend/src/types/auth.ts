@@ -1,4 +1,4 @@
-export type Role = 'ADMIN' | 'PARTICIPANTE' | 'VIEWER'
+export type Role = 'ADMIN' | 'PARTICIPANTE' | 'VIEWER' | 'COMISSAO_TECNICA'
 
 export type AuthUser = {
   id: number
