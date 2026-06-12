@@ -216,4 +216,15 @@ describe('modalidades.service', () => {
     mockPrisma.modalidade.findUnique.mockResolvedValue(null)
     await expect(service.replicarMensagens(99, [2], [])).rejects.toMatchObject({ status: 404 })
   })
+
+  it('setAtiva atualiza o flag ativa', async () => {
+    mockPrisma.modalidade.update.mockResolvedValue({ id: 3, ativa: false })
+    const r = await service.setAtiva(3, false)
+    expect(mockPrisma.modalidade.update).toHaveBeenCalledWith({
+      where: { id: 3 },
+      data: { ativa: false },
+      include: { competicao: true, tipo_modalidade: true },
+    })
+    expect(r).toEqual({ id: 3, ativa: false })
+  })
 })

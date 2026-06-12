@@ -93,6 +93,10 @@ export async function remover(id: number) {
   return prisma.modalidade.delete({ where: { id } })
 }
 
+export async function setAtiva(id: number, ativa: boolean) {
+  return prisma.modalidade.update({ where: { id }, data: { ativa }, include: INCLUDE })
+}
+
 export async function replicarMensagens(
   origem_id: number,
   destino_ids: number[],
