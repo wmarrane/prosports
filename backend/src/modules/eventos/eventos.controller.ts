@@ -3,6 +3,7 @@ import { z } from 'zod'
 import path from 'path'
 import * as service from './eventos.service'
 import { deleteFile } from '../../lib/upload'
+import { usuarioTemAcessoAoEvento } from '../../middleware/evento-acesso'
 
 const STATUS_VALUES = ['rascunho','inscricoes','pronto','sorteado','parcial','suspenso'] as const
 
@@ -15,6 +16,7 @@ const createSchema = z.object({
   competicao_id: z.coerce.number().int().positive(),
   municipio_id: z.coerce.number().int().positive(),
   anfitriao_id: z.coerce.number().int().positive().nullable().optional(),
+  comissao_ids: z.array(z.coerce.number().int().positive()).optional(),
 })
 const updateSchema = createSchema.partial()
 const listQuerySchema = z.object({
@@ -24,12 +26,20 @@ const listQuerySchema = z.object({
 export async function listar(req: Request, res: Response, next: NextFunction) {
   try {
     const { competicao_id } = listQuerySchema.parse(req.query)
-    res.json(await service.listar(competicao_id))
+    res.json(await service.listar(competicao_id, (req as any).user))
   } catch (err) { next(err) }
 }
 
 export async function buscarPorId(req: Request, res: Response, next: NextFunction) {
-  try { res.json(await service.buscarPorId(Number(req.params.id))) } catch (err) { next(err) }
+  try {
+    const evento = await service.buscarPorId(Number(req.params.id))
+    const user = (req as any).user
+    if (user?.role === 'COMISSAO_TECNICA' && !(await usuarioTemAcessoAoEvento(user, evento.id))) {
+      res.status(403).json({ message: 'Acesso negado a este evento.' })
+      return
+    }
+    res.json(evento)
+  } catch (err) { next(err) }
 }
 
 export async function criar(req: Request, res: Response, next: NextFunction) {

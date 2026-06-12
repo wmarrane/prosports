@@ -12,6 +12,9 @@ vi.mock('../../lib/prisma', () => ({
     inscricao: { groupBy: vi.fn() },
     sorteio: { findMany: vi.fn() },
     eventoModalidadeExcluida: { findMany: vi.fn() },
+    eventoComissao: { createMany: vi.fn(), deleteMany: vi.fn() },
+    user: { findMany: vi.fn() },
+    $transaction: vi.fn(async (ops: any) => Promise.all(ops)),
   },
 }))
 
@@ -25,6 +28,7 @@ const INCLUDE = {
   competicao: true,
   municipio: true,
   anfitriao: { include: { municipio: true, inspetoria: true, delegacia: true } },
+  comissao: { select: { usuario: { select: { id: true, nome: true } } } },
 }
 const LIST_INCLUDE = {
   competicao: {
@@ -48,10 +52,18 @@ describe('eventos.service', () => {
     mockPrisma.evento.findMany.mockResolvedValue([])
     await service.listar()
     expect(mockPrisma.evento.findMany).toHaveBeenCalledWith({
-      where: undefined,
+      where: {},
       orderBy: { data_hora: 'desc' },
       include: LIST_INCLUDE,
     })
+  })
+
+  it('listar filtra por comissão quando role COMISSAO_TECNICA', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([])
+    await service.listar(undefined, { sub: 7, role: 'COMISSAO_TECNICA' })
+    expect(mockPrisma.evento.findMany).toHaveBeenCalledWith(expect.objectContaining({
+      where: { comissao: { some: { usuario_id: 7 } } },
+    }))
   })
 
   it('listar filtra por competicao_id quando passado', async () => {
@@ -110,12 +122,16 @@ describe('eventos.service', () => {
     ).rejects.toMatchObject({ status: 409, message: expect.stringContaining('Já existe') })
   })
 
-  it('editar chama prisma.update com include', async () => {
+  it('editar chama prisma.update e retorna via findUnique com include', async () => {
     mockPrisma.evento.update.mockResolvedValue({ id: 1 })
+    mockPrisma.evento.findUnique.mockResolvedValue({ id: 1 })
     await service.editar(1, { nome: 'Renomeado' })
     expect(mockPrisma.evento.update).toHaveBeenCalledWith({
       where: { id: 1 },
       data: { nome: 'Renomeado' },
+    })
+    expect(mockPrisma.evento.findUnique).toHaveBeenCalledWith({
+      where: { id: 1 },
       include: INCLUDE,
     })
   })
