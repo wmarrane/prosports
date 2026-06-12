@@ -1,17 +1,24 @@
 import { Router } from 'express'
-import { requireAuth, requireRole } from '../../middleware/auth'
+import { requireAuth } from '../../middleware/auth'
+import { requireAcessoEvento } from '../../middleware/evento-acesso'
+import prisma from '../../lib/prisma'
 import * as ctrl from './inscricoes.controller'
 
 const router = Router()
-const admin = [requireAuth, requireRole('ADMIN')]
+const acessoBody = requireAcessoEvento(req => Number(req.body?.evento_id))
+const acessoParamsEvento = requireAcessoEvento(req => Number(req.params.eventoId))
+const acessoInscricaoId = requireAcessoEvento(async req => {
+  const i = await prisma.inscricao.findUnique({ where: { id: Number(req.params.id) }, select: { evento_id: true } })
+  return i?.evento_id ?? null
+})
 
 router.get('/counts', requireAuth, ctrl.counts)
 router.get('/', requireAuth, ctrl.listar)
 router.get('/:id', requireAuth, ctrl.buscarPorId)
-router.post('/', ...admin, ctrl.criar)
-router.post('/bulk', ...admin, ctrl.criarBulk)
-router.post('/import', ...admin, ctrl.importar)
-router.delete('/evento/:eventoId/modalidade/:modalidadeId', ...admin, ctrl.removerTodosDaModalidade)
-router.delete('/:id', ...admin, ctrl.remover)
+router.post('/', requireAuth, acessoBody, ctrl.criar)
+router.post('/bulk', requireAuth, acessoBody, ctrl.criarBulk)
+router.post('/import', requireAuth, acessoBody, ctrl.importar)
+router.delete('/evento/:eventoId/modalidade/:modalidadeId', requireAuth, acessoParamsEvento, ctrl.removerTodosDaModalidade)
+router.delete('/:id', requireAuth, acessoInscricaoId, ctrl.remover)
 
 export default router
