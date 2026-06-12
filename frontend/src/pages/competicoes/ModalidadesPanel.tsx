@@ -85,6 +85,13 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover modalidade.'),
   })
 
+  const { mutate: toggleAtiva } = useMutation({
+    mutationFn: ({ id, ativa }: { id: number; ativa: boolean }) => modalidadesService.setAtiva(id, ativa),
+    onSuccess: invalidate,
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao alterar status.'),
+  })
+  const [desativarAlvo, setDesativarAlvo] = useState<{ id: number; nome: string } | null>(null)
+
   function handleAdd() {
     setAddErro('')
     if (!newNome.trim()) return setAddErro('Informe o nome.')
@@ -244,6 +251,7 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
                   background: 'var(--card-bg-2)',
                   border: '1px solid var(--card-border)',
                   borderRadius: 'var(--radius-lg)',
+                  opacity: m.ativa ? 1 : 0.55,
                 }}
               >
                 <span
@@ -271,10 +279,21 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
                     >
                       {m.sigla}
                     </span>
+                    {!m.ativa && (
+                      <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', color: 'var(--warn-700)', background: 'var(--warn-soft)', border: '1px solid var(--warn)', padding: '1px 6px', borderRadius: 'var(--radius-pill)' }}>Inativa</span>
+                    )}
                   </div>
                   <div className="text-xs text-[var(--t3)] mt-0.5">{TIPO_LABEL[tipo]}</div>
                 </div>
                 <div className="flex gap-3 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => m.ativa ? setDesativarAlvo({ id: m.id, nome: m.nome }) : toggleAtiva({ id: m.id, ativa: true })}
+                    className="text-xs font-semibold"
+                    style={{ color: m.ativa ? 'var(--warn-700)' : 'var(--success-700)' }}
+                  >
+                    {m.ativa ? 'Desativar' : 'Ativar'}
+                  </button>
                   <Link
                     to={`/modalidades/${m.id}/editar`}
                     className="text-[var(--brand-500)] hover:text-[var(--brand-400)] text-xs font-semibold"
@@ -412,6 +431,21 @@ export default function ModalidadesPanel({ competicaoId }: Props) {
                   gap: 6,
                 }}
               ><X size={16} /> Remover</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {desativarAlvo && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310 }} onClick={() => setDesativarAlvo(null)}>
+          <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: 'var(--radius-2xl)', padding: 32, maxWidth: 480, width: '100%', margin: '0 16px', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
+            <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>Desativar modalidade?</h3>
+            <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
+              Os eventos desta competição deixarão de ver <b style={{ color: 'var(--t1)' }}>{desativarAlvo.nome}</b>. Inscritos e sorteios ficam ocultos e voltam ao reativar.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+              <button type="button" onClick={() => setDesativarAlvo(null)} style={{ background: 'transparent', color: 'var(--t1)', border: '1px solid var(--card-border)', borderRadius: 'var(--radius-lg)', padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Cancelar</button>
+              <button type="button" onClick={() => { toggleAtiva({ id: desativarAlvo.id, ativa: false }); setDesativarAlvo(null) }} style={{ background: 'var(--warn)', color: '#fff', border: 'none', borderRadius: 'var(--radius-lg)', padding: '12px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Desativar</button>
             </div>
           </div>
         </div>
