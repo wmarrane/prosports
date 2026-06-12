@@ -14,6 +14,7 @@ const ROLE_PILL: Record<string, { label: string; bg: string; color: string }> = 
   ADMIN: { label: 'Admin', bg: 'var(--brand-deep)', color: '#fff' },
   PARTICIPANTE: { label: 'Participante', bg: 'var(--success-soft)', color: 'var(--success-700)' },
   VIEWER: { label: 'Viewer', bg: 'var(--brand-50)', color: 'var(--brand-700)' },
+  COMISSAO_TECNICA: { label: 'Comissão Técnica', bg: 'var(--warn-soft)', color: 'var(--warn-700)' },
 }
 
 export default function UsuariosList() {
