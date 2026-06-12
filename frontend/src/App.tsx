@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ToastProvider } from './components/Toast'
+import { useAuthStore } from './store/authStore'
 import Login from './pages/Login'
 import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -37,6 +38,11 @@ import MobileModalidades from './pages/mobile/MobileModalidades'
 import MobileModalidade from './pages/mobile/MobileModalidade'
 import GlobalLoadingBar from './components/GlobalLoadingBar'
 
+function HomeRedirect() {
+  const role = useAuthStore(s => s.user?.role)
+  return <Navigate to={role === 'COMISSAO_TECNICA' ? '/eventos' : '/painel'} replace />
+}
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -50,7 +56,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/congresso" element={<ModoCongresso />} />
           <Route element={<Layout />}>
-            <Route path="/" element={<Navigate to="/painel" replace />} />
+            <Route path="/" element={<HomeRedirect />} />
 
             <Route path="/eventos"                  element={<EventosList />} />
             <Route path="/eventos/novo"             element={<EventoForm />} />

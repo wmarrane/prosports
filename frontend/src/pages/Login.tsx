@@ -33,7 +33,8 @@ export default function Login() {
     setErro('')
     try {
       await login({ email, senha })
-      navigate('/painel', { replace: true })
+      const role = useAuthStore.getState().user?.role
+      navigate(role === 'COMISSAO_TECNICA' ? '/eventos' : '/painel', { replace: true })
     } catch (err: any) {
       setErro(err?.response?.data?.message ?? 'Não foi possível conectar. Tente novamente.')
     }
