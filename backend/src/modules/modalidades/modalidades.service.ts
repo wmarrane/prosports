@@ -94,6 +94,27 @@ export async function remover(id: number) {
 }
 
 export async function setAtiva(id: number, ativa: boolean) {
+  // Desativar não pode ocultar dados de eventos já sorteados ou em sorteio:
+  // bloqueia se a modalidade tiver inscritos ou sorteio em evento sorteado/parcial.
+  if (!ativa) {
+    const STATUS_TRAVA = ['sorteado', 'parcial'] as const
+    const [comSorteio, comInscritos] = await Promise.all([
+      prisma.sorteio.findFirst({
+        where: { modalidade_id: id, evento: { status: { in: STATUS_TRAVA as any } } },
+        select: { id: true },
+      }),
+      prisma.inscricao.findFirst({
+        where: { modalidade_id: id, evento: { status: { in: STATUS_TRAVA as any } } },
+        select: { id: true },
+      }),
+    ])
+    if (comSorteio || comInscritos) {
+      throw Object.assign(
+        new Error('Não é possível desativar: a modalidade tem inscritos ou sorteio em eventos já sorteados ou em sorteio.'),
+        { status: 400 },
+      )
+    }
+  }
   return prisma.modalidade.update({ where: { id }, data: { ativa }, include: INCLUDE })
 }
 
