@@ -3,6 +3,7 @@ import type { MatchesGraph } from '../../types/sorteio'
 import type { Participante } from '../../types/participante'
 import CampeaoBadge from '../CampeaoBadge'
 import AnfitriaoBadge from '../AnfitriaoBadge'
+import { matchIsBye } from '../../lib/bye-chaves'
 
 type Props = {
   matchesGraph: MatchesGraph
@@ -272,7 +273,9 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
             />
           ))}
         </svg>
-        {layout.matches.map(m => (
+        {layout.matches.map(m => {
+          const bye = matchIsBye(m, slots)
+          return (
           <div
             key={m.id}
             className={`bg-[var(--card-bg-2)] rounded-lg ${m.isFinal ? 'border-amber-500' : ''}`}
@@ -289,7 +292,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              border: m.isFinal ? '2px solid #f59e0b' : '1.5px solid var(--t2)',
+              background: bye ? 'var(--warn-soft)' : undefined,
+              border: m.isFinal ? '2px solid #f59e0b' : bye ? '1.5px solid var(--warn)' : '1.5px solid var(--t2)',
               cursor: onMatchClick ? 'pointer' : 'default',
             }}
           >
@@ -308,7 +312,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
             )}
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

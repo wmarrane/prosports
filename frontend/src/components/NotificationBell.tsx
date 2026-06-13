@@ -6,7 +6,8 @@ import { eventosService } from '../services/eventos'
 import { modalidadesService } from '../services/modalidades'
 import { inscricoesService } from '../services/inscricoes'
 import { sistemasDisputaService } from '../services/sistemas-disputa'
-import { deriveEventoAlerts, deriveSemRegraAlerts } from '../lib/alertas'
+import { deriveEventoAlerts, deriveSemRegraAlerts, type Alerta } from '../lib/alertas'
+import { aplicarLida, carregarLidas, salvarLidas, type AlertaLido } from '../lib/alertas-lidas'
 
 const ATIVOS = new Set(['inscricoes', 'pronto', 'parcial'])
 const STALE = 60_000
@@ -14,6 +15,8 @@ const STALE = 60_000
 export default function NotificationBell() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
+  const [aba, setAba] = useState<'novas' | 'lidas'>('novas')
+  const [lidas, setLidas] = useState<AlertaLido[]>(() => carregarLidas())
   const ref = useRef<HTMLDivElement>(null)
 
   const { data: eventos = [] } = useQuery({ queryKey: ['eventos'], queryFn: () => eventosService.listar() })
@@ -71,6 +74,21 @@ export default function NotificationBell() {
     return [...status, ...semRegra]
   }, [eventos, modalidades, eventosAtivos, competicoesAtivas, countsQueries, gruposQueries, chavesQueries])
 
+  const lidasIds = useMemo(() => new Set(lidas.map(l => l.id)), [lidas])
+  const novas = useMemo(() => alertas.filter(a => !lidasIds.has(a.id)), [alertas, lidasIds])
+
+  function marcarLida(a: Alerta) {
+    setLidas(prev => { const next = aplicarLida(prev, a); salvarLidas(next); return next })
+  }
+  function marcarTodas() {
+    setLidas(prev => {
+      let next = prev
+      for (const a of novas) next = aplicarLida(next, a)
+      salvarLidas(next)
+      return next
+    })
+  }
+
   useEffect(() => {
     if (!open) return
     const onDown = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }
@@ -91,14 +109,14 @@ export default function NotificationBell() {
         onClick={() => setOpen(o => !o)}
       >
         <Bell size={19} />
-        {alertas.length > 0 && (
+        {novas.length > 0 && (
           <span
             style={{
               position: 'absolute', top: 4, right: 4, minWidth: 16, height: 16, padding: '0 4px',
               borderRadius: 9999, background: 'var(--danger)', color: '#fff',
               fontSize: 10, fontWeight: 700, lineHeight: '16px', textAlign: 'center',
             }}
-          >{alertas.length}</span>
+          >{novas.length}</span>
         )}
       </button>
 
@@ -112,16 +130,62 @@ export default function NotificationBell() {
             boxShadow: 'var(--shadow-card)', zIndex: 60, padding: 8,
           }}
         >
-          <div style={{ padding: '6px 10px', fontSize: 12, fontWeight: 700, color: 'var(--t3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Alertas {alertas.length > 0 ? `(${alertas.length})` : ''}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 6px 8px' }}>
+            <button
+              onClick={() => setAba('novas')}
+              style={{
+                flex: 1, padding: '6px 10px', borderRadius: 'var(--radius-md)', cursor: 'pointer',
+                border: 'none', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em',
+                background: aba === 'novas' ? 'var(--brand-500)' : 'transparent',
+                color: aba === 'novas' ? '#fff' : 'var(--t3)',
+              }}
+            >Novas {novas.length > 0 ? `(${novas.length})` : ''}</button>
+            <button
+              onClick={() => setAba('lidas')}
+              style={{
+                flex: 1, padding: '6px 10px', borderRadius: 'var(--radius-md)', cursor: 'pointer',
+                border: 'none', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em',
+                background: aba === 'lidas' ? 'var(--brand-500)' : 'transparent',
+                color: aba === 'lidas' ? '#fff' : 'var(--t3)',
+              }}
+            >Lidas</button>
           </div>
-          {alertas.length === 0 ? (
-            <div style={{ padding: '14px 10px', fontSize: 13, color: 'var(--t3)' }}>Nenhum alerta no momento.</div>
+
+          {aba === 'novas' ? (
+            novas.length === 0 ? (
+              <div style={{ padding: '14px 10px', fontSize: 13, color: 'var(--t3)' }}>Nenhuma mensagem nova.</div>
+            ) : (
+              <>
+                <div style={{ padding: '2px 6px 6px', textAlign: 'right' }}>
+                  <button
+                    onClick={marcarTodas}
+                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, color: 'var(--brand-500)' }}
+                  >Marcar todas como lidas</button>
+                </div>
+                {novas.map(a => (
+                  <button
+                    key={a.id}
+                    onClick={() => { marcarLida(a); goTo(a.to) }}
+                    style={{
+                      display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none',
+                      padding: '8px 10px', borderRadius: 'var(--radius-md)', cursor: 'pointer', color: 'var(--t1)',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--card-bg-2)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <div style={{ fontSize: 13, fontWeight: 600 }}>{a.titulo}</div>
+                    <div style={{ fontSize: 12, color: 'var(--t3)' }}>{a.descricao}</div>
+                  </button>
+                ))}
+              </>
+            )
+          ) : lidas.length === 0 ? (
+            <div style={{ padding: '14px 10px', fontSize: 13, color: 'var(--t3)' }}>Nenhuma mensagem lida.</div>
           ) : (
-            alertas.map(a => (
+            lidas.map(l => (
               <button
-                key={a.id}
-                onClick={() => goTo(a.to)}
+                key={l.id}
+                onClick={() => goTo(l.to)}
                 style={{
                   display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none',
                   padding: '8px 10px', borderRadius: 'var(--radius-md)', cursor: 'pointer', color: 'var(--t1)',
@@ -129,8 +193,8 @@ export default function NotificationBell() {
                 onMouseEnter={e => (e.currentTarget.style.background = 'var(--card-bg-2)')}
                 onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
               >
-                <div style={{ fontSize: 13, fontWeight: 600 }}>{a.titulo}</div>
-                <div style={{ fontSize: 12, color: 'var(--t3)' }}>{a.descricao}</div>
+                <div style={{ fontSize: 13, fontWeight: 600 }}>{l.titulo}</div>
+                <div style={{ fontSize: 12, color: 'var(--t3)' }}>{l.descricao}</div>
               </button>
             ))
           )}

@@ -82,6 +82,7 @@
   --accent-soft: rgba(20,184,138,0.16);
   --success-soft: rgba(16,185,129,0.15);
   --warn-soft:   rgba(245,158,11,0.16);
+  --warn:        #f59e0b;
   --danger-soft: rgba(239,68,68,0.16);
   --info-soft:   rgba(59,130,246,0.16);
   --violet-soft: rgba(139,92,246,0.16);
