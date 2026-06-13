@@ -9,7 +9,7 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
-    inscricao: { groupBy: vi.fn() },
+    inscricao: { groupBy: vi.fn(), findMany: vi.fn() },
     sorteio: { findMany: vi.fn() },
     eventoModalidadeExcluida: { findMany: vi.fn() },
     eventoComissao: { createMany: vi.fn(), deleteMany: vi.fn() },
@@ -22,7 +22,10 @@ import prisma from '../../lib/prisma'
 import * as service from './eventos.service'
 
 const mockPrisma = prisma as any
-beforeEach(() => vi.clearAllMocks())
+beforeEach(() => {
+  vi.clearAllMocks()
+  mockPrisma.inscricao.findMany.mockResolvedValue([])
+})
 
 const INCLUDE = {
   competicao: true,
@@ -224,5 +227,20 @@ describe('eventos.service', () => {
     const [e] = await service.listar() as any[]
     expect(e.modalidades_sorteaveis).toBe(2)
     expect(e.modalidades_pendentes).toBe(1)
+  })
+
+  it('listar conta participantes distintos em total_participantes', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([
+      { id: 1, competicao: { modalidades: [] }, _count: { inscricoes: 0, sorteios: 0 } },
+    ])
+    mockPrisma.inscricao.groupBy.mockResolvedValue([]) // counts por modalidade
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { evento_id: 1 }, { evento_id: 1 }, { evento_id: 1 },
+    ]) // 3 pares (evento, participante) distintos
+    mockPrisma.sorteio.findMany.mockResolvedValue([])
+    mockPrisma.eventoModalidadeExcluida.findMany.mockResolvedValue([])
+
+    const [e] = await service.listar() as any[]
+    expect(e.total_participantes).toBe(3)
   })
 })

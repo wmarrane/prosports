@@ -79,6 +79,16 @@ export async function listar(competicao_id?: number, user?: { sub: number; role:
     ;(countsByEvento[g.evento_id] ??= {})[g.modalidade_id] = g._count._all
   }
 
+  const participantesDistintos = await prisma.inscricao.findMany({
+    where: { evento_id: { in: eventIds } },
+    distinct: ['evento_id', 'participante_id'],
+    select: { evento_id: true },
+  })
+  const participantesPorEvento: Record<number, number> = {}
+  for (const p of participantesDistintos) {
+    participantesPorEvento[p.evento_id] = (participantesPorEvento[p.evento_id] ?? 0) + 1
+  }
+
   const sorteios = await prisma.sorteio.findMany({
     where: { evento_id: { in: eventIds } },
     select: { evento_id: true, modalidade_id: true },
@@ -115,7 +125,12 @@ export async function listar(competicao_id?: number, user?: { sub: number; role:
         if (!sorteadas.has(m.id)) pendentes++
       }
     }
-    return { ...e, modalidades_sorteaveis: sorteaveisIds.size, modalidades_pendentes: pendentes }
+    return {
+      ...e,
+      modalidades_sorteaveis: sorteaveisIds.size,
+      modalidades_pendentes: pendentes,
+      total_participantes: participantesPorEvento[e.id] ?? 0,
+    }
   })
 }
 

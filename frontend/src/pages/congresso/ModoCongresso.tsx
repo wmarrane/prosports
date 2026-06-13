@@ -54,18 +54,26 @@ export default function ModoCongresso() {
   // Campeões viraram parte do Sorteio (idle state), por isso step dedicado removido.
   function nextAfterParticipantes(opts?: { pularSorteio?: boolean }) {
     if (opts?.pularSorteio || tipoAtual === 'especifico') {
-      // Específico: a apresentação termina aqui — marca como vista (persistido).
-      if (tipoAtual === 'especifico' && eventoId != null && modalidadeId != null) {
+      // Sem sorteio (específico ou sorteio pulado por inscritos insuficientes):
+      // a apresentação termina aqui — marca como vista (persistido).
+      if (eventoId != null && modalidadeId != null) {
         const next = addVista(vistas, modalidadeId)
         setVistas(next)
         saveVistas(eventoId, next)
       }
-      // Sem sorteio — volta direto pra próxima modalidade
+      // Volta direto pra próxima modalidade
       voltarParaModalidade()
     } else {
       // grupos / chaves / ordem_entrada — Sorteio (com campeões inline quando aplicável)
       setStep('sorteio')
     }
+  }
+
+  function pularModalidadeVazia(id: number) {
+    if (eventoId == null) return
+    const next = addVista(vistas, id)
+    setVistas(next)
+    saveVistas(eventoId, next)
   }
 
   const contexto = {
@@ -85,6 +93,7 @@ export default function ModoCongresso() {
           eventoId={eventoId}
           onSelect={(id) => { setModalidadeId(id); setStep('participantes') }}
           vistasIds={vistasIds}
+          onPularVazia={pularModalidadeVazia}
         />
       )}
       {step === 'participantes' && eventoId != null && modalidadeId != null && (

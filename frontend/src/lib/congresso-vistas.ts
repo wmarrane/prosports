@@ -22,3 +22,11 @@ export function saveVistas(eventoId: number, ids: number[]): void {
     /* storage indisponível — ignora */
   }
 }
+
+export function clearVistas(eventoId: number): void {
+  try {
+    localStorage.removeItem(KEY(eventoId))
+  } catch {
+    /* storage indisponível — ignora */
+  }
+}

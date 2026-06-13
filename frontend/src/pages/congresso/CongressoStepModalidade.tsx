@@ -13,6 +13,7 @@ type Props = {
   eventoId: number
   onSelect: (modalidadeId: number) => void
   vistasIds?: Set<number>
+  onPularVazia?: (modalidadeId: number) => void
 }
 
 const TIPO_DESC: Record<string, string> = {
@@ -22,7 +23,7 @@ const TIPO_DESC: Record<string, string> = {
   especifico: 'Modalidade sem sorteio automático — definida manualmente.',
 }
 
-export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds = EMPTY_IDS }: Props) {
+export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds = EMPTY_IDS, onPularVazia }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -64,11 +65,23 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
 
   const selectedMod = modalidades.find(m => m.id === selectedId) ?? null
 
-  const { data: inscricoesSel = [] } = useQuery({
+  const { data: inscricoesSel = [], isLoading: inscricoesLoading } = useQuery({
     queryKey: ['inscricoes', eventoId, selectedId],
     queryFn: () => inscricoesService.listar({ evento_id: eventoId, modalidade_id: selectedId! }),
     enabled: selectedId != null,
   })
+
+  const vazia = !inscricoesLoading && selectedMod != null && inscricoesSel.length === 0
+
+  function pularVazia() {
+    if (!selectedMod) return
+    onPularVazia?.(selectedMod.id)
+    const idx = modalidades.findIndex(m => m.id === selectedMod.id)
+    const after = modalidades.slice(idx + 1).find(m => !isConcluida(m.id))
+    const before = modalidades.slice(0, idx).find(m => !isConcluida(m.id))
+    const proxima = after ?? before
+    setSelectedId(proxima ? proxima.id : selectedMod.id)
+  }
 
   if (isLoading) {
     return (
@@ -182,10 +195,10 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
                   </div>
                   <div style={{ marginTop: 32, display: 'flex', justifyContent: 'flex-end' }}>
                     <button
-                      onClick={() => onSelect(selectedMod.id)}
+                      onClick={() => (vazia ? pularVazia() : onSelect(selectedMod.id))}
                       className="cw-btn cw-btn-primary cw-btn-xl"
                     >
-                      Iniciar <ArrowRight size={22} />
+                      {vazia ? 'Próxima' : 'Iniciar'} <ArrowRight size={22} />
                     </button>
                   </div>
                 </div>

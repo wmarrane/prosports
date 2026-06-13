@@ -171,7 +171,7 @@ export default function EventosList() {
                   {g.eventos.map((ev, i) => {
                     const tipos = eventoTipos(ev)
                     const totalModalidades = ev.competicao?.modalidades?.length ?? 0
-                    const inscritos = ev._count?.inscricoes ?? 0
+                    const inscritos = ev.total_participantes ?? 0
                     const sorteadas = ev._count?.sorteios ?? 0
                     const sorteaveis = ev.modalidades_sorteaveis ?? totalModalidades
                     const ribbonGrad = tipos.length > 1

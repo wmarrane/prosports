@@ -24,10 +24,11 @@ import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, slugify, 
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
-import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2 } from 'lucide-react'
+import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2, RotateCcw } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
+import { clearVistas } from '../../lib/congresso-vistas'
 
 function formatDateBR(iso: string): string {
   try {
@@ -240,6 +241,7 @@ export default function EventoInscricoes() {
     mutationFn: () => sorteiosService.removerTodosDoEvento(eventoId),
     onSuccess: r => {
       setApagarTodosResumo(r)
+      clearVistas(eventoId)
       queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
     },
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao apagar sorteios.'),
@@ -464,17 +466,15 @@ export default function EventoInscricoes() {
               >
                 <Download size={12} /> {exportandoHtml ? 'Exportando...' : 'Exportar HTML'}
               </button>
-              {sorteadas > 0 && (
-                <button
-                  onClick={() => { setApagarTodosOpen(true); setApagarTodosResumo(null) }}
-                  disabled={eventoSuspenso}
-                  className="text-xs hover:text-[var(--danger-700)] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ color: 'var(--danger)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
-                  title="Apagar todos os sorteios deste evento"
-                >
-                  <Trash2 size={12} /> Apagar sorteios
-                </button>
-              )}
+              <button
+                onClick={() => { setApagarTodosOpen(true); setApagarTodosResumo(null) }}
+                disabled={eventoSuspenso}
+                className="text-xs hover:text-[var(--danger-700)] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ color: 'var(--danger)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                title="Apagar sorteios (se houver) e reiniciar as apresentações do Modo Congresso"
+              >
+                <RotateCcw size={12} /> Reiniciar evento
+              </button>
             </div>
           </div>
         </div>
@@ -1368,10 +1368,14 @@ export default function EventoInscricoes() {
                   <Check size={36} />
                 </div>
                 <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>
-                  Sorteios apagados
+                  Evento reiniciado
                 </h3>
                 <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
-                  <b style={{ color: 'var(--t1)' }}>{apagarTodosResumo.count}</b> {apagarTodosResumo.count === 1 ? 'sorteio foi apagado' : 'sorteios foram apagados'}. Você pode realizar novos sorteios para cada modalidade.
+                  {apagarTodosResumo.count > 0 ? (
+                    <><b style={{ color: 'var(--t1)' }}>{apagarTodosResumo.count}</b> {apagarTodosResumo.count === 1 ? 'sorteio foi apagado' : 'sorteios foram apagados'} e as apresentações foram reiniciadas.</>
+                  ) : (
+                    <>Apresentações reiniciadas.</>
+                  )}
                 </p>
                 <button
                   type="button"
@@ -1388,13 +1392,17 @@ export default function EventoInscricoes() {
                   borderRadius: '50%', background: 'var(--danger-soft)',
                   display: 'grid', placeItems: 'center', color: 'var(--danger)',
                 }}>
-                  <Trash2 size={36} />
+                  <RotateCcw size={36} />
                 </div>
                 <h3 style={{ fontSize: 22, fontWeight: 800, color: 'var(--t1)', marginBottom: 8 }}>
-                  Apagar todos os sorteios?
+                  Reiniciar evento?
                 </h3>
                 <p style={{ fontSize: 15, color: 'var(--t3)', marginBottom: 24 }}>
-                  Os <b style={{ color: 'var(--t1)' }}>{sorteadas}</b> {sorteadas === 1 ? 'sorteio' : 'sorteios'} de <b style={{ color: 'var(--t1)' }}>{evento?.nome}</b> serão apagados. As inscrições e campeões anteriores permanecem. Esta ação não pode ser desfeita.
+                  {sorteadas > 0 ? (
+                    <>Os <b style={{ color: 'var(--t1)' }}>{sorteadas}</b> {sorteadas === 1 ? 'sorteio' : 'sorteios'} de <b style={{ color: 'var(--t1)' }}>{evento?.nome}</b> serão apagados e as apresentações do Modo Congresso serão reiniciadas. As inscrições e campeões anteriores permanecem. Esta ação não pode ser desfeita.</>
+                  ) : (
+                    <>As apresentações do Modo Congresso de <b style={{ color: 'var(--t1)' }}>{evento?.nome}</b> serão reiniciadas. Inscrições, campeões e sorteios não são afetados.</>
+                  )}
                 </p>
                 <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
                   <button
@@ -1430,7 +1438,7 @@ export default function EventoInscricoes() {
                       display: 'inline-flex', alignItems: 'center', gap: 6,
                       opacity: apagandoTodos ? 0.5 : 1,
                     }}
-                  ><Trash2 size={16} /> {apagandoTodos ? 'Apagando...' : `Apagar ${sorteadas}`}</button>
+                  ><RotateCcw size={16} /> {apagandoTodos ? 'Reiniciando...' : 'Reiniciar'}</button>
                 </div>
               </>
             )}
