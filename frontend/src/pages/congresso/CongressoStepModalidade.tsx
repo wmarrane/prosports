@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { eventosService } from '../../services/eventos'
 import { sorteiosService } from '../../services/sorteios'
@@ -7,9 +7,12 @@ import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
 import { Check, ArrowRight, FileText } from 'lucide-react'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 
+const EMPTY_IDS: Set<number> = new Set()
+
 type Props = {
   eventoId: number
   onSelect: (modalidadeId: number) => void
+  vistasIds?: Set<number>
 }
 
 const TIPO_DESC: Record<string, string> = {
@@ -19,8 +22,9 @@ const TIPO_DESC: Record<string, string> = {
   especifico: 'Modalidade sem sorteio automático — definida manualmente.',
 }
 
-export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
+export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds = EMPTY_IDS }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const listRef = useRef<HTMLDivElement>(null)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -39,15 +43,24 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
   })
 
   const sorteadasIds = new Set(sorteios.map(s => s.modalidade_id))
-  const restantes = modalidades.filter(m => !sorteadasIds.has(m.id)).length
+  const isConcluida = (id: number) => sorteadasIds.has(id) || vistasIds.has(id)
+  const restantes = modalidades.filter(m => !isConcluida(m.id)).length
 
-  // Auto-select primeira modalidade não sorteada (ou primeira da lista)
+  // Auto-select primeira modalidade não concluída (não sorteada e não vista), ou a primeira
   useEffect(() => {
     if (selectedId == null && modalidades.length > 0) {
-      const naoSorteada = modalidades.find(m => !sorteadasIds.has(m.id))
-      setSelectedId((naoSorteada ?? modalidades[0]).id)
+      const naoConcluida = modalidades.find(m => !isConcluida(m.id))
+      setSelectedId((naoConcluida ?? modalidades[0]).id)
     }
-  }, [modalidades, selectedId, sorteadasIds])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalidades, selectedId, sorteios, vistasIds])
+
+  // Garante que o item selecionado fique visível na lista
+  useEffect(() => {
+    if (selectedId == null || !listRef.current) return
+    const el = listRef.current.querySelector<HTMLElement>(`[data-mid="${selectedId}"]`)
+    el?.scrollIntoView({ block: 'nearest' })
+  }, [selectedId])
 
   const selectedMod = modalidades.find(m => m.id === selectedId) ?? null
 
@@ -90,18 +103,19 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
 
       <div className="cw-md">
         {/* Lista esquerda */}
-        <div className="cw-md-list">
+        <div className="cw-md-list" ref={listRef}>
           {modalidades.map(m => {
-            const sorteada = sorteadasIds.has(m.id)
+            const concluida = isConcluida(m.id)
             return (
               <button
                 key={m.id}
+                data-mid={m.id}
                 className={`cw-md-item ${selectedId === m.id ? 'sel' : ''}`}
                 onClick={() => setSelectedId(m.id)}
               >
                 <ModalityBadge name={m.nome} size={40} showGender />
                 <span className="cw-md-name">{m.nome}</span>
-                {sorteada && (
+                {concluida && (
                   <span className="cw-md-done"><Check size={15} /></span>
                 )}
               </button>
@@ -115,6 +129,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
             (() => {
               const tipo = selectedMod.tipo_modalidade?.tipo ?? 'especifico'
               const sorteada = sorteadasIds.has(selectedMod.id)
+              const vista = !sorteada && vistasIds.has(selectedMod.id)
               const tipoLabel = selectedMod.tipo_modalidade ? TIPO_DISPUTA_LABEL[selectedMod.tipo_modalidade.tipo] : '—'
               return (
                 <div className="cw-md-card">
@@ -124,6 +139,11 @@ export default function CongressoStepModalidade({ eventoId, onSelect }: Props) {
                       {sorteada && (
                         <span className="cw-badge b-success">
                           <Check size={14} /> Sorteado
+                        </span>
+                      )}
+                      {vista && (
+                        <span className="cw-badge b-success">
+                          <Check size={14} /> Apresentada
                         </span>
                       )}
                       {evento?.logo_url && (
