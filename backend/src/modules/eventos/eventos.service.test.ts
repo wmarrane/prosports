@@ -225,4 +225,23 @@ describe('eventos.service', () => {
     expect(e.modalidades_sorteaveis).toBe(2)
     expect(e.modalidades_pendentes).toBe(1)
   })
+
+  it('listar conta participantes distintos em total_participantes', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([
+      { id: 1, competicao: { modalidades: [] }, _count: { inscricoes: 0, sorteios: 0 } },
+    ])
+    // 1ª chamada: groupBy por modalidade (vazio); 2ª chamada: groupBy por participante
+    mockPrisma.inscricao.groupBy
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([
+        { evento_id: 1, participante_id: 100 },
+        { evento_id: 1, participante_id: 200 },
+        { evento_id: 1, participante_id: 300 },
+      ])
+    mockPrisma.sorteio.findMany.mockResolvedValue([])
+    mockPrisma.eventoModalidadeExcluida.findMany.mockResolvedValue([])
+
+    const [e] = await service.listar() as any[]
+    expect(e.total_participantes).toBe(3)
+  })
 })
