@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import CongressoShell from './CongressoShell'
 import CongressoStepEvento from './CongressoStepEvento'
@@ -7,11 +7,20 @@ import CongressoStepParticipantes from './CongressoStepParticipantes'
 import CongressoStepSorteio from './CongressoStepSorteio'
 import { eventosService } from '../../services/eventos'
 import type { CongressoStep } from '../../types/congresso-step'
+import { addVista, loadVistas, saveVistas } from '../../lib/congresso-vistas'
 
 export default function ModoCongresso() {
   const [step, setStep] = useState<CongressoStep>('evento')
   const [eventoId, setEventoId] = useState<number | null>(null)
   const [modalidadeId, setModalidadeId] = useState<number | null>(null)
+  const [vistas, setVistas] = useState<number[]>([])
+
+  useEffect(() => {
+    if (eventoId != null) setVistas(loadVistas(eventoId))
+    else setVistas([])
+  }, [eventoId])
+
+  const vistasIds = useMemo(() => new Set(vistas), [vistas])
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -45,6 +54,12 @@ export default function ModoCongresso() {
   // Campeões viraram parte do Sorteio (idle state), por isso step dedicado removido.
   function nextAfterParticipantes(opts?: { pularSorteio?: boolean }) {
     if (opts?.pularSorteio || tipoAtual === 'especifico') {
+      // Específico: a apresentação termina aqui — marca como vista (persistido).
+      if (tipoAtual === 'especifico' && eventoId != null && modalidadeId != null) {
+        const next = addVista(vistas, modalidadeId)
+        setVistas(next)
+        saveVistas(eventoId, next)
+      }
       // Sem sorteio — volta direto pra próxima modalidade
       voltarParaModalidade()
     } else {
@@ -69,6 +84,7 @@ export default function ModoCongresso() {
         <CongressoStepModalidade
           eventoId={eventoId}
           onSelect={(id) => { setModalidadeId(id); setStep('participantes') }}
+          vistasIds={vistasIds}
         />
       )}
       {step === 'participantes' && eventoId != null && modalidadeId != null && (
