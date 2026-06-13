@@ -511,6 +511,7 @@ export default function EventoInscricoes() {
                   const tipo = (m.tipo_modalidade?.tipo as TipoDisputa | undefined) ?? 'especifico'
                   const Icon = TIPO_ICON[tipo] ?? FileText
                   const grad = TIPO_GRAD[tipo]
+                  const semInscricao = (countsByModalidade[m.id] ?? 0) === 0
                   return (
                     <button
                       key={m.id}
@@ -521,8 +522,8 @@ export default function EventoInscricoes() {
                         gap: 10,
                         padding: '10px 12px',
                         borderRadius: 'var(--radius-lg)',
-                        background: active ? 'var(--brand-50)' : 'transparent',
-                        border: `1px solid ${active ? 'var(--brand-500)' : 'transparent'}`,
+                        background: active ? 'var(--brand-50)' : semInscricao ? 'var(--warn-soft)' : 'transparent',
+                        border: `1px solid ${active ? 'var(--brand-500)' : semInscricao ? 'var(--warn)' : 'transparent'}`,
                         color: 'var(--t1)',
                         cursor: 'pointer',
                         textAlign: 'left',
@@ -530,7 +531,7 @@ export default function EventoInscricoes() {
                         width: '100%',
                       }}
                       onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'var(--card-bg-2)' }}
-                      onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent' }}
+                      onMouseLeave={e => { if (!active) e.currentTarget.style.background = semInscricao ? 'var(--warn-soft)' : 'transparent' }}
                     >
                       <span
                         style={{
@@ -549,6 +550,16 @@ export default function EventoInscricoes() {
                         >
                           {m.sigla}
                         </div>
+                        {semInscricao && (
+                          <span
+                            style={{
+                              display: 'inline-block', marginTop: 4, padding: '2px 6px',
+                              borderRadius: 'var(--radius-pill)',
+                              background: 'var(--warn-soft)', color: 'var(--warn-700)',
+                              border: '1px solid var(--warn)', fontSize: 10, fontWeight: 700,
+                            }}
+                          >Sem inscritos</span>
+                        )}
                       </div>
                       <span
                         style={{
@@ -557,8 +568,8 @@ export default function EventoInscricoes() {
                           gap: 4,
                           padding: '3px 8px',
                           borderRadius: 'var(--radius-pill)',
-                          background: 'var(--card-bg-2)',
-                          color: 'var(--t2)',
+                          background: semInscricao ? 'var(--warn-soft)' : 'var(--card-bg-2)',
+                          color: semInscricao ? 'var(--warn-700)' : 'var(--t2)',
                           fontSize: 11,
                           fontFamily: 'var(--font-mono)',
                           fontWeight: 700,
