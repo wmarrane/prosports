@@ -67,6 +67,20 @@ export default function EventosList() {
   const [filtro, setFiltro] = useState<FiltroId>('todos')
   const [alvo, setAlvo] = useState<{ id: number; nome: string } | null>(null)
   const [recolhidas, setRecolhidas] = useState<Set<number>>(new Set())
+  const [sorteadosAberto, setSorteadosAberto] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('prosports.eventos.sorteadosAberto') === '1'
+    } catch {
+      return false
+    }
+  })
+  function toggleSorteados() {
+    setSorteadosAberto(prev => {
+      const next = !prev
+      try { sessionStorage.setItem('prosports.eventos.sorteadosAberto', next ? '1' : '0') } catch { /* ignora */ }
+      return next
+    })
+  }
   const isAdmin = useAuthStore(s => s.user?.role === 'ADMIN')
   function toggleGrupo(id: number) {
     setRecolhidas(prev => { const n = new Set(prev); if (n.has(id)) n.delete(id); else n.add(id); return n })
@@ -456,8 +470,24 @@ export default function EventosList() {
             {demais.length > 0 && renderGrupos(gruposDemais)}
             {sorteados.length > 0 && (
               <div style={{ marginTop: 28 }}>
-                <div className="eyebrow" style={{ marginBottom: 12 }}>Sorteados</div>
-                {renderGrupos(gruposSorteados)}
+                <button
+                  type="button"
+                  onClick={toggleSorteados}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 8, width: '100%',
+                    background: 'transparent', border: 'none', cursor: 'pointer',
+                    padding: '4px 2px', marginBottom: 12, color: 'var(--t1)',
+                    borderBottom: '1px solid var(--card-border)',
+                  }}
+                >
+                  <ChevronDown
+                    size={18}
+                    style={{ transition: 'transform 140ms ease', transform: sorteadosAberto ? 'none' : 'rotate(-90deg)', color: 'var(--t3)' }}
+                  />
+                  <span style={{ fontWeight: 700, fontSize: 15 }}>Sorteados</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--t3)' }}>{sorteados.length}</span>
+                </button>
+                {sorteadosAberto && renderGrupos(gruposSorteados)}
               </div>
             )}
           </>
