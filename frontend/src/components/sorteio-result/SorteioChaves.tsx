@@ -106,11 +106,12 @@ type MatchCardProps = {
   topFallback?: string
   bottomFallback?: string
   subtituloLine?: (p: Participante) => string | null
+  isBye?: boolean
 }
 
-function MatchCard({ match, large, participantesById, campeoesByParticipanteId, anfitriaoPid, topFallback, bottomFallback, subtituloLine }: MatchCardProps) {
+function MatchCard({ match, large, participantesById, campeoesByParticipanteId, anfitriaoPid, topFallback, bottomFallback, subtituloLine, isBye }: MatchCardProps) {
   return (
-    <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 12 : 8 }}>
+    <div className="bg-[var(--card-bg-2)] border border-[var(--card-border)] rounded-lg" style={{ padding: large ? 12 : 8, background: isBye ? 'var(--warn-soft)' : undefined, borderColor: isBye ? 'var(--warn)' : undefined }}>
       <div style={{ padding: '4px 0' }}>
         <SlotRender
           pid={match.top} fallbackText={topFallback ?? 'BYE'}
@@ -170,6 +171,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
                 topFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 1}`}
                 bottomFallback={r === 0 ? 'BYE' : `Vencedor M${match.index * 2 + 2}`}
                 subtituloLine={subtituloLine}
+                isBye={r === 0 && ((match.top === null) !== (match.bottom === null))}
               />
             ))}
           </div>
@@ -201,7 +203,11 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
           const participante = pid !== null ? participantesById.get(pid) : null
           const isAnfitriao = pid !== null && anfitriaoPid != null && pid === anfitriaoPid
           return (
-            <li key={pos} className="flex items-center gap-3">
+            <li
+              key={pos}
+              className="flex items-center gap-3"
+              style={isBye ? { background: 'var(--warn-soft)', border: '1px solid var(--warn)', borderRadius: 8, padding: '2px 8px' } : undefined}
+            >
               <span className={indexClass}>{String(pos).padStart(2, '0')}</span>
               {pid === null ? (
                 <span className={`${nameClass} text-[var(--t4)]`}>—</span>
