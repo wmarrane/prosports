@@ -28,6 +28,7 @@ import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calenda
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
+import { clearVistas } from '../../lib/congresso-vistas'
 
 function formatDateBR(iso: string): string {
   try {
@@ -240,6 +241,7 @@ export default function EventoInscricoes() {
     mutationFn: () => sorteiosService.removerTodosDoEvento(eventoId),
     onSuccess: r => {
       setApagarTodosResumo(r)
+      clearVistas(eventoId)
       queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
     },
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao apagar sorteios.'),
