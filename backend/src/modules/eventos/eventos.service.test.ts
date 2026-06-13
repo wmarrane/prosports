@@ -9,7 +9,7 @@ vi.mock('../../lib/prisma', () => ({
       update: vi.fn(),
       delete: vi.fn(),
     },
-    inscricao: { groupBy: vi.fn() },
+    inscricao: { groupBy: vi.fn(), findMany: vi.fn() },
     sorteio: { findMany: vi.fn() },
     eventoModalidadeExcluida: { findMany: vi.fn() },
     eventoComissao: { createMany: vi.fn(), deleteMany: vi.fn() },
@@ -22,7 +22,10 @@ import prisma from '../../lib/prisma'
 import * as service from './eventos.service'
 
 const mockPrisma = prisma as any
-beforeEach(() => vi.clearAllMocks())
+beforeEach(() => {
+  vi.clearAllMocks()
+  mockPrisma.inscricao.findMany.mockResolvedValue([])
+})
 
 const INCLUDE = {
   competicao: true,
@@ -230,14 +233,10 @@ describe('eventos.service', () => {
     mockPrisma.evento.findMany.mockResolvedValue([
       { id: 1, competicao: { modalidades: [] }, _count: { inscricoes: 0, sorteios: 0 } },
     ])
-    // 1ª chamada: groupBy por modalidade (vazio); 2ª chamada: groupBy por participante
-    mockPrisma.inscricao.groupBy
-      .mockResolvedValueOnce([])
-      .mockResolvedValueOnce([
-        { evento_id: 1, participante_id: 100 },
-        { evento_id: 1, participante_id: 200 },
-        { evento_id: 1, participante_id: 300 },
-      ])
+    mockPrisma.inscricao.groupBy.mockResolvedValue([]) // counts por modalidade
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { evento_id: 1 }, { evento_id: 1 }, { evento_id: 1 },
+    ]) // 3 pares (evento, participante) distintos
     mockPrisma.sorteio.findMany.mockResolvedValue([])
     mockPrisma.eventoModalidadeExcluida.findMany.mockResolvedValue([])
 
