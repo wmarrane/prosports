@@ -69,6 +69,13 @@ export default function ModoCongresso() {
     }
   }
 
+  function pularModalidadeVazia(id: number) {
+    if (eventoId == null) return
+    const next = addVista(vistas, id)
+    setVistas(next)
+    saveVistas(eventoId, next)
+  }
+
   const contexto = {
     evento: evento?.nome,
     modalidade: modalidade ? `${modalidade.nome} (${modalidade.sigla})` : undefined,
@@ -86,6 +93,7 @@ export default function ModoCongresso() {
           eventoId={eventoId}
           onSelect={(id) => { setModalidadeId(id); setStep('participantes') }}
           vistasIds={vistasIds}
+          onPularVazia={pularModalidadeVazia}
         />
       )}
       {step === 'participantes' && eventoId != null && modalidadeId != null && (
