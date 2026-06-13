@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { addVista } from './congresso-vistas'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { addVista, clearVistas } from './congresso-vistas'
 
 describe('addVista', () => {
   it('adiciona um id novo ao fim', () => {
@@ -13,5 +13,21 @@ describe('addVista', () => {
   })
   it('parte de lista vazia', () => {
     expect(addVista([], 7)).toEqual([7])
+  })
+})
+
+describe('clearVistas', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('remove a chave do localStorage do evento', () => {
+    const removeItem = vi.fn()
+    vi.stubGlobal('localStorage', { removeItem, getItem: vi.fn(), setItem: vi.fn() })
+    clearVistas(5)
+    expect(removeItem).toHaveBeenCalledWith('prosports.congresso.vistas.5')
+  })
+
+  it('tolera localStorage indisponível (não lança)', () => {
+    vi.stubGlobal('localStorage', undefined)
+    expect(() => clearVistas(9)).not.toThrow()
   })
 })
