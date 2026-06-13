@@ -6,7 +6,7 @@ import { eventosService } from '../services/eventos'
 import { modalidadesService } from '../services/modalidades'
 import { inscricoesService } from '../services/inscricoes'
 import { sistemasDisputaService } from '../services/sistemas-disputa'
-import { deriveEventoAlerts, deriveSemRegraAlerts } from '../lib/alertas'
+import { deriveEventoAlerts, deriveSemRegraAlerts, type Alerta } from '../lib/alertas'
 import { aplicarLida, carregarLidas, salvarLidas, type AlertaLido } from '../lib/alertas-lidas'
 
 const ATIVOS = new Set(['inscricoes', 'pronto', 'parcial'])
@@ -77,7 +77,7 @@ export default function NotificationBell() {
   const lidasIds = useMemo(() => new Set(lidas.map(l => l.id)), [lidas])
   const novas = useMemo(() => alertas.filter(a => !lidasIds.has(a.id)), [alertas, lidasIds])
 
-  function marcarLida(a: { id: string; tipo: any; titulo: string; descricao: string; to: string }) {
+  function marcarLida(a: Alerta) {
     setLidas(prev => { const next = aplicarLida(prev, a); salvarLidas(next); return next })
   }
   function marcarTodas() {
