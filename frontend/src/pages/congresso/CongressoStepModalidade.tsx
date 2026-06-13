@@ -98,7 +98,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
     <>
       <h1 className="cw-h1">Modalidades do evento</h1>
       <p className="cw-sub">
-        {evento?.nome} · {restantes > 0 ? `${restantes} ${restantes === 1 ? 'modalidade' : 'modalidades'} a sortear` : 'todas concluídas'}
+        {evento?.nome} · {restantes > 0 ? `${restantes} ${restantes === 1 ? 'modalidade restante' : 'modalidades restantes'}` : 'todas concluídas'}
       </p>
 
       <div className="cw-md">
