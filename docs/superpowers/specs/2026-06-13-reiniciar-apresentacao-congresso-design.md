@@ -1,71 +1,70 @@
-# Reiniciar apresentação (limpar "vistas") sem depender de sorteio — Design
+# Reiniciar evento (apagar sorteios + reiniciar apresentações) — Design
 
 **Data:** 2026-06-13
 **Status:** Aprovado (aguardando revisão da spec)
 
 ## Problema
 
-As marcas de "apresentada/vista" do Modo Congresso (localStorage `prosports.congresso.vistas.{eventoId}`) só são resetadas hoje pelo botão **"Apagar sorteios"** em `EventoInscricoes` — que só aparece quando há `sorteadas > 0`. Num evento que percorreu modalidades **sem sortear** (específico / sorteio pulado), não há sorteio e, portanto, **não há como reiniciar** essas sinalizações.
+As marcas de "apresentada/vista" do Modo Congresso (localStorage `prosports.congresso.vistas.{eventoId}`) só são resetadas hoje pelo botão **"Apagar sorteios"** em `EventoInscricoes`, que só aparece quando há `sorteadas > 0`. Num evento que percorreu modalidades **sem sortear** (específico / sorteio pulado), não há sorteio e, portanto, **não há como reiniciar** essas sinalizações.
 
 ## Objetivo
 
-Adicionar um controle **"Reiniciar apresentação"** que limpa as marcas de apresentada (vistas) do evento, **independente de haver sorteio**, com confirmação. Disponível **em dois lugares**: no Modo Congresso e na tela do Evento.
+Em vez de criar um botão novo, **reusar o botão existente** "Apagar sorteios": deixá-lo **sempre visível** e relabelá-lo para **"Reiniciar evento"**, de modo que ele apague os sorteios (se houver) **e** reinicie as apresentações (vistas) — cobrindo o caso sem sorteio. Toca **apenas** `EventoInscricoes.tsx`.
 
 ## Decisões (do brainstorming)
 
-- Disponível em **ambos**: Modo Congresso (etapa de modalidades) e `EventoInscricoes`.
-- **Com confirmação** (diálogo `ConfirmDialog`).
-- Limpa **somente** as vistas (apresentadas). **Não** apaga sorteios — as sorteadas vêm do backend e continuam sendo removidas só por "Apagar sorteios".
+- **Reusar** o botão "Apagar sorteios" (sem botão novo; sem mudança no Modo Congresso).
+- Botão **sempre visível** (remover a condição `sorteadas > 0`).
+- Rótulo **fixo: "Reiniciar evento"**.
+- Ação: apaga todos os sorteios do evento (se houver) **e** limpa as vistas. **Não** remove inscrições nem campeões.
 
-## Contexto atual
+## Contexto atual (`EventoInscricoes.tsx`)
 
-- Helper `frontend/src/lib/congresso-vistas.ts` já tem `clearVistas(eventoId)` (remove a chave do localStorage) e `loadVistas(eventoId)`.
-- `ModoCongresso.tsx` mantém `vistas`/`setVistas` e `vistasIds` (Set) passado para `CongressoStepModalidade`. O check verde da lista usa `concluida = sorteada ∪ vista`.
-- `CongressoStepModalidade.tsx` exibe a lista com checks; já recebe `vistasIds`.
-- `EventoInscricoes.tsx` usa `useToast` e o componente `ConfirmDialog` está disponível em `frontend/src/components/ConfirmDialog` (usado p.ex. em `EventosList`). A área de ações de sorteio mostra "Apagar sorteios" quando `sorteadas > 0`.
+- Botão (linhas ~469-479): só renderiza quando `sorteadas > 0`; rótulo "Apagar sorteios" (`Trash2`); `disabled={eventoSuspenso}`; abre o modal via `setApagarTodosOpen(true)`.
+- Mutation `apagarTodosSorteios` (linhas ~239-246): `mutationFn: () => sorteiosService.removerTodosDoEvento(eventoId)`; `onSuccess` já faz `setApagarTodosResumo(r)`, **`clearVistas(eventoId)`** (já implementado), e invalida `['sorteios', eventoId]`.
+- Modal (linhas ~1350-1440): dois estados — confirmação (idle) com "Apagar todos os sorteios?" + botão "Apagar {sorteadas}"; e resumo (success) "Sorteios apagados".
+- `removerTodosDoEvento` no backend faz `deleteMany({ where: { evento_id } })` → retorna `{ count }` (0 quando não há sorteios; chamada inócua).
 
-## Modo Congresso
+## Mudanças (somente `EventoInscricoes.tsx`)
 
-- **`CongressoStepModalidade.tsx`:**
-  - Nova prop `onReiniciarApresentacao?: () => void`.
-  - Botão **"Reiniciar apresentação"** no cabeçalho (perto do `cw-sub`), visível somente quando `vistasIds.size > 0`.
-  - Estado local `confirmReiniciar` + `ConfirmDialog`. Ao confirmar, chama `onReiniciarApresentacao?.()` e fecha o diálogo.
-- **`ModoCongresso.tsx`:**
-  - Handler `reiniciarApresentacao()`: `setVistas([])` e `clearVistas(eventoId!)`.
-  - Passa `onReiniciarApresentacao={reiniciarApresentacao}` para `CongressoStepModalidade`.
-  - Efeito: os checks verdes das **apresentadas** somem na hora; sorteadas (do backend) permanecem.
+### Botão
+- Remover a condição `sorteadas > 0` → **sempre visível** (mantém `disabled={eventoSuspenso}`).
+- Rótulo: **"Reiniciar evento"**. Ícone: `RotateCcw` (importar de `lucide-react`); manter a cor de alerta (`var(--danger)`).
+- `title`: "Apagar sorteios (se houver) e reiniciar as apresentações do Modo Congresso".
 
-## Tela do Evento
+### Modal — estado de confirmação
+- Ícone do círculo: `RotateCcw` (mantém o círculo `danger-soft`).
+- Título: **"Reiniciar evento?"**.
+- Descrição condicional a `sorteadas`:
+  - `sorteadas > 0`: "Os **{sorteadas}** {sorteio/sorteios} de **{evento.nome}** serão apagados e as apresentações do Modo Congresso serão reiniciadas. Inscrições e campeões anteriores permanecem. Esta ação não pode ser desfeita."
+  - `sorteadas === 0`: "As apresentações do Modo Congresso de **{evento.nome}** serão reiniciadas. Inscrições, campeões e sorteios não são afetados."
+- Botão de confirmação: rótulo **"Reiniciar"** (ícone `RotateCcw`), estado de carregamento "Reiniciando...". (Remover o `Apagar {sorteadas}`.)
 
-- **`EventoInscricoes.tsx`:**
-  - Estado local `temVistas` inicializado de `loadVistas(eventoId).length > 0`.
-  - Botão **"Reiniciar apresentação"** junto às ações (ao lado de "Apagar sorteios"), visível quando `temVistas` — **independente de `sorteadas`**.
-  - Estado `reiniciarOpen` + `ConfirmDialog`. Ao confirmar: `clearVistas(eventoId)`, `setTemVistas(false)`, toast "Apresentações reiniciadas." e fecha o diálogo.
-  - A tela do evento não exibe os checks; o efeito aparece no próximo Modo Congresso (abre limpo).
+### Modal — estado de resumo (success)
+- Título: **"Evento reiniciado"**.
+- Descrição condicional a `apagarTodosResumo.count`:
+  - `count > 0`: "**{count}** {sorteio apagado / sorteios apagados} e apresentações reiniciadas."
+  - `count === 0`: "Apresentações reiniciadas."
 
-## Diálogo de confirmação (ambos)
-
-`ConfirmDialog`:
-- eyebrow: "Modo Congresso"
-- title: "Reiniciar apresentação"
-- description: "As marcas de modalidades apresentadas serão removidas. Os sorteios não são afetados."
-- confirmLabel: "Reiniciar"
-- confirmVariant: padrão (não destrutivo de dados — apenas marcas locais)
+### Lógica
+- Nenhuma mudança de lógica: a mutation `apagarTodosSorteios` já apaga sorteios e (via `onSuccess`) chama `clearVistas`. Só muda visibilidade/cópia/ícone.
 
 ## Tratamento de erros / casos
 
-- localStorage indisponível → `clearVistas` é no-op (try/catch já existente).
-- Sem vistas → botão não aparece (nos dois lugares).
-- Evento com sorteios + vistas → "Reiniciar apresentação" limpa só as vistas; "Apagar sorteios" segue limpando sorteios (e, como já implementado, também as vistas).
+- Evento sem sorteios e sem vistas: botão visível; ao confirmar, `removerTodosDoEvento` retorna `count 0` e `clearVistas` é no-op → resumo "Apresentações reiniciadas." (inócuo).
+- Evento suspenso: botão desabilitado (igual a hoje).
+- localStorage indisponível: `clearVistas` é no-op (try/catch já existente).
+- Reset reflete no **próximo** Modo Congresso do evento (abre limpo); a tela do evento não exibe os checks.
 
 ## Testes
 
-- `clearVistas` já tem testes. Sem nova função pura.
-- **Build + manual:** `npm run build`; manual — (a) Modo Congresso: apresentar modalidades sem sortear → botão aparece → confirmar → checks das apresentadas somem, sorteadas intactas; (b) EventoInscricoes: com vistas e sem sorteios, o botão aparece → confirmar → toast + botão some, e o próximo Modo Congresso abre limpo.
+- `clearVistas` já tem testes; sem nova função pura.
+- **Build + manual:** `npm run build`; manual — (a) evento só com apresentadas (sem sorteio): botão "Reiniciar evento" aparece → confirmar → Modo Congresso abre limpo; (b) evento com sorteios: "Reiniciar evento" apaga sorteios + reinicia apresentações (comportamento atual + reset de vistas); (c) inscrições/campeões permanecem.
 - Sem backend/migration.
 
 ## Fora de escopo
 
-- Reiniciar apresentação por modalidade (é tudo-ou-nada por evento).
+- Botão de reiniciar dentro do Modo Congresso (o reset é feito pela tela do Evento).
+- Reiniciar por modalidade (é por evento).
 - Persistir "vistas" no backend.
-- Alterar o reset já existente acoplado a "Apagar sorteios".
+- Separar "apagar sorteios" de "reiniciar apresentação" (decisão foi unificar num só botão).
