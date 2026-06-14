@@ -64,7 +64,25 @@ app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
 app.use(errorHandler)
 
+function validarSegredos() {
+  const s = process.env.JWT_SECRET
+  const r = process.env.JWT_REFRESH_SECRET
+  const probs: string[] = []
+  if (!s) probs.push('JWT_SECRET ausente')
+  if (!r) probs.push('JWT_REFRESH_SECRET ausente')
+  if (s && r && s === r) probs.push('JWT_SECRET e JWT_REFRESH_SECRET devem ser diferentes')
+  if (process.env.NODE_ENV === 'production') {
+    if (s && s.length < 32) probs.push('JWT_SECRET deve ter >= 32 chars em produção')
+    if (r && r.length < 32) probs.push('JWT_REFRESH_SECRET deve ter >= 32 chars em produção')
+  }
+  if (probs.length > 0) {
+    logger.error({ probs }, 'Configuração de segredos JWT inválida')
+    process.exit(1)
+  }
+}
+
 async function start() {
+  validarSegredos()
   await connectRedis()
   app.listen(PORT, () => logger.info(`Server running on port ${PORT}`))
 }
