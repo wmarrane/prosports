@@ -394,6 +394,7 @@ export default function EventoForm() {
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     <label
                       className="btn btn-primary btn-sm"
+                      title="Enviar uma imagem de logo do evento (JPG, PNG ou WebP)"
                       style={{ display: 'inline-flex', alignItems: 'center', gap: 6, cursor: salvandoLogo ? 'wait' : 'pointer', opacity: salvandoLogo ? 0.5 : 1 }}
                     >
                       <Upload size={14} /> {salvandoLogo ? 'Enviando...' : logoUrl ? 'Trocar logo' : 'Enviar logo'}
@@ -414,6 +415,7 @@ export default function EventoForm() {
                         type="button"
                         onClick={() => removerLogoMutate()}
                         disabled={removendoLogo}
+                        title="Remover o logo do evento"
                         className="btn btn-ghost btn-sm"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: removendoLogo ? 0.5 : 1 }}
                       >
@@ -515,6 +517,7 @@ export default function EventoForm() {
               <button
                 type="button"
                 onClick={() => navigate(`/eventos/${id}/inscricoes`)}
+                title="Abrir inscrições, sorteio e campeões deste evento"
                 className="btn btn-ghost"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
               >

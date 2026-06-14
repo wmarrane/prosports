@@ -146,6 +146,7 @@ export default function EventosList() {
               <button
                 type="button"
                 onClick={() => toggleGrupo(g.competicaoId)}
+                title="Recolher ou expandir os eventos desta competição"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8, width: '100%',
                   background: 'transparent', border: 'none', cursor: 'pointer',
@@ -345,6 +346,7 @@ export default function EventosList() {
                               e.stopPropagation()
                               navigate(`/eventos/${ev.id}/inscricoes`)
                             }}
+                            title="Abrir inscrições, sorteio e campeões do evento"
                             className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold"
                           >
                             Inscrições
@@ -366,6 +368,7 @@ export default function EventosList() {
                           )}
                           <button
                             onClick={e => handleRemove(e, ev)}
+                            title="Excluir o evento (inscrições e sorteios vinculados serão perdidos)"
                             className="text-xs text-[var(--danger)] hover:text-[var(--danger-700)] font-semibold"
                           >
                             Remover
@@ -390,7 +393,7 @@ export default function EventosList() {
         title="Eventos"
         sub="Gerencie edições de competições, datas, locais e inscrições."
         actions={
-          <button onClick={() => navigate('/eventos/novo')} className="btn btn-primary">
+          <button onClick={() => navigate('/eventos/novo')} title="Criar um novo evento" className="btn btn-primary">
             <Plus size={16} /> Novo Evento
           </button>
         }
@@ -408,6 +411,7 @@ export default function EventosList() {
                 <button
                   key={f.id}
                   onClick={() => setFiltro(f.id)}
+                  title={f.id === 'todos' ? 'Mostrar todos os eventos' : `Mostrar apenas eventos de ${f.label}`}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -474,6 +478,7 @@ export default function EventosList() {
                 <button
                   type="button"
                   onClick={toggleSorteados}
+                  title="Recolher ou expandir os eventos já sorteados"
                   style={{
                     display: 'flex', alignItems: 'center', gap: 8, width: '100%',
                     background: 'transparent', border: 'none', cursor: 'pointer',

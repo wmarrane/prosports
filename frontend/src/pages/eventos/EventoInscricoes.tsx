@@ -445,12 +445,14 @@ export default function EventoInscricoes() {
                 <>
                   <button
                     onClick={() => navigate(`/eventos/${eventoId}/editar`)}
+                    title="Editar os dados do evento"
                     className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
                   >
                     Editar evento
                   </button>
                   <button
                     onClick={() => setModalidadesModalOpen(true)}
+                    title="Escolher quais modalidades da competição participam deste evento"
                     className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2"
                   >
                     Modalidades do evento
@@ -516,6 +518,7 @@ export default function EventoInscricoes() {
                     <button
                       key={m.id}
                       onClick={() => { setModalidadeId(m.id); setErroSorteio('') }}
+                      title="Ver inscritos, sorteio e campeões desta modalidade"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -706,6 +709,7 @@ export default function EventoInscricoes() {
                       <button
                         onClick={() => setImportOpen(true)}
                         disabled={eventoSuspenso}
+                        title="Importar inscritos via arquivo CSV"
                         className="btn btn-ghost btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
@@ -714,6 +718,7 @@ export default function EventoInscricoes() {
                       <button
                         onClick={() => { setInscreverOpen(true); setPickedIds([]); setResumoBulk(null); setErroModal('') }}
                         disabled={eventoSuspenso}
+                        title="Inscrever participantes na modalidade selecionada"
                         className="btn btn-primary btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
@@ -891,6 +896,7 @@ export default function EventoInscricoes() {
                         <button
                           type="button"
                           className="btn btn-ghost btn-sm"
+                          title="Salvar a posição de entrada do anfitrião"
                           onClick={() => {
                             const v = posAnfitriao.trim() === '' ? null : Number(posAnfitriao)
                             if (v != null && (!Number.isInteger(v) || v < 1 || v > inscricoes.length)) {
@@ -945,12 +951,14 @@ export default function EventoInscricoes() {
                           <button
                             onClick={handleResortear}
                             disabled={executandoSorteio || eventoSuspenso}
+                            title="Refazer o sorteio desta modalidade"
                             className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] disabled:opacity-50 font-semibold"
                           >
                             {executandoSorteio ? 'Sorteando...' : 'Re-sortear'}
                           </button>
                           <button
                             onClick={() => handleApagarSorteio(sorteioDaModalidade.id)}
+                            title="Apagar o sorteio desta modalidade"
                             className="text-xs text-[var(--danger)] hover:text-[var(--danger-700)] font-semibold"
                           >
                             Apagar
@@ -1021,6 +1029,7 @@ export default function EventoInscricoes() {
                         <button
                           onClick={handleSortear}
                           disabled={inscricoes.length === 0 || executandoSorteio || eventoSuspenso}
+                          title="Executar o sorteio da modalidade selecionada"
                           className="btn btn-primary"
                           style={{
                             display: 'inline-flex',
@@ -1086,6 +1095,7 @@ export default function EventoInscricoes() {
                     <button
                       onClick={() => setImportCampeoesOpen(true)}
                       disabled={eventoSuspenso}
+                      title="Importar campeões do ano anterior via CSV"
                       className="btn btn-ghost btn-sm ml-auto disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
                     >
