@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { eventosService } from '../../services/eventos'
 import { sorteiosService } from '../../services/sorteios'
 import { inscricoesService } from '../../services/inscricoes'
+import { sistemasDisputaService } from '../../services/sistemas-disputa'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
 import { Check, ArrowRight, FileText } from 'lucide-react'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
@@ -69,6 +70,12 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
     queryKey: ['inscricoes', eventoId, selectedId],
     queryFn: () => inscricoesService.listar({ evento_id: eventoId, modalidade_id: selectedId! }),
     enabled: selectedId != null,
+  })
+
+  const { data: regrasGrupos = [] } = useQuery({
+    queryKey: ['sistemas-disputa-grupos', evento?.competicao_id],
+    queryFn: () => sistemasDisputaService.grupos.listar(evento!.competicao_id),
+    enabled: evento?.competicao_id != null,
   })
 
   const vazia = !inscricoesLoading && selectedMod != null && inscricoesSel.length === 0
@@ -144,6 +151,10 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
               const sorteada = sorteadasIds.has(selectedMod.id)
               const vista = !sorteada && vistasIds.has(selectedMod.id)
               const tipoLabel = selectedMod.tipo_modalidade ? TIPO_DISPUTA_LABEL[selectedMod.tipo_modalidade.tipo] : '—'
+              const quantidadeGrupos = tipo === 'grupos' && inscricoesSel.length > 0
+                ? regrasGrupos.find(r => r.quantidade_equipes === inscricoesSel.length)?.quantidade_grupos
+                : undefined
+              const formaSorteioLabel = quantidadeGrupos != null ? `${quantidadeGrupos} Grupos` : tipoLabel
               return (
                 <div className="cw-md-card">
                   <div className="cw-md-card-top">
@@ -189,7 +200,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
                       <span>Inscritos</span>
                     </div>
                     <div className="cw-md-stat">
-                      <b>{tipoLabel}</b>
+                      <b>{formaSorteioLabel}</b>
                       <span>Forma do sorteio</span>
                     </div>
                   </div>
