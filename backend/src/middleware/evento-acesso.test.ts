@@ -52,12 +52,22 @@ describe('requireAcessoEvento', () => {
     await requireAcessoEvento(() => 9)(req, res, next)
     expect(next).toHaveBeenCalled()
   })
-  it('400 quando evento_id não resolve', async () => {
-    const req: any = { user: { sub: 1, role: 'ADMIN' } }
+  it('400 quando evento_id não resolve (não-admin)', async () => {
+    const req: any = { user: { sub: 2, role: 'COMISSAO_TECNICA' } }
     const res: any = mkRes()
     const next = vi.fn()
     await requireAcessoEvento(() => null)(req, res, next)
     expect(res.statusCode).toBe(400)
     expect(next).not.toHaveBeenCalled()
+  })
+
+  it('ADMIN passa mesmo sem evento_id (resolver não é chamado)', async () => {
+    const req: any = { user: { sub: 1, role: 'ADMIN' } }
+    const res: any = mkRes()
+    const next = vi.fn()
+    const resolver = vi.fn(() => null)
+    await requireAcessoEvento(resolver as any)(req, res, next)
+    expect(next).toHaveBeenCalled()
+    expect(resolver).not.toHaveBeenCalled()
   })
 })

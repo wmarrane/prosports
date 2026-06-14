@@ -22,6 +22,8 @@ export function requireAcessoEvento(resolver: (req: Request) => number | null | 
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = (req as any).user as AuthUser
+      // ADMIN tem acesso global — não precisa resolver/scopo de evento.
+      if (user?.role === 'ADMIN') { next(); return }
       const evento_id = await resolver(req)
       if (evento_id == null || Number.isNaN(evento_id)) {
         res.status(400).json({ message: 'Evento não identificado na requisição.' })
