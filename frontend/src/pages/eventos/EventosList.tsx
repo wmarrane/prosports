@@ -353,13 +353,14 @@ export default function EventosList() {
                             <button
                               onClick={e => { e.stopPropagation(); despublicarSite(ev.id) }}
                               disabled={despublicandoSite}
+                              title="Remove o evento do site público (~1–2 min). Re-publicar atualiza/sobrescreve o snapshot."
                               className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
                             >Despublicar</button>
                           ) : (
                             <button
                               onClick={e => { e.stopPropagation(); publicarSite(ev.id) }}
                               disabled={publicandoSite || ev.status !== 'sorteado'}
-                              title={ev.status !== 'sorteado' ? 'Disponível apenas quando o evento estiver Sorteado' : undefined}
+                              title={ev.status !== 'sorteado' ? 'Disponível apenas quando o evento estiver Sorteado' : 'Publica um retrato (snapshot) do evento no site público (~1–2 min). Para refletir mudanças depois, publique novamente.'}
                               className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-[var(--brand-500)]"
                             >Publicar no site</button>
                           )}
