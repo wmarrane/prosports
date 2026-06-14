@@ -1,18 +1,21 @@
 import { Request, Response, NextFunction } from 'express'
-import { verifyAccess } from '../modules/auth/auth.service'
+import { verifyAccess, isAccessRevoked } from '../modules/auth/auth.service'
 
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
+export async function requireAuth(req: Request, res: Response, next: NextFunction) {
   const header = req.headers.authorization
   if (!header?.startsWith('Bearer ')) {
     res.status(401).json({ message: 'Token não fornecido' })
     return
   }
-
   try {
     const token = header.slice(7)
-    const payload = verifyAccess(token)
-    if ((payload as any).type === 'event-key') {
+    const payload = verifyAccess(token) as any
+    if (payload.type === 'event-key') {
       res.status(401).json({ message: 'Token inválido' })
+      return
+    }
+    if (await isAccessRevoked(payload)) {
+      res.status(401).json({ message: 'Sessão encerrada. Faça login novamente.' })
       return
     }
     ;(req as any).user = payload
