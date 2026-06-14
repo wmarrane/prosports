@@ -65,6 +65,7 @@ export default function MobileLogin() {
           type="email"
           inputMode="email"
           autoComplete="email"
+          aria-label="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="seu@email.com"
@@ -88,7 +89,7 @@ export default function MobileLogin() {
           {enviando ? 'Acessando...' : 'Acessar'}
         </button>
         {erro && (
-          <div style={{
+          <div role="alert" style={{
             background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.5)',
             padding: '12px 14px', borderRadius: 12, textAlign: 'center', fontSize: 14,
           }}>
