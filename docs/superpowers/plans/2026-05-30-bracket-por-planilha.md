@@ -311,7 +311,7 @@ Esperado:
 
 Comando (a partir do host):
 ```
-ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://prosports:erp0192@192.168.56.108:5432/newprosports' -c 'SELECT numero_inscrito, posicoes_bye FROM bracket_chaves_byes WHERE numero_inscrito IN (8,12,20,22) ORDER BY numero_inscrito;'"
+ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://USUARIO:SENHA@HOST:5432/newprosports' -c 'SELECT numero_inscrito, posicoes_bye FROM bracket_chaves_byes WHERE numero_inscrito IN (8,12,20,22) ORDER BY numero_inscrito;'"
 ```
 
 - [ ] **Step 5: Commit a migration final**
@@ -996,7 +996,7 @@ Esperado: ambos 200.
 - [ ] **Step 3: Confirmar tabela populada no banco prod**
 
 ```
-ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://prosports:erp0192@192.168.56.108:5432/newprosports' -c 'SELECT numero_inscrito, posicoes_bye FROM bracket_chaves_byes WHERE numero_inscrito IN (2, 8, 12, 20, 22, 77) ORDER BY numero_inscrito;'"
+ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://USUARIO:SENHA@HOST:5432/newprosports' -c 'SELECT numero_inscrito, posicoes_bye FROM bracket_chaves_byes WHERE numero_inscrito IN (2, 8, 12, 20, 22, 77) ORDER BY numero_inscrito;'"
 ```
 
 Esperado: 6 linhas conforme dados extraídos.

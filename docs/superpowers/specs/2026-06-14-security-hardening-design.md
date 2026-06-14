@@ -101,7 +101,7 @@ Sem migration — usar Redis + `jti`/`iat` do access:
 ## Grupo 4 — Higiene / config
 
 ### 4.1 Segredo de banco em docs (Alto)
-- Substituir a string `postgresql://prosports:erp0192@192.168.56.108:5432/newprosports` por um placeholder (`postgresql://USER:SENHA@HOST:5432/DB`) nos arquivos `docs/superpowers/plans/2026-05-27-cicd-deploy.md`, `2026-05-28-fundacao.md`, `2026-05-30-bracket-por-planilha.md`, `2026-05-30-bracket-arvore-fiel.md`.
+- Substituir a string `postgresql://USUARIO:SENHA@HOST:5432/newprosports` por um placeholder (`postgresql://USER:SENHA@HOST:5432/DB`) nos arquivos `docs/superpowers/plans/2026-05-27-cicd-deploy.md`, `2026-05-28-fundacao.md`, `2026-05-30-bracket-por-planilha.md`, `2026-05-30-bracket-arvore-fiel.md`.
 - **Ação manual do Wagner (fora do código):** rotacionar a senha do usuário `prosports` no Postgres de dev e confirmar que **não** é reusada no Cloud SQL de prod. (Histórico git permanece; reescrita opcional.)
 
 ### 4.2 Seed do admin (Médio)

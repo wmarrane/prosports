@@ -452,8 +452,8 @@ git -c user.name="Wagner Marrane" -c user.email="wmarrane@gmail.com" commit -m "
 
 - [ ] **Step 1: Substituir a senha por placeholder**
 
-Substituir todas as ocorrências da string `prosports:erp0192@192.168.56.108` por `USUARIO:SENHA@HOST` nesses arquivos (a senha `erp0192` não deve permanecer em texto). Usar busca/replace direto em cada arquivo. Confirmar com:
-Run: `cd "C:/Users/Wagner/OneDrive/Pessoal/Documentos/Projetos/prosports_v2" && grep -rl "erp0192" docs/ || echo "LIMPO"`
+Substituir todas as ocorrências da string `USUARIO:SENHA@HOST` por `USUARIO:SENHA@HOST` nesses arquivos (a senha de banco não deve permanecer em texto). Usar busca/replace direto em cada arquivo. Confirmar com:
+Run: `cd "C:/Users/Wagner/OneDrive/Pessoal/Documentos/Projetos/prosports_v2" && grep -rl "SENHA_BANCO" docs/ || echo "LIMPO"`
 Expected: `LIMPO`.
 
 - [ ] **Step 2: Commit**

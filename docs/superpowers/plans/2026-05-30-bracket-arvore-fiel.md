@@ -577,7 +577,7 @@ Expected: aplica sem erros.
 - [ ] **Step 3: Smoke check DB**
 
 ```
-ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://prosports:erp0192@192.168.56.108:5432/newprosports' -c \"SELECT numero_inscrito, jsonb_array_length(matches_graph->'matches') AS n_matches FROM bracket_chaves_matches WHERE numero_inscrito IN (2, 6, 12, 20, 77) ORDER BY numero_inscrito;\""
+ssh wagner@192.168.56.113 "docker run --rm postgres:16-alpine psql 'postgresql://USUARIO:SENHA@HOST:5432/newprosports' -c \"SELECT numero_inscrito, jsonb_array_length(matches_graph->'matches') AS n_matches FROM bracket_chaves_matches WHERE numero_inscrito IN (2, 6, 12, 20, 77) ORDER BY numero_inscrito;\""
 ```
 
 Expected:
