@@ -118,6 +118,7 @@ export default function Login() {
           {[
             [stats ? fmtNum(stats.inscritos_ativos) : '—', 'Inscritos ativos'],
             [stats ? fmtNum(stats.sorteios_realizados) : '—', 'Sorteios realizados'],
+            [stats ? fmtNum(stats.eventos_sorteados) : '—', 'Eventos sorteados'],
             ['100%', 'Auditados'],
           ].map(([v, l]) => (
             <div key={l}>

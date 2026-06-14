@@ -8,12 +8,18 @@ router.get('/public', async (_req: Request, res: Response, next: NextFunction) =
     const hoje = new Date()
     hoje.setHours(0, 0, 0, 0)
 
-    const [inscritos_ativos, sorteios_realizados] = await Promise.all([
-      prisma.inscricao.count({ where: { evento: { data_hora: { gte: hoje } } } }),
+    const [participantesDistintos, sorteios_realizados, eventos_sorteados] = await Promise.all([
+      prisma.inscricao.findMany({
+        where: { evento: { data_hora: { gte: hoje } } },
+        distinct: ['evento_id', 'participante_id'],
+        select: { evento_id: true },
+      }),
       prisma.sorteio.count(),
+      prisma.evento.count({ where: { status: 'sorteado' } }),
     ])
 
-    res.json({ inscritos_ativos, sorteios_realizados })
+    const inscritos_ativos = participantesDistintos.length
+    res.json({ inscritos_ativos, sorteios_realizados, eventos_sorteados })
   } catch (err) {
     next(err)
   }
