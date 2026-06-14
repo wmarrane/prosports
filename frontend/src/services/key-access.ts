@@ -7,7 +7,7 @@ import type { Sorteio } from '../types/sorteio'
 
 const BASE = '/key-access'
 
-type LoginPayload = { token: string; device_fp: string; device_label: string }
+type LoginPayload = { token: string; email: string; device_fp: string; device_label: string }
 type LoginResponse = { keyToken: string; evento: Evento }
 
 export type ModalidadeDetail = {
