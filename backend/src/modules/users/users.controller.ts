@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import * as service from './users.service'
 import { createSchema, updateSchema, resetarSenhaSchema } from './users.schemas'
+import { parseIntParam } from '../../lib/parse-id'
 
 function caller(req: Request) {
   const u = (req as any).user as { sub: number; role: string } | undefined
@@ -13,7 +14,7 @@ export async function listar(_req: Request, res: Response, next: NextFunction) {
 }
 
 export async function buscarPorId(req: Request, res: Response, next: NextFunction) {
-  try { res.json(await service.buscarPorId(Number(req.params.id))) } catch (e) { next(e) }
+  try { res.json(await service.buscarPorId(parseIntParam(req.params.id, 'id'))) } catch (e) { next(e) }
 }
 
 export async function criar(req: Request, res: Response, next: NextFunction) {
@@ -26,13 +27,13 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
 export async function editar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = updateSchema.parse(req.body)
-    res.json(await service.editar(Number(req.params.id), body, caller(req)))
+    res.json(await service.editar(parseIntParam(req.params.id, 'id'), body, caller(req)))
   } catch (e) { next(e) }
 }
 
 export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
-    await service.remover(Number(req.params.id), caller(req))
+    await service.remover(parseIntParam(req.params.id, 'id'), caller(req))
     res.status(204).send()
   } catch (e) { next(e) }
 }
@@ -40,6 +41,6 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
 export async function resetarSenha(req: Request, res: Response, next: NextFunction) {
   try {
     const body = resetarSenhaSchema.parse(req.body)
-    res.json(await service.resetarSenha(Number(req.params.id), body.nova_senha))
+    res.json(await service.resetarSenha(parseIntParam(req.params.id, 'id'), body.nova_senha))
   } catch (e) { next(e) }
 }
