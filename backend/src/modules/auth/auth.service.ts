@@ -5,7 +5,7 @@ import prisma from '../../lib/prisma'
 import redis from '../../lib/redis'
 
 const ACCESS_SECRET = process.env.JWT_SECRET!
-const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET ?? ACCESS_SECRET + '_refresh'
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!
 const ACCESS_EXPIRES = '3h'
 const REFRESH_EXPIRES_SEC = 7 * 24 * 60 * 60 // 7 dias
 const MAX_TENTATIVAS = 5
@@ -18,11 +18,11 @@ export type TokenPayload = {
 }
 
 function signAccess(payload: TokenPayload) {
-  return jwt.sign(payload, ACCESS_SECRET, { expiresIn: ACCESS_EXPIRES })
+  return jwt.sign(payload, ACCESS_SECRET, { expiresIn: ACCESS_EXPIRES, algorithm: 'HS256', jwtid: randomUUID() })
 }
 
-function signRefresh(payload: TokenPayload) {
-  return jwt.sign(payload, REFRESH_SECRET, { expiresIn: `${REFRESH_EXPIRES_SEC}s` })
+function signRefresh(payload: TokenPayload, jti: string) {
+  return jwt.sign(payload, REFRESH_SECRET, { expiresIn: `${REFRESH_EXPIRES_SEC}s`, algorithm: 'HS256', jwtid: jti })
 }
 
 export async function login(email: string, senha: string) {
@@ -65,9 +65,9 @@ export async function login(email: string, senha: string) {
   })
 
   const payload: TokenPayload = { sub: user.id, email: user.email, role: user.role }
-  const accessToken = signAccess(payload)
-  const refreshToken = signRefresh(payload)
   const refreshJti = randomUUID()
+  const accessToken = signAccess(payload)
+  const refreshToken = signRefresh(payload, refreshJti)
 
   // Armazena refresh token no Redis com TTL
   await redis.setEx(`refresh:${user.id}:${refreshJti}`, REFRESH_EXPIRES_SEC, refreshToken)
@@ -84,13 +84,17 @@ export async function refresh(refreshToken: string) {
   let payload: TokenPayload & { jti?: string }
 
   try {
-    payload = jwt.verify(refreshToken, REFRESH_SECRET) as unknown as TokenPayload & { jti?: string }
+    payload = jwt.verify(refreshToken, REFRESH_SECRET, { algorithms: ['HS256'] }) as unknown as TokenPayload & { jti?: string }
   } catch {
     throw Object.assign(new Error('Refresh token inválido'), { status: 401 })
   }
 
-  const stored = await redis.get(`refresh:${payload.sub}:${payload.jti}`)
-  if (!stored || stored !== refreshToken) {
+  const jti = payload.jti
+  const key = jti ? `refresh:${payload.sub}:${jti}` : null
+  const stored = key ? await redis.get(key) : null
+  if (!key || !stored || stored !== refreshToken) {
+    // Reuse/revogado: revoga todas as sessões e marca epoch (invalida todos os access).
+    await revogarTodosRefreshTokens(payload.sub)
     throw Object.assign(new Error('Refresh token revogado'), { status: 401 })
   }
 
@@ -99,12 +103,21 @@ export async function refresh(refreshToken: string) {
     throw Object.assign(new Error('Usuário inativo'), { status: 401 })
   }
 
+  // Rotaciona
+  await redis.del(key)
   const newPayload: TokenPayload = { sub: user.id, email: user.email, role: user.role }
-  return { accessToken: signAccess(newPayload) }
+  const newJti = randomUUID()
+  const accessToken = signAccess(newPayload)
+  const newRefresh = signRefresh(newPayload, newJti)
+  await redis.setEx(`refresh:${user.id}:${newJti}`, REFRESH_EXPIRES_SEC, newRefresh)
+  return { accessToken, refreshToken: newRefresh, refreshJti: newJti }
 }
 
-export async function logout(userId: number, jti: string) {
-  await redis.del(`refresh:${userId}:${jti}`)
+export async function logout(userId: number, refreshJti: string, accessJti?: string, accessTtlSec?: number) {
+  await redis.del(`refresh:${userId}:${refreshJti}`)
+  if (accessJti && accessTtlSec && accessTtlSec > 0) {
+    await redis.setEx(`denyAccess:${accessJti}`, accessTtlSec, '1')
+  }
 }
 
 /**
@@ -121,14 +134,22 @@ export async function revogarTodosRefreshTokens(userId: number) {
   if (keys.length > 0) {
     await redis.del(keys)
   }
+  await redis.set(`authEpoch:${userId}`, String(Math.floor(Date.now() / 1000)))
 }
 
 export async function hashSenha(senha: string) {
   return bcrypt.hash(senha, 12)
 }
 
-export function verifyAccess(token: string): TokenPayload {
-  return jwt.verify(token, ACCESS_SECRET) as unknown as TokenPayload
+export function verifyAccess(token: string): TokenPayload & { jti?: string; iat?: number } {
+  return jwt.verify(token, ACCESS_SECRET, { algorithms: ['HS256'] }) as unknown as TokenPayload & { jti?: string; iat?: number }
+}
+
+export async function isAccessRevoked(payload: { sub: number; jti?: string; iat?: number }): Promise<boolean> {
+  if (payload.jti && (await redis.get(`denyAccess:${payload.jti}`))) return true
+  const epoch = await redis.get(`authEpoch:${payload.sub}`)
+  if (epoch && payload.iat != null && payload.iat < Number(epoch)) return true
+  return false
 }
 
 export async function alterarSenha(userId: number, senhaAtual: string, novaSenha: string) {

@@ -11,9 +11,10 @@ const acessoSorteioId = requireAcessoEvento(async req => {
   const s = await prisma.sorteio.findUnique({ where: { id: Number(req.params.id) }, select: { evento_id: true } })
   return s?.evento_id ?? null
 })
+const acessoQueryEvento = requireAcessoEvento(req => Number(req.query.evento_id))
 
-router.get('/', requireAuth, ctrl.listar)
-router.get('/:id', requireAuth, ctrl.buscarPorId)
+router.get('/', requireAuth, acessoQueryEvento, ctrl.listar)
+router.get('/:id', requireAuth, acessoSorteioId, ctrl.buscarPorId)
 router.post('/executar', requireAuth, acessoBody, ctrl.executar)
 router.delete('/evento/:evento_id', requireAuth, acessoParamsEvento, ctrl.removerTodosDoEvento)
 router.delete('/:id', requireAuth, acessoSorteioId, ctrl.remover)

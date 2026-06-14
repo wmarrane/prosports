@@ -498,7 +498,7 @@ Copy-Item .env.example .env
 
 Editar `.env` e preencher `DATABASE_URL` com:
 ```
-DATABASE_URL=postgresql://prosports:erp0192@192.168.56.108:5432/newprosports
+DATABASE_URL=postgresql://USUARIO:SENHA@HOST:5432/newprosports
 ```
 
 ```powershell
@@ -709,7 +709,7 @@ Adicionar os seguintes secrets no environment `develop`:
 
 | Nome | Valor |
 |------|-------|
-| `DATABASE_URL` | `postgresql://prosports:erp0192@192.168.56.108:5432/newprosports` |
+| `DATABASE_URL` | `postgresql://USUARIO:SENHA@HOST:5432/newprosports` |
 | `JWT_SECRET` | (gerar: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`) |
 
 - [ ] **Step 2: Criar environment `production`**
@@ -866,7 +866,7 @@ Expected: resposta JSON do backend (ou 404 de rota não definida — confirma qu
 
 | Secret | Ambiente | Valor |
 |--------|----------|-------|
-| `DATABASE_URL` | develop | `postgresql://prosports:erp0192@192.168.56.108:5432/newprosports` |
+| `DATABASE_URL` | develop | `postgresql://USUARIO:SENHA@HOST:5432/newprosports` |
 | `JWT_SECRET` | develop | gerado com `crypto.randomBytes(32).toString('hex')` |
 | `GCP_SA_KEY` | production | JSON Service Account (configurar ao provisionar GCP) |
 | `GCP_PROJECT` | production | ID projeto GCP |

@@ -48,6 +48,7 @@ export async function refreshHandler(req: Request, res: Response, next: NextFunc
 
     const [, refreshToken] = raw.split('::')
     const result = await authService.refresh(refreshToken)
+    res.cookie(REFRESH_COOKIE, `${result.refreshJti}::${result.refreshToken}`, COOKIE_OPTS)
     res.json({ accessToken: result.accessToken })
   } catch (err) {
     next(err)
@@ -59,9 +60,10 @@ export async function logoutHandler(req: Request, res: Response, next: NextFunct
     const raw = req.cookies?.[REFRESH_COOKIE] as string | undefined
     if (raw) {
       const [jti] = raw.split('::')
-      const user = (req as any).user
+      const user = (req as any).user as { sub?: number; jti?: string; exp?: number } | undefined
       if (user?.sub && jti) {
-        await authService.logout(user.sub, jti)
+        const ttl = user.exp ? user.exp - Math.floor(Date.now() / 1000) : undefined
+        await authService.logout(user.sub, jti, user.jti, ttl)
       }
     }
 

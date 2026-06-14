@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import { requireEventoKey } from '../../middleware/requireEventoKey'
+import { loginRateLimit } from '../../middleware/security'
 import * as ctrl from './key_access.controller'
 
 const router = Router()
 
-// Public: login com token + device
-router.post('/login', ctrl.login)
+// Public: login com token + device (rate-limited contra brute force)
+router.post('/login', loginRateLimit, ctrl.login)
 
 // Protegido por keyToken
 router.get('/me', requireEventoKey, ctrl.me)

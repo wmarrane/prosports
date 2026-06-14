@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './inscricoes.service'
+import { parseIntParam } from '../../lib/parse-id'
 
 const createSchema = z.object({
   evento_id: z.coerce.number().int().positive(),
@@ -45,7 +46,7 @@ export async function listar(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function buscarPorId(req: Request, res: Response, next: NextFunction) {
-  try { res.json(await service.buscarPorId(Number(req.params.id))) } catch (err) { next(err) }
+  try { res.json(await service.buscarPorId(parseIntParam(req.params.id, 'id'))) } catch (err) { next(err) }
 }
 
 export async function criar(req: Request, res: Response, next: NextFunction) {
@@ -57,15 +58,15 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
 
 export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
-    await service.remover(Number(req.params.id))
+    await service.remover(parseIntParam(req.params.id, 'id'))
     res.status(204).send()
   } catch (err) { next(err) }
 }
 
 export async function removerTodosDaModalidade(req: Request, res: Response, next: NextFunction) {
   try {
-    const evento_id = Number(req.params.eventoId)
-    const modalidade_id = Number(req.params.modalidadeId)
+    const evento_id = parseIntParam(req.params.eventoId, 'eventoId')
+    const modalidade_id = parseIntParam(req.params.modalidadeId, 'modalidadeId')
     res.json(await service.removerTodosDaModalidade(evento_id, modalidade_id))
   } catch (err) { next(err) }
 }

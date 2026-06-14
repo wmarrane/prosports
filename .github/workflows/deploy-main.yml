@@ -93,6 +93,7 @@ jobs:
           INSTANCE_CONNECTION_NAME=${{ secrets.INSTANCE_CONNECTION_NAME }}
           PROD_DATABASE_URL=${{ secrets.PROD_DATABASE_URL }}
           PROD_JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
+          PROD_JWT_REFRESH_SECRET=${{ secrets.PROD_JWT_REFRESH_SECRET }}
           CADDY_API_DOMAIN=${{ secrets.CADDY_API_DOMAIN }}
           CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
           GITHUB_PAT=${{ secrets.SITE_GH_PAT }}

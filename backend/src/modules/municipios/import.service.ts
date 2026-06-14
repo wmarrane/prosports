@@ -36,6 +36,9 @@ function buildHeaderMap(actualHeaders: string[]): Record<keyof Row, string> | nu
 
 export async function importarCsv(content: string): Promise<Resumo> {
   const rows = parseCsv(content)
+  if (rows.length > 5000) {
+    throw Object.assign(new Error('Arquivo CSV excede o limite de 5000 linhas.'), { status: 400 })
+  }
   if (rows.length === 0) {
     return { criados: 0, atualizados: 0, ignorados: 0, erros: [] }
   }

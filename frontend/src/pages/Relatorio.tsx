@@ -8,15 +8,12 @@ import { inscricoesService } from '../services/inscricoes'
 import { sorteiosService } from '../services/sorteios'
 import { modalidadesService } from '../services/modalidades'
 import { STATUS_LABEL, STATUS_COLOR } from '../lib/evento-status'
+import { csvCell } from '../lib/csv-safe'
 import type { Evento } from '../types/evento'
 import type { Sorteio } from '../types/sorteio'
 
 function escapeCsv(value: string | null | undefined): string {
-  const s = value ?? ''
-  if (s.includes(',') || s.includes('"') || s.includes('\n') || s.includes('\r')) {
-    return `"${s.replace(/"/g, '""')}"`
-  }
-  return s
+  return csvCell(value)
 }
 
 function buildCsv(headers: string[], rows: string[][]): string {

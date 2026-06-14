@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
 import * as service from './campeoes_anteriores.service'
+import { parseIntParam } from '../../lib/parse-id'
 
 const createSchema = z.object({
   evento_id: z.coerce.number().int().positive(),
@@ -30,7 +31,7 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
 
 export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
-    await service.remover(Number(req.params.id))
+    await service.remover(parseIntParam(req.params.id, 'id'))
     res.status(204).send()
   } catch (err) { next(err) }
 }

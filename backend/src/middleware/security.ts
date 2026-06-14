@@ -41,6 +41,26 @@ export const corsMiddleware = cors({
 // (skipSuccessfulRequests). Logins bem-sucedidos e o /auth/refresh automático
 // não consomem o balde — evita falso positivo de "Muitas tentativas" em uso
 // legítimo, sem enfraquecer a proteção contra força bruta.
+export function originPermitida(origin?: string): boolean {
+  if (!origin) return false
+  if (allowedOrigins.includes(origin)) return true
+  if (allowLanOrigins && PRIVATE_LAN_ORIGIN.test(origin)) return true
+  return false
+}
+
+// CSRF: em prod o cookie é SameSite=None, então exigimos Origin/Referer na allowlist.
+export function requireSameOrigin(req: Request, res: Response, next: NextFunction) {
+  const ref = req.headers.referer
+  let origin = req.headers.origin as string | undefined
+  if (!origin && ref) { try { origin = new URL(ref).origin } catch { origin = undefined } }
+  if (originPermitida(origin)) { next(); return }
+  res.status(403).json({ message: 'Origem não permitida.' })
+}
+
+// Limite estrito SÓ no login, e contando apenas tentativas que falham
+// (skipSuccessfulRequests). Logins bem-sucedidos e o /auth/refresh automático
+// não consomem o balde — evita falso positivo de "Muitas tentativas" em uso
+// legítimo, sem enfraquecer a proteção contra força bruta.
 export const loginRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,
