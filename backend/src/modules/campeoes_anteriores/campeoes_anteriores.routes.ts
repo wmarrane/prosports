@@ -10,8 +10,9 @@ const acessoCampeaoId = requireAcessoEvento(async req => {
   const c = await prisma.campeaoAnterior.findUnique({ where: { id: Number(req.params.id) }, select: { evento_id: true } })
   return c?.evento_id ?? null
 })
+const acessoQueryEvento = requireAcessoEvento(req => Number(req.query.evento_id))
 
-router.get('/', requireAuth, ctrl.listar)
+router.get('/', requireAuth, acessoQueryEvento, ctrl.listar)
 router.post('/', requireAuth, acessoBody, ctrl.criar)
 router.post('/import', requireAuth, acessoBody, ctrl.importar)
 router.delete('/:id', requireAuth, acessoCampeaoId, ctrl.remover)
