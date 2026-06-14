@@ -21,7 +21,7 @@ beforeEach(() => vi.clearAllMocks())
 describe('key_access.service', () => {
   it('login 401 quando token não existe', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue(null)
-    await expect(service.login({ token: 'x', device_fp: 'fp', device_label: 'iPhone' }))
+    await expect(service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp', device_label: 'iPhone' }))
       .rejects.toMatchObject({ status: 401 })
   })
 
@@ -29,18 +29,18 @@ describe('key_access.service', () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
       id: 1, evento_id: 5, device_fp: null, revogado_em: new Date(),
     })
-    await expect(service.login({ token: 'x', device_fp: 'fp', device_label: 'iPhone' }))
+    await expect(service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp', device_label: 'iPhone' }))
       .rejects.toMatchObject({ status: 401 })
   })
 
   it('login first-use grava device_fp, label, first_used_at + retorna keyToken', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
-      id: 1, evento_id: 5, device_fp: null, revogado_em: null,
+      id: 1, evento_id: 5, device_fp: null, revogado_em: null, email: 'user@x.com',
       evento: { id: 5, nome: 'E', data_hora: new Date(), local: 'L', logo_url: null,
                 competicao: { subtitulo_campos: [] } },
     })
     mockPrisma.eventoKey.update.mockResolvedValue({})
-    const r = await service.login({ token: 'x', device_fp: 'fp1', device_label: 'iPhone' })
+    const r = await service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp1', device_label: 'iPhone' })
     expect(r.keyToken).toBeTruthy()
     expect(r.evento.id).toBe(5)
     const call = mockPrisma.eventoKey.update.mock.calls[0][0]
@@ -53,12 +53,12 @@ describe('key_access.service', () => {
 
   it('login com mesmo device_fp regrava device_fp/label e atualiza last_seen_at (sem first_used_at)', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
-      id: 1, evento_id: 5, device_fp: 'fp1', revogado_em: null,
+      id: 1, evento_id: 5, device_fp: 'fp1', revogado_em: null, email: 'user@x.com',
       evento: { id: 5, nome: 'E', data_hora: new Date(), local: 'L', logo_url: null,
                 competicao: { subtitulo_campos: [] } },
     })
     mockPrisma.eventoKey.update.mockResolvedValue({})
-    const r = await service.login({ token: 'x', device_fp: 'fp1', device_label: 'iPhone' })
+    const r = await service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp1', device_label: 'iPhone' })
     expect(r.keyToken).toBeTruthy()
     const call = mockPrisma.eventoKey.update.mock.calls[0][0]
     expect(call.data.device_fp).toBe('fp1')
@@ -69,11 +69,11 @@ describe('key_access.service', () => {
 
   it('login com device_fp diferente faz takeover (sobrescreve device_fp, invalida sessao antiga)', async () => {
     mockPrisma.eventoKey.findUnique.mockResolvedValue({
-      id: 1, evento_id: 5, device_fp: 'fp-ANTIGO', revogado_em: null,
+      id: 1, evento_id: 5, device_fp: 'fp-ANTIGO', revogado_em: null, email: 'user@x.com',
       evento: { id: 5, data_hora: new Date(), competicao: { subtitulo_campos: [] } },
     })
     mockPrisma.eventoKey.update.mockResolvedValue({})
-    const r = await service.login({ token: 'x', device_fp: 'fp-NOVO', device_label: 'Android Chrome' })
+    const r = await service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp-NOVO', device_label: 'Android Chrome' })
     expect(r.keyToken).toBeTruthy()
     const call = mockPrisma.eventoKey.update.mock.calls[0][0]
     expect(call.data.device_fp).toBe('fp-NOVO')
@@ -87,7 +87,7 @@ describe('key_access.service', () => {
       id: 1, evento_id: 5, device_fp: null, revogado_em: null,
       evento: { id: 5, data_hora: ontem, competicao: { subtitulo_campos: [] } },
     })
-    await expect(service.login({ token: 'x', device_fp: 'fp', device_label: 'iPhone' }))
+    await expect(service.login({ token: 'x', email: 'user@x.com', device_fp: 'fp', device_label: 'iPhone' }))
       .rejects.toMatchObject({ status: 401, code: 'event_expired' })
     expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
   })
@@ -143,5 +143,26 @@ describe('key_access.service', () => {
     expect(mockPrisma.inscricao.findMany.mock.calls[0][0].include).toEqual({
       participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
     })
+  })
+
+  it('login 401 com code email_mismatch quando email não confere (sem rebindar device)', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({
+      id: 1, evento_id: 5, device_fp: null, revogado_em: null, email: 'dono@x.com',
+      evento: { id: 5, data_hora: new Date(), competicao: { subtitulo_campos: [] } },
+    })
+    await expect(service.login({ token: 'x', email: 'outro@x.com', device_fp: 'fp', device_label: 'iPhone' }))
+      .rejects.toMatchObject({ status: 401, code: 'email_mismatch' })
+    expect(mockPrisma.eventoKey.update).not.toHaveBeenCalled()
+  })
+
+  it('login aceita email com espaços/maiúsculas (normalizado)', async () => {
+    mockPrisma.eventoKey.findUnique.mockResolvedValue({
+      id: 1, evento_id: 5, device_fp: null, revogado_em: null, email: 'Dono@X.com',
+      evento: { id: 5, nome: 'E', data_hora: new Date(), local: 'L', logo_url: null, competicao: { subtitulo_campos: [] } },
+    })
+    mockPrisma.eventoKey.update.mockResolvedValue({})
+    const r = await service.login({ token: 'x', email: '  dono@x.com ', device_fp: 'fp1', device_label: 'iPhone' })
+    expect(r.keyToken).toBeTruthy()
+    expect((r as any).email).toBeUndefined()
   })
 })
