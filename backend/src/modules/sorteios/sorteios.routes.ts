@@ -8,7 +8,9 @@ const router = Router()
 const acessoBody = requireAcessoEvento(req => Number(req.body?.evento_id))
 const acessoParamsEvento = requireAcessoEvento(req => Number(req.params.evento_id))
 const acessoSorteioId = requireAcessoEvento(async req => {
-  const s = await prisma.sorteio.findUnique({ where: { id: Number(req.params.id) }, select: { evento_id: true } })
+  const n = Number(req.params.id)
+  if (!Number.isInteger(n) || n <= 0) return null
+  const s = await prisma.sorteio.findUnique({ where: { id: n }, select: { evento_id: true } })
   return s?.evento_id ?? null
 })
 const acessoQueryEvento = requireAcessoEvento(req => Number(req.query.evento_id))

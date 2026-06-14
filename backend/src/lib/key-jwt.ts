@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken'
 
 const EXPIRES = '7d'
+// Leitura preguiçosa (em tempo de chamada) — não capturar no carregamento do módulo.
+// Segredo dedicado opcional; cai em JWT_SECRET se JWT_KEY_SECRET não estiver setado.
+const keySecret = () => process.env.JWT_KEY_SECRET ?? process.env.JWT_SECRET!
 
 export type KeyTokenPayload = {
   type: 'event-key'
@@ -11,11 +14,11 @@ export type KeyTokenPayload = {
 
 export function signKeyToken(data: Omit<KeyTokenPayload, 'type'>): string {
   const payload: KeyTokenPayload = { type: 'event-key', ...data }
-  return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: EXPIRES, algorithm: 'HS256' })
+  return jwt.sign(payload, keySecret(), { expiresIn: EXPIRES, algorithm: 'HS256' })
 }
 
 export function verifyKeyToken(token: string): KeyTokenPayload {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET!, { algorithms: ['HS256'] }) as any
+  const decoded = jwt.verify(token, keySecret(), { algorithms: ['HS256'] }) as any
   if (decoded?.type !== 'event-key') {
     throw new Error('Token de tipo inválido')
   }

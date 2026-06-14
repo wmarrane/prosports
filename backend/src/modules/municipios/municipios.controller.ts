@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
+import { parseIntParam } from '../../lib/parse-id'
 import * as service from './municipios.service'
 import { importarCsv } from './import.service'
 
@@ -26,7 +27,7 @@ export async function listar(req: Request, res: Response, next: NextFunction) {
 
 export async function buscarPorId(req: Request, res: Response, next: NextFunction) {
   try {
-    res.json(await service.buscarPorId(Number(req.params.id)))
+    res.json(await service.buscarPorId(parseIntParam(req.params.id, 'id')))
   } catch (err) { next(err) }
 }
 
@@ -40,13 +41,13 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
 export async function editar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = updateSchema.parse(req.body)
-    res.json(await service.editar(Number(req.params.id), body))
+    res.json(await service.editar(parseIntParam(req.params.id, 'id'), body))
   } catch (err) { next(err) }
 }
 
 export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
-    await service.remover(Number(req.params.id))
+    await service.remover(parseIntParam(req.params.id, 'id'))
     res.status(204).send()
   } catch (err) { next(err) }
 }

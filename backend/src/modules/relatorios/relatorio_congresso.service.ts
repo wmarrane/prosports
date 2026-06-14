@@ -4,6 +4,7 @@ import ExcelJS from 'exceljs'
 import prisma from '../../lib/prisma'
 import { aplicarEstilo, aplicarBordas, aplicarBordaExterna, COR } from './xlsx-style'
 import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
+import { sheetSafe } from '../../lib/sheet-safe'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -73,7 +74,7 @@ function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitri
   sheet.addImage(logoImageId, 'A1:B3')
   sheet.getCell('C2').value = 'Cidade Sede'
   const d2 = sheet.getCell('D2')
-  d2.value = anfitriao
+  d2.value = sheetSafe(anfitriao)
   aplicarEstilo(d2, { bold: true, fontColor: COR.branco, fill: COR.azul })
   sheet.getCell('B5').value = 'Modalidade (Inscritos)'
   // Remove as linhas de grade (gridlines) — só bordas explícitas aparecem.
@@ -86,14 +87,14 @@ function aplicarCabecalho(sheet: ExcelJS.Worksheet, logoImageId: number, anfitri
 
 function fillEspecifico(sheet: ExcelJS.Worksheet, nome: string, inscritos: string[]) {
   const b6 = sheet.getCell('B6')
-  b6.value = nome.toUpperCase()
+  b6.value = sheetSafe(nome.toUpperCase())
   aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.azul })
   const c6 = sheet.getCell('C6')
   c6.value = inscritos.length
   aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
   inscritos.forEach((n, i) => {
     const cell = sheet.getRow(7 + i).getCell(2)
-    cell.value = n
+    cell.value = sheetSafe(n)
     aplicarEstilo(cell, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
   })
 }
@@ -122,7 +123,7 @@ function fillGrupos(
     aplicarEstilo(head, { bold: true, fontSize: 11, fontColor: COR.branco, fill: COR.azul })
     g.participantes.slice(0, 4).forEach((pid, pi) => {
       const c = sheet.getRow(7 + pi).getCell(col)
-      c.value = nomePorPid.get(pid) ?? '—'
+      c.value = sheetSafe(nomePorPid.get(pid) ?? '—')
       aplicarEstilo(c, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
     })
   })
@@ -168,9 +169,9 @@ function fillProgramacao(
       for (const [pe, pd] of rod.pares) {
         const pidE = g.participantes[pe - 1]
         const pidD = g.participantes[pd - 1]
-        sheet.getRow(row).getCell(cb + 2).value = pidE != null ? (nomePorPid.get(pidE) ?? '-') : '-'
+        sheet.getRow(row).getCell(cb + 2).value = pidE != null ? sheetSafe(nomePorPid.get(pidE) ?? '-') : '-'
         sheet.getRow(row).getCell(cb + 3).value = 'x'
-        sheet.getRow(row).getCell(cb + 4).value = pidD != null ? (nomePorPid.get(pidD) ?? '-') : '-'
+        sheet.getRow(row).getCell(cb + 4).value = pidD != null ? sheetSafe(nomePorPid.get(pidD) ?? '-') : '-'
         row++
       }
     }
@@ -194,14 +195,14 @@ function fillOrdem(
   e6.value = '#'
   aplicarEstilo(e6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
   const f6 = sheet.getCell('F6')
-  f6.value = nome.toUpperCase()
+  f6.value = sheetSafe(nome.toUpperCase())
   aplicarEstilo(f6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
   ordem.forEach((pid, i) => {
     const pos = sheet.getRow(7 + i).getCell(5)
     pos.value = i + 1
     aplicarEstilo(pos, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
     const mun = sheet.getRow(7 + i).getCell(6)
-    mun.value = nomePorPid.get(pid) ?? '—'
+    mun.value = sheetSafe(nomePorPid.get(pid) ?? '—')
     aplicarEstilo(mun, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
   })
 }
@@ -252,14 +253,14 @@ function fillChaves(
   nomePorPid: Map<number, string>
 ) {
   const b6 = sheet.getCell('B6')
-  b6.value = nome.toUpperCase()
+  b6.value = sheetSafe(nome.toUpperCase())
   aplicarEstilo(b6, { bold: true, fontSize: 20, fontColor: COR.branco, fill: COR.azul })
   const c6 = sheet.getCell('C6')
   c6.value = inscritos.length
   aplicarEstilo(c6, { fontSize: 12, fontColor: COR.branco, fill: COR.azul })
   inscritos.forEach((n, i) => {
     const cell = sheet.getRow(7 + i).getCell(2)
-    cell.value = n
+    cell.value = sheetSafe(n)
     aplicarEstilo(cell, { fontSize: 11, fontColor: COR.preto, fill: COR.branco })
   })
   // mapa posição->linha lendo a coluna D
@@ -272,7 +273,7 @@ function fillChaves(
     if (pid == null) return
     const pos = idx + 1
     const rn = linhaPorPos.get(pos)
-    if (rn) sheet.getRow(rn).getCell(5).value = nomePorPid.get(pid) ?? '—'
+    if (rn) sheet.getRow(rn).getCell(5).value = sheetSafe(nomePorPid.get(pid) ?? '—')
   })
 }
 

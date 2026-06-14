@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { requireAuth, requireRole } from '../../middleware/auth'
+import { requireAcessoEvento } from '../../middleware/evento-acesso'
 import { createUpload } from '../../lib/upload'
 import * as ctrl from './eventos.controller'
 import eventoKeysRoutes from '../evento_keys/evento_keys.routes'
@@ -9,6 +10,7 @@ import * as modalidadesExcluidas from './modalidades-excluidas.controller'
 
 const router = Router()
 const admin = [requireAuth, requireRole('ADMIN')]
+const acessoEventoIdParam = requireAcessoEvento(req => Number(req.params.id))
 const uploadLogo = createUpload('eventos')
 
 router.get('/', requireAuth, ctrl.listar)
@@ -21,11 +23,11 @@ router.delete('/:id/logo', ...admin, ctrl.removerLogo)
 router.post('/:id/publicar', ...admin, sitePublico.publicar)
 router.post('/:id/despublicar', ...admin, sitePublico.despublicar)
 
-router.get('/:id/anfitriao-ordem', requireAuth, anfitriaoOrdem.getAnfitriaoOrdem)
+router.get('/:id/anfitriao-ordem', requireAuth, acessoEventoIdParam, anfitriaoOrdem.getAnfitriaoOrdem)
 router.put('/:id/anfitriao-ordem', ...admin, anfitriaoOrdem.setAnfitriaoOrdem)
 
-router.get('/:id/modalidades', requireAuth, modalidadesExcluidas.getModalidadesDoEvento)
-router.get('/:id/modalidades-excluidas', requireAuth, modalidadesExcluidas.getExcluidas)
+router.get('/:id/modalidades', requireAuth, acessoEventoIdParam, modalidadesExcluidas.getModalidadesDoEvento)
+router.get('/:id/modalidades-excluidas', requireAuth, acessoEventoIdParam, modalidadesExcluidas.getExcluidas)
 router.put('/:id/modalidades-excluidas', ...admin, modalidadesExcluidas.setExcluidas)
 
 router.use('/:evento_id/keys', eventoKeysRoutes)

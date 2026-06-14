@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
+import { parseIntParam } from '../../lib/parse-id'
 import * as service from './sistemas_disputa.service'
 
 const gruposSchema = z.object({
@@ -44,10 +45,10 @@ export const grupos = {
     try { res.status(201).json(await service.grupos.criar(gruposSchema.parse(req.body))) } catch (err) { next(err) }
   },
   editar: async (req: Request, res: Response, next: NextFunction) => {
-    try { res.json(await service.grupos.editar(Number(req.params.id), gruposUpdateSchema.parse(req.body))) } catch (err) { next(err) }
+    try { res.json(await service.grupos.editar(parseIntParam(req.params.id, 'id'), gruposUpdateSchema.parse(req.body))) } catch (err) { next(err) }
   },
   remover: async (req: Request, res: Response, next: NextFunction) => {
-    try { await service.grupos.remover(Number(req.params.id)); res.status(204).send() } catch (err) { next(err) }
+    try { await service.grupos.remover(parseIntParam(req.params.id, 'id')); res.status(204).send() } catch (err) { next(err) }
   },
 }
 
@@ -59,10 +60,10 @@ export const chaves = {
     try { res.status(201).json(await service.chaves.criar(chavesSchema.parse(req.body))) } catch (err) { next(err) }
   },
   editar: async (req: Request, res: Response, next: NextFunction) => {
-    try { res.json(await service.chaves.editar(Number(req.params.id), chavesUpdateSchema.parse(req.body))) } catch (err) { next(err) }
+    try { res.json(await service.chaves.editar(parseIntParam(req.params.id, 'id'), chavesUpdateSchema.parse(req.body))) } catch (err) { next(err) }
   },
   remover: async (req: Request, res: Response, next: NextFunction) => {
-    try { await service.chaves.remover(Number(req.params.id)); res.status(204).send() } catch (err) { next(err) }
+    try { await service.chaves.remover(parseIntParam(req.params.id, 'id')); res.status(204).send() } catch (err) { next(err) }
   },
 }
 

@@ -7,7 +7,9 @@ import * as ctrl from './campeoes_anteriores.controller'
 const router = Router()
 const acessoBody = requireAcessoEvento(req => Number(req.body?.evento_id))
 const acessoCampeaoId = requireAcessoEvento(async req => {
-  const c = await prisma.campeaoAnterior.findUnique({ where: { id: Number(req.params.id) }, select: { evento_id: true } })
+  const n = Number(req.params.id)
+  if (!Number.isInteger(n) || n <= 0) return null
+  const c = await prisma.campeaoAnterior.findUnique({ where: { id: n }, select: { evento_id: true } })
   return c?.evento_id ?? null
 })
 const acessoQueryEvento = requireAcessoEvento(req => Number(req.query.evento_id))
