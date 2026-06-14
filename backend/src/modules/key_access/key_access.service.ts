@@ -4,7 +4,7 @@ import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service
 
 type Evento = { id: number; competicao_id: number; [k: string]: any }
 
-export async function login(input: { token: string; device_fp: string; device_label: string }) {
+export async function login(input: { token: string; email: string; device_fp: string; device_label: string }) {
   const key = await prisma.eventoKey.findUnique({
     where: { token: input.token },
     include: { evento: { include: { competicao: true } } },
@@ -20,6 +20,12 @@ export async function login(input: { token: string; device_fp: string; device_la
       new Error('Acesso ao evento encerrado.'),
       { status: 401, code: 'event_expired' }
     )
+  }
+
+  const emailInformado = input.email.trim().toLowerCase()
+  const emailChave = key.email.trim().toLowerCase()
+  if (emailInformado !== emailChave) {
+    throw Object.assign(new Error('Email não confere com o desta chave.'), { status: 401, code: 'email_mismatch' })
   }
 
   const now = new Date()

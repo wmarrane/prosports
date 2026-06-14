@@ -4,6 +4,7 @@ import * as service from './key_access.service'
 
 const loginSchema = z.object({
   token: z.string().min(1),
+  email: z.string().min(1).max(200),
   device_fp: z.string().min(1).max(200),
   device_label: z.string().min(1).max(200),
 })
