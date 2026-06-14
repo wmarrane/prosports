@@ -151,7 +151,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
               const sorteada = sorteadasIds.has(selectedMod.id)
               const vista = !sorteada && vistasIds.has(selectedMod.id)
               const tipoLabel = selectedMod.tipo_modalidade ? TIPO_DISPUTA_LABEL[selectedMod.tipo_modalidade.tipo] : '—'
-              const quantidadeGrupos = tipo === 'grupos'
+              const quantidadeGrupos = tipo === 'grupos' && inscricoesSel.length > 0
                 ? regrasGrupos.find(r => r.quantidade_equipes === inscricoesSel.length)?.quantidade_grupos
                 : undefined
               const formaSorteioLabel = quantidadeGrupos != null ? `${quantidadeGrupos} Grupos` : tipoLabel
