@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { z } from 'zod'
+import { parseIntParam } from '../../lib/parse-id'
 import * as service from './key_access.service'
 
 const loginSchema = z.object({
@@ -33,6 +34,6 @@ export async function modalidades(req: Request, res: Response, next: NextFunctio
 export async function modalidadeDetail(req: Request, res: Response, next: NextFunction) {
   try {
     const key = (req as any).eventoKey
-    res.json(await service.getModalidadeDetail(key.evento, Number(req.params.id)))
+    res.json(await service.getModalidadeDetail(key.evento, parseIntParam(req.params.id, 'id')))
   } catch (err) { next(err) }
 }

@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 import prisma from '../../lib/prisma'
+import { parseIntParam } from '../../lib/parse-id'
 import { gerarCongressoXlsx, nomeArquivo } from './relatorio_congresso.service'
 
 export async function congresso(req: Request, res: Response, next: NextFunction) {
   try {
-    const eventoId = Number(req.params.eventoId)
+    const eventoId = parseIntParam(req.params.eventoId, 'eventoId')
     const evento = await prisma.evento.findUnique({
       where: { id: eventoId },
       select: { id: true, nome: true },
