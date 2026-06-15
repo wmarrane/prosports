@@ -172,6 +172,7 @@ export default function EventosList() {
                   {g.eventos.map((ev, i) => {
                     const tipos = eventoTipos(ev)
                     const totalModalidades = ev.competicao?.modalidades?.length ?? 0
+                    const modalidadesCount = ev.modalidades_distintas ?? totalModalidades
                     const inscritos = ev.total_participantes ?? 0
                     const sorteadas = ev._count?.sorteios ?? 0
                     const sorteaveis = ev.modalidades_sorteaveis ?? totalModalidades
@@ -327,7 +328,7 @@ export default function EventosList() {
                             flexWrap: 'wrap',
                           }}
                         >
-                          <Meta icon={Layers} label={String(totalModalidades)} sub="modalidades" />
+                          <Meta icon={Layers} label={String(modalidadesCount)} sub="modalidades" />
                           <Meta icon={Users} label={inscritos.toLocaleString('pt-BR')} sub="inscritos" />
                           <Meta icon={Dices} label={`${sorteadas}/${sorteaveis}`} sub="sorteadas" />
                         </div>
