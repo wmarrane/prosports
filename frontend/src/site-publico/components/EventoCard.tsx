@@ -1,7 +1,8 @@
 import type { SnapEvento } from '../snapshot-types'
+import { esporteBase } from '../lib/esporte'
 
 export default function EventoCard({ evento }: { evento: SnapEvento }) {
-  const total = evento.modalidades.length
+  const total = new Set(evento.modalidades.map(m => esporteBase(m.nome))).size
   const inscritos = new Set(evento.modalidades.flatMap(m => m.participantes.map(p => p.id))).size
   const sorteadas = evento.modalidades.filter(m => m.status === 'sorteado').length
   return (

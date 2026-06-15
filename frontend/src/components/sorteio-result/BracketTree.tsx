@@ -255,8 +255,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
   }
 
   return (
-    <div style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
-      <div style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
+    <div className="bracket-scroll" style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
+      <div className="bracket-canvas" style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
         <svg
           style={{ position: 'absolute', inset: 0, width: layout.width, height: layout.height, pointerEvents: 'none' }}
           viewBox={`0 0 ${layout.width} ${layout.height}`}

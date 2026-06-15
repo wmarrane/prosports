@@ -1,5 +1,6 @@
 import prisma from '../../lib/prisma'
 import { isSorteavel } from '../../lib/sorteaveis'
+import { esporteBase } from '../../lib/esporte'
 
 const INCLUDE = {
   competicao: true,
@@ -17,6 +18,7 @@ const LIST_INCLUDE = {
         where: { ativa: true },
         select: {
           id: true,
+          nome: true,
           mensagens_inscritos: true,
           tipo_modalidade: { select: { tipo: true } },
         },
@@ -125,10 +127,16 @@ export async function listar(competicao_id?: number, user?: { sub: number; role:
         if (!sorteadas.has(m.id)) pendentes++
       }
     }
+    const esportes = new Set<string>()
+    for (const m of (e as any).competicao?.modalidades ?? []) {
+      if (excluidas.has(m.id)) continue
+      esportes.add(esporteBase(m.nome))
+    }
     return {
       ...e,
       modalidades_sorteaveis: sorteaveisIds.size,
       modalidades_pendentes: pendentes,
+      modalidades_distintas: esportes.size,
       total_participantes: participantesPorEvento[e.id] ?? 0,
     }
   })

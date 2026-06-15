@@ -28,7 +28,7 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const clickable = !!onGroupClick
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${minCol}px, 1fr))`, gap }}>
+    <div className="grupos-grid" style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(min(${minCol}px, 100%), 1fr))`, gap }}>
       {resultado.grupos.map(g => (
         <div
           key={g.letra}
