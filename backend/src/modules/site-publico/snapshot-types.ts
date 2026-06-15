@@ -7,6 +7,7 @@ export type SnapModalidade = {
   seed: string | null; anfitriaoId: number | null
   participantes: SnapParticipante[]; campeoes: SnapCampeao[]
   cabecasPids: number[]; resultado: unknown | null
+  mensagens_inscritos: { min: number; max: number | null; mensagem: string; pular_sorteio: boolean }[]
 }
 export type SnapEvento = {
   id: number; nome: string; competicao: string

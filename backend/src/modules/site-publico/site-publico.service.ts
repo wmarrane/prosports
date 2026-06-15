@@ -24,7 +24,7 @@ export async function publicar(eventoId: number): Promise<void> {
 
   const modalidades = await prisma.modalidade.findMany({
     where: { competicao_id: evento.competicao_id, ativa: true },
-    select: { id: true, nome: true, tipo_modalidade: { select: { tipo: true } } },
+    select: { id: true, nome: true, tipo_modalidade: { select: { tipo: true } }, mensagens_inscritos: true },
     orderBy: { nome: 'asc' },
   })
 

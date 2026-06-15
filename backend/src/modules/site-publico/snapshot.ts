@@ -9,7 +9,7 @@ type EventoRow = {
   competicao: { nome: string; considerar_anfitriao: boolean; subtitulo_campos?: string[] }
   municipio: { nome: string }
 }
-type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string } }
+type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown }
 type InscricaoRow = { participante: { id: number; nome: string; subtitulo: string | null } }
 type CampeaoRow = { participante_id: number; posicao: number }
 type SorteioRow = { tipo: string; seed: string; resultado: unknown }
@@ -92,6 +92,9 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
       campeoes: campeoesSnap,
       cabecasPids,
       resultado: sorteio?.resultado ?? null,
+      mensagens_inscritos: Array.isArray(mod.mensagens_inscritos)
+        ? (mod.mensagens_inscritos as SnapModalidade['mensagens_inscritos'])
+        : [],
     }
   })
 
