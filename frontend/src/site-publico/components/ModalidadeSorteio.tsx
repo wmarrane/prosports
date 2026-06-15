@@ -3,6 +3,7 @@ import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import type { Participante } from '../../types/participante'
 import type { SnapModalidade } from '../snapshot-types'
+import { matchMensagem } from '../../lib/mensagens-inscritos'
 
 function buildMaps(m: SnapModalidade) {
   const participantesById = new Map<number, Participante>()
@@ -16,8 +17,17 @@ function buildMaps(m: SnapModalidade) {
 }
 
 export default function ModalidadeSorteio({ modalidade }: { modalidade: SnapModalidade }) {
+  if (modalidade.tipo === 'especifico') {
+    return <div style={{ padding: 16, color: 'var(--t3)', fontStyle: 'italic' }}>Modalidade específica — não possui sorteio.</div>
+  }
   if (modalidade.status !== 'sorteado' || !modalidade.resultado) {
-    return <div style={{ padding: 16, color: 'var(--t3)', fontStyle: 'italic' }}>Aguardando sorteio</div>
+    const regra = matchMensagem(modalidade.mensagens_inscritos ?? [], modalidade.participantes.length)
+    return (
+      <div style={{ padding: 16, color: 'var(--t3)', fontStyle: 'italic' }}>
+        {regra?.mensagem && <p style={{ margin: '0 0 8px' }}>{regra.mensagem}</p>}
+        {regra?.pular_sorteio ? 'Não vai a sorteio (regra de inscritos).' : 'Aguardando sorteio'}
+      </div>
+    )
   }
   const { participantesById, campeoesByParticipanteId, subtituloLine } = buildMaps(modalidade)
   const anfitriaoPid = modalidade.anfitriaoId ?? null
@@ -59,5 +69,5 @@ export default function ModalidadeSorteio({ modalidade }: { modalidade: SnapModa
       />
     )
   }
-  return <div style={{ padding: 16, color: 'var(--t3)' }}>Emparceiramento específico</div>
+  return null
 }
