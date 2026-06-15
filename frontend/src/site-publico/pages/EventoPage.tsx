@@ -1,11 +1,19 @@
 import SiteNav from '../components/SiteNav'
 import ModalidadeSorteio from '../components/ModalidadeSorteio'
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
+import { matchMensagem } from '../../lib/mensagens-inscritos'
 
 function categoriaDe(m: SnapModalidade): string {
   if (m.grupo) return m.grupo
   const idx = m.nome.indexOf('·')
   return idx > 0 ? m.nome.slice(0, idx).trim() : m.nome.split(' ')[0]
+}
+
+function statusLabel(m: SnapModalidade): string {
+  if (m.tipo === 'especifico') return 'específico'
+  if (m.status === 'sorteado') return 'sorteado'
+  const regra = matchMensagem(m.mensagens_inscritos ?? [], m.participantes.length)
+  return regra?.pular_sorteio ? 'sem sorteio' : 'aguardando'
 }
 
 export default function EventoPage({ evento }: { evento: SnapEvento }) {
@@ -29,7 +37,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               <details className="mod-acc" open={abrir} key={m.id} id={`mod-${m.id}`}>
                 <summary>
                   <strong>{m.nome}</strong>
-                  <span className="mod-meta">{m.tipo} · {m.participantes.length} inscritos · {m.status}</span>
+                  <span className="mod-meta">{m.tipo} · {m.participantes.length} inscritos · {statusLabel(m)}</span>
                   {m.seed && <span className="mod-seed">semente {m.seed}</span>}
                 </summary>
                 <div className="mod-body">
