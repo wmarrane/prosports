@@ -37,8 +37,10 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               <details className="mod-acc" open={abrir} key={m.id} id={`mod-${m.id}`}>
                 <summary>
                   <strong>{m.nome}</strong>
-                  <span className="mod-meta">{m.tipo} · {m.participantes.length} inscritos · {statusLabel(m)}</span>
-                  {m.seed && <span className="mod-seed">semente {m.seed}</span>}
+                  <div className="mod-sub">
+                    <span className="mod-meta">{m.tipo} · {m.participantes.length} inscritos · {statusLabel(m)}</span>
+                    {m.seed && <span className="mod-seed">semente {m.seed}</span>}
+                  </div>
                 </summary>
                 <div className="mod-body">
                   <ModalidadeSorteio modalidade={m} />
