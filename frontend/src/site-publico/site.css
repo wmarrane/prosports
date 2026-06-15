@@ -297,6 +297,7 @@ img { max-width: 100%; display: block; }
 .mod-body {
   display: flex; flex-direction: column; gap: 22px; padding: 22px;
 }
+.bracket-scroll { -webkit-overflow-scrolling: touch; }
 
 .inscritos h4,
 .campeoes h4 {
@@ -306,7 +307,7 @@ img { max-width: 100%; display: block; }
 .inscritos ul,
 .campeoes ul {
   list-style: none; padding: 0; margin: 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 4px 18px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 4px 18px;
 }
 .inscritos li,
 .campeoes li {
@@ -372,3 +373,11 @@ img { max-width: 100%; display: block; }
   transition: color var(--duration-fast);
 }
 .f-links a:hover { color: #fff; }
+
+/* ─────────────────────────── mobile: grupos/chaves ─────────────────────────── */
+@media (max-width: 720px) {
+  .mod-body { padding: 14px; gap: 16px; }
+  /* Compacta a árvore de chaves para caber/ficar legível; grandes ainda rolam
+     no .bracket-scroll. zoom reflowa o box (scrollWidth acompanha a escala). */
+  .bracket-canvas { zoom: 0.72; }
+}
