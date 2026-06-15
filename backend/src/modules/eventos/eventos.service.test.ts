@@ -40,6 +40,7 @@ const LIST_INCLUDE = {
         where: { ativa: true },
         select: {
           id: true,
+          nome: true,
           mensagens_inscritos: true,
           tipo_modalidade: { select: { tipo: true } },
         },
@@ -155,9 +156,9 @@ describe('eventos.service', () => {
       {
         id: 1,
         competicao: { modalidades: [
-          { id: 10, tipo_modalidade: { tipo: 'grupos' }, mensagens_inscritos: [] },
-          { id: 11, tipo_modalidade: { tipo: 'especifico' }, mensagens_inscritos: [] },
-          { id: 12, tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [{ min: 2, max: 2, mensagem: 'x', pular_sorteio: true }] },
+          { id: 10, nome: 'Atletismo Feminino', tipo_modalidade: { tipo: 'grupos' }, mensagens_inscritos: [] },
+          { id: 11, nome: 'Basquete Masculino', tipo_modalidade: { tipo: 'especifico' }, mensagens_inscritos: [] },
+          { id: 12, nome: 'Volei Feminino', tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [{ min: 2, max: 2, mensagem: 'x', pular_sorteio: true }] },
         ] },
         _count: { inscricoes: 0, sorteios: 1 },
       },
@@ -208,9 +209,9 @@ describe('eventos.service', () => {
   it('listar exclui modalidades excluidas do contador e calcula pendentes', async () => {
     mockPrisma.evento.findMany.mockResolvedValue([
       { id: 1, competicao: { modalidades: [
-        { id: 10, mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
-        { id: 11, mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
-        { id: 12, mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 10, nome: 'Atletismo Feminino', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 11, nome: 'Basquete Masculino', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 12, nome: 'Volei Feminino', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
       ] } },
     ])
     mockPrisma.inscricao.groupBy.mockResolvedValue([
@@ -227,6 +228,24 @@ describe('eventos.service', () => {
     const [e] = await service.listar() as any[]
     expect(e.modalidades_sorteaveis).toBe(2)
     expect(e.modalidades_pendentes).toBe(1)
+  })
+
+  it('listar conta modalidades_distintas por esporte (1a palavra), ignorando excluidas', async () => {
+    mockPrisma.evento.findMany.mockResolvedValue([
+      { id: 1, competicao: { modalidades: [
+        { id: 10, nome: 'Atletismo Feminino Cat. A', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 11, nome: 'Atletismo Masculino Cat. B', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 12, nome: 'Basquete 3x3 Feminino Cat. A', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+        { id: 13, nome: 'Bocha Rafa Masculino ou Misto', mensagens_inscritos: [], tipo_modalidade: { tipo: 'grupos' } },
+      ] } },
+    ])
+    mockPrisma.inscricao.groupBy.mockResolvedValue([])
+    mockPrisma.sorteio.findMany.mockResolvedValue([])
+    mockPrisma.eventoModalidadeExcluida.findMany.mockResolvedValue([
+      { evento_id: 1, modalidade_id: 13 },
+    ])
+    const [e] = await service.listar() as any[]
+    expect(e.modalidades_distintas).toBe(2)
   })
 
   it('listar conta participantes distintos em total_participantes', async () => {
