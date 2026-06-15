@@ -24,7 +24,7 @@ export default function EventosPage({ eventos }: { eventos: SnapEvento[] }) {
         <div className="container">
           {anos.map(ano => {
             const lista = porAno.get(ano)!
-            const inscritos = lista.reduce((s, e) => s + e.modalidades.reduce((t, m) => t + m.participantes.length, 0), 0)
+            const inscritos = lista.reduce((s, e) => s + new Set(e.modalidades.flatMap(m => m.participantes.map(p => p.id))).size, 0)
             return (
               <div className="year-group" key={ano}>
                 <div className="year-head">

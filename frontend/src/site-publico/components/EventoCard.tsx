@@ -2,7 +2,7 @@ import type { SnapEvento } from '../snapshot-types'
 
 export default function EventoCard({ evento }: { evento: SnapEvento }) {
   const total = evento.modalidades.length
-  const inscritos = evento.modalidades.reduce((s, m) => s + m.participantes.length, 0)
+  const inscritos = new Set(evento.modalidades.flatMap(m => m.participantes.map(p => p.id))).size
   const sorteadas = evento.modalidades.filter(m => m.status === 'sorteado').length
   return (
     <a className="evento-card" href={`/evento-${evento.id}.html`}>
