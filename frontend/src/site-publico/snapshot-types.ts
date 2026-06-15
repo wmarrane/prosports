@@ -1,3 +1,5 @@
+import type { MensagemInscritos } from '../lib/mensagens-inscritos'
+
 export type SnapParticipante = { id: number; nome: string; subtitulo: string | null }
 export type SnapCampeao = { participanteId: number; posicao: number }
 
@@ -13,6 +15,7 @@ export type SnapModalidade = {
   campeoes: SnapCampeao[]
   cabecasPids: number[]
   resultado: unknown | null
+  mensagens_inscritos: MensagemInscritos[]
 }
 
 export type SnapEvento = {

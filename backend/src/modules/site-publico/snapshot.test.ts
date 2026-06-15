@@ -96,3 +96,30 @@ it('insere anfitrião na 4ª cabeça em chaves quando considerar_anfitriao', () 
   expect(m.cabecasPids[3]).toBe(999)
   expect(m.cabecasPids).toContain(999)
 })
+
+it('propaga mensagens_inscritos da modalidade para o snapshot', () => {
+  const regras = [{ min: 0, max: 3, mensagem: 'Mínimo não atingido', pular_sorteio: true }]
+  const snap = montaSnapshot({
+    evento: baseEvento as any,
+    modalidades: [{ id: 4, nome: 'Xadrez', tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: regras } as any],
+    inscricoesPorModalidade: new Map([[4, [
+      { participante: { id: 1, nome: 'A', subtitulo: null } },
+    ]]]) as any,
+    campeoesPorModalidade: new Map() as any,
+    sorteiosPorModalidade: new Map() as any,
+    subtituloFn: () => null,
+  })
+  expect(snap.modalidades[0].mensagens_inscritos).toEqual(regras)
+})
+
+it('usa [] quando mensagens_inscritos é null/ausente', () => {
+  const snap = montaSnapshot({
+    evento: baseEvento as any,
+    modalidades: [{ id: 5, nome: 'Dama', tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: null } as any],
+    inscricoesPorModalidade: new Map([[5, []]]) as any,
+    campeoesPorModalidade: new Map() as any,
+    sorteiosPorModalidade: new Map() as any,
+    subtituloFn: () => null,
+  })
+  expect(snap.modalidades[0].mensagens_inscritos).toEqual([])
+})
