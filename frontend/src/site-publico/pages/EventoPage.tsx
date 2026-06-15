@@ -2,11 +2,11 @@ import SiteNav from '../components/SiteNav'
 import ModalidadeSorteio from '../components/ModalidadeSorteio'
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
+import { esporteBase } from '../lib/esporte'
 
 function categoriaDe(m: SnapModalidade): string {
   if (m.grupo) return m.grupo
-  const idx = m.nome.indexOf('·')
-  return idx > 0 ? m.nome.slice(0, idx).trim() : m.nome.split(' ')[0]
+  return esporteBase(m.nome)
 }
 
 function statusLabel(m: SnapModalidade): string {
