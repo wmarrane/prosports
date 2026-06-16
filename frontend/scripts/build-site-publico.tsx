@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, cpSync, renameSync } from 'node:fs'
+import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, cpSync, renameSync, unlinkSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -42,6 +42,10 @@ function main() {
   const cssPath = join(OUT, 'site-bundle.css')
   if (!existsSync(cssPath)) {
     throw new Error('site-bundle.css não encontrado em dist-site — rode o build do Tailwind antes')
+  }
+  // Remove bundles com hash de builds anteriores (acúmulo em rebuilds locais).
+  for (const f of readdirSync(OUT)) {
+    if (/^site-bundle\.[^.]+\.css$/.test(f)) unlinkSync(join(OUT, f))
   }
   const hash = createHash('sha256').update(readFileSync(cssPath)).digest('hex').slice(0, 8)
   const cssFile = `site-bundle.${hash}.css`
