@@ -1,4 +1,5 @@
-import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, cpSync } from 'node:fs'
+import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, cpSync, renameSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -15,7 +16,6 @@ const ROOT = join(__dirname, '..')
 const SNAP_DIR = join(ROOT, 'public-site-snapshots')
 const STATIC_DIR = join(ROOT, 'public-site-static')
 const OUT = join(ROOT, 'dist-site')
-const CSS_HREF = '/site-bundle.css'
 
 function loadSnapshots(): SnapEvento[] {
   if (!existsSync(SNAP_DIR)) return []
@@ -25,9 +25,9 @@ function loadSnapshots(): SnapEvento[] {
     .sort((a, b) => +new Date(b.data) - +new Date(a.data))
 }
 
-function emit(name: string, title: string, el: React.ReactElement) {
+function emit(name: string, title: string, el: React.ReactElement, cssHref: string) {
   const body = renderToStaticMarkup(el)
-  writeFileSync(join(OUT, name), htmlShell({ title, body, cssHref: CSS_HREF }), 'utf8')
+  writeFileSync(join(OUT, name), htmlShell({ title, body, cssHref }), 'utf8')
 }
 
 function main() {
@@ -35,12 +35,25 @@ function main() {
   mkdirSync(OUT, { recursive: true })
   // Copia assets estáticos (logos, captura da plataforma) para o output.
   if (existsSync(STATIC_DIR)) cpSync(STATIC_DIR, OUT, { recursive: true })
-  emit('index.html', 'Montana Eventos', React.createElement(IndexPage, { eventos }))
-  emit('eventos.html', 'Eventos · Montana', React.createElement(EventosPage, { eventos }))
-  emit('sobre.html', 'Sobre · Montana', React.createElement(SobrePage))
-  for (const ev of eventos) {
-    emit(`evento-${ev.id}.html`, `${ev.nome} · Montana`, React.createElement(EventoPage, { evento: ev }))
+
+  // O Tailwind (passo anterior do build:site) gerou dist-site/site-bundle.css.
+  // Renomeia para um nome com hash de conteúdo, para o cache `immutable` do
+  // Firebase Hosting ser correto e mudanças de CSS aparecerem na hora.
+  const cssPath = join(OUT, 'site-bundle.css')
+  if (!existsSync(cssPath)) {
+    throw new Error('site-bundle.css não encontrado em dist-site — rode o build do Tailwind antes')
   }
-  console.log(`Gerados ${eventos.length} eventos + 3 páginas em ${OUT}`)
+  const hash = createHash('sha256').update(readFileSync(cssPath)).digest('hex').slice(0, 8)
+  const cssFile = `site-bundle.${hash}.css`
+  renameSync(cssPath, join(OUT, cssFile))
+  const cssHref = `/${cssFile}`
+
+  emit('index.html', 'Montana Eventos', React.createElement(IndexPage, { eventos }), cssHref)
+  emit('eventos.html', 'Eventos · Montana', React.createElement(EventosPage, { eventos }), cssHref)
+  emit('sobre.html', 'Sobre · Montana', React.createElement(SobrePage), cssHref)
+  for (const ev of eventos) {
+    emit(`evento-${ev.id}.html`, `${ev.nome} · Montana`, React.createElement(EventoPage, { evento: ev }), cssHref)
+  }
+  console.log(`Gerados ${eventos.length} eventos + 3 páginas em ${OUT} (css: ${cssFile})`)
 }
 main()
