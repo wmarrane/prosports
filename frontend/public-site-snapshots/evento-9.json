@@ -1,0 +1,6316 @@
+{
+  "id": 9,
+  "nome": "28º Jogos da Melhor Idade de Assis",
+  "competicao": "Jogos da Melhor Idade",
+  "cidade": "Assis",
+  "local": ".",
+  "data": "2026-06-15T18:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-06-17T17:55:22.478Z",
+  "modalidades": [
+    {
+      "id": 168,
+      "nome": "Atletismo Feminino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 166,
+      "nome": "Atletismo Feminino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 167,
+      "nome": "Atletismo Feminino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 154,
+      "nome": "Atletismo Feminino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 162,
+      "nome": "Atletismo Feminino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 469,
+          "nome": "Presidente Venceslau",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 161,
+      "nome": "Atletismo Feminino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 158,
+      "nome": "Atletismo Feminino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 157,
+      "nome": "Atletismo Feminino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 179,
+      "nome": "Atletismo Masculino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 11,
+          "nome": "Alfredo Marcondes",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 176,
+      "nome": "Atletismo Masculino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 397,
+          "nome": "Pacaembu",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 472,
+          "nome": "Quatá",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 159,
+      "nome": "Atletismo Masculino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 11,
+          "nome": "Alfredo Marcondes",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 160,
+      "nome": "Atletismo Masculino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 318,
+          "nome": "Lutécia",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 611,
+          "nome": "Teodoro Sampaio",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 174,
+      "nome": "Atletismo Masculino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 171,
+      "nome": "Atletismo Masculino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 164,
+      "nome": "Atletismo Masculino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 165,
+      "nome": "Atletismo Masculino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 611,
+          "nome": "Teodoro Sampaio",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 107,
+      "nome": "Basquete 3x3 Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 134,
+      "nome": "Basquete 3x3 Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "nome": "Basquete 3x3 Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 135,
+      "nome": "Basquete 3x3 Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 143,
+      "nome": "Bocha Rafa Masculino ou Misto",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "8573e8f76edea551",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 11,
+          "nome": "Alfredo Marcondes",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 293,
+          "nome": "João Ramalho",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 393,
+          "nome": "Osvaldo Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 408,
+          "nome": "Parapuã",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 438,
+          "nome": "Piraju",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 469,
+          "nome": "Presidente Venceslau",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 494,
+          "nome": "Rinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 594,
+          "nome": "Taciba",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 639,
+          "nome": "Vera Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 466,
+          "posicao": 1
+        },
+        {
+          "participanteId": 330,
+          "posicao": 2
+        },
+        {
+          "participanteId": 11,
+          "posicao": 3
+        },
+        {
+          "participanteId": 524,
+          "posicao": 4
+        },
+        {
+          "participanteId": 621,
+          "posicao": 5
+        },
+        {
+          "participanteId": 639,
+          "posicao": 6
+        },
+        {
+          "participanteId": 408,
+          "posicao": 7
+        },
+        {
+          "participanteId": 469,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        466,
+        330,
+        11,
+        48,
+        524,
+        621,
+        639,
+        408
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              466,
+              313,
+              438
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              330,
+              479,
+              422
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              11,
+              469,
+              494
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              607,
+              622
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              524,
+              2,
+              293
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              621,
+              473,
+              394
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              639,
+              500,
+              393
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              408,
+              594,
+              513
+            ]
+          }
+        ],
+        "regra_id": 218,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 144,
+      "nome": "Buraco Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "d45c341612223099",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 219,
+          "nome": "Herculândia",
+          "subtitulo": null
+        },
+        {
+          "id": 318,
+          "nome": "Lutécia",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 393,
+          "nome": "Osvaldo Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 393,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        },
+        {
+          "participanteId": 403,
+          "posicao": 3
+        },
+        {
+          "participanteId": 514,
+          "posicao": 4
+        },
+        {
+          "participanteId": 524,
+          "posicao": 5
+        },
+        {
+          "participanteId": 422,
+          "posicao": 6
+        },
+        {
+          "participanteId": 576,
+          "posicao": 7
+        },
+        {
+          "participanteId": 500,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        393,
+        48,
+        403,
+        514,
+        524,
+        422
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              393,
+              468,
+              467,
+              500
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              48,
+              318,
+              466
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              403,
+              513,
+              17
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              514,
+              116,
+              330
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              524,
+              219,
+              365
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              422,
+              67,
+              622,
+              607
+            ]
+          }
+        ],
+        "regra_id": 214,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 117,
+      "nome": "Buraco Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "5b0a129d0dfbce3b",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 514,
+          "posicao": 1
+        },
+        {
+          "participanteId": 17,
+          "posicao": 2
+        },
+        {
+          "participanteId": 466,
+          "posicao": 3
+        },
+        {
+          "participanteId": 365,
+          "posicao": 4
+        },
+        {
+          "participanteId": 48,
+          "posicao": 5
+        },
+        {
+          "participanteId": 403,
+          "posicao": 6
+        },
+        {
+          "participanteId": 318,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        514,
+        17,
+        48
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              514,
+              466,
+              330
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              17,
+              327,
+              607
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              48,
+              365,
+              468
+            ]
+          }
+        ],
+        "regra_id": 203,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 116,
+      "nome": "Coreografia Cat. A",
+      "grupo": null,
+      "tipo": "ordem_entrada",
+      "status": "sorteado",
+      "seed": "8f8cb1ec506b2d03",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "ordem": [
+          607
+        ]
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 142,
+      "nome": "Coreografia Cat. B",
+      "grupo": null,
+      "tipo": "ordem_entrada",
+      "status": "sorteado",
+      "seed": "98001a02a5df41ae",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 219,
+          "nome": "Herculândia",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 393,
+          "nome": "Osvaldo Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "ordem": [
+          466,
+          219,
+          48,
+          393,
+          330,
+          403,
+          327,
+          621,
+          468,
+          2
+        ]
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 145,
+      "nome": "Damas Feminino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 397,
+          "nome": "Pacaembu",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 118,
+      "nome": "Damas Masculino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 251,
+          "nome": "Irapuru",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 487,
+          "nome": "Ribeirão do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 576,
+          "nome": "Sarutaiá",
+          "subtitulo": null
+        },
+        {
+          "id": 594,
+          "nome": "Taciba",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 111,
+      "nome": "Dança de Salão Misto Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 138,
+      "nome": "Dança de Salão Misto Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 112,
+      "nome": "Dança de Salão Misto Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 146,
+      "nome": "Dominó Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "82b8d7b289cd2dfa",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 219,
+          "nome": "Herculândia",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 318,
+          "nome": "Lutécia",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 357,
+          "nome": "Monte Castelo",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 397,
+          "nome": "Pacaembu",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 594,
+          "nome": "Taciba",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 607,
+          "posicao": 1
+        },
+        {
+          "participanteId": 468,
+          "posicao": 2
+        },
+        {
+          "participanteId": 219,
+          "posicao": 3
+        },
+        {
+          "participanteId": 243,
+          "posicao": 4
+        },
+        {
+          "participanteId": 576,
+          "posicao": 5
+        },
+        {
+          "participanteId": 622,
+          "posicao": 6
+        },
+        {
+          "participanteId": 469,
+          "posicao": 7
+        },
+        {
+          "participanteId": 524,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        607,
+        468,
+        219,
+        48,
+        243,
+        622,
+        524
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              607,
+              357,
+              298,
+              594
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              468,
+              116,
+              447
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              219,
+              332,
+              513,
+              67
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              327,
+              394,
+              621
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              243,
+              403,
+              466,
+              330
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              622,
+              500,
+              318,
+              514
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              524,
+              313,
+              17
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              467,
+              397,
+              365,
+              473
+            ]
+          }
+        ],
+        "regra_id": 224,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 119,
+      "nome": "Dominó Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "bc8bd236d998171d",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 219,
+          "nome": "Herculândia",
+          "subtitulo": null
+        },
+        {
+          "id": 251,
+          "nome": "Irapuru",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 318,
+          "nome": "Lutécia",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 514,
+          "posicao": 1
+        },
+        {
+          "participanteId": 318,
+          "posicao": 2
+        },
+        {
+          "participanteId": 607,
+          "posicao": 3
+        },
+        {
+          "participanteId": 422,
+          "posicao": 4
+        },
+        {
+          "participanteId": 327,
+          "posicao": 5
+        },
+        {
+          "participanteId": 251,
+          "posicao": 6
+        },
+        {
+          "participanteId": 332,
+          "posicao": 7
+        },
+        {
+          "participanteId": 621,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        514,
+        318,
+        607,
+        48,
+        422,
+        327
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              514,
+              473,
+              330
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              318,
+              513,
+              17,
+              251
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              607,
+              403,
+              467,
+              447
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              332,
+              219
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              422,
+              365,
+              466,
+              468
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              327,
+              621,
+              313
+            ]
+          }
+        ],
+        "regra_id": 215,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 120,
+      "nome": "Malha Masculino ou Misto",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "81354fbde54e9ae5",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 188,
+          "nome": "Florínea",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 438,
+          "nome": "Piraju",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 469,
+          "nome": "Presidente Venceslau",
+          "subtitulo": null
+        },
+        {
+          "id": 487,
+          "nome": "Ribeirão do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 494,
+          "nome": "Rinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 576,
+          "nome": "Sarutaiá",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 487,
+          "posicao": 1
+        },
+        {
+          "participanteId": 576,
+          "posicao": 2
+        },
+        {
+          "participanteId": 513,
+          "posicao": 3
+        },
+        {
+          "participanteId": 466,
+          "posicao": 4
+        },
+        {
+          "participanteId": 438,
+          "posicao": 5
+        },
+        {
+          "participanteId": 621,
+          "posicao": 6
+        },
+        {
+          "participanteId": 469,
+          "posicao": 7
+        },
+        {
+          "participanteId": 330,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        487,
+        576,
+        513,
+        48,
+        466,
+        438
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              487,
+              67,
+              116
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              576,
+              327,
+              394,
+              17
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              513,
+              621,
+              469,
+              524
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              494,
+              607
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              466,
+              188,
+              162,
+              422
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              438,
+              468,
+              330
+            ]
+          }
+        ],
+        "regra_id": 215,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 172,
+      "nome": "Natação Feminino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 173,
+      "nome": "Natação Feminino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 177,
+      "nome": "Natação Feminino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 155,
+      "nome": "Natação Feminino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 175,
+      "nome": "Natação Feminino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 169,
+      "nome": "Natação Feminino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 178,
+      "nome": "Natação Feminino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 156,
+      "nome": "Natação Feminino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 131,
+      "nome": "Natação Masculino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 170,
+      "nome": "Natação Masculino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 130,
+      "nome": "Natação Masculino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 163,
+      "nome": "Natação Masculino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 105,
+      "nome": "Natação Masculino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 132,
+      "nome": "Natação Masculino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 106,
+      "nome": "Natação Masculino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 133,
+      "nome": "Natação Masculino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 114,
+      "nome": "Tênis de Mesa Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "fcfc20ba82cab9f1",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        },
+        {
+          "id": 639,
+          "nome": "Vera Cruz",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 330,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        },
+        {
+          "participanteId": 394,
+          "posicao": 3
+        },
+        {
+          "participanteId": 67,
+          "posicao": 4
+        },
+        {
+          "participanteId": 17,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [
+        330,
+        48,
+        394
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              330,
+              67,
+              639
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              48,
+              466,
+              116
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              394,
+              17,
+              621
+            ]
+          }
+        ],
+        "regra_id": 203,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 141,
+      "nome": "Tênis de Mesa Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 17,
+          "posicao": 1
+        },
+        {
+          "participanteId": 394,
+          "posicao": 2
+        },
+        {
+          "participanteId": 621,
+          "posicao": 3
+        },
+        {
+          "participanteId": 513,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 115,
+      "nome": "Tênis de Mesa Feminino Cat. C",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 48,
+          "posicao": 1
+        },
+        {
+          "participanteId": 621,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 139,
+      "nome": "Tênis de Mesa Masculino Cat.A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "d82de762348bed4f",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 468,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        },
+        {
+          "participanteId": 330,
+          "posicao": 3
+        },
+        {
+          "participanteId": 162,
+          "posicao": 4
+        },
+        {
+          "participanteId": 332,
+          "posicao": 5
+        },
+        {
+          "participanteId": 513,
+          "posicao": 6
+        },
+        {
+          "participanteId": 327,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        48,
+        330,
+        162
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              48,
+              67,
+              513
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              330,
+              17,
+              466,
+              500
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              162,
+              332,
+              327
+            ]
+          }
+        ],
+        "regra_id": 204,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "nome": "Tênis de Mesa Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "c860f084e0267481",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 394,
+          "posicao": 1
+        },
+        {
+          "participanteId": 468,
+          "posicao": 2
+        },
+        {
+          "participanteId": 330,
+          "posicao": 3
+        },
+        {
+          "participanteId": 48,
+          "posicao": 4
+        },
+        {
+          "participanteId": 513,
+          "posicao": 5
+        },
+        {
+          "participanteId": 621,
+          "posicao": 6
+        },
+        {
+          "participanteId": 17,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        394,
+        468
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              394,
+              17,
+              330,
+              500
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              468,
+              513,
+              48,
+              67
+            ]
+          }
+        ],
+        "regra_id": 202,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 140,
+      "nome": "Tênis de Mesa Masculino Cat. C",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 403,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        },
+        {
+          "participanteId": 17,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 152,
+      "nome": "Tênis Feminino Duplas Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 129,
+      "nome": "Tênis Feminino Duplas Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "902b4e210ab59488",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 17,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [
+        17,
+        48
+      ],
+      "resultado": {
+        "size": 3,
+        "slots": [
+          17,
+          394,
+          48
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P1",
+              "round": 2,
+              "bottom": "V:J1"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 153,
+      "nome": "Tênis Feminino Duplas Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "fb6c5a2b450f1135",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 17,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [
+        17,
+        48
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          17,
+          48
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 124,
+      "nome": "Tênis Feminino Individual Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "6856e6a5660b1046",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 48,
+          "posicao": 1
+        },
+        {
+          "participanteId": 513,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        48,
+        513
+      ],
+      "resultado": {
+        "size": 5,
+        "slots": [
+          48,
+          332,
+          330,
+          67,
+          513
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J5",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J3",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "V:J2",
+              "round": 3,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J4",
+              "top": "L:J2",
+              "round": 3,
+              "bottom": "L:J3"
+            }
+          ],
+          "thirdPlace": "J4"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 148,
+      "nome": "Tênis Feminino Individual Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 513,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 125,
+      "nome": "Tênis Feminino Individual Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 127,
+      "nome": "Tênis Masculino Duplas Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "38c706ac9324150d",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 621,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          17,
+          327
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 151,
+      "nome": "Tênis Masculino Duplas Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "35828a6e57ac3b02",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 48,
+          "posicao": 1
+        },
+        {
+          "participanteId": 17,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        17
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          17,
+          330
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 128,
+      "nome": "Tênis Masculino Duplas Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 149,
+      "nome": "Tênis Masculino Individual Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "134862f69bb7bedc",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 332,
+          "posicao": 1
+        },
+        {
+          "participanteId": 48,
+          "posicao": 2
+        },
+        {
+          "participanteId": 67,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        332,
+        48,
+        67
+      ],
+      "resultado": {
+        "size": 5,
+        "slots": [
+          332,
+          330,
+          468,
+          67,
+          48
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J5",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J3",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "V:J2",
+              "round": 3,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J4",
+              "top": "L:J2",
+              "round": 3,
+              "bottom": "L:J3"
+            }
+          ],
+          "thirdPlace": "J4"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 126,
+      "nome": "Tênis Masculino Individual Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "977b4a981a255e87",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 468,
+          "posicao": 1
+        },
+        {
+          "participanteId": 67,
+          "posicao": 2
+        },
+        {
+          "participanteId": 513,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        468,
+        48
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          468,
+          48
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 150,
+      "nome": "Tênis Masculino Individual Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "ef59c3b2c47c5a1a",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 330,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [
+        330,
+        48
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          330,
+          48
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "nome": "Truco Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "571b7300e4f6dd14",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 243,
+          "nome": "Ipaussu",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 397,
+          "nome": "Pacaembu",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 500,
+          "nome": "Rosana",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 67,
+          "posicao": 1
+        },
+        {
+          "participanteId": 397,
+          "posicao": 2
+        },
+        {
+          "participanteId": 524,
+          "posicao": 3
+        },
+        {
+          "participanteId": 468,
+          "posicao": 4
+        },
+        {
+          "participanteId": 622,
+          "posicao": 5
+        },
+        {
+          "participanteId": 500,
+          "posicao": 6
+        },
+        {
+          "participanteId": 17,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        67,
+        397,
+        524,
+        48
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              67,
+              479,
+              330,
+              514
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              397,
+              116,
+              622,
+              500
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              524,
+              17,
+              401
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              513,
+              298,
+              243
+            ]
+          }
+        ],
+        "regra_id": 209,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 121,
+      "nome": "Truco Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "7a5955780d898e63",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 11,
+          "nome": "Alfredo Marcondes",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 219,
+          "nome": "Herculândia",
+          "subtitulo": null
+        },
+        {
+          "id": 251,
+          "nome": "Irapuru",
+          "subtitulo": null
+        },
+        {
+          "id": 298,
+          "nome": "Junqueirópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 318,
+          "nome": "Lutécia",
+          "subtitulo": null
+        },
+        {
+          "id": 327,
+          "nome": "Maracaí",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 357,
+          "nome": "Monte Castelo",
+          "subtitulo": null
+        },
+        {
+          "id": 365,
+          "nome": "Narandiba",
+          "subtitulo": null
+        },
+        {
+          "id": 397,
+          "nome": "Pacaembu",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 466,
+          "nome": "Presidente Bernardes",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 487,
+          "nome": "Ribeirão do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 494,
+          "nome": "Rinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 594,
+          "nome": "Taciba",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 622,
+          "nome": "Tupi Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 298,
+          "posicao": 1
+        },
+        {
+          "participanteId": 524,
+          "posicao": 2
+        },
+        {
+          "participanteId": 466,
+          "posicao": 3
+        },
+        {
+          "participanteId": 357,
+          "posicao": 4
+        },
+        {
+          "participanteId": 48,
+          "posicao": 5
+        },
+        {
+          "participanteId": 607,
+          "posicao": 6
+        },
+        {
+          "participanteId": 472,
+          "posicao": 7
+        },
+        {
+          "participanteId": 467,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        298,
+        524,
+        466,
+        48,
+        357,
+        607,
+        467
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              298,
+              594,
+              11
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              524,
+              219,
+              313,
+              513
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              466,
+              473,
+              330,
+              479
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              48,
+              401,
+              251
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              357,
+              318,
+              494,
+              403
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              607,
+              397,
+              514,
+              116
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              467,
+              365,
+              487,
+              622
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              17,
+              422,
+              447,
+              327
+            ]
+          }
+        ],
+        "regra_id": 224,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "nome": "Voleibol Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "d8fe0cf0a0fad036",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 293,
+          "nome": "João Ramalho",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 393,
+          "nome": "Osvaldo Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 401,
+          "nome": "Palmital",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 408,
+          "nome": "Parapuã",
+          "subtitulo": null
+        },
+        {
+          "id": 422,
+          "nome": "Pedrinhas Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 447,
+          "nome": "Platina",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 472,
+          "nome": "Quatá",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 524,
+          "nome": "Santa Cruz do Rio Pardo",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 330,
+          "posicao": 1
+        },
+        {
+          "participanteId": 2,
+          "posicao": 2
+        },
+        {
+          "participanteId": 48,
+          "posicao": 3
+        },
+        {
+          "participanteId": 479,
+          "posicao": 4
+        },
+        {
+          "participanteId": 408,
+          "posicao": 5
+        },
+        {
+          "participanteId": 513,
+          "posicao": 6
+        },
+        {
+          "participanteId": 468,
+          "posicao": 7
+        },
+        {
+          "participanteId": 607,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        330,
+        2,
+        48,
+        479,
+        408,
+        513,
+        468,
+        607
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              330,
+              403,
+              473
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              2,
+              116,
+              621
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              48,
+              401,
+              332,
+              467
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              479,
+              472,
+              422
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              408,
+              394,
+              293
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              513,
+              67,
+              17
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              468,
+              524,
+              162
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              607,
+              447,
+              393
+            ]
+          }
+        ],
+        "regra_id": 219,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 137,
+      "nome": "Voleibol Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f6eb729457cade47",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 67,
+          "nome": "Bastos",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 473,
+          "nome": "Queiroz",
+          "subtitulo": null
+        },
+        {
+          "id": 479,
+          "nome": "Regente Feijó",
+          "subtitulo": null
+        },
+        {
+          "id": 514,
+          "nome": "Sandovalina",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 48,
+          "posicao": 1
+        },
+        {
+          "participanteId": 162,
+          "posicao": 2
+        },
+        {
+          "participanteId": 479,
+          "posicao": 3
+        },
+        {
+          "participanteId": 17,
+          "posicao": 4
+        },
+        {
+          "participanteId": 394,
+          "posicao": 5
+        },
+        {
+          "participanteId": 403,
+          "posicao": 6
+        },
+        {
+          "participanteId": 2,
+          "posicao": 7
+        },
+        {
+          "participanteId": 330,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        48,
+        162,
+        479,
+        17
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              48,
+              514,
+              313,
+              607
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              162,
+              621,
+              394,
+              67
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              479,
+              2,
+              468,
+              467
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              17,
+              330,
+              473,
+              403
+            ]
+          }
+        ],
+        "regra_id": 210,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "nome": "Voleibol Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "8f1b5dc111fb197d",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 313,
+          "nome": "Lucélia",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 332,
+          "nome": "Martinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 393,
+          "nome": "Osvaldo Cruz",
+          "subtitulo": null
+        },
+        {
+          "id": 394,
+          "nome": "Ourinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 403,
+          "nome": "Paraguaçu Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 607,
+          "nome": "Tarumã",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 468,
+          "posicao": 1
+        },
+        {
+          "participanteId": 393,
+          "posicao": 2
+        },
+        {
+          "participanteId": 394,
+          "posicao": 3
+        },
+        {
+          "participanteId": 403,
+          "posicao": 4
+        },
+        {
+          "participanteId": 330,
+          "posicao": 5
+        },
+        {
+          "participanteId": 17,
+          "posicao": 6
+        },
+        {
+          "participanteId": 116,
+          "posicao": 7
+        },
+        {
+          "participanteId": 467,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        468,
+        393,
+        394,
+        403
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              468,
+              313,
+              607
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              393,
+              621,
+              467
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              394,
+              330,
+              332
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              403,
+              17,
+              116
+            ]
+          }
+        ],
+        "regra_id": 206,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 136,
+      "nome": "Voleibol Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "8b375ad428bf1314",
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 162,
+          "nome": "Dracena",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 468,
+          "posicao": 1
+        },
+        {
+          "participanteId": 330,
+          "posicao": 2
+        },
+        {
+          "participanteId": 162,
+          "posicao": 3
+        },
+        {
+          "participanteId": 116,
+          "posicao": 4
+        },
+        {
+          "participanteId": 394,
+          "posicao": 5
+        },
+        {
+          "participanteId": 17,
+          "posicao": 6
+        },
+        {
+          "participanteId": 621,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        468,
+        330
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              468,
+              116,
+              621
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              330,
+              2,
+              17,
+              162
+            ]
+          }
+        ],
+        "regra_id": 201,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 123,
+      "nome": "Xadrez Feminino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 468,
+          "nome": "Presidente Prudente",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 147,
+      "nome": "Xadrez Masculino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 48,
+      "participantes": [
+        {
+          "id": 17,
+          "nome": "Álvares Machado",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 116,
+          "nome": "Cândido Mota",
+          "subtitulo": null
+        },
+        {
+          "id": 193,
+          "nome": "Gália",
+          "subtitulo": null
+        },
+        {
+          "id": 330,
+          "nome": "Marília",
+          "subtitulo": null
+        },
+        {
+          "id": 513,
+          "nome": "Salto Grande",
+          "subtitulo": null
+        },
+        {
+          "id": 594,
+          "nome": "Taciba",
+          "subtitulo": null
+        },
+        {
+          "id": 621,
+          "nome": "Tupã",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
