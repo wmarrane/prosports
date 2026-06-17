@@ -153,10 +153,12 @@ def build_structural_graph(raw_matches, bye_positions, N):
 
 
 def find_visual_j_cells(ws):
-    """Localiza todas as celulas do diagrama com label 'j\\d+' (minusculo).
+    """Localiza todas as celulas do diagrama com label 'j\\d+' (jogo).
 
     Filtros:
-      - Apenas minusculas (legendas usam 'J' maiusculo).
+      - Full-match 'j'/'J' + digitos (case-insensitive): algumas planilhas
+        rotulam o jogo play-in em maiusculo (ex.: N=17/62-76 usam 'J1'). O
+        full-match evita pegar legendas tipo 'Venc.J1' / 'J = jogo'.
       - Restrito a colunas 1..15 (diagramas nao passam disso na pratica).
       - Ignora celulas onde a linha tambem contem texto explicativo (heuristica:
         proxima coluna a direita tem texto que nao parece label de jogo).
@@ -171,7 +173,7 @@ def find_visual_j_cells(ws):
             v = ws.cell(row=r, column=c).value
             if v is None: continue
             s = str(v).strip()
-            m = re.fullmatch(r'j\s*(\d+)', s)
+            m = re.fullmatch(r'[jJ]\s*(\d+)', s)
             if m:
                 out.append((int(m.group(1)), r, c))
     return out
