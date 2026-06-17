@@ -153,6 +153,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       posicao: number | null
       inscrito: boolean
       slotLabel: string | null
+      slotOrder: number | null
     }
     const items: Item[] = cabecasInscritas.map(c => ({
       key: `c-${c.id}`,
@@ -161,6 +162,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       posicao: c.posicao,
       inscrito: c.inscrito,
       slotLabel: null,
+      slotOrder: null,
     }))
     // Adiciona o anfitrião como entrada sintetica se ele se aplica
     // pela regra mas nao eh campeao.
@@ -176,6 +178,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         posicao: null,
         inscrito: true,
         slotLabel: null,
+        slotOrder: null,
       })
     }
     // Computa slotLabel
@@ -186,8 +189,8 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       // (oriundos do sorteio puro NAO recebem chip).
       for (const it of items) {
         if (!cabecasPids.has(it.participante_id)) continue
-        const g = grupos.find((g: any) => g.participantes?.[0] === it.participante_id)
-        if (g) it.slotLabel = `Grupo ${g.letra}`
+        const gi = grupos.findIndex((g: any) => g.participantes?.[0] === it.participante_id)
+        if (gi >= 0) { it.slotLabel = `Grupo ${grupos[gi].letra}`; it.slotOrder = gi }
       }
     } else if (sorteio.tipo === 'chaves') {
       const campeoesInscritosPids = cabecasInscritas.filter(c => c.inscrito).map(c => c.participante_id)
@@ -196,10 +199,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       ).slice(0, 4)
       for (const it of items) {
         const idx = cabecasFinais.indexOf(it.participante_id)
-        if (idx !== -1) it.slotLabel = `${idx + 1}ª cabeça`
+        if (idx !== -1) { it.slotLabel = `${idx + 1}ª cabeça`; it.slotOrder = idx }
       }
     }
-    return items
+    return [...items].sort((a, b) => (a.slotOrder ?? Infinity) - (b.slotOrder ?? Infinity))
   }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, cabecasPids])
 
   const { mutate: executar, isPending: executando } = useMutation({
