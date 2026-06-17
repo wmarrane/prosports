@@ -1081,7 +1081,7 @@ export default function EventoInscricoes() {
                     subtituloLine={subtituloLine}
                     inscritos={inscricoes.map((i: any) => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
                     campeoes={[...campeoes].sort((a: any, b: any) => a.posicao - b.posicao).map((c: any) => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
-                    cabecas={tipoDaModalidade === 'grupos' && sorteioDaModalidade?.resultado
+                    cabecas={tipoDaModalidade === 'grupos' && (sorteioDaModalidade?.resultado as any)?.grupos
                       ? cabecasComGrupo({
                           campeoes: campeoes.map((c: any) => ({ participante_id: c.participante_id, posicao: c.posicao, nome: c.participante?.nome ?? '—' })),
                           inscritosIds: new Set(inscricoes.map((i: any) => i.participante_id)),
