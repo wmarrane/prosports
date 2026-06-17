@@ -19,8 +19,10 @@ const uploadCsv = multer({
   },
 })
 
-router.get('/', ...admin, ctrl.listar)
-router.get('/:id', ...admin, ctrl.buscarPorId)
+// Leitura liberada a qualquer usuário autenticado (ex.: Comissão Técnica no
+// Modo Congresso precisa do tipo/nome da modalidade). Escrita segue ADMIN.
+router.get('/', requireAuth, ctrl.listar)
+router.get('/:id', requireAuth, ctrl.buscarPorId)
 router.post('/', ...admin, ctrl.criar)
 router.post('/replicar-mensagens', ...admin, ctrl.replicarMensagens)
 router.put('/:id', ...admin, ctrl.editar)
