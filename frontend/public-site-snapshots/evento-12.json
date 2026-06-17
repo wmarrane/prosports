@@ -1,0 +1,6404 @@
+{
+  "id": 12,
+  "nome": "68º Jogos Regionais de Barretos",
+  "competicao": "Jogos Regionais",
+  "cidade": "Barretos",
+  "local": ".",
+  "data": "2026-06-17T18:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-06-17T20:19:14.691Z",
+  "modalidades": [
+    {
+      "id": 1,
+      "nome": "Atletismo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 641,
+          "nome": "Viradouro",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 214,
+          "nome": "Guariba",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 248,
+          "nome": "Ipuã",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 375,
+          "nome": "Nova Europa",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 182,
+      "nome": "Atletismo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 482,
+          "nome": "Restinga",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 375,
+          "nome": "Nova Europa",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 214,
+          "nome": "Guariba",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 189,
+      "nome": "Badminton Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "4e29c50b8415052d",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 91,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        491,
+        91
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              189,
+              38
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              91,
+              557,
+              581
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "Badminton Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "Basquete 3x3 Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "cfbc6216f4f2a929",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 491,
+          "posicao": 2
+        },
+        {
+          "participanteId": 581,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        189,
+        491
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              333,
+              70,
+              412
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              491,
+              557,
+              38,
+              581
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Basquete 3x3 Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "343abdd24d3f4af3",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 64,
+          "posicao": 2
+        },
+        {
+          "participanteId": 38,
+          "posicao": 3
+        },
+        {
+          "participanteId": 581,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        189,
+        64,
+        38,
+        581
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              333,
+              491,
+              445
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              64,
+              412,
+              70
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              38,
+              557,
+              534
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              581,
+              264,
+              386,
+              452
+            ]
+          }
+        ],
+        "regra_id": 76,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Basquete Feminino 21 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 581,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nome": "Basquete Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 557,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nome": "Basquete Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "ba2081aa0af7b04e",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 491,
+          "posicao": 2
+        },
+        {
+          "participanteId": 228,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        38,
+        491,
+        228
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              189,
+              280
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              491,
+              612,
+              70
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              228,
+              386,
+              148
+            ]
+          }
+        ],
+        "regra_id": 71,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nome": "Basquete Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "397980ce86b566d1",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 462,
+          "nome": "Pradópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 592,
+          "nome": "Tabatinga",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 65,
+          "nome": "Barrinha",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 462,
+          "posicao": 1
+        },
+        {
+          "participanteId": 534,
+          "posicao": 2
+        },
+        {
+          "participanteId": 581,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        462,
+        534,
+        581,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              462,
+              149,
+              445
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              534,
+              557,
+              592,
+              264
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              581,
+              412,
+              65
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              452,
+              333
+            ]
+          }
+        ],
+        "regra_id": 75,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "nome": "Biribol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "cd1891cec535112e",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 38,
+          "posicao": 2
+        },
+        {
+          "participanteId": 64,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        189,
+        38
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              386,
+              491,
+              581
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              38,
+              64,
+              333
+            ]
+          }
+        ],
+        "regra_id": 69,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "nome": "Bocha Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f5a5ff5346bb274e",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 77,
+          "nome": "Boa Esperança do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 117,
+          "nome": "Cândido Rodrigues",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 592,
+          "nome": "Tabatinga",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 77,
+          "posicao": 2
+        },
+        {
+          "participanteId": 189,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 280,
+          "posicao": 5
+        },
+        {
+          "participanteId": 21,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        491,
+        77,
+        189,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              13,
+              603
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              77,
+              91,
+              117,
+              38
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              189,
+              592,
+              280,
+              354
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              581,
+              390
+            ]
+          }
+        ],
+        "regra_id": 76,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "nome": "Capoeira Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 20,
+      "nome": "Capoeira Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 21,
+      "nome": "Ciclismo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 22,
+      "nome": "Ciclismo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 21,
+          "nome": "Américo Brasiliense",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 23,
+      "nome": "Damas Feminino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 24,
+      "nome": "Damas Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 25,
+      "nome": "Damas Masculino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 26,
+      "nome": "Damas Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 27,
+      "nome": "Futebol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "9051218d53de81d6",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 38,
+          "posicao": 2
+        },
+        {
+          "participanteId": 64,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        189,
+        38
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              491,
+              64
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              38,
+              557,
+              333
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "nome": "Futebol Masculino 20-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "6a1c8f6b29637200",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 77,
+          "nome": "Boa Esperança do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 592,
+          "nome": "Tabatinga",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 375,
+          "nome": "Nova Europa",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 445,
+          "posicao": 1
+        },
+        {
+          "participanteId": 603,
+          "posicao": 2
+        },
+        {
+          "participanteId": 412,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 149,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [
+        445,
+        603,
+        412,
+        64,
+        149
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              445,
+              333,
+              592,
+              581
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              603,
+              375,
+              38
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              412,
+              386,
+              491
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              189,
+              202,
+              280
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              149,
+              77,
+              205
+            ]
+          }
+        ],
+        "regra_id": 79,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "nome": "Futsal Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "be4f16ab6b1622a9",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 214,
+          "nome": "Guariba",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 452,
+          "posicao": 1
+        },
+        {
+          "participanteId": 491,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        452,
+        491
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              452,
+              214,
+              333,
+              412
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              491,
+              205,
+              64,
+              557
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "nome": "Futsal Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "afa12ea10d33c67e",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 354,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        38,
+        354
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              581,
+              228,
+              13
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              354,
+              540,
+              148,
+              189
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "nome": "Futsal Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "0299e9af019dccc4",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 482,
+          "nome": "Restinga",
+          "subtitulo": null
+        },
+        {
+          "id": 492,
+          "nome": "Rifaina",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 522,
+          "nome": "Santa Cruz da Esperança",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 573,
+          "nome": "São Simão",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 65,
+          "nome": "Barrinha",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 452,
+          "posicao": 2
+        },
+        {
+          "participanteId": 70,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 13,
+          "posicao": 5
+        },
+        {
+          "participanteId": 540,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        38,
+        452,
+        70,
+        64,
+        13,
+        540
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              492,
+              205
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              452,
+              354,
+              412,
+              202
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              70,
+              390,
+              333,
+              522
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              148,
+              612,
+              557
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              13,
+              189,
+              482,
+              507
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              540,
+              534,
+              573,
+              65
+            ]
+          }
+        ],
+        "regra_id": 85,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "nome": "Futsal Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "0e97bf8ae4f7f4df",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 641,
+          "nome": "Viradouro",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 315,
+          "nome": "Luís Antônio",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 214,
+          "nome": "Guariba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 641,
+          "posicao": 2
+        },
+        {
+          "participanteId": 580,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        491,
+        641
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              581,
+              315,
+              603
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              641,
+              228,
+              386,
+              214
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "nome": "Ginástica Artística Feminino 13-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 440,
+          "nome": "Pirangi",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 35,
+      "nome": "Ginástica Artística Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 36,
+      "nome": "Ginástica Artistica Masculino 16-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 33,
+      "nome": "Ginástica Artística Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 37,
+      "nome": "Ginástica Rítmica Feminino 14-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 38,
+      "nome": "Ginástica Ritmica Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 39,
+      "nome": "Handebol Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "90a03e5dcf04c4e8",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 482,
+          "nome": "Restinga",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              557,
+              64,
+              386
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              491,
+              603,
+              482
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "nome": "Handebol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "nome": "Handebol Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "2c0ff892ee3f95a7",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 482,
+          "nome": "Restinga",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              557,
+              482,
+              603
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              64,
+              491,
+              70
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "nome": "Handebol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "4b33f4d105a34cb4",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 452,
+          "posicao": 1
+        },
+        {
+          "participanteId": 581,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        452,
+        581
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              452,
+              386,
+              354
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              581,
+              412,
+              280
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "nome": "Judô Feminino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "49d5a1956c75fd1c",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 202,
+          "posicao": 2
+        },
+        {
+          "participanteId": 491,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        189,
+        202,
+        491,
+        64
+      ],
+      "resultado": {
+        "size": 13,
+        "slots": [
+          189,
+          333,
+          68,
+          412,
+          557,
+          64,
+          491,
+          390,
+          149,
+          420,
+          38,
+          205,
+          202
+        ],
+        "byePositions": [
+          1,
+          6,
+          13
+        ],
+        "matchesGraph": {
+          "final": "J13",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J4",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J5",
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
+            },
+            {
+              "id": "J6",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J7",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J8",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J9",
+              "top": "V:J5",
+              "round": 2,
+              "bottom": "V:B3"
+            },
+            {
+              "id": "J10",
+              "top": "V:J6",
+              "round": 3,
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J11",
+              "top": "V:J8",
+              "round": 3,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J13",
+              "top": "V:J10",
+              "round": 4,
+              "bottom": "V:J11"
+            },
+            {
+              "id": "J12",
+              "top": "L:J10",
+              "round": 4,
+              "bottom": "L:J11"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P13",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J12"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "nome": "Judô Masculino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "ec6258fc2fee1773",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 202,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        },
+        {
+          "participanteId": 491,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        202,
+        189,
+        491,
+        64
+      ],
+      "resultado": {
+        "size": 16,
+        "slots": [
+          202,
+          581,
+          108,
+          333,
+          68,
+          557,
+          420,
+          64,
+          491,
+          390,
+          205,
+          38,
+          149,
+          412,
+          386,
+          189
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J16",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J3",
+              "top": "P5",
+              "round": 1,
+              "bottom": "P6"
+            },
+            {
+              "id": "J4",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J5",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J6",
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
+            },
+            {
+              "id": "J7",
+              "top": "P13",
+              "round": 1,
+              "bottom": "P14"
+            },
+            {
+              "id": "J8",
+              "top": "P15",
+              "round": 1,
+              "bottom": "P16"
+            },
+            {
+              "id": "J9",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J10",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J11",
+              "top": "V:J5",
+              "round": 2,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J12",
+              "top": "V:J7",
+              "round": 2,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J13",
+              "top": "V:J9",
+              "round": 3,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J14",
+              "top": "V:J11",
+              "round": 3,
+              "bottom": "V:J12"
+            },
+            {
+              "id": "J16",
+              "top": "V:J13",
+              "round": 4,
+              "bottom": "V:J14"
+            },
+            {
+              "id": "J15",
+              "top": "L:J13",
+              "round": 4,
+              "bottom": "L:J14"
+            }
+          ],
+          "thirdPlace": "J15"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "nome": "Karatê Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 492,
+          "nome": "Rifaina",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 46,
+      "nome": "Karatê Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 48,
+      "nome": "Malha Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "8b7791306f842c29",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        },
+        {
+          "participanteId": 64,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        491,
+        189,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              149,
+              38
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              390,
+              333
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              64,
+              581,
+              603
+            ]
+          }
+        ],
+        "regra_id": 71,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "nome": "Natação Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 50,
+      "nome": "Natação Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 51,
+      "nome": "Natação Nado Medley Misto Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 52,
+      "nome": "Taekwondo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 53,
+      "nome": "Taekwondo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 190,
+      "nome": "Taekwondo Poom-se Equipe A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 184,
+      "nome": "Taekwondo Poom-se Individual A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 54,
+      "nome": "Tênis de Mesa Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f66d8a6d6cb086f9",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              540,
+              557
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              64,
+              445,
+              333
+            ]
+          }
+        ],
+        "regra_id": 69,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "nome": "Tênis de Mesa Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "nome": "Tênis de Mesa Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "278561378dbc3708",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        },
+        {
+          "participanteId": 581,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189,
+        581,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              557,
+              333
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              452,
+              540,
+              390
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              581,
+              445,
+              70
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              354,
+              386
+            ]
+          }
+        ],
+        "regra_id": 75,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "nome": "Tênis de Mesa Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 68,
+          "nome": "Batatais",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 492,
+          "nome": "Rifaina",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 491,
+          "posicao": 1
+        },
+        {
+          "participanteId": 196,
+          "posicao": 2
+        },
+        {
+          "participanteId": 68,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Tênis Feminino 21 anos",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "cebf1c957fab99d1",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 581,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        189,
+        581
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          189,
+          333,
+          38,
+          581
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "nome": "Tênis Feminino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "0c82aa9024d30ec4",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 202,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [
+        202
+      ],
+      "resultado": {
+        "size": 3,
+        "slots": [
+          202,
+          557,
+          491
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "nome": "Tênis Masculino 21-anos",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "5ce2baa64f35fc04",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 581,
+          "posicao": 1
+        },
+        {
+          "participanteId": 354,
+          "posicao": 2
+        },
+        {
+          "participanteId": 64,
+          "posicao": 3
+        },
+        {
+          "participanteId": 13,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        581,
+        354,
+        64,
+        13
+      ],
+      "resultado": {
+        "size": 5,
+        "slots": [
+          581,
+          333,
+          13,
+          64,
+          354
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J5",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J3",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "V:J2",
+              "round": 3,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J4",
+              "top": "L:J2",
+              "round": 3,
+              "bottom": "L:J3"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J4"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "nome": "Tênis Masculino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "f03cc2b4333bba72",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 492,
+          "nome": "Rifaina",
+          "subtitulo": null
+        },
+        {
+          "id": 493,
+          "nome": "Rincão",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        },
+        {
+          "participanteId": 493,
+          "posicao": 3
+        },
+        {
+          "participanteId": 557,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189,
+        493,
+        557
+      ],
+      "resultado": {
+        "size": 8,
+        "slots": [
+          38,
+          202,
+          491,
+          557,
+          493,
+          390,
+          492,
+          189
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J8",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J3",
+              "top": "P5",
+              "round": 1,
+              "bottom": "P6"
+            },
+            {
+              "id": "J4",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J5",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J6",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J8",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J7",
+              "top": "L:J5",
+              "round": 3,
+              "bottom": "L:J6"
+            }
+          ],
+          "thirdPlace": "J7"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "nome": "Voleibol Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "cad2fecc2544d02c",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 85,
+          "nome": "Borborema",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 214,
+          "nome": "Guariba",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 482,
+          "nome": "Restinga",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 491,
+          "posicao": 2
+        },
+        {
+          "participanteId": 189,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 148,
+          "posicao": 5
+        },
+        {
+          "participanteId": 581,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        38,
+        491,
+        189,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              148,
+              85,
+              214
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              491,
+              354,
+              452
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              189,
+              445,
+              482
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              581,
+              280
+            ]
+          }
+        ],
+        "regra_id": 75,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "nome": "Voleibol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "68f2784c695c1fa5",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 641,
+          "nome": "Viradouro",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 641,
+          "posicao": 1
+        },
+        {
+          "participanteId": 149,
+          "posicao": 2
+        },
+        {
+          "participanteId": 540,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        641,
+        149
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              641,
+              507,
+              540,
+              557
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              149,
+              612,
+              603,
+              333
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "nome": "Voleibol Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "6a47882b0565358b",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 65,
+          "nome": "Barrinha",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 315,
+          "nome": "Luís Antônio",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 38,
+          "posicao": 1
+        },
+        {
+          "participanteId": 189,
+          "posicao": 2
+        },
+        {
+          "participanteId": 491,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 315,
+          "posicao": 5
+        },
+        {
+          "participanteId": 534,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        38,
+        189,
+        491,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              581,
+              13,
+              228
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              70,
+              386,
+              445
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              491,
+              534,
+              390,
+              65
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              315,
+              354,
+              148
+            ]
+          }
+        ],
+        "regra_id": 78,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "nome": "Voleibol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "6ff460cdc7fe9db4",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 278,
+          "nome": "Ituverava",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 592,
+          "nome": "Tabatinga",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 333,
+          "posicao": 1
+        },
+        {
+          "participanteId": 149,
+          "posicao": 2
+        },
+        {
+          "participanteId": 452,
+          "posicao": 3
+        },
+        {
+          "participanteId": 580,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        333,
+        149,
+        452,
+        580
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              333,
+              557,
+              592,
+              507
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              149,
+              280,
+              264
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              452,
+              540,
+              278
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              580,
+              612,
+              412
+            ]
+          }
+        ],
+        "regra_id": 75,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "nome": "Volei de Praia Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "9bf4e3902d094523",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 315,
+          "nome": "Luís Antônio",
+          "subtitulo": null
+        },
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 573,
+          "nome": "São Simão",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 38,
+          "posicao": 2
+        },
+        {
+          "participanteId": 202,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
+        },
+        {
+          "participanteId": 491,
+          "posicao": 5
+        },
+        {
+          "participanteId": 557,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        189,
+        38,
+        202,
+        64,
+        491,
+        557
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              315,
+              581,
+              580
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              38,
+              354,
+              333
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              202,
+              149,
+              507,
+              603
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              91,
+              13
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              491,
+              573,
+              280
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              557,
+              445,
+              386
+            ]
+          }
+        ],
+        "regra_id": 82,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "nome": "Volei de Praia Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "857cde419d2fc07b",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 228,
+          "nome": "Ibitinga",
+          "subtitulo": null
+        },
+        {
+          "id": 248,
+          "nome": "Ipuã",
+          "subtitulo": null
+        },
+        {
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 315,
+          "nome": "Luís Antônio",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 462,
+          "nome": "Pradópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 507,
+          "nome": "Sales Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 573,
+          "nome": "São Simão",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 64,
+          "posicao": 2
+        },
+        {
+          "participanteId": 38,
+          "posicao": 3
+        },
+        {
+          "participanteId": 534,
+          "posicao": 4
+        },
+        {
+          "participanteId": 315,
+          "posicao": 5
+        },
+        {
+          "participanteId": 280,
+          "posicao": 6
+        },
+        {
+          "participanteId": 333,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        189,
+        64,
+        38,
+        534,
+        315,
+        280,
+        333
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              462,
+              573
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              64,
+              507,
+              412
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              38,
+              202,
+              540,
+              228
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              534,
+              390,
+              581,
+              445
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              315,
+              491,
+              91,
+              248
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              280,
+              580,
+              148
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              333,
+              386,
+              149,
+              557
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              354,
+              13,
+              452,
+              603
+            ]
+          }
+        ],
+        "regra_id": 91,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "nome": "Xadrez Feminino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 65,
+          "nome": "Barrinha",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 185,
+      "nome": "Xadrez Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 186,
+      "nome": "Xadrez Masculino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 65,
+          "nome": "Barrinha",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 187,
+      "nome": "Xadrez Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 70,
+          "nome": "Bebedouro",
+          "subtitulo": null
+        },
+        {
+          "id": 91,
+          "nome": "Brodowski",
+          "subtitulo": null
+        },
+        {
+          "id": 164,
+          "nome": "Dumont",
+          "subtitulo": null
+        },
+        {
+          "id": 248,
+          "nome": "Ipuã",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
