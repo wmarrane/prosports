@@ -26,6 +26,7 @@ import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2, RotateCcw } from 'lucide-react'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { cabecasComGrupo } from '../../lib/cabecas-grupo'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { clearVistas } from '../../lib/congresso-vistas'
@@ -309,6 +310,15 @@ export default function EventoInscricoes() {
         for (const c of camps) cByPid.set(c.participante_id, c.posicao)
         const sorteio = sorteios.find(s => s.modalidade_id === m.id) ?? null
         const tipo = m.tipo_modalidade?.tipo as 'grupos' | 'chaves' | 'ordem_entrada' | 'especifico' | undefined
+        const grupos = tipo === 'grupos' && sorteio?.resultado ? ((sorteio.resultado as any).grupos ?? null) : null
+        const cabecas = grupos ? cabecasComGrupo({
+          campeoes: camps.map(c => ({ participante_id: c.participante_id, posicao: c.posicao, nome: c.participante?.nome ?? '—' })),
+          inscritosIds: new Set(insc.map(i => i.participante_id)),
+          anfitriaoPid: evento.anfitriao_id ?? null,
+          anfitriaoNome: evento.anfitriao?.nome ?? null,
+          consideraAnfitriao: evento.competicao?.considerar_anfitriao ?? false,
+          grupos,
+        }) : undefined
         return renderToStaticMarkup(
           <SorteioPrintContent
             eventoNome={evento.nome}
@@ -328,6 +338,7 @@ export default function EventoInscricoes() {
               .sort((a, b) => a.posicao - b.posicao)
               .map(c => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
             omitEventoHeader
+            cabecas={cabecas}
           />
         )
       })
@@ -1070,6 +1081,16 @@ export default function EventoInscricoes() {
                     subtituloLine={subtituloLine}
                     inscritos={inscricoes.map((i: any) => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
                     campeoes={[...campeoes].sort((a: any, b: any) => a.posicao - b.posicao).map((c: any) => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}
+                    cabecas={tipoDaModalidade === 'grupos' && sorteioDaModalidade?.resultado
+                      ? cabecasComGrupo({
+                          campeoes: campeoes.map((c: any) => ({ participante_id: c.participante_id, posicao: c.posicao, nome: c.participante?.nome ?? '—' })),
+                          inscritosIds: new Set(inscricoes.map((i: any) => i.participante_id)),
+                          anfitriaoPid: evento?.anfitriao_id ?? null,
+                          anfitriaoNome: evento?.anfitriao?.nome ?? null,
+                          consideraAnfitriao: evento?.competicao?.considerar_anfitriao ?? false,
+                          grupos: (sorteioDaModalidade.resultado as any).grupos ?? null,
+                        })
+                      : undefined}
                   />
                 )}
 
