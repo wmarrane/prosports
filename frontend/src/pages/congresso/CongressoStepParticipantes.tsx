@@ -90,9 +90,9 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
             <ModalityBadge name={modalidade.nome} size={64} showGender />
           )}
           <div style={{ minWidth: 0 }}>
-            <h1 className="cw-h1" style={{ marginBottom: 6 }}>Participantes confirmados</h1>
+            <h1 className="cw-h1" style={{ marginBottom: 6 }}>{modalidade?.nome ?? 'Modalidade'}</h1>
             <p className="cw-sub" style={{ margin: 0 }}>
-              {modalidade?.nome} · <b style={{ color: FG }}>{inscricoes.length}</b> {inscricoes.length === 1 ? 'confirmado' : 'confirmados'}
+              Participantes confirmados · <b style={{ color: FG }}>{inscricoes.length}</b> {inscricoes.length === 1 ? 'confirmado' : 'confirmados'}
             </p>
           </div>
         </div>

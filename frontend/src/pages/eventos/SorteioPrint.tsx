@@ -23,6 +23,7 @@ type Props = {
   // Quando true, não renderiza o cabeçalho do evento (usado no export HTML,
   // onde o cabeçalho aparece uma única vez no topo do documento).
   omitEventoHeader?: boolean
+  cabecas?: { nome: string; grupo: string | null }[]
 }
 
 export function SorteioPrintHeader(p: { eventoNome: string; anfitriao: string; cidadeLocalData: string }) {
@@ -49,6 +50,14 @@ export function SorteioPrintContent(p: Props) {
         {p.seed && <div style={{ fontSize: 12, color: '#475569' }}>seed: <span style={{ fontFamily: 'monospace' }}>{p.seed}</span></div>}
       </div>
 
+      {p.cabecas && p.cabecas.length > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Cabeças</div>
+          <ol style={{ margin: 0, paddingLeft: 18, color: '#1e293b', fontSize: 12 }}>
+            {p.cabecas.map((c, i) => <li key={i}>{c.nome}{c.grupo ? ` - ${c.grupo}` : ''}</li>)}
+          </ol>
+        </div>
+      )}
       {p.modalidadeTipo === 'grupos' && p.resultado && (
         <SorteioGrupos resultado={p.resultado} participantesById={p.participantesById} campeoesByParticipanteId={p.campeoesByParticipanteId} anfitriaoPid={p.anfitriaoPid} subtituloLine={p.subtituloLine} />
       )}
