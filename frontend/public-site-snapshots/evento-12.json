@@ -1,12 +1,12 @@
 {
-  "id": 7,
-  "nome": "68º Jogos Regionais de Lençóis Paulista",
+  "id": 12,
+  "nome": "68º Jogos Regionais de Barretos",
   "competicao": "Jogos Regionais",
-  "cidade": "Lençóis Paulista",
+  "cidade": "Barretos",
   "local": ".",
-  "data": "2026-06-16T19:00:00.000Z",
+  "data": "2026-06-17T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-17T17:54:24.973Z",
+  "publicadoEm": "2026-06-17T20:19:14.691Z",
   "modalidades": [
     {
       "id": 1,
@@ -15,116 +15,126 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 420,
+          "nome": "Pedregulho",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 641,
+          "nome": "Viradouro",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 78,
-          "nome": "Bocaina",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 201,
-          "nome": "Guaimbê",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 214,
+          "nome": "Guariba",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 248,
+          "nome": "Ipuã",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 375,
+          "nome": "Nova Europa",
           "subtitulo": null
         }
       ],
@@ -140,131 +150,136 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 27,
-          "nome": "Anhembi",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 420,
+          "nome": "Pedregulho",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 78,
-          "nome": "Bocaina",
+          "id": 482,
+          "nome": "Restinga",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 201,
-          "nome": "Guaimbê",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 580,
+          "nome": "Serrana",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 375,
+          "nome": "Nova Europa",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
+          "id": 214,
+          "nome": "Guariba",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 13,
+          "nome": "Altinópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         }
       ],
@@ -278,151 +293,71 @@
       "nome": "Badminton Feminino Livre",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
-      "anfitriaoId": 306,
-      "participantes": [
-        {
-          "id": 9,
-          "nome": "Agudos",
-          "subtitulo": null
-        },
-        {
-          "id": 41,
-          "nome": "Arealva",
-          "subtitulo": null
-        },
-        {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        }
-      ],
-      "campeoes": [
-        {
-          "participanteId": 87,
-          "posicao": 1
-        },
-        {
-          "participanteId": 309,
-          "posicao": 2
-        },
-        {
-          "participanteId": 69,
-          "posicao": 3
-        }
-      ],
-      "cabecasPids": [],
-      "resultado": null,
-      "mensagens_inscritos": [
-        {
-          "max": 5,
-          "min": 3,
-          "mensagem": "Turno único",
-          "pular_sorteio": true
-        },
-        {
-          "max": 2,
-          "min": 2,
-          "mensagem": "Melhor de 3 partidas",
-          "pular_sorteio": true
-        },
-        {
-          "max": 1,
-          "min": 1,
-          "mensagem": "Classificado",
-          "pular_sorteio": true
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "nome": "Badminton Masculino Livre",
-      "grupo": null,
-      "tipo": "grupos",
       "status": "sorteado",
-      "seed": "930f314db07c6c5a",
-      "anfitriaoId": 306,
+      "seed": "4e29c50b8415052d",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 41,
-          "nome": "Arealva",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 69,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 87,
+          "participanteId": 91,
           "posicao": 2
-        },
-        {
-          "participanteId": 309,
-          "posicao": 3
-        },
-        {
-          "participanteId": 437,
-          "posicao": 4
         }
       ],
       "cabecasPids": [
-        69,
-        87
+        491,
+        91
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              69,
-              437,
-              504
+              491,
+              189,
+              38
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              87,
-              41,
-              9
+              91,
+              557,
+              581
             ]
           }
         ],
@@ -451,97 +386,154 @@
       ]
     },
     {
+      "id": 6,
+      "nome": "Badminton Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
       "id": 7,
       "nome": "Basquete 3x3 Feminino Livre",
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "a64ac5a6ed53ef1b",
-      "anfitriaoId": 306,
+      "seed": "cfbc6216f4f2a929",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 437,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 309,
+          "participanteId": 491,
           "posicao": 2
         },
         {
-          "participanteId": 290,
+          "participanteId": 581,
           "posicao": 3
-        },
-        {
-          "participanteId": 306,
-          "posicao": 4
-        },
-        {
-          "participanteId": 87,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        437,
-        309
+        189,
+        491
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              306,
-              87,
-              69
+              189,
+              333,
+              70,
+              412
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              309,
-              290,
-              551
+              491,
+              557,
+              38,
+              581
             ]
           }
         ],
-        "regra_id": 69,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -571,162 +563,142 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "b34811e97ffde483",
-      "anfitriaoId": 306,
+      "seed": "343abdd24d3f4af3",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 437,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 309,
+          "participanteId": 64,
           "posicao": 2
         },
         {
-          "participanteId": 290,
+          "participanteId": 38,
           "posicao": 3
         },
         {
-          "participanteId": 470,
+          "participanteId": 581,
           "posicao": 4
-        },
-        {
-          "participanteId": 87,
-          "posicao": 5
-        },
-        {
-          "participanteId": 159,
-          "posicao": 6
         }
       ],
       "cabecasPids": [
-        437,
-        309,
-        290,
-        306
+        189,
+        64,
+        38,
+        581
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              319,
-              439,
-              458
+              189,
+              333,
+              491,
+              445
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              309,
-              551,
-              232,
-              159
+              64,
+              412,
+              70
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              290,
-              470,
-              565,
-              163
+              38,
+              557,
+              534
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              306,
-              87,
-              417,
-              69
+              581,
+              264,
+              386,
+              452
             ]
           }
         ],
-        "regra_id": 78,
+        "regra_id": 76,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -757,18 +729,37 @@
       "tipo": "grupos",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 64,
+          "nome": "Barretos",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 189,
           "posicao": 1
+        },
+        {
+          "participanteId": 581,
+          "posicao": 2
         }
       ],
       "cabecasPids": [],
@@ -799,95 +790,38 @@
       "nome": "Basquete Feminino Livre",
       "grupo": null,
       "tipo": "grupos",
-      "status": "sorteado",
-      "seed": "1de13b32f7e17dca",
-      "anfitriaoId": 306,
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 306,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 437,
+          "participanteId": 557,
           "posicao": 2
-        },
-        {
-          "participanteId": 69,
-          "posicao": 3
-        },
-        {
-          "participanteId": 417,
-          "posicao": 4
-        },
-        {
-          "participanteId": 309,
-          "posicao": 5
         }
       ],
-      "cabecasPids": [
-        306,
-        437
-      ],
-      "resultado": {
-        "grupos": [
-          {
-            "letra": "A",
-            "participantes": [
-              306,
-              417,
-              551,
-              290
-            ]
-          },
-          {
-            "letra": "B",
-            "participantes": [
-              437,
-              69,
-              309
-            ]
-          }
-        ],
-        "regra_id": 69,
-        "classificados_por_grupo": 2
-      },
+      "cabecasPids": [],
+      "resultado": null,
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -915,128 +849,102 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "eb725e25a22be300",
-      "anfitriaoId": 306,
+      "seed": "ba2081aa0af7b04e",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 612,
+          "nome": "Terra Roxa",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 437,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 309,
+          "participanteId": 491,
           "posicao": 2
         },
         {
-          "participanteId": 306,
+          "participanteId": 228,
           "posicao": 3
-        },
-        {
-          "participanteId": 458,
-          "posicao": 4
-        },
-        {
-          "participanteId": 87,
-          "posicao": 5
-        },
-        {
-          "participanteId": 565,
-          "posicao": 6
-        },
-        {
-          "participanteId": 290,
-          "posicao": 7
-        },
-        {
-          "participanteId": 439,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        437,
-        309,
-        306
+        38,
+        491,
+        228
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              470,
-              290,
-              439
+              38,
+              189,
+              280
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              309,
-              232,
-              87
+              491,
+              612,
+              70
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              306,
-              444,
-              458
+              228,
+              386,
+              148
             ]
           }
         ],
-        "regra_id": 72,
+        "regra_id": 71,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -1066,96 +974,136 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "7d15e69b566943cf",
-      "anfitriaoId": 306,
+      "seed": "397980ce86b566d1",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 462,
+          "nome": "Pradópolis",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 86,
-          "nome": "Borebi",
+          "id": 592,
+          "nome": "Tabatinga",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 65,
+          "nome": "Barrinha",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 264,
+          "nome": "Itápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 452,
+          "nome": "Pontal",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 163,
+          "participanteId": 462,
           "posicao": 1
         },
         {
-          "participanteId": 510,
+          "participanteId": 534,
           "posicao": 2
+        },
+        {
+          "participanteId": 581,
+          "posicao": 3
+        },
+        {
+          "participanteId": 64,
+          "posicao": 4
         }
       ],
       "cabecasPids": [
-        163
+        462,
+        534,
+        581,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              163,
-              551,
-              43
+              462,
+              149,
+              445
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              9,
-              60,
-              159
+              534,
+              557,
+              592,
+              264
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              86,
-              417,
-              565
+              581,
+              412,
+              65
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              452,
+              333
             ]
           }
         ],
-        "regra_id": 71,
+        "regra_id": 75,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -1185,146 +1133,84 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "7a3cb8f3f2576607",
-      "anfitriaoId": 306,
+      "seed": "cd1891cec535112e",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 101,
-          "nome": "Cafelândia",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 309,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 470,
+          "participanteId": 38,
           "posicao": 2
         },
         {
-          "participanteId": 201,
+          "participanteId": 64,
           "posicao": 3
-        },
-        {
-          "participanteId": 69,
-          "posicao": 4
-        },
-        {
-          "participanteId": 306,
-          "posicao": 5
-        },
-        {
-          "participanteId": 437,
-          "posicao": 6
-        },
-        {
-          "participanteId": 504,
-          "posicao": 7
-        },
-        {
-          "participanteId": 101,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        309,
-        470,
-        69,
-        306
+        189,
+        38
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              309,
-              290,
-              9
+              189,
+              386,
+              491,
+              581
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              470,
-              87,
-              551
-            ]
-          },
-          {
-            "letra": "C",
-            "participantes": [
-              69,
-              159,
-              101
-            ]
-          },
-          {
-            "letra": "D",
-            "participantes": [
-              306,
-              437,
-              417
+              38,
+              64,
+              333
             ]
           }
         ],
-        "regra_id": 74,
+        "regra_id": 69,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -1354,182 +1240,150 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "c0f12a5ac071bf19",
-      "anfitriaoId": 306,
+      "seed": "f5a5ff5346bb274e",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 41,
-          "nome": "Arealva",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 77,
+          "nome": "Boa Esperança do Sul",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 101,
-          "nome": "Cafelândia",
+          "id": 117,
+          "nome": "Cândido Rodrigues",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 592,
+          "nome": "Tabatinga",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 510,
-          "nome": "Saltinho",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 290,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 41,
+          "participanteId": 77,
           "posicao": 2
         },
         {
-          "participanteId": 78,
+          "participanteId": 189,
           "posicao": 3
         },
         {
-          "participanteId": 306,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 510,
+          "participanteId": 280,
           "posicao": 5
         },
         {
-          "participanteId": 309,
+          "participanteId": 21,
           "posicao": 6
-        },
-        {
-          "participanteId": 565,
-          "posicao": 7
-        },
-        {
-          "participanteId": 87,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        290,
-        41,
-        306,
-        510,
-        565
+        491,
+        77,
+        189,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              290,
-              464,
-              319
+              491,
+              13,
+              603
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              41,
-              551,
-              101,
-              84
+              77,
+              91,
+              117,
+              38
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              306,
-              69,
-              417
+              189,
+              592,
+              280,
+              354
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              510,
-              437,
-              232
-            ]
-          },
-          {
-            "letra": "E",
-            "participantes": [
-              565,
-              470,
-              9,
-              87
+              64,
+              581,
+              390
             ]
           }
         ],
-        "regra_id": 79,
+        "regra_id": 76,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -1560,66 +1414,51 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 551,
-          "nome": "São Carlos",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 266,
-          "nome": "Itapuí",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -1635,76 +1474,61 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         }
       ],
@@ -1720,46 +1544,46 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         },
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
@@ -1775,61 +1599,81 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 21,
+          "nome": "Américo Brasiliense",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 280,
+          "nome": "Jaboticabal",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -1845,41 +1689,51 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
@@ -1895,16 +1749,21 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
@@ -1920,46 +1779,56 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 612,
+          "nome": "Terra Roxa",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         }
       ],
@@ -1975,16 +1844,21 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
@@ -1999,92 +1873,78 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "628b95406856230b",
-      "anfitriaoId": 306,
+      "seed": "9051218d53de81d6",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 439,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 69,
+          "participanteId": 38,
           "posicao": 2
         },
         {
-          "participanteId": 306,
+          "participanteId": 64,
           "posicao": 3
-        },
-        {
-          "participanteId": 309,
-          "posicao": 4
-        },
-        {
-          "participanteId": 87,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        69,
-        306
+        189,
+        38
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              69,
-              87,
-              437,
-              417
+              189,
+              491,
+              64
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              306,
-              551,
-              309
+              38,
+              557,
+              333
             ]
           }
         ],
-        "regra_id": 69,
+        "regra_id": 68,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -2114,266 +1974,170 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "380ab8031008e062",
-      "anfitriaoId": 306,
+      "seed": "6a1c8f6b29637200",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 77,
+          "nome": "Boa Esperança do Sul",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 41,
-          "nome": "Arealva",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 592,
+          "nome": "Tabatinga",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 78,
-          "nome": "Bocaina",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 86,
-          "nome": "Borebi",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 101,
-          "nome": "Cafelândia",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 222,
-          "nome": "Iacanga",
+          "id": 375,
+          "nome": "Nova Europa",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
-          "subtitulo": null
-        },
-        {
-          "id": 272,
-          "nome": "Itatinga",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 319,
-          "nome": "Macatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 439,
-          "nome": "Pirajuí",
-          "subtitulo": null
-        },
-        {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 290,
+          "participanteId": 445,
           "posicao": 1
         },
         {
-          "participanteId": 154,
+          "participanteId": 603,
           "posicao": 2
         },
         {
-          "participanteId": 87,
+          "participanteId": 412,
           "posicao": 3
         },
         {
-          "participanteId": 266,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 470,
+          "participanteId": 149,
           "posicao": 5
-        },
-        {
-          "participanteId": 417,
-          "posicao": 6
-        },
-        {
-          "participanteId": 439,
-          "posicao": 7
-        },
-        {
-          "participanteId": 200,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        290,
-        154,
-        87,
-        306,
-        266,
-        470,
-        417,
-        439
+        445,
+        603,
+        412,
+        64,
+        149
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              290,
-              437,
-              78,
-              159
+              445,
+              333,
+              592,
+              581
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              154,
-              41,
-              84
+              603,
+              375,
+              38
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              87,
-              43,
-              69
+              412,
+              386,
+              491
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              306,
-              272,
-              551,
-              458
+              64,
+              189,
+              202,
+              280
             ]
           },
           {
             "letra": "E",
             "participantes": [
-              266,
-              61,
-              86
-            ]
-          },
-          {
-            "letra": "F",
-            "participantes": [
-              470,
-              309,
-              232,
-              101
-            ]
-          },
-          {
-            "letra": "G",
-            "participantes": [
-              417,
-              565,
-              222
-            ]
-          },
-          {
-            "letra": "H",
-            "participantes": [
-              439,
-              9,
-              319,
-              504
+              149,
+              77,
+              205
             ]
           }
         ],
-        "regra_id": 90,
+        "regra_id": 79,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -2403,96 +2167,86 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "b6ef8d32f81d8ea3",
-      "anfitriaoId": 306,
+      "seed": "be4f16ab6b1622a9",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 214,
+          "nome": "Guariba",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 443,
+          "participanteId": 452,
           "posicao": 1
         },
         {
-          "participanteId": 87,
+          "participanteId": 491,
           "posicao": 2
-        },
-        {
-          "participanteId": 417,
-          "posicao": 3
-        },
-        {
-          "participanteId": 69,
-          "posicao": 4
-        },
-        {
-          "participanteId": 437,
-          "posicao": 5
-        },
-        {
-          "participanteId": 306,
-          "posicao": 6
         }
       ],
       "cabecasPids": [
-        443,
-        87
+        452,
+        491
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              443,
-              306,
-              69,
-              417
+              452,
+              214,
+              333,
+              412
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              87,
-              290,
-              272
+              491,
+              205,
+              64,
+              557
             ]
           }
         ],
-        "regra_id": 69,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -2522,74 +2276,86 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "c86fe1acb58cd860",
-      "anfitriaoId": 306,
+      "seed": "afa12ea10d33c67e",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 354,
+          "nome": "Monte Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 439,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 309,
+          "participanteId": 354,
           "posicao": 2
         }
       ],
       "cabecasPids": [
-        439,
-        309
+        38,
+        354
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              439,
-              437,
-              551
+              38,
+              581,
+              228,
+              13
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              309,
-              61,
-              565
+              354,
+              540,
+              148,
+              189
             ]
           }
         ],
-        "regra_id": 68,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -2619,248 +2385,216 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "61fd68ac129a51c6",
-      "anfitriaoId": 306,
+      "seed": "0299e9af019dccc4",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 92,
-          "nome": "Brotas",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 41,
-          "nome": "Arealva",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 482,
+          "nome": "Restinga",
           "subtitulo": null
         },
         {
-          "id": 78,
-          "nome": "Bocaina",
+          "id": 492,
+          "nome": "Rifaina",
           "subtitulo": null
         },
         {
-          "id": 86,
-          "nome": "Borebi",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 222,
-          "nome": "Iacanga",
+          "id": 522,
+          "nome": "Santa Cruz da Esperança",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 573,
+          "nome": "São Simão",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 612,
+          "nome": "Terra Roxa",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 65,
+          "nome": "Barrinha",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 451,
-          "nome": "Pongaí",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 306,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 69,
+          "participanteId": 452,
           "posicao": 2
         },
         {
-          "participanteId": 290,
+          "participanteId": 70,
           "posicao": 3
         },
         {
-          "participanteId": 458,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 78,
+          "participanteId": 13,
           "posicao": 5
         },
         {
-          "participanteId": 86,
+          "participanteId": 540,
           "posicao": 6
-        },
-        {
-          "participanteId": 61,
-          "posicao": 7
-        },
-        {
-          "participanteId": 464,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        306,
-        69,
-        290,
-        458,
-        78,
-        86,
-        61,
-        464
+        38,
+        452,
+        70,
+        64,
+        13,
+        540
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              306,
-              232,
-              272
+              38,
+              492,
+              205
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              69,
-              470,
-              60
+              452,
+              354,
+              412,
+              202
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              290,
-              443,
-              444
+              70,
+              390,
+              333,
+              522
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              458,
-              9,
-              266
+              64,
+              148,
+              612,
+              557
             ]
           },
           {
             "letra": "E",
             "participantes": [
-              78,
-              43,
-              451,
-              41
+              13,
+              189,
+              482,
+              507
             ]
           },
           {
             "letra": "F",
             "participantes": [
-              86,
-              92,
-              504
-            ]
-          },
-          {
-            "letra": "G",
-            "participantes": [
-              61,
-              222,
-              565
-            ]
-          },
-          {
-            "letra": "H",
-            "participantes": [
-              464,
-              417,
-              439
+              540,
+              534,
+              573,
+              65
             ]
           }
         ],
-        "regra_id": 87,
+        "regra_id": 85,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -2890,128 +2624,90 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "ac95167be7adc83b",
-      "anfitriaoId": 306,
+      "seed": "0e97bf8ae4f7f4df",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 641,
+          "nome": "Viradouro",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 315,
+          "nome": "Luís Antônio",
           "subtitulo": null
         },
         {
-          "id": 198,
-          "nome": "Getulina",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 214,
+          "nome": "Guariba",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 443,
+          "participanteId": 641,
           "posicao": 2
         },
         {
-          "participanteId": 9,
+          "participanteId": 580,
           "posicao": 3
-        },
-        {
-          "participanteId": 309,
-          "posicao": 4
-        },
-        {
-          "participanteId": 154,
-          "posicao": 5
-        },
-        {
-          "participanteId": 159,
-          "posicao": 6
-        },
-        {
-          "participanteId": 198,
-          "posicao": 7
-        },
-        {
-          "participanteId": 339,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        87,
-        309,
-        154
+        491,
+        641
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              87,
-              339,
-              163,
-              551
+              491,
+              581,
+              315,
+              603
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              309,
-              140,
-              159
-            ]
-          },
-          {
-            "letra": "C",
-            "participantes": [
-              154,
-              437,
-              198
+              641,
+              228,
+              386,
+              214
             ]
           }
         ],
-        "regra_id": 72,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -3042,51 +2738,36 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 209,
-          "nome": "Guarantã",
+          "id": 440,
+          "nome": "Pirangi",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         }
       ],
@@ -3102,21 +2783,11 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
@@ -3132,11 +2803,16 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         }
       ],
@@ -3152,24 +2828,8 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
-      "participantes": [
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 209,
-          "nome": "Guarantã",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        }
-      ],
+      "anfitriaoId": 64,
+      "participantes": [],
       "campeoes": [],
       "cabecasPids": [],
       "resultado": null,
@@ -3182,36 +2842,16 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
-          "subtitulo": null
-        },
-        {
-          "id": 9,
-          "nome": "Agudos",
-          "subtitulo": null
-        },
-        {
-          "id": 43,
-          "nome": "Areiópolis",
-          "subtitulo": null
-        },
-        {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 510,
-          "nome": "Saltinho",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         }
       ],
@@ -3227,41 +2867,26 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 420,
+          "nome": "Pedregulho",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 121,
-          "nome": "Capivari",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         }
       ],
@@ -3276,86 +2901,86 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "7825ed53f5c309ed",
-      "anfitriaoId": 306,
+      "seed": "90a03e5dcf04c4e8",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 482,
+          "nome": "Restinga",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 309,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 87,
+          "participanteId": 189,
           "posicao": 2
-        },
-        {
-          "participanteId": 61,
-          "posicao": 3
-        },
-        {
-          "participanteId": 9,
-          "posicao": 4
-        },
-        {
-          "participanteId": 565,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        309,
-        87
+        38,
+        189
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              309,
-              470,
-              339
+              38,
+              557,
+              64,
+              386
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              87,
-              290,
-              61
+              189,
+              491,
+              603,
+              482
             ]
           }
         ],
-        "regra_id": 68,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -3384,91 +3009,29 @@
       "nome": "Handebol Feminino Livre",
       "grupo": null,
       "tipo": "grupos",
-      "status": "sorteado",
-      "seed": "1f634eed19fed9a5",
-      "anfitriaoId": 306,
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
-          "subtitulo": null
-        },
-        {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 272,
-          "nome": "Itatinga",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         }
       ],
-      "campeoes": [
-        {
-          "participanteId": 437,
-          "posicao": 1
-        },
-        {
-          "participanteId": 69,
-          "posicao": 2
-        },
-        {
-          "participanteId": 154,
-          "posicao": 3
-        },
-        {
-          "participanteId": 306,
-          "posicao": 4
-        }
-      ],
-      "cabecasPids": [
-        437,
-        69
-      ],
-      "resultado": {
-        "grupos": [
-          {
-            "letra": "A",
-            "participantes": [
-              437,
-              272,
-              551,
-              9
-            ]
-          },
-          {
-            "letra": "B",
-            "participantes": [
-              69,
-              154,
-              306
-            ]
-          }
-        ],
-        "regra_id": 69,
-        "classificados_por_grupo": 2
-      },
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -3496,98 +3059,82 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "d6ac41c3d98a11d7",
-      "anfitriaoId": 306,
+      "seed": "2c0ff892ee3f95a7",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 482,
+          "nome": "Restinga",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 61,
+          "participanteId": 189,
           "posicao": 2
-        },
-        {
-          "participanteId": 9,
-          "posicao": 3
-        },
-        {
-          "participanteId": 309,
-          "posicao": 4
-        },
-        {
-          "participanteId": 565,
-          "posicao": 5
-        },
-        {
-          "participanteId": 470,
-          "posicao": 6
         }
       ],
       "cabecasPids": [
-        87,
-        61
+        38,
+        189
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              87,
-              470,
-              339,
-              9
+              38,
+              557,
+              482,
+              603
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              61,
-              309,
-              159,
-              69
+              189,
+              64,
+              491,
+              70
             ]
           }
         ],
@@ -3620,64 +3167,77 @@
       "nome": "Handebol Masculino Livre",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
-      "anfitriaoId": 306,
+      "status": "sorteado",
+      "seed": "4b33f4d105a34cb4",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 306,
+          "participanteId": 452,
           "posicao": 1
         },
         {
-          "participanteId": 159,
+          "participanteId": 581,
           "posicao": 2
-        },
-        {
-          "participanteId": 437,
-          "posicao": 3
-        },
-        {
-          "participanteId": 154,
-          "posicao": 4
-        },
-        {
-          "participanteId": 69,
-          "posicao": 5
-        },
-        {
-          "participanteId": 86,
-          "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        452,
+        581
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              452,
+              386,
+              354
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              581,
+              412,
+              280
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -3705,89 +3265,123 @@
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "19e51e175a77f8b6",
-      "anfitriaoId": 306,
+      "seed": "49d5a1956c75fd1c",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 420,
+          "nome": "Pedregulho",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 205,
+          "nome": "Guará",
+          "subtitulo": null
+        },
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 189,
+          "nome": "Franca",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 437,
+          "participanteId": 202,
           "posicao": 2
         },
         {
-          "participanteId": 309,
+          "participanteId": 491,
           "posicao": 3
         },
         {
-          "participanteId": 69,
+          "participanteId": 64,
           "posicao": 4
-        },
-        {
-          "participanteId": 290,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        87,
-        437,
-        69,
-        290
+        189,
+        202,
+        491,
+        64
       ],
       "resultado": {
-        "size": 7,
+        "size": 13,
         "slots": [
-          87,
-          551,
-          290,
-          69,
-          154,
-          565,
-          437
+          189,
+          333,
+          68,
+          412,
+          557,
+          64,
+          491,
+          390,
+          149,
+          420,
+          38,
+          205,
+          202
         ],
         "byePositions": [
-          1
+          1,
+          6,
+          13
         ],
         "matchesGraph": {
-          "final": "J7",
+          "final": "J13",
           "matches": [
             {
               "id": "J1",
@@ -3803,42 +3397,90 @@
             },
             {
               "id": "J3",
-              "top": "P6",
+              "top": "P7",
               "round": 1,
-              "bottom": "P7"
+              "bottom": "P8"
             },
             {
               "id": "J4",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J5",
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
+            },
+            {
+              "id": "J6",
               "top": "V:B1",
               "round": 2,
               "bottom": "V:J1"
             },
             {
-              "id": "J5",
+              "id": "J7",
               "top": "V:J2",
               "round": 2,
-              "bottom": "V:J3"
+              "bottom": "V:B2"
             },
             {
-              "id": "J7",
-              "top": "V:J4",
-              "round": 3,
-              "bottom": "V:J5"
+              "id": "J8",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
             },
             {
-              "id": "J6",
-              "top": "L:J4",
+              "id": "J9",
+              "top": "V:J5",
+              "round": 2,
+              "bottom": "V:B3"
+            },
+            {
+              "id": "J10",
+              "top": "V:J6",
               "round": 3,
-              "bottom": "L:J5"
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J11",
+              "top": "V:J8",
+              "round": 3,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J13",
+              "top": "V:J10",
+              "round": 4,
+              "bottom": "V:J11"
+            },
+            {
+              "id": "J12",
+              "top": "L:J10",
+              "round": 4,
+              "bottom": "L:J11"
             },
             {
               "id": "B1",
               "top": "P1",
               "round": 1,
               "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P13",
+              "round": 1,
+              "bottom": "BYE"
             }
           ],
-          "thirdPlace": "J6"
+          "thirdPlace": "J12"
         }
       },
       "mensagens_inscritos": [
@@ -3856,172 +3498,236 @@
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "bcf7a1da952efb46",
-      "anfitriaoId": 306,
+      "seed": "ec6258fc2fee1773",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 108,
+          "nome": "Cajuru",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 205,
+          "nome": "Guará",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 386,
+          "nome": "Olímpia",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
+          "subtitulo": null
+        },
+        {
+          "id": 412,
+          "nome": "Patrocínio Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 420,
+          "nome": "Pedregulho",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 202,
           "posicao": 1
         },
         {
-          "participanteId": 437,
+          "participanteId": 189,
           "posicao": 2
         },
         {
-          "participanteId": 69,
+          "participanteId": 491,
           "posicao": 3
         },
         {
-          "participanteId": 309,
+          "participanteId": 64,
           "posicao": 4
-        },
-        {
-          "participanteId": 154,
-          "posicao": 5
-        },
-        {
-          "participanteId": 290,
-          "posicao": 6
-        },
-        {
-          "participanteId": 565,
-          "posicao": 7
         }
       ],
       "cabecasPids": [
-        87,
-        437,
-        69,
-        309
+        202,
+        189,
+        491,
+        64
       ],
       "resultado": {
-        "size": 9,
+        "size": 16,
         "slots": [
-          87,
-          565,
-          417,
-          290,
-          309,
-          69,
-          154,
-          551,
-          437
+          202,
+          581,
+          108,
+          333,
+          68,
+          557,
+          420,
+          64,
+          491,
+          390,
+          205,
+          38,
+          149,
+          412,
+          386,
+          189
         ],
-        "byePositions": [
-          1
-        ],
+        "byePositions": [],
         "matchesGraph": {
-          "final": "J9",
+          "final": "J16",
           "matches": [
             {
               "id": "J1",
-              "top": "P2",
+              "top": "P1",
               "round": 1,
-              "bottom": "P3"
+              "bottom": "P2"
             },
             {
               "id": "J2",
-              "top": "V:B1",
-              "round": 2,
-              "bottom": "V:J1"
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
             },
             {
               "id": "J3",
-              "top": "P4",
+              "top": "P5",
               "round": 1,
-              "bottom": "P5"
+              "bottom": "P6"
             },
             {
               "id": "J4",
-              "top": "P6",
+              "top": "P7",
               "round": 1,
-              "bottom": "P7"
+              "bottom": "P8"
             },
             {
               "id": "J5",
-              "top": "P8",
+              "top": "P9",
               "round": 1,
-              "bottom": "P9"
+              "bottom": "P10"
             },
             {
               "id": "J6",
-              "top": "V:J2",
-              "round": 3,
-              "bottom": "V:J3"
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
             },
             {
               "id": "J7",
-              "top": "V:J4",
-              "round": 2,
-              "bottom": "V:J5"
-            },
-            {
-              "id": "J9",
-              "top": "V:J6",
-              "round": 4,
-              "bottom": "V:J7"
+              "top": "P13",
+              "round": 1,
+              "bottom": "P14"
             },
             {
               "id": "J8",
-              "top": "L:J6",
-              "round": 4,
-              "bottom": "L:J7"
+              "top": "P15",
+              "round": 1,
+              "bottom": "P16"
             },
             {
-              "id": "B1",
-              "top": "P1",
-              "round": 1,
-              "bottom": "BYE"
+              "id": "J9",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J10",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J11",
+              "top": "V:J5",
+              "round": 2,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J12",
+              "top": "V:J7",
+              "round": 2,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J13",
+              "top": "V:J9",
+              "round": 3,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J14",
+              "top": "V:J11",
+              "round": 3,
+              "bottom": "V:J12"
+            },
+            {
+              "id": "J16",
+              "top": "V:J13",
+              "round": 4,
+              "bottom": "V:J14"
+            },
+            {
+              "id": "J15",
+              "top": "L:J13",
+              "round": 4,
+              "bottom": "L:J14"
             }
           ],
-          "thirdPlace": "J8"
+          "thirdPlace": "J15"
         }
       },
       "mensagens_inscritos": [
@@ -4040,56 +3746,56 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 492,
+          "nome": "Rifaina",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         }
       ],
@@ -4105,61 +3811,56 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         }
       ],
@@ -4174,130 +3875,102 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "8a950ab19deb02a0",
-      "anfitriaoId": 306,
+      "seed": "8b7791306f842c29",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 437,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 306,
+          "participanteId": 189,
           "posicao": 2
         },
         {
-          "participanteId": 565,
+          "participanteId": 64,
           "posicao": 3
-        },
-        {
-          "participanteId": 443,
-          "posicao": 4
-        },
-        {
-          "participanteId": 84,
-          "posicao": 5
-        },
-        {
-          "participanteId": 464,
-          "posicao": 6
-        },
-        {
-          "participanteId": 87,
-          "posicao": 7
         }
       ],
       "cabecasPids": [
-        437,
-        306,
-        565
+        491,
+        189,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              232,
-              443,
-              87
+              491,
+              149,
+              38
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              306,
-              84,
-              69
+              189,
+              390,
+              333
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              565,
-              470,
-              464,
-              551
+              64,
+              581,
+              603
             ]
           }
         ],
-        "regra_id": 73,
+        "regra_id": 71,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -4328,76 +4001,46 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 439,
-          "nome": "Pirajuí",
-          "subtitulo": null
-        },
-        {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -4413,86 +4056,46 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 439,
-          "nome": "Pirajuí",
-          "subtitulo": null
-        },
-        {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -4508,61 +4111,46 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
-          "subtitulo": null
-        },
-        {
-          "id": 458,
-          "nome": "Porto Ferreira",
-          "subtitulo": null
-        },
-        {
-          "id": 551,
-          "nome": "São Carlos",
-          "subtitulo": null
-        },
-        {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -4578,36 +4166,26 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         }
       ],
@@ -4623,46 +4201,36 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 43,
-          "nome": "Areiópolis",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
@@ -4678,24 +4246,8 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
-      "participantes": [
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 551,
-          "nome": "São Carlos",
-          "subtitulo": null
-        }
-      ],
+      "anfitriaoId": 64,
+      "participantes": [],
       "campeoes": [],
       "cabecasPids": [],
       "resultado": null,
@@ -4708,44 +4260,8 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
-      "participantes": [
-        {
-          "id": 551,
-          "nome": "São Carlos",
-          "subtitulo": null
-        },
-        {
-          "id": 43,
-          "nome": "Areiópolis",
-          "subtitulo": null
-        },
-        {
-          "id": 61,
-          "nome": "Barra Bonita",
-          "subtitulo": null
-        },
-        {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 309,
-          "nome": "Lins",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        }
-      ],
+      "anfitriaoId": 64,
+      "participantes": [],
       "campeoes": [],
       "cabecasPids": [],
       "resultado": null,
@@ -4757,80 +4273,76 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "cbf083b4123e6f32",
-      "anfitriaoId": 306,
+      "seed": "f66d8a6d6cb086f9",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 437,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 290,
+          "participanteId": 189,
           "posicao": 2
-        },
-        {
-          "participanteId": 87,
-          "posicao": 3
         }
       ],
       "cabecasPids": [
-        437,
-        87
+        38,
+        189
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              9,
-              439,
-              464
+              38,
+              540,
+              557
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              87,
-              470,
-              568
+              189,
+              64,
+              445,
+              333
             ]
           }
         ],
@@ -4865,40 +4377,25 @@
       "tipo": "grupos",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
-      "campeoes": [
-        {
-          "participanteId": 69,
-          "posicao": 1
-        }
-      ],
+      "campeoes": [],
       "cabecasPids": [],
       "resultado": null,
       "mensagens_inscritos": [
@@ -4928,115 +4425,136 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "d9b48184900b0847",
-      "anfitriaoId": 306,
+      "seed": "278561378dbc3708",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 464,
-          "nome": "Pratânia",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 69,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 437,
+          "participanteId": 189,
           "posicao": 2
         },
         {
-          "participanteId": 290,
+          "participanteId": 581,
           "posicao": 3
         },
         {
-          "participanteId": 272,
+          "participanteId": 64,
           "posicao": 4
-        },
-        {
-          "participanteId": 319,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        437,
-        290
+        38,
+        189,
+        581,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              437,
-              464,
-              232
+              38,
+              557,
+              333
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              290,
-              504,
-              9
+              189,
+              452,
+              540,
+              390
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              470,
-              60,
-              439,
-              568
+              581,
+              445,
+              70
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              64,
+              354,
+              386
             ]
           }
         ],
-        "regra_id": 72,
+        "regra_id": 75,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -5065,97 +4583,42 @@
       "nome": "Tênis de Mesa Masculino Livre",
       "grupo": null,
       "tipo": "grupos",
-      "status": "sorteado",
-      "seed": "8398726f5d90e0db",
-      "anfitriaoId": 306,
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 68,
+          "nome": "Batatais",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 266,
-          "nome": "Itapuí",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 492,
+          "nome": "Rifaina",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 306,
+          "participanteId": 491,
           "posicao": 1
         },
         {
-          "participanteId": 87,
+          "participanteId": 196,
           "posicao": 2
         },
         {
-          "participanteId": 443,
+          "participanteId": 68,
           "posicao": 3
-        },
-        {
-          "participanteId": 458,
-          "posicao": 4
         }
       ],
-      "cabecasPids": [
-        306,
-        87
-      ],
-      "resultado": {
-        "grupos": [
-          {
-            "letra": "A",
-            "participantes": [
-              306,
-              272,
-              565,
-              551
-            ]
-          },
-          {
-            "letra": "B",
-            "participantes": [
-              87,
-              154,
-              266,
-              443
-            ]
-          }
-        ],
-        "regra_id": 70,
-        "classificados_por_grupo": 2
-      },
+      "cabecasPids": [],
+      "resultado": null,
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -5183,40 +4646,133 @@
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "8dc4d03fa0eb848d",
-      "anfitriaoId": 306,
+      "seed": "cebf1c957fab99d1",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 333,
+          "nome": "Matão",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 140,
+          "participanteId": 189,
+          "posicao": 1
+        },
+        {
+          "participanteId": 581,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        189,
+        581
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          189,
+          333,
+          38,
+          581
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "nome": "Tênis Feminino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "0c82aa9024d30ec4",
+      "anfitriaoId": 64,
+      "participantes": [
+        {
+          "id": 202,
+          "nome": "Guaíra",
+          "subtitulo": null
+        },
+        {
+          "id": 491,
+          "nome": "Ribeirão Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 557,
+          "nome": "São Joaquim da Barra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 202,
           "posicao": 1
         }
       ],
       "cabecasPids": [
-        140
+        202
       ],
       "resultado": {
         "size": 3,
         "slots": [
-          140,
-          551,
-          437
+          202,
+          557,
+          491
         ],
         "byePositions": [
           1
@@ -5256,242 +4812,78 @@
       ]
     },
     {
-      "id": 59,
-      "nome": "Tênis Feminino Livre",
-      "grupo": null,
-      "tipo": "chaves",
-      "status": "sorteado",
-      "seed": "90379c1946967739",
-      "anfitriaoId": 306,
-      "participantes": [
-        {
-          "id": 458,
-          "nome": "Porto Ferreira",
-          "subtitulo": null
-        },
-        {
-          "id": 69,
-          "nome": "Bauru",
-          "subtitulo": null
-        },
-        {
-          "id": 87,
-          "nome": "Botucatu",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
-          "subtitulo": null
-        },
-        {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 568,
-          "nome": "São Pedro",
-          "subtitulo": null
-        }
-      ],
-      "campeoes": [
-        {
-          "participanteId": 437,
-          "posicao": 1
-        },
-        {
-          "participanteId": 87,
-          "posicao": 2
-        },
-        {
-          "participanteId": 69,
-          "posicao": 3
-        },
-        {
-          "participanteId": 309,
-          "posicao": 4
-        },
-        {
-          "participanteId": 306,
-          "posicao": 5
-        },
-        {
-          "participanteId": 568,
-          "posicao": 6
-        }
-      ],
-      "cabecasPids": [
-        87,
-        69,
-        306,
-        568
-      ],
-      "resultado": {
-        "size": 7,
-        "slots": [
-          87,
-          565,
-          568,
-          306,
-          458,
-          290,
-          69
-        ],
-        "byePositions": [
-          1
-        ],
-        "matchesGraph": {
-          "final": "J7",
-          "matches": [
-            {
-              "id": "J1",
-              "top": "P2",
-              "round": 1,
-              "bottom": "P3"
-            },
-            {
-              "id": "J2",
-              "top": "P4",
-              "round": 1,
-              "bottom": "P5"
-            },
-            {
-              "id": "J3",
-              "top": "P6",
-              "round": 1,
-              "bottom": "P7"
-            },
-            {
-              "id": "J4",
-              "top": "V:B1",
-              "round": 2,
-              "bottom": "V:J1"
-            },
-            {
-              "id": "J5",
-              "top": "V:J2",
-              "round": 2,
-              "bottom": "V:J3"
-            },
-            {
-              "id": "J7",
-              "top": "V:J4",
-              "round": 3,
-              "bottom": "V:J5"
-            },
-            {
-              "id": "J6",
-              "top": "L:J4",
-              "round": 3,
-              "bottom": "L:J5"
-            },
-            {
-              "id": "B1",
-              "top": "P1",
-              "round": 1,
-              "bottom": "BYE"
-            }
-          ],
-          "thirdPlace": "J6"
-        }
-      },
-      "mensagens_inscritos": [
-        {
-          "max": 1,
-          "min": 1,
-          "mensagem": "Classificado",
-          "pular_sorteio": true
-        }
-      ]
-    },
-    {
       "id": 60,
       "nome": "Tênis Masculino 21-anos",
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "6b5ce166c10ca432",
-      "anfitriaoId": 306,
+      "seed": "5ce2baa64f35fc04",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 154,
+          "participanteId": 581,
           "posicao": 1
         },
         {
-          "participanteId": 309,
+          "participanteId": 354,
           "posicao": 2
         },
         {
-          "participanteId": 306,
+          "participanteId": 64,
           "posicao": 3
         },
         {
-          "participanteId": 504,
+          "participanteId": 13,
           "posicao": 4
-        },
-        {
-          "participanteId": 139,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        306,
-        504
+        581,
+        354,
+        64,
+        13
       ],
       "resultado": {
-        "size": 6,
+        "size": 5,
         "slots": [
-          306,
-          61,
-          140,
-          437,
-          551,
-          504
+          581,
+          333,
+          13,
+          64,
+          354
         ],
         "byePositions": [
-          1,
-          6
+          1
         ],
         "matchesGraph": {
-          "final": "J6",
+          "final": "J5",
           "matches": [
             {
               "id": "J1",
@@ -5501,48 +4893,36 @@
             },
             {
               "id": "J2",
-              "top": "P4",
-              "round": 1,
-              "bottom": "P5"
-            },
-            {
-              "id": "J3",
               "top": "V:B1",
               "round": 2,
               "bottom": "V:J1"
             },
             {
-              "id": "J4",
-              "top": "V:J2",
-              "round": 2,
-              "bottom": "V:B2"
-            },
-            {
-              "id": "J6",
-              "top": "V:J3",
-              "round": 3,
-              "bottom": "V:J4"
+              "id": "J3",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
             },
             {
               "id": "J5",
-              "top": "L:J3",
+              "top": "V:J2",
               "round": 3,
-              "bottom": "L:J4"
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J4",
+              "top": "L:J2",
+              "round": 3,
+              "bottom": "L:J3"
             },
             {
               "id": "B1",
               "top": "P1",
               "round": 1,
               "bottom": "BYE"
-            },
-            {
-              "id": "B2",
-              "top": "P6",
-              "round": 1,
-              "bottom": "BYE"
             }
           ],
-          "thirdPlace": "J5"
+          "thirdPlace": "J4"
         }
       },
       "mensagens_inscritos": [
@@ -5560,89 +4940,85 @@
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "ed1d5087d045338f",
-      "anfitriaoId": 306,
+      "seed": "f03cc2b4333bba72",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 492,
+          "nome": "Rifaina",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 493,
+          "nome": "Rincão",
           "subtitulo": null
         },
         {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 69,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 87,
+          "participanteId": 189,
           "posicao": 2
         },
         {
-          "participanteId": 437,
+          "participanteId": 493,
           "posicao": 3
         },
         {
-          "participanteId": 565,
+          "participanteId": 557,
           "posicao": 4
-        },
-        {
-          "participanteId": 417,
-          "posicao": 5
         }
       ],
       "cabecasPids": [
-        69,
-        87,
-        565,
-        417
+        38,
+        189,
+        493,
+        557
       ],
       "resultado": {
         "size": 8,
         "slots": [
-          69,
-          458,
-          443,
-          417,
-          565,
-          232,
-          568,
-          87
+          38,
+          202,
+          491,
+          557,
+          493,
+          390,
+          492,
+          189
         ],
         "byePositions": [],
         "matchesGraph": {
@@ -5715,164 +5091,144 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "840b85337c53a382",
-      "anfitriaoId": 306,
+      "seed": "cad2fecc2544d02c",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 85,
+          "nome": "Borborema",
           "subtitulo": null
         },
         {
-          "id": 163,
-          "nome": "Duartina",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         },
         {
-          "id": 209,
-          "nome": "Guarantã",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 222,
-          "nome": "Iacanga",
+          "id": 214,
+          "nome": "Guariba",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 482,
+          "nome": "Restinga",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 568,
-          "nome": "São Pedro",
-          "subtitulo": null
-        },
-        {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 69,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 306,
+          "participanteId": 491,
           "posicao": 2
         },
         {
-          "participanteId": 437,
+          "participanteId": 189,
           "posicao": 3
         },
         {
-          "participanteId": 470,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 140,
+          "participanteId": 148,
           "posicao": 5
         },
         {
-          "participanteId": 290,
+          "participanteId": 581,
           "posicao": 6
-        },
-        {
-          "participanteId": 61,
-          "posicao": 7
-        },
-        {
-          "participanteId": 439,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        69,
-        306,
-        470,
-        290
+        38,
+        491,
+        189,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              69,
-              209,
-              266,
-              9
+              38,
+              148,
+              85,
+              214
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              306,
-              61,
-              163,
-              309
+              491,
+              354,
+              452
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              470,
-              272,
-              339,
-              568
+              189,
+              445,
+              482
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              290,
-              439,
-              222
+              64,
+              581,
+              280
             ]
           }
         ],
-        "regra_id": 77,
+        "regra_id": 75,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -5902,96 +5258,90 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "dca07a9f361df58f",
-      "anfitriaoId": 306,
+      "seed": "68f2784c695c1fa5",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 79,
-          "nome": "Bofete",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 86,
-          "nome": "Borebi",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 612,
+          "nome": "Terra Roxa",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 641,
+          "nome": "Viradouro",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 309,
+          "participanteId": 641,
           "posicao": 1
         },
         {
-          "participanteId": 101,
+          "participanteId": 149,
           "posicao": 2
         },
         {
-          "participanteId": 87,
+          "participanteId": 540,
           "posicao": 3
-        },
-        {
-          "participanteId": 458,
-          "posicao": 4
-        },
-        {
-          "participanteId": 41,
-          "posicao": 5
-        },
-        {
-          "participanteId": 444,
-          "posicao": 6
         }
       ],
       "cabecasPids": [
-        87,
-        458
+        641,
+        149
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              87,
-              444,
-              86
+              641,
+              507,
+              540,
+              557
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              458,
-              79,
-              551,
-              437
+              149,
+              612,
+              603,
+              333
             ]
           }
         ],
-        "regra_id": 69,
+        "regra_id": 70,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -6021,200 +5371,162 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "fb90d30f8a52e121",
-      "anfitriaoId": 306,
+      "seed": "6a47882b0565358b",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 92,
-          "nome": "Brotas",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 65,
+          "nome": "Barrinha",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 101,
-          "nome": "Cafelândia",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 315,
+          "nome": "Luís Antônio",
           "subtitulo": null
         },
         {
-          "id": 209,
-          "nome": "Guarantã",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 504,
-          "nome": "Sabino",
-          "subtitulo": null
-        },
-        {
-          "id": 568,
-          "nome": "São Pedro",
-          "subtitulo": null
-        },
-        {
-          "id": 451,
-          "nome": "Pongaí",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 306,
+          "participanteId": 38,
           "posicao": 1
         },
         {
-          "participanteId": 69,
+          "participanteId": 189,
           "posicao": 2
         },
         {
-          "participanteId": 309,
+          "participanteId": 491,
           "posicao": 3
         },
         {
-          "participanteId": 9,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 504,
+          "participanteId": 315,
           "posicao": 5
         },
         {
-          "participanteId": 101,
+          "participanteId": 534,
           "posicao": 6
-        },
-        {
-          "participanteId": 290,
-          "posicao": 7
-        },
-        {
-          "participanteId": 140,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        306,
-        69,
-        309,
-        9,
-        504,
-        101
+        38,
+        189,
+        491,
+        64
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              306,
-              290,
-              92
+              38,
+              581,
+              13,
+              228
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              69,
-              61,
-              209
+              189,
+              70,
+              386,
+              445
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              309,
-              443,
-              568,
-              458
+              491,
+              534,
+              390,
+              65
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              9,
-              140,
-              84
-            ]
-          },
-          {
-            "letra": "E",
-            "participantes": [
-              504,
-              451,
-              319
-            ]
-          },
-          {
-            "letra": "F",
-            "participantes": [
-              101,
-              470,
-              439
+              64,
+              315,
+              354,
+              148
             ]
           }
         ],
-        "regra_id": 81,
+        "regra_id": 78,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -6244,108 +5556,136 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "89e61c43f0806786",
-      "anfitriaoId": 306,
+      "seed": "6ff460cdc7fe9db4",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 264,
+          "nome": "Itápolis",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 278,
+          "nome": "Ituverava",
           "subtitulo": null
         },
         {
-          "id": 79,
-          "nome": "Bofete",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 272,
-          "nome": "Itatinga",
+          "id": 580,
+          "nome": "Serrana",
+          "subtitulo": null
+        },
+        {
+          "id": 592,
+          "nome": "Tabatinga",
+          "subtitulo": null
+        },
+        {
+          "id": 612,
+          "nome": "Terra Roxa",
+          "subtitulo": null
+        },
+        {
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 333,
           "posicao": 1
         },
         {
-          "participanteId": 79,
+          "participanteId": 149,
           "posicao": 2
         },
         {
-          "participanteId": 154,
+          "participanteId": 452,
           "posicao": 3
+        },
+        {
+          "participanteId": 580,
+          "posicao": 4
         }
       ],
       "cabecasPids": [
-        87,
-        79,
-        154
+        333,
+        149,
+        452,
+        580
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              87,
-              551,
-              60
+              333,
+              557,
+              592,
+              507
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              79,
-              444,
-              565
+              149,
+              280,
+              264
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              154,
-              437,
-              159,
-              272
+              452,
+              540,
+              278
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              580,
+              612,
+              412
             ]
           }
         ],
-        "regra_id": 72,
+        "regra_id": 75,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -6375,218 +5715,198 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "a793dd4417ae8ed5",
-      "anfitriaoId": 306,
+      "seed": "9bf4e3902d094523",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 315,
+          "nome": "Luís Antônio",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 79,
-          "nome": "Bofete",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 101,
-          "nome": "Cafelândia",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 222,
-          "nome": "Iacanga",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 573,
+          "nome": "São Simão",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 580,
+          "nome": "Serrana",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 87,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 154,
+          "participanteId": 38,
           "posicao": 2
         },
         {
-          "participanteId": 69,
+          "participanteId": 202,
           "posicao": 3
         },
         {
-          "participanteId": 140,
+          "participanteId": 64,
           "posicao": 4
         },
         {
-          "participanteId": 306,
+          "participanteId": 491,
           "posicao": 5
         },
         {
-          "participanteId": 458,
+          "participanteId": 557,
           "posicao": 6
-        },
-        {
-          "participanteId": 309,
-          "posicao": 7
-        },
-        {
-          "participanteId": 101,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        87,
-        154,
-        69,
-        306,
-        140,
-        458
+        189,
+        38,
+        202,
+        64,
+        491,
+        557
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              87,
-              470,
-              101,
-              79
+              189,
+              315,
+              581,
+              580
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              154,
-              439,
-              319,
-              565
+              38,
+              354,
+              333
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              69,
-              444,
-              551,
-              9
+              202,
+              149,
+              507,
+              603
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              306,
-              339,
-              568
+              64,
+              91,
+              13
             ]
           },
           {
             "letra": "E",
             "participantes": [
-              140,
-              443,
-              309,
-              222
+              491,
+              573,
+              280
             ]
           },
           {
             "letra": "F",
             "participantes": [
-              458,
-              437,
-              290
+              557,
+              445,
+              386
             ]
           }
         ],
-        "regra_id": 84,
+        "regra_id": 82,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -6616,284 +5936,267 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "8ab0b7925186cba5",
-      "anfitriaoId": 306,
+      "seed": "857cde419d2fc07b",
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 154,
-          "nome": "Descalvado",
+          "id": 13,
+          "nome": "Altinópolis",
           "subtitulo": null
         },
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 458,
-          "nome": "Porto Ferreira",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 148,
+          "nome": "Cravinhos",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 149,
+          "nome": "Cristais Paulista",
           "subtitulo": null
         },
         {
-          "id": 61,
-          "nome": "Barra Bonita",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 202,
+          "nome": "Guaíra",
           "subtitulo": null
         },
         {
-          "id": 78,
-          "nome": "Bocaina",
+          "id": 228,
+          "nome": "Ibitinga",
           "subtitulo": null
         },
         {
-          "id": 79,
-          "nome": "Bofete",
+          "id": 248,
+          "nome": "Ipuã",
           "subtitulo": null
         },
         {
-          "id": 84,
-          "nome": "Boracéia",
+          "id": 280,
+          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 315,
+          "nome": "Luís Antônio",
           "subtitulo": null
         },
         {
-          "id": 140,
-          "nome": "Conchas",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 354,
+          "nome": "Monte Alto",
           "subtitulo": null
         },
         {
-          "id": 209,
-          "nome": "Guarantã",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 222,
-          "nome": "Iacanga",
+          "id": 390,
+          "nome": "Orlândia",
           "subtitulo": null
         },
         {
-          "id": 232,
-          "nome": "Igaraçu do Tietê",
+          "id": 412,
+          "nome": "Patrocínio Paulista",
           "subtitulo": null
         },
         {
-          "id": 266,
-          "nome": "Itapuí",
+          "id": 445,
+          "nome": "Pitangueiras",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 452,
+          "nome": "Pontal",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 462,
+          "nome": "Pradópolis",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 507,
+          "nome": "Sales Oliveira",
           "subtitulo": null
         },
         {
-          "id": 339,
-          "nome": "Mineiros do Tietê",
+          "id": 534,
+          "nome": "Santa Rosa de Viterbo",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
+          "id": 540,
+          "nome": "Santo Antônio da Alegria",
           "subtitulo": null
         },
         {
-          "id": 439,
-          "nome": "Pirajuí",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 444,
-          "nome": "Piratininga",
+          "id": 573,
+          "nome": "São Simão",
           "subtitulo": null
         },
         {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 580,
+          "nome": "Serrana",
           "subtitulo": null
         },
         {
-          "id": 504,
-          "nome": "Sabino",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
-          "subtitulo": null
-        },
-        {
-          "id": 568,
-          "nome": "São Pedro",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 69,
+          "participanteId": 189,
           "posicao": 1
         },
         {
-          "participanteId": 140,
+          "participanteId": 64,
           "posicao": 2
         },
         {
-          "participanteId": 154,
+          "participanteId": 38,
           "posicao": 3
         },
         {
-          "participanteId": 470,
+          "participanteId": 534,
           "posicao": 4
         },
         {
-          "participanteId": 9,
+          "participanteId": 315,
           "posicao": 5
         },
         {
-          "participanteId": 437,
+          "participanteId": 280,
           "posicao": 6
         },
         {
-          "participanteId": 306,
+          "participanteId": 333,
           "posicao": 7
-        },
-        {
-          "participanteId": 568,
-          "posicao": 8
         }
       ],
       "cabecasPids": [
-        69,
-        140,
-        154,
-        306,
-        470,
-        9,
-        437,
-        568
+        189,
+        64,
+        38,
+        534,
+        315,
+        280,
+        333
       ],
       "resultado": {
         "grupos": [
           {
             "letra": "A",
             "participantes": [
-              69,
-              444,
-              159,
-              439
+              189,
+              462,
+              573
             ]
           },
           {
             "letra": "B",
             "participantes": [
-              140,
-              232,
-              60,
-              319
+              64,
+              507,
+              412
             ]
           },
           {
             "letra": "C",
             "participantes": [
-              154,
-              266,
-              209,
-              443
+              38,
+              202,
+              540,
+              228
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              306,
-              79,
-              417,
-              87
+              534,
+              390,
+              581,
+              445
             ]
           },
           {
             "letra": "E",
             "participantes": [
-              470,
-              458,
-              504,
-              290
+              315,
+              491,
+              91,
+              248
             ]
           },
           {
             "letra": "F",
             "participantes": [
-              9,
-              339,
-              61
+              280,
+              580,
+              148
             ]
           },
           {
             "letra": "G",
             "participantes": [
-              437,
-              78,
-              222,
-              309
+              333,
+              386,
+              149,
+              557
             ]
           },
           {
             "letra": "H",
             "participantes": [
-              568,
-              565,
-              551,
-              84
+              354,
+              13,
+              452,
+              603
             ]
           }
         ],
-        "regra_id": 93,
+        "regra_id": 91,
         "classificados_por_grupo": 2
       },
       "mensagens_inscritos": [
@@ -6924,46 +6227,36 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 65,
+          "nome": "Barrinha",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 470,
-          "nome": "Promissão",
-          "subtitulo": null
-        },
-        {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         }
       ],
@@ -6979,26 +6272,21 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
@@ -7014,51 +6302,41 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 551,
-          "nome": "São Carlos",
+          "id": 65,
+          "nome": "Barrinha",
           "subtitulo": null
         },
         {
-          "id": 69,
-          "nome": "Bauru",
+          "id": 189,
+          "nome": "Franca",
           "subtitulo": null
         },
         {
-          "id": 87,
-          "nome": "Botucatu",
+          "id": 333,
+          "nome": "Matão",
           "subtitulo": null
         },
         {
-          "id": 159,
-          "nome": "Dois Córregos",
+          "id": 386,
+          "nome": "Olímpia",
           "subtitulo": null
         },
         {
-          "id": 306,
-          "nome": "Lençóis Paulista",
+          "id": 491,
+          "nome": "Ribeirão Preto",
           "subtitulo": null
         },
         {
-          "id": 309,
-          "nome": "Lins",
+          "id": 557,
+          "nome": "São Joaquim da Barra",
           "subtitulo": null
         },
         {
-          "id": 319,
-          "nome": "Macatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 417,
-          "nome": "Pederneiras",
-          "subtitulo": null
-        },
-        {
-          "id": 470,
-          "nome": "Promissão",
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
@@ -7074,36 +6352,46 @@
       "tipo": "especifico",
       "status": "aguardando",
       "seed": null,
-      "anfitriaoId": 306,
+      "anfitriaoId": 64,
       "participantes": [
         {
-          "id": 443,
-          "nome": "Pirassununga",
+          "id": 38,
+          "nome": "Araraquara",
           "subtitulo": null
         },
         {
-          "id": 9,
-          "nome": "Agudos",
+          "id": 64,
+          "nome": "Barretos",
           "subtitulo": null
         },
         {
-          "id": 60,
-          "nome": "Bariri",
+          "id": 70,
+          "nome": "Bebedouro",
           "subtitulo": null
         },
         {
-          "id": 290,
-          "nome": "Jaú",
+          "id": 91,
+          "nome": "Brodowski",
           "subtitulo": null
         },
         {
-          "id": 565,
-          "nome": "São Manuel",
+          "id": 164,
+          "nome": "Dumont",
           "subtitulo": null
         },
         {
-          "id": 437,
-          "nome": "Piracicaba",
+          "id": 248,
+          "nome": "Ipuã",
+          "subtitulo": null
+        },
+        {
+          "id": 445,
+          "nome": "Pitangueiras",
+          "subtitulo": null
+        },
+        {
+          "id": 581,
+          "nome": "Sertãozinho",
           "subtitulo": null
         }
       ],
