@@ -11,6 +11,14 @@ export function htmlShell(opts: { title: string; body: string; cssHref: string }
 <title>${escapeHtml(opts.title)}</title>
 <link rel="icon" href="/montana/simbolo.png" />
 <link rel="stylesheet" href="${opts.cssHref}" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RE4Q0N8XKS"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RE4Q0N8XKS');
+</script>
 </head>
 <body>${opts.body}</body>
 </html>`
