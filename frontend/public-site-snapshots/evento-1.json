@@ -1,0 +1,6308 @@
+{
+  "id": 1,
+  "nome": "68º Jogos Regionais de Penápolis",
+  "competicao": "Jogos Regionais",
+  "cidade": "Penápolis",
+  "local": ".",
+  "data": "2026-06-23T18:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-06-23T20:17:24.585Z",
+  "modalidades": [
+    {
+      "id": 1,
+      "nome": "Atletismo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 71,
+          "nome": "Bento de Abreu",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 316,
+          "nome": "Luiziânia",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 182,
+      "nome": "Atletismo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 50,
+          "nome": "Auriflama",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 56,
+          "nome": "Bálsamo",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 203,
+          "nome": "Guapiaçu",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 316,
+          "nome": "Luiziânia",
+          "subtitulo": null
+        },
+        {
+          "id": 320,
+          "nome": "Macaubal",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 54,
+          "nome": "Bady Bassitt",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 189,
+      "nome": "Badminton Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "17a78992f00d9bbe",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 344,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [
+        344
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              344,
+              645,
+              33
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              561,
+              75,
+              424
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "Badminton Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "7461caa7200d8573",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 344,
+          "posicao": 2
+        },
+        {
+          "participanteId": 75,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        561,
+        344
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              561,
+              75,
+              424
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              344,
+              645,
+              33
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "Basquete 3x3 Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 344,
+          "posicao": 1
+        },
+        {
+          "participanteId": 128,
+          "posicao": 2
+        },
+        {
+          "participanteId": 561,
+          "posicao": 3
+        },
+        {
+          "participanteId": 599,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Basquete 3x3 Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "fd9b58d3eef4b936",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 50,
+          "nome": "Auriflama",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 54,
+          "nome": "Bady Bassitt",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 344,
+          "posicao": 2
+        },
+        {
+          "participanteId": 237,
+          "posicao": 3
+        },
+        {
+          "participanteId": 33,
+          "posicao": 4
+        },
+        {
+          "participanteId": 182,
+          "posicao": 5
+        },
+        {
+          "participanteId": 631,
+          "posicao": 6
+        },
+        {
+          "participanteId": 75,
+          "posicao": 7
+        },
+        {
+          "participanteId": 424,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        561,
+        344,
+        237,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              561,
+              128,
+              599
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              344,
+              33,
+              52
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              237,
+              75,
+              285,
+              54
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              50,
+              645
+            ]
+          }
+        ],
+        "regra_id": 75,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Basquete Feminino 21 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 128,
+          "posicao": 1
+        },
+        {
+          "participanteId": 178,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nome": "Basquete Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 33,
+          "posicao": 1
+        },
+        {
+          "participanteId": 561,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nome": "Basquete Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f3b2e6048eece958",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 344,
+          "posicao": 1
+        },
+        {
+          "participanteId": 237,
+          "posicao": 2
+        },
+        {
+          "participanteId": 128,
+          "posicao": 3
+        },
+        {
+          "participanteId": 75,
+          "posicao": 4
+        },
+        {
+          "participanteId": 424,
+          "posicao": 5
+        },
+        {
+          "participanteId": 52,
+          "posicao": 6
+        },
+        {
+          "participanteId": 25,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        344,
+        237,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              344,
+              52,
+              645,
+              210
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              237,
+              128,
+              33,
+              285
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              424,
+              75,
+              25
+            ]
+          }
+        ],
+        "regra_id": 73,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nome": "Basquete Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 50,
+          "nome": "Auriflama",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 294,
+          "nome": "José Bonifácio",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 182,
+          "posicao": 2
+        },
+        {
+          "participanteId": 33,
+          "posicao": 3
+        },
+        {
+          "participanteId": 285,
+          "posicao": 4
+        },
+        {
+          "participanteId": 599,
+          "posicao": 5
+        },
+        {
+          "participanteId": 645,
+          "posicao": 6
+        },
+        {
+          "participanteId": 22,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "nome": "Biribol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f6690ee4c408f375",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 75,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        },
+        {
+          "participanteId": 344,
+          "posicao": 4
+        },
+        {
+          "participanteId": 237,
+          "posicao": 5
+        },
+        {
+          "participanteId": 561,
+          "posicao": 6
+        },
+        {
+          "participanteId": 342,
+          "posicao": 7
+        },
+        {
+          "participanteId": 50,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        75,
+        33,
+        645,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              75,
+              25,
+              237
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              33,
+              342,
+              599
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              645,
+              128,
+              344
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              210,
+              561
+            ]
+          }
+        ],
+        "regra_id": 74,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "nome": "Bocha Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "c83aba7d8b37db21",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 71,
+          "nome": "Bento de Abreu",
+          "subtitulo": null
+        },
+        {
+          "id": 74,
+          "nome": "Bilac",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 536,
+          "nome": "Santana da Ponte Pensa",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 629,
+          "nome": "Urânia",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 75,
+          "posicao": 2
+        },
+        {
+          "participanteId": 344,
+          "posicao": 3
+        },
+        {
+          "participanteId": 127,
+          "posicao": 4
+        },
+        {
+          "participanteId": 182,
+          "posicao": 5
+        },
+        {
+          "participanteId": 237,
+          "posicao": 6
+        },
+        {
+          "participanteId": 561,
+          "posicao": 7
+        },
+        {
+          "participanteId": 33,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        645,
+        75,
+        344,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              645,
+              561,
+              599,
+              629
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              75,
+              237,
+              127,
+              285
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              344,
+              536,
+              33,
+              74
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              128,
+              182,
+              71
+            ]
+          }
+        ],
+        "regra_id": 78,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "nome": "Capoeira Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 369,
+          "nome": "Nhandeara",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 20,
+      "nome": "Capoeira Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 369,
+          "nome": "Nhandeara",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 21,
+      "nome": "Ciclismo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 22,
+      "nome": "Ciclismo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 23,
+      "nome": "Damas Feminino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 24,
+      "nome": "Damas Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 25,
+      "nome": "Damas Masculino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 26,
+      "nome": "Damas Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 634,
+          "nome": "Valparaíso",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 27,
+      "nome": "Futebol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "56b514d152edd044",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 369,
+          "nome": "Nhandeara",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 645,
+          "posicao": 2
+        },
+        {
+          "participanteId": 33,
+          "posicao": 3
+        },
+        {
+          "participanteId": 369,
+          "posicao": 4
+        },
+        {
+          "participanteId": 128,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [
+        561,
+        645
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              561,
+              33,
+              424
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              645,
+              369,
+              128
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "nome": "Futebol Masculino 20-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f68f7f8d3cbce4ac",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 59,
+          "nome": "Barbosa",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 316,
+          "nome": "Luiziânia",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 555,
+          "nome": "São João de Iracema",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 634,
+          "nome": "Valparaíso",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 33,
+          "posicao": 1
+        },
+        {
+          "participanteId": 344,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        },
+        {
+          "participanteId": 285,
+          "posicao": 4
+        },
+        {
+          "participanteId": 561,
+          "posicao": 5
+        },
+        {
+          "participanteId": 555,
+          "posicao": 6
+        },
+        {
+          "participanteId": 425,
+          "posicao": 7
+        },
+        {
+          "participanteId": 127,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        33,
+        344,
+        645,
+        424,
+        285,
+        561
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              33,
+              59,
+              182
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              344,
+              555,
+              425
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              645,
+              316,
+              634
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              52,
+              342,
+              128
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              285,
+              237,
+              75
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              561,
+              25,
+              127,
+              599
+            ]
+          }
+        ],
+        "regra_id": 82,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "nome": "Futsal Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 33,
+          "posicao": 1
+        },
+        {
+          "participanteId": 369,
+          "posicao": 2
+        },
+        {
+          "participanteId": 398,
+          "posicao": 3
+        },
+        {
+          "participanteId": 425,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "nome": "Futsal Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f90d39d15dc6e4fe",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 369,
+          "nome": "Nhandeara",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 561,
+          "posicao": 2
+        },
+        {
+          "participanteId": 75,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [
+        645,
+        561
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              645,
+              599,
+              424,
+              75
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              561,
+              182,
+              369,
+              128
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "nome": "Futsal Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "19021705a1790e6e",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 59,
+          "nome": "Barbosa",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 369,
+          "nome": "Nhandeara",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 634,
+          "nome": "Valparaíso",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 127,
+          "posicao": 1
+        },
+        {
+          "participanteId": 645,
+          "posicao": 2
+        },
+        {
+          "participanteId": 182,
+          "posicao": 3
+        },
+        {
+          "participanteId": 561,
+          "posicao": 4
+        },
+        {
+          "participanteId": 342,
+          "posicao": 5
+        },
+        {
+          "participanteId": 424,
+          "posicao": 6
+        },
+        {
+          "participanteId": 425,
+          "posicao": 7
+        },
+        {
+          "participanteId": 555,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        127,
+        645,
+        182,
+        342
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              127,
+              285,
+              75,
+              634
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              645,
+              52,
+              128
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              182,
+              599,
+              369,
+              25
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              342,
+              59,
+              237,
+              344
+            ]
+          }
+        ],
+        "regra_id": 77,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "nome": "Futsal Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 50,
+          "nome": "Auriflama",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 599,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 75,
+          "posicao": 3
+        },
+        {
+          "participanteId": 128,
+          "posicao": 4
+        },
+        {
+          "participanteId": 285,
+          "posicao": 5
+        },
+        {
+          "participanteId": 50,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "nome": "Ginástica Artística Feminino 13-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 382,
+          "nome": "Novo Horizonte",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 35,
+      "nome": "Ginástica Artística Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 294,
+          "nome": "José Bonifácio",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 515,
+          "nome": "Santa Adélia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 36,
+      "nome": "Ginástica Artistica Masculino 16-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 33,
+      "nome": "Ginástica Artística Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 37,
+      "nome": "Ginástica Rítmica Feminino 14-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 203,
+          "nome": "Guapiaçu",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 515,
+          "nome": "Santa Adélia",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 38,
+      "nome": "Ginástica Ritmica Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 39,
+      "nome": "Handebol Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "5227b8d4cfc4ce7b",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 25,
+          "posicao": 2
+        },
+        {
+          "participanteId": 285,
+          "posicao": 3
+        },
+        {
+          "participanteId": 127,
+          "posicao": 4
+        },
+        {
+          "participanteId": 182,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [
+        561,
+        25
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              561,
+              182,
+              285
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              25,
+              424,
+              127
+            ]
+          }
+        ],
+        "regra_id": 68,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "nome": "Handebol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 128,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "nome": "Handebol Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "04b029a3ee563c9e",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 285,
+          "posicao": 1
+        },
+        {
+          "participanteId": 25,
+          "posicao": 2
+        },
+        {
+          "participanteId": 561,
+          "posicao": 3
+        },
+        {
+          "participanteId": 75,
+          "posicao": 4
+        },
+        {
+          "participanteId": 59,
+          "posicao": 5
+        },
+        {
+          "participanteId": 182,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [
+        285,
+        25
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              285,
+              182,
+              561
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              25,
+              75,
+              424,
+              127
+            ]
+          }
+        ],
+        "regra_id": 69,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "nome": "Handebol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 33,
+          "posicao": 1
+        },
+        {
+          "participanteId": 645,
+          "posicao": 2
+        },
+        {
+          "participanteId": 425,
+          "posicao": 3
+        },
+        {
+          "participanteId": 128,
+          "posicao": 4
+        },
+        {
+          "participanteId": 54,
+          "posicao": 5
+        },
+        {
+          "participanteId": 127,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "nome": "Judô Feminino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "3a13fc2db0d70f87",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        },
+        {
+          "participanteId": 344,
+          "posicao": 4
+        },
+        {
+          "participanteId": 182,
+          "posicao": 5
+        },
+        {
+          "participanteId": 342,
+          "posicao": 6
+        },
+        {
+          "participanteId": 285,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [
+        561,
+        33,
+        645,
+        424
+      ],
+      "resultado": {
+        "size": 10,
+        "slots": [
+          561,
+          75,
+          342,
+          182,
+          424,
+          645,
+          237,
+          344,
+          128,
+          33
+        ],
+        "byePositions": [
+          1,
+          10
+        ],
+        "matchesGraph": {
+          "final": "J10",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J3",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J4",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "P6",
+              "round": 1,
+              "bottom": "P7"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:J3",
+              "round": 3,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J8",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 4,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J9",
+              "top": "L:J7",
+              "round": 4,
+              "bottom": "L:J8"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P10",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J9"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "nome": "Judô Masculino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "c14287eb9559956f",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 316,
+          "nome": "Luiziânia",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 75,
+          "posicao": 3
+        },
+        {
+          "participanteId": 128,
+          "posicao": 4
+        },
+        {
+          "participanteId": 344,
+          "posicao": 5
+        },
+        {
+          "participanteId": 645,
+          "posicao": 6
+        },
+        {
+          "participanteId": 424,
+          "posicao": 7
+        },
+        {
+          "participanteId": 182,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        561,
+        33,
+        75,
+        424
+      ],
+      "resultado": {
+        "size": 12,
+        "slots": [
+          561,
+          128,
+          342,
+          645,
+          599,
+          424,
+          75,
+          344,
+          182,
+          237,
+          316,
+          33
+        ],
+        "byePositions": [
+          1,
+          6,
+          7,
+          12
+        ],
+        "matchesGraph": {
+          "final": "J12",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J4",
+              "top": "P10",
+              "round": 1,
+              "bottom": "P11"
+            },
+            {
+              "id": "J5",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:B3",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:B4"
+            },
+            {
+              "id": "J9",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 3,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J12",
+              "top": "V:J9",
+              "round": 4,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J11",
+              "top": "L:J9",
+              "round": 4,
+              "bottom": "L:J10"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P7",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B4",
+              "top": "P12",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J11"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "nome": "Karatê Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 56,
+          "nome": "Bálsamo",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 515,
+          "nome": "Santa Adélia",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 46,
+      "nome": "Karatê Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 56,
+          "nome": "Bálsamo",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 515,
+          "nome": "Santa Adélia",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 48,
+      "nome": "Malha Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "4d058ff9f83baeb5",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 71,
+          "nome": "Bento de Abreu",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 127,
+          "nome": "Castilho",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 634,
+          "nome": "Valparaíso",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 182,
+          "posicao": 2
+        },
+        {
+          "participanteId": 285,
+          "posicao": 3
+        },
+        {
+          "participanteId": 127,
+          "posicao": 4
+        },
+        {
+          "participanteId": 344,
+          "posicao": 5
+        },
+        {
+          "participanteId": 561,
+          "posicao": 6
+        },
+        {
+          "participanteId": 75,
+          "posicao": 7
+        },
+        {
+          "participanteId": 71,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        645,
+        182,
+        285,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              645,
+              237,
+              344,
+              342
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              182,
+              599,
+              71
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              285,
+              33,
+              634,
+              561
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              127,
+              75,
+              128
+            ]
+          }
+        ],
+        "regra_id": 77,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "nome": "Natação Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 50,
+      "nome": "Natação Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 51,
+      "nome": "Natação Nado Medley Misto Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 52,
+      "nome": "Taekwondo Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 53,
+      "nome": "Taekwondo Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 190,
+      "nome": "Taekwondo Poom-se Equipe A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 184,
+      "nome": "Taekwondo Poom-se Individual A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 54,
+      "nome": "Tênis de Mesa Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 631,
+          "nome": "Urupês",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 344,
+          "posicao": 1
+        },
+        {
+          "participanteId": 631,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "nome": "Tênis de Mesa Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 75,
+          "posicao": 3
+        },
+        {
+          "participanteId": 128,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "nome": "Tênis de Mesa Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "d547b9d763c72c2e",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 71,
+          "nome": "Bento de Abreu",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 631,
+          "nome": "Urupês",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 75,
+          "posicao": 1
+        },
+        {
+          "participanteId": 344,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        },
+        {
+          "participanteId": 631,
+          "posicao": 4
+        },
+        {
+          "participanteId": 425,
+          "posicao": 5
+        },
+        {
+          "participanteId": 342,
+          "posicao": 6
+        },
+        {
+          "participanteId": 369,
+          "posicao": 7
+        },
+        {
+          "participanteId": 71,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        75,
+        344
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              75,
+              342,
+              631,
+              71
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              344,
+              645,
+              599,
+              424
+            ]
+          }
+        ],
+        "regra_id": 70,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "nome": "Tênis de Mesa Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 128,
+          "posicao": 2
+        },
+        {
+          "participanteId": 33,
+          "posicao": 3
+        },
+        {
+          "participanteId": 182,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Tênis Feminino 21 anos",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "8dfce801400f5a30",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 344,
+          "posicao": 1
+        },
+        {
+          "participanteId": 285,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [
+        344,
+        285
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          344,
+          285
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "nome": "Tênis Feminino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "3f543a6461e2479d",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 645,
+          "posicao": 3
+        },
+        {
+          "participanteId": 182,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        561,
+        33,
+        645,
+        424
+      ],
+      "resultado": {
+        "size": 6,
+        "slots": [
+          561,
+          182,
+          424,
+          645,
+          75,
+          33
+        ],
+        "byePositions": [
+          1,
+          6
+        ],
+        "matchesGraph": {
+          "final": "J6",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J4",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J6",
+              "top": "V:J3",
+              "round": 3,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J5",
+              "top": "L:J3",
+              "round": 3,
+              "bottom": "L:J4"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J5"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "nome": "Tênis Masculino 21-anos",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "ec0eecfe947004e1",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 285,
+          "nome": "Jales",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 128,
+          "posicao": 3
+        },
+        {
+          "participanteId": 285,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        561,
+        33,
+        285
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          561,
+          344,
+          285,
+          33
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "nome": "Tênis Masculino Livre",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "f7773a837238dcd7",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 182,
+          "posicao": 2
+        },
+        {
+          "participanteId": 342,
+          "posicao": 3
+        },
+        {
+          "participanteId": 526,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [
+        645,
+        182,
+        424
+      ],
+      "resultado": {
+        "size": 8,
+        "slots": [
+          645,
+          237,
+          128,
+          52,
+          424,
+          599,
+          75,
+          182
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J8",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J3",
+              "top": "P5",
+              "round": 1,
+              "bottom": "P6"
+            },
+            {
+              "id": "J4",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J5",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J6",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J8",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J7",
+              "top": "L:J5",
+              "round": 3,
+              "bottom": "L:J6"
+            }
+          ],
+          "thirdPlace": "J7"
+        }
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "nome": "Voleibol Feminino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "a0f3b8f03dc3a541",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 195,
+          "nome": "Gastão Vidigal",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 355,
+          "nome": "Monte Aprazível",
+          "subtitulo": null
+        },
+        {
+          "id": 396,
+          "nome": "Ouroeste",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 629,
+          "nome": "Urânia",
+          "subtitulo": null
+        },
+        {
+          "id": 631,
+          "nome": "Urupês",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 629,
+          "posicao": 1
+        },
+        {
+          "participanteId": 52,
+          "posicao": 2
+        },
+        {
+          "participanteId": 33,
+          "posicao": 3
+        },
+        {
+          "participanteId": 424,
+          "posicao": 4
+        },
+        {
+          "participanteId": 425,
+          "posicao": 5
+        },
+        {
+          "participanteId": 645,
+          "posicao": 6
+        },
+        {
+          "participanteId": 241,
+          "posicao": 7
+        },
+        {
+          "participanteId": 237,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        629,
+        52,
+        33,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              629,
+              355,
+              237,
+              599
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              52,
+              195,
+              645
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              33,
+              631,
+              425,
+              75
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              396,
+              342,
+              344
+            ]
+          }
+        ],
+        "regra_id": 77,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "nome": "Voleibol Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 59,
+          "nome": "Barbosa",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 561,
+          "posicao": 1
+        },
+        {
+          "participanteId": 526,
+          "posicao": 2
+        },
+        {
+          "participanteId": 128,
+          "posicao": 3
+        },
+        {
+          "participanteId": 182,
+          "posicao": 4
+        },
+        {
+          "participanteId": 342,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "nome": "Voleibol Masculino 21-anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "2de17b3178f6fd39",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 59,
+          "nome": "Barbosa",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 195,
+          "nome": "Gastão Vidigal",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 355,
+          "nome": "Monte Aprazível",
+          "subtitulo": null
+        },
+        {
+          "id": 396,
+          "nome": "Ouroeste",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 629,
+          "nome": "Urânia",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 33,
+          "posicao": 2
+        },
+        {
+          "participanteId": 631,
+          "posicao": 3
+        },
+        {
+          "participanteId": 355,
+          "posicao": 4
+        },
+        {
+          "participanteId": 128,
+          "posicao": 5
+        },
+        {
+          "participanteId": 182,
+          "posicao": 6
+        },
+        {
+          "participanteId": 561,
+          "posicao": 7
+        },
+        {
+          "participanteId": 526,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        33,
+        355,
+        128,
+        424
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              33,
+              59,
+              344,
+              210
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              355,
+              25,
+              396,
+              182
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              128,
+              52,
+              561,
+              195
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              629,
+              237
+            ]
+          }
+        ],
+        "regra_id": 77,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "nome": "Voleibol Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "6f85ea5453c55c77",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 50,
+          "nome": "Auriflama",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 241,
+          "nome": "Indiaporã",
+          "subtitulo": null
+        },
+        {
+          "id": 320,
+          "nome": "Macaubal",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 526,
+          "nome": "Santa Fé do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 54,
+          "nome": "Bady Bassitt",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 241,
+          "posicao": 1
+        },
+        {
+          "participanteId": 75,
+          "posicao": 2
+        },
+        {
+          "participanteId": 396,
+          "posicao": 3
+        },
+        {
+          "participanteId": 342,
+          "posicao": 4
+        },
+        {
+          "participanteId": 599,
+          "posicao": 5
+        },
+        {
+          "participanteId": 425,
+          "posicao": 6
+        },
+        {
+          "participanteId": 50,
+          "posicao": 7
+        },
+        {
+          "participanteId": 54,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        241,
+        75,
+        599
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              241,
+              89,
+              320
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              75,
+              50,
+              54,
+              526
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              599,
+              425,
+              645
+            ]
+          }
+        ],
+        "regra_id": 72,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "nome": "Volei de Praia Feminino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "7637e0dcabacc4b4",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 195,
+          "nome": "Gastão Vidigal",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 629,
+          "nome": "Urânia",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 33,
+          "posicao": 1
+        },
+        {
+          "participanteId": 526,
+          "posicao": 2
+        },
+        {
+          "participanteId": 561,
+          "posicao": 3
+        },
+        {
+          "participanteId": 344,
+          "posicao": 4
+        },
+        {
+          "participanteId": 54,
+          "posicao": 5
+        },
+        {
+          "participanteId": 128,
+          "posicao": 6
+        },
+        {
+          "participanteId": 424,
+          "posicao": 7
+        },
+        {
+          "participanteId": 182,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        33,
+        561,
+        344,
+        424,
+        128
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              33,
+              645,
+              342,
+              25
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              561,
+              425,
+              52
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              344,
+              182,
+              89,
+              599
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              237,
+              629
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              128,
+              195,
+              75
+            ]
+          }
+        ],
+        "regra_id": 79,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "nome": "Volei de Praia Masculino Livre",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "102ef54c68cd479e",
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 25,
+          "nome": "Andradina",
+          "subtitulo": null
+        },
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 195,
+          "nome": "Gastão Vidigal",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 320,
+          "nome": "Macaubal",
+          "subtitulo": null
+        },
+        {
+          "id": 342,
+          "nome": "Mirandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 355,
+          "nome": "Monte Aprazível",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 425,
+          "nome": "Pereira Barreto",
+          "subtitulo": null
+        },
+        {
+          "id": 453,
+          "nome": "Pontalinda",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 629,
+          "nome": "Urânia",
+          "subtitulo": null
+        },
+        {
+          "id": 634,
+          "nome": "Valparaíso",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 645,
+          "posicao": 1
+        },
+        {
+          "participanteId": 561,
+          "posicao": 2
+        },
+        {
+          "participanteId": 33,
+          "posicao": 3
+        },
+        {
+          "participanteId": 424,
+          "posicao": 4
+        },
+        {
+          "participanteId": 54,
+          "posicao": 5
+        },
+        {
+          "participanteId": 599,
+          "posicao": 6
+        },
+        {
+          "participanteId": 50,
+          "posicao": 7
+        },
+        {
+          "participanteId": 241,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        645,
+        561,
+        33,
+        424,
+        599
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              645,
+              75,
+              344,
+              629
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              561,
+              320,
+              195,
+              634
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              33,
+              342,
+              89,
+              182
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              424,
+              237,
+              128,
+              355
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              599,
+              425,
+              453
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              52,
+              210,
+              25
+            ]
+          }
+        ],
+        "regra_id": 84,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "nome": "Xadrez Feminino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 185,
+      "nome": "Xadrez Feminino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 186,
+      "nome": "Xadrez Masculino 21-anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 71,
+          "nome": "Bento de Abreu",
+          "subtitulo": null
+        },
+        {
+          "id": 75,
+          "nome": "Birigui",
+          "subtitulo": null
+        },
+        {
+          "id": 128,
+          "nome": "Catanduva",
+          "subtitulo": null
+        },
+        {
+          "id": 142,
+          "nome": "Coroados",
+          "subtitulo": null
+        },
+        {
+          "id": 182,
+          "nome": "Fernandópolis",
+          "subtitulo": null
+        },
+        {
+          "id": 344,
+          "nome": "Mirassol",
+          "subtitulo": null
+        },
+        {
+          "id": 424,
+          "nome": "Penápolis",
+          "subtitulo": null
+        },
+        {
+          "id": 599,
+          "nome": "Tanabi",
+          "subtitulo": null
+        },
+        {
+          "id": 645,
+          "nome": "Votuporanga",
+          "subtitulo": null
+        },
+        {
+          "id": 52,
+          "nome": "Avanhandava",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 187,
+      "nome": "Xadrez Masculino Livre",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 424,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 89,
+          "nome": "Braúna",
+          "subtitulo": null
+        },
+        {
+          "id": 210,
+          "nome": "Guararapes",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
