@@ -67,8 +67,17 @@ jobs:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SA_FIREBASE }}
 
-      - name: Instalar Firebase CLI
-        run: npm install -g firebase-tools
+      # Binário standalone com versão fixa: o `npm install -g firebase-tools`
+      # não trava as dependências transitivas (google-auth-library/gaxios), e uma
+      # delas regrediu o suporte a credenciais WIF/ADC (external_account), causando
+      # "Failed to authenticate" mesmo com GOOGLE_APPLICATION_CREDENTIALS setado.
+      # O binário standalone empacota as deps na versão do release.
+      - name: Instalar Firebase CLI (binário standalone, versão fixa)
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/firebase" https://github.com/firebase/firebase-tools/releases/download/v15.22.1/firebase-tools-linux
+          chmod +x "$RUNNER_TEMP/firebase"
+          sudo mv "$RUNNER_TEMP/firebase" /usr/local/bin/firebase
+          firebase --version
 
       - name: Deploy Firebase Hosting
         working-directory: ./frontend
