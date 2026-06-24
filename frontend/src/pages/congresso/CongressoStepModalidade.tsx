@@ -122,7 +122,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
         {evento?.nome} · {restantes > 0 ? `${restantes} ${restantes === 1 ? 'modalidade restante' : 'modalidades restantes'}` : 'todas concluídas'}
       </p>
 
-      <div className="cw-md">
+      <div className={`cw-md${listaAberta ? '' : ' cw-md--recolhido'}`}>
         {/* Lista esquerda (recolhível) */}
         <div className="cw-md-listcol">
           <button

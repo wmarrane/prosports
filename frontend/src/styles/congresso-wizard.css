@@ -198,6 +198,7 @@
 
 /* ── modalidades: master-detail ── */
 .cw-md { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
+.cw-md--recolhido { grid-template-columns: 1fr; }
 .cw-md-list { display: flex; flex-direction: column; gap: 8px; }
 .cw-md-listcol { display: flex; flex-direction: column; gap: 8px; }
 .cw-md-list-toggle {
