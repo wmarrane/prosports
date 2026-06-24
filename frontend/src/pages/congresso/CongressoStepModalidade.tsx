@@ -9,6 +9,7 @@ import { Check, ArrowRight, FileText, ChevronUp, ChevronDown } from 'lucide-reac
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 
 const EMPTY_IDS: Set<number> = new Set()
+const LISTA_KEY = 'prosports.congresso.lista-aberta'
 
 type Props = {
   eventoId: number
@@ -26,7 +27,9 @@ const TIPO_DESC: Record<string, string> = {
 
 export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds = EMPTY_IDS, onPularVazia }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null)
-  const [listaAberta, setListaAberta] = useState(true)
+  const [listaAberta, setListaAberta] = useState<boolean>(() => {
+    try { return localStorage.getItem(LISTA_KEY) !== 'false' } catch { return true }
+  })
   const listRef = useRef<HTMLDivElement>(null)
 
   const { data: evento } = useQuery({
@@ -128,7 +131,11 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
           <button
             type="button"
             className="cw-md-list-toggle"
-            onClick={() => setListaAberta(v => !v)}
+            onClick={() => setListaAberta(v => {
+              const nv = !v
+              try { localStorage.setItem(LISTA_KEY, String(nv)) } catch { /* storage indisponível */ }
+              return nv
+            })}
             aria-expanded={listaAberta}
           >
             <span>Modalidades <b>{modalidades.length}</b></span>
