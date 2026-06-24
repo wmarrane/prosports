@@ -42,9 +42,10 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement)
   const currentIdx = STEP_INDEX[step]
   // No passo de sorteio, o passo gerencia o próprio scroll (header fixo + resultado
-  // rolando), então propagamos a altura por toda a cadeia até o conteúdo. Nos demais
-  // passos o scroll continua no .cw-main (conteúdo de altura natural).
-  const fillHeight = step === 'sorteio'
+  // rolando); no bem-vindos a lista de participantes pagina conforme a altura
+  // disponível. Ambos precisam que a altura seja propagada por toda a cadeia até o
+  // conteúdo. Nos demais passos o scroll continua no .cw-main (altura natural).
+  const fillHeight = step === 'sorteio' || step === 'bemvindos'
 
   useEffect(() => {
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement)
