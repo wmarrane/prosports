@@ -412,67 +412,67 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
         </div>
       </div>
 
-      {/* Banner de cabeças semeadas (grupos/chaves só, e só se houver campeões inscritos) */}
-      {cabecasInscritas.length > 0 && (sorteio.tipo === 'grupos' || sorteio.tipo === 'chaves') && (
-        <div style={{
-          marginBottom: 20,
-          padding: '14px 18px',
-          background: 'var(--cw-card)',
-          border: '1px solid var(--cw-card-bd)',
-          borderRadius: 'var(--radius-xl)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 16,
-          flexWrap: 'wrap',
-        }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--warn)', fontWeight: 700, fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            <Crown size={18} /> Cabeças
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'flex-end' }}>
-            {cabecasComGrupo.map(c => (
-              <div
-                key={c.key}
-                style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4, opacity: c.inscrito ? 1 : 0.55 }}
-                title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
-              >
-                {c.slotLabel && (
-                  <span style={{
-                    fontSize: 12,
-                    fontWeight: 800,
-                    letterSpacing: '0.06em',
-                    color: 'var(--warn)',
-                    textTransform: 'uppercase',
-                    padding: '2px 8px',
-                    background: 'var(--warn-soft)',
-                    border: '1px solid var(--warn)',
-                    borderRadius: 'var(--radius-pill)',
-                    lineHeight: 1.2,
-                  }}>{c.slotLabel}</span>
-                )}
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                  {c.posicao != null && <CampeaoBadge posicao={c.posicao} />}
-                  <div style={{
-                    display: 'inline-flex', flexDirection: 'column',
-                    textDecoration: c.inscrito ? 'none' : 'line-through',
-                    textDecorationThickness: '2px',
-                  }}>
-                    <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
-                      {c.participante?.nome ?? '—'}
-                    </span>
-                    {(() => {
-                      const l = c.participante ? subtituloLine(c.participante) : null
-                      return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
-                    })()}
-                  </div>
-                  {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>
+        {/* Banner de cabeças semeadas (grupos/chaves só, e só se houver campeões inscritos) */}
+        {cabecasInscritas.length > 0 && (sorteio.tipo === 'grupos' || sorteio.tipo === 'chaves') && (
+          <div style={{
+            marginBottom: 20,
+            padding: '14px 18px',
+            background: 'var(--cw-card)',
+            border: '1px solid var(--cw-card-bd)',
+            borderRadius: 'var(--radius-xl)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            flexWrap: 'wrap',
+          }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: 'var(--warn)', fontWeight: 700, fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <Crown size={18} /> Cabeças
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'flex-end' }}>
+              {cabecasComGrupo.map(c => (
+                <div
+                  key={c.key}
+                  style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4, opacity: c.inscrito ? 1 : 0.55 }}
+                  title={c.inscrito ? undefined : 'Não está inscrito nesta modalidade — não será semeado como cabeça'}
+                >
+                  {c.slotLabel && (
+                    <span style={{
+                      fontSize: 12,
+                      fontWeight: 800,
+                      letterSpacing: '0.06em',
+                      color: 'var(--warn)',
+                      textTransform: 'uppercase',
+                      padding: '2px 8px',
+                      background: 'var(--warn-soft)',
+                      border: '1px solid var(--warn)',
+                      borderRadius: 'var(--radius-pill)',
+                      lineHeight: 1.2,
+                    }}>{c.slotLabel}</span>
+                  )}
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    {c.posicao != null && <CampeaoBadge posicao={c.posicao} />}
+                    <div style={{
+                      display: 'inline-flex', flexDirection: 'column',
+                      textDecoration: c.inscrito ? 'none' : 'line-through',
+                      textDecorationThickness: '2px',
+                    }}>
+                      <span style={{ fontSize: 15, color: c.inscrito ? FG : DIM, fontWeight: 600 }}>
+                        {c.participante?.nome ?? '—'}
+                      </span>
+                      {(() => {
+                        const l = c.participante ? subtituloLine(c.participante) : null
+                        return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
+                      })()}
+                    </div>
+                    {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {sorteio.tipo === 'grupos' && (
           <SorteioGrupos
             resultado={sorteio.resultado}

@@ -5,10 +5,11 @@ import { sorteiosService } from '../../services/sorteios'
 import { inscricoesService } from '../../services/inscricoes'
 import { sistemasDisputaService } from '../../services/sistemas-disputa'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
-import { Check, ArrowRight, FileText } from 'lucide-react'
+import { Check, ArrowRight, FileText, ChevronUp, ChevronDown } from 'lucide-react'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 
 const EMPTY_IDS: Set<number> = new Set()
+const LISTA_KEY = 'prosports.congresso.lista-aberta'
 
 type Props = {
   eventoId: number
@@ -26,6 +27,9 @@ const TIPO_DESC: Record<string, string> = {
 
 export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds = EMPTY_IDS, onPularVazia }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [listaAberta, setListaAberta] = useState<boolean>(() => {
+    try { return localStorage.getItem(LISTA_KEY) !== 'false' } catch { return true }
+  })
   const listRef = useRef<HTMLDivElement>(null)
 
   const { data: evento } = useQuery({
@@ -121,26 +125,43 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
         {evento?.nome} · {restantes > 0 ? `${restantes} ${restantes === 1 ? 'modalidade restante' : 'modalidades restantes'}` : 'todas concluídas'}
       </p>
 
-      <div className="cw-md">
-        {/* Lista esquerda */}
-        <div className="cw-md-list" ref={listRef}>
-          {modalidades.map(m => {
-            const concluida = isConcluida(m.id)
-            return (
-              <button
-                key={m.id}
-                data-mid={m.id}
-                className={`cw-md-item ${selectedId === m.id ? 'sel' : ''}`}
-                onClick={() => setSelectedId(m.id)}
-              >
-                <ModalityBadge name={m.nome} size={40} showGender />
-                <span className="cw-md-name">{m.nome}</span>
-                {concluida && (
-                  <span className="cw-md-done"><Check size={15} /></span>
-                )}
-              </button>
-            )
-          })}
+      <div className={`cw-md${listaAberta ? '' : ' cw-md--recolhido'}`}>
+        {/* Lista esquerda (recolhível) */}
+        <div className="cw-md-listcol">
+          <button
+            type="button"
+            className="cw-md-list-toggle"
+            onClick={() => setListaAberta(v => {
+              const nv = !v
+              try { localStorage.setItem(LISTA_KEY, String(nv)) } catch { /* storage indisponível */ }
+              return nv
+            })}
+            aria-expanded={listaAberta}
+          >
+            <span>Modalidades <b>{modalidades.length}</b></span>
+            {listaAberta ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </button>
+          {listaAberta && (
+            <div className="cw-md-list" ref={listRef}>
+              {modalidades.map(m => {
+                const concluida = isConcluida(m.id)
+                return (
+                  <button
+                    key={m.id}
+                    data-mid={m.id}
+                    className={`cw-md-item ${selectedId === m.id ? 'sel' : ''}`}
+                    onClick={() => setSelectedId(m.id)}
+                  >
+                    <ModalityBadge name={m.nome} size={40} showGender />
+                    <span className="cw-md-name">{m.nome}</span>
+                    {concluida && (
+                      <span className="cw-md-done"><Check size={15} /></span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+          )}
         </div>
 
         {/* Detalhe direita */}
