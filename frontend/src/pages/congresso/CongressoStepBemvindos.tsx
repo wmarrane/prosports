@@ -58,15 +58,15 @@ export default function CongressoStepBemvindos({ eventoId, onIniciar }: Props) {
           </div>
         )}
         <div style={{ minWidth: 0 }}>
-          <h1 className="cw-h1" style={{ margin: 0 }}>Bem-vindos</h1>
-          <p className="cw-sub" style={{ margin: '6px 0 0' }}>{evento?.nome ?? ''}</p>
+          <p className="cw-sub" style={{ margin: 0 }}>Bem-vindos</p>
+          <h1 className="cw-h1" style={{ margin: '6px 0 0' }}>{evento?.nome ?? ''}</h1>
         </div>
       </div>
 
       {/* Bloco 2: big numbers */}
       <div className="cw-md-card-stats" style={{ marginBottom: 28 }}>
-        <div className="cw-md-stat"><b>{nModalidades}</b><span>Modalidades</span></div>
-        <div className="cw-md-stat"><b>{nInscritos}</b><span>Inscritos</span></div>
+        <div className="cw-md-stat"><b style={{ color: 'var(--cw-accent)' }}>{nModalidades}</b><span>Modalidades</span></div>
+        <div className="cw-md-stat"><b style={{ color: 'var(--cw-accent)' }}>{nInscritos}</b><span>Inscritos</span></div>
       </div>
 
       {/* Bloco 3: participantes do evento */}
