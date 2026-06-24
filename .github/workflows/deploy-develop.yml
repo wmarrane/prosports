@@ -31,11 +31,8 @@ jobs:
       - name: Rodar migrations Prisma
         run: cd backend && DATABASE_URL=${{ secrets.DATABASE_URL }} npx prisma migrate deploy
 
-      - name: Parar containers antigos
-        run: docker compose down --remove-orphans || true
-
       - name: Build e subir containers
-        run: docker compose up -d --build
+        run: docker compose up -d --build --remove-orphans
 
       - name: Limpar imagens antigas
         run: docker image prune -f
