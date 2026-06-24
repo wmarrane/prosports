@@ -7,6 +7,7 @@ import LogoMontana from '../../components/LogoMontana'
 
 const STEPS: Array<{ key: CongressoStep; label: string }> = [
   { key: 'evento', label: 'Evento' },
+  { key: 'bemvindos', label: 'Bem-vindos' },
   { key: 'modalidade', label: 'Modalidade' },
   { key: 'participantes', label: 'Participantes' },
   { key: 'sorteio', label: 'Sorteio' },
@@ -14,10 +15,11 @@ const STEPS: Array<{ key: CongressoStep; label: string }> = [
 
 const STEP_INDEX: Record<CongressoStep, number> = {
   evento: 0,
-  modalidade: 1,
-  participantes: 2,
-  campeoes: 3,  // deprecated — não aparece mais no fluxo
-  sorteio: 3,
+  bemvindos: 1,
+  modalidade: 2,
+  participantes: 3,
+  campeoes: 4,
+  sorteio: 4,
 }
 
 type ContextoCongresso = {
