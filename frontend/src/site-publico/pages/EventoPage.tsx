@@ -9,6 +9,11 @@ function categoriaDe(m: SnapModalidade): string {
   return esporteBase(m.nome)
 }
 
+function inscritosOrdenados(m: SnapModalidade): SnapModalidade['participantes'] {
+  return [...m.participantes].sort((a, b) =>
+    (a.nome ?? '').localeCompare(b.nome ?? '', 'pt-BR', { sensitivity: 'base' }))
+}
+
 function statusLabel(m: SnapModalidade): string {
   if (m.tipo === 'especifico') return 'específico'
   if (m.status === 'sorteado') return 'sorteado'
@@ -46,7 +51,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
                   <ModalidadeSorteio modalidade={m} />
                   <section className="inscritos">
                     <h4>Inscritos ({m.participantes.length})</h4>
-                    <ul>{m.participantes.map(p => <li key={p.id}>{p.nome}{p.subtitulo ? ` — ${p.subtitulo}` : ''}</li>)}</ul>
+                    <ul>{inscritosOrdenados(m).map(p => <li key={p.id}>{p.nome}{p.subtitulo ? ` — ${p.subtitulo}` : ''}</li>)}</ul>
                   </section>
                   {m.campeoes.length > 0 && (
                     <section className="campeoes">
