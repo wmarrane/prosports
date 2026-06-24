@@ -7,6 +7,7 @@ import LogoMontana from '../../components/LogoMontana'
 
 const STEPS: Array<{ key: CongressoStep; label: string }> = [
   { key: 'evento', label: 'Evento' },
+  { key: 'bemvindos', label: 'Bem-vindos' },
   { key: 'modalidade', label: 'Modalidade' },
   { key: 'participantes', label: 'Participantes' },
   { key: 'sorteio', label: 'Sorteio' },
@@ -14,10 +15,11 @@ const STEPS: Array<{ key: CongressoStep; label: string }> = [
 
 const STEP_INDEX: Record<CongressoStep, number> = {
   evento: 0,
-  modalidade: 1,
-  participantes: 2,
-  campeoes: 3,  // deprecated — não aparece mais no fluxo
-  sorteio: 3,
+  bemvindos: 1,
+  modalidade: 2,
+  participantes: 3,
+  campeoes: 4,
+  sorteio: 4,
 }
 
 type ContextoCongresso = {
@@ -40,9 +42,10 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
   const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement)
   const currentIdx = STEP_INDEX[step]
   // No passo de sorteio, o passo gerencia o próprio scroll (header fixo + resultado
-  // rolando), então propagamos a altura por toda a cadeia até o conteúdo. Nos demais
-  // passos o scroll continua no .cw-main (conteúdo de altura natural).
-  const fillHeight = step === 'sorteio'
+  // rolando); no bem-vindos a lista de participantes pagina conforme a altura
+  // disponível. Ambos precisam que a altura seja propagada por toda a cadeia até o
+  // conteúdo. Nos demais passos o scroll continua no .cw-main (altura natural).
+  const fillHeight = step === 'sorteio' || step === 'bemvindos'
 
   useEffect(() => {
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement)
