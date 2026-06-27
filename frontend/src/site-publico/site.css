@@ -377,19 +377,6 @@ img { max-width: 100%; display: block; }
 
 /* ─────────────────────────── boletins ─────────────────────────── */
 .evento-periodo { color: #475569; font-weight: 600; margin-top: 2px; }
-.boletins { margin-top: 28px; }
-.boletins-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-.bol-chip { padding: 8px 14px; border-radius: 999px; border: 1px solid #cbd5e1; background: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
-.bol-chip.is-active { background: #1061d8; color: #fff; border-color: #1061d8; }
-.boletins-lista { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.boletim-row a { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 14px; text-decoration: none; color: inherit; }
-.boletim-num { font-weight: 800; font-variant-numeric: tabular-nums; color: #1061d8; min-width: 28px; }
-.boletim-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-.boletim-titulo { font-weight: 700; font-size: 17px; }
-.boletim-meta { font-size: 13px; color: #64748b; }
-.boletim-cat { font-weight: 700; }
-.boletim-dl { font-size: 20px; color: #1061d8; }
-@media (min-width: 720px) { .boletim-titulo { font-size: 18px; } }
 
 /* ─────────────────────────── mobile: grupos/chaves ─────────────────────────── */
 @media (max-width: 720px) {

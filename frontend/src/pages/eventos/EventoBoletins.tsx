@@ -10,7 +10,7 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
   const [kebab, setKebab] = useState<number | null>(null)
 
   async function load() { setDocs(await boletinsService.listar(eventoId)) }
-  useEffect(() => { load() }, [eventoId])
+  useEffect(() => { load().catch(() => {}) }, [eventoId])
   useEffect(() => {
     const close = () => setKebab(null)
     document.addEventListener('click', close)
@@ -113,6 +113,13 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
+
+  useEffect(() => {
+    if (!typeOpen) return
+    const close = () => setTypeOpen(false)
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [typeOpen])
 
   function pick(f: File | null) {
     if (!f) return

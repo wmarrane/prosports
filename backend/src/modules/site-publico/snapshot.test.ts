@@ -131,7 +131,7 @@ it('inclui boletins e datas inicio/fim no snapshot', () => {
       anfitriao_id: null, competicao: { nome: 'C', considerar_anfitriao: false }, municipio: { nome: 'M' },
       data_inicio: new Date('2026-07-01'), data_fim: new Date('2026-07-03'),
       boletins: [
-        { numero: 2, titulo: 'B2', categoria: 'Comunicado', data_publicacao: new Date('2026-07-02'), public_url: 'http://vm/2.pdf', size_bytes: 2048 },
+        { numero: 2, titulo: 'B2', categoria: 'Oficial', data_publicacao: new Date('2026-07-02'), public_url: 'http://vm/2.pdf', size_bytes: 2048 },
         { numero: 1, titulo: 'B1', categoria: 'Resultados', data_publicacao: new Date('2026-07-01'), public_url: 'http://vm/1.pdf', size_bytes: 1024 },
       ],
     } as any,
