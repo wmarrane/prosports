@@ -3,7 +3,7 @@ import { z } from 'zod'
 import * as service from './boletins.service'
 import { parseIntParam } from '../../lib/parse-id'
 
-const CATEGORIAS = ['Resultados','Comunicado','Tabela','Regulamento','Outros'] as const
+const CATEGORIAS = ['Oficial','Regulamento','Resultados','Convocacao','ComunicadoErrata'] as const
 
 const criarSchema = z.object({
   numero: z.coerce.number().int().positive(),

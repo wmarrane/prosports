@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { CategoriaBoletim } from '@prisma/client'
 import prisma from '../../lib/prisma'
 import { getStorage } from '../../lib/storage'
 import { publicar } from '../site-publico/site-publico.service'
@@ -7,7 +8,7 @@ type CriarInput = {
   eventoId: number
   numero: number
   titulo: string
-  categoria: 'Resultados' | 'Comunicado' | 'Tabela' | 'Regulamento' | 'Outros'
+  categoria: CategoriaBoletim
   data_publicacao: Date
   file: { buffer: Buffer; originalname: string; size: number; mimetype: string }
 }
