@@ -34,6 +34,12 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
         <header className="evento-header">
           <h1>{evento.nome}</h1>
           <p>{evento.cidade} · {evento.local} · {new Date(evento.data).toLocaleDateString('pt-BR')}</p>
+          {evento.dataInicio && (
+            <p className="evento-periodo">
+              {new Date(evento.dataInicio).toLocaleDateString('pt-BR')}
+              {evento.dataFim ? ` a ${new Date(evento.dataFim).toLocaleDateString('pt-BR')}` : ''}
+            </p>
+          )}
         </header>
         {[...cats.entries()].map(([cat, mods]) => (
           <section className="cat-section" key={cat}>
@@ -67,6 +73,41 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
             ))}
           </section>
         ))}
+        {evento.boletins.length > 0 && (() => {
+          const ordenados = [...evento.boletins].sort((a, b) => b.numero - a.numero)
+          const categorias = [...new Set(ordenados.map(b => b.categoria))]
+          return (
+            <section id="boletins-evento" className="boletins">
+              <h2>Boletins</h2>
+              <div className="boletins-filtros">
+                <button className="bol-chip is-active" data-cat="">Todos</button>
+                {categorias.map(c => <button className="bol-chip" data-cat={c} key={c}>{c}</button>)}
+              </div>
+              <ul className="boletins-lista">
+                {ordenados.map(b => (
+                  <li className="boletim-row" data-cat={b.categoria} key={b.numero}>
+                    <a href={b.url} target="_blank" rel="noopener">
+                      <span className="boletim-num">{String(b.numero).padStart(2, '0')}</span>
+                      <span className="boletim-main">
+                        <span className="boletim-titulo">{b.titulo}</span>
+                        <span className="boletim-meta"><span className="boletim-cat">{b.categoria}</span> · {new Date(b.data).toLocaleDateString('pt-BR')}</span>
+                      </span>
+                      <span className="boletim-dl" aria-hidden="true">⬇</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <script dangerouslySetInnerHTML={{ __html:
+                "(function(){var s=document.getElementById('boletins-evento');if(!s)return;" +
+                "s.querySelectorAll('.bol-chip').forEach(function(c){c.addEventListener('click',function(){" +
+                "var cat=c.getAttribute('data-cat');" +
+                "s.querySelectorAll('.bol-chip').forEach(function(x){x.classList.toggle('is-active',x===c)});" +
+                "s.querySelectorAll('.boletim-row').forEach(function(r){r.style.display=(!cat||r.getAttribute('data-cat')===cat)?'':'none'});" +
+                "})})})();"
+              }} />
+            </section>
+          )
+        })()}
       </main>
     </>
   )
