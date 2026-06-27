@@ -8,20 +8,20 @@ const base: SnapEvento = {
   data: '2026-07-01T00:00:00.000Z', organizador: null, publicadoEm: '2026-07-01T00:00:00.000Z',
   dataInicio: '2026-07-01T00:00:00.000Z', dataFim: '2026-07-03T00:00:00.000Z',
   boletins: [
-    { numero: 1, titulo: 'B1', categoria: 'Resultados', data: '2026-07-01T00:00:00.000Z', url: 'http://vm/1.pdf' },
-    { numero: 2, titulo: 'B2', categoria: 'Comunicado', data: '2026-07-02T00:00:00.000Z', url: 'http://vm/2.pdf' },
+    { numero: 1, titulo: 'Abertura', categoria: 'Oficial', data: '2026-07-01T00:00:00.000Z', url: 'http://vm/1.pdf', tamanho: 2516582 },
+    { numero: 2, titulo: 'Resultados R1', categoria: 'Resultados', data: '2026-07-02T00:00:00.000Z', url: 'http://vm/2.pdf', tamanho: 1258291 },
   ],
   modalidades: [],
 }
 
-describe('EventoPage boletins', () => {
-  it('renderiza a seção de boletins com link e categoria, mais recente primeiro', () => {
+describe('EventoPage boletins (reskin)', () => {
+  it('mostra a seção, destaque (mais recente) e badges de tipo', () => {
     const html = renderToStaticMarkup(<EventoPage evento={base} />)
     expect(html).toContain('Boletins')
-    expect(html).toContain('http://vm/2.pdf')
-    expect(html).toContain('Comunicado')
-    // ordem desc por numero: B2 antes de B1
-    expect(html.indexOf('http://vm/2.pdf')).toBeLessThan(html.indexOf('http://vm/1.pdf'))
+    expect(html).toContain('doc-feature')
+    expect(html).toContain('http://vm/2.pdf') // destaque = numero 2 (data maior)
+    expect(html).toContain('Resultados')
+    expect(html).toContain('Oficial')
   })
   it('omite a seção quando não há boletins', () => {
     const html = renderToStaticMarkup(<EventoPage evento={{ ...base, boletins: [] }} />)

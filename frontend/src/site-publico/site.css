@@ -430,6 +430,11 @@ img { max-width: 100%; display: block; }
 .doc-card .dl { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; text-decoration: none; padding: 10px 16px; border-radius: 11px; font-size: 13px; font-weight: 700; background: var(--card-bg-2); border: 1px solid var(--card-border); color: var(--t1); transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast); }
 .doc-card .dl:hover { border-color: var(--brand-400); color: var(--brand-600); background: var(--brand-50); }
 .doc-card .dl svg { width: 16px; height: 16px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; }
+.badge.b-brand { background: var(--brand-50); color: #1061d8; }
+.badge.b-success { background: var(--success-soft); color: #0e9f72; }
+.badge.b-warn { background: var(--warn-soft); color: #b45309; }
+.badge.b-violet { background: color-mix(in srgb, #8b5cf6 14%, transparent); color: #7c3aed; }
 .badge.b-neutral { background: var(--card-bg-2); color: var(--t3); border: 1px solid var(--card-border); }
 @media (max-width: 940px) { .doc-layout { grid-template-columns: 1fr; gap: 20px; } .doc-feature { position: static; } }
 @media (max-width: 560px) {

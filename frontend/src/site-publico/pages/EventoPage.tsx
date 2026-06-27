@@ -3,6 +3,8 @@ import ModalidadeSorteio from '../components/ModalidadeSorteio'
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
+import { FileText, Download, Calendar } from 'lucide-react'
+import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
 
 function categoriaDe(m: SnapModalidade): string {
   if (m.grupo) return m.grupo
@@ -75,37 +77,50 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
           </section>
         ))}
         {boletins.length > 0 && (() => {
-          const ordenados = [...boletins].sort((a, b) => b.numero - a.numero)
-          const categorias = [...new Set(ordenados.map(b => b.categoria))]
+          const ordenados = [...boletins].sort((a, b) => +new Date(b.data) - +new Date(a.data))
+          const destaque = ordenados[0]
+          const di = categoriaInfo(destaque.categoria)
           return (
-            <section id="boletins-evento" className="boletins">
-              <h2>Boletins</h2>
-              <div className="boletins-filtros">
-                <button className="bol-chip is-active" data-cat="">Todos</button>
-                {categorias.map(c => <button className="bol-chip" data-cat={c} key={c}>{c}</button>)}
+            <section id="boletins-evento" className="section">
+              <div className="sec-head">
+                <div className="sec-eyebrow">Acompanhe</div>
+                <h2>Boletins &amp; documentos</h2>
+                <p>Boletins oficiais, regulamento e resultados publicados pela organização. Baixe sempre a versão mais recente.</p>
               </div>
-              <ul className="boletins-lista">
-                {ordenados.map(b => (
-                  <li className="boletim-row" data-cat={b.categoria} key={b.numero}>
-                    <a href={b.url} target="_blank" rel="noopener noreferrer">
-                      <span className="boletim-num">{String(b.numero).padStart(2, '0')}</span>
-                      <span className="boletim-main">
-                        <span className="boletim-titulo">{b.titulo}</span>
-                        <span className="boletim-meta"><span className="boletim-cat">{b.categoria}</span> · {new Date(b.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</span>
-                      </span>
-                      <span className="boletim-dl" aria-hidden="true">⬇</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <script dangerouslySetInnerHTML={{ __html:
-                "(function(){var s=document.getElementById('boletins-evento');if(!s)return;" +
-                "s.querySelectorAll('.bol-chip').forEach(function(c){c.addEventListener('click',function(){" +
-                "var cat=c.getAttribute('data-cat');" +
-                "s.querySelectorAll('.bol-chip').forEach(function(x){x.classList.toggle('is-active',x===c)});" +
-                "s.querySelectorAll('.boletim-row').forEach(function(r){r.style.display=(!cat||r.getAttribute('data-cat')===cat)?'':'none'});" +
-                "})})})();"
-              }} />
+              <div className="doc-layout">
+                <aside className="doc-feature">
+                  <div className="flag"><span className="dot" /> Último boletim</div>
+                  <div className="big-pdf"><FileText /></div>
+                  <span className={`badge ${di.badgeClass}`} style={{ marginBottom: 12 }}>{di.label}</span>
+                  <h3>{destaque.titulo}</h3>
+                  <div className="fmeta">
+                    <span className="m"><Calendar /> {dataPtBr(destaque.data)}</span>
+                    <span className="m"><FileText /> {formatBytes(destaque.tamanho)}</span>
+                  </div>
+                  <a className="btn btn-primary btn-lg btn-block" href={destaque.url} target="_blank" rel="noopener noreferrer"><Download /> Baixar PDF</a>
+                </aside>
+                <div className="doc-list">
+                  {CATEGORIAS_BOLETIM.filter((c) => ordenados.some((b) => b.categoria === c.value)).map((c) => (
+                    <div key={c.value} style={{ display: 'contents' }}>
+                      <div className="doc-group-lbl">{c.grupo}</div>
+                      {ordenados.filter((b) => b.categoria === c.value).map((b) => {
+                        const info = categoriaInfo(b.categoria)
+                        return (
+                          <div className="doc-card" key={b.numero}>
+                            <div className="pdf"><FileText /></div>
+                            <div className="dc-main">
+                              <div className="dc-num">Nº {String(b.numero).padStart(3, '0')}</div>
+                              <div className="dc-title">{b.titulo}</div>
+                              <div className="dc-meta"><span className={`badge ${info.badgeClass}`}>{info.label}</span><span className="sep" />{dataPtBr(b.data)}<span className="sep" />{formatBytes(b.tamanho)}</div>
+                            </div>
+                            <a className="dl" href={b.url} target="_blank" rel="noopener noreferrer"><Download /> Baixar</a>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </section>
           )
         })()}
