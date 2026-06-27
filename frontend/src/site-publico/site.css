@@ -400,3 +400,43 @@ img { max-width: 100%; display: block; }
   .grupos-grid { zoom: 0.8; }
   .mod-acc > summary { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+/* ─────────────────────────── Boletins & documentos ─────────────────────────── */
+.doc-layout { display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start; }
+.doc-feature { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 26px; box-shadow: var(--shadow-e2); position: sticky; top: 92px; }
+.doc-feature .flag { font-size: 10.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brand-500); display: inline-flex; align-items: center; gap: 8px; }
+.doc-feature .flag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.doc-feature .big-pdf { width: 88px; height: 108px; border-radius: 14px; margin: 22px 0 20px; position: relative; background: linear-gradient(160deg, #fef2f2, #fee2e2); border: 1px solid #fecaca; color: #dc2626; display: grid; place-items: center; box-shadow: 0 16px 36px -16px rgba(220,38,38,0.4); }
+.doc-feature .big-pdf svg { width: 34px; height: 34px; margin-bottom: 14px; }
+.doc-feature .big-pdf::after { content: "PDF"; position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font: 800 11px/1 var(--font-mono); letter-spacing: 0.08em; }
+.doc-feature h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--t1); margin: 0; line-height: 1.18; }
+.doc-feature .fmeta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 14px 0 22px; font-size: 13px; color: var(--t3); }
+.doc-feature .fmeta .m { display: inline-flex; align-items: center; gap: 7px; }
+.doc-feature .fmeta .m svg { width: 14px; height: 14px; color: var(--t4); }
+.btn-block { width: 100%; }
+.doc-list { display: grid; gap: 12px; }
+.doc-group-lbl { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--t4); margin: 10px 2px 2px; }
+.doc-group-lbl:first-child { margin-top: 0; }
+.doc-card { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 15px; background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: var(--shadow-e1); transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base); }
+.doc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-e3); border-color: var(--brand-400); }
+.doc-card .pdf { width: 44px; height: 54px; border-radius: 9px; flex-shrink: 0; position: relative; background: linear-gradient(160deg, #fef2f2, #fee2e2); border: 1px solid #fecaca; color: #dc2626; display: grid; place-items: center; }
+.doc-card .pdf svg { width: 18px; height: 18px; margin-bottom: 7px; }
+.doc-card .pdf::after { content: "PDF"; position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font: 800 7.5px/1 var(--font-mono); letter-spacing: 0.06em; }
+.doc-card .dc-main { flex: 1; min-width: 0; }
+.doc-card .dc-num { font: 700 11px/1 var(--font-mono); color: var(--t4); letter-spacing: 0.04em; }
+.doc-card .dc-title { font-family: var(--font-display); font-size: 15.5px; font-weight: 700; color: var(--t1); letter-spacing: -0.01em; margin-top: 5px; }
+.doc-card .dc-meta { font-size: 12.5px; color: var(--t3); margin-top: 7px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.doc-card .dc-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--t4); opacity: 0.7; display: inline-block; }
+.doc-card .dl { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; text-decoration: none; padding: 10px 16px; border-radius: 11px; font-size: 13px; font-weight: 700; background: var(--card-bg-2); border: 1px solid var(--card-border); color: var(--t1); transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast); }
+.doc-card .dl:hover { border-color: var(--brand-400); color: var(--brand-600); background: var(--brand-50); }
+.doc-card .dl svg { width: 16px; height: 16px; }
+.badge.b-neutral { background: var(--card-bg-2); color: var(--t3); border: 1px solid var(--card-border); }
+@media (max-width: 940px) { .doc-layout { grid-template-columns: 1fr; gap: 20px; } .doc-feature { position: static; } }
+@media (max-width: 560px) {
+  .doc-feature { padding: 22px; }
+  .doc-feature .big-pdf { width: 76px; height: 94px; margin: 18px 0 16px; }
+  .doc-feature h3 { font-size: 20px; }
+  .doc-card { flex-wrap: wrap; gap: 13px; padding: 14px; }
+  .doc-card .dc-title { font-size: 15px; }
+  .doc-card .dl { width: 100%; justify-content: center; margin-top: 4px; }
+}
