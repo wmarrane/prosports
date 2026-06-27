@@ -13,6 +13,7 @@ import type { EventoStatus } from '../../types/evento'
 import { Check, X, Trophy } from '../../lib/icons'
 import { Calendar, MapPin, Users, Image as ImageIcon, Upload } from 'lucide-react'
 import AcessoMobileCard from './AcessoMobileCard'
+import EventoBoletins from './EventoBoletins'
 
 const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial', 'suspenso']
 
@@ -579,6 +580,7 @@ export default function EventoForm() {
             </div>
           </div>
         </form>
+        {isEdit && <EventoBoletins eventoId={Number(id)} />}
       </div>
     </div>
   )
