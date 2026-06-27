@@ -580,7 +580,7 @@ export default function EventoForm() {
             </div>
           </div>
         </form>
-        {isEdit && <EventoBoletins eventoId={Number(id)} />}
+        {isEdit && <EventoBoletins eventoId={Number(id)} eventoNome={nome} />}
       </div>
     </div>
   )

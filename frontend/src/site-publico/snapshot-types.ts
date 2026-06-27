@@ -29,6 +29,6 @@ export type SnapEvento = {
   publicadoEm: string
   dataInicio: string | null
   dataFim: string | null
-  boletins: { numero: number; titulo: string; categoria: string; data: string; url: string }[]
+  boletins: { numero: number; titulo: string; categoria: string; data: string; url: string; tamanho: number }[]
   modalidades: SnapModalidade[]
 }

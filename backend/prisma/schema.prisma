@@ -322,11 +322,11 @@ model EventoComissao {
 }
 
 enum CategoriaBoletim {
-  Resultados
-  Comunicado
-  Tabela
+  Oficial
   Regulamento
-  Outros
+  Resultados
+  Convocacao
+  ComunicadoErrata
 }
 
 model Boletim {

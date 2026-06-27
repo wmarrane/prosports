@@ -31,7 +31,7 @@ describe('boletins.service', () => {
     prismaMock.evento.findUnique.mockResolvedValue({ id: 9, site_publicado_em: null })
     prismaMock.boletim.create.mockResolvedValue({ id: 2, evento_id: 9, numero: 2 })
     const { criarBoletim } = await import('./boletins.service')
-    await criarBoletim({ eventoId: 9, numero: 2, titulo: 'B2', categoria: 'Comunicado', data_publicacao: new Date(), file: { buffer: Buffer.from('x'), originalname: 'b.pdf', size: 1, mimetype: 'application/pdf' } as any })
+    await criarBoletim({ eventoId: 9, numero: 2, titulo: 'B2', categoria: 'Oficial', data_publicacao: new Date(), file: { buffer: Buffer.from('x'), originalname: 'b.pdf', size: 1, mimetype: 'application/pdf' } as any })
     expect(publicarMock).not.toHaveBeenCalled()
   })
 
