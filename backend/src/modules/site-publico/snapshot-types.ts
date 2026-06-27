@@ -14,6 +14,6 @@ export type SnapEvento = {
   cidade: string; local: string; data: string; organizador: string | null
   publicadoEm: string
   dataInicio: string | null; dataFim: string | null
-  boletins: { numero: number; titulo: string; categoria: string; data: string; url: string }[]
+  boletins: { numero: number; titulo: string; categoria: string; data: string; url: string; tamanho: number }[]
   modalidades: SnapModalidade[]
 }

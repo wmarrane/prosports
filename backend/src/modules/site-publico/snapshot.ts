@@ -9,7 +9,7 @@ type EventoRow = {
   competicao: { nome: string; considerar_anfitriao: boolean; subtitulo_campos?: string[] }
   municipio: { nome: string }
   data_inicio?: Date | null; data_fim?: Date | null
-  boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string }[]
+  boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string; size_bytes: number }[]
 }
 type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown }
 type InscricaoRow = { participante: { id: number; nome: string; subtitulo: string | null } }
@@ -113,7 +113,7 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
     dataFim: evento.data_fim ? evento.data_fim.toISOString() : null,
     boletins: [...(evento.boletins ?? [])]
       .sort((a, b) => a.numero - b.numero)
-      .map(b => ({ numero: b.numero, titulo: b.titulo, categoria: b.categoria, data: b.data_publicacao.toISOString(), url: b.public_url })),
+      .map(b => ({ numero: b.numero, titulo: b.titulo, categoria: b.categoria, data: b.data_publicacao.toISOString(), url: b.public_url, tamanho: b.size_bytes })),
     modalidades: modalidadesSnap,
   }
 }
