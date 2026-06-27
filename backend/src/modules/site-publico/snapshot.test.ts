@@ -123,3 +123,23 @@ it('usa [] quando mensagens_inscritos é null/ausente', () => {
   })
   expect(snap.modalidades[0].mensagens_inscritos).toEqual([])
 })
+
+it('inclui boletins e datas inicio/fim no snapshot', () => {
+  const snap = montaSnapshot({
+    evento: {
+      id: 1, nome: 'Ev', local: 'L', organizador: null, data_hora: new Date('2026-07-01'),
+      anfitriao_id: null, competicao: { nome: 'C', considerar_anfitriao: false }, municipio: { nome: 'M' },
+      data_inicio: new Date('2026-07-01'), data_fim: new Date('2026-07-03'),
+      boletins: [
+        { numero: 2, titulo: 'B2', categoria: 'Comunicado', data_publicacao: new Date('2026-07-02'), public_url: 'http://vm/2.pdf' },
+        { numero: 1, titulo: 'B1', categoria: 'Resultados', data_publicacao: new Date('2026-07-01'), public_url: 'http://vm/1.pdf' },
+      ],
+    } as any,
+    modalidades: [], inscricoesPorModalidade: new Map(), campeoesPorModalidade: new Map(),
+    sorteiosPorModalidade: new Map(), subtituloFn: () => null,
+  })
+  expect(snap.dataInicio).toBe('2026-07-01T00:00:00.000Z')
+  expect(snap.dataFim).toBe('2026-07-03T00:00:00.000Z')
+  expect(snap.boletins.map(b => b.numero)).toEqual([1, 2]) // ordenado por numero asc
+  expect(snap.boletins[0]).toMatchObject({ titulo: 'B1', categoria: 'Resultados', url: 'http://vm/1.pdf' })
+})

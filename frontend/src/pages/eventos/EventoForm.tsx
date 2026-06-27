@@ -13,6 +13,7 @@ import type { EventoStatus } from '../../types/evento'
 import { Check, X, Trophy } from '../../lib/icons'
 import { Calendar, MapPin, Users, Image as ImageIcon, Upload } from 'lucide-react'
 import AcessoMobileCard from './AcessoMobileCard'
+import EventoBoletins from './EventoBoletins'
 
 const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial', 'suspenso']
 
@@ -47,6 +48,8 @@ export default function EventoForm() {
   const [status, setStatus] = useState<EventoStatus>('rascunho')
   const [anfitriaoId, setAnfitriaoId] = useState<number | null>(null)
   const [comissaoIds, setComissaoIds] = useState<number[]>([])
+  const [dataInicio, setDataInicio] = useState<string | null>(null)
+  const [dataFim, setDataFim] = useState<string | null>(null)
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [erro, setErro] = useState('')
   const [erroLogo, setErroLogo] = useState('')
@@ -79,6 +82,8 @@ export default function EventoForm() {
       setStatus(existing.status)
       setAnfitriaoId(existing.anfitriao_id ?? null)
       setComissaoIds(existing.comissao?.map(c => c.usuario.id) ?? [])
+      setDataInicio(existing.data_inicio ? existing.data_inicio.slice(0, 10) : null)
+      setDataFim(existing.data_fim ? existing.data_fim.slice(0, 10) : null)
       setLogoUrl(existing.logo_url ?? null)
     }
   }, [existing])
@@ -115,6 +120,8 @@ export default function EventoForm() {
         municipio_id: municipioId!,
         anfitriao_id: anfitriaoId,
         comissao_ids: comissaoIds,
+        data_inicio: dataInicio || null,
+        data_fim: dataFim || null,
       }
       return isEdit
         ? eventosService.editar(Number(id), payload)
@@ -483,6 +490,32 @@ export default function EventoForm() {
                 </select>
                 <p className="text-xs text-[var(--t4)] mt-1.5">{STATUS_DESC[status]}</p>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Início
+                  <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
+                </label>
+                <input
+                  type="date"
+                  value={dataInicio ?? ''}
+                  onChange={e => setDataInicio(e.target.value || null)}
+                  className={inputClass}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+                  Fim
+                  <span className="text-[var(--t4)] font-normal text-xs ml-1">(opcional)</span>
+                </label>
+                <input
+                  type="date"
+                  value={dataFim ?? ''}
+                  onChange={e => setDataFim(e.target.value || null)}
+                  className={inputClass}
+                />
+              </div>
             </div>
           </section>
 
@@ -547,6 +580,7 @@ export default function EventoForm() {
             </div>
           </div>
         </form>
+        {isEdit && <EventoBoletins eventoId={Number(id)} />}
       </div>
     </div>
   )

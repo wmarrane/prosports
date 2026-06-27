@@ -10,6 +10,8 @@ export async function publicar(eventoId: number): Promise<void> {
     select: {
       id: true, nome: true, local: true, organizador: true, data_hora: true,
       anfitriao_id: true, competicao_id: true, status: true,
+      data_inicio: true, data_fim: true,
+      boletins: { select: { numero: true, titulo: true, categoria: true, data_publicacao: true, public_url: true } },
       competicao: { select: { nome: true, considerar_anfitriao: true, subtitulo_campos: true } },
       municipio: { select: { nome: true } },
     },

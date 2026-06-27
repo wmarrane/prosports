@@ -21,6 +21,7 @@ import statsRoutes from './modules/stats/stats.routes'
 import sistemasDisputaRoutes from './modules/sistemas_disputa/sistemas_disputa.routes'
 import keyAccessRoutes from './modules/key_access/key_access.routes'
 import relatoriosRoutes from './modules/relatorios/relatorios.routes'
+import boletinsRoutes from './modules/boletins/boletins.routes'
 import {
   helmetMiddleware,
   corsMiddleware,
@@ -59,6 +60,7 @@ app.use('/competicoes', competicoesRoutes)
 app.use('/sistemas-disputa', sistemasDisputaRoutes)
 app.use('/key-access', keyAccessRoutes)
 app.use('/relatorios', relatoriosRoutes)
+app.use('/eventos', boletinsRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
