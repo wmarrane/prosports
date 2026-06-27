@@ -25,12 +25,12 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:8080}
       - STORAGE_PROVIDER=${STORAGE_PROVIDER:-sftp}
-      - SFTP_HOST=${SFTP_HOST}
+      - SFTP_HOST=${SFTP_HOST:-192.168.56.130}
       - SFTP_PORT=${SFTP_PORT:-22}
-      - SFTP_USER=${SFTP_USER}
+      - SFTP_USER=${SFTP_USER:-wagner}
       - SFTP_PRIVATE_KEY_PATH=/app/secrets/boletins_ssh_key
       - SFTP_BASE_DIR=${SFTP_BASE_DIR:-/srv/boletins}
-      - PUBLIC_BOLETINS_BASE_URL=${PUBLIC_BOLETINS_BASE_URL}
+      - PUBLIC_BOLETINS_BASE_URL=${PUBLIC_BOLETINS_BASE_URL:-http://192.168.56.130/boletins}
       - MAX_PDF_BYTES=${MAX_PDF_BYTES:-26214400}
     volumes:
       - uploads_data:/app/uploads
