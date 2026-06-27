@@ -18,6 +18,8 @@ const createSchema = z.object({
   municipio_id: z.coerce.number().int().positive(),
   anfitriao_id: z.coerce.number().int().positive().nullable().optional(),
   comissao_ids: z.array(z.coerce.number().int().positive()).optional(),
+  data_inicio: z.coerce.date().nullable().optional(),
+  data_fim: z.coerce.date().nullable().optional(),
 })
 const updateSchema = createSchema.partial()
 const listQuerySchema = z.object({
