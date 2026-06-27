@@ -37,8 +37,8 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
           <p>{evento.cidade} · {evento.local} · {new Date(evento.data).toLocaleDateString('pt-BR')}</p>
           {evento.dataInicio && (
             <p className="evento-periodo">
-              {new Date(evento.dataInicio).toLocaleDateString('pt-BR')}
-              {evento.dataFim ? ` a ${new Date(evento.dataFim).toLocaleDateString('pt-BR')}` : ''}
+              {new Date(evento.dataInicio).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+              {evento.dataFim ? ` a ${new Date(evento.dataFim).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}` : ''}
             </p>
           )}
         </header>
@@ -91,7 +91,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
                       <span className="boletim-num">{String(b.numero).padStart(2, '0')}</span>
                       <span className="boletim-main">
                         <span className="boletim-titulo">{b.titulo}</span>
-                        <span className="boletim-meta"><span className="boletim-cat">{b.categoria}</span> · {new Date(b.data).toLocaleDateString('pt-BR')}</span>
+                        <span className="boletim-meta"><span className="boletim-cat">{b.categoria}</span> · {new Date(b.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</span>
                       </span>
                       <span className="boletim-dl" aria-hidden="true">⬇</span>
                     </a>
