@@ -343,6 +343,7 @@ model Boletim {
   size_bytes      Int
   content_type    String           @default("application/pdf")
   criado_em       DateTime         @default(now())
+  atualizado_em   DateTime         @updatedAt
 
   @@unique([evento_id, numero])
   @@index([evento_id])
