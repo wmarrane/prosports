@@ -30,8 +30,12 @@ export default function EventoBoletins({ eventoId }: { eventoId: number }) {
 
   async function onDelete(id: number) {
     if (!confirm('Remover este boletim?')) return
-    await boletinsService.remover(eventoId, id)
-    await load()
+    try {
+      await boletinsService.remover(eventoId, id)
+      await load()
+    } catch (e: any) {
+      setErro(e?.response?.data?.message ?? 'Falha ao remover')
+    }
   }
 
   return (
@@ -52,7 +56,7 @@ export default function EventoBoletins({ eventoId }: { eventoId: number }) {
         {docs.map(d => (
           <li key={d.id}>
             <strong>{String(d.numero).padStart(2, '0')}</strong> — {d.titulo} <em>[{d.categoria}]</em>{' '}
-            <a href={d.public_url} target="_blank" rel="noopener">PDF</a>{' '}
+            <a href={d.public_url} target="_blank" rel="noopener noreferrer">PDF</a>{' '}
             <button onClick={() => onDelete(d.id)}>Remover</button>
           </li>
         ))}

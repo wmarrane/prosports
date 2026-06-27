@@ -27,6 +27,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
   for (const m of evento.modalidades) {
     const c = categoriaDe(m); const arr = cats.get(c) ?? []; arr.push(m); cats.set(c, arr)
   }
+  const boletins = evento.boletins ?? []
   return (
     <>
       <SiteNav active="eventos" />
@@ -73,8 +74,8 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
             ))}
           </section>
         ))}
-        {evento.boletins.length > 0 && (() => {
-          const ordenados = [...evento.boletins].sort((a, b) => b.numero - a.numero)
+        {boletins.length > 0 && (() => {
+          const ordenados = [...boletins].sort((a, b) => b.numero - a.numero)
           const categorias = [...new Set(ordenados.map(b => b.categoria))]
           return (
             <section id="boletins-evento" className="boletins">
@@ -86,7 +87,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               <ul className="boletins-lista">
                 {ordenados.map(b => (
                   <li className="boletim-row" data-cat={b.categoria} key={b.numero}>
-                    <a href={b.url} target="_blank" rel="noopener">
+                    <a href={b.url} target="_blank" rel="noopener noreferrer">
                       <span className="boletim-num">{String(b.numero).padStart(2, '0')}</span>
                       <span className="boletim-main">
                         <span className="boletim-titulo">{b.titulo}</span>

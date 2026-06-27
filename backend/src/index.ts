@@ -60,7 +60,7 @@ app.use('/competicoes', competicoesRoutes)
 app.use('/sistemas-disputa', sistemasDisputaRoutes)
 app.use('/key-access', keyAccessRoutes)
 app.use('/relatorios', relatoriosRoutes)
-app.use('/', boletinsRoutes)
+app.use('/eventos', boletinsRoutes)
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
