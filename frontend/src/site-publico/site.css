@@ -236,15 +236,47 @@ img { max-width: 100%; display: block; }
 
 .year-group { margin-bottom: 56px; }
 .year-group:last-child { margin-bottom: 0; }
-.year-head {
-  display: flex; align-items: baseline; gap: 16px;
-  margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--hairline);
-}
-.yr {
-  font-family: var(--font-display); font-weight: 800; font-size: 40px;
-  letter-spacing: -0.03em; color: var(--t1); line-height: 1;
-}
-.yc { font-size: 13px; color: var(--t3); }
+/* cabeçalho do grupo de ano (listagem redesenhada) */
+.yr-head { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding-bottom: 18px; margin-bottom: 26px; border-bottom: 1px solid var(--hairline); }
+.yr-head .yr { font-family: var(--font-display); font-size: 46px; font-weight: 800; letter-spacing: -0.03em; line-height: 0.9; color: var(--t1); }
+.yr-head .sub { font-size: 14px; color: var(--t3); padding-bottom: 5px; }
+.yr-head .sub b { color: var(--t1); font-weight: 700; }
+.yr-head .spacer { flex: 1; }
+.yr-filter { display: flex; gap: 6px; padding-bottom: 3px; flex-wrap: wrap; }
+.yr-filter button { font: 600 13px var(--font-sans); padding: 8px 14px; border-radius: 9999px; border: 1px solid var(--card-border); background: var(--card-bg); color: var(--t2); cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: border-color var(--duration-fast), color var(--duration-fast), background var(--duration-fast); }
+.yr-filter button:hover { border-color: var(--t4); color: var(--t1); }
+.yr-filter button.on { background: var(--brand-50); border-color: var(--brand-200); color: var(--brand-600); }
+.yr-filter button .d { width: 7px; height: 7px; border-radius: 50%; }
+
+/* grade da listagem */
+.ev-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 940px) { .ev-grid3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .ev-grid3 { grid-template-columns: 1fr; } }
+
+/* card de listagem (.evc) */
+a.evc { text-decoration: none; color: inherit; display: flex; flex-direction: column; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-e1); transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base); }
+a.evc:hover { transform: translateY(-3px); box-shadow: var(--shadow-e3); border-color: var(--brand-300); }
+.evc .accent { height: 5px; }
+.evc-h { display: flex; align-items: center; gap: 11px; padding: 16px 18px 0; }
+.evc-tile { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; color: #fff; flex-shrink: 0; box-shadow: var(--shadow-e1); }
+.evc-tile svg { width: 19px; height: 19px; }
+.evc-body { padding: 14px 18px 0; flex: 1; }
+.evc-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.22; color: var(--t1); margin: 0; text-wrap: balance; }
+.evc-loc { display: inline-flex; align-items: center; gap: 7px; font: 600 12px var(--font-mono); color: var(--t4); margin-top: 10px; }
+.evc-loc svg { width: 13px; height: 13px; }
+.evc-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 16px 18px 0; border: 1px solid var(--card-border); border-radius: 13px; overflow: hidden; }
+.evc-stats > div { padding: 11px 8px; text-align: center; border-right: 1px solid var(--card-border); }
+.evc-stats > div:last-child { border-right: none; }
+.evc-stats b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -0.02em; color: var(--t1); font-variant-numeric: tabular-nums; line-height: 1; }
+.evc-stats b.hl { color: var(--accent-700); }
+.evc-stats b.zero { color: var(--t4); }
+.evc-stats span { display: block; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--t4); margin-top: 5px; }
+.evc-foot { display: flex; align-items: center; gap: 8px; padding: 14px 18px 16px; }
+.evc-status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--t2); }
+.evc-status .d { width: 8px; height: 8px; border-radius: 50%; }
+.evc-go { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; color: var(--brand-600); }
+.evc-go svg { width: 14px; height: 14px; transition: transform var(--duration-fast); }
+a.evc:hover .evc-go svg { transform: translateX(3px); }
 
 /* ─────────────────────────── EventoPage ─────────────────────────── */
 .evento-page { max-width: 1200px; margin: 0 auto; padding: 40px 32px 80px; }
