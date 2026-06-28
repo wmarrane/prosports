@@ -16,6 +16,7 @@ it('status pronto → aguardando visual', () => {
   expect(html).toContain('Pronto p/ sorteio')
   expect(html).toContain('var(--grad-warn)')
   expect(html).toContain('/evento-5.html')
+  expect(html).toContain('class="zero"')
 })
 it('status parcial → andamento visual', () => {
   const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado', participantes: [{ id: 1, nome: 'A', subtitulo: null }] })], 'parcial')} />)
@@ -28,4 +29,5 @@ it('status sorteado → verde', () => {
   expect(html).toContain('data-status="sorteado"')
   expect(html).toContain('Sorteado')
   expect(html).toContain('var(--grad-accent)')
+  expect(html).toContain('class="hl"')
 })

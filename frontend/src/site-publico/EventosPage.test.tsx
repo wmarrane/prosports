@@ -22,7 +22,7 @@ it('renderiza cabecalho de ano, filtro por status e grade', () => {
 })
 
 it('inclui o script de filtro escopado por grupo de ano', () => {
-  const html = renderToStaticMarkup(<EventosPage eventos={[ev(1, 'aguardando')]} />)
+  const html = renderToStaticMarkup(<EventosPage eventos={[ev(1, 'pronto')]} />)
   expect(html).toContain('.year-group')
   expect(html).toContain('addEventListener')
 })
