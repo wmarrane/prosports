@@ -17,13 +17,15 @@ export interface ModalidadesDaEdicaoProps {
   modalidades: ModEdicaoItem[]
   excluidas: Set<number>
   onToggle: (id: number) => void
+  bloqueadas?: Set<number>
 }
 
-export default function ModalidadesDaEdicao({ modalidades, excluidas, onToggle }: ModalidadesDaEdicaoProps) {
+export default function ModalidadesDaEdicao({ modalidades, excluidas, onToggle, bloqueadas }: ModalidadesDaEdicaoProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       {modalidades.map((m) => {
         const off = excluidas.has(m.id)
+        const blocked = bloqueadas?.has(m.id) ?? false
         const Ic = TIPO_ICON[m.tipo]
         return (
           <div className="evx-mod" data-off={off} key={m.id}>
@@ -35,10 +37,13 @@ export default function ModalidadesDaEdicao({ modalidades, excluidas, onToggle }
             <button
               type="button"
               role="switch"
-              aria-checked={!off}
+              aria-checked={blocked ? true : !off}
               aria-label={`${off ? 'Ativar' : 'Desativar'} ${m.nome} nesta edição`}
-              className={`switch${off ? '' : ' on'}`}
-              onClick={() => onToggle(m.id)}
+              className={`switch${blocked || !off ? ' on' : ''}`}
+              disabled={blocked}
+              title={blocked ? 'Tem inscritos ou sorteio — não pode ser desativada nesta edição.' : undefined}
+              style={blocked ? { opacity: 0.5, cursor: 'not-allowed' } : undefined}
+              onClick={blocked ? undefined : () => onToggle(m.id)}
             >
               <span className="knob" />
             </button>

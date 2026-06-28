@@ -11,6 +11,7 @@ import { competicoesService } from '../../services/competicoes'
 import { usersService } from '../../services/users'
 import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
+import { sorteiosService } from '../../services/sorteios'
 import { STATUS_LABEL } from '../../lib/evento-status'
 import type { EventoStatus } from '../../types/evento'
 import type { TipoDisputa } from '../../types/modalidade'
@@ -121,6 +122,13 @@ export default function EventoForm() {
     enabled: isEdit,
   })
 
+  // sorteios do evento (edição) — para bloquear desativação de modalidade sorteada
+  const { data: sorteiosEvento = [] } = useQuery({
+    queryKey: ['sorteios', Number(id)],
+    queryFn: () => sorteiosService.listar({ evento_id: Number(id) }),
+    enabled: isEdit,
+  })
+
   // ── effects ──
   useEffect(() => {
     if (existing) {
@@ -145,9 +153,20 @@ export default function EventoForm() {
 
   // ── derivados ──
   const modsTodas: ModEdicaoItem[] = useMemo(
-    () => modalidadesComp.map((m: any) => ({ id: m.id, nome: m.nome, tipo: m.tipo_modalidade.tipo as TipoDisputa })),
+    () =>
+      modalidadesComp
+        .filter((m: any) => m.ativa === true)
+        .map((m: any) => ({ id: m.id, nome: m.nome, tipo: m.tipo_modalidade.tipo as TipoDisputa })),
     [modalidadesComp],
   )
+
+  // modalidades bloqueadas: têm inscritos ou sorteio neste evento
+  const bloqueadas = useMemo<Set<number>>(() => {
+    const s = new Set<number>()
+    inscricoesEvento.forEach((i: any) => s.add(i.modalidade_id))
+    sorteiosEvento.forEach((sv: any) => s.add(sv.modalidade_id))
+    return s
+  }, [inscricoesEvento, sorteiosEvento])
   const modsAtivos: ModEdicaoItem[] = useMemo(
     () => modsTodas.filter((m) => !excluidas.has(m.id)),
     [modsTodas, excluidas],
@@ -168,6 +187,7 @@ export default function EventoForm() {
   const canSave = nome.trim().length > 0 && modsAtivos.length > 0
 
   function toggleModalidade(mid: number) {
+    if (bloqueadas.has(mid)) return
     setExcluidas((prev) => {
       const n = new Set(prev)
       if (n.has(mid)) n.delete(mid)
@@ -215,8 +235,8 @@ export default function EventoForm() {
         data_fim: dataFim || null,
       }
       if (isEdit) {
-        await eventosService.editar(Number(id), payload)
         await eventosService.setModalidadesExcluidas(Number(id), [...excluidas])
+        await eventosService.editar(Number(id), payload)
         return { id: Number(id) }
       }
       const novo: any = await eventosService.criar(payload)
@@ -489,7 +509,7 @@ export default function EventoForm() {
                     {competicaoId ? 'Nenhuma modalidade cadastrada nesta competição.' : 'Selecione uma competição para ver as modalidades.'}
                   </p>
                 ) : (
-                  <ModalidadesDaEdicao modalidades={modsTodas} excluidas={excluidas} onToggle={toggleModalidade} />
+                  <ModalidadesDaEdicao modalidades={modsTodas} excluidas={excluidas} onToggle={toggleModalidade} bloqueadas={bloqueadas} />
                 )}
 
                 <div className="evx-note">
