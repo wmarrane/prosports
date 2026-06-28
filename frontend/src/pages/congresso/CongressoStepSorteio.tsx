@@ -251,7 +251,9 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       .then(() => { try { localStorage.setItem(key, String(marco)) } catch { /* storage off */ } })
       .catch(() => { toast.error('Falha ao iniciar a publicação do site.') })
       .finally(() => { publicandoMarcoRef.current = false })
-  }, [evento, progresso, eventoId, toast])
+  // toast omitido: useToast() retorna novo objeto a cada render, mas seus
+  // métodos success/error são useCallback estáveis — a referência capturada é segura.
+  }, [evento, progresso, eventoId])
 
   function handleSortear() {
     setErro('')

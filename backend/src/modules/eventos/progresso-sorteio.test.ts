@@ -58,4 +58,29 @@ describe('progressoSorteio', () => {
     expect(r.sorteaveis).toBe(3) // mod 1 (chaves/8), mod 2 (grupos/6), mod 4 (chaves/5 agora com bracket)
     expect(r.sorteadas).toBe(1)  // mod 1
   })
+
+  it('R2 (pular_sorteio): modalidade com mensagens_inscritos pular_sorteio=true e inscritos dentro do range é excluída de sorteaveis', async () => {
+    // mod 3 tem 3 inscritos (do beforeEach); sobrescreve para ter pular_sorteio=true com range [1,10]
+    mp.modalidade.findMany.mockResolvedValue([
+      { id: 1, tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [] },
+      { id: 2, tipo_modalidade: { tipo: 'grupos' }, mensagens_inscritos: [] },
+      { id: 3, tipo_modalidade: { tipo: 'grupos' }, mensagens_inscritos: [{ min: 1, max: 10, mensagem: 'sem sorteio', pular_sorteio: true }] },
+      { id: 4, tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [] },
+      { id: 5, tipo_modalidade: { tipo: 'chaves' }, mensagens_inscritos: [] },
+      { id: 6, tipo_modalidade: { tipo: 'ordem_entrada' }, mensagens_inscritos: [] },
+      { id: 7, tipo_modalidade: { tipo: 'especifico' }, mensagens_inscritos: [] },
+    ])
+    const r = await progressoSorteio(1)
+    // baseline = 2 (mod1 chaves/8, mod2 grupos/6); mod3 (grupos/3) agora tem pular_sorteio → não entra
+    expect(r.sorteaveis).toBe(2)
+    expect(r.sorteadas).toBe(1)
+  })
+
+  it('Exclusões: modalidade presente em eventoModalidadeExcluida é removida de sorteaveis', async () => {
+    // mod 2 é sorteável no baseline; excluir ela deve reduzir sorteaveis de 2 para 1
+    mp.eventoModalidadeExcluida.findMany.mockResolvedValue([{ modalidade_id: 2 }])
+    const r = await progressoSorteio(1)
+    expect(r.sorteaveis).toBe(1) // apenas mod 1 (chaves/8) sobra
+    expect(r.sorteadas).toBe(1)
+  })
 })
