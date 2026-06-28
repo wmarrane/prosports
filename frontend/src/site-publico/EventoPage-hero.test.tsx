@@ -23,11 +23,11 @@ describe('EventoPage hero', () => {
     expect(html).toContain('Inscritos')
     expect(html).toContain('info-band')
   })
-  it('mostra "Baixar boletim oficial" só quando há boletim', () => {
+  it('mostra "Baixar o último boletim oficial" só quando há boletim', () => {
     const semBol = renderToStaticMarkup(<EventoPage evento={base()} />)
-    expect(semBol).not.toContain('Baixar boletim oficial')
+    expect(semBol).not.toContain('Baixar o último boletim oficial')
     const comBol = renderToStaticMarkup(<EventoPage evento={base({ boletins: [{ numero: 1, titulo: 'Of', categoria: 'Oficial', data: '2026-06-18T00:00:00.000Z', url: 'http://x/1.pdf', tamanho: 1, atualizadoEm: '2026-06-18T00:00:00.000Z' }] })} />)
-    expect(comBol).toContain('Baixar boletim oficial')
+    expect(comBol).toContain('Baixar o último boletim oficial')
     expect(comBol).toContain('http://x/1.pdf')
   })
 })

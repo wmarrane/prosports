@@ -84,7 +84,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
                 </div>
                 <div className="divider" />
                 {ultimoBoletim && (
-                  <a className="btn-onhero solid" href={ultimoBoletim.url} target="_blank" rel="noopener noreferrer"><Download size={17} /> Baixar boletim oficial</a>
+                  <a className="btn-onhero solid" href={ultimoBoletim.url} target="_blank" rel="noopener noreferrer"><Download size={17} /> Baixar o último boletim oficial</a>
                 )}
                 <button className="btn-onhero ghost" data-share-title={`${evento.nome} · Montana Eventos`} data-share-url={`/evento-${evento.id}.html`}><Share2 size={17} /> Compartilhar evento</button>
               </aside>
