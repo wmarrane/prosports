@@ -77,6 +77,8 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--card-border); box-shadow: var(--shadow-e1);
 }
 .btn-secondary:hover { filter: none; background: var(--card-bg-2); border-color: var(--t4); }
+.btn-onhero { background: #fff; color: var(--brand-700); box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.4); }
+.btn-onhero:hover { filter: none; background: var(--brand-50); }
 .btn-ghost-hero {
   background: rgba(255, 255, 255, 0.08); color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -454,7 +456,6 @@ a.ev2:hover .foot .go svg { transform: translateX(3px); }
 .ev-badges { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .ev-type-tile { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: #fff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.26); }
 .ev-type-tile svg { width: 16px; height: 16px; }
-.badge.badge-onhero { background: rgba(255,255,255,0.16); color: #fff; border: 1px solid rgba(255,255,255,0.26); }
 .badge.b-accent { background: rgba(255,255,255,0.16); color: #fff; border: 1px solid rgba(255,255,255,0.26); display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9999px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .badge.b-accent .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0; }
 .ev-h-title { color: #fff; font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.03em; line-height: 1.06; margin: 0; max-width: 18ch; text-wrap: balance; }
@@ -473,14 +474,13 @@ a.ev2:hover .foot .go svg { transform: translateX(3px); }
 .ev-actions .sp .v { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .ev-actions .sp .l { font-size: 10.5px; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 7px; font-weight: 600; }
 .ev-actions .divider { height: 1px; background: rgba(255,255,255,0.14); margin: 4px 0 18px; }
-.btn-onhero { background: #fff; color: var(--brand-700); box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: transform var(--duration-fast), filter var(--duration-fast); }
-.ev-actions .btn-onhero { width: 100%; }
-.btn-onhero:active { transform: scale(0.985); }
-.btn-onhero svg { width: 17px; height: 17px; }
-.btn-onhero.solid { background: #fff; color: var(--brand-700); }
-.btn-onhero.solid:hover { filter: brightness(0.95); }
-.btn-onhero.ghost { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.22); margin-top: 10px; }
-.btn-onhero.ghost:hover { background: rgba(255,255,255,0.14); }
+.ev-actions .btn-onhero { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; border: 1px solid transparent; width: 100%; transition: transform var(--duration-fast), filter var(--duration-fast); }
+.ev-actions .btn-onhero:active { transform: scale(0.985); }
+.ev-actions .btn-onhero svg { width: 17px; height: 17px; }
+.ev-actions .btn-onhero.solid { background: #fff; color: var(--brand-700); }
+.ev-actions .btn-onhero.solid:hover { filter: brightness(0.95); }
+.ev-actions .btn-onhero.ghost { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.22); margin-top: 10px; }
+.ev-actions .btn-onhero.ghost:hover { background: rgba(255,255,255,0.14); }
 .info-band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: -26px; position: relative; z-index: 3; margin-bottom: 8px; }
 @media (max-width: 760px) { .info-band { grid-template-columns: repeat(2, 1fr); margin-top: 18px; } }
 .info-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 15px; padding: 16px 18px; box-shadow: var(--shadow-e2); }
