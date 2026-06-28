@@ -19,6 +19,7 @@ it('aguardando quando nada foi sorteado', () => {
   expect(html).toContain('Modalidades')
   expect(html).toContain('Inscritos')
   expect(html).toContain('Sorteios')
+  expect(html).toContain('class="zero"')
 })
 
 it('em andamento quando parte sorteada', () => {
@@ -32,4 +33,5 @@ it('sorteado quando 100% das sorteaveis', () => {
   const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado' }), mod({ id: 2, status: 'sorteado' })])} />)
   expect(html).toContain('data-status="sorteado"')
   expect(html).toContain('var(--grad-accent)')
+  expect(html).toContain('class="hl"')
 })
