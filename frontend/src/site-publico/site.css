@@ -209,30 +209,42 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-e3);
 }
 
-/* ─────────────────────────── event card ─────────────────────────── */
-.evento-card {
-  display: block; text-decoration: none;
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 18px; padding: 22px; box-shadow: var(--shadow-e1);
-  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base);
-}
-.evento-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-e3); border-color: var(--brand-400); }
-.evento-card h3 {
-  font-family: var(--font-display); font-size: 17px; font-weight: 700;
-  color: var(--t1); letter-spacing: -0.01em; margin: 0;
-}
-.evento-meta { font-size: 13px; color: var(--t3); margin: 8px 0 0; }
-.evento-counts {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
-}
-.evento-counts span {
-  font-size: 11.5px; font-weight: 600; color: var(--t2);
-  background: var(--card-bg-2); border: 1px solid var(--card-border);
-  padding: 5px 10px; border-radius: 9999px; font-variant-numeric: tabular-nums;
-}
+/* ─────────────────────────── event card (ev2) ─────────────────────────── */
+a.ev2 { text-decoration: none; color: inherit; display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-e1); transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base); }
+a.ev2:hover { transform: translateY(-3px); box-shadow: var(--shadow-e3); }
+.cover { position: relative; padding: 16px 18px; min-height: 100px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.cover::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.4px); background-size: 14px 14px; opacity: 0.5; }
+.cover-top { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; }
+.c-icons { display: flex; gap: 6px; }
+.c-tile { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; color: #fff; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(2px); }
+.c-tile svg { width: 20px; height: 20px; }
+.c-more { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; font: 700 12px var(--font-mono); color: #fff; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); }
+.c-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 9999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(2px); white-space: nowrap; }
+.c-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.c-loc { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 7px; font: 600 12px var(--font-mono); color: rgba(255,255,255,0.92); }
+.c-loc svg { width: 13px; height: 13px; opacity: 0.85; }
+.ev2 .b { padding: 18px 20px 20px; }
+.b-title { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: var(--t1); line-height: 1.2; margin: 0; }
+.b-comp { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--t3); margin-top: 8px; }
+.b-comp svg { width: 14px; height: 14px; color: var(--t4); flex-shrink: 0; }
+.prog { margin-top: 18px; }
+.prog-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.prog-head .lab { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--t4); }
+.prog-head b { font: 800 13px var(--font-mono); color: var(--t1); font-variant-numeric: tabular-nums; }
+.prog-head b.done { color: var(--accent-700); }
+.bar { height: 7px; border-radius: 9999px; background: var(--card-border); overflow: hidden; }
+.bar span { display: block; height: 100%; border-radius: 9999px; transition: width var(--duration-slow); }
+.ev2 .foot { display: flex; align-items: center; gap: 16px; margin-top: 16px; padding-top: 15px; border-top: 1px solid var(--hairline); font-size: 12px; color: var(--t3); }
+.ev2 .foot .st { display: inline-flex; align-items: center; gap: 6px; }
+.ev2 .foot .st svg { width: 14px; height: 14px; color: var(--t4); }
+.ev2 .foot .st b { color: var(--t1); font-weight: 700; }
+.ev2 .foot .go { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; color: var(--brand-600); }
+.ev2 .foot .go svg { width: 14px; height: 14px; transition: transform var(--duration-fast); }
+a.ev2:hover .foot .go svg { transform: translateX(3px); }
 
 /* ─────────────────────────── event grid / year groups ─────────────────────────── */
-.ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; }
+.ev-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 760px) { .ev-grid { grid-template-columns: 1fr; } }
 
 .year-group { margin-bottom: 56px; }
 .year-group:last-child { margin-bottom: 0; }
