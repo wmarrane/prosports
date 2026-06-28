@@ -5,6 +5,7 @@ import './styles/tokens.css'
 import './styles/prosports-theme.css'
 import './styles/boletins.css'
 import './styles/congresso-wizard.css'
+import './styles/editar-evento.css'
 import App from './App.tsx'
 import { useThemeStore } from './store/themeStore'
 

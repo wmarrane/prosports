@@ -1,0 +1,133 @@
+/* ProSports — Editar evento. Reusa tokens.css + prosports-theme.css.
+   Só adiciona o que não existe no tema: preview do card público (ao vivo),
+   stat-pairs do resumo, linha de modalidade do evento e zona de perigo. */
+
+/* layout: formulário (esquerda) + coluna fixa de resumo (direita) */
+.evx-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.82fr);
+  gap: 16px;
+  align-items: start;
+}
+.evx-col { display: flex; flex-direction: column; gap: 16px; }
+.evx-aside { position: sticky; top: 8px; }
+@media (max-width: 1080px) {
+  .evx-grid { grid-template-columns: 1fr; }
+  .evx-aside { position: static; }
+}
+
+/* duas colunas de campos lado a lado dentro de um card */
+.evx-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .evx-row2 { grid-template-columns: 1fr; } }
+
+/* cabeçalho de seção dentro do card de formulário */
+.evx-sec-h { display: flex; align-items: center; gap: 10px; }
+.evx-sec-h .sec-title { font-size: 15px; }
+.evx-sec-h svg { color: var(--brand-500); }
+
+/* ── select estilizado (competição) ── */
+.evx-select { position: relative; }
+.evx-select select {
+  -webkit-appearance: none; appearance: none; width: 100%;
+  border: 1.5px solid var(--input-border); background: var(--input-bg);
+  border-radius: 12px; padding: 12px 38px 12px 14px;
+  font: 600 14px/1.4 var(--font-sans); color: var(--t1); cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.evx-select select:focus { outline: none; border-color: var(--brand-500); box-shadow: var(--ring); }
+.evx-select .evx-caret { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: var(--t4); pointer-events: none; }
+
+/* ── linha de modalidade do evento ── */
+.evx-mod {
+  display: flex; align-items: center; gap: 12px; padding: 11px 12px;
+  border-radius: 13px; background: var(--card-bg-2); border: 1px solid var(--card-border);
+  transition: border-color var(--duration-fast), opacity var(--duration-fast);
+}
+.evx-mod[data-off="true"] { opacity: 0.5; }
+.evx-mod[data-off="true"] .evx-mod-name { text-decoration: line-through; }
+.evx-mod-ic { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: grid; place-items: center; color: #fff; }
+.evx-mod-main { flex: 1; min-width: 0; }
+.evx-mod-name { font-size: 13.5px; font-weight: 700; color: var(--t1); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.evx-mod-sub { font-size: 11px; color: var(--t4); margin-top: 2px; }
+
+/* ── preview do card público (ao vivo) ── */
+.evx-prev {
+  border: 1px solid var(--card-border); border-radius: 18px; overflow: hidden;
+  background: var(--card-bg); box-shadow: var(--shadow-e2);
+}
+.evx-cover { position: relative; padding: 15px 17px 16px; color: #fff; overflow: hidden; }
+.evx-cover::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+.evx-cover-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.evx-tiles { display: flex; gap: 6px; }
+.evx-gtile { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: grid; place-items: center;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(2px); }
+.evx-gtile.more { font: 800 12px var(--font-sans); }
+.evx-cbadge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 9999px;
+  font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); color: #fff; backdrop-filter: blur(2px); }
+.evx-cbadge .dot { width: 6px; height: 6px; border-radius: 9999px; background: #fff; }
+.evx-cover-loc { position: relative; z-index: 1; margin-top: 22px; display: inline-flex; align-items: center; gap: 7px;
+  font: 600 11px var(--font-mono); color: rgba(255,255,255,0.92); }
+.evx-cover-loc svg { width: 13px; height: 13px; }
+
+.evx-prev-body { padding: 15px 17px 16px; }
+.evx-prev-title { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.22; color: var(--t1); margin: 0; text-wrap: balance; }
+.evx-prev-comp { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--t3); margin-top: 7px; }
+.evx-prev-comp svg { width: 13px; height: 13px; color: var(--brand-500); }
+
+.evx-prog { margin-top: 15px; }
+.evx-prog-h { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.evx-prog-lab { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--t4); }
+.evx-prog-n { font: 700 12px var(--font-mono); color: var(--t1); display: inline-flex; align-items: center; gap: 4px; }
+.evx-prog-n.full { color: var(--accent-700); }
+.evx-bar { height: 7px; border-radius: 9999px; background: var(--card-border); overflow: hidden; }
+.evx-bar > i { display: block; height: 100%; border-radius: 9999px; transition: width 0.4s var(--ease-spring); }
+
+.evx-prev-foot { display: flex; align-items: center; gap: 16px; margin-top: 15px; padding-top: 13px; border-top: 1px solid var(--hairline); }
+.evx-prev-foot .it { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--t3); }
+.evx-prev-foot .it b { color: var(--t1); font-weight: 700; }
+.evx-prev-foot .it svg { width: 14px; height: 14px; color: var(--t4); }
+
+/* tag "Preview" sobre o card */
+.evx-prev-flag { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--t4); margin-bottom: 10px; }
+.evx-prev-flag .d { width: 6px; height: 6px; border-radius: 9999px; background: var(--brand-400); }
+
+/* ── stat-pair (resumo) ── */
+.evx-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--card-border); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); }
+.evx-stat { background: var(--card-bg); padding: 14px 15px; }
+.evx-stat .v { font-family: var(--font-display); font-weight: 800; font-size: 23px; letter-spacing: -0.03em; color: var(--t1); line-height: 1; font-variant-numeric: tabular-nums; }
+.evx-stat .v.accent { color: var(--accent-700); }
+.evx-stat .l { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--t4); margin-top: 6px; }
+
+/* ── lista de status (publicação) ── */
+.evx-status-opt { display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 12px; border-radius: 11px;
+  border: 1.5px solid var(--card-border); background: var(--card-bg); cursor: pointer; text-align: left;
+  transition: border-color var(--duration-fast), background var(--duration-fast); }
+.evx-status-opt:hover { border-color: var(--t4); }
+.evx-status-opt[data-on="true"] { border-color: var(--brand-500); background: var(--brand-50); box-shadow: var(--ring); }
+.evx-status-opt .sd { width: 9px; height: 9px; border-radius: 9999px; flex-shrink: 0; }
+.evx-status-opt .st { flex: 1; }
+.evx-status-opt .st b { display: block; font-size: 13px; font-weight: 700; color: var(--t1); }
+.evx-status-opt .st span { display: block; font-size: 11px; color: var(--t4); margin-top: 1px; }
+
+/* ── zona de perigo ── */
+.evx-danger { display: flex; align-items: center; gap: 13px; padding: 14px 16px; border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, var(--card-border)); background: var(--danger-soft); }
+.evx-danger .di { width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0; display: grid; place-items: center;
+  background: var(--card-bg); color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent); }
+.evx-danger .dx { flex: 1; min-width: 0; }
+.evx-danger .dx b { font-size: 13px; font-weight: 700; color: var(--t1); }
+.evx-danger .dx p { font-size: 11.5px; color: var(--t3); margin: 2px 0 0; line-height: 1.4; }
+.evx-btn-danger { background: var(--card-bg); color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent); }
+.evx-btn-danger:hover { filter: none; background: var(--danger); color: #fff; border-color: transparent; }
+
+/* nota informativa (rodapé de card) */
+.evx-note { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px;
+  background: var(--card-bg-2); border: 1px solid var(--card-border); }
+.evx-note svg { color: var(--t4); flex-shrink: 0; margin-top: 1px; }
+.evx-note p { font-size: 12px; color: var(--t3); line-height: 1.5; margin: 0; }
+.evx-note b { color: var(--t2); }
