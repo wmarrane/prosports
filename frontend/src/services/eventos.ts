@@ -45,4 +45,5 @@ export const eventosService = {
     api.get<number[]>(`${BASE}/${eventoId}/modalidades-excluidas`).then(r => r.data),
   setModalidadesExcluidas: (eventoId: number, excluidas: number[]) =>
     api.put<{ excluidas: number[] }>(`${BASE}/${eventoId}/modalidades-excluidas`, { excluidas }).then(r => r.data),
+  progressoSorteio: (id: number) => api.get<{ sorteadas: number; sorteaveis: number }>(`${BASE}/${id}/progresso-sorteio`).then(r => r.data),
 }
