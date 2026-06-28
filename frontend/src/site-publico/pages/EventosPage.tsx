@@ -3,7 +3,7 @@ import SiteFooter from '../components/SiteFooter'
 import EventoCardListagem from '../components/EventoCardListagem'
 import { inscritos } from '../lib/evento-stats'
 import type { SnapEvento } from '../snapshot-types'
-import { statusPublico, STATUS_ORDEM, type EventoStatus } from '../lib/status-evento'
+import { statusPublico, STATUS_ORDEM } from '../lib/status-evento'
 
 export default function EventosPage({ eventos }: { eventos: SnapEvento[] }) {
   const porAno = new Map<number, SnapEvento[]>()
