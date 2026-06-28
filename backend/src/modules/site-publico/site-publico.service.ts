@@ -4,7 +4,9 @@ import { putSnapshot, deleteSnapshot, dispatchBuild } from './snapshot-store'
 import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
 import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 
-export async function publicar(eventoId: number): Promise<void> {
+const STATUS_PARCIAL_OK = ['pronto', 'parcial', 'sorteado']
+
+export async function publicar(eventoId: number, opts: { permitirParcial?: boolean } = {}): Promise<void> {
   const evento = await prisma.evento.findUnique({
     where: { id: eventoId },
     select: {
@@ -17,7 +19,14 @@ export async function publicar(eventoId: number): Promise<void> {
     },
   })
   if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
-  if (evento.status !== 'sorteado') {
+  if (opts.permitirParcial) {
+    if (!STATUS_PARCIAL_OK.includes(evento.status)) {
+      throw Object.assign(
+        new Error('Publicação parcial requer evento a partir de "Pronto p/ sorteio".'),
+        { status: 400 },
+      )
+    }
+  } else if (evento.status !== 'sorteado') {
     throw Object.assign(
       new Error('Só é possível publicar eventos com status "Sorteado".'),
       { status: 400 },

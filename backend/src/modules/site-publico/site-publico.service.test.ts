@@ -72,6 +72,72 @@ it('despublicar remove snapshot, dispara e limpa', async () => {
   expect(mp.evento.update).toHaveBeenCalledWith({ where: { id: 10 }, data: { site_publicado_em: null } })
 })
 
+// --- publicação parcial ---
+
+it('publicar parcial aceita status pronto', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'pronto',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10, { permitirParcial: true })).resolves.toBeUndefined()
+})
+
+it('publicar parcial aceita status parcial', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'parcial',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10, { permitirParcial: true })).resolves.toBeUndefined()
+})
+
+it('publicar parcial rejeita status rascunho', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'rascunho',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10, { permitirParcial: true })).rejects.toMatchObject({ status: 400 })
+  expect(store.putSnapshot).not.toHaveBeenCalled()
+})
+
+it('publicar parcial rejeita status inscricoes', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'inscricoes',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10, { permitirParcial: true })).rejects.toMatchObject({ status: 400 })
+  expect(store.putSnapshot).not.toHaveBeenCalled()
+})
+
+it('publicar parcial rejeita status suspenso', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'suspenso',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10, { permitirParcial: true })).rejects.toMatchObject({ status: 400 })
+  expect(store.putSnapshot).not.toHaveBeenCalled()
+})
+
+it('publicar normal continua exigindo sorteado (rejeita pronto)', async () => {
+  mp.evento.findUnique.mockResolvedValue({
+    id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
+    anfitriao_id: null, competicao_id: 7, status: 'pronto',
+    competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'São Manuel' },
+  })
+  await expect(service.publicar(10)).rejects.toMatchObject({ status: 400 })
+  expect(store.putSnapshot).not.toHaveBeenCalled()
+})
+
 it('publicar compõe subtitulo a partir de subtitulo_campos', async () => {
   mp.evento.findUnique.mockResolvedValue({
     id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M', data_hora: new Date('2026-05-10T12:00:00Z'),
