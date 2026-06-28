@@ -51,8 +51,11 @@ describe('progressoSorteio', () => {
     expect(r.sorteaveis).toBe(2) // mod 1 (chaves/8) e mod 2 (grupos/6)
     expect(r.sorteadas).toBe(1)  // mod 1
   })
-  it('exclui chaves sem bracket (R4) e grupos sem regra (R3)', async () => {
+  it('adicionar bracket reinclui a chave (R4): exclui R3, inclui R4 corrigido', async () => {
+    // Adiciona bracket para mod 4 (N=5) → agora passa R4 e se torna sorteável
+    mp.bracketChavesByes.findMany.mockResolvedValue([{ numero_inscrito: 8 }, { numero_inscrito: 5 }])
     const r = await progressoSorteio(1)
-    expect(r.sorteaveis).toBe(2) // mod 3 (R3) e mod 4 (R4) fora
+    expect(r.sorteaveis).toBe(3) // mod 1 (chaves/8), mod 2 (grupos/6), mod 4 (chaves/5 agora com bracket)
+    expect(r.sorteadas).toBe(1)  // mod 1
   })
 })
