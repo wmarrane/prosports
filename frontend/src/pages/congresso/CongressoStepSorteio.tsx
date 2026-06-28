@@ -240,10 +240,14 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   useEffect(() => {
     if (!evento || evento.status !== 'pronto' || !progresso) return
     const pct = pctSorteado(progresso.sorteadas, progresso.sorteaveis)
-    const key = `prosports.congresso.autopublish.${eventoId}`
+    // chave versionada (v2): evita dedupe contaminado pela versão anterior do recurso,
+    // que usava `prosports.congresso.autopublish.<id>` e podia gravar marcos antigos.
+    const key = `prosports.congresso.autopublish.v2.${eventoId}`
     let ultimo = 0
     try { ultimo = Number(localStorage.getItem(key) ?? '0') || 0 } catch { /* storage off */ }
     const marco = proximoMarcoCruzado(pct, ultimo)
+    // TODO(autopublish-debug): remover após confirmar o gatilho no próximo congresso.
+    console.debug('[autopublish]', { eventoId, status: evento.status, sorteadas: progresso.sorteadas, sorteaveis: progresso.sorteaveis, pct, ultimo, marco })
     if (marco == null || publicandoMarcoRef.current) return
     publicandoMarcoRef.current = true
     toast.success(`Publicação do site iniciada — atualização ${marco}%`)
