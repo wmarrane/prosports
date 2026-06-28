@@ -238,10 +238,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
   const publicandoMarcoRef = useRef(false)
   useEffect(() => {
-    if (!evento || (evento as any).status !== 'pronto') return
-    const comInscritos = new Set(inscricoesEvento.map((i: any) => i.modalidade_id))
+    if (!evento || evento.status !== 'pronto') return
+    const comInscritos = new Set(inscricoesEvento.map((i) => i.modalidade_id))
     const sorteaveis = modalidadesEvento.filter(
-      (m: any) => m.tipo_modalidade?.tipo !== 'especifico' && comInscritos.has(m.id),
+      (m) => m.tipo_modalidade?.tipo !== 'especifico' && comInscritos.has(m.id),
     ).length
     const sorteadasCount = new Set(sorteios.map((s) => s.modalidade_id)).size
     const pct = pctSorteado(sorteadasCount, sorteaveis)
