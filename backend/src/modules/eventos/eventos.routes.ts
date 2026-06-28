@@ -30,6 +30,8 @@ router.get('/:id/modalidades', requireAuth, acessoEventoIdParam, modalidadesExcl
 router.get('/:id/modalidades-excluidas', requireAuth, acessoEventoIdParam, modalidadesExcluidas.getExcluidas)
 router.put('/:id/modalidades-excluidas', ...admin, modalidadesExcluidas.setExcluidas)
 
+router.get('/:id/progresso-sorteio', ...admin, ctrl.progressoSorteio)
+
 router.use('/:evento_id/keys', eventoKeysRoutes)
 
 export default router

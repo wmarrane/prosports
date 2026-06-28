@@ -1,6 +1,7 @@
 import prisma from '../../lib/prisma'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { esporteBase } from '../../lib/esporte'
+import { getModalidadeIdsExcluidas } from './evento-modalidades.service'
 
 const INCLUDE = {
   competicao: true,
@@ -206,4 +207,50 @@ export async function setLogoUrl(id: number, logo_url: string | null) {
 export async function getLogoUrl(id: number): Promise<string | null> {
   const e = await prisma.evento.findUnique({ where: { id }, select: { logo_url: true } })
   return e?.logo_url ?? null
+}
+
+export async function progressoSorteio(eventoId: number): Promise<{ sorteadas: number; sorteaveis: number }> {
+  const evento = await prisma.evento.findUnique({ where: { id: eventoId }, select: { id: true, competicao_id: true } })
+  if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+
+  const [modalidades, inscricoesGrp, sorteios, excluidasIds, gruposRegras, chavesRegras] = await Promise.all([
+    prisma.modalidade.findMany({
+      where: { competicao_id: evento.competicao_id, ativa: true },
+      select: { id: true, tipo_modalidade: { select: { tipo: true } }, mensagens_inscritos: true },
+    }),
+    prisma.inscricao.groupBy({ by: ['modalidade_id'], where: { evento_id: eventoId }, _count: { _all: true } }),
+    prisma.sorteio.findMany({ where: { evento_id: eventoId }, select: { modalidade_id: true } }),
+    getModalidadeIdsExcluidas(eventoId),
+    prisma.sistemaDisputasGrupos.findMany({ where: { competicao_id: evento.competicao_id }, select: { quantidade_equipes: true } }),
+    prisma.sistemaDisputasChaves.findMany({ where: { competicao_id: evento.competicao_id }, select: { numero_inscrito: true } }),
+  ])
+
+  const inscritosPorMod = new Map<number, number>()
+  for (const g of inscricoesGrp) inscritosPorMod.set(g.modalidade_id, (g as any)._count?._all ?? 0)
+  const sorteadasSet = new Set<number>(sorteios.map((s) => s.modalidade_id))
+  const gruposSet = new Set<number>(gruposRegras.map((r) => r.quantidade_equipes))
+  const chavesSet = new Set<number>(chavesRegras.map((r) => r.numero_inscrito))
+
+  // Candidatas: grupos/chaves, ativas, não excluídas
+  const candidatas = modalidades.filter(
+    (m) => (m.tipo_modalidade.tipo === 'grupos' || m.tipo_modalidade.tipo === 'chaves') && !excluidasIds.has(m.id),
+  )
+  // Bracket byes só para os N candidatos de chaves (consulta enxuta)
+  const nsChaves = [...new Set(candidatas.filter((m) => m.tipo_modalidade.tipo === 'chaves').map((m) => inscritosPorMod.get(m.id) ?? 0))]
+  const byes = nsChaves.length
+    ? await prisma.bracketChavesByes.findMany({ where: { numero_inscrito: { in: nsChaves } }, select: { numero_inscrito: true } })
+    : []
+  const bracketSet = new Set<number>(byes.map((b) => b.numero_inscrito))
+
+  let sorteaveis = 0
+  let sorteadas = 0
+  for (const m of candidatas) {
+    const n = inscritosPorMod.get(m.id) ?? 0
+    if (!isSorteavel({ tipo: m.tipo_modalidade.tipo, mensagens_inscritos: m.mensagens_inscritos }, n)) continue // R1+R2
+    if (m.tipo_modalidade.tipo === 'grupos' && !gruposSet.has(n)) continue // R3
+    if (m.tipo_modalidade.tipo === 'chaves' && (!chavesSet.has(n) || !bracketSet.has(n))) continue // R4
+    sorteaveis++
+    if (sorteadasSet.has(m.id)) sorteadas++
+  }
+  return { sorteadas, sorteaveis }
 }

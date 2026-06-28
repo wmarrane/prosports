@@ -96,3 +96,11 @@ export async function removerLogo(req: Request, res: Response, next: NextFunctio
     res.json(evento)
   } catch (err) { next(err) }
 }
+
+export async function progressoSorteio(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = parseIntParam(req.params.id, 'id')
+    const r = await service.progressoSorteio(id)
+    res.json(r)
+  } catch (err) { next(err) }
+}
