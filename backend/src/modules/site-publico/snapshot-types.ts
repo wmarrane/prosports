@@ -10,7 +10,7 @@ export type SnapModalidade = {
   mensagens_inscritos: { min: number; max: number | null; mensagem: string; pular_sorteio: boolean }[]
 }
 export type SnapEvento = {
-  id: number; nome: string; competicao: string
+  id: number; nome: string; status: string; competicao: string
   cidade: string; local: string; data: string; organizador: string | null
   publicadoEm: string
   dataInicio: string | null; dataFim: string | null

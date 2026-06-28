@@ -4,7 +4,7 @@ import type {
 } from './snapshot-types'
 
 type EventoRow = {
-  id: number; nome: string; local: string; organizador: string | null
+  id: number; nome: string; status: string; local: string; organizador: string | null
   data_hora: Date; anfitriao_id: number | null
   competicao: { nome: string; considerar_anfitriao: boolean; subtitulo_campos?: string[] }
   municipio: { nome: string }
@@ -103,6 +103,7 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
   return {
     id: evento.id,
     nome: evento.nome,
+    status: evento.status,
     competicao: evento.competicao.nome,
     cidade: evento.municipio.nome,
     local: evento.local,
