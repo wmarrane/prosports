@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { FileText, Plus, Download, MoreHorizontal, X, Check, ChevronDown, Upload, Lock, Trash2 } from 'lucide-react'
+import { FileText, Plus, Download, MoreHorizontal, X, Check, ChevronDown, Upload, Lock, Trash2, RefreshCw } from 'lucide-react'
 import { boletinsService, type Boletim } from '../../services/boletins'
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
 
 export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: number; eventoNome?: string }) {
   const [docs, setDocs] = useState<Boletim[]>([])
   const [modalOpen, setModalOpen] = useState(false)
+  const [editing, setEditing] = useState<Boletim | null>(null)
   const [toast, setToast] = useState<string | null>(null)
   const [kebab, setKebab] = useState<number | null>(null)
 
@@ -25,7 +26,11 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
     try { await boletinsService.remover(eventoId, id); await load() } catch { showToast('Falha ao remover') }
   }
 
-  const ordenados = [...docs].sort((a, b) => b.numero - a.numero)
+  // mais recentemente publicado/reprocessado no topo
+  const ordenados = [...docs].sort((a, b) => (+new Date(b.atualizado_em) - +new Date(a.atualizado_em)) || (b.numero - a.numero))
+
+  function abrirPublicar() { setEditing(null); setModalOpen(true) }
+  function abrirSubstituir(b: Boletim) { setKebab(null); setEditing(b); setModalOpen(true) }
 
   return (
     <div className="card" style={{ padding: 24, marginTop: 24 }}>
@@ -37,14 +42,14 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
           <div className="count">{docs.length} publicado{docs.length === 1 ? '' : 's'}{eventoNome ? ` — ${eventoNome}` : ''}</div>
         </div>
         <div className="spacer" />
-        <button className="btn btn-primary pub-btn" onClick={() => setModalOpen(true)}><Plus size={18} /> Publicar boletim</button>
+        <button className="btn btn-primary pub-btn" onClick={abrirPublicar}><Plus size={18} /> Publicar boletim</button>
       </div>
 
       {ordenados.length === 0 ? (
         <div className="bol-empty">
           <FileText size={28} />
           <div>Nenhum boletim publicado</div>
-          <button className="btn btn-primary" onClick={() => setModalOpen(true)}><Plus size={18} /> Publicar primeiro boletim</button>
+          <button className="btn btn-primary" onClick={abrirPublicar}><Plus size={18} /> Publicar primeiro boletim</button>
         </div>
       ) : (
         <div className="bol-list">
@@ -67,7 +72,10 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
                     <a className="ibtn-sm" href={d.public_url} target="_blank" rel="noopener noreferrer" title="Baixar"><Download size={17} /></a>
                     <button className="ibtn-sm" title="Mais" onClick={() => setKebab(kebab === d.id ? null : d.id)}><MoreHorizontal size={17} /></button>
                     {kebab === d.id && (
-                      <div className="kebab-menu"><button onClick={() => onRemove(d.id)}><Trash2 size={15} /> Remover</button></div>
+                      <div className="kebab-menu">
+                        <button onClick={() => abrirSubstituir(d)}><RefreshCw size={15} /> Substituir</button>
+                        <button onClick={() => onRemove(d.id)}><Trash2 size={15} /> Remover</button>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -78,11 +86,12 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
       )}
 
       {modalOpen && (
-        <PublicarModal
+        <BoletimModal
           eventoId={eventoId}
           eventoNome={eventoNome}
+          boletim={editing}
           onClose={() => setModalOpen(false)}
-          onPublished={async () => { setModalOpen(false); await load(); showToast('Boletim publicado') }}
+          onDone={async (msg) => { setModalOpen(false); await load(); showToast(msg) }}
         />
       )}
 
@@ -93,13 +102,14 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
   )
 }
 
-function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
-  eventoId: number; eventoNome?: string; onClose: () => void; onPublished: () => void
+function BoletimModal({ eventoId, eventoNome, boletim, onClose, onDone }: {
+  eventoId: number; eventoNome?: string; boletim: Boletim | null; onClose: () => void; onDone: (msg: string) => void
 }) {
-  const [numero, setNumero] = useState('')
-  const [titulo, setTitulo] = useState('')
-  const [categoria, setCategoria] = useState(CATEGORIAS_BOLETIM[0].value)
-  const [data, setData] = useState('')
+  const isEdit = boletim != null
+  const [numero, setNumero] = useState(boletim ? String(boletim.numero) : '')
+  const [titulo, setTitulo] = useState(boletim?.titulo ?? '')
+  const [categoria, setCategoria] = useState(boletim?.categoria ?? CATEGORIAS_BOLETIM[0].value)
+  const [data, setData] = useState(boletim ? boletim.data_publicacao.slice(0, 10) : '')
   const [file, setFile] = useState<File | null>(null)
   const [typeOpen, setTypeOpen] = useState(false)
   const [drag, setDrag] = useState(false)
@@ -113,7 +123,6 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
-
   useEffect(() => {
     if (!typeOpen) return
     const close = () => setTypeOpen(false)
@@ -127,14 +136,20 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
     setErro(null); setFile(f)
   }
 
-  async function publicar() {
-    if (!file || !numero || !titulo || !data) { setErro('Preencha número, título, data e arquivo.'); return }
+  async function salvar() {
+    if (!titulo || !data) { setErro('Preencha título e data.'); return }
+    if (!isEdit && (!file || !numero)) { setErro('Preencha número e arquivo.'); return }
     setLoading(true); setErro(null)
     try {
-      await boletinsService.enviar(eventoId, { numero: Number(numero), titulo, categoria, data_publicacao: data, file })
-      onPublished()
+      if (isEdit) {
+        await boletinsService.substituir(eventoId, boletim!.id, { titulo, categoria, data_publicacao: data, file: file ?? undefined })
+        onDone('Boletim atualizado')
+      } else {
+        await boletinsService.enviar(eventoId, { numero: Number(numero), titulo, categoria, data_publicacao: data, file: file! })
+        onDone('Boletim publicado')
+      }
     } catch (e: any) {
-      setErro(e?.response?.data?.message ?? 'Falha ao publicar')
+      setErro(e?.response?.data?.message ?? 'Falha ao salvar')
     } finally { setLoading(false) }
   }
 
@@ -144,14 +159,16 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
         <div className="mh">
           <div className="mi"><FileText size={20} /></div>
           <div style={{ flex: 1 }}>
-            <h3 className="sec-title" style={{ fontSize: 16 }}>Publicar boletim</h3>
+            <h3 className="sec-title" style={{ fontSize: 16 }}>{isEdit ? 'Substituir boletim' : 'Publicar boletim'}</h3>
             <div style={{ fontSize: 12, color: 'var(--t3)', marginTop: 2 }}>{eventoNome ?? ''}</div>
           </div>
           <button className="ibtn-sm" onClick={onClose}><X size={18} /></button>
         </div>
         <div className="mb">
           <div className="grid-num-title">
-            <div className="field"><label>Número <span className="req">*</span></label><input className="lg-input" value={numero} onChange={(e) => setNumero(e.target.value)} /></div>
+            <div className="field"><label>Número {!isEdit && <span className="req">*</span>}</label>
+              <input className="lg-input" value={numero} onChange={(e) => setNumero(e.target.value)} disabled={isEdit} />
+            </div>
             <div className="field"><label>Título <span className="req">*</span></label><input className="lg-input" value={titulo} onChange={(e) => setTitulo(e.target.value)} /></div>
           </div>
           <div className="grid-tipo-data">
@@ -177,7 +194,7 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
             </div>
           </div>
           <div className="field">
-            <label>Arquivo PDF <span className="req">*</span></label>
+            <label>{isEdit ? 'Trocar PDF (opcional)' : <>Arquivo PDF <span className="req">*</span></>}</label>
             <input ref={fileRef} type="file" accept="application/pdf" style={{ display: 'none' }} onChange={(e) => pick(e.target.files?.[0] ?? null)} />
             {file ? (
               <div className="file-chip">
@@ -194,7 +211,7 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
                 onDrop={(e) => { e.preventDefault(); setDrag(false); pick(e.dataTransfer.files?.[0] ?? null) }}
               >
                 <div className="dz-ic"><Upload size={21} /></div>
-                <div><div className="t">Arraste o PDF ou clique para selecionar</div><div className="s">Apenas .pdf · até 25 MB</div></div>
+                <div><div className="t">{isEdit ? 'Arraste um novo PDF ou mantenha o atual' : 'Arraste o PDF ou clique para selecionar'}</div><div className="s">Apenas .pdf · até 25 MB</div></div>
               </div>
             )}
           </div>
@@ -204,7 +221,7 @@ function PublicarModal({ eventoId, eventoNome, onClose, onPublished }: {
           <span className="hint"><Lock size={13} /> Registrado em auditoria</span>
           <span className="grow" />
           <button className="btn btn-ghost" onClick={onClose}>Cancelar</button>
-          <button className="btn btn-primary" disabled={loading} onClick={publicar}><Check size={16} /> {loading ? 'Publicando…' : 'Publicar'}</button>
+          <button className="btn btn-primary" disabled={loading} onClick={salvar}><Check size={16} /> {loading ? 'Salvando…' : (isEdit ? 'Salvar' : 'Publicar')}</button>
         </div>
       </div>
     </div>

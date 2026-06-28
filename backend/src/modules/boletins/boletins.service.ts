@@ -51,3 +51,40 @@ export async function removerBoletim(eventoId: number, boletimId: number) {
   await prisma.boletim.delete({ where: { id: boletim.id } })
   await republicarSePublicado(eventoId)
 }
+
+type SubstituirInput = {
+  titulo?: string
+  categoria?: CategoriaBoletim
+  data_publicacao?: Date
+  file?: { buffer: Buffer; originalname: string; size: number; mimetype: string }
+}
+
+export async function substituirBoletim(eventoId: number, boletimId: number, input: SubstituirInput) {
+  const boletim = await prisma.boletim.findFirst({ where: { id: boletimId, evento_id: eventoId } })
+  if (!boletim) throw Object.assign(new Error('Boletim não encontrado'), { status: 404 })
+
+  const data: Record<string, unknown> = {}
+  if (input.titulo !== undefined) data.titulo = input.titulo
+  if (input.categoria !== undefined) data.categoria = input.categoria
+  if (input.data_publicacao !== undefined) data.data_publicacao = input.data_publicacao
+
+  let novoObjectKey: string | null = null
+  if (input.file) {
+    novoObjectKey = `eventos/${eventoId}/boletim-${boletim.numero}-${randomUUID()}.pdf`
+    const url = await getStorage().put(novoObjectKey, input.file.buffer, 'application/pdf')
+    data.object_key = novoObjectKey
+    data.public_url = url
+    data.filename = input.file.originalname
+    data.size_bytes = input.file.size
+  }
+
+  try {
+    const atualizado = await prisma.boletim.update({ where: { id: boletim.id }, data })
+    if (input.file) { try { await getStorage().remove(boletim.object_key) } catch { /* ignore */ } }
+    await republicarSePublicado(eventoId)
+    return atualizado
+  } catch (err) {
+    if (novoObjectKey) { try { await getStorage().remove(novoObjectKey) } catch { /* ignore */ } }
+    throw err
+  }
+}

@@ -38,3 +38,23 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
     res.status(204).send()
   } catch (err) { next(err) }
 }
+
+const substituirSchema = z.object({
+  titulo: z.string().min(1).optional(),
+  categoria: z.enum(CATEGORIAS).optional(),
+  data_publicacao: z.coerce.date().optional(),
+})
+
+export async function substituir(req: Request, res: Response, next: NextFunction) {
+  try {
+    const eventoId = parseIntParam(req.params.eventoId, 'eventoId')
+    const boletimId = parseIntParam(req.params.boletimId, 'boletimId')
+    const file = (req as any).file as Express.Multer.File | undefined
+    const body = substituirSchema.parse(req.body)
+    if (!file && body.titulo === undefined && body.categoria === undefined && body.data_publicacao === undefined) {
+      res.status(400).json({ message: 'Nada para atualizar.' }); return
+    }
+    const boletim = await service.substituirBoletim(eventoId, boletimId, { ...body, file })
+    res.json(boletim)
+  } catch (err) { next(err) }
+}

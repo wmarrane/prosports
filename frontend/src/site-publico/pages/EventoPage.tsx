@@ -77,7 +77,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
           </section>
         ))}
         {boletins.length > 0 && (() => {
-          const ordenados = [...boletins].sort((a, b) => (+new Date(b.data) - +new Date(a.data)) || (b.numero - a.numero))
+          const ordenados = [...boletins].sort((a, b) => (+new Date(b.atualizadoEm) - +new Date(a.atualizadoEm)) || (b.numero - a.numero))
           const destaque = ordenados[0]
           const di = categoriaInfo(destaque.categoria)
           return (

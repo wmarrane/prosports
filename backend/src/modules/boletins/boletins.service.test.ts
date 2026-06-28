@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 const prismaMock = {
   evento: { findUnique: vi.fn() },
-  boletim: { create: vi.fn(), findMany: vi.fn(), findFirst: vi.fn(), delete: vi.fn() },
+  boletim: { create: vi.fn(), findMany: vi.fn(), findFirst: vi.fn(), delete: vi.fn(), update: vi.fn() },
 }
 vi.mock('../../lib/prisma', () => ({ default: prismaMock }))
 
@@ -42,5 +42,34 @@ describe('boletins.service', () => {
     await removerBoletim(9, 5)
     expect(removeMock).toHaveBeenCalledWith('eventos/9/boletim-1-abc.pdf')
     expect(prismaMock.boletim.delete).toHaveBeenCalledWith({ where: { id: 5 } })
+  })
+})
+
+describe('substituirBoletim', () => {
+  it('substitui com novo PDF: sobe novo, remove antigo, atualiza e re-publica se publicado', async () => {
+    prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, numero: 3, object_key: 'eventos/9/boletim-3-old.pdf' })
+    prismaMock.boletim.update.mockResolvedValue({ id: 5, evento_id: 9, numero: 3 })
+    prismaMock.evento.findUnique.mockResolvedValue({ id: 9, site_publicado_em: new Date() })
+    const { substituirBoletim } = await import('./boletins.service')
+    await substituirBoletim(9, 5, { titulo: 'Novo', file: { buffer: Buffer.from('x'), originalname: 'n.pdf', size: 2, mimetype: 'application/pdf' } as any })
+    expect(putMock).toHaveBeenCalled()
+    expect(removeMock).toHaveBeenCalledWith('eventos/9/boletim-3-old.pdf')
+    expect(prismaMock.boletim.update).toHaveBeenCalled()
+    expect(publicarMock).toHaveBeenCalledWith(9)
+  })
+  it('substitui só campos (sem arquivo): não mexe no storage', async () => {
+    prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, numero: 3, object_key: 'k' })
+    prismaMock.boletim.update.mockResolvedValue({ id: 5 })
+    prismaMock.evento.findUnique.mockResolvedValue({ id: 9, site_publicado_em: null })
+    const { substituirBoletim } = await import('./boletins.service')
+    await substituirBoletim(9, 5, { titulo: 'Corrigido' })
+    expect(putMock).not.toHaveBeenCalled()
+    expect(removeMock).not.toHaveBeenCalled()
+    expect(publicarMock).not.toHaveBeenCalled()
+  })
+  it('404 se o boletim não existe', async () => {
+    prismaMock.boletim.findFirst.mockResolvedValue(null)
+    const { substituirBoletim } = await import('./boletins.service')
+    await expect(substituirBoletim(9, 999, { titulo: 'x' })).rejects.toMatchObject({ status: 404 })
   })
 })
