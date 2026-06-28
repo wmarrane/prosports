@@ -3,6 +3,7 @@ import SiteFooter from '../components/SiteFooter'
 import EventoCardListagem from '../components/EventoCardListagem'
 import { inscritos } from '../lib/evento-stats'
 import type { SnapEvento } from '../snapshot-types'
+import { statusPublico, STATUS_ORDEM } from '../lib/status-evento'
 
 export default function EventosPage({ eventos }: { eventos: SnapEvento[] }) {
   const porAno = new Map<number, SnapEvento[]>()
@@ -34,9 +35,9 @@ export default function EventosPage({ eventos }: { eventos: SnapEvento[] }) {
                   <span className="spacer" />
                   <div className="yr-filter">
                     <button type="button" className="on" data-filter="todos">Todos</button>
-                    <button type="button" data-filter="andamento"><span className="d" style={{ background: 'var(--info)' }} />Em andamento</button>
-                    <button type="button" data-filter="aguardando"><span className="d" style={{ background: 'var(--warn)' }} />Aguardando</button>
-                    <button type="button" data-filter="sorteado"><span className="d" style={{ background: 'var(--accent)' }} />Sorteado</button>
+                    {STATUS_ORDEM.filter((s) => lista.some((e) => e.status === s)).map((s) => (
+                      <button type="button" key={s} data-filter={s}><span className="d" style={{ background: statusPublico(s).dot }} />{statusPublico(s).label}</button>
+                    ))}
                   </div>
                 </div>
                 <div className="ev-grid3">

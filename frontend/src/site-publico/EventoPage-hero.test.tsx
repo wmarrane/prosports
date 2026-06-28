@@ -7,6 +7,7 @@ const base = (extra: Partial<SnapEvento> = {}): SnapEvento => ({
   id: 3, nome: 'Jogos Regionais', competicao: 'Regionais 2026', cidade: 'Campinas', local: 'Ginásio',
   data: '2026-06-18T00:00:00.000Z', organizador: 'Org X', publicadoEm: '',
   dataInicio: '2026-06-18T00:00:00.000Z', dataFim: '2026-06-20T00:00:00.000Z',
+  status: 'pronto',
   boletins: [], modalidades: [
     { id: 1, nome: 'Judô', grupo: null, tipo: 'chaves', status: 'sorteado', seed: null, anfitriaoId: null, participantes: [{ id: 1, nome: 'A', subtitulo: null }], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
     { id: 2, nome: 'Futsal', grupo: null, tipo: 'grupos', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [{ id: 2, nome: 'B', subtitulo: null }], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
@@ -25,6 +26,11 @@ describe('EventoPage hero', () => {
     expect(html).not.toContain('Categorias')
     expect(html).toContain('Modalidades')
     expect(html).toContain('Com sorteio')
+    expect(html).toContain('Pronto p/ sorteio')
+  })
+  it('badge do hero segue o status real do evento', () => {
+    expect(renderToStaticMarkup(<EventoPage evento={base({ status: 'parcial' } as any)} />)).toContain('Parcial')
+    expect(renderToStaticMarkup(<EventoPage evento={base({ status: 'sorteado' } as any)} />)).toContain('Sorteado')
   })
   it('mostra "Baixar o último boletim oficial" só quando há boletim', () => {
     const semBol = renderToStaticMarkup(<EventoPage evento={base()} />)

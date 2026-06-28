@@ -124,6 +124,24 @@ it('usa [] quando mensagens_inscritos é null/ausente', () => {
   expect(snap.modalidades[0].mensagens_inscritos).toEqual([])
 })
 
+it('montaSnapshot inclui o status do evento', () => {
+  const eventoComStatus = {
+    id: 1, nome: 'E', local: 'L', organizador: null, data_hora: new Date('2026-06-18T00:00:00Z'),
+    anfitriao_id: null, status: 'pronto',
+    competicao: { nome: 'C', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'Cidade' }, data_inicio: null, data_fim: null, boletins: [],
+  } as any
+  const snap = montaSnapshot({
+    evento: eventoComStatus,
+    modalidades: [],
+    inscricoesPorModalidade: new Map(),
+    campeoesPorModalidade: new Map(),
+    sorteiosPorModalidade: new Map(),
+    subtituloFn: () => null,
+  })
+  expect(snap.status).toBe('pronto')
+})
+
 it('inclui boletins e datas inicio/fim no snapshot', () => {
   const snap = montaSnapshot({
     evento: {

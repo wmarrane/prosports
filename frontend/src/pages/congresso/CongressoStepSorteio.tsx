@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { eventosService } from '../../services/eventos'
@@ -19,6 +19,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
+import { proximoMarcoCruzado, pctSorteado } from './autopublish'
 
 type Props = {
   eventoId: number
@@ -77,6 +78,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const { data: campeoes = [] } = useQuery({
     queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
+  })
+
+  const { data: modalidadesEvento = [] } = useQuery({
+    queryKey: ['evento-modalidades', eventoId],
+    queryFn: () => eventosService.getModalidadesDoEvento(eventoId),
+  })
+  const { data: inscricoesEvento = [] } = useQuery({
+    queryKey: ['inscricoes', eventoId],
+    queryFn: () => inscricoesService.listar({ evento_id: eventoId }),
   })
 
   const participantesById = useMemo(() => {
@@ -223,6 +233,29 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       return () => clearTimeout(t)
     }
   }, [executando, animating])
+
+  // Auto-publicação parcial: dispara quando sorteios cruzam marco de 25/50/75/100%
+  // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
+  const publicandoMarcoRef = useRef(false)
+  useEffect(() => {
+    if (!evento || evento.status !== 'pronto') return
+    const comInscritos = new Set(inscricoesEvento.map((i) => i.modalidade_id))
+    const sorteaveis = modalidadesEvento.filter(
+      (m) => m.tipo_modalidade?.tipo !== 'especifico' && comInscritos.has(m.id),
+    ).length
+    const sorteadasCount = new Set(sorteios.map((s) => s.modalidade_id)).size
+    const pct = pctSorteado(sorteadasCount, sorteaveis)
+    const key = `prosports.congresso.autopublish.${eventoId}`
+    let ultimo = 0
+    try { ultimo = Number(localStorage.getItem(key) ?? '0') || 0 } catch { /* storage off */ }
+    const marco = proximoMarcoCruzado(pct, ultimo)
+    if (marco == null || publicandoMarcoRef.current) return
+    publicandoMarcoRef.current = true
+    eventosService.publicarParcial(eventoId)
+      .then(() => { try { localStorage.setItem(key, String(marco)) } catch { /* storage off */ } })
+      .catch(() => { /* silencioso: não interrompe o congresso */ })
+      .finally(() => { publicandoMarcoRef.current = false })
+  }, [evento, modalidadesEvento, inscricoesEvento, sorteios, eventoId])
 
   function handleSortear() {
     setErro('')
