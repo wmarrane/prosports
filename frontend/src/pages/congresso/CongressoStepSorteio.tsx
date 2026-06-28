@@ -33,6 +33,12 @@ const FG = 'var(--cw-fg)'
 const DIM = 'var(--cw-dim)'
 const DANGER = 'var(--danger)'
 
+// Dedupe de auto-publicação por SESSÃO (escopo de módulo): sobrevive à remontagem
+// ao navegar entre modalidades, mas zera ao recarregar a página — assim um novo
+// congresso re-sincroniza o site sem ficar "preso" em marcos antigos (como acontecia
+// com o localStorage). Mapa eventoId -> maior marco já publicado nesta sessão.
+const ultimoMarcoPublicadoPorEvento = new Map<number, number>()
+
 const ANIM_MS = 1500
 
 export default function CongressoStepSorteio({ eventoId, modalidadeId, competicaoId, onProxima }: Props) {
@@ -238,23 +244,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
   const publicandoMarcoRef = useRef(false)
   useEffect(() => {
-    // TODO(autopublish-debug): remover após confirmar o gatilho no próximo congresso.
-    // Loga ANTES dos guards para revelar early-returns (ex.: progresso indefinido por 403).
-    console.debug('[autopublish] eval', { eventoId, temEvento: !!evento, status: evento?.status, progresso })
     if (!evento || evento.status !== 'pronto' || !progresso) return
     const pct = pctSorteado(progresso.sorteadas, progresso.sorteaveis)
-    // chave versionada (v2): evita dedupe contaminado pela versão anterior do recurso,
-    // que usava `prosports.congresso.autopublish.<id>` e podia gravar marcos antigos.
-    const key = `prosports.congresso.autopublish.v2.${eventoId}`
-    let ultimo = 0
-    try { ultimo = Number(localStorage.getItem(key) ?? '0') || 0 } catch { /* storage off */ }
+    const ultimo = ultimoMarcoPublicadoPorEvento.get(eventoId) ?? 0
     const marco = proximoMarcoCruzado(pct, ultimo)
-    console.debug('[autopublish] marco', { pct, ultimo, marco, sorteadas: progresso.sorteadas, sorteaveis: progresso.sorteaveis })
     if (marco == null || publicandoMarcoRef.current) return
     publicandoMarcoRef.current = true
     toast.success(`Publicação do site iniciada — atualização ${marco}%`)
     eventosService.publicarParcial(eventoId)
-      .then(() => { try { localStorage.setItem(key, String(marco)) } catch { /* storage off */ } })
+      .then(() => { ultimoMarcoPublicadoPorEvento.set(eventoId, marco) })
       .catch(() => { toast.error('Falha ao iniciar a publicação do site.') })
       .finally(() => { publicandoMarcoRef.current = false })
   // toast omitido: useToast() retorna novo objeto a cada render, mas seus
