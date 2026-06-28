@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useToast } from '../../components/Toast'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { eventosService } from '../../services/eventos'
@@ -36,6 +37,7 @@ const ANIM_MS = 1500
 
 export default function CongressoStepSorteio({ eventoId, modalidadeId, competicaoId, onProxima }: Props) {
   const queryClient = useQueryClient()
+  const toast = useToast()
   const [erro, setErro] = useState('')
   const [animating, setAnimating] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
@@ -80,13 +82,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
   })
 
-  const { data: modalidadesEvento = [] } = useQuery({
-    queryKey: ['evento-modalidades', eventoId],
-    queryFn: () => eventosService.getModalidadesDoEvento(eventoId),
-  })
-  const { data: inscricoesEvento = [] } = useQuery({
-    queryKey: ['inscricoes', eventoId],
-    queryFn: () => inscricoesService.listar({ evento_id: eventoId }),
+  const { data: progresso } = useQuery({
+    queryKey: ['progresso-sorteio', eventoId],
+    queryFn: () => eventosService.progressoSorteio(eventoId),
+    enabled: !!evento,
   })
 
   const participantesById = useMemo(() => {
@@ -219,6 +218,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
+      queryClient.invalidateQueries({ queryKey: ['progresso-sorteio', eventoId] })
       setErro('')
     },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao sortear.'),
@@ -238,24 +238,22 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
   const publicandoMarcoRef = useRef(false)
   useEffect(() => {
-    if (!evento || evento.status !== 'pronto') return
-    const comInscritos = new Set(inscricoesEvento.map((i) => i.modalidade_id))
-    const sorteaveis = modalidadesEvento.filter(
-      (m) => m.tipo_modalidade?.tipo !== 'especifico' && comInscritos.has(m.id),
-    ).length
-    const sorteadasCount = new Set(sorteios.map((s) => s.modalidade_id)).size
-    const pct = pctSorteado(sorteadasCount, sorteaveis)
+    if (!evento || evento.status !== 'pronto' || !progresso) return
+    const pct = pctSorteado(progresso.sorteadas, progresso.sorteaveis)
     const key = `prosports.congresso.autopublish.${eventoId}`
     let ultimo = 0
     try { ultimo = Number(localStorage.getItem(key) ?? '0') || 0 } catch { /* storage off */ }
     const marco = proximoMarcoCruzado(pct, ultimo)
     if (marco == null || publicandoMarcoRef.current) return
     publicandoMarcoRef.current = true
+    toast.success(`Publicação do site iniciada — atualização ${marco}%`)
     eventosService.publicarParcial(eventoId)
       .then(() => { try { localStorage.setItem(key, String(marco)) } catch { /* storage off */ } })
-      .catch(() => { /* silencioso: não interrompe o congresso */ })
+      .catch(() => { toast.error('Falha ao iniciar a publicação do site.') })
       .finally(() => { publicandoMarcoRef.current = false })
-  }, [evento, modalidadesEvento, inscricoesEvento, sorteios, eventoId])
+  // toast omitido: useToast() retorna novo objeto a cada render, mas seus
+  // métodos success/error são useCallback estáveis — a referência capturada é segura.
+  }, [evento, progresso, eventoId])
 
   function handleSortear() {
     setErro('')
