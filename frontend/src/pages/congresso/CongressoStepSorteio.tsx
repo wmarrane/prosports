@@ -238,6 +238,9 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
   const publicandoMarcoRef = useRef(false)
   useEffect(() => {
+    // TODO(autopublish-debug): remover após confirmar o gatilho no próximo congresso.
+    // Loga ANTES dos guards para revelar early-returns (ex.: progresso indefinido por 403).
+    console.debug('[autopublish] eval', { eventoId, temEvento: !!evento, status: evento?.status, progresso })
     if (!evento || evento.status !== 'pronto' || !progresso) return
     const pct = pctSorteado(progresso.sorteadas, progresso.sorteaveis)
     // chave versionada (v2): evita dedupe contaminado pela versão anterior do recurso,
@@ -246,8 +249,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     let ultimo = 0
     try { ultimo = Number(localStorage.getItem(key) ?? '0') || 0 } catch { /* storage off */ }
     const marco = proximoMarcoCruzado(pct, ultimo)
-    // TODO(autopublish-debug): remover após confirmar o gatilho no próximo congresso.
-    console.debug('[autopublish]', { eventoId, status: evento.status, sorteadas: progresso.sorteadas, sorteaveis: progresso.sorteaveis, pct, ultimo, marco })
+    console.debug('[autopublish] marco', { pct, ultimo, marco, sorteadas: progresso.sorteadas, sorteaveis: progresso.sorteaveis })
     if (marco == null || publicandoMarcoRef.current) return
     publicandoMarcoRef.current = true
     toast.success(`Publicação do site iniciada — atualização ${marco}%`)
