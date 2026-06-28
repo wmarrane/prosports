@@ -21,6 +21,7 @@ export type SnapModalidade = {
 export type SnapEvento = {
   id: number
   nome: string
+  status: string
   competicao: string
   cidade: string
   local: string

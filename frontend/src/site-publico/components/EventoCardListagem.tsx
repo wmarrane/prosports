@@ -2,28 +2,14 @@ import type { SnapEvento } from '../snapshot-types'
 import { progressoSorteios, inscritos, modalidadesDistintas } from '../lib/evento-stats'
 import { dataPtBr } from '../../lib/boletim-categorias'
 import { Medal, MapPin, ArrowRight } from 'lucide-react'
-
-type StatusListagem = 'sorteado' | 'andamento' | 'aguardando'
-
-const STATUS_INFO: Record<StatusListagem, { label: string; grad: string; dot: string }> = {
-  sorteado: { label: 'Sorteado', grad: 'var(--grad-accent)', dot: 'var(--accent)' },
-  andamento: { label: 'Sorteios em andamento', grad: 'var(--grad-brand)', dot: 'var(--info)' },
-  aguardando: { label: 'Aguardando sorteio', grad: 'var(--grad-warn)', dot: 'var(--warn)' },
-}
-
-function statusDe(sorteadas: number, done: boolean): StatusListagem {
-  if (done) return 'sorteado'
-  if (sorteadas > 0) return 'andamento'
-  return 'aguardando'
-}
+import { statusPublico } from '../lib/status-evento'
 
 export default function EventoCardListagem({ evento }: { evento: SnapEvento }) {
   const { sorteadas, done } = progressoSorteios(evento)
-  const status = statusDe(sorteadas, done)
-  const info = STATUS_INFO[status]
+  const info = statusPublico(evento.status)
   const sortCls = sorteadas === 0 ? 'zero' : done ? 'hl' : ''
   return (
-    <a className="evc" href={`/evento-${evento.id}.html`} data-status={status}>
+    <a className="evc" href={`/evento-${evento.id}.html`} data-status={evento.status}>
       <div className="accent" style={{ background: info.grad }} />
       <div className="evc-h">
         <div className="evc-tile" style={{ background: info.grad }}><Medal size={19} /></div>
