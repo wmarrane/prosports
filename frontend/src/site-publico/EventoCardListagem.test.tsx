@@ -23,14 +23,14 @@ it('aguardando quando nada foi sorteado', () => {
 })
 
 it('em andamento quando parte sorteada', () => {
-  const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado' }), mod({ id: 2, status: 'aguardando' })])} />)
+  const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado', participantes: [{ id: 1, nome: 'A', subtitulo: null }] }), mod({ id: 2, status: 'aguardando', participantes: [{ id: 2, nome: 'B', subtitulo: null }] })])} />)
   expect(html).toContain('data-status="andamento"')
   expect(html).toContain('Sorteios em andamento')
   expect(html).toContain('var(--grad-brand)')
 })
 
 it('sorteado quando 100% das sorteaveis', () => {
-  const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado' }), mod({ id: 2, status: 'sorteado' })])} />)
+  const html = renderToStaticMarkup(<EventoCardListagem evento={ev([mod({ id: 1, status: 'sorteado', participantes: [{ id: 1, nome: 'A', subtitulo: null }] }), mod({ id: 2, status: 'sorteado', participantes: [{ id: 2, nome: 'B', subtitulo: null }] })])} />)
   expect(html).toContain('data-status="sorteado"')
   expect(html).toContain('var(--grad-accent)')
   expect(html).toContain('class="hl"')

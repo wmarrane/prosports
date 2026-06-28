@@ -5,7 +5,7 @@ import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
 import { Trophy, Calendar, MapPin, Clock, Building2, Download, Share2, GitFork, Grid2x2, ListOrdered, List, FileText } from 'lucide-react'
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
-import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, totalModalidades, categorias, type TipoSorteio } from '../lib/evento-stats'
+import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, modalidadesDistintas, type TipoSorteio } from '../lib/evento-stats'
 
 const TIPO_ICON: Record<TipoSorteio, typeof GitFork> = { chaves: GitFork, grupos: Grid2x2, ordem_entrada: ListOrdered, especifico: List }
 
@@ -77,10 +77,9 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               </div>
               <aside className="ev-actions">
                 <div className="stat-pair">
-                  <div className="sp"><div className="v">{totalModalidades(evento)}</div><div className="l">Modalidades</div></div>
+                  <div className="sp"><div className="v">{modalidadesDistintas(evento)}</div><div className="l">Modalidades</div></div>
                   <div className="sp"><div className="v">{inscritos(evento)}</div><div className="l">Inscritos</div></div>
-                  <div className="sp"><div className="v">{categorias(evento)}</div><div className="l">Categorias</div></div>
-                  <div className="sp"><div className="v">{prog.sorteadas}</div><div className="l">Com sorteio</div></div>
+                  <div className="sp wide"><div className="v">{prog.sorteadas}</div><div className="l">Com sorteio</div></div>
                 </div>
                 <div className="divider" />
                 {ultimoBoletim && (

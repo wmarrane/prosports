@@ -7,7 +7,7 @@ function mod(over: Partial<SnapModalidade>): SnapModalidade {
   return { id: 1, nome: 'Judô', grupo: null, tipo: 'chaves', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [], ...over }
 }
 function ev(id: number, status: 'sorteado' | 'aguardando'): SnapEvento {
-  return { id, nome: `Evento ${id}`, competicao: 'Jogos', cidade: 'Cidade', local: 'Ginásio', data: '2026-06-18T00:00:00.000Z', organizador: null, publicadoEm: '', dataInicio: null, dataFim: null, boletins: [], modalidades: [mod({ id: 1, status })] }
+  return { id, nome: `Evento ${id}`, competicao: 'Jogos', cidade: 'Cidade', local: 'Ginásio', data: '2026-06-18T00:00:00.000Z', organizador: null, publicadoEm: '', dataInicio: null, dataFim: null, boletins: [], modalidades: [mod({ id: 1, status, participantes: [{ id: 1, nome: 'A', subtitulo: null }] })] }
 }
 
 it('renderiza cabecalho de ano, filtro e grade', () => {

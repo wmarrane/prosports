@@ -486,6 +486,7 @@ a.evc:hover .evc-go svg { transform: translateX(3px); }
 .hero-prog .sub { margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.6); }
 .ev-actions { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; padding: 20px; backdrop-filter: blur(6px); }
 .ev-actions .stat-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.ev-actions .stat-pair .sp.wide { grid-column: 1 / -1; }
 .ev-actions .sp .v { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .ev-actions .sp .l { font-size: 10.5px; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 7px; font-weight: 600; }
 .ev-actions .divider { height: 1px; background: rgba(255,255,255,0.14); margin: 4px 0 18px; }

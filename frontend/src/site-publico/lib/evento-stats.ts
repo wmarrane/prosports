@@ -36,10 +36,15 @@ export function categorias(e: SnapEvento): number {
 }
 
 export function progressoSorteios(e: SnapEvento): { sorteadas: number; sorteaveis: number; pct: number; done: boolean } {
-  const sorteaveis = e.modalidades.filter((m) => m.tipo !== 'especifico').length
-  const sorteadas = e.modalidades.filter((m) => m.status === 'sorteado').length
+  const sorteaveisArr = e.modalidades.filter((m) => m.tipo !== 'especifico' && m.participantes.length > 0)
+  const sorteaveis = sorteaveisArr.length
+  const sorteadas = sorteaveisArr.filter((m) => m.status === 'sorteado').length
   const pct = sorteaveis > 0 ? Math.round((sorteadas / sorteaveis) * 100) : 0
   return { sorteadas, sorteaveis, pct, done: sorteaveis > 0 && sorteadas === sorteaveis }
+}
+
+export function modalidadesDistintas(e: SnapEvento): number {
+  return categorias(e)
 }
 
 export function statusEvento(e: SnapEvento): 'Sorteado' | 'Pronto p/ sorteio' {

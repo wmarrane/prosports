@@ -1,5 +1,5 @@
 import type { SnapEvento } from '../snapshot-types'
-import { progressoSorteios, inscritos, totalModalidades } from '../lib/evento-stats'
+import { progressoSorteios, inscritos, modalidadesDistintas } from '../lib/evento-stats'
 import { dataPtBr } from '../../lib/boletim-categorias'
 import { Medal, MapPin, ArrowRight } from 'lucide-react'
 
@@ -33,7 +33,7 @@ export default function EventoCardListagem({ evento }: { evento: SnapEvento }) {
         <div className="evc-loc"><MapPin size={13} /> {evento.cidade} · {dataPtBr(evento.data)}</div>
       </div>
       <div className="evc-stats">
-        <div><b>{totalModalidades(evento)}</b><span>Modalidades</span></div>
+        <div><b>{modalidadesDistintas(evento)}</b><span>Modalidades</span></div>
         <div><b>{inscritos(evento)}</b><span>Inscritos</span></div>
         <div><b className={sortCls}>{sorteadas}</b><span>Sorteios</span></div>
       </div>

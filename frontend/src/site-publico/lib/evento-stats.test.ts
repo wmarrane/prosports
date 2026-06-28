@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import type { SnapEvento } from '../snapshot-types'
-import { tiposPresentes, tipoDominante, inscritos, totalModalidades, categorias, progressoSorteios, statusEvento } from './evento-stats'
+import { tiposPresentes, tipoDominante, inscritos, totalModalidades, categorias, progressoSorteios, statusEvento, modalidadesDistintas } from './evento-stats'
 
 function ev(mods: any[]): SnapEvento {
   return { id: 1, nome: 'E', competicao: 'C', cidade: 'M', local: 'L', data: '2026-06-01T00:00:00.000Z', organizador: null, publicadoEm: '', dataInicio: null, dataFim: null, boletins: [], modalidades: mods } as any
@@ -27,8 +27,8 @@ describe('evento-stats', () => {
   })
   it('progresso ignora especifico em M; done quando todas as sorteáveis estão sorteadas', () => {
     const e = ev([
-      { nome: 'A', tipo: 'chaves', status: 'sorteado', participantes: [] },
-      { nome: 'B', tipo: 'grupos', status: 'sorteado', participantes: [] },
+      { nome: 'A', tipo: 'chaves', status: 'sorteado', participantes: [{ id: 1 }] },
+      { nome: 'B', tipo: 'grupos', status: 'sorteado', participantes: [{ id: 2 }] },
       { nome: 'C', tipo: 'especifico', status: 'aguardando', participantes: [] },
     ])
     const p = progressoSorteios(e)
@@ -38,5 +38,33 @@ describe('evento-stats', () => {
   it('só especifico → sorteaveis 0 (oculta progresso)', () => {
     const e = ev([{ nome: 'X', tipo: 'especifico', status: 'aguardando', participantes: [] }])
     expect(progressoSorteios(e).sorteaveis).toBe(0)
+  })
+
+  it('progressoSorteios ignora modalidades sem inscritos no total sorteavel', () => {
+    const e = {
+      id: 1, nome: 'E', competicao: 'C', cidade: 'X', local: 'L', data: '2026-01-01T00:00:00.000Z',
+      organizador: null, publicadoEm: '', dataInicio: null, dataFim: null, boletins: [],
+      modalidades: [
+        { id: 1, nome: 'Judô', grupo: null, tipo: 'chaves', status: 'sorteado', seed: null, anfitriaoId: null, participantes: [{ id: 1, nome: 'A', subtitulo: null }], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
+        { id: 2, nome: 'Futsal', grupo: null, tipo: 'chaves', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
+      ],
+    } as any
+    const p = progressoSorteios(e)
+    expect(p.sorteaveis).toBe(1)
+    expect(p.sorteadas).toBe(1)
+    expect(p.done).toBe(true)
+  })
+
+  it('modalidadesDistintas conta esportes pela base do nome', () => {
+    const e = {
+      id: 1, nome: 'E', competicao: 'C', cidade: 'X', local: 'L', data: '2026-01-01T00:00:00.000Z',
+      organizador: null, publicadoEm: '', dataInicio: null, dataFim: null, boletins: [],
+      modalidades: [
+        { id: 1, nome: 'Atletismo Masculino', grupo: null, tipo: 'chaves', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
+        { id: 2, nome: 'Atletismo Feminino', grupo: null, tipo: 'chaves', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
+        { id: 3, nome: 'Judô Livre', grupo: null, tipo: 'chaves', status: 'aguardando', seed: null, anfitriaoId: null, participantes: [], campeoes: [], cabecasPids: [], resultado: null, mensagens_inscritos: [] },
+      ],
+    } as any
+    expect(modalidadesDistintas(e)).toBe(2)
   })
 })
