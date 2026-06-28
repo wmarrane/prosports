@@ -22,6 +22,9 @@ describe('EventoPage hero', () => {
     expect(html).toContain('1 / 2')
     expect(html).toContain('Inscritos')
     expect(html).toContain('info-band')
+    expect(html).not.toContain('Categorias')
+    expect(html).toContain('Modalidades')
+    expect(html).toContain('Com sorteio')
   })
   it('mostra "Baixar o último boletim oficial" só quando há boletim', () => {
     const semBol = renderToStaticMarkup(<EventoPage evento={base()} />)
