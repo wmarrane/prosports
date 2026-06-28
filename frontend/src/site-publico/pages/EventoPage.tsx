@@ -5,7 +5,7 @@ import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
 import { Trophy, Calendar, MapPin, Clock, Building2, Download, Share2, GitFork, Grid2x2, ListOrdered, List, FileText } from 'lucide-react'
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
-import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, totalModalidades, categorias, statusEvento, type TipoSorteio } from '../lib/evento-stats'
+import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, totalModalidades, categorias, type TipoSorteio } from '../lib/evento-stats'
 
 const TIPO_ICON: Record<TipoSorteio, typeof GitFork> = { chaves: GitFork, grupos: Grid2x2, ordem_entrada: ListOrdered, especifico: List }
 
@@ -59,7 +59,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               <div>
                 <div className="ev-badges">
                   {tipos.map((t) => { const Ic = TIPO_ICON[t]; return <span className="ev-type-tile" key={t} title={TIPO_INFO[t].label}><Ic size={16} /></span> })}
-                  <span className="badge b-accent"><span className="dot" />{statusEvento(evento)}</span>
+                  <span className="badge b-accent"><span className="dot" />{prog.done ? 'Sorteado' : prog.sorteaveis > 0 ? 'Sorteios em andamento' : 'Pronto p/ sorteio'}</span>
                 </div>
                 <h1 className="ev-h-title">{evento.nome}</h1>
                 <div className="ev-h-meta">
