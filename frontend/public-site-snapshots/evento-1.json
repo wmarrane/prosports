@@ -1,12 +1,16 @@
 {
   "id": 1,
   "nome": "68º Jogos Regionais de Penápolis",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "Penápolis",
   "local": ".",
   "data": "2026-06-23T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-23T20:17:24.585Z",
+  "publicadoEm": "2026-06-29T18:36:28.505Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,
