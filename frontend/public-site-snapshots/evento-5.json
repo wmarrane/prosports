@@ -1,12 +1,16 @@
 {
   "id": 5,
   "nome": "68º Jogos Regionais de Santana de Parnaíba",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "Santana de Parnaíba",
   "local": ".",
   "data": "2026-06-23T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-23T20:19:46.689Z",
+  "publicadoEm": "2026-06-29T18:34:33.248Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,
