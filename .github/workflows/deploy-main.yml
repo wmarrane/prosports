@@ -108,6 +108,8 @@ jobs:
           GITHUB_PAT=${{ secrets.SITE_GH_PAT }}
           GITHUB_REPO=wmarrane/prosports
           GITHUB_SNAPSHOT_BRANCH=develop
+          GCS_DOCS_BUCKET=${{ secrets.GCS_DOCS_BUCKET }}
+          PUBLIC_DOCS_BASE_URL=${{ secrets.PUBLIC_DOCS_BASE_URL }}
           EOF
 
       - name: Autenticar Docker no Artifact Registry
