@@ -1,5 +1,6 @@
 import SiteNav from '../components/SiteNav'
 import ModalidadeSorteio from '../components/ModalidadeSorteio'
+import BracketView from '../components/BracketView'
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
@@ -26,6 +27,8 @@ function statusLabel(m: SnapModalidade): string {
   const regra = matchMensagem(m.mensagens_inscritos ?? [], m.participantes.length)
   return regra?.pular_sorteio ? 'sem sorteio' : 'aguardando'
 }
+
+const temChave = (m: SnapModalidade) => m.tipo === 'chaves' && m.status === 'sorteado' && !!(m.resultado as any)?.matchesGraph?.matches?.length
 
 export default function EventoPage({ evento }: { evento: SnapEvento }) {
   const abrir = evento.modalidades.length <= 10
@@ -118,6 +121,9 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
                 </summary>
                 <div className="mod-body">
                   <ModalidadeSorteio modalidade={m} />
+                  {temChave(m) && (
+                    <button type="button" className="btn btn-secondary" data-bracket={m.id} style={{ marginTop: 10 }}>Ver chave</button>
+                  )}
                   <section className="inscritos">
                     <h4>Inscritos ({m.participantes.length})</h4>
                     <ul>{inscritosOrdenados(m).map(p => <li key={p.id}>{p.nome}{p.subtitulo ? ` — ${p.subtitulo}` : ''}</li>)}</ul>
@@ -184,6 +190,16 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
             </section>
           )
         })()}
+        {evento.modalidades.filter(temChave).map((m) => <BracketView key={m.id} modalidade={m} />)}
+        <script dangerouslySetInnerHTML={{ __html:
+          "document.querySelectorAll('[data-bracket]').forEach(function(b){b.addEventListener('click',function(){var o=document.getElementById('bracket-'+b.getAttribute('data-bracket'));if(o)o.setAttribute('data-open','true')})});" +
+          "document.querySelectorAll('.em-bracket-ov').forEach(function(o){" +
+          "o.querySelectorAll('[data-bracket-close]').forEach(function(c){c.addEventListener('click',function(){o.setAttribute('data-open','false')})});" +
+          "o.querySelectorAll('.em-vtog button[data-view]').forEach(function(v){v.addEventListener('click',function(){var view=v.getAttribute('data-view');o.querySelectorAll('.em-vtog button[data-view]').forEach(function(x){x.setAttribute('data-on',String(x===v))});o.querySelectorAll('.em-pane').forEach(function(p){p.setAttribute('data-on',String(p.getAttribute('data-pane')===view))})})});" +
+          "o.querySelectorAll('.em-rtab[data-round]').forEach(function(t){t.addEventListener('click',function(){var rd=t.getAttribute('data-round');o.querySelectorAll('.em-rtab[data-round]').forEach(function(x){x.setAttribute('data-on',String(x.getAttribute('data-round')===rd))});o.querySelectorAll('.em-round[data-round]').forEach(function(p){p.setAttribute('data-on',String(p.getAttribute('data-round')===rd))})})});" +
+          "});" +
+          "document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.em-bracket-ov[data-open=\"true\"]').forEach(function(o){o.setAttribute('data-open','false')})});"
+        }} />
       </main>
     </>
   )
