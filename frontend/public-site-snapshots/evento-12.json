@@ -1,12 +1,16 @@
 {
   "id": 12,
   "nome": "68º Jogos Regionais de Barretos",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "Barretos",
   "local": ".",
   "data": "2026-06-17T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-17T20:19:14.691Z",
+  "publicadoEm": "2026-06-29T18:39:28.210Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,
