@@ -1,6 +1,7 @@
 import SiteNav from '../components/SiteNav'
 import ModalidadeSorteio from '../components/ModalidadeSorteio'
 import BracketView from '../components/BracketView'
+import EventoEsportesNav, { type SecaoNav } from '../components/EventoEsportesNav'
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
@@ -38,6 +39,12 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
     const c = categoriaDe(m); const arr = cats.get(c) ?? []; arr.push(m); cats.set(c, arr)
   }
   const boletins = evento.boletins ?? []
+  const secoes: SecaoNav[] = [...cats.entries()].map(([key, mods]) => ({
+    key,
+    count: mods.length,
+    tipo: (mods[0]?.tipo ?? 'chaves') as TipoSorteio,
+    sorteadas: mods.filter((m) => m.status === 'sorteado').length,
+  }))
 
   const prog = progressoSorteios(evento)
   const tipos = tiposPresentes(evento)
@@ -107,12 +114,13 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
       <script dangerouslySetInnerHTML={{ __html:
         "document.querySelectorAll('.btn-onhero.ghost[data-share-url]').forEach(function(b){b.addEventListener('click',function(){var u=location.origin+b.getAttribute('data-share-url');var t=b.getAttribute('data-share-title')||document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(u);b.textContent='Link copiado!'}})});"
       }} />
-      <main className="evento-page">
-        {[...cats.entries()].map(([cat, mods]) => (
-          <section className="cat-section" key={cat}>
+      <main className="evento-page" data-status-filter="all">
+        <EventoEsportesNav secoes={secoes} />
+        {[...cats.entries()].map(([cat, mods], i) => (
+          <section className="cat-section" key={cat} data-sport={cat} data-on={i === 0 ? 'true' : 'false'}>
             <h2 className="cat-head">{cat} <span>{mods.length}</span></h2>
             {mods.map((m) => (
-              <details className="mod-acc" open={abrir} key={m.id} id={`mod-${m.id}`}>
+              <details className="mod-acc" open={abrir} key={m.id} id={`mod-${m.id}`} data-mstatus={m.status === 'sorteado' ? 'sorteado' : 'aberto'}>
                 <summary>
                   <strong>{m.nome}</strong>
                   <div className="mod-sub">
@@ -200,6 +208,17 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
           "o.querySelectorAll('.em-rtab[data-round]').forEach(function(t){t.addEventListener('click',function(){var rd=t.getAttribute('data-round');o.querySelectorAll('.em-rtab[data-round]').forEach(function(x){x.setAttribute('data-on',String(x.getAttribute('data-round')===rd))});o.querySelectorAll('.em-round[data-round]').forEach(function(p){p.setAttribute('data-on',String(p.getAttribute('data-round')===rd))})})});" +
           "});" +
           "document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.em-bracket-ov[data-open=\"true\"]').forEach(function(o){o.setAttribute('data-open','false')})});"
+        }} />
+        <script dangerouslySetInnerHTML={{ __html:
+          "(function(){var main=document.querySelector('main.evento-page');if(!main)return;" +
+          "function setSport(k){document.querySelectorAll('.cat-section[data-sport]').forEach(function(s){s.setAttribute('data-on',String(s.getAttribute('data-sport')===k))});document.querySelectorAll('.em-pill[data-sport]').forEach(function(p){p.setAttribute('data-on',String(p.getAttribute('data-sport')===k))})}" +
+          "function closeSheet(){document.querySelectorAll('.em-sheet,.em-scrim').forEach(function(e){e.setAttribute('data-open','false')})}" +
+          "function openSheet(){document.querySelectorAll('.em-sheet,.em-scrim').forEach(function(e){e.setAttribute('data-open','true')})}" +
+          "document.querySelectorAll('.em-pill[data-sport],.em-sheet-item[data-sport]').forEach(function(b){b.addEventListener('click',function(){setSport(b.getAttribute('data-sport'));closeSheet()})});" +
+          "document.querySelectorAll('[data-sheet-open]').forEach(function(b){b.addEventListener('click',openSheet)});" +
+          "document.querySelectorAll('[data-sheet-close]').forEach(function(b){b.addEventListener('click',closeSheet)});" +
+          "document.querySelectorAll('.seg button[data-sf]').forEach(function(b){b.addEventListener('click',function(){main.setAttribute('data-status-filter',b.getAttribute('data-sf'));document.querySelectorAll('.seg button[data-sf]').forEach(function(x){x.setAttribute('data-on',String(x===b))})})});" +
+          "})();"
         }} />
       </main>
     </>
