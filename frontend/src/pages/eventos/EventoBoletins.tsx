@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FileText, Plus, Download, MoreHorizontal, X, Check, ChevronDown, Upload, Lock, Trash2, RefreshCw } from 'lucide-react'
 import { boletinsService, type Boletim } from '../../services/boletins'
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
+import ConfirmDialog from '../../components/ConfirmDialog'
 
 export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: number; eventoNome?: string }) {
   const [docs, setDocs] = useState<Boletim[]>([])
@@ -9,6 +10,7 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
   const [editing, setEditing] = useState<Boletim | null>(null)
   const [toast, setToast] = useState<string | null>(null)
   const [kebab, setKebab] = useState<number | null>(null)
+  const [alvoRemover, setAlvoRemover] = useState<Boletim | null>(null)
 
   async function load() { setDocs(await boletinsService.listar(eventoId)) }
   useEffect(() => { load().catch(() => {}) }, [eventoId])
@@ -20,10 +22,16 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
 
   function showToast(msg: string) { setToast(msg); setTimeout(() => setToast(null), 2600) }
 
-  async function onRemove(id: number) {
-    setKebab(null)
-    if (!confirm('Remover este boletim?')) return
-    try { await boletinsService.remover(eventoId, id); await load() } catch { showToast('Falha ao remover') }
+  async function confirmarRemover() {
+    if (!alvoRemover) return
+    try {
+      await boletinsService.remover(eventoId, alvoRemover.id)
+      await load()
+      showToast('Boletim removido')
+    } catch {
+      showToast('Falha ao remover')
+      throw new Error('falha ao remover')
+    }
   }
 
   // mais recentemente publicado/reprocessado no topo
@@ -74,7 +82,7 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
                     {kebab === d.id && (
                       <div className="kebab-menu">
                         <button onClick={() => abrirSubstituir(d)}><RefreshCw size={15} /> Substituir</button>
-                        <button onClick={() => onRemove(d.id)}><Trash2 size={15} /> Remover</button>
+                        <button onClick={() => { setKebab(null); setAlvoRemover(d) }}><Trash2 size={15} /> Remover</button>
                       </div>
                     )}
                   </div>
@@ -94,6 +102,18 @@ export default function EventoBoletins({ eventoId, eventoNome }: { eventoId: num
           onDone={async (msg) => { setModalOpen(false); await load(); showToast(msg) }}
         />
       )}
+
+      <ConfirmDialog
+        open={alvoRemover !== null}
+        onClose={() => setAlvoRemover(null)}
+        onConfirm={confirmarRemover}
+        eyebrow="Remover boletim"
+        title={alvoRemover ? `Nº ${String(alvoRemover.numero).padStart(3, '0')} — ${alvoRemover.titulo}` : ''}
+        description="O arquivo será removido do site público. Esta ação não pode ser desfeita."
+        confirmLabel="Remover"
+        confirmVariant="danger"
+        icon="trash"
+      />
 
       {toast && (
         <div className="toast show"><span className="tk"><Check size={14} /></span> {toast}</div>
