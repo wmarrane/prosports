@@ -7,10 +7,20 @@
   "local": ".",
   "data": "2026-09-30T20:46:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-29T17:41:56.451Z",
+  "publicadoEm": "2026-06-29T17:42:27.708Z",
   "dataInicio": null,
   "dataFim": null,
-  "boletins": [],
+  "boletins": [
+    {
+      "numero": 1,
+      "titulo": "teste de copa",
+      "categoria": "ComunicadoErrata",
+      "data": "2026-06-29T00:00:00.000Z",
+      "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/4/boletim-1-ad52f442-c10e-4384-ac3b-b2cbcb373a75.pdf",
+      "tamanho": 16320,
+      "atualizadoEm": "2026-06-29T17:42:27.619Z"
+    }
+  ],
   "modalidades": [
     {
       "id": 181,
