@@ -24,7 +24,7 @@ function ev(over: Partial<Evento> = {}): Evento {
 }
 
 const noop = () => {}
-const cbs = { isAdmin: true, publicando: false, despublicando: false, onAbrir: noop, onInscricoes: noop, onPublicar: noop, onDespublicar: noop, onRemover: noop }
+const cbs = { isAdmin: true, publicando: false, despublicando: false, republicando: false, onAbrir: noop, onInscricoes: noop, onPublicar: noop, onDespublicar: noop, onRepublicar: noop, onRemover: noop }
 
 it('renderiza cover, status, progresso N/M e ações', () => {
   const html = renderToStaticMarkup(<EventoAdminCard evento={ev()} {...cbs} />)
@@ -38,10 +38,16 @@ it('renderiza cover, status, progresso N/M e ações', () => {
   expect(html).toContain('var(--grad-brand)') // tipo dominante = chaves
 })
 
-it('mostra Despublicar quando publicado', () => {
+it('mostra Despublicar e Republicar quando publicado', () => {
   const html = renderToStaticMarkup(<EventoAdminCard evento={ev({ site_publicado_em: '2026-06-19T00:00:00Z' })} {...cbs} />)
   expect(html).toContain('Despublicar')
+  expect(html).toContain('Republicar')
   expect(html).not.toContain('Publicar no site')
+})
+
+it('não mostra Republicar quando não publicado', () => {
+  const html = renderToStaticMarkup(<EventoAdminCard evento={ev()} {...cbs} />)
+  expect(html).not.toContain('Republicar')
 })
 
 it('oculta o progresso quando não há modalidades sorteáveis', () => {
