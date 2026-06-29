@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-09-30T20:46:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-29T17:29:47.199Z",
+  "publicadoEm": "2026-06-29T17:29:53.352Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -113,8 +113,8 @@
       "nome": "Handebol Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d86912a7a071b357",
       "anfitriaoId": 613,
       "participantes": [
         {
@@ -150,7 +150,28 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              3,
+              6,
+              4
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              2,
+              7,
+              5
+            ]
+          }
+        ],
+        "regra_id": 266,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
