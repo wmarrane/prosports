@@ -8,6 +8,7 @@ import { Trophy, Calendar, MapPin, Clock, Building2, Download, Share2, GitFork, 
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
 import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, modalidadesDistintas, type TipoSorteio } from '../lib/evento-stats'
 import { statusPublico } from '../lib/status-evento'
+import type { ChavesResultado } from '../../types/sorteio'
 
 const TIPO_ICON: Record<TipoSorteio, typeof GitFork> = { chaves: GitFork, grupos: Grid2x2, ordem_entrada: ListOrdered, especifico: List }
 
@@ -28,7 +29,7 @@ function statusLabel(m: SnapModalidade): string {
   return regra?.pular_sorteio ? 'sem sorteio' : 'aguardando'
 }
 
-const temChave = (m: SnapModalidade) => m.tipo === 'chaves' && m.status === 'sorteado' && !!(m.resultado as any)?.matchesGraph?.matches?.length
+const temChave = (m: SnapModalidade) => m.tipo === 'chaves' && m.status === 'sorteado' && !!(m.resultado as ChavesResultado | null)?.matchesGraph?.matches?.length
 
 export default function EventoPage({ evento }: { evento: SnapEvento }) {
   const abrir = evento.modalidades.length <= 10

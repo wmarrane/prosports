@@ -1,5 +1,6 @@
 import type { SnapModalidade } from '../snapshot-types'
 import type { Participante } from '../../types/participante'
+import type { ChavesResultado } from '../../types/sorteio'
 import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import { resolveRef } from '../lib/bracket'
 import { X, GitFork, ListOrdered, Crown } from 'lucide-react'
@@ -12,7 +13,7 @@ function roundLabel(round: number, maxRound: number): string {
 }
 
 export default function BracketView({ modalidade }: { modalidade: SnapModalidade }) {
-  const res = modalidade.resultado as any
+  const res = modalidade.resultado as ChavesResultado
   const graph = res?.matchesGraph
   if (!graph || !graph.matches?.length) return null
 
