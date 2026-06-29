@@ -466,8 +466,6 @@ a.evc:hover .evc-go svg { transform: translateX(3px); }
 .ev-hero2 .breadcrumb a:hover { color: #fff; }
 .ev-hero2 .breadcrumb span { opacity: 0.5; }
 .ev-hero2 .breadcrumb b { color: #fff; font-weight: 600; }
-.ev-grid2 { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start; }
-@media (max-width: 920px) { .ev-grid2 { grid-template-columns: 1fr; gap: 26px; } }
 .ev-badges { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .ev-type-tile { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: #fff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.26); }
 .ev-type-tile svg { width: 16px; height: 16px; }
@@ -477,39 +475,9 @@ a.evc:hover .evc-go svg { transform: translateX(3px); }
 .ev-h-meta { display: flex; flex-wrap: wrap; gap: 11px 24px; margin-top: 18px; }
 .ev-h-meta .m { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: rgba(255,255,255,0.84); }
 .ev-h-meta .m svg { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
-.hero-prog { margin-top: 26px; max-width: 460px; }
-.hero-prog-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 9px; }
-.hero-prog-head .lab { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.13em; color: rgba(255,255,255,0.66); }
-.hero-prog-head b { font: 800 15px var(--font-mono); color: #fff; font-variant-numeric: tabular-nums; }
-.hero-bar { height: 9px; border-radius: 9999px; background: rgba(255,255,255,0.16); overflow: hidden; }
-.hero-bar span { display: block; height: 100%; border-radius: 9999px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8)); }
-.hero-prog .sub { margin-top: 9px; font-size: 12.5px; color: rgba(255,255,255,0.6); }
-.ev-actions { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; padding: 20px; backdrop-filter: blur(6px); }
-.ev-actions .stat-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-.ev-actions .stat-pair .sp.wide { grid-column: 1 / -1; }
-.ev-actions .sp .v { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
-.ev-actions .sp .l { font-size: 10.5px; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 7px; font-weight: 600; }
-.ev-actions .divider { height: 1px; background: rgba(255,255,255,0.14); margin: 4px 0 18px; }
-.ev-actions .btn-onhero { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 13px 16px; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; border: 1px solid transparent; width: 100%; transition: transform var(--duration-fast), filter var(--duration-fast); }
-.ev-actions .btn-onhero:active { transform: scale(0.985); }
-.ev-actions .btn-onhero svg { width: 17px; height: 17px; }
-.ev-actions .btn-onhero.solid { background: #fff; color: var(--brand-700); }
-.ev-actions .btn-onhero.solid:hover { filter: brightness(0.95); }
-.ev-actions .btn-onhero.ghost { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.22); margin-top: 10px; }
-.ev-actions .btn-onhero.ghost:hover { background: rgba(255,255,255,0.14); }
-.info-band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: -26px; position: relative; z-index: 3; margin-bottom: 8px; }
-@media (max-width: 760px) { .info-band { grid-template-columns: repeat(2, 1fr); margin-top: 18px; } }
-.info-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 15px; padding: 16px 18px; box-shadow: var(--shadow-e2); }
-.info-card .ic-tile { width: 34px; height: 34px; border-radius: 10px; background: var(--card-bg-2); border: 1px solid var(--card-border); color: var(--brand-500); display: grid; place-items: center; margin-bottom: 12px; }
-.info-card .ic-tile svg { width: 17px; height: 17px; }
-.info-card .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--t4); }
-.info-card .vv { font-size: 14px; font-weight: 700; color: var(--t1); margin-top: 4px; }
 @media (max-width: 600px) {
   .ev-hero2-inner { padding: 24px 0 30px; }
   .ev-hero2 .blob.b1 { width: 300px; height: 300px; top: -120px; right: -80px; }
-  .ev-grid2 { gap: 22px; }
-  .ev-actions .sp .v { font-size: 23px; }
-  .info-card { padding: 14px 15px; }
 }
 
 /* ════════════════════ Visualizador de chave (.em-*) ════════════════════ */

@@ -5,9 +5,9 @@ import EventoEsportesNav, { type SecaoNav } from '../components/EventoEsportesNa
 import type { SnapEvento, SnapModalidade } from '../snapshot-types'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { esporteBase } from '../lib/esporte'
-import { Trophy, Calendar, MapPin, Clock, Building2, Download, Share2, GitFork, Grid2x2, ListOrdered, List, FileText } from 'lucide-react'
+import { Trophy, Calendar, MapPin, Download, GitFork, Grid2x2, ListOrdered, List, FileText } from 'lucide-react'
 import { CATEGORIAS_BOLETIM, categoriaInfo, formatBytes, dataPtBr } from '../../lib/boletim-categorias'
-import { TIPO_INFO, tiposPresentes, progressoSorteios, inscritos, modalidadesDistintas, type TipoSorteio } from '../lib/evento-stats'
+import { TIPO_INFO, tiposPresentes, type TipoSorteio } from '../lib/evento-stats'
 import { statusPublico } from '../lib/status-evento'
 import type { ChavesResultado } from '../../types/sorteio'
 
@@ -46,9 +46,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
     sorteadas: mods.filter((m) => m.status === 'sorteado').length,
   }))
 
-  const prog = progressoSorteios(evento)
   const tipos = tiposPresentes(evento)
-  const ultimoBoletim = [...boletins].sort((a, b) => +new Date(b.atualizadoEm) - +new Date(a.atualizadoEm))[0]
   const periodo = evento.dataInicio
     ? `${dataPtBr(evento.dataInicio)}${evento.dataFim ? ` a ${dataPtBr(evento.dataFim)}` : ''}`
     : dataPtBr(evento.data)
@@ -67,53 +65,19 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
               <a href="/eventos.html">{ano}</a><span>›</span>
               <b>{evento.nome}</b>
             </nav>
-            <div className="ev-grid2">
-              <div>
-                <div className="ev-badges">
-                  {tipos.map((t) => { const Ic = TIPO_ICON[t]; return <span className="ev-type-tile" key={t} title={TIPO_INFO[t].label}><Ic size={16} /></span> })}
-                  <span className="badge b-accent"><span className="dot" />{statusPublico(evento.status).label}</span>
-                </div>
-                <h1 className="ev-h-title">{evento.nome}</h1>
-                <div className="ev-h-meta">
-                  <span className="m"><Trophy size={16} /> {evento.competicao}</span>
-                  <span className="m"><Calendar size={16} /> {periodo}</span>
-                  <span className="m"><MapPin size={16} /> {evento.local} · {evento.cidade}</span>
-                </div>
-                {prog.sorteaveis > 0 && (
-                  <div className="hero-prog">
-                    <div className="hero-prog-head"><span className="lab">Andamento dos sorteios</span><b>{prog.sorteadas} / {prog.sorteaveis}</b></div>
-                    <div className="hero-bar"><span style={{ width: `${Math.max(prog.pct, 3)}%` }} /></div>
-                    <div className="sub">{prog.pct}% das modalidades já sorteadas · {prog.sorteaveis - prog.sorteadas} aguardando</div>
-                  </div>
-                )}
-              </div>
-              <aside className="ev-actions">
-                <div className="stat-pair">
-                  <div className="sp"><div className="v">{modalidadesDistintas(evento)}</div><div className="l">Modalidades</div></div>
-                  <div className="sp"><div className="v">{inscritos(evento)}</div><div className="l">Inscritos</div></div>
-                  <div className="sp wide"><div className="v">{prog.sorteadas}</div><div className="l">Com sorteio</div></div>
-                </div>
-                <div className="divider" />
-                {ultimoBoletim && (
-                  <a className="btn-onhero solid" href={ultimoBoletim.url} target="_blank" rel="noopener noreferrer"><Download size={17} /> Baixar o último boletim oficial</a>
-                )}
-                <button className="btn-onhero ghost" data-share-title={`${evento.nome} · Montana Eventos`} data-share-url={`/evento-${evento.id}.html`}><Share2 size={17} /> Compartilhar evento</button>
-              </aside>
+            <div className="ev-badges">
+              {tipos.map((t) => { const Ic = TIPO_ICON[t]; return <span className="ev-type-tile" key={t} title={TIPO_INFO[t].label}><Ic size={16} /></span> })}
+              <span className="badge b-accent"><span className="dot" />{statusPublico(evento.status).label}</span>
+            </div>
+            <h1 className="ev-h-title">{evento.nome}</h1>
+            <div className="ev-h-meta">
+              <span className="m"><Trophy size={16} /> {evento.competicao}</span>
+              <span className="m"><Calendar size={16} /> {periodo}</span>
+              <span className="m"><MapPin size={16} /> {evento.local} · {evento.cidade}</span>
             </div>
           </div>
         </div>
       </section>
-      <div className="container">
-        <div className="info-band">
-          <div className="info-card"><div className="ic-tile"><Calendar size={17} /></div><div className="k">Período</div><div className="vv">{periodo}</div></div>
-          <div className="info-card"><div className="ic-tile"><Clock size={17} /></div><div className="k">Sorteios</div><div className="vv">{prog.sorteaveis > 0 ? `${prog.sorteadas}/${prog.sorteaveis}` : '—'}</div></div>
-          <div className="info-card"><div className="ic-tile"><MapPin size={17} /></div><div className="k">Local</div><div className="vv">{evento.local} · {evento.cidade}</div></div>
-          {evento.organizador && <div className="info-card"><div className="ic-tile"><Building2 size={17} /></div><div className="k">Organização</div><div className="vv">{evento.organizador}</div></div>}
-        </div>
-      </div>
-      <script dangerouslySetInnerHTML={{ __html:
-        "document.querySelectorAll('.btn-onhero.ghost[data-share-url]').forEach(function(b){b.addEventListener('click',function(){var u=location.origin+b.getAttribute('data-share-url');var t=b.getAttribute('data-share-title')||document.title;if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(u);b.textContent='Link copiado!'}})});"
-      }} />
       <main className="evento-page" data-status-filter="all">
         <EventoEsportesNav secoes={secoes} />
         {[...cats.entries()].map(([cat, mods], i) => (
