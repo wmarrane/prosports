@@ -15,28 +15,23 @@ const base = (extra: Partial<SnapEvento> = {}): SnapEvento => ({
 } as any)
 
 describe('EventoPage hero', () => {
-  it('renderiza o hero novo com título, progresso e stat-pair', () => {
+  it('renderiza o hero com título e badge de status', () => {
     const html = renderToStaticMarkup(<EventoPage evento={base()} />)
     expect(html).toContain('ev-hero2')
     expect(html).toContain('Jogos Regionais')
-    expect(html).toContain('Andamento dos sorteios')
-    expect(html).toContain('1 / 2')
-    expect(html).toContain('Inscritos')
-    expect(html).toContain('info-band')
-    expect(html).not.toContain('Categorias')
-    expect(html).toContain('Modalidades')
-    expect(html).toContain('Com sorteio')
     expect(html).toContain('Pronto p/ sorteio')
+    expect(html).not.toContain('Categorias')
+  })
+  it('não renderiza barra de progresso, quadros de indicadores nem ações do hero', () => {
+    const html = renderToStaticMarkup(<EventoPage evento={base()} />)
+    expect(html).not.toContain('Andamento dos sorteios')
+    expect(html).not.toContain('stat-pair')
+    expect(html).not.toContain('info-band')
+    expect(html).not.toContain('Compartilhar evento')
+    expect(html).not.toContain('Baixar o último boletim oficial')
   })
   it('badge do hero segue o status real do evento', () => {
     expect(renderToStaticMarkup(<EventoPage evento={base({ status: 'parcial' } as any)} />)).toContain('Parcial')
     expect(renderToStaticMarkup(<EventoPage evento={base({ status: 'sorteado' } as any)} />)).toContain('Sorteado')
-  })
-  it('mostra "Baixar o último boletim oficial" só quando há boletim', () => {
-    const semBol = renderToStaticMarkup(<EventoPage evento={base()} />)
-    expect(semBol).not.toContain('Baixar o último boletim oficial')
-    const comBol = renderToStaticMarkup(<EventoPage evento={base({ boletins: [{ numero: 1, titulo: 'Of', categoria: 'Oficial', data: '2026-06-18T00:00:00.000Z', url: 'http://x/1.pdf', tamanho: 1, atualizadoEm: '2026-06-18T00:00:00.000Z' }] })} />)
-    expect(comBol).toContain('Baixar o último boletim oficial')
-    expect(comBol).toContain('http://x/1.pdf')
   })
 })

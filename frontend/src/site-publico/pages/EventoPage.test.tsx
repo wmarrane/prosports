@@ -42,7 +42,8 @@ it('mobile nav: renderiza EventoEsportesNav e o script de navegação', () => {
   expect(html).toContain('setSport')
 })
 
-it('não quebra hero/boletins: botão compartilhar continua', () => {
+it('hero sem botão compartilhar (removido); título permanece', () => {
   const html = renderToStaticMarkup(<EventoPage evento={multi} />)
-  expect(html).toContain('Compartilhar evento')
+  expect(html).toContain('Multi 2026')
+  expect(html).not.toContain('Compartilhar evento')
 })
