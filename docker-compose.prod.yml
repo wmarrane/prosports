@@ -38,6 +38,9 @@ services:
       - GITHUB_PAT=${GITHUB_PAT}
       - GITHUB_REPO=${GITHUB_REPO}
       - GITHUB_SNAPSHOT_BRANCH=${GITHUB_SNAPSHOT_BRANCH}
+      - STORAGE_PROVIDER=gcs
+      - GCS_DOCS_BUCKET=${GCS_DOCS_BUCKET}
+      - PUBLIC_DOCS_BASE_URL=${PUBLIC_DOCS_BASE_URL}
     volumes:
       - uploads_data:/app/uploads
     restart: unless-stopped

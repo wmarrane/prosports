@@ -3,6 +3,7 @@
   "cidade": "Bauru", "local": "Arena",
   "data": "2026-06-01T12:00:00.000Z",
   "organizador": "Montana Eventos", "publicadoEm": "2026-06-06T18:00:00.000Z",
+  "dataInicio": null, "dataFim": null, "boletins": [],
   "modalidades": [{
     "id": 2, "nome": "Tênis", "grupo": null, "tipo": "chaves",
     "status": "sorteado", "seed": "AAAA-BBBB-CCCC-DDDD", "anfitriaoId": null,

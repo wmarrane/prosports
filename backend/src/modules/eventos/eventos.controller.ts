@@ -18,6 +18,8 @@ const createSchema = z.object({
   municipio_id: z.coerce.number().int().positive(),
   anfitriao_id: z.coerce.number().int().positive().nullable().optional(),
   comissao_ids: z.array(z.coerce.number().int().positive()).optional(),
+  data_inicio: z.coerce.date().nullable().optional(),
+  data_fim: z.coerce.date().nullable().optional(),
 })
 const updateSchema = createSchema.partial()
 const listQuerySchema = z.object({
@@ -92,5 +94,13 @@ export async function removerLogo(req: Request, res: Response, next: NextFunctio
     }
     const evento = await service.setLogoUrl(id, null)
     res.json(evento)
+  } catch (err) { next(err) }
+}
+
+export async function progressoSorteio(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = parseIntParam(req.params.id, 'id')
+    const r = await service.progressoSorteio(id)
+    res.json(r)
   } catch (err) { next(err) }
 }

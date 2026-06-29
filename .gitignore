@@ -45,3 +45,11 @@ frontend/.firebase/
 *.xlsx
 *_tmp.*
 backend/migration_script.sql
+
+# SSH keys and local secrets (never commit)
+secrets/
+
+# Config local do Claude Code (contém PAT) e arquivos de design ad-hoc — nunca commitar
+.claude/
+claudedesign/
+remove_modal.png

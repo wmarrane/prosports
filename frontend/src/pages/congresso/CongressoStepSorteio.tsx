@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { inscricoesService } from '../../services/inscricoes'
 import { eventosService } from '../../services/eventos'
@@ -14,11 +14,12 @@ import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import SorteioPrint from '../eventos/SorteioPrint'
 import CampeoesPanel from './CampeoesPanel'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
-import { Shuffle, Crown, X, Report } from '../../lib/icons'
+import { Shuffle, Crown, X, Report, CheckCircle2 } from '../../lib/icons'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
+import { proximoMarcoCruzado, pctSorteado } from './autopublish'
 
 type Props = {
   eventoId: number
@@ -31,10 +32,17 @@ const FG = 'var(--cw-fg)'
 const DIM = 'var(--cw-dim)'
 const DANGER = 'var(--danger)'
 
+// Dedupe de auto-publicação por SESSÃO (escopo de módulo): sobrevive à remontagem
+// ao navegar entre modalidades, mas zera ao recarregar a página — assim um novo
+// congresso re-sincroniza o site sem ficar "preso" em marcos antigos (como acontecia
+// com o localStorage). Mapa eventoId -> maior marco já publicado nesta sessão.
+const ultimoMarcoPublicadoPorEvento = new Map<number, number>()
+
 const ANIM_MS = 1500
 
 export default function CongressoStepSorteio({ eventoId, modalidadeId, competicaoId, onProxima }: Props) {
   const queryClient = useQueryClient()
+  const [pubBanner, setPubBanner] = useState<{ kind: 'ok' | 'erro'; marco: number } | null>(null)
   const [erro, setErro] = useState('')
   const [animating, setAnimating] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
@@ -77,6 +85,12 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
   const { data: campeoes = [] } = useQuery({
     queryKey: ['campeoes-anteriores', eventoId, modalidadeId],
     queryFn: () => campeoesAnterioresService.listar({ evento_id: eventoId, modalidade_id: modalidadeId }),
+  })
+
+  const { data: progresso } = useQuery({
+    queryKey: ['progresso-sorteio', eventoId],
+    queryFn: () => eventosService.progressoSorteio(eventoId),
+    enabled: !!evento,
   })
 
   const participantesById = useMemo(() => {
@@ -209,6 +223,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['sorteios', eventoId] })
+      queryClient.invalidateQueries({ queryKey: ['progresso-sorteio', eventoId] })
       setErro('')
     },
     onError: (err: any) => setErro(err?.response?.data?.message ?? 'Erro ao sortear.'),
@@ -223,6 +238,29 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       return () => clearTimeout(t)
     }
   }, [executando, animating])
+
+  // Auto-publicação parcial: dispara quando sorteios cruzam marco de 25/50/75/100%
+  // (apenas enquanto status === 'pronto'; fire-and-forget; dedupe via localStorage)
+  const publicandoMarcoRef = useRef(false)
+  useEffect(() => {
+    if (!evento || evento.status !== 'pronto' || !progresso) return
+    const pct = pctSorteado(progresso.sorteadas, progresso.sorteaveis)
+    const ultimo = ultimoMarcoPublicadoPorEvento.get(eventoId) ?? 0
+    const marco = proximoMarcoCruzado(pct, ultimo)
+    if (marco == null || publicandoMarcoRef.current) return
+    publicandoMarcoRef.current = true
+    eventosService.publicarParcial(eventoId)
+      .then(() => { ultimoMarcoPublicadoPorEvento.set(eventoId, marco); setPubBanner({ kind: 'ok', marco }) })
+      .catch(() => { setPubBanner({ kind: 'erro', marco }) })
+      .finally(() => { publicandoMarcoRef.current = false })
+  }, [evento, progresso, eventoId])
+
+  // Banner de auto-publicação some sozinho após alguns segundos.
+  useEffect(() => {
+    if (!pubBanner) return
+    const t = setTimeout(() => setPubBanner(null), 6000)
+    return () => clearTimeout(t)
+  }, [pubBanner])
 
   function handleSortear() {
     setErro('')
@@ -364,6 +402,20 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {pubBanner && (
+        <div style={{
+          position: 'fixed', top: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 400,
+          display: 'inline-flex', alignItems: 'center', gap: 12,
+          padding: '14px 26px', borderRadius: 'var(--radius-xl)',
+          background: pubBanner.kind === 'ok' ? 'var(--grad-accent)' : 'var(--danger)',
+          color: '#fff', boxShadow: '0 14px 44px rgba(0,0,0,0.5)',
+          fontSize: 18, fontWeight: 700, letterSpacing: '-0.01em',
+        }}>
+          {pubBanner.kind === 'ok'
+            ? <><CheckCircle2 size={22} /> Site público atualizado — {pubBanner.marco}%</>
+            : <><X size={22} /> Falha ao publicar no site</>}
+        </div>
+      )}
       <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, minWidth: 0 }}>
           {modalidade && (

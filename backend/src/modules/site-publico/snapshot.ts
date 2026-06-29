@@ -4,10 +4,12 @@ import type {
 } from './snapshot-types'
 
 type EventoRow = {
-  id: number; nome: string; local: string; organizador: string | null
+  id: number; nome: string; status: string; local: string; organizador: string | null
   data_hora: Date; anfitriao_id: number | null
   competicao: { nome: string; considerar_anfitriao: boolean; subtitulo_campos?: string[] }
   municipio: { nome: string }
+  data_inicio?: Date | null; data_fim?: Date | null
+  boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string; size_bytes: number; atualizado_em: Date }[]
 }
 type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown }
 type InscricaoRow = { participante: { id: number; nome: string; subtitulo: string | null } }
@@ -101,12 +103,18 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
   return {
     id: evento.id,
     nome: evento.nome,
+    status: evento.status,
     competicao: evento.competicao.nome,
     cidade: evento.municipio.nome,
     local: evento.local,
     data: evento.data_hora.toISOString(),
     organizador: evento.organizador,
     publicadoEm: new Date().toISOString(),
+    dataInicio: evento.data_inicio ? evento.data_inicio.toISOString() : null,
+    dataFim: evento.data_fim ? evento.data_fim.toISOString() : null,
+    boletins: [...(evento.boletins ?? [])]
+      .sort((a, b) => a.numero - b.numero)
+      .map(b => ({ numero: b.numero, titulo: b.titulo, categoria: b.categoria, data: b.data_publicacao.toISOString(), url: b.public_url, tamanho: b.size_bytes, atualizadoEm: b.atualizado_em.toISOString() })),
     modalidades: modalidadesSnap,
   }
 }

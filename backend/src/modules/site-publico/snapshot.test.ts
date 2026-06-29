@@ -123,3 +123,41 @@ it('usa [] quando mensagens_inscritos é null/ausente', () => {
   })
   expect(snap.modalidades[0].mensagens_inscritos).toEqual([])
 })
+
+it('montaSnapshot inclui o status do evento', () => {
+  const eventoComStatus = {
+    id: 1, nome: 'E', local: 'L', organizador: null, data_hora: new Date('2026-06-18T00:00:00Z'),
+    anfitriao_id: null, status: 'pronto',
+    competicao: { nome: 'C', considerar_anfitriao: false, subtitulo_campos: [] },
+    municipio: { nome: 'Cidade' }, data_inicio: null, data_fim: null, boletins: [],
+  } as any
+  const snap = montaSnapshot({
+    evento: eventoComStatus,
+    modalidades: [],
+    inscricoesPorModalidade: new Map(),
+    campeoesPorModalidade: new Map(),
+    sorteiosPorModalidade: new Map(),
+    subtituloFn: () => null,
+  })
+  expect(snap.status).toBe('pronto')
+})
+
+it('inclui boletins e datas inicio/fim no snapshot', () => {
+  const snap = montaSnapshot({
+    evento: {
+      id: 1, nome: 'Ev', local: 'L', organizador: null, data_hora: new Date('2026-07-01'),
+      anfitriao_id: null, competicao: { nome: 'C', considerar_anfitriao: false }, municipio: { nome: 'M' },
+      data_inicio: new Date('2026-07-01'), data_fim: new Date('2026-07-03'),
+      boletins: [
+        { numero: 2, titulo: 'B2', categoria: 'Oficial', data_publicacao: new Date('2026-07-02'), public_url: 'http://vm/2.pdf', size_bytes: 2048, atualizado_em: new Date('2026-07-02T10:00:00Z') },
+        { numero: 1, titulo: 'B1', categoria: 'Resultados', data_publicacao: new Date('2026-07-01'), public_url: 'http://vm/1.pdf', size_bytes: 1024, atualizado_em: new Date('2026-07-01T10:00:00Z') },
+      ],
+    } as any,
+    modalidades: [], inscricoesPorModalidade: new Map(), campeoesPorModalidade: new Map(),
+    sorteiosPorModalidade: new Map(), subtituloFn: () => null,
+  })
+  expect(snap.dataInicio).toBe('2026-07-01T00:00:00.000Z')
+  expect(snap.dataFim).toBe('2026-07-03T00:00:00.000Z')
+  expect(snap.boletins.map(b => b.numero)).toEqual([1, 2]) // ordenado por numero asc
+  expect(snap.boletins[0]).toMatchObject({ titulo: 'B1', tamanho: 1024, atualizadoEm: '2026-07-01T10:00:00.000Z' })
+})

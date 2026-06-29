@@ -14,6 +14,8 @@ type EventoPayload = {
   municipio_id: number
   anfitriao_id?: number | null
   comissao_ids?: number[]
+  data_inicio?: string | null
+  data_fim?: string | null
 }
 
 export const eventosService = {
@@ -31,6 +33,7 @@ export const eventosService = {
   },
   removerLogo: (id: number) => api.delete<Evento>(`${BASE}/${id}/logo`).then(r => r.data),
   publicar: (id: number) => api.post(`${BASE}/${id}/publicar`).then(r => r.data),
+  publicarParcial: (id: number) => api.post(`${BASE}/${id}/publicar-parcial`).then(r => r.data),
   despublicar: (id: number) => api.post(`${BASE}/${id}/despublicar`).then(r => r.data),
   getAnfitriaoOrdem: (eventoId: number) =>
     api.get<Record<number, number>>(`${BASE}/${eventoId}/anfitriao-ordem`).then(r => r.data),
@@ -42,4 +45,5 @@ export const eventosService = {
     api.get<number[]>(`${BASE}/${eventoId}/modalidades-excluidas`).then(r => r.data),
   setModalidadesExcluidas: (eventoId: number, excluidas: number[]) =>
     api.put<{ excluidas: number[] }>(`${BASE}/${eventoId}/modalidades-excluidas`, { excluidas }).then(r => r.data),
+  progressoSorteio: (id: number) => api.get<{ sorteadas: number; sorteaveis: number }>(`${BASE}/${id}/progresso-sorteio`).then(r => r.data),
 }

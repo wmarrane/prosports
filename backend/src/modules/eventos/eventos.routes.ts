@@ -22,6 +22,9 @@ router.post('/:id/logo', ...admin, uploadLogo.single('logo'), ctrl.uploadLogo)
 router.delete('/:id/logo', ...admin, ctrl.removerLogo)
 router.post('/:id/publicar', ...admin, sitePublico.publicar)
 router.post('/:id/despublicar', ...admin, sitePublico.despublicar)
+// Publicação parcial (auto-publish do Modo Congresso): acessível a quem opera o
+// evento (ex.: COMISSÃO_TÉCNICA), igual ao sorteio — não é admin-only.
+router.post('/:id/publicar-parcial', requireAuth, acessoEventoIdParam, sitePublico.publicarParcial)
 
 router.get('/:id/anfitriao-ordem', requireAuth, acessoEventoIdParam, anfitriaoOrdem.getAnfitriaoOrdem)
 router.put('/:id/anfitriao-ordem', ...admin, anfitriaoOrdem.setAnfitriaoOrdem)
@@ -29,6 +32,8 @@ router.put('/:id/anfitriao-ordem', ...admin, anfitriaoOrdem.setAnfitriaoOrdem)
 router.get('/:id/modalidades', requireAuth, acessoEventoIdParam, modalidadesExcluidas.getModalidadesDoEvento)
 router.get('/:id/modalidades-excluidas', requireAuth, acessoEventoIdParam, modalidadesExcluidas.getExcluidas)
 router.put('/:id/modalidades-excluidas', ...admin, modalidadesExcluidas.setExcluidas)
+
+router.get('/:id/progresso-sorteio', requireAuth, acessoEventoIdParam, ctrl.progressoSorteio)
 
 router.use('/:evento_id/keys', eventoKeysRoutes)
 

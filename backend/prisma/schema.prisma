@@ -166,6 +166,8 @@ model Evento {
   anfitriao       Participante? @relation("EventoAnfitriao", fields: [anfitriao_id], references: [id], onDelete: SetNull)
   anfitriao_id    Int?
   logo_url        String?
+  data_inicio       DateTime?
+  data_fim          DateTime?
   site_publicado_em DateTime?
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
@@ -174,6 +176,7 @@ model Evento {
   anfitriao_ordem EventoModalidadeAnfitriao[]
   modalidades_excluidas EventoModalidadeExcluida[]
   comissao        EventoComissao[]
+  boletins        Boletim[]
   criado_em       DateTime      @default(now())
   atualizado_em   DateTime      @updatedAt
 
@@ -316,4 +319,32 @@ model EventoComissao {
   @@unique([evento_id, usuario_id])
   @@index([usuario_id])
   @@map("evento_comissao")
+}
+
+enum CategoriaBoletim {
+  Oficial
+  Regulamento
+  Resultados
+  Convocacao
+  ComunicadoErrata
+}
+
+model Boletim {
+  id              Int              @id @default(autoincrement())
+  evento          Evento           @relation(fields: [evento_id], references: [id], onDelete: Cascade)
+  evento_id       Int
+  numero          Int
+  titulo          String
+  categoria       CategoriaBoletim
+  data_publicacao DateTime
+  filename        String
+  object_key      String           @unique
+  public_url      String
+  size_bytes      Int
+  content_type    String           @default("application/pdf")
+  criado_em       DateTime         @default(now())
+  atualizado_em   DateTime         @updatedAt
+
+  @@unique([evento_id, numero])
+  @@index([evento_id])
 }

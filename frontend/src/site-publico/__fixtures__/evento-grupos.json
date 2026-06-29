@@ -3,6 +3,7 @@
   "cidade": "São Manuel", "local": "Ginásio Central",
   "data": "2026-05-10T12:00:00.000Z", "organizador": "Montana Eventos",
   "publicadoEm": "2026-06-06T18:00:00.000Z",
+  "dataInicio": null, "dataFim": null, "boletins": [],
   "modalidades": [{
     "id": 1, "nome": "Futsal Masculino", "grupo": null, "tipo": "grupos",
     "status": "sorteado", "seed": "DE5B-8022-5193-ED3B", "anfitriaoId": null,

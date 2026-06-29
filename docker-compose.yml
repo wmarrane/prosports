@@ -24,8 +24,19 @@ services:
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - NODE_ENV=${NODE_ENV:-development}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:8080}
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-sftp}
+      - SFTP_HOST=${SFTP_HOST:-192.168.56.130}
+      - SFTP_PORT=${SFTP_PORT:-22}
+      - SFTP_USER=${SFTP_USER:-wagner}
+      - SFTP_PRIVATE_KEY_PATH=/app/secrets/boletins_ssh_key
+      - SFTP_BASE_DIR=${SFTP_BASE_DIR:-/srv/boletins}
+      - PUBLIC_BOLETINS_BASE_URL=${PUBLIC_BOLETINS_BASE_URL:-http://192.168.56.130/boletins}
+      - MAX_PDF_BYTES=${MAX_PDF_BYTES:-26214400}
+      - SITE_SNAPSHOT_LOCAL_DIR=/data/snapshots
     volumes:
       - uploads_data:/app/uploads
+      - ./secrets/boletins_ssh_key:/app/secrets/boletins_ssh_key:ro
+      - site_snapshots:/data/snapshots
     restart: unless-stopped
 
   site-publico:
@@ -34,6 +45,8 @@ services:
       dockerfile: frontend/Dockerfile.site
     ports:
       - "8081:80"
+    volumes:
+      - site_snapshots:/app/public-site-snapshots
     restart: unless-stopped
 
   redis:
@@ -47,3 +60,4 @@ services:
 volumes:
   redis_data:
   uploads_data:
+  site_snapshots:
