@@ -21,6 +21,7 @@ import AcessoMobileCard from './AcessoMobileCard'
 import EventoBoletins from './EventoBoletins'
 import EventoCardPreview from './EventoCardPreview'
 import ModalidadesDaEdicao, { type ModEdicaoItem } from './ModalidadesDaEdicao'
+import { esporteBase } from '../../site-publico/lib/esporte'
 
 const STATUS_VALUES: EventoStatus[] = ['rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial', 'suspenso']
 
@@ -173,6 +174,12 @@ export default function EventoForm() {
   )
   const tiposAtivos = useMemo(
     () => [...new Set(modsAtivos.map((m) => m.tipo))] as TipoDisputa[],
+    [modsAtivos],
+  )
+  // "Modalidades" no padrão do app (card público/listagem) = esportes distintos,
+  // não linhas de modalidade. O badge da lista abaixo segue contando linhas.
+  const modalidadesDistintas = useMemo(
+    () => new Set(modsAtivos.map((m) => esporteBase(m.nome))).size,
     [modsAtivos],
   )
   const inscritosDistintos = useMemo(
@@ -620,7 +627,7 @@ export default function EventoForm() {
                   dataLabel={dataLabel}
                   status={status}
                   tipos={tiposAtivos}
-                  totalModalidades={modsAtivos.length}
+                  totalModalidades={modalidadesDistintas}
                   inscritos={inscritosDistintos}
                   sorteadas={sorteadas}
                   sorteaveis={sorteaveis}
@@ -630,7 +637,7 @@ export default function EventoForm() {
               {/* Resumo */}
               <section className="card pad">
                 <div className="evx-stats">
-                  <div className="evx-stat"><div className="v">{modsAtivos.length}</div><div className="l">Modalidades</div></div>
+                  <div className="evx-stat"><div className="v">{modalidadesDistintas}</div><div className="l">Modalidades</div></div>
                   <div className="evx-stat"><div className="v">{inscritosDistintos}</div><div className="l">Inscritos</div></div>
                   <div className="evx-stat"><div className="v">{tiposAtivos.length}</div><div className="l">Tipos de sorteio</div></div>
                   <div className="evx-stat"><div className="v accent">{sorteadas}</div><div className="l">Com sorteio</div></div>
