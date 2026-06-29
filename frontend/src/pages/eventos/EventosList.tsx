@@ -81,6 +81,11 @@ export default function EventosList() {
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); toast.success('Despublicação disparada.') },
     onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao despublicar.'),
   })
+  const { mutate: republicarSite, isPending: republicandoSite } = useMutation({
+    mutationFn: (id: number) => eventosService.publicarParcial(id),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['eventos'] }); toast.success('Republicação disparada. O site público será atualizado em ~1-2 min.') },
+    onError: (e: any) => toast.error(e?.response?.data?.message ?? 'Erro ao republicar.'),
+  })
 
   const lista = useMemo(
     () => (filtro === 'todos' ? eventos : eventos.filter(e => eventoTipos(e).includes(filtro))),
@@ -142,10 +147,12 @@ export default function EventosList() {
                       isAdmin={isAdmin}
                       publicando={publicandoSite}
                       despublicando={despublicandoSite}
+                      republicando={republicandoSite}
                       onAbrir={e => navigate(`/eventos/${e.id}/${isAdmin ? 'editar' : 'inscricoes'}`)}
                       onInscricoes={e => navigate(`/eventos/${e.id}/inscricoes`)}
                       onPublicar={id => publicarSite(id)}
                       onDespublicar={id => despublicarSite(id)}
+                      onRepublicar={id => republicarSite(id)}
                       onRemover={e => setAlvo({ id: e.id, nome: e.nome })}
                     />
                   ))}
