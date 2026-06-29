@@ -38,16 +38,18 @@ export interface EventoAdminCardProps {
   isAdmin: boolean
   publicando: boolean
   despublicando: boolean
+  republicando: boolean
   onAbrir: (ev: Evento) => void
   onInscricoes: (ev: Evento) => void
   onPublicar: (id: number) => void
   onDespublicar: (id: number) => void
+  onRepublicar: (id: number) => void
   onRemover: (ev: Evento) => void
 }
 
 export default function EventoAdminCard({
-  evento: ev, publicando, despublicando,
-  onAbrir, onInscricoes, onPublicar, onDespublicar, onRemover,
+  evento: ev, publicando, despublicando, republicando,
+  onAbrir, onInscricoes, onPublicar, onDespublicar, onRepublicar, onRemover,
 }: EventoAdminCardProps) {
   const tipos = tiposPorFrequencia(ev)
   const dominanteGrad = tipos.length > 0 ? TIPO_GRAD[tipos[0]] : 'var(--grad-brand)'
@@ -151,12 +153,20 @@ export default function EventoAdminCard({
             className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold"
           >Inscrições</button>
           {ev.site_publicado_em ? (
-            <button
-              onClick={e => { stop(e); onDespublicar(ev.id) }}
-              disabled={despublicando}
-              title="Remove o evento do site público (~1–2 min). Re-publicar atualiza/sobrescreve o snapshot."
-              className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
-            >Despublicar</button>
+            <>
+              <button
+                onClick={e => { stop(e); onRepublicar(ev.id) }}
+                disabled={republicando}
+                title="Atualiza/sobrescreve o snapshot publicado com o estado atual do evento (~1–2 min)."
+                className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
+              >Republicar</button>
+              <button
+                onClick={e => { stop(e); onDespublicar(ev.id) }}
+                disabled={despublicando}
+                title="Remove o evento do site público (~1–2 min). Re-publicar atualiza/sobrescreve o snapshot."
+                className="text-xs text-[var(--t3)] hover:text-[var(--t1)] font-semibold"
+              >Despublicar</button>
+            </>
           ) : (
             <button
               onClick={e => { stop(e); onPublicar(ev.id) }}

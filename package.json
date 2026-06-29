@@ -1,6 +1,6 @@
 {
   "name": "prosports",
-  "version": "1.136.0",
+  "version": "1.137.1",
   "private": true,
   "scripts": {
     "dev:backend": "cd backend && npm run dev",
