@@ -1,0 +1,119 @@
+{
+  "id": 4,
+  "nome": "Copa de Handebol de Tietê",
+  "status": "pronto",
+  "competicao": "Copa de Handebol",
+  "cidade": "Tietê",
+  "local": ".",
+  "data": "2026-09-30T20:46:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-06-30T00:29:40.907Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 181,
+      "nome": "Handebol Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 613,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 3,
+          "nome": "Adolfo",
+          "subtitulo": null
+        },
+        {
+          "id": 4,
+          "nome": "Aguaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 2,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 180,
+      "nome": "Handebol Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 613,
+      "participantes": [
+        {
+          "id": 2,
+          "nome": "Adamantina",
+          "subtitulo": null
+        },
+        {
+          "id": 3,
+          "nome": "Adolfo",
+          "subtitulo": null
+        },
+        {
+          "id": 4,
+          "nome": "Aguaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    }
+  ]
+}
