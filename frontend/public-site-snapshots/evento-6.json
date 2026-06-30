@@ -1,12 +1,16 @@
 {
   "id": 6,
   "nome": "68º Jogos Regionais de Tupã",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "Tupã",
   "local": ".",
   "data": "2026-06-15T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-24T15:05:49.206Z",
+  "publicadoEm": "2026-06-29T18:41:34.540Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,

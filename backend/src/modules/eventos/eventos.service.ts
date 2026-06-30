@@ -2,6 +2,8 @@ import prisma from '../../lib/prisma'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { esporteBase } from '../../lib/esporte'
 import { getModalidadeIdsExcluidas } from './evento-modalidades.service'
+import { publicar, despublicar } from '../site-publico/site-publico.service'
+import { decidirAcaoPublicacao } from './publicar-status'
 
 const INCLUDE = {
   competicao: true,
@@ -182,7 +184,8 @@ export async function editar(id: number, data: Partial<CreateInput>) {
   const { comissao_ids: comissaoRaw, ...rest } = data
   const comissao_ids = comissaoRaw ? [...new Set(comissaoRaw)] : undefined
   if (comissao_ids) await validarComissaoIds(comissao_ids)
-  return mapPrismaError(async () => {
+  const antes = await prisma.evento.findUnique({ where: { id }, select: { status: true, site_publicado_em: true } })
+  const atualizado = await mapPrismaError(async () => {
     await prisma.evento.update({ where: { id }, data: rest })
     if (comissao_ids) {
       await prisma.$transaction([
@@ -194,6 +197,13 @@ export async function editar(id: number, data: Partial<CreateInput>) {
     }
     return prisma.evento.findUnique({ where: { id }, include: INCLUDE })
   })
+  const acao = decidirAcaoPublicacao(antes?.status, rest.status, !!antes?.site_publicado_em)
+  if (acao === 'publicar') {
+    try { await publicar(id, { permitirParcial: true }) } catch (e) { console.warn(`[editar] publicar evento ${id} falhou`, e) }
+  } else if (acao === 'despublicar') {
+    try { await despublicar(id) } catch (e) { console.warn(`[editar] despublicar evento ${id} falhou`, e) }
+  }
+  return atualizado
 }
 
 export async function remover(id: number) {

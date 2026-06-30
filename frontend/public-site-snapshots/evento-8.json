@@ -1,12 +1,16 @@
 {
   "id": 8,
   "nome": "68º Jogos Regionais de São José dos Campos",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "São José dos Campos",
   "local": ".",
   "data": "2026-06-22T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-22T13:21:53.950Z",
+  "publicadoEm": "2026-06-29T18:38:15.842Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,

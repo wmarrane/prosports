@@ -1,12 +1,16 @@
 {
   "id": 2,
   "nome": "68º Jogos Regionais de Itatiba",
+  "status": "sorteado",
   "competicao": "Jogos Regionais",
   "cidade": "Itatiba",
   "local": ".",
   "data": "2026-06-23T13:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-06-23T15:04:00.159Z",
+  "publicadoEm": "2026-06-29T18:37:21.467Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
   "modalidades": [
     {
       "id": 1,

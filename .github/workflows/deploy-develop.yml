@@ -31,14 +31,10 @@ jobs:
       - name: Rodar migrations Prisma
         run: cd backend && DATABASE_URL=${{ secrets.DATABASE_URL }} npx prisma migrate deploy
 
-      - name: Provisionar chave SFTP dos boletins
-        # A chave é gitignored e o checkout (clean) apaga secrets/ a cada deploy;
-        # copia do caminho estável no host do runner para o workspace antes do compose.
-        run: |
-          mkdir -p secrets
-          cp /home/wagner/secrets/boletins_ssh_key secrets/boletins_ssh_key
-          chmod 600 secrets/boletins_ssh_key
-
+      # A chave SFTP dos boletins é montada direto do caminho permanente da VM
+      # (SFTP_KEY_HOST_PATH no docker-compose.yml, default /home/wagner/secrets/boletins_ssh_key),
+      # fora do workspace do git — o checkout nunca a apaga e o Docker nunca cria um
+      # diretório root no lugar (evita o EACCES no checkout após reinício da VM).
       - name: Build e subir containers
         run: docker compose up -d --build --remove-orphans
 
