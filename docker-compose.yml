@@ -35,7 +35,7 @@ services:
       - SITE_SNAPSHOT_LOCAL_DIR=/data/snapshots
     volumes:
       - uploads_data:/app/uploads
-      - ./secrets/boletins_ssh_key:/app/secrets/boletins_ssh_key:ro
+      - ${SFTP_KEY_HOST_PATH:-/home/wagner/secrets/boletins_ssh_key}:/app/secrets/boletins_ssh_key:ro
       - site_snapshots:/data/snapshots
     restart: unless-stopped
 
