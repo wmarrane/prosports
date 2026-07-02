@@ -38,8 +38,8 @@ jobs:
       - name: Build e subir containers
         run: docker compose up -d --build --remove-orphans
 
-      - name: Ajustar dono do volume de uploads (idempotente)
-        run: docker compose exec -T -u root backend chown -R node:node /app/uploads
+      - name: Ajustar dono dos volumes graváveis (idempotente)
+        run: docker compose exec -T -u root backend chown -R node:node /app/uploads /data/snapshots
 
       - name: Limpar imagens antigas
         run: docker image prune -f
