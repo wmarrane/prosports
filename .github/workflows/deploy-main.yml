@@ -135,5 +135,8 @@ jobs:
       - name: Subir backend + Caddy
         run: docker compose -f docker-compose.prod.yml up -d
 
+      - name: Ajustar dono do volume de uploads (idempotente)
+        run: docker compose -f docker-compose.prod.yml exec -T -u root backend chown -R node:node /app/uploads
+
       - name: Limpar imagens antigas
         run: docker image prune -f
