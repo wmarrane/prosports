@@ -103,6 +103,7 @@ jobs:
           PROD_DATABASE_URL=${{ secrets.PROD_DATABASE_URL }}
           PROD_JWT_SECRET=${{ secrets.PROD_JWT_SECRET }}
           PROD_JWT_REFRESH_SECRET=${{ secrets.PROD_JWT_REFRESH_SECRET }}
+          PROD_JWT_KEY_SECRET=${{ secrets.PROD_JWT_KEY_SECRET }}
           CADDY_API_DOMAIN=${{ secrets.CADDY_API_DOMAIN }}
           CORS_ORIGINS=${{ secrets.CORS_ORIGINS }}
           GITHUB_PAT=${{ secrets.SITE_GH_PAT }}
@@ -134,6 +135,9 @@ jobs:
 
       - name: Subir backend + Caddy
         run: docker compose -f docker-compose.prod.yml up -d
+
+      - name: Ajustar dono do volume de uploads (idempotente)
+        run: docker compose -f docker-compose.prod.yml exec -T -u root backend chown -R node:node /app/uploads
 
       - name: Limpar imagens antigas
         run: docker image prune -f
