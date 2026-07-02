@@ -20,6 +20,7 @@ jobs:
           REDIS_URL=redis://redis:6379
           JWT_SECRET=${{ secrets.JWT_SECRET }}
           JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}
+          JWT_KEY_SECRET=${{ secrets.JWT_KEY_SECRET }}
           NODE_ENV=development
           CORS_ORIGINS=http://192.168.56.113:8080,http://192.168.1.10:8080,http://localhost:8080,http://localhost:5173
           GIT_COMMIT=$(git rev-parse --short HEAD)
@@ -37,6 +38,9 @@ jobs:
       # diretório root no lugar (evita o EACCES no checkout após reinício da VM).
       - name: Build e subir containers
         run: docker compose up -d --build --remove-orphans
+
+      - name: Ajustar dono dos volumes graváveis (idempotente)
+        run: docker compose exec -T -u root backend chown -R node:node /app/uploads /data/snapshots
 
       - name: Limpar imagens antigas
         run: docker image prune -f

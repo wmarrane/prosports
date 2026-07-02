@@ -22,6 +22,7 @@ services:
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=${JWT_SECRET}
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - JWT_KEY_SECRET=${JWT_KEY_SECRET}
       - NODE_ENV=${NODE_ENV:-development}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:8080}
       - STORAGE_PROVIDER=${STORAGE_PROVIDER:-sftp}

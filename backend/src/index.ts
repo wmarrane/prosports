@@ -73,6 +73,14 @@ function validarSegredos() {
   if (!s) probs.push('JWT_SECRET ausente')
   if (!r) probs.push('JWT_REFRESH_SECRET ausente')
   if (s && r && s === r) probs.push('JWT_SECRET e JWT_REFRESH_SECRET devem ser diferentes')
+  const k = process.env.JWT_KEY_SECRET
+  if (process.env.NODE_ENV === 'production') {
+    if (!k) probs.push('JWT_KEY_SECRET ausente')
+    if (k && s && k === s) probs.push('JWT_KEY_SECRET deve ser diferente de JWT_SECRET')
+    if (k && k.length < 32) probs.push('JWT_KEY_SECRET deve ter >= 32 chars em produção')
+  } else if (!k) {
+    logger.warn('JWT_KEY_SECRET ausente — tokens de chave caem em JWT_SECRET (aceitável fora de produção)')
+  }
   if (process.env.NODE_ENV === 'production') {
     if (s && s.length < 32) probs.push('JWT_SECRET deve ter >= 32 chars em produção')
     if (r && r.length < 32) probs.push('JWT_REFRESH_SECRET deve ter >= 32 chars em produção')
