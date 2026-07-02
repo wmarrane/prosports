@@ -33,6 +33,7 @@ services:
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=${PROD_JWT_SECRET}
       - JWT_REFRESH_SECRET=${PROD_JWT_REFRESH_SECRET}
+      - JWT_KEY_SECRET=${PROD_JWT_KEY_SECRET}
       - NODE_ENV=production
       - CORS_ORIGINS=${CORS_ORIGINS}
       - GITHUB_PAT=${GITHUB_PAT}
