@@ -17,7 +17,8 @@ describe('assertPdf', () => {
 
 describe('sanitizeFilename', () => {
   it('remove control chars e separadores de caminho', () => {
-    expect(sanitizeFilename('a b/c\\d.pdf')).toBe('ab_c_d.pdf')
+    expect(sanitizeFilename('a\x00b\x1fc\x7f.pdf')).toBe('abc.pdf')
+    expect(sanitizeFilename('a b/c\\d.pdf')).toBe('a b_c_d.pdf')
   })
   it('limita a 150 chars', () => {
     expect(sanitizeFilename('x'.repeat(300) + '.pdf').length).toBe(150)

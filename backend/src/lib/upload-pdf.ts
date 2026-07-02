@@ -23,7 +23,7 @@ export function assertPdf(buffer: Buffer): void {
 
 export function sanitizeFilename(nome: string): string {
   const limpo = nome
-    .replace(/[ -]/g, '')
+    .replace(/[\x00-\x1f\x7f]/g, '')
     .replace(/[\\/]/g, '_')
     .trim()
     .slice(0, 150)
