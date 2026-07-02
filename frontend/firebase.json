@@ -25,7 +25,8 @@
           { "key": "X-Frame-Options", "value": "DENY" },
           { "key": "X-Content-Type-Options", "value": "nosniff" },
           { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+          { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; script-src 'self' 'sha256-U1mbDnI3xsDs16pIIlVhEVKMIuRcyDRfVX4pUd2y0dw=' 'sha256-TPGvwyFKwMDU+zHk1sAT1IZtEefjhqgYZFGXdLfXvA4=' 'sha256-enUdFYH6aGRCJz7rOyF22aW5iRTZaX8//DJ9+syPjHA=' 'sha256-hpYFPds6IFNMI5jeGrGgnr1CWmZObxNvM+a3fB9EmeY=' 'sha256-83voCM9OZEC3qWWvl/IVRxiY+WeR+GoqiwtQ7UvvBoc=' 'sha256-5gsYn0DgFAo3j3j1yWmUsYalVd+86x1a79ytznrAjvA=' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.googletagmanager.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none'" }
         ] },
         { "source": "**/*.@(js|css|woff2|svg|png|jpg|jpeg|gif|ico)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
         { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "public, max-age=300" }] }
