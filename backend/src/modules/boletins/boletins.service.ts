@@ -3,6 +3,7 @@ import { CategoriaBoletim } from '@prisma/client'
 import prisma from '../../lib/prisma'
 import { getStorage } from '../../lib/storage'
 import { publicar } from '../site-publico/site-publico.service'
+import { assertPdf, sanitizeFilename } from '../../lib/upload-pdf'
 
 type CriarInput = {
   eventoId: number
@@ -21,12 +22,13 @@ async function republicarSePublicado(eventoId: number) {
 export async function criarBoletim(input: CriarInput) {
   const { eventoId, numero, titulo, categoria, data_publicacao, file } = input
   const objectKey = `eventos/${eventoId}/boletim-${numero}-${randomUUID()}.pdf`
+  assertPdf(file.buffer)
   const publicUrl = await getStorage().put(objectKey, file.buffer, 'application/pdf')
   try {
     const boletim = await prisma.boletim.create({
       data: {
         evento_id: eventoId, numero, titulo, categoria, data_publicacao,
-        filename: file.originalname, object_key: objectKey, public_url: publicUrl,
+        filename: sanitizeFilename(file.originalname), object_key: objectKey, public_url: publicUrl,
         size_bytes: file.size, content_type: 'application/pdf',
       },
     })
@@ -70,11 +72,12 @@ export async function substituirBoletim(eventoId: number, boletimId: number, inp
 
   let novoObjectKey: string | null = null
   if (input.file) {
+    assertPdf(input.file.buffer)
     novoObjectKey = `eventos/${eventoId}/boletim-${boletim.numero}-${randomUUID()}.pdf`
     const url = await getStorage().put(novoObjectKey, input.file.buffer, 'application/pdf')
     data.object_key = novoObjectKey
     data.public_url = url
-    data.filename = input.file.originalname
+    data.filename = sanitizeFilename(input.file.originalname)
     data.size_bytes = input.file.size
   }
 
