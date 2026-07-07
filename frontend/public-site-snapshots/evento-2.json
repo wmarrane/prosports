@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-06-23T13:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-07-07T15:40:22.611Z",
+  "publicadoEm": "2026-07-07T17:41:24.608Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [
@@ -19,6 +19,15 @@
       "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-1-d9022d33-870a-48fe-ba7c-0bae6846aa89.pdf",
       "tamanho": 543236,
       "atualizadoEm": "2026-07-07T15:40:22.478Z"
+    },
+    {
+      "numero": 2,
+      "titulo": "Programação do dia 15",
+      "categoria": "ComunicadoErrata",
+      "data": "2026-07-07T00:00:00.000Z",
+      "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-2-8c512ffc-a77e-41cb-86b3-5a0c41da7197.pdf",
+      "tamanho": 645808,
+      "atualizadoEm": "2026-07-07T17:41:24.458Z"
     }
   ],
   "modalidades": [
