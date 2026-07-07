@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-06-23T13:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-07-07T17:48:34.918Z",
+  "publicadoEm": "2026-07-07T17:49:28.579Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [
@@ -37,6 +37,15 @@
       "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-3-59993fca-3707-4abd-a0c0-011b8e1249b7.pdf",
       "tamanho": 657092,
       "atualizadoEm": "2026-07-07T17:48:34.773Z"
+    },
+    {
+      "numero": 4,
+      "titulo": "Programação do dia 17/04",
+      "categoria": "ComunicadoErrata",
+      "data": "2026-07-07T00:00:00.000Z",
+      "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-4-4faaf530-195d-4278-99dd-31a03fdcec97.pdf",
+      "tamanho": 683165,
+      "atualizadoEm": "2026-07-07T17:49:28.442Z"
     }
   ],
   "modalidades": [
