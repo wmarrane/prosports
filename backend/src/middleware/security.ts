@@ -3,6 +3,9 @@ import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import { Request, Response, NextFunction } from 'express'
 import { ZodError } from 'zod'
+import pino from 'pino'
+
+const logger = pino()
 
 export const helmetMiddleware = helmet({
   contentSecurityPolicy: {
@@ -78,13 +81,19 @@ export const globalRateLimit = rateLimit({
   legacyHeaders: false,
 })
 
-export function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
+export function errorHandler(err: any, req: Request, res: Response, _next: NextFunction) {
   if (err instanceof ZodError) {
     res.status(400).json({ message: 'Dados inválidos', errors: err.flatten().fieldErrors })
     return
   }
 
   const status = err.status ?? 500
+  if (status >= 500) {
+    logger.error(
+      { err: { message: err?.message, stack: err?.stack, code: err?.code }, method: req.method, url: req.originalUrl },
+      'Erro não tratado (5xx)',
+    )
+  }
   const message = status < 500 ? err.message : 'Erro interno do servidor'
   res.status(status).json({ message })
 }
