@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-06-23T13:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-07-07T17:49:28.579Z",
+  "publicadoEm": "2026-07-14T22:09:03.902Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [
@@ -46,6 +46,15 @@
       "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-4-4faaf530-195d-4278-99dd-31a03fdcec97.pdf",
       "tamanho": 683165,
       "atualizadoEm": "2026-07-07T17:49:28.442Z"
+    },
+    {
+      "numero": 5,
+      "titulo": "Boletim 01",
+      "categoria": "Oficial",
+      "data": "2026-07-14T00:00:00.000Z",
+      "url": "https://storage.googleapis.com/newprosports-boletins-br/eventos/2/boletim-5-0dfbc908-76b8-4a0d-8606-e1f703ff9090.pdf",
+      "tamanho": 7326688,
+      "atualizadoEm": "2026-07-14T22:09:03.785Z"
     }
   ],
   "modalidades": [
