@@ -20,6 +20,7 @@ vi.mock('../../lib/prisma', () => ({
     },
     municipio: {
       findMany: vi.fn(),
+      findUnique: vi.fn(),
     },
     participante: {
       findMany: vi.fn(),
@@ -34,7 +35,7 @@ import * as service from './inscricoes.service'
 const mockPrisma = prisma as any
 beforeEach(() => vi.clearAllMocks())
 
-const INCLUDE = { participante: { include: { municipio: true, inspetoria: true, delegacia: true } } }
+const INCLUDE = { participante: { include: { municipio: true, inspetoria: true, delegacia: true } }, municipio: true }
 
 describe('inscricoes.service', () => {
   it('listar com filtros passa where corretamente', async () => {
@@ -101,6 +102,44 @@ describe('inscricoes.service', () => {
     mockPrisma.inscricao.create.mockRejectedValue(Object.assign(new Error('dup'), { code: 'P2002' }))
     await expect(service.criar({ evento_id: 1, modalidade_id: 1, participante_id: 1 }))
       .rejects.toMatchObject({ status: 409, message: expect.stringContaining('inscrito') })
+  })
+
+  it('criar com subtitulo e municipio_id válidos persiste overrides e retorna municipio', async () => {
+    const municipio = { id: 42, nome: 'Campinas', uf: 'SP' }
+    mockPrisma.evento.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.municipio.findUnique.mockResolvedValue(municipio)
+    const created = { id: 10, evento_id: 1, modalidade_id: 1, participante_id: 1, subtitulo: 'Sub A', municipio_id: 42, municipio }
+    mockPrisma.inscricao.create.mockResolvedValue(created)
+    mockPrisma.inscricao.findUnique.mockResolvedValue(created)
+    mockPrisma.inscricao.findMany.mockResolvedValue([created])
+
+    const data = { evento_id: 1, modalidade_id: 1, participante_id: 1, subtitulo: 'Sub A', municipio_id: 42 }
+    const result = await service.criar(data)
+    expect(mockPrisma.municipio.findUnique).toHaveBeenCalledWith({ where: { id: 42 } })
+    expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
+      data: { evento_id: 1, modalidade_id: 1, participante_id: 1, subtitulo: 'Sub A', municipio_id: 42 },
+      include: INCLUDE,
+    })
+    expect(result.subtitulo).toBe('Sub A')
+    expect(result.municipio).toEqual(municipio)
+
+    const byId = await service.buscarPorId(10)
+    expect(byId.subtitulo).toBe('Sub A')
+    expect(byId.municipio).toEqual(municipio)
+
+    const list = await service.listar({ evento_id: 1 })
+    expect(list[0].subtitulo).toBe('Sub A')
+    expect(list[0].municipio).toEqual(municipio)
+  })
+
+  it('criar com municipio_id inválido lança 400', async () => {
+    mockPrisma.evento.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({ competicao_id: 1 })
+    mockPrisma.municipio.findUnique.mockResolvedValue(null)
+    await expect(service.criar({ evento_id: 1, modalidade_id: 1, participante_id: 1, municipio_id: 999 }))
+      .rejects.toMatchObject({ status: 400, message: expect.stringContaining('Município') })
+    expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
   })
 
   it('remover deleta direto', async () => {

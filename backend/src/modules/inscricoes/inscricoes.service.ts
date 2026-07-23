@@ -3,6 +3,7 @@ import { resolverParticipantes } from '../participantes/resolver-participantes.s
 
 const INCLUDE = {
   participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
+  municipio: true,
 } as const
 
 async function mapPrismaError<T>(fn: () => Promise<T>): Promise<T> {
@@ -23,6 +24,8 @@ type CreateInput = {
   evento_id: number
   modalidade_id: number
   participante_id: number
+  subtitulo?: string | null
+  municipio_id?: number | null
 }
 
 export async function listar(filtros: { evento_id?: number; modalidade_id?: number }) {
@@ -55,7 +58,18 @@ export async function criar(data: CreateInput) {
       { status: 400 }
     )
   }
-  return mapPrismaError(() => prisma.inscricao.create({ data, include: INCLUDE }))
+  if (data.municipio_id != null) {
+    const municipio = await prisma.municipio.findUnique({ where: { id: data.municipio_id } })
+    if (!municipio) throw Object.assign(new Error('Município inválido'), { status: 400 })
+  }
+  const createData: Record<string, unknown> = {
+    evento_id: data.evento_id,
+    modalidade_id: data.modalidade_id,
+    participante_id: data.participante_id,
+  }
+  if (data.subtitulo !== undefined) createData.subtitulo = data.subtitulo
+  if (data.municipio_id !== undefined) createData.municipio_id = data.municipio_id
+  return mapPrismaError(() => prisma.inscricao.create({ data: createData as any, include: INCLUDE }))
 }
 
 export async function remover(id: number) {
