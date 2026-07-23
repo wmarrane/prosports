@@ -6,6 +6,7 @@ export type Competicao = {
   estados: string[]
   subtitulo_campos: CampoSubtitulo[]
   considerar_anfitriao: boolean
+  subtitulo_municipio_por_modalidade?: boolean
   criado_em: string
   atualizado_em: string
   _count?: {

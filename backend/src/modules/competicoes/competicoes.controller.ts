@@ -14,6 +14,7 @@ const createSchema = z.object({
     .optional()
     .default([]),
   considerar_anfitriao: z.boolean().optional().default(false),
+  subtitulo_municipio_por_modalidade: z.boolean().optional().default(false),
 })
 
 const updateSchema = createSchema.partial()
