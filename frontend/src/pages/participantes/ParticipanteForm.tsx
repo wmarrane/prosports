@@ -53,7 +53,7 @@ export default function ParticipanteForm() {
     mutationFn: () => {
       const payload = {
         nome: nome.trim(),
-        subtitulo: subtitulo.trim() || undefined,
+        subtitulo: subtitulo.trim() || null,
         inspetoria_id: inspetoriaId === '' ? null : Number(inspetoriaId),
         delegacia_id: delegaciaId === '' ? null : Number(delegaciaId),
         municipio_id: municipioId!,
