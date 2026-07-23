@@ -18,11 +18,9 @@ const listQuerySchema = z.object({
 
 const importRowSchema = z.object({
   nome: z.string().min(1).max(200),
-  municipio_uf: z.string().length(2),
+  municipio_uf: z.string().length(2).optional(),
   municipio_nome: z.string().min(1).max(120),
   subtitulo: z.string().max(200).optional(),
-  municipio_mod_uf: z.string().length(2).optional(),
-  municipio_mod_nome: z.string().max(120).optional(),
 })
 
 const importSchema = z.object({

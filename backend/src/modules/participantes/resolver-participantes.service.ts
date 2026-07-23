@@ -5,6 +5,44 @@ export type ResolucaoParticipante = {
   participante_id: number | null
 }
 
+export type ResolucaoEscolar = {
+  municipio_id: number | null
+  ambiguo_municipio: boolean
+  participante_id: number | null  // null = não existe (deve ser criado)
+}
+
+// Resolve município por NOME dentro dos estados da competição e participante por NOME.
+// Nunca cria; a criação é decidida por importar() (respeita dry_run).
+export async function resolverEscolar(
+  rows: { nome: string; municipio_nome: string }[],
+  estados: string[],
+): Promise<ResolucaoEscolar[]> {
+  const municipios = estados.length > 0
+    ? await prisma.municipio.findMany({ where: { uf: { in: estados } }, select: { id: true, nome: true } })
+    : []
+  const munByNome = new Map<string, number[]>()
+  for (const m of municipios) {
+    const k = m.nome.toLowerCase()
+    munByNome.set(k, [...(munByNome.get(k) ?? []), m.id])
+  }
+  const nomes = Array.from(new Set(rows.map(r => r.nome.trim().toLowerCase())))
+  const participantes = nomes.length > 0
+    ? await prisma.participante.findMany({ select: { id: true, nome: true } })
+    : []
+  const partByNome = new Map<string, number>()
+  for (const p of participantes) partByNome.set(p.nome.trim().toLowerCase(), p.id)
+
+  return rows.map(r => {
+    const ids = munByNome.get(r.municipio_nome.trim().toLowerCase()) ?? []
+    const municipio_id = ids.length === 1 ? ids[0] : null
+    return {
+      municipio_id,
+      ambiguo_municipio: ids.length > 1,
+      participante_id: partByNome.get(r.nome.trim().toLowerCase()) ?? null,
+    }
+  })
+}
+
 type RowLite = { nome: string; municipio_uf: string; municipio_nome: string }
 
 // Resolve cada linha para o município e o participante EXISTENTES.

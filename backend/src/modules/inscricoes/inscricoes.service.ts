@@ -1,5 +1,5 @@
 import prisma from '../../lib/prisma'
-import { resolverParticipantes } from '../participantes/resolver-participantes.service'
+import { resolverParticipantes, resolverEscolar } from '../participantes/resolver-participantes.service'
 
 const INCLUDE = {
   participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
@@ -169,11 +169,9 @@ export async function criarBulk(input: {
 
 export type ImportRow = {
   nome: string
-  municipio_uf: string
+  municipio_uf?: string
   municipio_nome: string
   subtitulo?: string
-  municipio_mod_uf?: string
-  municipio_mod_nome?: string
 }
 
 export type ImportRowResult = {
@@ -218,38 +216,14 @@ export async function importar(input: {
     )
   }
 
-  // Fetch the competition toggle
+  // Fetch the competition toggle and estados
   const competicao = evento.competicao_id != null
     ? await prisma.competicao.findUnique({
         where: { id: evento.competicao_id },
-        select: { subtitulo_municipio_por_modalidade: true },
+        select: { subtitulo_municipio_por_modalidade: true, estados: true },
       })
     : null
   const toggleOn = competicao?.subtitulo_municipio_por_modalidade === true
-
-  const resolucoes = await resolverParticipantes(input.rows)
-
-  // When toggle is ON, resolve override municipality IDs
-  let overrideMunicipioMap: Map<string, number> | null = null
-  if (toggleOn) {
-    const overrideUfs = Array.from(
-      new Set(
-        input.rows
-          .filter(r => r.municipio_mod_uf)
-          .map(r => r.municipio_mod_uf!.trim().toUpperCase())
-      )
-    )
-    const overrideMunicipios = overrideUfs.length > 0
-      ? await prisma.municipio.findMany({
-          where: { uf: { in: overrideUfs } },
-          select: { id: true, nome: true, uf: true },
-        })
-      : []
-    overrideMunicipioMap = new Map<string, number>()
-    for (const m of overrideMunicipios) {
-      overrideMunicipioMap.set(`${m.uf.toUpperCase()}:${m.nome.toLowerCase()}`, m.id)
-    }
-  }
 
   const inscricoes = await prisma.inscricao.findMany({
     where: { evento_id: input.evento_id, modalidade_id: input.modalidade_id },
@@ -260,61 +234,107 @@ export async function importar(input: {
   const results: ImportRowResult[] = []
   const contadores = { criadas: 0, duplicadas: 0, erros: 0, nao_cadastrados: 0 }
 
-  for (let i = 0; i < input.rows.length; i++) {
-    const row = input.rows[i]
-    const linha = i + 1
-    const nome = row.nome.trim()
-    const r = resolucoes[i]
+  if (toggleOn) {
+    // ESCOLAR PATH: resolve município por nome nos estados da competição;
+    // resolve participante por nome (cria se não existir e !dry_run)
+    const estados: string[] = competicao?.estados ?? []
+    const resolucoes = await resolverEscolar(input.rows, estados)
 
-    if (r.municipio_id == null) {
-      results.push({ linha, nome, status: 'erro', erro: `Município '${row.municipio_nome}/${row.municipio_uf}' não encontrado` })
-      contadores.erros++
-      continue
-    }
-    if (r.participante_id == null) {
-      results.push({ linha, nome, status: 'erro', erro: "Participante não cadastrado. Cadastre em 'Participantes' primeiro." })
-      contadores.erros++
-      contadores.nao_cadastrados++
-      continue
-    }
+    for (let i = 0; i < input.rows.length; i++) {
+      const row = input.rows[i]
+      const linha = i + 1
+      const nome = row.nome.trim()
+      const r = resolucoes[i]
 
-    // Resolve override municipality when toggle is ON
-    let overrideMunicipioId: number | null = null
-    if (toggleOn && overrideMunicipioMap !== null) {
-      const modUf = row.municipio_mod_uf?.trim()
-      const modNome = row.municipio_mod_nome?.trim()
-      if (modUf && modNome) {
-        const key = `${modUf.toUpperCase()}:${modNome.toLowerCase()}`
-        const resolved = overrideMunicipioMap.get(key)
-        if (resolved == null) {
-          results.push({ linha, nome, status: 'erro', erro: `Município (modalidade) '${modNome}/${modUf}' não encontrado` })
-          contadores.erros++
-          continue
+      if (r.ambiguo_municipio) {
+        results.push({ linha, nome, status: 'erro', erro: `Município '${row.municipio_nome}' ambíguo nos estados da competição` })
+        contadores.erros++
+        continue
+      }
+      if (r.municipio_id == null) {
+        results.push({ linha, nome, status: 'erro', erro: `Município '${row.municipio_nome}' não encontrado em ${estados.join(', ')}` })
+        contadores.erros++
+        continue
+      }
+
+      let participante_id = r.participante_id
+      if (participante_id == null) {
+        if (!input.dry_run) {
+          const criado = await prisma.participante.create({
+            data: { nome: nome, municipio_id: r.municipio_id },
+          })
+          participante_id = criado.id
         }
-        overrideMunicipioId = resolved
+        // dry_run: trata como criável (status 'criada', sem persistir)
       }
-    }
 
-    if (inscritosSet.has(r.participante_id)) {
-      results.push({ linha, nome, status: 'duplicada' })
-      contadores.duplicadas++
-      continue
-    }
-    if (!input.dry_run) {
-      const data: Record<string, unknown> = {
-        evento_id: input.evento_id,
-        modalidade_id: input.modalidade_id,
-        participante_id: r.participante_id,
+      if (participante_id != null && inscritosSet.has(participante_id)) {
+        results.push({ linha, nome, status: 'duplicada' })
+        contadores.duplicadas++
+        continue
       }
-      if (toggleOn) {
-        data.subtitulo = row.subtitulo ?? null
-        data.municipio_id = overrideMunicipioId
+      if (!input.dry_run && participante_id != null) {
+        await prisma.inscricao.create({
+          data: {
+            evento_id: input.evento_id,
+            modalidade_id: input.modalidade_id,
+            participante_id,
+            subtitulo: row.subtitulo?.trim() || null,
+            municipio_id: r.municipio_id,
+          },
+        })
+        inscritosSet.add(participante_id)
       }
-      await prisma.inscricao.create({ data: data as any })
+      results.push({ linha, nome, status: 'criada' })
+      contadores.criadas++
     }
-    inscritosSet.add(r.participante_id)
-    results.push({ linha, nome, status: 'criada' })
-    contadores.criadas++
+  } else {
+    // NON-ESCOLAR PATH: uses resolverParticipantes, requires municipio_uf,
+    // never creates participant, no overrides
+    const resolucoes = await resolverParticipantes(
+      input.rows.map(r => ({
+        nome: r.nome,
+        municipio_uf: r.municipio_uf ?? '',
+        municipio_nome: r.municipio_nome,
+      }))
+    )
+
+    for (let i = 0; i < input.rows.length; i++) {
+      const row = input.rows[i]
+      const linha = i + 1
+      const nome = row.nome.trim()
+      const r = resolucoes[i]
+
+      if (r.municipio_id == null) {
+        results.push({ linha, nome, status: 'erro', erro: `Município '${row.municipio_nome}/${row.municipio_uf}' não encontrado` })
+        contadores.erros++
+        continue
+      }
+      if (r.participante_id == null) {
+        results.push({ linha, nome, status: 'erro', erro: "Participante não cadastrado. Cadastre em 'Participantes' primeiro." })
+        contadores.erros++
+        contadores.nao_cadastrados++
+        continue
+      }
+
+      if (inscritosSet.has(r.participante_id)) {
+        results.push({ linha, nome, status: 'duplicada' })
+        contadores.duplicadas++
+        continue
+      }
+      if (!input.dry_run) {
+        await prisma.inscricao.create({
+          data: {
+            evento_id: input.evento_id,
+            modalidade_id: input.modalidade_id,
+            participante_id: r.participante_id,
+          },
+        })
+      }
+      inscritosSet.add(r.participante_id)
+      results.push({ linha, nome, status: 'criada' })
+      contadores.criadas++
+    }
   }
 
   return { rows: results, contadores }
