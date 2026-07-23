@@ -1,7 +1,42 @@
 # Competição escolar (Jeesp): subtítulo e município por modalidade — Design
 
-**Data:** 2026-07-14
-**Status:** Aprovado (aguardando revisão da spec)
+**Data:** 2026-07-14 · **Revisado:** 2026-07-23
+**Status:** Revisado após dados reais do Jeesp — a seção "REVISÃO 2026-07-23" abaixo **substitui** os pontos conflitantes das seções originais (import/match/fallback). B1 (fundação: schema, toggle, overrides na inscrição, cadastro manual) já implementado e no dev; falta **revisar o import** e implementar o **B2 (exibição)**.
+
+---
+
+## REVISÃO 2026-07-23 — conceito Jeesp corrigido (autoritativo)
+
+Os arquivos reais de inscrição do Jeesp mostraram que o conceito é diferente do assumido na 1ª versão. Esta seção **prevalece** sobre "Decisões aprovadas", "Arquitetura" e "B1/B2" onde houver conflito.
+
+### Conceito real
+- O **participante/competidor é a SREL** (regional): "SREL Araçatuba", "SREL Barretos"… — o mesmo conjunto (~16) em todas as modalidades.
+- Em cada modalidade a SREL é representada por uma **escola diferente** (`Subtitulo`, ex.: "EE Dr Carlos Rosa") num **município diferente** (`Municipio`, ex.: "Birigui").
+- Portanto **subtítulo e município são atributos da INSCRIÇÃO (por modalidade)**; a SREL **não tem** subtítulo/município globais com significado. O `Participante.municipio_id` (obrigatório) é apenas um **placeholder de cadastro** no escolar — nunca exibido.
+
+### Formato real do import escolar (planilha por modalidade)
+```
+Basquete Masculino 14 anos        (linha de título — IGNORAR)
+Participante,Subtitulo,Municipio  (cabeçalho)
+SREL Araçatuba,EE Dr Carlos Rosa,Birigui
+...
+```
+- Delimitador vírgula; **pular a 1ª linha (título)** e ler o cabeçalho na 2ª.
+- Colunas: `Participante` (nome), `Subtitulo` (override), `Municipio` (override, **só nome, sem UF**).
+
+### Regras corrigidas (substituem as originais)
+1. **Match do participante: por NOME apenas** (a SREL é única na competição). *(Substitui "nome + município de cadastro".)*
+2. **Import CRIA a SREL se não existir** (nome novo → cria `Participante` com `municipio_id` = o município resolvido da 1ª linha, como placeholder de cadastro). Reusa em modalidades seguintes por nome. *(O import escolar passa a criar; o import padrão continua só casando.)*
+3. **Município por NOME dentro do(s) estado(s) da competição** (Jeesp = SP). Nome não encontrado nos estados → linha com erro (não cria/inscreve). Se ambíguo entre múltiplos estados da competição → erro pedindo desambiguação (no Jeesp/SP não ocorre).
+4. **`Subtitulo` e `Municipio` da linha → overrides da inscrição** (`Inscricao.subtitulo`, `Inscricao.municipio_id`).
+5. **Fallback no escolar (corrigido):** o override da inscrição é a **fonte única**. Sem override → **em branco** (NÃO herda o global do participante, que é placeholder). *(Substitui "cai no valor do participante".)* Para competições **não-escolar**, nada muda (usam o participante como hoje).
+
+### Impacto no que já foi implementado (B1)
+- **Mantém:** schema (toggle + overrides), toggle no cadastro da competição, persistência/retorno dos overrides na inscrição, cadastro manual (campos Subtítulo + Município).
+- **Revisar (B1-revisão):** o **import** — trocar o formato/colunas antigos (`nome, municipio_uf, municipio_nome`, `municipio_mod_uf/nome`) pelo formato real acima; match/cria por nome; município por nome em SP. (As colunas `municipio_mod_*` deixam de existir.)
+- **B2 (exibição):** usar o override como fonte única no escolar (sem herdar global) em Modo Congresso, sorteio, site público e relatórios.
+
+---
 
 ## Objetivo
 
