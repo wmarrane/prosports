@@ -51,7 +51,11 @@ export default function CongressoStepBemvindos({ eventoId, onIniciar }: Props) {
     queryFn: () => competicoesService.buscar(evento!.competicao_id),
     enabled: evento?.competicao_id != null,
   })
-  const camposSubtitulo = competicao?.subtitulo_campos ?? []
+  // Escolar: subtítulo/município variam POR modalidade; esta tela de boas-vindas é do
+  // evento inteiro (dedup por participante), sem contexto de modalidade — então não há
+  // valor único a exibir. Suprime a linha (não usa o placeholder global do participante).
+  const porModalidade = competicao?.subtitulo_municipio_por_modalidade === true
+  const camposSubtitulo = porModalidade ? [] : (competicao?.subtitulo_campos ?? [])
 
   const nModalidades = new Set(modalidades.map(m => esporteBase(m.nome))).size
 
