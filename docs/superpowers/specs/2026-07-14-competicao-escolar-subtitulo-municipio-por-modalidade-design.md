@@ -36,6 +36,14 @@ SREL Araçatuba,EE Dr Carlos Rosa,Birigui
 - **Revisar (B1-revisão):** o **import** — trocar o formato/colunas antigos (`nome, municipio_uf, municipio_nome`, `municipio_mod_uf/nome`) pelo formato real acima; match/cria por nome; município por nome em SP. (As colunas `municipio_mod_*` deixam de existir.)
 - **B2 (exibição):** usar o override como fonte única no escolar (sem herdar global) em Modo Congresso, sorteio, site público e relatórios.
 
+### Escopo do B2 (ampliado 2026-07-23)
+Além da exibição, o B2 inclui a **gestão do override na inscrição** (o cadastro manual do B1 só cria; falta editar/ver):
+1. **Helper `atributosEfetivos(inscricao, porModalidade)`** (backend + frontend, twin): escolar → `{ subtitulo: inscricao.subtitulo, municipio: inscricao.municipio }` (override é fonte única; vazio se null, **sem** herdar o global); não-escolar → valores do participante (como hoje). Alimenta o `composeSubtituloLine` existente com o `subtitulo_campos`.
+2. **Editar override na inscrição:** endpoint `PATCH /inscricoes/:id` (`editar(id, { subtitulo?, municipio_id? })` no service; valida município; auth `requireAcessoEvento`) + UI para editar o Subtítulo/Município de um inscrito já criado.
+3. **Lista "Inscritos" mostra o override** (escolar): em vez do município global, exibe o subtítulo/município da inscrição (via `atributosEfetivos`), com ação de editar.
+4. **Exibição por modalidade** (via `atributosEfetivos`): Modo Congresso (telas `CongressoStep*`), resultado do sorteio (chaves/grupos/ordem), site público (snapshot) e relatórios.
+- Não-escolar (toggle off): tudo inalterado.
+
 ---
 
 ## Objetivo
