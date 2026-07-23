@@ -4,6 +4,13 @@
 # called" no npm ci (bug do npm já resolvido nas versões mais novas).
 FROM node:24-alpine AS builder
 WORKDIR /app
+# Resiliência de rede no build (VM com rede/DNS instável pós-restart):
+# retries + timeouts maiores e menos conexões paralelas evitam ETIMEDOUT no npm ci.
+ENV NPM_CONFIG_FETCH_RETRIES=5 \
+    NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000 \
+    NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000 \
+    NPM_CONFIG_FETCH_TIMEOUT=600000 \
+    NPM_CONFIG_MAXSOCKETS=3
 COPY package*.json ./
 RUN npm ci
 COPY . .

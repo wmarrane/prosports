@@ -6,6 +6,13 @@ FROM node:24-alpine AS builder
 ARG APP_COMMIT=unknown
 ENV APP_COMMIT=$APP_COMMIT
 WORKDIR /app
+# Resiliência de rede no build (VM com rede/DNS instável pós-restart):
+# retries + timeouts maiores e menos conexões paralelas evitam ETIMEDOUT no npm ci.
+ENV NPM_CONFIG_FETCH_RETRIES=5 \
+    NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000 \
+    NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000 \
+    NPM_CONFIG_FETCH_TIMEOUT=600000 \
+    NPM_CONFIG_MAXSOCKETS=3
 COPY frontend/package*.json ./
 # O package-lock.json é gerado no Windows; `npm ci` omite o binário opcional
 # linux-musl do lightningcss (bug de optional deps), quebrando o Tailwind v4.
