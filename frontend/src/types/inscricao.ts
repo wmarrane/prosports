@@ -12,11 +12,9 @@ export type Inscricao = {
 
 export type ImportRow = {
   nome: string
-  municipio_uf: string
+  municipio_uf?: string
   municipio_nome: string
   subtitulo?: string
-  municipio_mod_uf?: string
-  municipio_mod_nome?: string
 }
 
 export type ImportRowResult = {
