@@ -7,6 +7,23 @@ type ParticipanteLike = Pick<
   'subtitulo' | 'municipio' | 'inspetoria' | 'delegacia'
 >
 
+type InscricaoLike = {
+  subtitulo?: string | null
+  municipio?: { nome: string; uf: string } | null
+  participante: ParticipanteLike
+}
+
+/** Participante "efetivo" p/ compor o subtítulo: escolar usa o override da inscrição
+ *  (fonte única; vazio se null), não-escolar usa o participante. */
+export function participanteEfetivo(insc: InscricaoLike, porModalidade: boolean): ParticipanteLike {
+  if (!porModalidade) return insc.participante
+  return {
+    ...insc.participante,
+    subtitulo: insc.subtitulo ?? null,
+    municipio: insc.municipio ?? null,
+  }
+}
+
 /**
  * Compõe a "linha de info adicional" de um participante, juntando os campos
  * selecionados na ordem definida, separados por ` | `. Campos vazios/null
