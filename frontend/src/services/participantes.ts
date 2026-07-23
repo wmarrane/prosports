@@ -5,7 +5,7 @@ const BASE = '/participantes'
 
 type ParticipantePayload = {
   nome: string
-  subtitulo?: string
+  subtitulo?: string | null
   inspetoria_id?: number | null
   delegacia_id?: number | null
   municipio_id: number
