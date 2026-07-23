@@ -18,6 +18,9 @@ vi.mock('../../lib/prisma', () => ({
     modalidade: {
       findUnique: vi.fn(),
     },
+    competicao: {
+      findUnique: vi.fn(),
+    },
     municipio: {
       findMany: vi.fn(),
       findUnique: vi.fn(),
@@ -296,6 +299,126 @@ describe('inscricoes.service', () => {
         rows: [{ nome: 'joão silva', municipio_uf: 'SP', municipio_nome: 'São Paulo' }],
       }))
       expect(result.rows[0]).toMatchObject({ status: 'criada' })
+    })
+
+    describe('toggle subtitulo_municipio_por_modalidade', () => {
+      function setupToggleOn() {
+        // evento com competicao_id=10, competicao com toggle ON
+        mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+        mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 10 })
+        mockPrisma.competicao.findUnique.mockResolvedValue({ id: 10, subtitulo_municipio_por_modalidade: true })
+        // municípios de cadastro
+        mockPrisma.municipio.findMany
+          .mockResolvedValueOnce([
+            { id: 100, nome: 'São Paulo', uf: 'SP' },
+          ])
+          // municípios de override (segunda chamada)
+          .mockResolvedValueOnce([
+            { id: 200, nome: 'Campinas', uf: 'SP' },
+          ])
+        mockPrisma.participante.findMany.mockResolvedValue([
+          { id: 500, nome: 'João Silva', municipio_id: 100 },
+        ])
+        mockPrisma.inscricao.findMany.mockResolvedValue([])
+        mockPrisma.inscricao.create.mockResolvedValue({ id: 999 })
+      }
+
+      it('toggle ON: grava subtitulo e municipio_id de override na inscrição', async () => {
+        setupToggleOn()
+        const result = await service.importar({
+          evento_id: 1,
+          modalidade_id: 2,
+          dry_run: false,
+          rows: [
+            {
+              nome: 'João Silva',
+              municipio_uf: 'SP',
+              municipio_nome: 'São Paulo',
+              subtitulo: 'Equipe A',
+              municipio_mod_uf: 'SP',
+              municipio_mod_nome: 'Campinas',
+            },
+          ],
+        })
+        expect(result.rows[0]).toMatchObject({ status: 'criada' })
+        expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
+          data: {
+            evento_id: 1,
+            modalidade_id: 2,
+            participante_id: 500,
+            subtitulo: 'Equipe A',
+            municipio_id: 200,
+          },
+        })
+      })
+
+      it('toggle ON: override município não encontrado → linha erro, não cria inscrição', async () => {
+        mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+        mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 10 })
+        mockPrisma.competicao.findUnique.mockResolvedValue({ id: 10, subtitulo_municipio_por_modalidade: true })
+        mockPrisma.municipio.findMany
+          .mockResolvedValueOnce([{ id: 100, nome: 'São Paulo', uf: 'SP' }])
+          // override UF = 'XX', não retorna nada
+          .mockResolvedValueOnce([])
+        mockPrisma.participante.findMany.mockResolvedValue([
+          { id: 500, nome: 'João Silva', municipio_id: 100 },
+        ])
+        mockPrisma.inscricao.findMany.mockResolvedValue([])
+
+        const result = await service.importar({
+          evento_id: 1,
+          modalidade_id: 2,
+          dry_run: false,
+          rows: [
+            {
+              nome: 'João Silva',
+              municipio_uf: 'SP',
+              municipio_nome: 'São Paulo',
+              municipio_mod_uf: 'XX',
+              municipio_mod_nome: 'Inexistente',
+            },
+          ],
+        })
+        expect(result.rows[0]).toMatchObject({
+          status: 'erro',
+          erro: expect.stringContaining('Município (modalidade)'),
+        })
+        expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
+      })
+
+      it('toggle OFF: inscrição criada sem overrides mesmo com colunas preenchidas', async () => {
+        mockPrisma.evento.findUnique.mockResolvedValue({ id: 1, competicao_id: 10 })
+        mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 10 })
+        mockPrisma.competicao.findUnique.mockResolvedValue({ id: 10, subtitulo_municipio_por_modalidade: false })
+        mockPrisma.municipio.findMany.mockResolvedValue([
+          { id: 100, nome: 'São Paulo', uf: 'SP' },
+        ])
+        mockPrisma.participante.findMany.mockResolvedValue([
+          { id: 500, nome: 'João Silva', municipio_id: 100 },
+        ])
+        mockPrisma.inscricao.findMany.mockResolvedValue([])
+        mockPrisma.inscricao.create.mockResolvedValue({ id: 999 })
+
+        const result = await service.importar({
+          evento_id: 1,
+          modalidade_id: 2,
+          dry_run: false,
+          rows: [
+            {
+              nome: 'João Silva',
+              municipio_uf: 'SP',
+              municipio_nome: 'São Paulo',
+              subtitulo: 'Equipe A',
+              municipio_mod_uf: 'SP',
+              municipio_mod_nome: 'Campinas',
+            },
+          ],
+        })
+        expect(result.rows[0]).toMatchObject({ status: 'criada' })
+        expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
+          data: { evento_id: 1, modalidade_id: 2, participante_id: 500 },
+        })
+      })
     })
   })
 })

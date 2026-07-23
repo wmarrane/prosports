@@ -48,8 +48,19 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
   })
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const incluiSubtitulo = camposSubtitulo.includes('subtitulo')
+  const incluiMunMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
 
-  const template = incluiSubtitulo
+  const template = incluiMunMod
+    ? {
+        filename: 'modelo_inscricoes.csv',
+        headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome', 'municipio_mod_uf', 'municipio_mod_nome'],
+        exampleRows: [
+          ['João Silva', 'Clube Atlético', 'SP', 'São Paulo', 'SP', 'Campinas'],
+          ['Maria Souza', '', 'RJ', 'Rio de Janeiro', 'RJ', 'Niterói'],
+          ['Pedro Oliveira', 'Equipe Sub-15', 'MG', 'Belo Horizonte', '', ''],
+        ],
+      }
+    : incluiSubtitulo
     ? {
         filename: 'modelo_inscricoes.csv',
         headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
@@ -102,12 +113,19 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
           return
         }
         const parsed: ImportRow[] = result.data
-          .map(r => ({
-            nome: (r.nome ?? '').trim(),
-            municipio_uf: (r.municipio_uf ?? '').trim(),
-            municipio_nome: (r.municipio_nome ?? '').trim(),
-            subtitulo: r.subtitulo?.trim() || undefined,
-          }))
+          .map(r => {
+            const row: ImportRow = {
+              nome: (r.nome ?? '').trim(),
+              municipio_uf: (r.municipio_uf ?? '').trim(),
+              municipio_nome: (r.municipio_nome ?? '').trim(),
+              subtitulo: r.subtitulo?.trim() || undefined,
+            }
+            if (incluiMunMod) {
+              row.municipio_mod_uf = r.municipio_mod_uf?.trim() || undefined
+              row.municipio_mod_nome = r.municipio_mod_nome?.trim() || undefined
+            }
+            return row
+          })
           .filter(r => r.nome && r.municipio_uf && r.municipio_nome)
         if (parsed.length === 0) {
           setErro('Nenhuma linha válida encontrada no CSV.')
@@ -228,9 +246,19 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 }}
               >
                 <div className="font-bold text-[var(--brand-500)] mb-1">
-                  {incluiSubtitulo ? 'nome,subtitulo,municipio_uf,municipio_nome' : 'nome,municipio_uf,municipio_nome'}
+                  {incluiMunMod
+                    ? 'nome,subtitulo,municipio_uf,municipio_nome,municipio_mod_uf,municipio_mod_nome'
+                    : incluiSubtitulo
+                      ? 'nome,subtitulo,municipio_uf,municipio_nome'
+                      : 'nome,municipio_uf,municipio_nome'}
                 </div>
-                {incluiSubtitulo ? (
+                {incluiMunMod ? (
+                  <>
+                    <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo,SP,Campinas</div>
+                    <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro,RJ,Niterói</div>
+                    <div className="text-[var(--t3)]">Pedro Oliveira,Equipe Sub-15,MG,Belo Horizonte,,</div>
+                  </>
+                ) : incluiSubtitulo ? (
                   <>
                     <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
                     <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
@@ -245,9 +273,15 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
 
               <ul className="text-xs text-[var(--t3)] space-y-1 ml-4 list-disc">
                 <li><b>nome</b>: nome do participante (obrigatório).</li>
-                {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
-                <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
-                <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
+                {(incluiSubtitulo || incluiMunMod) && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
+                <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>) — município de cadastro do participante.</li>
+                <li><b>municipio_nome</b>: nome do município de cadastro (case-insensitive).</li>
+                {incluiMunMod && (
+                  <>
+                    <li><b>municipio_mod_uf</b>: UF do município da modalidade (override, opcional). Se preenchido, deve ser um município existente.</li>
+                    <li><b>municipio_mod_nome</b>: nome do município da modalidade (case-insensitive, opcional).</li>
+                  </>
+                )}
                 <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
                 <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
               </ul>
