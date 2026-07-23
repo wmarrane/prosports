@@ -6,6 +6,8 @@ export type Inscricao = {
   modalidade_id: number
   participante_id: number
   participante: Participante
+  subtitulo?: string | null
+  municipio?: { id: number; nome: string; uf: string } | null
   criado_em: string
   atualizado_em: string
 }

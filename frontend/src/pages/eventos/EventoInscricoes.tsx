@@ -26,7 +26,7 @@ import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
 import { Brackets, Group, ListOrdered, FileText, Users, Crown, Download, Calendar, MapPin, Home, Trash2, RotateCcw } from 'lucide-react'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
 import { cabecasComGrupo } from '../../lib/cabecas-grupo'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
@@ -105,6 +105,9 @@ export default function EventoInscricoes() {
   const [importCampeoesOpen, setImportCampeoesOpen] = useState(false)
   const [subtituloManual, setSubtituloManual] = useState('')
   const [municipioIdManual, setMunicipioIdManual] = useState<number | null>(null)
+  const [editarAlvo, setEditarAlvo] = useState<{ id: number; nome: string; subtitulo: string | null; municipioId: number | null } | null>(null)
+  const [editSubtitulo, setEditSubtitulo] = useState('')
+  const [editMunicipioId, setEditMunicipioId] = useState<number | null>(null)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -300,6 +303,17 @@ export default function EventoInscricoes() {
     mutationFn: (cid: number) => campeoesAnterioresService.remover(cid),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campeoes-anteriores', eventoId, modalidadeId] }),
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao remover campeão.'),
+  })
+
+  const { mutate: editarInscricao, isPending: editando } = useMutation({
+    mutationFn: ({ id, subtitulo, municipio_id }: { id: number; subtitulo: string | null; municipio_id: number | null }) =>
+      inscricoesService.editar(id, { subtitulo, municipio_id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+      setEditarAlvo(null)
+      toast.success('Inscrição atualizada.')
+    },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao editar inscrição.'),
   })
 
   const { mutate: salvarPosAnfitriao } = useMutation({
@@ -838,7 +852,22 @@ export default function EventoInscricoes() {
                               >
                                 {i.participante.nome}
                               </div>
-                              {(() => {
+                              {subMunPorMod ? (() => {
+                                const linha = subtituloLine(participanteEfetivo(i, true))
+                                return linha ? (
+                                  <div
+                                    className="text-[var(--t4)] mt-0.5"
+                                    style={{
+                                      fontSize: 11,
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      whiteSpace: 'nowrap',
+                                    }}
+                                  >
+                                    {linha}
+                                  </div>
+                                ) : null
+                              })() : (() => {
                                 const linha = subtituloLine(i.participante)
                                 const mun = i.participante.municipio ? `${i.participante.municipio.nome}/${i.participante.municipio.uf}` : ''
                                 // Se a linha já inclui municipio (campo selecionado), não duplicar.
@@ -871,6 +900,32 @@ export default function EventoInscricoes() {
                               >
                                 <Home size={12} />
                               </span>
+                            )}
+                            {subMunPorMod && isAdmin && (
+                              <button
+                                onClick={() => {
+                                  setEditarAlvo({ id: i.id, nome: i.participante.nome, subtitulo: i.subtitulo ?? null, municipioId: i.municipio?.id ?? null })
+                                  setEditSubtitulo(i.subtitulo ?? '')
+                                  setEditMunicipioId(i.municipio?.id ?? null)
+                                }}
+                                style={{
+                                  background: 'transparent',
+                                  border: 'none',
+                                  color: 'var(--t4)',
+                                  cursor: 'pointer',
+                                  padding: 6,
+                                  borderRadius: 6,
+                                  lineHeight: 0,
+                                  flexShrink: 0,
+                                  fontSize: 11,
+                                  fontWeight: 600,
+                                }}
+                                onMouseEnter={e => (e.currentTarget.style.color = 'var(--brand-500)')}
+                                onMouseLeave={e => (e.currentTarget.style.color = 'var(--t4)')}
+                                title="Editar subtítulo e município desta inscrição"
+                              >
+                                Editar
+                              </button>
                             )}
                             <button
                               onClick={() => setRemoverInscricaoAlvo({ id: i.id, nome: i.participante.nome })}
@@ -1339,6 +1394,75 @@ export default function EventoInscricoes() {
                 </div>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Modal: editar override (subtítulo + município) de inscrição escolar */}
+      {editarAlvo && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 310,
+          }}
+          onClick={() => !editando && setEditarAlvo(null)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-2xl)',
+              padding: 28,
+              maxWidth: 480,
+              width: '100%',
+              margin: '0 16px',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 className="sec-title mb-1" style={{ fontSize: 'clamp(16px, 1.8vw, 20px)' }}>
+              Editar inscrição
+            </h3>
+            <p className="text-sm text-[var(--t3)] mb-4">
+              <b style={{ color: 'var(--t1)' }}>{editarAlvo.nome}</b>
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div>
+                <label className="block text-xs font-semibold text-[var(--t2)] mb-1">
+                  Subtítulo <span className="font-normal text-[var(--t3)]">(opcional)</span>
+                </label>
+                <input
+                  type="text"
+                  value={editSubtitulo}
+                  onChange={e => setEditSubtitulo(e.target.value)}
+                  placeholder="Ex: Equipe Sub-15"
+                  maxLength={200}
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[var(--t2)] mb-1">
+                  Município <span className="font-normal text-[var(--t3)]">(opcional)</span>
+                </label>
+                <MunicipioSelect value={editMunicipioId} onChange={setEditMunicipioId} />
+              </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 20 }}>
+              <button
+                onClick={() => setEditarAlvo(null)}
+                disabled={editando}
+                className="btn btn-ghost"
+              >
+                <X size={16} /> Cancelar
+              </button>
+              <button
+                onClick={() => editarInscricao({ id: editarAlvo.id, subtitulo: editSubtitulo || null, municipio_id: editMunicipioId })}
+                disabled={editando}
+                className="btn btn-primary"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, opacity: editando ? 0.5 : 1 }}
+              >
+                <Check size={16} /> {editando ? 'Salvando...' : 'Salvar'}
+              </button>
+            </div>
           </div>
         </div>
       )}

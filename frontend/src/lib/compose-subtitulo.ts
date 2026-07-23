@@ -2,14 +2,20 @@ import type { Participante } from '../types/participante'
 
 export type CampoSubtitulo = 'subtitulo' | 'municipio' | 'inspetoria' | 'delegacia'
 
-type ParticipanteLike = Pick<
-  Participante,
-  'subtitulo' | 'municipio' | 'inspetoria' | 'delegacia'
->
+/** Shape mínima de município necessária para compor a linha de subtítulo. */
+type MunicipioLike = { nome: string; uf: string }
+
+/** Participante-like para composição de subtítulo; municipio é nullable para suportar overrides. */
+type ParticipanteLike = {
+  subtitulo: string | null
+  municipio: MunicipioLike | null
+  inspetoria: Participante['inspetoria']
+  delegacia: Participante['delegacia']
+}
 
 type InscricaoLike = {
   subtitulo?: string | null
-  municipio?: { nome: string; uf: string } | null
+  municipio?: MunicipioLike | null
   participante: ParticipanteLike
 }
 
