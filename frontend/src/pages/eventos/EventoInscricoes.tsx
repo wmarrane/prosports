@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import PageHeader from '../../components/PageHeader'
+import MunicipioSelect from '../../components/MunicipioSelect'
 import ParticipantesMultiSelect from '../../components/ParticipantesMultiSelect'
 import ImportInscricoesModal from '../../components/import/ImportInscricoesModal'
 import CampeaoBadge from '../../components/CampeaoBadge'
@@ -102,6 +103,8 @@ export default function EventoInscricoes() {
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
   const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
   const [importCampeoesOpen, setImportCampeoesOpen] = useState(false)
+  const [subtituloManual, setSubtituloManual] = useState('')
+  const [municipioIdManual, setMunicipioIdManual] = useState<number | null>(null)
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -187,6 +190,7 @@ export default function EventoInscricoes() {
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
   const eventoSuspenso = evento?.status === 'suspenso'
+  const subMunPorMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
 
   const { mutate: criarBulk, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criarBulk({
@@ -198,6 +202,38 @@ export default function EventoInscricoes() {
       queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
       queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
       setResumoBulk({ criadas: r.criadas, duplicadas: r.duplicadas, erros: r.erros.length })
+      setPickedIds([])
+    },
+    onError: (err: any) => setErroModal(err?.response?.data?.message ?? 'Erro ao inscrever.'),
+  })
+
+  const { mutateAsync: criarUmAUm, isPending: salvandoUmAUm } = useMutation({
+    mutationFn: async () => {
+      let criadas = 0
+      let duplicadas = 0
+      let erros = 0
+      for (const pid of pickedIds) {
+        try {
+          await inscricoesService.criar({
+            evento_id: eventoId,
+            modalidade_id: modalidadeId!,
+            participante_id: pid,
+            subtitulo: subtituloManual || null,
+            municipio_id: municipioIdManual,
+          })
+          criadas++
+        } catch (err: any) {
+          const status = err?.response?.status
+          if (status === 409) duplicadas++
+          else erros++
+        }
+      }
+      return { criadas, duplicadas, erros }
+    },
+    onSuccess: r => {
+      queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] })
+      queryClient.invalidateQueries({ queryKey: ['inscricoes-counts', eventoId] })
+      setResumoBulk(r)
       setPickedIds([])
     },
     onError: (err: any) => setErroModal(err?.response?.data?.message ?? 'Erro ao inscrever.'),
@@ -727,7 +763,7 @@ export default function EventoInscricoes() {
                         <Download size={14} /> Importar CSV
                       </button>
                       <button
-                        onClick={() => { setInscreverOpen(true); setPickedIds([]); setResumoBulk(null); setErroModal('') }}
+                        onClick={() => { setInscreverOpen(true); setPickedIds([]); setResumoBulk(null); setErroModal(''); setSubtituloManual(''); setMunicipioIdManual(null) }}
                         disabled={eventoSuspenso}
                         title="Inscrever participantes na modalidade selecionada"
                         className="btn btn-primary btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1164,6 +1200,8 @@ export default function EventoInscricoes() {
             setPickedIds([])
             setResumoBulk(null)
             setErroModal('')
+            setSubtituloManual('')
+            setMunicipioIdManual(null)
           }}
         >
           <div
@@ -1202,7 +1240,7 @@ export default function EventoInscricoes() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
                   <button
-                    onClick={() => { setResumoBulk(null); setPickedIds([]) }}
+                    onClick={() => { setResumoBulk(null); setPickedIds([]); setSubtituloManual(''); setMunicipioIdManual(null) }}
                     className="btn btn-ghost"
                   >
                     Inscrever mais
@@ -1212,6 +1250,8 @@ export default function EventoInscricoes() {
                       setInscreverOpen(false)
                       setResumoBulk(null)
                       setPickedIds([])
+                      setSubtituloManual('')
+                      setMunicipioIdManual(null)
                     }}
                     className="btn btn-primary"
                   >
@@ -1227,6 +1267,29 @@ export default function EventoInscricoes() {
                   excludeIds={excludeIds}
                   subtituloLine={subtituloLine}
                 />
+                {subMunPorMod && (
+                  <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div>
+                      <label className="block text-xs font-semibold text-[var(--t2)] mb-1">
+                        Subtítulo <span className="font-normal text-[var(--t3)]">(opcional)</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={subtituloManual}
+                        onChange={e => setSubtituloManual(e.target.value)}
+                        placeholder="Ex: Equipe Sub-15"
+                        maxLength={200}
+                        className="w-full px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-500)]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-[var(--t2)] mb-1">
+                        Município <span className="font-normal text-[var(--t3)]">(opcional)</span>
+                      </label>
+                      <MunicipioSelect value={municipioIdManual} onChange={setMunicipioIdManual} />
+                    </div>
+                  </div>
+                )}
                 {erroModal && (
                   <div
                     style={{
@@ -1248,24 +1311,26 @@ export default function EventoInscricoes() {
                       setInscreverOpen(false)
                       setPickedIds([])
                       setErroModal('')
+                      setSubtituloManual('')
+                      setMunicipioIdManual(null)
                     }}
                     className="btn btn-ghost"
                   >
                     <X size={16} /> Cancelar
                   </button>
                   <button
-                    onClick={() => criarBulk()}
-                    disabled={pickedIds.length === 0 || salvando}
+                    onClick={() => subMunPorMod ? criarUmAUm() : criarBulk()}
+                    disabled={pickedIds.length === 0 || salvando || salvandoUmAUm}
                     className="btn btn-primary"
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: 6,
-                      opacity: pickedIds.length === 0 || salvando ? 0.5 : 1,
+                      opacity: pickedIds.length === 0 || salvando || salvandoUmAUm ? 0.5 : 1,
                     }}
                   >
                     <Check size={16} />
-                    {salvando
+                    {(salvando || salvandoUmAUm)
                       ? 'Inscrevendo...'
                       : pickedIds.length === 0
                       ? 'Selecione participantes'
