@@ -173,7 +173,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     const items: Item[] = cabecasInscritas.map(c => ({
       key: `c-${c.id}`,
       participante_id: c.participante_id,
-      participante: c.participante,
+      // Inscritos: usa o efetivo (override por modalidade no escolar). Não inscritos:
+      // sem inscrição → escolar exibe em branco; não-escolar mantém o participante.
+      participante: participantesById.get(c.participante_id)
+        ?? participanteEfetivo({ participante: c.participante }, porModalidade),
       posicao: c.posicao,
       inscrito: c.inscrito,
       slotLabel: null,
@@ -218,7 +221,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       }
     }
     return [...items].sort((a, b) => (a.slotOrder ?? Infinity) - (b.slotOrder ?? Infinity))
-  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, cabecasPids])
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
