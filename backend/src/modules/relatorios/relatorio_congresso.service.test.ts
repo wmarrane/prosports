@@ -1,6 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import ExcelJS from 'exceljs'
 
+// Cada teste gera um xlsx real (lê o template CHAVES CT.xlsx) — lento sob carga paralela;
+// o default de 5s estoura de forma intermitente. Timeout amplo para este arquivo.
+vi.setConfig({ testTimeout: 30000 })
+
 vi.mock('../../lib/prisma', () => ({
   default: {
     evento: { findUnique: vi.fn() },

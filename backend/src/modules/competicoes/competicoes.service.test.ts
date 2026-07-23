@@ -44,7 +44,7 @@ describe('competicoes.service', () => {
     mockPrisma.competicao.create.mockResolvedValue({ id: 1 })
     await service.criar({ nome: 'Copa Brasil', estados: ['SP', 'RJ'] })
     expect(mockPrisma.competicao.create).toHaveBeenCalledWith({
-      data: { nome: 'Copa Brasil', estados: ['SP', 'RJ'], subtitulo_campos: [], considerar_anfitriao: false },
+      data: { nome: 'Copa Brasil', estados: ['SP', 'RJ'], subtitulo_campos: [], considerar_anfitriao: false, subtitulo_municipio_por_modalidade: false },
     })
   })
 
@@ -52,7 +52,7 @@ describe('competicoes.service', () => {
     mockPrisma.competicao.create.mockResolvedValue({ id: 1 })
     await service.criar({ nome: 'Copa', estados: ['MG'], subtitulo_campos: ['municipio'] })
     expect(mockPrisma.competicao.create).toHaveBeenCalledWith({
-      data: { nome: 'Copa', estados: ['MG'], subtitulo_campos: ['municipio'], considerar_anfitriao: false },
+      data: { nome: 'Copa', estados: ['MG'], subtitulo_campos: ['municipio'], considerar_anfitriao: false, subtitulo_municipio_por_modalidade: false },
     })
   })
 
