@@ -5,6 +5,7 @@ import prisma from '../../lib/prisma'
 import { aplicarEstilo, aplicarBordas, aplicarBordaExterna, COR } from './xlsx-style'
 import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 import { sheetSafe } from '../../lib/sheet-safe'
+import { composeSubtituloLine, participanteEfetivo, type CampoSubtitulo } from '../../lib/compose-subtitulo'
 
 function sanitizeSheetName(name: string): string {
   // Excel: max 31 chars; nao pode conter : \ / ? * [ ]
@@ -50,6 +51,7 @@ async function loadInscritosByModalidade(evento_id: number) {
   const insc = await prisma.inscricao.findMany({
     where: { evento_id },
     include: {
+      municipio: true,
       participante: { include: { municipio: true } },
     },
     orderBy: { participante: { nome: 'asc' } },
@@ -65,6 +67,16 @@ async function loadInscritosByModalidade(evento_id: number) {
 async function loadSorteiosByModalidade(evento_id: number) {
   const sorteios = await prisma.sorteio.findMany({ where: { evento_id } })
   return new Map(sorteios.map((s) => [s.modalidade_id, s]))
+}
+
+// Nome exibido do inscrito. Escolar (por modalidade): anexa a escola/município do
+// override da inscrição ao nome da SREL (que é igual em todas as modalidades), via
+// participanteEfetivo + composeSubtituloLine. Não-escolar: só o nome (inalterado).
+function nomeExibicao(insc: any, porModalidade: boolean, campos: CampoSubtitulo[]): string {
+  const nome = insc.participante?.nome ?? '—'
+  if (!porModalidade) return nome
+  const sub = composeSubtituloLine(participanteEfetivo(insc, porModalidade), campos)
+  return sub ? `${nome} — ${sub}` : nome
 }
 
 // ── Cabeçalho comum ────────────────────────────────────────────────────
@@ -284,6 +296,8 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
   const inscritosByMod = await loadInscritosByModalidade(evento_id)
   const sorteiosByMod = await loadSorteiosByModalidade(evento_id)
   const anfitriao = evento.anfitriao?.nome ?? ''
+  const porModalidade = (evento.competicao as any)?.subtitulo_municipio_por_modalidade === true
+  const campos = ((evento.competicao as any)?.subtitulo_campos as CampoSubtitulo[]) ?? []
 
   const wb = new ExcelJS.Workbook()
   const chavesWb = new ExcelJS.Workbook()
@@ -294,8 +308,8 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
   for (const mod of modalidades) {
     const tipo = mod.tipo_modalidade?.tipo ?? 'especifico'
     const inscr = inscritosByMod.get(mod.id) ?? []
-    const nomes = inscr.map((i) => i.participante?.nome ?? '—') // já alfabético
-    const nomePorPid = new Map(inscr.map((i) => [i.participante_id, i.participante?.nome ?? '—']))
+    const nomes = inscr.map((i) => nomeExibicao(i, porModalidade, campos)) // já alfabético
+    const nomePorPid = new Map(inscr.map((i) => [i.participante_id, nomeExibicao(i, porModalidade, campos)]))
     const sorteio = sorteiosByMod.get(mod.id)
     const sigla = uniqueSheetName(wb, mod.sigla || `MOD${mod.id}`)
 
