@@ -38,6 +38,7 @@ model Municipio {
   uf            String         @db.Char(2)
   participantes Participante[]
   eventos       Evento[]
+  inscricoes    Inscricao[]    @relation("InscricaoMunicipio")
   criado_em     DateTime       @default(now())
   atualizado_em DateTime       @updatedAt
 
@@ -110,8 +111,9 @@ model Competicao {
   id                       Int                      @id @default(autoincrement())
   nome                     String                   @unique
   estados                  String[]
-  subtitulo_campos         String[]                 @default([])
-  considerar_anfitriao     Boolean                  @default(false)
+  subtitulo_campos                    String[]                 @default([])
+  subtitulo_municipio_por_modalidade  Boolean                  @default(false)
+  considerar_anfitriao                Boolean                  @default(false)
   modalidades              Modalidade[]
   eventos                  Evento[]
   sistema_disputas_grupos  SistemaDisputasGrupos[]
@@ -198,6 +200,9 @@ model Inscricao {
   modalidade_id   Int
   participante    Participante @relation(fields: [participante_id], references: [id])
   participante_id Int
+  subtitulo       String?
+  municipio       Municipio?   @relation("InscricaoMunicipio", fields: [municipio_id], references: [id])
+  municipio_id    Int?
   criado_em       DateTime     @default(now())
   atualizado_em   DateTime     @updatedAt
 

@@ -7,6 +7,8 @@ type InscricaoPayload = {
   evento_id: number
   modalidade_id: number
   participante_id: number
+  subtitulo?: string | null
+  municipio_id?: number | null
 }
 
 type ImportPayload = {

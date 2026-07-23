@@ -37,6 +37,7 @@ export default function CompeticaoForm() {
   const [nome, setNome] = useState('')
   const [estados, setEstados] = useState<string[]>([])
   const [campos, setCampos] = useState<CampoSubtitulo[]>([])
+  const [subMunPorMod, setSubMunPorMod] = useState(false)
   const [considerarAnfitriao, setConsiderarAnfitriao] = useState(false)
   const [erro, setErro] = useState('')
 
@@ -51,13 +52,14 @@ export default function CompeticaoForm() {
       setNome(existing.nome)
       setEstados(existing.estados)
       setCampos(existing.subtitulo_campos ?? [])
+      setSubMunPorMod(existing.subtitulo_municipio_por_modalidade ?? false)
       setConsiderarAnfitriao(existing.considerar_anfitriao ?? false)
     }
   }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
-      const payload = { nome, estados, subtitulo_campos: campos, considerar_anfitriao: considerarAnfitriao }
+      const payload = { nome, estados, subtitulo_campos: campos, considerar_anfitriao: considerarAnfitriao, subtitulo_municipio_por_modalidade: subMunPorMod }
       return isEdit
         ? competicoesService.editar(Number(id), payload)
         : competicoesService.criar(payload)
@@ -355,6 +357,26 @@ export default function CompeticaoForm() {
             Nenhuma informação adicional será exibida ao lado do nome.
           </p>
         )}
+
+        <div style={{ marginTop: 16 }}>
+          <label style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '10px 12px',
+            background: subMunPorMod ? 'var(--brand-50)' : 'var(--card-bg-2)',
+            border: `1px solid ${subMunPorMod ? 'var(--brand-500)' : 'var(--card-border)'}`,
+            borderRadius: 'var(--radius-lg)',
+            cursor: 'pointer',
+            transition: 'all 120ms ease',
+          }}>
+            <input
+              type="checkbox"
+              checked={subMunPorMod}
+              onChange={e => setSubMunPorMod(e.target.checked)}
+              className="rounded border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--brand-500)] focus:ring-[var(--brand-500)]"
+            />
+            <span className="text-sm font-medium text-[var(--t1)]">Subtítulo e município variam por modalidade (competição escolar)</span>
+          </label>
+        </div>
 
         <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid var(--card-border)' }}>
           <div className="eyebrow mb-1">Privilégios</div>

@@ -54,6 +54,7 @@ export async function criar(input: {
   estados: string[]
   subtitulo_campos?: string[]
   considerar_anfitriao?: boolean
+  subtitulo_municipio_por_modalidade?: boolean
 }) {
   validateUfs(input.estados)
   const campos = input.subtitulo_campos ?? []
@@ -63,13 +64,14 @@ export async function criar(input: {
     estados: input.estados,
     subtitulo_campos: campos,
     considerar_anfitriao: input.considerar_anfitriao ?? false,
+    subtitulo_municipio_por_modalidade: input.subtitulo_municipio_por_modalidade ?? false,
   }
   return mapPrismaError(() => prisma.competicao.create({ data }))
 }
 
 export async function editar(
   id: number,
-  input: Partial<{ nome: string; estados: string[]; subtitulo_campos: string[]; considerar_anfitriao: boolean }>
+  input: Partial<{ nome: string; estados: string[]; subtitulo_campos: string[]; considerar_anfitriao: boolean; subtitulo_municipio_por_modalidade: boolean }>
 ) {
   if (input.estados !== undefined) validateUfs(input.estados)
   if (input.subtitulo_campos !== undefined) validateCampos(input.subtitulo_campos)
