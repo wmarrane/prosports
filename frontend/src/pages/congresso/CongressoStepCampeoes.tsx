@@ -7,7 +7,8 @@ import { competicoesService } from '../../services/competicoes'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, ArrowRight, X } from '../../lib/icons'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
+import type { Participante } from '../../types/participante'
 import { useToast } from '../../components/Toast'
 
 type Props = {
@@ -51,7 +52,9 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
     enabled: !!competicaoId,
   })
   const camposSubtitulo = competicao?.subtitulo_campos ?? []
+  const porModalidade = competicao?.subtitulo_municipio_por_modalidade === true
   const inscritosSet = new Set(inscricoes.map(i => i.participante_id))
+  const inscByPid = new Map(inscricoes.map(i => [i.participante_id, i]))
   const ordenados = [...campeoes].sort((a, b) => a.posicao - b.posicao)
 
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
@@ -124,7 +127,11 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 'clamp(18px, 1.6vw, 22px)', color: FG, fontWeight: 700 }}>{c.participante.nome}</div>
                   {(() => {
-                    const l = composeSubtituloLine(c.participante, camposSubtitulo)
+                    const efetivo = participanteEfetivo(
+                      inscByPid.get(c.participante_id) ?? { participante: c.participante as Participante },
+                      porModalidade,
+                    )
+                    const l = composeSubtituloLine(efetivo, camposSubtitulo)
                     return l ? <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{l}</div> : null
                   })()}
                 </div>

@@ -7,6 +7,8 @@ const createSchema = z.object({
   evento_id: z.coerce.number().int().positive(),
   modalidade_id: z.coerce.number().int().positive(),
   participante_id: z.coerce.number().int().positive(),
+  subtitulo: z.string().max(200).nullish(),
+  municipio_id: z.coerce.number().int().positive().nullish(),
 })
 
 const listQuerySchema = z.object({
@@ -16,7 +18,7 @@ const listQuerySchema = z.object({
 
 const importRowSchema = z.object({
   nome: z.string().min(1).max(200),
-  municipio_uf: z.string().length(2),
+  municipio_uf: z.string().length(2).optional(),
   municipio_nome: z.string().min(1).max(120),
   subtitulo: z.string().max(200).optional(),
 })
@@ -26,6 +28,11 @@ const importSchema = z.object({
   modalidade_id: z.coerce.number().int().positive(),
   dry_run: z.boolean(),
   rows: z.array(importRowSchema).min(1).max(2000),
+})
+
+const patchSchema = z.object({
+  subtitulo: z.string().max(200).nullish(),
+  municipio_id: z.coerce.number().int().positive().nullish(),
 })
 
 const bulkSchema = z.object({
@@ -53,6 +60,13 @@ export async function criar(req: Request, res: Response, next: NextFunction) {
   try {
     const body = createSchema.parse(req.body)
     res.status(201).json(await service.criar(body))
+  } catch (err) { next(err) }
+}
+
+export async function editar(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = patchSchema.parse(req.body)
+    res.json(await service.editar(parseIntParam(req.params.id, 'id'), body))
   } catch (err) { next(err) }
 }
 

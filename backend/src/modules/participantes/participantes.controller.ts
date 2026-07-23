@@ -5,7 +5,7 @@ import { parseIntParam } from '../../lib/parse-id'
 
 const createSchema = z.object({
   nome: z.string().min(1),
-  subtitulo: z.string().optional(),
+  subtitulo: z.string().nullish(),
   inspetoria_id: z.coerce.number().int().positive().nullable().optional(),
   delegacia_id: z.coerce.number().int().positive().nullable().optional(),
   municipio_id: z.coerce.number().int().positive(),

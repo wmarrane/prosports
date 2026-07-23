@@ -1,4 +1,5 @@
 import { applyAnfitriaoRule } from '../sorteios/sorteios.service'
+import { participanteEfetivo } from '../../lib/compose-subtitulo'
 import type {
   SnapEvento, SnapModalidade, SnapParticipante, SnapCampeao,
 } from './snapshot-types'
@@ -12,9 +13,26 @@ type EventoRow = {
   boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string; size_bytes: number; atualizado_em: Date }[]
 }
 type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown }
-type InscricaoRow = { participante: { id: number; nome: string; subtitulo: string | null } }
+type ParticipanteRow = {
+  id: number; nome: string; subtitulo: string | null
+  municipio?: { nome: string; uf: string } | null
+  inspetoria?: { nome: string } | null
+  delegacia?: { nome: string } | null
+}
+type InscricaoRow = {
+  subtitulo?: string | null
+  municipio?: { nome: string; uf: string } | null
+  participante: ParticipanteRow
+}
 type CampeaoRow = { participante_id: number; posicao: number }
 type SorteioRow = { tipo: string; seed: string; resultado: unknown }
+
+type ParticipanteLike = {
+  subtitulo: string | null
+  municipio?: { nome: string; uf: string } | null
+  inspetoria?: { nome: string } | null
+  delegacia?: { nome: string } | null
+}
 
 export type MontaSnapshotInput = {
   evento: EventoRow
@@ -22,7 +40,9 @@ export type MontaSnapshotInput = {
   inscricoesPorModalidade: Map<number, InscricaoRow[]>
   campeoesPorModalidade: Map<number, CampeaoRow[]>
   sorteiosPorModalidade: Map<number, SorteioRow>
-  subtituloFn: (p: { id: number; nome: string; subtitulo: string | null }) => string | null
+  subtituloFn: (p: ParticipanteLike) => string | null
+  /** Escolar: usa o override (subtítulo/município) da inscrição por modalidade. */
+  porModalidade?: boolean
 }
 
 function calcCabecas(
@@ -53,7 +73,7 @@ function calcCabecas(
 }
 
 export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
-  const { evento, modalidades, inscricoesPorModalidade, campeoesPorModalidade, sorteiosPorModalidade, subtituloFn } = input
+  const { evento, modalidades, inscricoesPorModalidade, campeoesPorModalidade, sorteiosPorModalidade, subtituloFn, porModalidade = false } = input
 
   const modalidadesSnap: SnapModalidade[] = modalidades.map((mod) => {
     const inscricoes = inscricoesPorModalidade.get(mod.id) ?? []
@@ -63,7 +83,7 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
     const participantes: SnapParticipante[] = inscricoes.map((i) => ({
       id: i.participante.id,
       nome: i.participante.nome,
-      subtitulo: subtituloFn(i.participante),
+      subtitulo: subtituloFn(participanteEfetivo(i, porModalidade)),
     }))
     const campeoesSnap: SnapCampeao[] = [...campeoes]
       .sort((a, b) => a.posicao - b.posicao)

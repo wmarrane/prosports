@@ -14,7 +14,7 @@ export async function publicar(eventoId: number, opts: { permitirParcial?: boole
       anfitriao_id: true, competicao_id: true, status: true,
       data_inicio: true, data_fim: true,
       boletins: { select: { numero: true, titulo: true, categoria: true, data_publicacao: true, public_url: true, size_bytes: true, atualizado_em: true } },
-      competicao: { select: { nome: true, considerar_anfitriao: true, subtitulo_campos: true } },
+      competicao: { select: { nome: true, considerar_anfitriao: true, subtitulo_campos: true, subtitulo_municipio_por_modalidade: true } },
       municipio: { select: { nome: true } },
     },
   })
@@ -45,7 +45,12 @@ export async function publicar(eventoId: number, opts: { permitirParcial?: boole
   const [inscricoes, campeoes, sorteios] = await Promise.all([
     prisma.inscricao.findMany({
       where: { evento_id: eventoId },
-      select: { modalidade_id: true, participante: { select: { id: true, nome: true, subtitulo: true, municipio: true, inspetoria: true, delegacia: true } } },
+      select: {
+        modalidade_id: true,
+        subtitulo: true,
+        municipio: { select: { nome: true, uf: true } },
+        participante: { select: { id: true, nome: true, subtitulo: true, municipio: true, inspetoria: true, delegacia: true } },
+      },
       orderBy: { criado_em: 'asc' },
     }),
     prisma.campeaoAnterior.findMany({
@@ -79,6 +84,7 @@ export async function publicar(eventoId: number, opts: { permitirParcial?: boole
     campeoesPorModalidade,
     sorteiosPorModalidade,
     subtituloFn: (p: any) => composeSubtituloLine(p, campos),
+    porModalidade: evento.competicao.subtitulo_municipio_por_modalidade === true,
   })
 
   await putSnapshot(eventoId, snapshot)

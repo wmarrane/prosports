@@ -15,7 +15,8 @@ type Props = {
   onImported: () => void
 }
 
-const REQUIRED_HEADERS = ['nome', 'municipio_uf', 'municipio_nome'] as const
+const REQUIRED_HEADERS_DEFAULT = ['nome', 'municipio_uf', 'municipio_nome'] as const
+const REQUIRED_HEADERS_ESCOLAR = ['participante', 'municipio'] as const
 type Step = 'upload' | 'review' | 'done'
 
 function StatusBadge({ status }: { status: 'criada' | 'duplicada' | 'erro' }) {
@@ -48,8 +49,19 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
   })
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const incluiSubtitulo = camposSubtitulo.includes('subtitulo')
+  const incluiMunMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
 
-  const template = incluiSubtitulo
+  const template = incluiMunMod
+    ? {
+        filename: 'modelo_inscricoes.csv',
+        headers: ['Participante', 'Subtitulo', 'Municipio'],
+        exampleRows: [
+          ['SREL Araçatuba', 'EE Dr Carlos Rosa', 'Birigui'],
+          ['SREL São Paulo', 'EE Prof João Silva', 'São Paulo'],
+          ['SREL Campinas', '', 'Campinas'],
+        ],
+      }
+    : incluiSubtitulo
     ? {
         filename: 'modelo_inscricoes.csv',
         headers: ['nome', 'subtitulo', 'municipio_uf', 'municipio_nome'],
@@ -91,12 +103,63 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
 
   function handleParseNext() {
     if (!file) { setErro('Selecione um arquivo CSV.'); return }
+
+    if (incluiMunMod) {
+      // Escolar: lê texto, descarta linhas até encontrar cabeçalho Participante/Nome
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const text = e.target?.result as string
+        if (!text) { setErro('Não foi possível ler o arquivo.'); return }
+        const lines = text.split(/\r?\n/)
+        const headerIdx = lines.findIndex(line => {
+          const first = line.split(',')[0].trim().toLowerCase()
+          return first === 'participante' || first === 'nome'
+        })
+        if (headerIdx === -1) {
+          setErro(`Cabeçalho inválido. Coluna(s) obrigatória(s) ausente(s): ${REQUIRED_HEADERS_ESCOLAR.join(', ')}`)
+          return
+        }
+        const csvFromHeader = lines.slice(headerIdx).join('\n')
+        Papa.parse<Record<string, string>>(csvFromHeader, {
+          header: true,
+          skipEmptyLines: true,
+          transformHeader: (h) => h.trim().toLowerCase(),
+          complete: (result) => {
+            const headers = result.meta.fields ?? []
+            const missingEscolar = REQUIRED_HEADERS_ESCOLAR.filter(h => !headers.includes(h))
+            if (missingEscolar.length > 0) {
+              setErro(`Cabeçalho inválido. Coluna(s) obrigatória(s) ausente(s): ${missingEscolar.join(', ')}`)
+              return
+            }
+            const parsed: ImportRow[] = result.data
+              .map(r => ({
+                nome: (r.participante ?? r.nome ?? '').trim(),
+                subtitulo: r.subtitulo?.trim() || undefined,
+                municipio_nome: (r.municipio ?? '').trim(),
+              }))
+              .filter(r => r.nome && r.municipio_nome)
+            if (parsed.length === 0) {
+              setErro('Nenhuma linha válida encontrada no CSV.')
+              return
+            }
+            setRows(parsed)
+            runPreview(parsed)
+          },
+          error: (err) => setErro(`Erro ao ler CSV: ${err.message}`),
+        })
+      }
+      reader.onerror = () => setErro('Erro ao ler o arquivo.')
+      reader.readAsText(file, 'utf-8')
+      return
+    }
+
+    // Não-escolar: parsing padrão inalterado
     Papa.parse<Record<string, string>>(file, {
       header: true,
       skipEmptyLines: true,
       complete: (result) => {
         const headers = result.meta.fields ?? []
-        const missing = REQUIRED_HEADERS.filter(h => !headers.includes(h))
+        const missing = REQUIRED_HEADERS_DEFAULT.filter(h => !headers.includes(h))
         if (missing.length > 0) {
           setErro(`Cabeçalho inválido. Coluna(s) obrigatória(s) ausente(s): ${missing.join(', ')}`)
           return
@@ -228,9 +291,19 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                 }}
               >
                 <div className="font-bold text-[var(--brand-500)] mb-1">
-                  {incluiSubtitulo ? 'nome,subtitulo,municipio_uf,municipio_nome' : 'nome,municipio_uf,municipio_nome'}
+                  {incluiMunMod
+                    ? 'Participante,Subtitulo,Municipio'
+                    : incluiSubtitulo
+                      ? 'nome,subtitulo,municipio_uf,municipio_nome'
+                      : 'nome,municipio_uf,municipio_nome'}
                 </div>
-                {incluiSubtitulo ? (
+                {incluiMunMod ? (
+                  <>
+                    <div className="text-[var(--t3)]">SREL Araçatuba,EE Dr Carlos Rosa,Birigui</div>
+                    <div className="text-[var(--t3)]">SREL São Paulo,EE Prof João Silva,São Paulo</div>
+                    <div className="text-[var(--t3)]">SREL Campinas,,Campinas</div>
+                  </>
+                ) : incluiSubtitulo ? (
                   <>
                     <div className="text-[var(--t3)]">João Silva,Clube Atlético,SP,São Paulo</div>
                     <div className="text-[var(--t3)]">Maria Souza,,RJ,Rio de Janeiro</div>
@@ -244,12 +317,25 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
               </div>
 
               <ul className="text-xs text-[var(--t3)] space-y-1 ml-4 list-disc">
-                <li><b>nome</b>: nome do participante (obrigatório).</li>
-                {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
-                <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>).</li>
-                <li><b>municipio_nome</b>: nome do município (case-insensitive).</li>
-                <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
-                <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
+                {incluiMunMod ? (
+                  <>
+                    <li><b>Participante</b>: nome da SREL ou equipe (obrigatório).</li>
+                    <li><b>Subtitulo</b>: nome da escola (opcional).</li>
+                    <li><b>Municipio</b>: nome do município (case-insensitive, obrigatório).</li>
+                    <li>O arquivo pode ter uma linha de título antes do cabeçalho — ela será ignorada automaticamente.</li>
+                    <li>Participantes não encontrados são listados como erro para cadastro e reimportação.</li>
+                    <li>UTF-8, separador vírgula.</li>
+                  </>
+                ) : (
+                  <>
+                    <li><b>nome</b>: nome do participante (obrigatório).</li>
+                    {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
+                    <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>) — município de cadastro do participante.</li>
+                    <li><b>municipio_nome</b>: nome do município de cadastro (case-insensitive).</li>
+                    <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
+                    <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
+                  </>
+                )}
               </ul>
             </section>
 

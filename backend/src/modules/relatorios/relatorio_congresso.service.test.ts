@@ -1,6 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import ExcelJS from 'exceljs'
 
+// Cada teste gera um xlsx real (lê o template CHAVES CT.xlsx) — lento sob carga paralela;
+// o default de 5s estoura de forma intermitente. Timeout amplo para este arquivo.
+vi.setConfig({ testTimeout: 30000 })
+
 vi.mock('../../lib/prisma', () => ({
   default: {
     evento: { findUnique: vi.fn() },
@@ -229,6 +233,66 @@ describe('gerarCongressoXlsx', () => {
     // P5 é uma célula estrutural da chave (não sobrescrita pelo filler) e tem borda no template
     const b = ws.getCell('P5').border
     expect(b && (b.top || b.bottom || b.left || b.right)).toBeTruthy()
+  })
+
+  it('escolar: anexa a escola/município do override ao nome da SREL', async () => {
+    // Competição escolar (toggle ON) com subtitulo_campos = subtitulo + municipio.
+    p.evento.findUnique.mockResolvedValue({
+      id: 1,
+      nome: 'Jeesp',
+      anfitriao: { nome: 'Cidade Anfitriã', municipio: { nome: 'Município X' } },
+      competicao: {
+        subtitulo_municipio_por_modalidade: true,
+        subtitulo_campos: ['subtitulo', 'municipio'],
+        modalidades: [
+          { id: 60, nome: 'Basquete', sigla: 'BAS', tipo_modalidade: { tipo: 'especifico' } },
+        ],
+      },
+    })
+    p.inscricao.findMany.mockImplementation(async () => [
+      {
+        id: 6001, evento_id: 1, modalidade_id: 60, participante_id: 1,
+        subtitulo: 'EE Dr Carlos Rosa',
+        municipio: { nome: 'Birigui', uf: 'SP' },
+        participante: { id: 1, nome: 'SREL Araçatuba', subtitulo: 'PLACEHOLDER', municipio: { nome: 'PlaceholderCity', uf: 'SP' } },
+      },
+    ])
+    p.sorteio.findMany.mockResolvedValue([])
+
+    const buf = await gerarCongressoXlsx(1)
+    const wb2 = new ExcelJS.Workbook()
+    await wb2.xlsx.load(buf as any)
+    const ws = wb2.getWorksheet('BAS')!
+    expect(ws.getCell('B7').value).toBe('SREL Araçatuba — EE Dr Carlos Rosa | Birigui/SP')
+  })
+
+  it('escolar sem override: mostra só o nome da SREL (sem sufixo)', async () => {
+    p.evento.findUnique.mockResolvedValue({
+      id: 1,
+      nome: 'Jeesp',
+      anfitriao: { nome: 'Cidade Anfitriã', municipio: { nome: 'Município X' } },
+      competicao: {
+        subtitulo_municipio_por_modalidade: true,
+        subtitulo_campos: ['subtitulo', 'municipio'],
+        modalidades: [
+          { id: 61, nome: 'Vôlei', sigla: 'VOL', tipo_modalidade: { tipo: 'especifico' } },
+        ],
+      },
+    })
+    p.inscricao.findMany.mockImplementation(async () => [
+      {
+        id: 6101, evento_id: 1, modalidade_id: 61, participante_id: 1,
+        subtitulo: null, municipio: null,
+        participante: { id: 1, nome: 'SREL Barretos', subtitulo: 'PLACEHOLDER', municipio: { nome: 'PlaceholderCity', uf: 'SP' } },
+      },
+    ])
+    p.sorteio.findMany.mockResolvedValue([])
+
+    const buf = await gerarCongressoXlsx(1)
+    const wb2 = new ExcelJS.Workbook()
+    await wb2.xlsx.load(buf as any)
+    const ws = wb2.getWorksheet('VOL')!
+    expect(ws.getCell('B7').value).toBe('SREL Barretos')
   })
 
   it('chaves sem aba correspondente: fallback para especifico', async () => {

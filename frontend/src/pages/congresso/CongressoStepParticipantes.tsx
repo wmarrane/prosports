@@ -6,7 +6,7 @@ import { competicoesService } from '../../services/competicoes'
 import ParticipanteSelect from '../../components/ParticipanteSelect'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Plus, X, ArrowRight } from '../../lib/icons'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { useToast } from '../../components/Toast'
 
@@ -53,6 +53,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
     enabled: !!competicaoId,
   })
   const camposSubtitulo = competicao?.subtitulo_campos ?? []
+  const porModalidade = competicao?.subtitulo_municipio_por_modalidade === true
 
   const { mutate: criar, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criar({
@@ -131,7 +132,7 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
                 <div className="cw-prow-main">
                   <span className="cw-prow-name">{displayNome}</span>
                   {(() => {
-                    const l = composeSubtituloLine(i.participante, camposSubtitulo)
+                    const l = composeSubtituloLine(participanteEfetivo(i, porModalidade), camposSubtitulo)
                     return l ? <span className="cw-prow-club">{l}</span> : null
                   })()}
                 </div>
