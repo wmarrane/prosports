@@ -296,8 +296,8 @@ export async function gerarCongressoXlsx(evento_id: number): Promise<Buffer> {
   const inscritosByMod = await loadInscritosByModalidade(evento_id)
   const sorteiosByMod = await loadSorteiosByModalidade(evento_id)
   const anfitriao = evento.anfitriao?.nome ?? ''
-  const porModalidade = (evento.competicao as any)?.subtitulo_municipio_por_modalidade === true
-  const campos = ((evento.competicao as any)?.subtitulo_campos as CampoSubtitulo[]) ?? []
+  const porModalidade = evento.competicao?.subtitulo_municipio_por_modalidade === true
+  const campos = (evento.competicao?.subtitulo_campos as CampoSubtitulo[]) ?? []
 
   const wb = new ExcelJS.Workbook()
   const chavesWb = new ExcelJS.Workbook()
