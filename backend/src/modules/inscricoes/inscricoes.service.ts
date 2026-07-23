@@ -72,6 +72,17 @@ export async function criar(data: CreateInput) {
   return mapPrismaError(() => prisma.inscricao.create({ data: createData as any, include: INCLUDE }))
 }
 
+export async function editar(id: number, data: { subtitulo?: string | null; municipio_id?: number | null }) {
+  if (data.municipio_id != null) {
+    const m = await prisma.municipio.findUnique({ where: { id: data.municipio_id }, select: { id: true } })
+    if (!m) throw Object.assign(new Error('Município inválido'), { status: 400 })
+  }
+  const patch: Record<string, unknown> = {}
+  if (data.subtitulo !== undefined) patch.subtitulo = data.subtitulo
+  if (data.municipio_id !== undefined) patch.municipio_id = data.municipio_id
+  return prisma.inscricao.update({ where: { id }, data: patch, include: INCLUDE })
+}
+
 export async function remover(id: number) {
   return prisma.inscricao.delete({ where: { id } })
 }

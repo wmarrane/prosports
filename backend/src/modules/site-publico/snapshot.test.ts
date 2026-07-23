@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { montaSnapshot } from './snapshot'
+import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 const baseEvento = {
   id: 10, nome: 'Jogos 2026',
@@ -140,6 +141,62 @@ it('montaSnapshot inclui o status do evento', () => {
     subtituloFn: () => null,
   })
   expect(snap.status).toBe('pronto')
+})
+
+describe('escolar — override subtítulo/município por modalidade', () => {
+  const campos = ['subtitulo', 'municipio'] as const
+  const subtituloFn = (p: any) => composeSubtituloLine(p, campos as any)
+  // No escolar o participante (SREL) tem subtítulo/município globais que são placeholders
+  // e NÃO devem aparecer — só o override da inscrição.
+  const participanteSREL = {
+    id: 1, nome: 'SREL Araçatuba', subtitulo: 'PLACEHOLDER',
+    municipio: { nome: 'PlaceholderCity', uf: 'SP' }, inspetoria: null, delegacia: null,
+  }
+
+  it('escolar: usa o override da inscrição (não o placeholder do participante)', () => {
+    const snap = montaSnapshot({
+      evento: baseEvento as any,
+      modalidades: [modalidadeGrupos as any],
+      inscricoesPorModalidade: new Map([[1, [
+        { subtitulo: 'EE Dr Carlos Rosa', municipio: { nome: 'Birigui', uf: 'SP' }, participante: participanteSREL },
+      ]]]) as any,
+      campeoesPorModalidade: new Map() as any,
+      sorteiosPorModalidade: new Map() as any,
+      subtituloFn,
+      porModalidade: true,
+    })
+    expect(snap.modalidades[0].participantes[0].subtitulo).toBe('EE Dr Carlos Rosa | Birigui/SP')
+  })
+
+  it('escolar sem override → em branco (não herda o placeholder do participante)', () => {
+    const snap = montaSnapshot({
+      evento: baseEvento as any,
+      modalidades: [modalidadeGrupos as any],
+      inscricoesPorModalidade: new Map([[1, [
+        { subtitulo: null, municipio: null, participante: participanteSREL },
+      ]]]) as any,
+      campeoesPorModalidade: new Map() as any,
+      sorteiosPorModalidade: new Map() as any,
+      subtituloFn,
+      porModalidade: true,
+    })
+    expect(snap.modalidades[0].participantes[0].subtitulo).toBeNull()
+  })
+
+  it('não-escolar: ignora override e usa o participante (inalterado)', () => {
+    const snap = montaSnapshot({
+      evento: baseEvento as any,
+      modalidades: [modalidadeGrupos as any],
+      inscricoesPorModalidade: new Map([[1, [
+        { subtitulo: 'IGNORAR', municipio: { nome: 'Ignorada', uf: 'SP' }, participante: participanteSREL },
+      ]]]) as any,
+      campeoesPorModalidade: new Map() as any,
+      sorteiosPorModalidade: new Map() as any,
+      subtituloFn,
+      porModalidade: false,
+    })
+    expect(snap.modalidades[0].participantes[0].subtitulo).toBe('PLACEHOLDER | PlaceholderCity/SP')
+  })
 })
 
 it('inclui boletins e datas inicio/fim no snapshot', () => {

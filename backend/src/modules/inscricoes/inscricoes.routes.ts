@@ -21,6 +21,7 @@ router.get('/:id', requireAuth, acessoInscricaoId, ctrl.buscarPorId)
 router.post('/', requireAuth, acessoBody, ctrl.criar)
 router.post('/bulk', requireAuth, acessoBody, ctrl.criarBulk)
 router.post('/import', requireAuth, acessoBody, ctrl.importar)
+router.patch('/:id', requireAuth, acessoInscricaoId, ctrl.editar)
 router.delete('/evento/:eventoId/modalidade/:modalidadeId', requireAuth, acessoParamsEvento, ctrl.removerTodosDaModalidade)
 router.delete('/:id', requireAuth, acessoInscricaoId, ctrl.remover)
 

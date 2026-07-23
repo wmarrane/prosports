@@ -17,7 +17,7 @@ import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Shuffle, Crown, X, Report, CheckCircle2 } from '../../lib/icons'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
 import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
 import { proximoMarcoCruzado, pctSorteado } from './autopublish'
 
@@ -62,6 +62,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     enabled: !!competicaoId,
   })
   const camposSubtitulo = competicao?.subtitulo_campos ?? []
+  const porModalidade = competicao?.subtitulo_municipio_por_modalidade === true
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
   const tipo = modalidade?.tipo_modalidade?.tipo
 
@@ -95,9 +96,9 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
 
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of inscricoes) m.set(i.participante_id, i.participante)
+    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
     return m
-  }, [inscricoes])
+  }, [inscricoes, porModalidade])
 
   const campeoesByParticipanteId = useMemo(() => {
     const m = new Map<number, number>()
@@ -172,7 +173,10 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     const items: Item[] = cabecasInscritas.map(c => ({
       key: `c-${c.id}`,
       participante_id: c.participante_id,
-      participante: c.participante,
+      // Inscritos: usa o efetivo (override por modalidade no escolar). Não inscritos:
+      // sem inscrição → escolar exibe em branco; não-escolar mantém o participante.
+      participante: participantesById.get(c.participante_id)
+        ?? participanteEfetivo({ participante: c.participante }, porModalidade),
       posicao: c.posicao,
       inscrito: c.inscrito,
       slotLabel: null,
@@ -217,7 +221,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       }
     }
     return [...items].sort((a, b) => (a.slotOrder ?? Infinity) - (b.slotOrder ?? Infinity))
-  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, cabecasPids])
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -361,6 +365,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             subtituloLine={subtituloLine}
             anfitriaoPid={anfitriaoPid}
             competicaoId={competicaoId}
+            porModalidade={porModalidade}
             tipo={tipo as 'grupos' | 'chaves'}
             consideraAnfitriao={consideraAnfitriao}
           />

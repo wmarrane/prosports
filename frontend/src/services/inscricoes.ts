@@ -42,4 +42,6 @@ export const inscricoesService = {
     api.delete<{ count: number }>(`${BASE}/evento/${evento_id}/modalidade/${modalidade_id}`).then(r => r.data),
   importar: (data: ImportPayload) =>
     api.post<ImportResult>(`${BASE}/import`, data).then(r => r.data),
+  editar: (id: number, payload: { subtitulo?: string | null; municipio_id?: number | null }) =>
+    api.patch(`${BASE}/${id}`, payload).then(r => r.data),
 }

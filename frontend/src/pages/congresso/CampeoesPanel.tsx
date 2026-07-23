@@ -8,6 +8,7 @@ import AnfitriaoBadge from '../../components/AnfitriaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, X } from '../../lib/icons'
 import { applyAnfitriaoRuleFront, grupoLetra } from '../../lib/anfitriao-rule'
+import { participanteEfetivo } from '../../lib/compose-subtitulo'
 import type { Participante } from '../../types/participante'
 import { useToast } from '../../components/Toast'
 
@@ -17,6 +18,7 @@ type Props = {
   subtituloLine?: (p: any) => string | null
   anfitriaoPid?: number | null
   competicaoId?: number
+  porModalidade?: boolean
   tipo?: 'grupos' | 'chaves'
   consideraAnfitriao?: boolean
 }
@@ -32,6 +34,7 @@ export default function CampeoesPanel({
   subtituloLine,
   anfitriaoPid,
   competicaoId,
+  porModalidade = false,
   tipo,
   consideraAnfitriao = false,
 }: Props) {
@@ -60,10 +63,17 @@ export default function CampeoesPanel({
   const inscritosSet = useMemo(() => new Set(inscricoes.map(i => i.participante_id)), [inscricoes])
   const ordenados = useMemo(() => [...campeoes].sort((a, b) => a.posicao - b.posicao), [campeoes])
 
-  // Mapeia participante_id -> Participante (apenas inscritos têm dado completo).
+  // Mapeia participante_id -> Participante efetivo (escolar: override da inscrição).
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of inscricoes) m.set(i.participante_id, i.participante)
+    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
+    return m
+  }, [inscricoes, porModalidade])
+
+  // Inscrição por participante (para aplicar o override no subtítulo dos campeões).
+  const inscByPid = useMemo(() => {
+    const m = new Map<number, (typeof inscricoes)[number]>()
+    for (const i of inscricoes) m.set(i.participante_id, i)
     return m
   }, [inscricoes])
 
@@ -109,7 +119,10 @@ export default function CampeoesPanel({
     const items: Item[] = ordenados.map(c => ({
       key: `c-${c.id}`,
       participante_id: c.participante_id,
-      participante: c.participante as Participante,
+      participante: participanteEfetivo(
+        inscByPid.get(c.participante_id) ?? { participante: c.participante as Participante },
+        porModalidade,
+      ),
       posicao: c.posicao,
       inscrito: inscritosSet.has(c.participante_id),
       slotLabel: null,
@@ -135,7 +148,7 @@ export default function CampeoesPanel({
       it.slotLabel = tipo === 'grupos' ? `Grupo ${grupoLetra(idx)}` : `${idx + 1}ª cabeça`
     }
     return items
-  }, [ordenados, inscritosSet, consideraAnfitriao, anfitriaoInscrito, anfitriaoPid, participantesById, cabecasFinais, tipo])
+  }, [ordenados, inscritosSet, consideraAnfitriao, anfitriaoInscrito, anfitriaoPid, participantesById, inscByPid, porModalidade, cabecasFinais, tipo])
 
   const { mutate: criarCampeao, isPending: salvandoCampeao } = useMutation({
     mutationFn: (data: { participante_id: number; posicao: number }) =>

@@ -6,6 +6,7 @@ vi.mock('../../lib/prisma', () => ({
       findMany: vi.fn(),
       findUnique: vi.fn(),
       create: vi.fn(),
+      update: vi.fn(),
       delete: vi.fn(),
       deleteMany: vi.fn(),
     },
@@ -143,6 +144,58 @@ describe('inscricoes.service', () => {
     await expect(service.criar({ evento_id: 1, modalidade_id: 1, participante_id: 1, municipio_id: 999 }))
       .rejects.toMatchObject({ status: 400, message: expect.stringContaining('Município') })
     expect(mockPrisma.inscricao.create).not.toHaveBeenCalled()
+  })
+
+  describe('editar', () => {
+    it('editar atualiza subtitulo e municipio_id e retorna overrides com municipio incluído', async () => {
+      const municipio = { id: 42, nome: 'Campinas', uf: 'SP' }
+      mockPrisma.municipio.findUnique.mockResolvedValue(municipio)
+      const updated = { id: 5, subtitulo: 'Sub B', municipio_id: 42, municipio }
+      mockPrisma.inscricao.update.mockResolvedValue(updated)
+
+      const result = await service.editar(5, { subtitulo: 'Sub B', municipio_id: 42 })
+      expect(mockPrisma.municipio.findUnique).toHaveBeenCalledWith({ where: { id: 42 }, select: { id: true } })
+      expect(mockPrisma.inscricao.update).toHaveBeenCalledWith({
+        where: { id: 5 },
+        data: { subtitulo: 'Sub B', municipio_id: 42 },
+        include: INCLUDE,
+      })
+      expect(result.subtitulo).toBe('Sub B')
+      expect(result.municipio).toEqual(municipio)
+    })
+
+    it('editar com municipio_id inválido lança 400', async () => {
+      mockPrisma.municipio.findUnique.mockResolvedValue(null)
+      await expect(service.editar(5, { municipio_id: 999 }))
+        .rejects.toMatchObject({ status: 400, message: expect.stringContaining('Município') })
+      expect(mockPrisma.inscricao.update).not.toHaveBeenCalled()
+    })
+
+    it('editar com apenas subtitulo só inclui subtitulo no patch', async () => {
+      const updated = { id: 5, subtitulo: 'Só Título', municipio_id: null, municipio: null }
+      mockPrisma.inscricao.update.mockResolvedValue(updated)
+
+      await service.editar(5, { subtitulo: 'Só Título' })
+      expect(mockPrisma.municipio.findUnique).not.toHaveBeenCalled()
+      expect(mockPrisma.inscricao.update).toHaveBeenCalledWith({
+        where: { id: 5 },
+        data: { subtitulo: 'Só Título' },
+        include: INCLUDE,
+      })
+    })
+
+    it('editar com municipio_id null (limpar) inclui campo sem validar', async () => {
+      const updated = { id: 5, subtitulo: null, municipio_id: null, municipio: null }
+      mockPrisma.inscricao.update.mockResolvedValue(updated)
+
+      await service.editar(5, { municipio_id: null })
+      expect(mockPrisma.municipio.findUnique).not.toHaveBeenCalled()
+      expect(mockPrisma.inscricao.update).toHaveBeenCalledWith({
+        where: { id: 5 },
+        data: { municipio_id: null },
+        include: INCLUDE,
+      })
+    })
   })
 
   it('remover deleta direto', async () => {
