@@ -7,6 +7,7 @@ import { sistemasDisputaService } from '../../services/sistemas-disputa'
 import { TIPO_DISPUTA_LABEL } from '../../lib/tipo-disputa'
 import { Check, ArrowRight, FileText, ChevronUp, ChevronDown } from 'lucide-react'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
+import { assetUrl } from '../../lib/asset-url'
 
 const EMPTY_IDS: Set<number> = new Set()
 const LISTA_KEY = 'prosports.congresso.lista-aberta'
@@ -204,7 +205,7 @@ export default function CongressoStepModalidade({ eventoId, onSelect, vistasIds 
                           title={`Logo de ${evento.nome}`}
                         >
                           <img
-                            src={evento.logo_url}
+                            src={assetUrl(evento.logo_url)}
                             alt={`Logo ${evento.nome}`}
                             style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                           />

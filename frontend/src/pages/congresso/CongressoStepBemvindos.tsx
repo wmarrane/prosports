@@ -4,6 +4,7 @@ import { eventosService } from '../../services/eventos'
 import { inscricoesService } from '../../services/inscricoes'
 import { competicoesService } from '../../services/competicoes'
 import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
+import { assetUrl } from '../../lib/asset-url'
 import { esporteBase } from '../../site-publico/lib/esporte'
 import { ArrowRight } from 'lucide-react'
 
@@ -116,7 +117,7 @@ export default function CongressoStepBemvindos({ eventoId, onIniciar }: Props) {
             background: 'rgba(255,255,255,0.04)', border: '1px solid var(--cw-card-bd)',
             borderRadius: 'var(--radius-lg)', padding: 8, overflow: 'hidden',
           }}>
-            <img src={evento.logo_url} alt={`Logo ${evento.nome}`} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            <img src={assetUrl(evento.logo_url)} alt={`Logo ${evento.nome}`} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
           </div>
         )}
         <div style={{ minWidth: 0 }}>

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { Evento } from '../../types/evento'
 import { clearKeyToken } from '../../lib/api-key'
+import { assetUrl } from '../../lib/asset-url'
 import LogoMontana from '../../components/LogoMontana'
 import { LogOut, ArrowLeft, RefreshCw } from 'lucide-react'
 
@@ -40,7 +41,7 @@ export default function MobileShell({ evento, showBack, onBack, onRefresh, child
           </button>
         ) : evento?.logo_url ? (
           <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,255,255,0.95)', padding: 4, display: 'grid', placeItems: 'center' }}>
-            <img src={evento.logo_url} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            <img src={assetUrl(evento.logo_url)} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
           </div>
         ) : (
           <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(255,255,255,0.95)', padding: 4, display: 'grid', placeItems: 'center' }}>

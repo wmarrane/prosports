@@ -13,6 +13,7 @@ import { modalidadesService } from '../../services/modalidades'
 import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { STATUS_LABEL } from '../../lib/evento-status'
+import { assetUrl } from '../../lib/asset-url'
 import type { EventoStatus } from '../../types/evento'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Check, X, Trophy } from '../../lib/icons'
@@ -555,7 +556,7 @@ export default function EventoForm() {
                       }}
                     >
                       {logoUrl ? (
-                        <img src={logoUrl} alt="Logo do evento" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                        <img src={assetUrl(logoUrl)} alt="Logo do evento" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                       ) : (
                         <ImageIcon size={36} className="text-[var(--t4)]" />
                       )}

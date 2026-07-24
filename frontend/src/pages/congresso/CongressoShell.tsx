@@ -4,6 +4,7 @@ import type { CongressoStep } from '../../types/congresso-step'
 import { Maximize, Minimize, X, Sun, Moon } from '../../lib/icons'
 import { useThemeStore } from '../../store/themeStore'
 import LogoMontana from '../../components/LogoMontana'
+import { assetUrl } from '../../lib/asset-url'
 
 const STEPS: Array<{ key: CongressoStep; label: string }> = [
   { key: 'evento', label: 'Evento' },
@@ -77,7 +78,7 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
           <div className="cw-glyph" style={{ padding: 0, background: 'transparent', display: 'grid', placeItems: 'center', overflow: 'hidden' }}>
             {eventoLogoUrl ? (
               <img
-                src={eventoLogoUrl}
+                src={assetUrl(eventoLogoUrl)}
                 alt="Logo do evento"
                 style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
               />
@@ -156,7 +157,7 @@ export default function CongressoShell({ step, onBack, contexto, eventoLogoUrl, 
               }}
             >
               <img
-                src={eventoLogoUrl}
+                src={assetUrl(eventoLogoUrl)}
                 alt=""
                 style={{
                   maxWidth: '55%', maxHeight: '60%',
