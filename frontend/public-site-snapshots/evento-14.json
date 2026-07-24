@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-07-24T00:09:26.446Z",
+  "publicadoEm": "2026-07-24T00:11:25.729Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -17,8 +17,8 @@
       "nome": "Basquetebol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "24624ff64e51a29c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -94,7 +94,46 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              679,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              675,
+              683,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              680,
+              684,
+              688
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              677,
+              674,
+              687,
+              681
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
