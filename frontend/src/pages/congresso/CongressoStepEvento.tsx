@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { eventosService } from '../../services/eventos'
 import { Trophy, Calendar } from 'lucide-react'
+import { assetUrl } from '../../lib/asset-url'
 
 function formatDateBR(iso: string): string {
   try {
@@ -63,7 +64,7 @@ export default function CongressoStepEvento({ onSelect }: Props) {
                   }}
                 >
                   <img
-                    src={e.logo_url}
+                    src={assetUrl(e.logo_url)}
                     alt={`Logo ${e.nome}`}
                     style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                   />
