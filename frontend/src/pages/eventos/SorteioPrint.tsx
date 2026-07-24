@@ -18,7 +18,7 @@ type Props = {
   campeoesByParticipanteId: Map<number, number>
   anfitriaoPid: number | null
   subtituloLine: (p: Participante) => string | null
-  inscritos: { id: number; nome: string }[]
+  inscritos: { id: number; nome: string; subtitulo?: string | null }[]
   campeoes: { posicao: number; nome: string }[]
   // Quando true, não renderiza o cabeçalho do evento (usado no export HTML,
   // onde o cabeçalho aparece uma única vez no topo do documento).
@@ -80,7 +80,12 @@ export function SorteioPrintContent(p: Props) {
       <div style={{ marginTop: 16 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Inscritos ({p.inscritos.length})</div>
         <ul style={{ margin: 0, paddingLeft: 18, color: '#1e293b', fontSize: 12, columns: 2 }}>
-          {p.inscritos.map((i) => <li key={i.id}>{i.nome}</li>)}
+          {p.inscritos.map((i) => (
+            <li key={i.id} style={{ breakInside: 'avoid' }}>
+              {i.nome}
+              {i.subtitulo && <div style={{ fontSize: 10, color: '#64748b' }}>{i.subtitulo}</div>}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

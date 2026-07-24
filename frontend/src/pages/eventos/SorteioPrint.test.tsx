@@ -56,3 +56,28 @@ it('SorteioPrintHeader renderiza nome e dados do evento uma vez', () => {
   expect(html).toContain('Cidade Sede')
   expect(html).toContain('São Manuel')
 })
+
+it('inscritos mostram o subtítulo numa 2ª linha quando presente', () => {
+  const html = renderToStaticMarkup(
+    <SorteioPrintContent
+      {...base}
+      omitEventoHeader
+      inscritos={[{ id: 1, nome: 'SREL Araçatuba', subtitulo: 'EE Dr Carlos Rosa | Birigui/SP' }]}
+    />
+  )
+  expect(html).toContain('SREL Araçatuba')
+  expect(html).toContain('EE Dr Carlos Rosa | Birigui/SP')
+  expect(html).toContain('#64748b') // cor da 2ª linha discreta
+})
+
+it('inscritos sem subtítulo mostram só o nome (sem 2ª linha)', () => {
+  const html = renderToStaticMarkup(
+    <SorteioPrintContent
+      {...base}
+      omitEventoHeader
+      inscritos={[{ id: 2, nome: 'Time X', subtitulo: null }]}
+    />
+  )
+  expect(html).toContain('Time X')
+  expect(html).not.toContain('#64748b')
+})
