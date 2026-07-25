@@ -1,9 +1,12 @@
 import { randomUUID } from 'crypto'
+import pino from 'pino'
 import { CategoriaBoletim } from '@prisma/client'
 import prisma from '../../lib/prisma'
 import { getStorage } from '../../lib/storage'
 import { publicar } from '../site-publico/site-publico.service'
 import { assertPdf, sanitizeFilename } from '../../lib/upload-pdf'
+
+const logger = pino()
 
 type CriarInput = {
   eventoId: number
@@ -14,9 +17,23 @@ type CriarInput = {
   file: { buffer: Buffer; originalname: string; size: number; mimetype: string }
 }
 
+/**
+ * Republica o site do evento quando ele já está publicado.
+ *
+ * NUNCA lança: a republicação é efeito colateral do boletim, não parte dele.
+ * Deixar o erro subir fazia uma operação já persistida parecer ter falhado —
+ * e, pior, disparava os `catch` de rollback dos chamadores, que apagavam o
+ * arquivo do storage e deixavam a linha do banco apontando para um 404.
+ * Acontecia, por exemplo, com evento publicado cujo status voltou de
+ * "sorteado" para "pronto" (aí `publicar` recusa com 400).
+ */
 async function republicarSePublicado(eventoId: number) {
-  const ev = await prisma.evento.findUnique({ where: { id: eventoId }, select: { id: true, site_publicado_em: true } })
-  if (ev?.site_publicado_em) await publicar(eventoId)
+  try {
+    const ev = await prisma.evento.findUnique({ where: { id: eventoId }, select: { id: true, site_publicado_em: true } })
+    if (ev?.site_publicado_em) await publicar(eventoId)
+  } catch (err) {
+    logger.warn({ err, eventoId }, 'Boletim salvo, mas a republicação do site público falhou')
+  }
 }
 
 export async function criarBoletim(input: CriarInput) {
