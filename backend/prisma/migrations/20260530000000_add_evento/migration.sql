@@ -2,7 +2,12 @@
 CREATE TYPE "EventoStatus" AS ENUM ('rascunho', 'inscricoes', 'pronto', 'sorteado', 'parcial');
 
 -- DropTable
-DROP TABLE "sistema_disputas_grupos";
+-- IF EXISTS: em banco LIMPO esta tabela ainda não existe (ela só é criada pela
+-- migration posterior 20260530010000_restore_sistema_disputas_grupos), e o DROP
+-- incondicional quebrava o replay do histórico do zero (erro 42P01).
+-- `prisma migrate deploy` não verifica checksum, então ambientes já aplicados
+-- (prod/VM de dev) não precisam de ação.
+DROP TABLE IF EXISTS "sistema_disputas_grupos";
 
 -- CreateTable
 CREATE TABLE "Evento" (
