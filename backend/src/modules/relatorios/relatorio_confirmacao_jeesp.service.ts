@@ -21,8 +21,18 @@ export type ConfirmacaoJeespParams = {
   codModalidade: number
 }
 
-/** Linha extra que o modelo traz uma vez por modalidade, além dos inscritos. */
+/**
+ * O modelo traz exatamente UMA linha "Cidade Sede" por modalidade, sempre no
+ * fim do bloco. O anfitrião também costuma existir como participante cadastrado
+ * (o import do Jeesp o cria), e aí viria ordenado no meio dos inscritos — o que
+ * geraria uma segunda linha. Por isso ele é retirado da lista de inscritos e
+ * reinserido no fim, resultando em uma única linha, esteja inscrito ou não.
+ */
 const LINHA_CIDADE_SEDE = 'Cidade Sede'
+
+function ehCidadeSede(nome: string): boolean {
+  return nome.trim().toLowerCase() === LINHA_CIDADE_SEDE.toLowerCase()
+}
 
 export function nomeArquivoConfirmacao(evento: { nome: string; id: number }): string {
   const slug = evento.nome
@@ -61,8 +71,10 @@ export async function gerarConfirmacaoJeespXlsx(
 
   const porModalidade = new Map<number, string[]>()
   for (const i of inscricoes) {
+    const nome = i.participante?.nome ?? '—'
+    if (ehCidadeSede(nome)) continue // reinserido no fim do bloco, sempre uma vez
     const arr = porModalidade.get(i.modalidade_id) ?? []
-    arr.push(i.participante?.nome ?? '—')
+    arr.push(nome)
     porModalidade.set(i.modalidade_id, arr)
   }
 
@@ -90,7 +102,9 @@ export async function gerarConfirmacaoJeespXlsx(
 
   for (const m of modalidades) {
     const insc = porModalidade.get(m.id) ?? []
-    if (insc.length === 0) continue // modalidade sem inscritos não vai para a planilha
+    // Sem inscritos reais (o anfitrião já foi retirado acima) a modalidade não
+    // entra na planilha — nem com a linha "Cidade Sede" sozinha.
+    if (insc.length === 0) continue
     for (const nome of insc) escreveLinha(nome, m.nome)
     escreveLinha(LINHA_CIDADE_SEDE, m.nome)
   }

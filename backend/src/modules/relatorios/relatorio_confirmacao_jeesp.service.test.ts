@@ -103,6 +103,39 @@ it('modalidade excluída do evento não entra na planilha', async () => {
   expect(ws.getCell('B5').value).toBeFalsy()
 })
 
+it('anfitrião já inscrito como "Cidade Sede" não duplica a linha (fica só a do fim)', async () => {
+  p.evento.findUnique.mockResolvedValue({ competicao_id: 7 })
+  p.modalidade.findMany.mockResolvedValue([{ id: 10, nome: 'Basquetebol Feminino 14' }])
+  // o import do Jeesp cadastra o anfitrião como participante; ele vem ordenado
+  // antes das SRELs e não pode virar uma 2ª linha "Cidade Sede"
+  p.inscricao.findMany.mockResolvedValue([
+    { modalidade_id: 10, participante: { nome: 'Cidade Sede' } },
+    { modalidade_id: 10, participante: { nome: 'SREL Araçatuba' } },
+    { modalidade_id: 10, participante: { nome: 'SREL Bauru' } },
+  ])
+
+  const ws = await abrir(await gerarConfirmacaoJeespXlsx(1, params))
+
+  expect(ws.getCell('B3').value).toBe('SREL Araçatuba')
+  expect(ws.getCell('B4').value).toBe('SREL Bauru')
+  expect(ws.getCell('B5').value).toBe('Cidade Sede') // única, e no fim do bloco
+  expect(ws.getCell('B6').value).toBeFalsy()
+})
+
+it('variações de caixa/espaço do anfitrião também são deduplicadas', async () => {
+  p.evento.findUnique.mockResolvedValue({ competicao_id: 7 })
+  p.modalidade.findMany.mockResolvedValue([{ id: 10, nome: 'Basquetebol Feminino 14' }])
+  p.inscricao.findMany.mockResolvedValue([
+    { modalidade_id: 10, participante: { nome: '  CIDADE SEDE ' } },
+    { modalidade_id: 10, participante: { nome: 'SREL Bauru' } },
+  ])
+
+  const ws = await abrir(await gerarConfirmacaoJeespXlsx(1, params))
+  expect(ws.getCell('B3').value).toBe('SREL Bauru')
+  expect(ws.getCell('B4').value).toBe('Cidade Sede')
+  expect(ws.getCell('B5').value).toBeFalsy()
+})
+
 it('evento inexistente lança 404', async () => {
   p.evento.findUnique.mockResolvedValue(null)
   await expect(gerarConfirmacaoJeespXlsx(999, params)).rejects.toMatchObject({ status: 404 })
