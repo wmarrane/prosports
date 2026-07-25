@@ -7,8 +7,14 @@ function extractFilename(disposition: string | undefined, fallback: string): str
 }
 
 export const relatoriosService = {
-  congresso: async (eventoId: number): Promise<{ blob: Blob; filename: string }> => {
+  // `params` carrega os valores legados do JEESP (só usados quando a competição
+  // do evento é escolar; nos demais eventos vai vazio e nada muda).
+  congresso: async (
+    eventoId: number,
+    params?: Record<string, string | number>,
+  ): Promise<{ blob: Blob; filename: string }> => {
     const r = await api.get(`/relatorios/eventos/${eventoId}/congresso`, {
+      params,
       responseType: 'blob',
     })
     return {

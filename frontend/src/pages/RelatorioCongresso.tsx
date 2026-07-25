@@ -20,17 +20,24 @@ export default function RelatorioCongresso() {
   const toast = useToast()
   const [eventoId, setEventoId] = useState<number | ''>('')
   const [baixando, setBaixando] = useState(false)
+  const [modalJeesp, setModalJeesp] = useState(false)
+  const [fCompeticao, setFCompeticao] = useState('Jogos Escolares')
+  const [fCodCompeticao, setFCodCompeticao] = useState('')
+  const [fDivisao, setFDivisao] = useState('')
+  const [fMunicipioSede, setFMunicipioSede] = useState('')
+  const [fCodMunicipioSede, setFCodMunicipioSede] = useState('')
+  const [fCodModalidade, setFCodModalidade] = useState('0')
 
   const { data: eventos = [], isLoading } = useQuery({
     queryKey: ['eventos'],
     queryFn: () => eventosService.listar(),
   })
 
-  async function baixar() {
+  async function download(params?: Record<string, string | number>) {
     if (!eventoId) return
     setBaixando(true)
     try {
-      const { blob, filename } = await relatoriosService.congresso(eventoId)
+      const { blob, filename } = await relatoriosService.congresso(eventoId, params)
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
@@ -61,6 +68,31 @@ export default function RelatorioCongresso() {
   }
 
   const selecionado = eventos.find((e) => e.id === eventoId)
+  // Competição escolar (JEESP): o Excel vira a planilha de confirmação e exige
+  // os valores do sistema legado, que não existem aqui — pedimos num modal.
+  const escolar = (selecionado?.competicao as any)?.subtitulo_municipio_por_modalidade === true
+
+  function onClickBaixar() {
+    if (!eventoId) return
+    if (escolar) {
+      setFMunicipioSede((selecionado as any)?.municipio?.nome ?? '')
+      setModalJeesp(true)
+      return
+    }
+    download()
+  }
+
+  function confirmarJeesp() {
+    setModalJeesp(false)
+    download({
+      codCompeticao: fCodCompeticao,
+      competicao: fCompeticao,
+      divisao: fDivisao,
+      codMunicipioSede: fCodMunicipioSede,
+      municipioSede: fMunicipioSede,
+      codModalidade: fCodModalidade,
+    })
+  }
 
   return (
     <div className="text-[var(--t1)]">
@@ -135,7 +167,7 @@ export default function RelatorioCongresso() {
           <div className="flex justify-end mt-5">
             <button
               type="button"
-              onClick={baixar}
+              onClick={onClickBaixar}
               disabled={!eventoId || baixando}
               className="btn btn-primary"
               style={{
@@ -160,6 +192,113 @@ export default function RelatorioCongresso() {
           mantém a estrutura do template para você consolidar.
         </div>
       </div>
+
+      {modalJeesp && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 300,
+          }}
+          onClick={() => setModalJeesp(false)}
+        >
+          <div
+            style={{
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: 'var(--radius-xl)',
+              padding: 24,
+              width: '100%',
+              maxWidth: 460,
+              margin: '0 16px',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="sec-title" style={{ fontSize: 17, marginBottom: 4 }}>
+              Confirmação JEESP
+            </h3>
+            <p className="text-xs text-[var(--t3)]" style={{ marginBottom: 16 }}>
+              Valores do sistema legado usados nas colunas fixas e no{' '}
+              <code>insert into confirmacao</code>.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <label className="text-sm text-[var(--t2)]" style={{ gridColumn: '1 / -1' }}>
+                Competição
+                <input
+                  value={fCompeticao}
+                  onChange={(e) => setFCompeticao(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+              <label className="text-sm text-[var(--t2)]">
+                CodCompetição
+                <input
+                  value={fCodCompeticao}
+                  onChange={(e) => setFCodCompeticao(e.target.value)}
+                  inputMode="numeric"
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+              <label className="text-sm text-[var(--t2)]">
+                Divisão
+                <input
+                  value={fDivisao}
+                  onChange={(e) => setFDivisao(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+              <label className="text-sm text-[var(--t2)]">
+                Município Sede
+                <input
+                  value={fMunicipioSede}
+                  onChange={(e) => setFMunicipioSede(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+              <label className="text-sm text-[var(--t2)]">
+                CodMunicípioSede
+                <input
+                  value={fCodMunicipioSede}
+                  onChange={(e) => setFCodMunicipioSede(e.target.value)}
+                  inputMode="numeric"
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+              <label className="text-sm text-[var(--t2)]">
+                CodModalidade
+                <input
+                  value={fCodModalidade}
+                  onChange={(e) => setFCodModalidade(e.target.value)}
+                  inputMode="numeric"
+                  className="w-full mt-1 px-3 py-2 rounded-lg bg-[var(--card-bg-2)] border border-[var(--card-border)] text-[var(--t1)] text-sm"
+                />
+              </label>
+            </div>
+            <div className="flex justify-end gap-2" style={{ marginTop: 20 }}>
+              <button type="button" className="btn btn-ghost" onClick={() => setModalJeesp(false)}>
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={
+                  !fCompeticao.trim() ||
+                  !fCodCompeticao.trim() ||
+                  !fMunicipioSede.trim() ||
+                  !fCodMunicipioSede.trim()
+                }
+                onClick={confirmarJeesp}
+              >
+                Gerar Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
