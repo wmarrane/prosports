@@ -1,4 +1,11 @@
+# ATENÇÃO: templates/*.xlsx e templates/*.png são lidos em RUNTIME
+# (relatorio_congresso.service.ts) — não excluir.
 node_modules
 dist
+uploads
+coverage
 .env
+.env.*
 *.log
+migration_script.sql
+scripts/__pycache__

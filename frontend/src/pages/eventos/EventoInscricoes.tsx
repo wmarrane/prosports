@@ -355,7 +355,7 @@ export default function EventoInscricoes() {
           a.participante.nome.localeCompare(b.participante.nome, 'pt-BR', { sensitivity: 'base' })
         )
         const pById = new Map<number, Participante>()
-        for (const i of ordenadas) pById.set(i.participante_id, i.participante)
+        for (const i of ordenadas) pById.set(i.participante_id, participanteEfetivo(i, subMunPorMod))
         const cByPid = new Map<number, number>()
         for (const c of camps) cByPid.set(c.participante_id, c.posicao)
         const sorteio = sorteios.find(s => s.modalidade_id === m.id) ?? null
@@ -383,7 +383,11 @@ export default function EventoInscricoes() {
             campeoesByParticipanteId={cByPid}
             anfitriaoPid={evento.anfitriao_id ?? null}
             subtituloLine={subtituloLine}
-            inscritos={ordenadas.map(i => ({ id: i.participante_id, nome: i.participante?.nome ?? '—' }))}
+            inscritos={ordenadas.map(i => ({
+              id: i.participante_id,
+              nome: i.participante?.nome ?? '—',
+              subtitulo: subtituloLine(participanteEfetivo(i, subMunPorMod)),
+            }))}
             campeoes={[...camps]
               .sort((a, b) => a.posicao - b.posicao)
               .map(c => ({ posicao: c.posicao, nome: c.participante?.nome ?? '—' }))}

@@ -1,0 +1,136 @@
+# Ambiente de DEV completo e auto-contido para Docker Desktop (Windows).
+#
+# Diferenças em relação ao docker-compose.yml (VM Linux 192.168.56.113):
+#   - Postgres roda AQUI (na VM o banco é externo, via DATABASE_URL);
+#   - portas do host remapeadas — 3000/5432/8080/8081 já estão ocupadas no Windows
+#     (5432 = r2p-postgres; 3000/8080/8081 = serviços do próprio Windows);
+#   - sem bind mount da chave SFTP (o caminho /home/wagner/... não existe no Windows;
+#     upload de boletins exige configurar SFTP ou GCS — veja o runbook);
+#   - migrations aplicadas por um serviço one-shot (na VM o runner roda no host).
+#
+# Uso:
+#   copy .env.dev.windows.example .env.dev.windows.local
+#   docker compose -f docker-compose.dev.windows.yml --env-file .env.dev.windows.local up -d --build
+#
+# Runbook: docs/runbooks/dev-docker-desktop-windows.md
+
+name: prosports-dev
+
+services:
+  # Reusa a imagem postgres:16-alpine já presente no Docker Desktop (stack r2p),
+  # em container e volume próprios — os dados do prosports ficam isolados.
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-prosports}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-prosports}
+      POSTGRES_DB: ${POSTGRES_DB:-newprosports}
+    ports:
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-prosports} -d ${POSTGRES_DB:-newprosports}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  # One-shot: aplica as migrations e sai. O backend só sobe depois deste sucesso.
+  migrate:
+    build: ./backend
+    image: prosports-backend:dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-prosports}:${POSTGRES_PASSWORD:-prosports}@postgres:5432/${POSTGRES_DB:-newprosports}?schema=public
+    command: ["npx", "prisma", "migrate", "deploy"]
+    restart: "no"
+
+  # Popula o banco (admin@prosports.com / admin123 + dados base).
+  # Sob demanda: docker compose ... --profile seed run --rm seed
+  seed:
+    build: ./backend
+    image: prosports-backend:dev
+    profiles: ["seed"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-prosports}:${POSTGRES_PASSWORD:-prosports}@postgres:5432/${POSTGRES_DB:-newprosports}?schema=public
+      # prisma/seed.ts fica fora do rootDir "src" do tsconfig — sem isto o ts-node aborta (TS6059).
+      - TS_NODE_COMPILER_OPTIONS={"rootDir":"."}
+    command: ["npx", "prisma", "db", "seed"]
+    restart: "no"
+
+  backend:
+    build: ./backend
+    image: prosports-backend:dev
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
+    ports:
+      - "${BACKEND_HOST_PORT:-3100}:3000"
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-prosports}:${POSTGRES_PASSWORD:-prosports}@postgres:5432/${POSTGRES_DB:-newprosports}?schema=public
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET:-dev-jwt-secret-troque-em-producao-0001}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET:-dev-refresh-secret-troque-em-producao-02}
+      - JWT_KEY_SECRET=${JWT_KEY_SECRET:-dev-key-secret-troque-em-producao-000003}
+      - NODE_ENV=development
+      # O frontend chama /api pelo nginx (mesma origem), então CORS só importa
+      # se você atacar o backend direto pela porta publicada.
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:${FRONTEND_HOST_PORT:-8090},http://127.0.0.1:${FRONTEND_HOST_PORT:-8090},http://localhost:${BACKEND_HOST_PORT:-3100}}
+      - MAX_PDF_BYTES=${MAX_PDF_BYTES:-26214400}
+      # Publicação do site público: grava o snapshot no volume compartilhado
+      # (sem GITHUB_PAT) — o container site-publico observa e reconstrói.
+      - SITE_SNAPSHOT_LOCAL_DIR=/data/snapshots
+      # Boletins gravados no próprio volume de uploads e servidos pela rota
+      # estática /uploads — sem depender da VM de SFTP (192.168.56.130).
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
+      - PUBLIC_BOLETINS_BASE_URL=${PUBLIC_BOLETINS_BASE_URL:-}
+    volumes:
+      - uploads_data:/app/uploads
+      - site_snapshots:/data/snapshots
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        APP_COMMIT: ${GIT_COMMIT:-dev}
+    ports:
+      - "${FRONTEND_HOST_PORT:-8090}:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # Site público de dev: reconstrói o estático quando o backend publica/despublica
+  # um evento (watcher inotify sobre o volume site_snapshots).
+  # NÃO trocar este volume por bind mount do Windows: inotify não propaga via
+  # 9p/virtiofs e o rebuild automático para de acontecer silenciosamente.
+  site-publico:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.site
+    ports:
+      - "${SITE_HOST_PORT:-8091}:80"
+    volumes:
+      - site_snapshots:/app/public-site-snapshots
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redis_data:
+  uploads_data:
+  site_snapshots:

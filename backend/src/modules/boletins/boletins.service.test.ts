@@ -45,6 +45,48 @@ describe('boletins.service', () => {
   })
 })
 
+describe('falha ao republicar o site não desfaz nem aborta a operação', () => {
+  const arquivo = { buffer: Buffer.from('%PDF-1.7\n'), originalname: 'b.pdf', size: 1, mimetype: 'application/pdf' } as any
+  const publicado = { id: 9, site_publicado_em: new Date() }
+
+  it('criar: devolve o boletim criado e mantém o arquivo', async () => {
+    prismaMock.evento.findUnique.mockResolvedValue(publicado)
+    prismaMock.boletim.create.mockResolvedValue({ id: 7, evento_id: 9, numero: 1 })
+    publicarMock.mockRejectedValueOnce(Object.assign(new Error('Só é possível publicar eventos com status "Sorteado".'), { status: 400 }))
+
+    const { criarBoletim } = await import('./boletins.service')
+    const r = await criarBoletim({ eventoId: 9, numero: 1, titulo: 'B1', categoria: 'Oficial', data_publicacao: new Date(), file: arquivo })
+
+    expect(r.id).toBe(7)
+    expect(removeMock).not.toHaveBeenCalled()
+  })
+
+  it('remover: conclui sem lançar', async () => {
+    prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, object_key: 'eventos/9/b.pdf' })
+    prismaMock.evento.findUnique.mockResolvedValue(publicado)
+    publicarMock.mockRejectedValueOnce(new Error('falhou'))
+
+    const { removerBoletim } = await import('./boletins.service')
+    await expect(removerBoletim(9, 5)).resolves.toBeUndefined()
+    expect(prismaMock.boletim.delete).toHaveBeenCalledWith({ where: { id: 5 } })
+  })
+
+  it('substituir: devolve o atualizado e mantém o arquivo novo', async () => {
+    prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, numero: 3, object_key: 'eventos/9/antigo.pdf' })
+    prismaMock.boletim.update.mockResolvedValue({ id: 5, evento_id: 9, numero: 3 })
+    prismaMock.evento.findUnique.mockResolvedValue(publicado)
+    publicarMock.mockRejectedValueOnce(new Error('falhou'))
+
+    const { substituirBoletim } = await import('./boletins.service')
+    const r = await substituirBoletim(9, 5, { file: arquivo })
+
+    expect(r.id).toBe(5)
+    // só o arquivo ANTIGO é removido; o novo (recém-gravado) permanece
+    expect(removeMock).toHaveBeenCalledTimes(1)
+    expect(removeMock).toHaveBeenCalledWith('eventos/9/antigo.pdf')
+  })
+})
+
 describe('substituirBoletim', () => {
   it('substitui com novo PDF: sobe novo, remove antigo, atualiza e re-publica se publicado', async () => {
     prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, numero: 3, object_key: 'eventos/9/boletim-3-old.pdf' })
