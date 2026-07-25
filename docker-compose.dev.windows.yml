@@ -94,12 +94,9 @@ services:
       # Publicação do site público: grava o snapshot no volume compartilhado
       # (sem GITHUB_PAT) — o container site-publico observa e reconstrói.
       - SITE_SNAPSHOT_LOCAL_DIR=/data/snapshots
-      # Boletins: sem SFTP/GCS configurados o upload falha (só o upload).
-      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-sftp}
-      - SFTP_HOST=${SFTP_HOST:-}
-      - SFTP_PORT=${SFTP_PORT:-22}
-      - SFTP_USER=${SFTP_USER:-}
-      - SFTP_BASE_DIR=${SFTP_BASE_DIR:-/srv/boletins}
+      # Boletins gravados no próprio volume de uploads e servidos pela rota
+      # estática /uploads — sem depender da VM de SFTP (192.168.56.130).
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
       - PUBLIC_BOLETINS_BASE_URL=${PUBLIC_BOLETINS_BASE_URL:-}
     volumes:
       - uploads_data:/app/uploads
