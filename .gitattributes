@@ -1,0 +1,8 @@
+# O repo é editado no Windows (core.autocrlf=true). Arquivos consumidos por
+# ferramentas Linux/Docker precisam de LF — CRLF quebra scripts sh dentro do
+# container (por isso o Dockerfile.site tem o `sed -i 's/\r$//'`) e pode
+# atrapalhar o parser dos .dockerignore.
+# Escopo intencionalmente estreito: não usar `* text=auto` para não
+# renormalizar o repositório inteiro.
+*.sh text eol=lf
+.dockerignore text eol=lf
