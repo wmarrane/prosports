@@ -1,0 +1,34 @@
+# Contexto de build do frontend e do site-publico (ambos usam `context: .`).
+# Sem isto o contexto vai com ~700 MB (node_modules do backend/frontend, .git,
+# personaladmin) — lento em qualquer host e muito lento no Windows/OneDrive.
+# Os Dockerfiles do root só precisam de: frontend/, package.json e CHANGELOG.md.
+
+.git
+.github
+.claude
+.idea
+.superpowers
+.playwright-mcp
+.DS_Store
+
+node_modules
+**/node_modules
+
+backend
+docs
+claudedesign
+personaladmin
+secrets
+public-site-snapshots-backup
+
+frontend/dist
+frontend/dist-site
+frontend/.firebase
+frontend/public/CHANGELOG.md
+
+.env
+.env.*
+*.log
+remove_modal.png
+docker-compose*.yml
+Caddyfile
