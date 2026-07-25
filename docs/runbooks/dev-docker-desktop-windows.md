@@ -54,10 +54,20 @@ projetos não se misturam.
 
 ## Boletins (upload de PDF)
 
-O `getStorage()` só conhece `sftp` (dev) e `gcs` (prod). Sem configurar um dos
-dois, **apenas o upload de boletim falha** — o resto do sistema funciona. Para
-reusar o SFTP da VM, preencha as variáveis `SFTP_*` no `.env.dev.windows.local` e
-monte a chave privada no serviço `backend`:
+Este ambiente usa `STORAGE_PROVIDER=local`: os PDFs vão para
+`/app/uploads/boletins/<object_key>` (volume `uploads_data`) e são servidos pela
+rota estática `/uploads` do backend — **sem depender da VM de SFTP**
+(`192.168.56.130`). O `public_url` gravado no banco fica relativo
+(`/uploads/boletins/...`), que o admin resolve na mesma origem via proxy do
+nginx; para forçar uma URL absoluta, defina `PUBLIC_BOLETINS_BASE_URL`.
+
+Provider só para desenvolvimento — produção continua em `gcs`.
+
+Boletins que vieram na cópia do banco de dev têm `public_url` apontando para o
+SFTP antigo; só os enviados a partir de agora usam o storage local.
+
+Se ainda assim quiser usar o SFTP da VM, troque para `STORAGE_PROVIDER=sftp`,
+preencha as variáveis `SFTP_*` e monte a chave privada no serviço `backend`:
 
 ```yaml
     volumes:
