@@ -206,6 +206,50 @@ it('modalidade excluída do evento não entra', async () => {
   expect(wb.worksheets.map((w) => w.name)).toEqual(['Basquetebol'])
 })
 
+it('formata com a paleta padrão e as bordas do modelo', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'SREL Capital', 'Colegio Campos Sales', 'São Paulo', 'p1'),
+    insc(1, 'SREL Bauru', 'EE Bauru', 'Bauru', 'p2'),
+  ])
+  p.sorteio.findMany.mockResolvedValue([
+    { modalidade_id: 1, resultado: { grupos: [{ letra: 'A', participantes: ['p1', 'p2'] }] } },
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+  const AZUL = 'FF156082'
+
+  // cabeçalhos em azul com texto branco (mesma paleta dos outros exports)
+  for (const ref of ['B2', 'C2', 'D2', 'I2']) {
+    expect(ws.getCell(ref).fill).toMatchObject({ fgColor: { argb: AZUL } })
+    expect(ws.getCell(ref).font).toMatchObject({ bold: true, color: { argb: 'FFFFFFFF' } })
+  }
+
+  // contorno grosso por fora e grade fina por dentro, como na planilha exemplo
+  expect(ws.getCell('B2').border?.top).toMatchObject({ style: 'medium', color: { argb: AZUL } })
+  expect(ws.getCell('B18').border?.bottom).toMatchObject({ style: 'medium' })
+  expect(ws.getCell('C3').border?.top).toMatchObject({ style: 'medium' }) // linha do cabeçalho
+  expect(ws.getCell('C4').border?.top).toMatchObject({ style: 'thin' }) // grade interna
+
+  // grupos: só grade fina; cabeçalho e legenda sem borda, como no modelo
+  expect(ws.getCell('I3').border?.left).toMatchObject({ style: 'thin' })
+  expect(ws.getCell('I2').border?.top).toBeUndefined()
+  expect(ws.getCell('I13').border?.left).toBeUndefined()
+
+  // jogos: contorno preto grosso e horizontal só ENTRE jogos
+  expect(ws.getCell('Q4').border?.top).toMatchObject({ style: 'medium', color: { argb: 'FF000000' } })
+  expect(ws.getCell('Q4').border?.bottom).toBeUndefined() // mesma partida da linha 5
+  expect(ws.getCell('Q5').border?.bottom).toMatchObject({ style: 'thin' })
+  expect(ws.getCell('S4').border?.right).toMatchObject({ style: 'medium' })
+
+  // larguras do modelo
+  expect(ws.getColumn('A').width).toBe(3)
+  expect(ws.getColumn('C').width).toBe(32)
+  expect(ws.getColumn('S').width).toBe(33)
+})
+
 it('evento inexistente lança 404', async () => {
   p.evento.findUnique.mockResolvedValue(null)
   await expect(gerarCongressoJeespXlsx(999)).rejects.toMatchObject({ status: 404 })
