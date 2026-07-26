@@ -140,7 +140,10 @@ describe('key_access.service', () => {
     expect(r.modalidade.id).toBe(1)
     expect(r.inscritos).toHaveLength(1)
     expect(r.sorteio).toBeTruthy()
+    // `municipio` da própria inscrição = override por modalidade do escolar; sem
+    // ele a tela mobile cai no município do cadastro do participante.
     expect(mockPrisma.inscricao.findMany.mock.calls[0][0].include).toEqual({
+      municipio: true,
       participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
     })
   })

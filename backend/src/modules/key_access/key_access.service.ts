@@ -85,6 +85,9 @@ export async function getModalidadeDetail(evento: Evento, modalidade_id: number)
     prisma.inscricao.findMany({
       where: { evento_id: evento.id, modalidade_id },
       include: {
+        // Município da própria inscrição: é o override por modalidade do escolar,
+        // que a tela mobile usa no lugar do município do cadastro.
+        municipio: true,
         participante: { include: { municipio: true, inspetoria: true, delegacia: true } },
       },
     }),
