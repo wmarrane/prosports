@@ -28,10 +28,13 @@ export function aplicarEstilo(cell: ExcelJS.Cell, e: Estilo): void {
   }
 }
 
+type Espessura = 'thin' | 'medium'
+
 export function aplicarBordas(
   sheet: ExcelJS.Worksheet, r1: number, c1: number, r2: number, c2: number, argb: string,
+  style: Espessura = 'thin',
 ): void {
-  const edge = { style: 'thin' as const, color: { argb } }
+  const edge = { style, color: { argb } }
   for (let r = r1; r <= r2; r++) {
     for (let c = c1; c <= c2; c++) {
       sheet.getRow(r).getCell(c).border = { top: edge, left: edge, bottom: edge, right: edge }
@@ -42,8 +45,9 @@ export function aplicarBordas(
 // Borda só no contorno externo do retângulo (preserva bordas internas existentes).
 export function aplicarBordaExterna(
   sheet: ExcelJS.Worksheet, r1: number, c1: number, r2: number, c2: number, argb: string,
+  style: Espessura = 'thin',
 ): void {
-  const edge = { style: 'thin' as const, color: { argb } }
+  const edge = { style, color: { argb } }
   for (let r = r1; r <= r2; r++) {
     for (let c = c1; c <= c2; c++) {
       const cell = sheet.getRow(r).getCell(c)
