@@ -79,6 +79,31 @@ it('empilha um bloco por modalidade no passo de 29 linhas, com a sigla no topo',
   expect(ws.getCell('B31').value).toBe('Diretorias')
 })
 
+it('agrupa os blocos por idade: feminino e masculino da mesma idade ficam juntos', async () => {
+  // a ordem alfabética pura jogaria os dois femininos para cima (F14, F17, M14, M17)
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+    { id: 2, sigla: 'BF17', nome: 'Basquetebol Feminino 17 anos' },
+    { id: 3, sigla: 'BM14', nome: 'Basquetebol Masculino 14 anos' },
+    { id: 4, sigla: 'BM17', nome: 'Basquetebol Masculino 17 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([1, 2, 3, 4].map((m) => insc(m, 'SREL Bauru', 'EE Bauru', 'Bauru')))
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+  expect([1, 30, 59, 88].map((r) => ws.getCell(`C${r}`).value)).toEqual(['BF14', 'BM14', 'BF17', 'BM17'])
+})
+
+it('modalidades sem idade no nome mantêm a ordem alfabética', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'XM', nome: 'Xadrez Masculino Infantil' },
+    { id: 2, sigla: 'XF', nome: 'Xadrez Feminino Infantil' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([1, 2].map((m) => insc(m, 'SREL Bauru', 'EE Bauru', 'Bauru')))
+
+  const ws = (await gerar()).getWorksheet('Xadrez')!
+  expect([1, 30].map((r) => ws.getCell(`C${r}`).value)).toEqual(['XF', 'XM'])
+})
+
 it('lista inscritos com escola e município do override, Cidade Sede por último', async () => {
   p.modalidade.findMany.mockResolvedValue([
     { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },

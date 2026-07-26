@@ -40,6 +40,25 @@ function ehAnfitriao(nome: string): boolean {
   return nome.trim().toLowerCase() === ANFITRIAO.toLowerCase()
 }
 
+/**
+ * Idade/categoria embutida no nome da modalidade ("Basquetebol Feminino 14
+ * anos" → 14). Os blocos são agrupados por idade, então feminino e masculino da
+ * mesma categoria ficam lado a lado. Nome sem número (ex.: "Xadrez Feminino
+ * Infantil", como no modelo do JEESP) cai no fim e vale a ordem alfabética.
+ */
+function idadeDaModalidade(nome: string): number {
+  const m = nome.match(/\d+/)
+  return m ? Number(m[0]) : Number.MAX_SAFE_INTEGER
+}
+
+function ordenarModalidades<T extends { nome: string }>(modalidades: T[]): T[] {
+  return [...modalidades].sort(
+    (a, b) =>
+      idadeDaModalidade(a.nome) - idadeDaModalidade(b.nome) ||
+      a.nome.localeCompare(b.nome, 'pt-BR'),
+  )
+}
+
 /** Nome do município do override da inscrição (escolar). Sem override, vazio. */
 function municipioDaInscricao(insc: any): string {
   return insc.municipio?.nome ?? ''
@@ -174,13 +193,15 @@ export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer
   if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
 
   const excluidas = await getModalidadeIdsExcluidas(evento_id)
-  const modalidades = (
-    await prisma.modalidade.findMany({
-      where: { competicao_id: evento.competicao_id, ativa: true },
-      select: { id: true, sigla: true, nome: true },
-      orderBy: { nome: 'asc' },
-    })
-  ).filter((m) => !excluidas.has(m.id))
+  const modalidades = ordenarModalidades(
+    (
+      await prisma.modalidade.findMany({
+        where: { competicao_id: evento.competicao_id, ativa: true },
+        select: { id: true, sigla: true, nome: true },
+        orderBy: { nome: 'asc' },
+      })
+    ).filter((m) => !excluidas.has(m.id)),
+  )
 
   const inscricoes = await prisma.inscricao.findMany({
     where: { evento_id },
