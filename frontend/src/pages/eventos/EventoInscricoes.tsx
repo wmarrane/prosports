@@ -172,11 +172,17 @@ export default function EventoInscricoes() {
     [sorteios]
   )
 
+  const subMunPorMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
+
+  // Alimenta os blocos de resultado do sorteio (grupos, chaves e ordem). No
+  // escolar precisa ser o participante EFETIVO: subtítulo e município saem do
+  // override da inscrição, não do cadastro global — mesma regra do Modo
+  // Congresso e do export desta tela.
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of inscricoes) m.set(i.participante_id, i.participante)
+    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, subMunPorMod))
     return m
-  }, [inscricoes])
+  }, [inscricoes, subMunPorMod])
 
   const campeoesByParticipanteId = useMemo(() => {
     const m = new Map<number, number>()
@@ -193,7 +199,6 @@ export default function EventoInscricoes() {
   const camposSubtitulo = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, camposSubtitulo)
   const eventoSuspenso = evento?.status === 'suspenso'
-  const subMunPorMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
 
   const { mutate: criarBulk, isPending: salvando } = useMutation({
     mutationFn: () => inscricoesService.criarBulk({
