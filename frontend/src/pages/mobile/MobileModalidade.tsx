@@ -8,7 +8,7 @@ import SorteioChaves from '../../components/sorteio-result/SorteioChaves'
 import SorteioOrdem from '../../components/sorteio-result/SorteioOrdem'
 import CampeaoBadge from '../../components/CampeaoBadge'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
-import { composeSubtituloLine } from '../../lib/compose-subtitulo'
+import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
 import type { Participante } from '../../types/participante'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -48,11 +48,17 @@ export default function MobileModalidade() {
   const campos = evento?.competicao?.subtitulo_campos ?? []
   const subtituloLine = (p: any) => composeSubtituloLine(p, campos)
 
+  // Escolar: subtítulo e município saem do override da inscrição, não do
+  // cadastro global do participante — mesma regra do admin e do Modo Congresso.
+  const subMunPorMod = evento?.competicao?.subtitulo_municipio_por_modalidade === true
+
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of data?.inscritos ?? []) m.set(i.participante_id, i.participante as any)
+    for (const i of data?.inscritos ?? []) {
+      m.set(i.participante_id, participanteEfetivo(i as any, subMunPorMod) as any)
+    }
     return m
-  }, [data])
+  }, [data, subMunPorMod])
 
   const campeoesByParticipanteId = useMemo(() => {
     const m = new Map<number, number>()
@@ -180,7 +186,7 @@ export default function MobileModalidade() {
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {data.inscritos.map((i, idx) => {
                     const pos = campeoesByParticipanteId.get(i.participante_id)
-                    const linha = subtituloLine(i.participante)
+                    const linha = subtituloLine(participanteEfetivo(i as any, subMunPorMod))
                     return (
                       <li key={i.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
                         <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--t4)', fontSize: 11, minWidth: 22 }}>
@@ -209,7 +215,12 @@ export default function MobileModalidade() {
               ) : (
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {data.campeoes.map(c => {
-                    const linha = subtituloLine(c.participante)
+                    // Campeão inscrito usa o efetivo da inscrição; não inscrito não
+                    // tem override, então no escolar sai sem subtítulo/município.
+                    const linha = subtituloLine(
+                      participantesById.get(c.participante_id)
+                        ?? participanteEfetivo({ participante: c.participante } as any, subMunPorMod),
+                    )
                     return (
                       <li key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
                         <CampeaoBadge posicao={c.posicao} />
