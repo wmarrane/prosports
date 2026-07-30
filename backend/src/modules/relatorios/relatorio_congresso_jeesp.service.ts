@@ -301,7 +301,11 @@ function escreveJogos(
     }
   }
   // Faixa LOCAL:/END.: com contorno próprio, acima da grade.
-  aplicarBordaExterna(ws, base + 1, letraParaIndice('N'), base + 2, c2, COR.preto, 'medium')
+  const cN = letraParaIndice('N')
+  aplicarBordaExterna(ws, base + 1, cN, base + 2, c2, COR.preto, 'medium')
+  // Fecha o bloco inteiro — faixa LOCAL/END + jogos — num retângulo só. Sem isto
+  // a lateral esquerda (coluna do LOCAL, vazia nas linhas de jogo) fica aberta.
+  aplicarBordaExterna(ws, base + 1, cN, fim, c2, COR.preto, 'medium')
 }
 
 export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer> {
@@ -349,6 +353,10 @@ export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer
     if (!aba) {
       const ws = wb.addWorksheet(sheetSafe(esporte) as string)
       for (const [letra, largura] of Object.entries(LARGURAS)) ws.getColumn(letra).width = largura
+      // Nome do evento no topo da aba, ao lado da sigla do 1º bloco.
+      const titulo = ws.getCell('I1')
+      titulo.value = sheetSafe(evento.nome)
+      aplicarEstilo(titulo, { bold: true, fontSize: 12, fontColor: COR.azul })
       aba = { ws, blocos: 0 }
       abas.set(esporte, aba)
     }
