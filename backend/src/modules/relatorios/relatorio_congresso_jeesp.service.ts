@@ -30,21 +30,38 @@ const PASSO_BLOCO = 29
 const LINHAS_INSCRITOS_MODELO = 16
 /** Slots por grupo — o modelo reserva 4 mesmo quando o grupo tem menos. */
 const SLOTS_POR_GRUPO = 4
-/** Pares da 1ª rodada, os mesmos do relatório padrão (fillProgramacao). */
-const PARES_1A_RODADA: readonly (readonly [number, number])[] = [
-  [1, 4],
-  [2, 3],
+/** Largura de uma faixa de rodada: rótulo · sigla · vaga · casa · X · fora. */
+const COLUNAS_POR_RODADA = 6
+
+type Rodada = {
+  titulo: string
+  /** Índice da 1ª coluna da faixa (N=14, U=21, AB=28 — uma coluna de respiro entre elas). */
+  colBase: number
+  pares: readonly (readonly [number, number])[]
+}
+
+/**
+ * Rodízio de 4 slots, os mesmos pares do relatório padrão (`fillProgramacao`):
+ * num grupo de 4 os seis confrontos saem uma única vez; num grupo de 3 o slot 4
+ * não existe, então cada integrante folga exatamente uma rodada.
+ */
+const RODADAS: readonly Rodada[] = [
+  { titulo: '1ª Rodada', colBase: 14, pares: [[1, 4], [2, 3]] },
+  { titulo: '2ª Rodada', colBase: 21, pares: [[3, 1], [4, 2]] },
+  { titulo: '3ª Rodada', colBase: 28, pares: [[1, 2], [3, 4]] },
 ]
 const VAZIO = '-----'
 const VAZIO_LEGENDA = '----x-----'
 const ANFITRIAO = 'Cidade Sede'
 
-/** Larguras do modelo (`congresso_jeesp.xlsx`), por letra de coluna. */
+/** Larguras do modelo (`congresso_jeesp.xlsx`) nas colunas de inscritos e grupos. */
 const LARGURAS: Record<string, number> = {
   A: 3, B: 20, C: 32, D: 18.5, E: 2.5,
   I: 30.5, J: 27, K: 32, L: 28.5, M: 2.5,
-  N: 10, O: 4, P: 2.5, Q: 32, R: 2.5, S: 33,
 }
+
+/** Larguras de uma faixa de rodada, repetidas em cada uma das três. */
+const LARGURAS_RODADA = [10, 4, 2.5, 32, 2.5, 33]
 
 const COL_GRUPOS = ['I', 'J', 'K', 'L'] as const
 const letraParaIndice = (letra: string) => letra.charCodeAt(0) - 64 // 'A' → 1
@@ -163,16 +180,6 @@ function escreveBloco(
     c.alignment = { horizontal: 'center' }
   }
 
-  // LOCAL/END. ficam sem valor: são preenchidos à mão no congresso.
-  for (const ref of [`N${cab}`, `O${cab}`]) {
-    ws.getCell(ref).value = 'LOCAL:'
-    aplicarEstilo(ws.getCell(ref), { bold: true, fontSize: 10 })
-  }
-  for (const ref of [`N${cab + 1}`, `O${cab + 1}`]) {
-    ws.getCell(ref).value = 'END.:'
-    aplicarEstilo(ws.getCell(ref), { bold: true, fontSize: 10 })
-  }
-
   linhas.forEach((l, i) => {
     const r = base + 2 + i
     const num = ws.getCell(`A${r}`)
@@ -212,7 +219,7 @@ function escreveBloco(
   cabB.border = { ...(cabB.border ?? {}), left: { style: 'thin', color: { argb: COR.azul } } }
 
   escreveGrupos(ws, base, grupos, porId)
-  escreveJogos(ws, base, modalidade.sigla, grupos, porId)
+  for (const rodada of RODADAS) escreveRodada(ws, base, modalidade.sigla, grupos, porId, rodada)
 }
 
 /**
@@ -274,44 +281,72 @@ function escreveGrupos(
 }
 
 /**
- * Grade de jogos da 1ª rodada. Cada jogo ocupa duas linhas: escolas em cima,
- * municípios embaixo. Quando o adversário não existe (grupo incompleto), a
- * linha das escolas fica vazia e a dos municípios recebe "-----".
+ * Uma faixa de jogos (uma rodada) a partir da coluna `colBase`, com 6 colunas:
+ * rótulo LOCAL/END · sigla · vaga · mandante · X · visitante.
+ *
+ * Cada jogo ocupa duas linhas — escolas em cima, municípios embaixo. Sem
+ * adversário (grupo incompleto), a linha das escolas fica vazia e a dos
+ * municípios recebe "-----": é a folga daquele integrante na rodada.
+ *
+ * Trabalha com índices numéricos de coluna porque as faixas passam de Z.
  */
-function escreveJogos(
+function escreveRodada(
   ws: ExcelJS.Worksheet,
   base: number,
   sigla: string,
   grupos: { letra: string; participantes: number[] }[],
   porId: Map<number, Linha>,
+  rodada: Rodada,
 ) {
+  const c1 = rodada.colBase
+  const c2 = c1 + COLUNAS_POR_RODADA - 1
+  const cSigla = c1 + 1
+  const cCasa = c1 + 3
+  const cX = c1 + 4
+  const cFora = c1 + 5
+  const cell = (r: number, c: number) => ws.getRow(r).getCell(c)
+
+  const titulo = cell(base, c1)
+  titulo.value = rodada.titulo
+  aplicarEstilo(titulo, { bold: true, fontSize: 11, fontColor: COR.azul })
+
+  // LOCAL/END. ficam sem valor: são preenchidos à mão no congresso.
+  for (const [linha, rotulo] of [[base + 1, 'LOCAL:'], [base + 2, 'END.:']] as const) {
+    for (const c of [c1, c1 + 1]) {
+      cell(linha, c).value = rotulo
+      aplicarEstilo(cell(linha, c), { bold: true, fontSize: 10 })
+    }
+  }
+
   const inicio = base + 3
   let row = inicio
   for (const g of grupos) {
-    for (const [a, b] of PARES_1A_RODADA) {
+    for (const [a, b] of rodada.pares) {
       const casa = porId.get(g.participantes[a - 1])
       const fora = porId.get(g.participantes[b - 1])
 
-      ws.getCell(`O${row}`).value = sheetSafe(sigla)
-      ws.getCell(`R${row}`).value = 'X'
-      if (casa) ws.getCell(`Q${row}`).value = sheetSafe(casa.escola)
-      if (fora) ws.getCell(`S${row}`).value = sheetSafe(fora.escola)
+      cell(row, cSigla).value = sheetSafe(sigla)
+      cell(row, cX).value = 'X'
+      if (casa) cell(row, cCasa).value = sheetSafe(casa.escola)
+      if (fora) cell(row, cFora).value = sheetSafe(fora.escola)
 
-      ws.getCell(`O${row + 1}`).value = sheetSafe(sigla)
-      ws.getCell(`R${row + 1}`).value = 'X'
-      if (casa) ws.getCell(`Q${row + 1}`).value = sheetSafe(casa.municipio)
-      ws.getCell(`S${row + 1}`).value = fora ? sheetSafe(fora.municipio) : VAZIO
+      cell(row + 1, cSigla).value = sheetSafe(sigla)
+      cell(row + 1, cX).value = 'X'
+      // O "-----" marca a folga de qualquer um dos lados: na 1ª rodada o slot
+      // que falta é o visitante, mas na 2ª (4x2) é o mandante.
+      cell(row + 1, cCasa).value = casa ? sheetSafe(casa.municipio) : VAZIO
+      cell(row + 1, cFora).value = fora ? sheetSafe(fora.municipio) : VAZIO
 
       // Linha da escola normal, linha do município em negrito (como nos grupos).
-      for (const col of ['O', 'Q', 'R', 'S']) {
-        aplicarEstilo(ws.getCell(`${col}${row}`), { fontSize: 10, fontColor: COR.preto })
-        aplicarEstilo(ws.getCell(`${col}${row + 1}`), {
-          bold: col === 'R' ? true : col !== 'O',
+      for (const c of [cSigla, cCasa, cX, cFora]) {
+        aplicarEstilo(cell(row, c), { fontSize: 10, fontColor: COR.preto })
+        aplicarEstilo(cell(row + 1, c), {
+          bold: c !== cSigla,
           fontSize: 10,
           fontColor: COR.preto,
         })
-        ws.getCell(`${col}${row}`).alignment = { horizontal: 'center' }
-        ws.getCell(`${col}${row + 1}`).alignment = { horizontal: 'center' }
+        cell(row, c).alignment = { horizontal: 'center' }
+        cell(row + 1, c).alignment = { horizontal: 'center' }
       }
       row += 2
     }
@@ -319,23 +354,15 @@ function escreveJogos(
 
   if (row === inicio) return
 
-  // Bordas da grade de jogos, no desenho do modelo: separadores verticais finos
-  // em todas as linhas, mas horizontal só ENTRE jogos — as duas linhas de um
-  // mesmo jogo (escolas e municípios) não são separadas. Contorno externo grosso.
-  // A grade começa na coluna do LOCAL (N), não na da sigla: no modelo essa
-  // coluna estreita fica vazia nas linhas de jogo, mas participa da grade —
-  // tem o separador vertical à direita e recebe as horizontais entre jogos.
-  const c1 = letraParaIndice('N')
-  const c2 = letraParaIndice('S')
+  // Bordas: separadores verticais finos em todas as linhas, horizontal só ENTRE
+  // jogos (as duas linhas de um mesmo jogo não são separadas) e contorno grosso
+  // por fora. A coluna do LOCAL participa da grade, como no modelo.
   const fim = row - 1
   const fina = { style: 'thin' as const, color: { argb: COR.preto } }
   const grossa = { style: 'medium' as const, color: { argb: COR.preto } }
   for (let r = inicio; r <= fim; r++) {
     const fimDeJogo = (r - inicio) % 2 === 1
     for (let c = c1; c <= c2; c++) {
-      // A linha entre jogos é declarada dos dois lados (bottom da 2ª linha do
-      // jogo anterior e top da 1ª deste), como no modelo. Dentro de um mesmo
-      // jogo — escolas em cima, municípios embaixo — não há separação.
       const b: any = {
         left: c === c1 ? grossa : fina,
         right: c === c2 ? grossa : fina,
@@ -344,22 +371,20 @@ function escreveJogos(
       else if (!fimDeJogo) b.top = fina
       if (r === fim) b.bottom = grossa
       else if (fimDeJogo) b.bottom = fina
-      ws.getRow(r).getCell(c).border = b
+      cell(r, c).border = b
     }
   }
-  // Faixa LOCAL:/END.: com contorno próprio, acima da grade.
-  const cN = letraParaIndice('N')
-  aplicarBordaExterna(ws, base + 1, cN, base + 2, c2, COR.preto, 'medium')
-  // Vertical fina fechando as duas células de rótulo, como no modelo.
+
+  // Faixa LOCAL:/END.: com contorno próprio e a vertical fina que fecha os dois
+  // rótulos; depois um retângulo grosso em volta do bloco inteiro.
+  aplicarBordaExterna(ws, base + 1, c1, base + 2, c2, COR.preto, 'medium')
   for (const r of [base + 1, base + 2]) {
-    const rotulo = ws.getCell(`O${r}`)
+    const rotulo = cell(r, c1 + 1)
     rotulo.border = { ...(rotulo.border ?? {}), right: fina }
-    const vizinho = ws.getCell(`P${r}`)
+    const vizinho = cell(r, c1 + 2)
     vizinho.border = { ...(vizinho.border ?? {}), left: fina }
   }
-  // Fecha o bloco inteiro — faixa LOCAL/END + jogos — num retângulo só. Sem isto
-  // a lateral esquerda (coluna do LOCAL, vazia nas linhas de jogo) fica aberta.
-  aplicarBordaExterna(ws, base + 1, cN, fim, c2, COR.preto, 'medium')
+  aplicarBordaExterna(ws, base + 1, c1, fim, c2, COR.preto, 'medium')
 }
 
 export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer> {
@@ -409,6 +434,9 @@ export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer
     if (!aba) {
       const ws = wb.addWorksheet(sheetSafe(esporte) as string)
       for (const [letra, largura] of Object.entries(LARGURAS)) ws.getColumn(letra).width = largura
+      for (const rodada of RODADAS) {
+        LARGURAS_RODADA.forEach((w, i) => (ws.getColumn(rodada.colBase + i).width = w))
+      }
       // Nome do evento no topo da aba, ao lado da sigla do 1º bloco.
       const titulo = ws.getCell('I1')
       titulo.value = sheetSafe(evento.nome)
