@@ -344,6 +344,72 @@ it('a coluna do LOCAL participa da grade interna dos jogos', async () => {
   expect(ws.getCell('O3').border?.right).toMatchObject(FINA)
 })
 
+it('gera as três rodadas em faixas lado a lado, com os pares do rodízio', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'A1', 'Escola 1', 'Cidade 1', 'p1'),
+    insc(1, 'A2', 'Escola 2', 'Cidade 2', 'p2'),
+    insc(1, 'A3', 'Escola 3', 'Cidade 3', 'p3'),
+    insc(1, 'A4', 'Escola 4', 'Cidade 4', 'p4'),
+  ])
+  p.sorteio.findMany.mockResolvedValue([
+    { modalidade_id: 1, resultado: { grupos: [{ letra: 'A', participantes: ['p1', 'p2', 'p3', 'p4'] }] } },
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+
+  // títulos das faixas
+  expect(ws.getCell('N1').value).toBe('1ª Rodada')
+  expect(ws.getCell('U1').value).toBe('2ª Rodada')
+  expect(ws.getCell('AB1').value).toBe('3ª Rodada')
+  // cada faixa tem sua própria tarja LOCAL/END
+  expect(ws.getCell('U2').value).toBe('LOCAL:')
+  expect(ws.getCell('AB3').value).toBe('END.:')
+
+  // 1ª rodada (N..S): 1x4 e 2x3
+  expect([ws.getCell('Q4').value, ws.getCell('S4').value]).toEqual(['Escola 1', 'Escola 4'])
+  expect([ws.getCell('Q6').value, ws.getCell('S6').value]).toEqual(['Escola 2', 'Escola 3'])
+  // 2ª rodada (U..Z): 3x1 e 4x2
+  expect([ws.getCell('X4').value, ws.getCell('Z4').value]).toEqual(['Escola 3', 'Escola 1'])
+  expect([ws.getCell('X6').value, ws.getCell('Z6').value]).toEqual(['Escola 4', 'Escola 2'])
+  // 3ª rodada (AB..AG): 1x2 e 3x4
+  expect([ws.getCell('AE4').value, ws.getCell('AG4').value]).toEqual(['Escola 1', 'Escola 2'])
+  expect([ws.getCell('AE6').value, ws.getCell('AG6').value]).toEqual(['Escola 3', 'Escola 4'])
+})
+
+it('grupo de 3: a folga cai num integrante diferente a cada rodada', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'A1', 'Escola 1', 'Cidade 1', 'p1'),
+    insc(1, 'A2', 'Escola 2', 'Cidade 2', 'p2'),
+    insc(1, 'A3', 'Escola 3', 'Cidade 3', 'p3'),
+  ])
+  p.sorteio.findMany.mockResolvedValue([
+    { modalidade_id: 1, resultado: { grupos: [{ letra: 'A', participantes: ['p1', 'p2', 'p3'] }] } },
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+  // 1ª: 1 folga (1x4 sem o 4º) e 2x3 acontece
+  expect(ws.getCell('Q4').value).toBe('Escola 1')
+  expect(ws.getCell('S5').value).toBe('-----')
+  expect([ws.getCell('Q6').value, ws.getCell('S6').value]).toEqual(['Escola 2', 'Escola 3'])
+  // 2ª: 3x1 acontece, 2 folga (4x2 sem o 4º) — aqui quem falta é o MANDANTE,
+  // então o "-----" tem de aparecer do lado esquerdo
+  expect([ws.getCell('X4').value, ws.getCell('Z4').value]).toEqual(['Escola 3', 'Escola 1'])
+  expect(ws.getCell('X6').value).toBeFalsy()
+  expect(ws.getCell('X7').value).toBe('-----')
+  expect(ws.getCell('Z6').value).toBe('Escola 2')
+  // 3ª: 1x2 acontece, 3 folga (3x4 sem o 4º) — a folga é o 2º jogo, linhas 6/7
+  expect([ws.getCell('AE4').value, ws.getCell('AG4').value]).toEqual(['Escola 1', 'Escola 2'])
+  expect(ws.getCell('AE6').value).toBe('Escola 3')
+  expect(ws.getCell('AG6').value).toBeFalsy()
+  expect(ws.getCell('AG7').value).toBe('-----')
+})
+
 it('evento inexistente lança 404', async () => {
   p.evento.findUnique.mockResolvedValue(null)
   await expect(gerarCongressoJeespXlsx(999)).rejects.toMatchObject({ status: 404 })
