@@ -122,6 +122,36 @@ it('lista inscritos com escola e município do override, Cidade Sede por último
   expect(ws.getCell('A5').value).toBe(3)
 })
 
+it('diretoria sem inscrição na modalidade aparece tachada, com escola e município vazios', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+    { id: 2, sigla: 'BM14', nome: 'Basquetebol Masculino 14 anos' },
+  ])
+  // SREL Bauru só disputa a feminina; na masculina deve constar tachada
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'SREL Araçatuba', 'EE Um', 'Birigui'),
+    insc(1, 'SREL Bauru', 'EE Dois', 'Campinas'),
+    insc(2, 'SREL Araçatuba', 'EE Um', 'Birigui'),
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+
+  // bloco 1 (feminina, linha 1): as duas inscritas, sem tachado
+  expect(ws.getCell('B3').value).toBe('SREL Araçatuba')
+  expect(ws.getCell('B4').value).toBe('SREL Bauru')
+  expect(ws.getCell('B4').font?.strike).toBeFalsy()
+  expect(ws.getCell('C4').value).toBe('EE Dois')
+
+  // bloco 2 (masculina, linha 30): SREL Bauru continua listada, porém tachada
+  expect(ws.getCell('B32').value).toBe('SREL Araçatuba')
+  expect(ws.getCell('B33').value).toBe('SREL Bauru')
+  expect(ws.getCell('B33').font?.strike).toBe(true)
+  expect(ws.getCell('C33').value).toBeFalsy()
+  expect(ws.getCell('D33').value).toBeFalsy()
+  // a numeração sequencial não pula a linha tachada
+  expect(ws.getCell('A33').value).toBe(2)
+})
+
 it('grupos: escola e município em linhas alternadas, slot vazio vira -----', async () => {
   p.modalidade.findMany.mockResolvedValue([
     { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
@@ -229,7 +259,8 @@ it('formata com a paleta padrão e as bordas do modelo', async () => {
 
   // contorno grosso por fora e grade fina por dentro, como na planilha exemplo
   expect(ws.getCell('B2').border?.top).toMatchObject({ style: 'medium', color: { argb: AZUL } })
-  expect(ws.getCell('B18').border?.bottom).toMatchObject({ style: 'medium' })
+  // 2 diretorias + Cidade Sede => o quadro termina na linha 5 e é ali que fecha
+  expect(ws.getCell('B5').border?.bottom).toMatchObject({ style: 'medium' })
   expect(ws.getCell('C3').border?.top).toMatchObject({ style: 'medium' }) // linha do cabeçalho
   expect(ws.getCell('C4').border?.top).toMatchObject({ style: 'thin' }) // grade interna
 
@@ -286,6 +317,31 @@ it('a grade de jogos fecha o contorno, incluindo a coluna do LOCAL/END', async (
   expect(ws.getCell('N7').border?.bottom).toMatchObject(GROSSA) // fundo fecha na coluna do LOCAL
   expect(ws.getCell('S7').border?.bottom).toMatchObject(GROSSA)
   expect(ws.getCell('S7').border?.right).toMatchObject(GROSSA)
+})
+
+it('a coluna do LOCAL participa da grade interna dos jogos', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'SREL Capital', 'Colegio Campos Sales', 'São Paulo', 'p1'),
+    insc(1, 'SREL Bauru', 'EE Bauru', 'Bauru', 'p2'),
+  ])
+  p.sorteio.findMany.mockResolvedValue([
+    { modalidade_id: 1, resultado: { grupos: [{ letra: 'A', participantes: ['p1', 'p2'] }] } },
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+  const FINA = { style: 'thin' }
+
+  // vertical separando a coluna do LOCAL da coluna da sigla, nas linhas de jogo
+  expect(ws.getCell('N4').border?.right).toMatchObject(FINA)
+  expect(ws.getCell('N6').border?.right).toMatchObject(FINA)
+  // a horizontal entre jogos atravessa a coluna do LOCAL
+  expect(ws.getCell('N5').border?.bottom).toMatchObject(FINA)
+  // faixa LOCAL/END: vertical fina fechando as duas celulas de rotulo
+  expect(ws.getCell('O2').border?.right).toMatchObject(FINA)
+  expect(ws.getCell('O3').border?.right).toMatchObject(FINA)
 })
 
 it('evento inexistente lança 404', async () => {

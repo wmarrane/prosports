@@ -10,6 +10,7 @@ export const COR = {
 
 type Estilo = {
   bold?: boolean
+  strike?: boolean
   fontSize?: number
   fontName?: string
   fontColor?: string
@@ -21,6 +22,7 @@ export function aplicarEstilo(cell: ExcelJS.Cell, e: Estilo): void {
     name: e.fontName ?? 'Aptos Narrow',
     size: e.fontSize ?? 11,
     bold: e.bold ?? false,
+    strike: e.strike ?? false,
     color: e.fontColor ? { argb: e.fontColor } : undefined,
   }
   if (e.fill) {
