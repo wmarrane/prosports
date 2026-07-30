@@ -22,8 +22,12 @@ import { COR, aplicarEstilo, aplicarBordas, aplicarBordaExterna } from './xlsx-s
 
 /** Distância entre o topo de um bloco e o topo do seguinte, como no modelo. */
 const PASSO_BLOCO = 29
-/** Linhas de inscritos por bloco (15 diretorias + Cidade Sede). */
-const LINHAS_INSCRITOS = 16
+/**
+ * Referência do modelo: 15 diretorias + Cidade Sede. O quadro real vem do
+ * evento, mas o passo de 29 linhas entre blocos só comporta ~27 linhas de
+ * diretoria — acima disso os blocos se sobreporiam.
+ */
+const LINHAS_INSCRITOS_MODELO = 16
 /** Slots por grupo — o modelo reserva 4 mesmo quando o grupo tem menos. */
 const SLOTS_POR_GRUPO = 4
 /** Pares da 1ª rodada, os mesmos do relatório padrão (fillProgramacao). */
@@ -54,7 +58,15 @@ function bordaTopo(ws: ExcelJS.Worksheet, row: number, c1: number, c2: number, a
   }
 }
 
-type Linha = { nome: string; escola: string; municipio: string; participanteId: number | null }
+type Linha = {
+  nome: string
+  escola: string
+  municipio: string
+  participanteId: number | null
+  /** Diretoria do evento que não se inscreveu NESTA modalidade: entra na lista
+   *  assim mesmo (o quadro é o mesmo em todos os blocos), com o nome tachado. */
+  ausente?: boolean
+}
 
 function ehAnfitriao(nome: string): boolean {
   return nome.trim().toLowerCase() === ANFITRIAO.toLowerCase()
@@ -98,11 +110,31 @@ function toLinha(insc: any): Linha {
  * ele costuma vir cadastrado como participante (o import do Jeesp o cria) e no
  * modelo ocupa a 16ª linha.
  */
-function ordenarInscritos(inscricoes: any[]): Linha[] {
-  const linhas = inscricoes.map(toLinha)
-  const normais = linhas.filter((l) => !ehAnfitriao(l.nome))
-  const anfitriao = linhas.find((l) => ehAnfitriao(l.nome))
-  return anfitriao ? [...normais, anfitriao] : [...normais, { nome: ANFITRIAO, escola: '', municipio: '', participanteId: null }]
+/**
+ * Linhas de um bloco: TODAS as diretorias do evento, na mesma ordem em todos os
+ * blocos (é assim que o modelo funciona — o quadro é fixo por evento). As que
+ * não se inscreveram nesta modalidade entram sem escola/município e marcadas
+ * como ausentes, para sair com o nome tachado.
+ *
+ * `roster` já vem ordenado por nome com o anfitrião por último.
+ */
+function linhasDoBloco(roster: string[], inscricoes: any[]): Linha[] {
+  const porNome = new Map<string, Linha>()
+  for (const i of inscricoes) {
+    const l = toLinha(i)
+    porNome.set(l.nome, l)
+  }
+  return roster.map(
+    (nome) => porNome.get(nome) ?? { nome, escola: '', municipio: '', participanteId: null, ausente: true },
+  )
+}
+
+/** Diretorias do evento inteiro, ordenadas por nome com o anfitrião por último. */
+function montarRoster(inscricoes: any[]): string[] {
+  const nomes = new Set<string>()
+  for (const i of inscricoes) nomes.add(i.participante?.nome ?? '—')
+  const normais = [...nomes].filter((n) => !ehAnfitriao(n)).sort((a, b) => a.localeCompare(b, 'pt-BR'))
+  return [...normais, ANFITRIAO]
 }
 
 function escreveBloco(
@@ -141,7 +173,7 @@ function escreveBloco(
     aplicarEstilo(ws.getCell(ref), { bold: true, fontSize: 10 })
   }
 
-  linhas.slice(0, LINHAS_INSCRITOS).forEach((l, i) => {
+  linhas.forEach((l, i) => {
     const r = base + 2 + i
     const num = ws.getCell(`A${r}`)
     num.value = i + 1
@@ -153,14 +185,21 @@ function escreveBloco(
     ws.getCell(`D${r}`).value = sheetSafe(l.municipio)
     for (const col of ['B', 'C', 'D']) {
       const c = ws.getCell(`${col}${r}`)
-      aplicarEstilo(c, { fontSize: col === 'B' ? 11 : 10, fontColor: COR.preto, fill: COR.branco })
+      aplicarEstilo(c, {
+        fontSize: col === 'B' ? 11 : 10,
+        fontColor: COR.preto,
+        fill: COR.branco,
+        // Tachado só no nome da diretoria (coluna B) quando ela não disputa
+        // esta modalidade; escola e município ficam vazios mesmo.
+        strike: col === 'B' && l.ausente === true,
+      })
       c.alignment = { horizontal: 'left' }
     }
   })
 
   // Grade fina no bloco inteiro, contorno grosso por fora e a linha do cabeçalho
   // reforçada nos dois lados — exatamente como o modelo desenha.
-  const ultimaLinha = base + 1 + LINHAS_INSCRITOS
+  const ultimaLinha = base + 1 + linhas.length
   const bIdx = letraParaIndice('B')
   const dIdx = letraParaIndice('D')
   aplicarBordas(ws, cab, bIdx, ultimaLinha, dIdx, COR.azul)
@@ -283,7 +322,10 @@ function escreveJogos(
   // Bordas da grade de jogos, no desenho do modelo: separadores verticais finos
   // em todas as linhas, mas horizontal só ENTRE jogos — as duas linhas de um
   // mesmo jogo (escolas e municípios) não são separadas. Contorno externo grosso.
-  const c1 = letraParaIndice('O')
+  // A grade começa na coluna do LOCAL (N), não na da sigla: no modelo essa
+  // coluna estreita fica vazia nas linhas de jogo, mas participa da grade —
+  // tem o separador vertical à direita e recebe as horizontais entre jogos.
+  const c1 = letraParaIndice('N')
   const c2 = letraParaIndice('S')
   const fim = row - 1
   const fina = { style: 'thin' as const, color: { argb: COR.preto } }
@@ -291,10 +333,15 @@ function escreveJogos(
   for (let r = inicio; r <= fim; r++) {
     const fimDeJogo = (r - inicio) % 2 === 1
     for (let c = c1; c <= c2; c++) {
-      // A linha entre jogos é desenhada uma única vez, pelo `bottom` da 2ª
-      // linha do jogo anterior — é assim que o modelo faz.
-      const b: any = { left: fina, right: c === c2 ? grossa : fina }
+      // A linha entre jogos é declarada dos dois lados (bottom da 2ª linha do
+      // jogo anterior e top da 1ª deste), como no modelo. Dentro de um mesmo
+      // jogo — escolas em cima, municípios embaixo — não há separação.
+      const b: any = {
+        left: c === c1 ? grossa : fina,
+        right: c === c2 ? grossa : fina,
+      }
       if (r === inicio) b.top = grossa
+      else if (!fimDeJogo) b.top = fina
       if (r === fim) b.bottom = grossa
       else if (fimDeJogo) b.bottom = fina
       ws.getRow(r).getCell(c).border = b
@@ -303,6 +350,13 @@ function escreveJogos(
   // Faixa LOCAL:/END.: com contorno próprio, acima da grade.
   const cN = letraParaIndice('N')
   aplicarBordaExterna(ws, base + 1, cN, base + 2, c2, COR.preto, 'medium')
+  // Vertical fina fechando as duas células de rótulo, como no modelo.
+  for (const r of [base + 1, base + 2]) {
+    const rotulo = ws.getCell(`O${r}`)
+    rotulo.border = { ...(rotulo.border ?? {}), right: fina }
+    const vizinho = ws.getCell(`P${r}`)
+    vizinho.border = { ...(vizinho.border ?? {}), left: fina }
+  }
   // Fecha o bloco inteiro — faixa LOCAL/END + jogos — num retângulo só. Sem isto
   // a lateral esquerda (coluna do LOCAL, vazia nas linhas de jogo) fica aberta.
   aplicarBordaExterna(ws, base + 1, cN, fim, c2, COR.preto, 'medium')
@@ -331,6 +385,8 @@ export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer
     include: { municipio: true, participante: true },
     orderBy: { participante: { nome: 'asc' } },
   })
+  // Quadro fixo de diretorias do evento — igual em todos os blocos.
+  const roster = montarRoster(inscricoes)
   const porModalidade = new Map<number, any[]>()
   for (const i of inscricoes) {
     const arr = porModalidade.get(i.modalidade_id) ?? []
@@ -361,7 +417,7 @@ export async function gerarCongressoJeespXlsx(evento_id: number): Promise<Buffer
       abas.set(esporte, aba)
     }
 
-    const linhas = ordenarInscritos(inscricoesMod)
+    const linhas = linhasDoBloco(roster, inscricoesMod)
     const porId = new Map<number, Linha>()
     for (const l of linhas) if (l.participanteId != null) porId.set(l.participanteId, l)
 
