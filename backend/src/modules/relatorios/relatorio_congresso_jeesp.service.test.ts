@@ -250,6 +250,44 @@ it('formata com a paleta padrão e as bordas do modelo', async () => {
   expect(ws.getColumn('S').width).toBe(33)
 })
 
+it('I1 de cada aba traz o nome do evento', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+    { id: 2, sigla: 'HF14', nome: 'Handebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'SREL Bauru', 'EE Bauru', 'Bauru'),
+    insc(2, 'SREL Bauru', 'EE Bauru', 'Bauru'),
+  ])
+
+  const wb = await gerar()
+  expect(wb.getWorksheet('Basquetebol')!.getCell('I1').value).toBe('Jeesp Mirim')
+  expect(wb.getWorksheet('Handebol')!.getCell('I1').value).toBe('Jeesp Mirim')
+})
+
+it('a grade de jogos fecha o contorno, incluindo a coluna do LOCAL/END', async () => {
+  p.modalidade.findMany.mockResolvedValue([
+    { id: 1, sigla: 'BF14', nome: 'Basquetebol Feminino 14 anos' },
+  ])
+  p.inscricao.findMany.mockResolvedValue([
+    insc(1, 'SREL Capital', 'Colegio Campos Sales', 'São Paulo', 'p1'),
+    insc(1, 'SREL Bauru', 'EE Bauru', 'Bauru', 'p2'),
+  ])
+  p.sorteio.findMany.mockResolvedValue([
+    { modalidade_id: 1, resultado: { grupos: [{ letra: 'A', participantes: ['p1', 'p2'] }] } },
+  ])
+
+  const ws = (await gerar()).getWorksheet('Basquetebol')!
+  // 1 grupo × 2 pares × 2 linhas = jogos nas linhas 4..7
+  const GROSSA = { style: 'medium' }
+  expect(ws.getCell('N2').border?.left).toMatchObject(GROSSA) // topo do bloco
+  expect(ws.getCell('N4').border?.left).toMatchObject(GROSSA) // lateral desce pelas linhas de jogo
+  expect(ws.getCell('N7').border?.left).toMatchObject(GROSSA)
+  expect(ws.getCell('N7').border?.bottom).toMatchObject(GROSSA) // fundo fecha na coluna do LOCAL
+  expect(ws.getCell('S7').border?.bottom).toMatchObject(GROSSA)
+  expect(ws.getCell('S7').border?.right).toMatchObject(GROSSA)
+})
+
 it('evento inexistente lança 404', async () => {
   p.evento.findUnique.mockResolvedValue(null)
   await expect(gerarCongressoJeespXlsx(999)).rejects.toMatchObject({ status: 404 })
