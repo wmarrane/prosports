@@ -19,6 +19,35 @@ Popular o banco (admin + dados base) — só na primeira vez:
 docker compose -f docker-compose.dev.windows.yml --env-file .env.dev.windows.local --profile seed run --rm seed
 ```
 
+## Atualizar o ambiente (sempre pela develop)
+
+```powershell
+npm run dev:update
+```
+
+Este é o caminho padrão, equivalente ao que o `deploy-develop.yml` fazia na VM
+`192.168.56.113`: busca o remoto, coloca a árvore em `origin/develop` por
+fast-forward, e reconstrói os containers com o commit resultante.
+
+**Por que não basta `docker compose up -d --build`:** o compose constrói a
+**árvore de trabalho** (`build: ./backend`, `context: .`), não uma branch. Rodar
+o build direto empacota o que estiver em checkout — já aconteceu de o ambiente
+ficar três releases atrás sem nenhum aviso, e de uma promoção deixar a `main`
+em checkout.
+
+O script recusa a atualização se houver alteração **não commitada** (arquivos
+não rastreados são tolerados) ou se a `develop` local tiver divergido do remoto.
+
+Para conferir em que versão o ambiente está:
+
+```powershell
+curl http://localhost:3100/health     # {"status":"ok","commit":"d472b9e"}
+```
+
+`commit` = de qual código a instância foi construída. Vale para a VM também (o
+`deploy-develop` já grava `GIT_COMMIT` no `.env`). Sobindo na mão, sem o script,
+aparece `local`.
+
 ## Endereços
 
 | Serviço | URL | Observação |
@@ -43,14 +72,44 @@ parametrizadas no `.env.dev.windows.local`.
 
 | Item | VM (`docker-compose.yml`) | Windows (`docker-compose.dev.windows.yml`) |
 |---|---|---|
-| Postgres | externo (`DATABASE_URL` aponta para outra máquina) | container `postgres:16-alpine` + volume `pgdata` |
+| Postgres | externo (`DATABASE_URL` aponta para outra máquina) | container `postgres:18-alpine` + volume `pgdata` |
 | Migrations | runner do GitHub Actions roda no host antes do `up` | serviço one-shot `migrate` (o backend só sobe depois dele) |
 | Chave SFTP | bind mount de `/home/wagner/secrets/...` | não montada (veja "Boletins") |
 | Deploy | push em `develop` → CI | `docker compose ... up -d --build` na mão |
 
-A imagem `postgres:16-alpine` é a mesma que a stack **r2p** já usa nesta máquina —
-não há download novo. Container e volume são próprios do prosports, então os dois
-projetos não se misturam.
+Container e volume são próprios do prosports, então não se misturam com as outras
+stacks da máquina.
+
+## Versão do PostgreSQL
+
+O dev usa **`postgres:18-alpine`**, a mesma major da produção (Cloud SQL
+`prosportdb-sb`), para que um dump de lá restaure aqui sem conversão.
+
+Duas armadilhas ao mexer nisso:
+
+- **O PG18 não lê um diretório de dados criado pelo 16.** Trocar a tag da imagem
+  sem migrar faz o container subir em loop. A troca exige dump/restore:
+
+  ```powershell
+  # com a stack antiga no ar
+  docker run --rm -v prosports-pg16-backup:/dump --network prosports-dev_default `
+    -e PGPASSWORD=prosports postgres:16-alpine `
+    pg_dump -h postgres -U prosports -d newprosports -Fc -f /dump/antes.dump
+  # troca a tag no compose, derruba, remove o volume e sobe só o postgres
+  docker compose -f docker-compose.dev.windows.yml down
+  docker volume rm prosports-dev_pgdata
+  docker compose -f docker-compose.dev.windows.yml up -d postgres
+  # restaura e sobe o resto
+  docker run --rm -v prosports-pg16-backup:/dump --network prosports-dev_default `
+    -e PGPASSWORD=prosports postgres:18-alpine `
+    pg_restore --no-owner --no-privileges -h postgres -U prosports -d newprosports /dump/antes.dump
+  ```
+
+- **A partir do 18 o volume vai montado em `/var/lib/postgresql`**, não em
+  `/var/lib/postgresql/data`: a imagem passou a guardar os dados em
+  `/var/lib/postgresql/<major>/docker`. Com o mount antigo o entrypoint aborta
+  com *"there appears to be PostgreSQL data in /var/lib/postgresql/data (unused
+  mount/volume)"*.
 
 ## Boletins (upload de PDF)
 
