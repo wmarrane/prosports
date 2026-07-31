@@ -62,7 +62,11 @@ app.use('/key-access', keyAccessRoutes)
 app.use('/relatorios', relatoriosRoutes)
 app.use('/eventos', boletinsRoutes)
 
-app.get('/health', (_req, res) => res.json({ status: 'ok' }))
+// `commit` diz de qual código esta instância foi construída — é como se
+// verifica, de fora, se o ambiente está na versão esperada. Vem do GIT_COMMIT
+// que o compose injeta (dev: script dev:update; VM: workflow deploy-develop).
+app.get('/health', (_req, res) =>
+  res.json({ status: 'ok', commit: process.env.GIT_COMMIT || 'unknown' }))
 
 app.use(errorHandler)
 
