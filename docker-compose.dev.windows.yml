@@ -87,6 +87,9 @@ services:
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET:-dev-refresh-secret-troque-em-producao-02}
       - JWT_KEY_SECRET=${JWT_KEY_SECRET:-dev-key-secret-troque-em-producao-000003}
       - NODE_ENV=development
+      # Commit de que este ambiente foi construído — exposto no /health.
+      # Preenchido pelo `npm run dev:update`; "local" quando se sobe na mão.
+      - GIT_COMMIT=${GIT_COMMIT:-local}
       # O frontend chama /api pelo nginx (mesma origem), então CORS só importa
       # se você atacar o backend direto pela porta publicada.
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:${FRONTEND_HOST_PORT:-8090},http://127.0.0.1:${FRONTEND_HOST_PORT:-8090},http://localhost:${BACKEND_HOST_PORT:-3100}}

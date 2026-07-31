@@ -24,6 +24,8 @@ services:
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - JWT_KEY_SECRET=${JWT_KEY_SECRET}
       - NODE_ENV=${NODE_ENV:-development}
+      # Exposto no /health; o deploy-develop já grava GIT_COMMIT no .env.
+      - GIT_COMMIT=${GIT_COMMIT:-unknown}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:8080}
       - STORAGE_PROVIDER=${STORAGE_PROVIDER:-sftp}
       - SFTP_HOST=${SFTP_HOST:-192.168.56.130}

@@ -19,6 +19,35 @@ Popular o banco (admin + dados base) — só na primeira vez:
 docker compose -f docker-compose.dev.windows.yml --env-file .env.dev.windows.local --profile seed run --rm seed
 ```
 
+## Atualizar o ambiente (sempre pela develop)
+
+```powershell
+npm run dev:update
+```
+
+Este é o caminho padrão, equivalente ao que o `deploy-develop.yml` fazia na VM
+`192.168.56.113`: busca o remoto, coloca a árvore em `origin/develop` por
+fast-forward, e reconstrói os containers com o commit resultante.
+
+**Por que não basta `docker compose up -d --build`:** o compose constrói a
+**árvore de trabalho** (`build: ./backend`, `context: .`), não uma branch. Rodar
+o build direto empacota o que estiver em checkout — já aconteceu de o ambiente
+ficar três releases atrás sem nenhum aviso, e de uma promoção deixar a `main`
+em checkout.
+
+O script recusa a atualização se houver alteração **não commitada** (arquivos
+não rastreados são tolerados) ou se a `develop` local tiver divergido do remoto.
+
+Para conferir em que versão o ambiente está:
+
+```powershell
+curl http://localhost:3100/health     # {"status":"ok","commit":"d472b9e"}
+```
+
+`commit` = de qual código a instância foi construída. Vale para a VM também (o
+`deploy-develop` já grava `GIT_COMMIT` no `.env`). Sobindo na mão, sem o script,
+aparece `local`.
+
 ## Endereços
 
 | Serviço | URL | Observação |
