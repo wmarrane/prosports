@@ -72,14 +72,44 @@ parametrizadas no `.env.dev.windows.local`.
 
 | Item | VM (`docker-compose.yml`) | Windows (`docker-compose.dev.windows.yml`) |
 |---|---|---|
-| Postgres | externo (`DATABASE_URL` aponta para outra máquina) | container `postgres:16-alpine` + volume `pgdata` |
+| Postgres | externo (`DATABASE_URL` aponta para outra máquina) | container `postgres:18-alpine` + volume `pgdata` |
 | Migrations | runner do GitHub Actions roda no host antes do `up` | serviço one-shot `migrate` (o backend só sobe depois dele) |
 | Chave SFTP | bind mount de `/home/wagner/secrets/...` | não montada (veja "Boletins") |
 | Deploy | push em `develop` → CI | `docker compose ... up -d --build` na mão |
 
-A imagem `postgres:16-alpine` é a mesma que a stack **r2p** já usa nesta máquina —
-não há download novo. Container e volume são próprios do prosports, então os dois
-projetos não se misturam.
+Container e volume são próprios do prosports, então não se misturam com as outras
+stacks da máquina.
+
+## Versão do PostgreSQL
+
+O dev usa **`postgres:18-alpine`**, a mesma major da produção (Cloud SQL
+`prosportdb-sb`), para que um dump de lá restaure aqui sem conversão.
+
+Duas armadilhas ao mexer nisso:
+
+- **O PG18 não lê um diretório de dados criado pelo 16.** Trocar a tag da imagem
+  sem migrar faz o container subir em loop. A troca exige dump/restore:
+
+  ```powershell
+  # com a stack antiga no ar
+  docker run --rm -v prosports-pg16-backup:/dump --network prosports-dev_default `
+    -e PGPASSWORD=prosports postgres:16-alpine `
+    pg_dump -h postgres -U prosports -d newprosports -Fc -f /dump/antes.dump
+  # troca a tag no compose, derruba, remove o volume e sobe só o postgres
+  docker compose -f docker-compose.dev.windows.yml down
+  docker volume rm prosports-dev_pgdata
+  docker compose -f docker-compose.dev.windows.yml up -d postgres
+  # restaura e sobe o resto
+  docker run --rm -v prosports-pg16-backup:/dump --network prosports-dev_default `
+    -e PGPASSWORD=prosports postgres:18-alpine `
+    pg_restore --no-owner --no-privileges -h postgres -U prosports -d newprosports /dump/antes.dump
+  ```
+
+- **A partir do 18 o volume vai montado em `/var/lib/postgresql`**, não em
+  `/var/lib/postgresql/data`: a imagem passou a guardar os dados em
+  `/var/lib/postgresql/<major>/docker`. Com o mount antigo o entrypoint aborta
+  com *"there appears to be PostgreSQL data in /var/lib/postgresql/data (unused
+  mount/volume)"*.
 
 ## Boletins (upload de PDF)
 
