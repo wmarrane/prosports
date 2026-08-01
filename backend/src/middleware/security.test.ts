@@ -8,10 +8,23 @@ vi.hoisted(() => {
   process.env.NODE_ENV = 'production'
 })
 
-import { requireSameOrigin } from './security'
+import { requireSameOrigin, uploadsCorsResourcePolicy } from './security'
 
 const mkRes = () => ({ statusCode: 0, body: null as any, status(c:number){this.statusCode=c;return this}, json(b:any){this.body=b;return this} })
 beforeEach(() => vi.clearAllMocks())
+
+describe('uploadsCorsResourcePolicy', () => {
+  it('libera o CORP para os assets de /uploads', () => {
+    // O helmet marca tudo como same-origin; com o admin no Firebase e a API em
+    // outro domínio, o navegador BLOQUEIA a imagem mesmo com CORS liberado.
+    const headers: Record<string, string> = {}
+    const res: any = { setHeader: (k: string, v: string) => { headers[k] = v } }
+    const next = vi.fn()
+    uploadsCorsResourcePolicy({} as any, res, next)
+    expect(headers['Cross-Origin-Resource-Policy']).toBe('cross-origin')
+    expect(next).toHaveBeenCalled()
+  })
+})
 
 describe('requireSameOrigin', () => {
   it('next quando Origin está na allowlist', () => {

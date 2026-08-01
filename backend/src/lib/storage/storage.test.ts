@@ -1,9 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-// Ver local.test.ts: reimportar `./index` puxa o SDK do Google Cloud e passa dos
-// 5s padrão do vitest quando a suíte inteira roda em paralelo.
-const IMPORT_TIMEOUT = 20_000
-
 const putMock = vi.fn()
 const deleteMock = vi.fn()
 const connectMock = vi.fn()
@@ -18,13 +14,13 @@ beforeEach(() => { vi.clearAllMocks(); vi.resetModules()
   process.env.SFTP_HOST = 'h'; process.env.SFTP_USER = 'u'
   process.env.SFTP_PRIVATE_KEY_PATH = ''; process.env.SFTP_BASE_DIR = '/srv/boletins'
   process.env.PUBLIC_BOLETINS_BASE_URL = 'http://vm/boletins'
-}, IMPORT_TIMEOUT)
+})
 
 it('getStorage retorna SftpStorage quando STORAGE_PROVIDER=sftp', async () => {
   const { getStorage } = await import('./index')
   const s = getStorage()
   expect(s).toBeTruthy()
-}, IMPORT_TIMEOUT)
+})
 
 it('SftpStorage.put envia o buffer e retorna a URL pública', async () => {
   const { getStorage } = await import('./index')
@@ -32,4 +28,4 @@ it('SftpStorage.put envia o buffer e retorna a URL pública', async () => {
   expect(putMock).toHaveBeenCalled()
   expect(url).toBe('http://vm/boletins/eventos/9/boletim-1-abc.pdf')
   expect(endMock).toHaveBeenCalled()
-}, IMPORT_TIMEOUT)
+})
