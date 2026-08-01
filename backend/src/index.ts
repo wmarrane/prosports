@@ -27,6 +27,7 @@ import {
   corsMiddleware,
   globalRateLimit,
   errorHandler,
+  uploadsCorsResourcePolicy,
 } from './middleware/security'
 
 const app = express()
@@ -42,7 +43,9 @@ app.use(globalRateLimit)
 app.use(express.json({ limit: '1mb' }))
 app.use(cookieParser())
 
-app.use('/uploads', express.static(UPLOADS_DIR))
+// O admin carrega estes arquivos de outra origem em produção (Firebase → API),
+// então o CORP restrito do helmet os bloquearia no navegador.
+app.use('/uploads', uploadsCorsResourcePolicy, express.static(UPLOADS_DIR))
 app.use('/stats', statsRoutes)
 app.use('/auth', authRoutes)
 app.use('/users', usersRoutes)
