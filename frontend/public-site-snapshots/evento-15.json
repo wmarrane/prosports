@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:22:46.228Z",
+  "publicadoEm": "2026-08-01T21:25:11.739Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1317,8 +1317,8 @@
       "nome": "Voleibol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "25d3fb101820e615",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1431,8 +1431,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        681,
+        678,
+        677
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              675,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              681,
+              684,
+              687,
+              676
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              685,
+              680,
+              679
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              677,
+              683,
+              674,
+              682
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1440,8 +1485,8 @@
       "nome": "Voleibol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "8c0fb5753a664038",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1544,8 +1589,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        685,
+        688,
+        678
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              682,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              685,
+              676,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              688,
+              687,
+              681
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              678,
+              683,
+              674,
+              677
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
