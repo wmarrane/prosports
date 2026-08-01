@@ -1,0 +1,1384 @@
+{
+  "id": 15,
+  "nome": "JEESP Sub 14 - Etapa II",
+  "status": "pronto",
+  "competicao": "JEESP",
+  "cidade": "Praia Grande",
+  "local": ".",
+  "data": "2026-08-01T20:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-08-01T18:41:19.423Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 265,
+      "nome": "Basquetebol Feminino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Feb - Fundação Educacional De Barretos | Barretos/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Anglo Itatiba | Itatiba/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "]Escola Sesi | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Esi Colegio São José | Santo André/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Emef Profª Adelaide Pedroso Racanello | Ourinhos/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Bassano Vaccarini | Ribeirão Preto/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Emef Profº Nelson De Paula | Ouro Verde/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Emef. Arnaldo Zancaner | Catanduva/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Campo Salles | São Paulo/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 676,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 685,
+          "posicao": 4
+        },
+        {
+          "participanteId": 683,
+          "posicao": 5
+        },
+        {
+          "participanteId": 682,
+          "posicao": 6
+        },
+        {
+          "participanteId": 686,
+          "posicao": 7
+        },
+        {
+          "participanteId": 687,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 264,
+      "nome": "Basquetebol Masculino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Girassol | Avanhandava/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Objetivo | Araraquara/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Nieb - Núcleo Integrado De Educação Básica | Terra Roxa/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Purissimo | Rio Claro/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Fundação Educandário Pestalozzi | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Mello Dante | Mogi das Cruzes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Cristo Rei | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Emef Profº Nelson De Paula | Ouro Verde/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Bassano Vaccarini | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Liceu Santista | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Anglo Votuporanga | Votuporanga/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emef Tancredo De Almeida Neves | Ubatuba/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Uirapuru | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 678,
+          "posicao": 2
+        },
+        {
+          "participanteId": 680,
+          "posicao": 3
+        },
+        {
+          "participanteId": 683,
+          "posicao": 4
+        },
+        {
+          "participanteId": 679,
+          "posicao": 5
+        },
+        {
+          "participanteId": 687,
+          "posicao": 6
+        },
+        {
+          "participanteId": 682,
+          "posicao": 7
+        },
+        {
+          "participanteId": 686,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 268,
+      "nome": "Damas Feminino 14 anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 269,
+      "nome": "Damas Masculino 14 anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 274,
+      "nome": "Futsal Feminino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emeb Alzira De Freitas Casseb | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Novo Anglo | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Viverde Escola De Educação Básica | Bragança Paulista/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Jornalista Granduque José | Ribeirão Corrente/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Criativo | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Posicruz | Osvaldo Cruz/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Professor Jarbas Massullo | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Monteiro Lobato | Peruíbe/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colegio Agostiniano São Jose | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Uirapuru | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Colegio França  | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 685,
+          "posicao": 3
+        },
+        {
+          "participanteId": 681,
+          "posicao": 4
+        },
+        {
+          "participanteId": 677,
+          "posicao": 5
+        },
+        {
+          "participanteId": 686,
+          "posicao": 6
+        },
+        {
+          "participanteId": 675,
+          "posicao": 7
+        },
+        {
+          "participanteId": 678,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 272,
+      "nome": "Futsal Masculino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Rede Sagrado De Educação | Araçatuba/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Collegium Sapiens | São Carlos/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Colégio Plus | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Preve | Lins/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Drummond | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Gandolfi | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Marconi | Guarulhos/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Esmeraldas | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Átomo | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Santa Cecília | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Coc-Fernandopolis | Fernandópolis/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Sepp | Jacareí/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Uirapuru | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 677,
+          "posicao": 2
+        },
+        {
+          "participanteId": 684,
+          "posicao": 3
+        },
+        {
+          "participanteId": 678,
+          "posicao": 4
+        },
+        {
+          "participanteId": 681,
+          "posicao": 5
+        },
+        {
+          "participanteId": 680,
+          "posicao": 6
+        },
+        {
+          "participanteId": 674,
+          "posicao": 7
+        },
+        {
+          "participanteId": 682,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 278,
+      "nome": "Handebol Feminino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Diocesano La Salle | São Carlos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Preve | Agudos/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Instituto Educacional Imaculada Conceição | Mogi Mirim/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Gilberta Vilela Rosa | Restinga/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Ábaco | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Água Viva | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Braga Mello | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Liceu Albert Sabin  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EMEF Professora Maria Aparecida Araújo | Guarujá/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Sepp | Jacareí/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Soc. Edu. Atitude Colegio Objetivo  | Fernandópolis/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Salesiano | Sorocaba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim Santa Teresa | São Paulo/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 684,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 680,
+          "posicao": 3
+        },
+        {
+          "participanteId": 682,
+          "posicao": 4
+        },
+        {
+          "participanteId": 679,
+          "posicao": 5
+        },
+        {
+          "participanteId": 687,
+          "posicao": 6
+        },
+        {
+          "participanteId": 678,
+          "posicao": 7
+        },
+        {
+          "participanteId": 681,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 276,
+      "nome": "Handebol Masculino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio São Francisco De Assis | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Natureza | Araraquara/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Ceap -Complexo Ed. Adoniran Pagan | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Bosque Primeiros Passos | Atibaia/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim Santa Teresa | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Gilberta Vilela Rosa | Restinga/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Ábaco | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Shunji Nishimura  | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Braga Mello | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Ateneu Barão De Mauá | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Integração | São Vicente/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Soc. Edu. Atitude Colegio Objetivo  | Fernandópolis/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Emef Eunice Pereira De Camargo | Tatuí/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 685,
+          "posicao": 2
+        },
+        {
+          "participanteId": 688,
+          "posicao": 3
+        },
+        {
+          "participanteId": 679,
+          "posicao": 4
+        },
+        {
+          "participanteId": 682,
+          "posicao": 5
+        },
+        {
+          "participanteId": 683,
+          "posicao": 6
+        },
+        {
+          "participanteId": 684,
+          "posicao": 7
+        },
+        {
+          "participanteId": 687,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 280,
+      "nome": "Tênis de Mesa Feminino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Adventista Unasp | Engenheiro Coelho/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Escola De Educação E Ensino Vivenda | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Esmeraldas  | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Emef Profº Nelson De Paula | Ouro Verde/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Do Carmo | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colegio Agostiniano São Jose | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Objetivo | Itapeva/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 677,
+          "posicao": 4
+        },
+        {
+          "participanteId": 683,
+          "posicao": 5
+        },
+        {
+          "participanteId": 685,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 675,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 282,
+      "nome": "Tênis de Mesa Masculino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emef Santa Do Prado Maximiano\"Dona Santinha\" | Colômbia/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Porto Alvorada | Jaú/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Adventista Unasp | Engenheiro Coelho/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Escola De Educação E Ensino Vivenda | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Educandário  Santo Antonio | Santo André/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Dask/Eefm \"Liliana Gonzaga\" | Dracena/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Cônego Macário De Almeida | Santo Antônio da Alegria/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Do Carmo | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Emef. Prof. Athayr Da Silva Rosa | Urupês/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Escola Waldorf  | Capão Bonito/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 685,
+          "posicao": 3
+        },
+        {
+          "participanteId": 683,
+          "posicao": 4
+        },
+        {
+          "participanteId": 687,
+          "posicao": 5
+        },
+        {
+          "participanteId": 678,
+          "posicao": 6
+        },
+        {
+          "participanteId": 684,
+          "posicao": 7
+        },
+        {
+          "participanteId": 675,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 284,
+      "nome": "Voleibol Feminino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Objetivo | Araraquara/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emeb Manoel Rodrigues Villarinho Filho | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio São Francisco | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Campo Salles | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Gandolfi | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Esi Colegio São José | Santo André/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Vale Do Paranapanema | Assis/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Adamantinense-Objetivo | Adamantina/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Marista De Ribeirão Preto | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Novo Tempo | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Emef.Lucia Novais | Cedral/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Uirapuru | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 681,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 677,
+          "posicao": 4
+        },
+        {
+          "participanteId": 687,
+          "posicao": 5
+        },
+        {
+          "participanteId": 683,
+          "posicao": 6
+        },
+        {
+          "participanteId": 679,
+          "posicao": 7
+        },
+        {
+          "participanteId": 680,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 286,
+      "nome": "Voleibol Masculino 14 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Afonso Pena/Anglo | Penápolis/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emeb Manoel Rodrigues Villarinho Filho | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio John F. Kenedy | Cafelândia/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EMEF Theo Dutra | São Paulo/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Leonardo Da Vinci | Mauá/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Criativo  | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Múltiplus School | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Prof. Dr. Waldemar Roberto | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio A B C | Cubatão/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Emef. Prof. Athayr Da Silva Rosa | Urupês/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 685,
+          "posicao": 2
+        },
+        {
+          "participanteId": 688,
+          "posicao": 3
+        },
+        {
+          "participanteId": 678,
+          "posicao": 4
+        },
+        {
+          "participanteId": 683,
+          "posicao": 5
+        },
+        {
+          "participanteId": 677,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 686,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 290,
+      "nome": "Xadrez Feminino 14 anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Up/Objetivo | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emeb Manoel Rodrigues Villarinho Filho | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Rodin | Indaiatuba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EMEF Leonor Mendes de Barros | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio De Educação Integral - Piaget | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colégio Harmonia | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Dask/Eefm \"Liliana Gonzaga\" | Dracena/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Prof Darvy Mascaro | Barrinha/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Santa Cecília | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Emef. Arnaldo Zancaner | Catanduva/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio SER Campolim | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 288,
+      "nome": "Xadrez Masculino 14 anos",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Diocesano La Salle | São Carlos/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Emeb Manoel Rodrigues Villarinho Filho | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colégio Fundação | Jaú/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Dom Bosco | Rio Claro/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Ábaco Sumaré | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Toulouse-Lautrec | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Instituto Educacional Formação | Suzano/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Santa Clara  | Assis/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Centro Educacional De Tupi Paulista | Tupi Paulista/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Prof Darvy Mascaro | Barrinha/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Lantagi | Registro/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Soc. Edu. Atitude Colegio Objetivo  | Fernandópolis/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emief Prof. Anna Dos Reis Signorini | Taubaté/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Montesso | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
