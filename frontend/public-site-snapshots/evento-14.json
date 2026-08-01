@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T18:40:52.195Z",
+  "publicadoEm": "2026-08-01T21:00:41.077Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -17,8 +17,8 @@
       "nome": "Basquetebol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "c9a22e231e6a85dc",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -121,8 +121,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        681,
+        680,
+        674,
+        675
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              681,
+              682,
+              684
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              683,
+              679
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              674,
+              678,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              675,
+              687,
+              686,
+              688
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -130,8 +173,8 @@
       "nome": "Basquetebol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "e4c347a0b710edf7",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -244,8 +287,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        679,
+        682,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              686,
+              675,
+              677
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              679,
+              684,
+              683,
+              674
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              682,
+              685,
+              678,
+              681
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              680,
+              687
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -443,8 +531,8 @@
       "nome": "Futsal Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "5de23e01081e2230",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -562,8 +650,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        681,
+        680,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              677,
+              685,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              681,
+              674,
+              679,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              684,
+              678,
+              687
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              676,
+              683,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
