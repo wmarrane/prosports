@@ -1,13 +1,13 @@
 {
   "id": 14,
   "nome": "JEESP Sub 14 - Etapa I",
-  "status": "pronto",
+  "status": "sorteado",
   "competicao": "JEESP",
   "cidade": "Praia Grande",
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:08:13.318Z",
+  "publicadoEm": "2026-08-01T21:46:10.514Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1958,7 +1958,7 @@
         {
           "id": 687,
           "nome": "SREL Sorocaba",
-          "subtitulo": null
+          "subtitulo": "EE Diógenes Ribeiro de Lima | Ribeira/SP"
         },
         {
           "id": 689,
@@ -2028,7 +2028,7 @@
         {
           "id": 682,
           "nome": "SREL Presidente Prudente",
-          "subtitulo": "EE  Profª. Josepha Cubas Da Silva | Ourinhos/SP"
+          "subtitulo": "EE Francisco Pessoa | Presidente Prudente/SP"
         },
         {
           "id": 683,
