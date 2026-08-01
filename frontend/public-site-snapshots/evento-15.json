@@ -1,13 +1,13 @@
 {
   "id": 15,
   "nome": "JEESP Sub 14 - Etapa II",
-  "status": "pronto",
+  "status": "sorteado",
   "competicao": "JEESP",
   "cidade": "Praia Grande",
   "local": ".",
   "data": "2026-08-01T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:25:11.739Z",
+  "publicadoEm": "2026-08-01T21:44:57.235Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -310,34 +310,6 @@
         "regra_id": 406,
         "classificados_por_grupo": 2
       },
-      "mensagens_inscritos": []
-    },
-    {
-      "id": 268,
-      "nome": "Damas Feminino 14 anos",
-      "grupo": null,
-      "tipo": "especifico",
-      "status": "aguardando",
-      "seed": null,
-      "anfitriaoId": 689,
-      "participantes": [],
-      "campeoes": [],
-      "cabecasPids": [],
-      "resultado": null,
-      "mensagens_inscritos": []
-    },
-    {
-      "id": 269,
-      "nome": "Damas Masculino 14 anos",
-      "grupo": null,
-      "tipo": "especifico",
-      "status": "aguardando",
-      "seed": null,
-      "anfitriaoId": 689,
-      "participantes": [],
-      "campeoes": [],
-      "cabecasPids": [],
-      "resultado": null,
       "mensagens_inscritos": []
     },
     {
