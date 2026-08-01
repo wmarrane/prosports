@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:19:25.147Z",
+  "publicadoEm": "2026-08-01T21:22:46.228Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -843,8 +843,8 @@
       "nome": "Handebol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "0fe3e833265e9e79",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -952,8 +952,52 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        685,
+        688,
+        679
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              684,
+              687
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              685,
+              678,
+              681,
+              677
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              688,
+              675,
+              686
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              679,
+              683,
+              674,
+              682
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -961,8 +1005,8 @@
       "nome": "Tênis de Mesa Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "cc9582f256803b77",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1060,8 +1104,50 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        678,
+        685
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              679,
+              674
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              681,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              675,
+              687
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              685,
+              686,
+              684
+            ]
+          }
+        ],
+        "regra_id": 404,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1069,8 +1155,8 @@
       "nome": "Tênis de Mesa Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "266f9158ddd7e847",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1178,8 +1264,52 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        685,
+        683
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              679,
+              687
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              678,
+              675,
+              677
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              685,
+              674,
+              684
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              683,
+              686,
+              682,
+              676
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
