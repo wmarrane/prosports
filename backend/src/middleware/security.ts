@@ -19,6 +19,23 @@ export const helmetMiddleware = helmet({
   hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
 })
 
+/**
+ * Libera o Cross-Origin-Resource-Policy dos arquivos servidos em `/uploads`.
+ *
+ * O helmet marca TODA resposta como `same-origin`, o que instrui o navegador a
+ * recusar o recurso quando embutido por outra origem — e CORS liberado não
+ * ajuda, porque CORP é um mecanismo separado e mais restritivo. Em produção o
+ * admin roda no Firebase e a API em outro domínio, então o `<img>` do logo do
+ * evento era bloqueado mesmo com o arquivo existindo e sendo servido (o `curl`
+ * não reproduz: ele não aplica CORP).
+ *
+ * Aplicado só aos uploads; as respostas da API seguem com o padrão restrito.
+ */
+export function uploadsCorsResourcePolicy(_req: Request, res: Response, next: NextFunction): void {
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+  next()
+}
+
 const allowedOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:8080').split(',')
 
 // Fora de produção, libera qualquer origem de LAN privada (localhost/10.x/172.16-31.x/
