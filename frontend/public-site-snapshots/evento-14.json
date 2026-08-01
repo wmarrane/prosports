@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:02:47.621Z",
+  "publicadoEm": "2026-08-01T21:06:15.225Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1041,8 +1041,8 @@
       "nome": "Handebol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9ffe34bf97694356",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1155,8 +1155,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        678,
+        686,
+        677,
+        685
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              682,
+              681
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              680,
+              683,
+              688
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              677,
+              675,
+              684,
+              674
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              685,
+              676,
+              679,
+              687
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1164,8 +1209,8 @@
       "nome": "Tênis de Mesa Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "da61700d61b1289c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1278,8 +1323,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        681,
+        680,
+        686,
+        688
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              681,
+              683,
+              685,
+              675
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              679,
+              674
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              678,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              688,
+              682,
+              677,
+              676
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1287,8 +1377,8 @@
       "nome": "Tênis de Mesa Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9eca751c6ffd1d2d",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1401,8 +1491,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        684,
+        686,
+        680,
+        674
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              684,
+              683,
+              687,
+              682
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              681,
+              688,
+              676
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              677,
+              675,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              674,
+              679,
+              678
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
