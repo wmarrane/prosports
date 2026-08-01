@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T21:00:41.077Z",
+  "publicadoEm": "2026-08-01T21:02:47.621Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -705,8 +705,8 @@
       "nome": "Futsal Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "33df178bb1b0259c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -819,8 +819,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        674,
+        680,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              674,
+              683,
+              685,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              687,
+              682,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              679,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              688,
+              678,
+              675
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -828,8 +873,8 @@
       "nome": "Handebol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9cb6de10a1cc043e",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -942,8 +987,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        677,
+        679,
+        685
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              681,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              687,
+              682,
+              678
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              679,
+              683,
+              675,
+              688
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              685,
+              674,
+              684
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
