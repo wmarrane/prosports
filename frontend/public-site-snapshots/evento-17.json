@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T21:01:55.198Z",
+  "publicadoEm": "2026-08-14T21:04:28.734Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1457,8 +1457,8 @@
       "nome": "Tênis de Mesa Masculino Duplas 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "0cdbfe184132ae20",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1561,8 +1561,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        677,
+        680,
+        683,
+        682
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              677,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              679,
+              688,
+              674
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              683,
+              685,
+              681
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              682,
+              675,
+              687
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1570,8 +1613,8 @@
       "nome": "Voleibol Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "09418a8fdedf9b52",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1689,8 +1732,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        677,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              680,
+              684,
+              685
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              676,
+              679,
+              687
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              674,
+              675,
+              683
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              686,
+              682,
+              678
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1698,8 +1787,8 @@
       "nome": "Voleibol Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "29df7410e1cc15eb",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1812,8 +1901,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              676,
+              677,
+              684
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              679,
+              682,
+              687
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              683,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              674,
+              681,
+              686
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     }
   ]
