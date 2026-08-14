@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T19:24:30.521Z",
+  "publicadoEm": "2026-08-14T20:57:04.828Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -17,8 +17,8 @@
       "nome": "Basquetebol Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "65ddfdb261318742",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -131,8 +131,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        678,
+        680,
+        688,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              679,
+              684,
+              685
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              675,
+              683
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              688,
+              681,
+              682,
+              686
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              687,
+              676,
+              677
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -140,8 +185,8 @@
       "nome": "Basquetebol Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "508d55e095a1f093",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -259,8 +304,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              675,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              685,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              674,
+              677,
+              682
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              683,
+              681,
+              679
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -268,8 +359,8 @@
       "nome": "Futsal Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "67d778867e265a29",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -372,8 +463,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        686,
+        684
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              682,
+              677
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              678,
+              681
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              683,
+              674,
+              679
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              684,
+              685,
+              687
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
