@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T20:57:04.828Z",
+  "publicadoEm": "2026-08-14T20:59:39.998Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -515,8 +515,8 @@
       "nome": "Futsal Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f38512fca60c3945",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -634,8 +634,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        680,
+        683,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              685,
+              679,
+              684
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              676,
+              681,
+              686
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              683,
+              687,
+              682,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              678,
+              675,
+              674
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -643,8 +689,8 @@
       "nome": "Handebol Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "4cfc6aac7d559217",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -752,8 +798,52 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        680,
+        684,
+        682
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              675,
+              678
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              685,
+              677
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              684,
+              674,
+              686,
+              681
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              682,
+              679,
+              683,
+              687
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -761,8 +851,8 @@
       "nome": "Handebol Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "740e2ed5a57bbc9c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -870,8 +960,52 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        680,
+        687,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              678,
+              681
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              682,
+              685
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              687,
+              686,
+              684,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              683,
+              675,
+              674
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
