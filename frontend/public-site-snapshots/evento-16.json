@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T20:47:55.146Z",
+  "publicadoEm": "2026-08-14T20:50:59.173Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1049,8 +1049,8 @@
       "nome": "Tênis de Mesa Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "1a6f7d0b96add146",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1163,8 +1163,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        687,
+        686,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              681,
+              677,
+              688
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              687,
+              676,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              685,
+              674,
+              678
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              683,
+              679,
+              675
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1172,8 +1217,8 @@
       "nome": "Tênis de Mesa Feminino Duplas 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "40e0af316c993f23",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1200,11 +1245,6 @@
           "id": 688,
           "nome": "SREL Capital",
           "subtitulo": "EE Ana Siqueira Da Silva | São Paulo/SP"
-        },
-        {
-          "id": 687,
-          "nome": "SREL Sorocaba",
-          "subtitulo": "EE Aggeo Pereira Do Amaral | Sorocaba/SP"
         },
         {
           "id": 685,
@@ -1281,8 +1321,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        686,
+        682,
+        684
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              685,
+              681,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              688,
+              679
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              682,
+              675,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              684,
+              678,
+              676
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1290,8 +1373,8 @@
       "nome": "Tênis de Mesa Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "a4f4ece02c3e244b",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1409,8 +1492,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        682,
+        686,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              675,
+              674,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              682,
+              679,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              678,
+              681,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              680,
+              677,
+              676
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
