@@ -1,0 +1,1432 @@
+{
+  "id": 17,
+  "nome": "JEESP Sub 17 - Etapa II",
+  "status": "pronto",
+  "competicao": "JEESP",
+  "cidade": "Praia Grande",
+  "local": ".",
+  "data": "2026-08-14T20:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-08-14T19:24:30.521Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 267,
+      "nome": "Basquetebol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Conexão | Araraquara/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "FEB - Fundação Educacional de Barretos | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Novo Anglo | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Anglo Itatiba | Itatiba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Campos Salles | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Piaget | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Marconi | Guarulhos/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Interação  | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Alpha | Rancharia/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Monteiro Lobato | Peruíbe/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "COOPEN - Rio Preto | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Emef Antônia Antunes Arouca | Caraguatatuba/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Centro Educacional Vila Verde | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 678,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 688,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 687,
+          "posicao": 5
+        },
+        {
+          "participanteId": 679,
+          "posicao": 6
+        },
+        {
+          "participanteId": 677,
+          "posicao": 7
+        },
+        {
+          "participanteId": 682,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 266,
+      "nome": "Basquetebol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Instituto Noroeste | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Conexão | Araraquara/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Colégio Liceu de Barretos | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Dinamico Vest | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Campos Salles | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Copérnico | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Mello Dante | Mogi das Cruzes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Cristo Rei  | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Múltiplus School | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Liceu Santista | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colégio Maplebear - Rio Preto | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Anglo Alante | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Uirapuru | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Centro Educacional Vila Verde | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 686,
+          "posicao": 5
+        },
+        {
+          "participanteId": 683,
+          "posicao": 6
+        },
+        {
+          "participanteId": 679,
+          "posicao": 7
+        },
+        {
+          "participanteId": 685,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 275,
+      "nome": "Futsal Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Franciscano Coração De Maria | Penápolis/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Amélio De Paula Coelho | Cristais Paulista/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Fênix de Educação | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Criativo | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Múltiplus School | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Monteiro Lobato | Peruíbe/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colégio Agostiniano São José - Rio Preto | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Anglo Alante | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Municipal Tenente General Gaspar De Godoy Colaço | Santana de Parnaíba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 686,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 685,
+          "posicao": 5
+        },
+        {
+          "participanteId": 687,
+          "posicao": 6
+        },
+        {
+          "participanteId": 678,
+          "posicao": 7
+        },
+        {
+          "participanteId": 683,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 273,
+      "nome": "Futsal Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Escola Champagnat | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Colégio Liceu de Barretos | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Conquista | Indaiatuba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Gandolfi | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Marconi | Guarulhos/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Esmeraldas | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Anglo Prudentino | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colegio Novo Tempo  | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "COOPERE - Fernandópolis | Fernandópolis/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Objetivo Aquárius | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Escola Celestin Freinet | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 683,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 681,
+          "posicao": 5
+        },
+        {
+          "participanteId": 677,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 686,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 279,
+      "nome": "Handebol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Super 14 De Agosto | Mirandópolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Diocesano La Salle | São Carlos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Bosque Primeiros Passos | Atibaia/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim Santa Teresa | São Paulo/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio O Farol | Sorocaba/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Sepp | Jacareí/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "SESI - Fernandópolis | Fernandópolis/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Expressão Maria Aparecida Araujo | Mongaguá/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Átomo | Presidente Prudente/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Água Viva | Marília/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Ábaco | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Gilberta Vilela Rosa | Restinga/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 684,
+          "posicao": 3
+        },
+        {
+          "participanteId": 682,
+          "posicao": 4
+        },
+        {
+          "participanteId": 683,
+          "posicao": 5
+        },
+        {
+          "participanteId": 677,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 675,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 277,
+      "nome": "Handebol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Centro Educacional | Andradina/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Externato Santa Terezinha | Araraquara/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Anglo São João | São João da Boa Vista/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Amorim Santa Teresa | São Paulo/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Ábaco | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Esmeraldas | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Braga Mello | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Ateneu Barão De Mauá | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Integração | São Vicente/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "SESI - Fernandópolis | Fernandópolis/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Instituto De Educação Thereza Porto Marques | Jacareí/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Gradual | Tietê/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EM Ronaldo Sergio Alves Lameira Ramos | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 687,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 685,
+          "posicao": 5
+        },
+        {
+          "participanteId": 681,
+          "posicao": 6
+        },
+        {
+          "participanteId": 683,
+          "posicao": 7
+        },
+        {
+          "participanteId": 678,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 281,
+      "nome": "Tênis de Mesa Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Instituto Noroeste | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Anglo | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Adventista Unasp | Engenheiro Coelho/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Caetano Caprício | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Criativo | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Sophus | Rosana/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Pequeno Príncipe - Cpp | Ribeirão Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Oliveira Neto | Cunha/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Monteiro Lobato - Anglo | Itapeva/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 675,
+          "posicao": 2
+        },
+        {
+          "participanteId": 688,
+          "posicao": 3
+        },
+        {
+          "participanteId": 678,
+          "posicao": 4
+        },
+        {
+          "participanteId": 677,
+          "posicao": 5
+        },
+        {
+          "participanteId": 682,
+          "posicao": 6
+        },
+        {
+          "participanteId": 686,
+          "posicao": 7
+        },
+        {
+          "participanteId": 687,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 292,
+      "nome": "Tênis de Mesa Feminino Duplas 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Instituto Noroeste | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Adventista Unasp | Engenheiro Coelho/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Caetano Caprício | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Shunji Nishimura | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Emef Profº Nelson De Paula | Ouro Verde/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Pequeno Príncipe - Cpp | Ribeirão Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Oliveira Neto | Cunha/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 686,
+          "posicao": 3
+        },
+        {
+          "participanteId": 682,
+          "posicao": 4
+        },
+        {
+          "participanteId": 683,
+          "posicao": 5
+        },
+        {
+          "participanteId": 675,
+          "posicao": 6
+        },
+        {
+          "participanteId": 674,
+          "posicao": 7
+        },
+        {
+          "participanteId": 687,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 283,
+      "nome": "Tênis de Mesa Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Instituto Noroeste | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Preve | Jaú/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Adventista Unasp | Engenheiro Coelho/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Objetivo De Ituverava | Ituverava/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Shunji Nishimura | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "IFSP-Instituto Federal | Presidente Epitácio/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Pequeno Príncipe - Cpp | Ribeirão Preto/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Instituto Federal - Catanduva | Catanduva/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Oliveira Neto | Cunha/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Luminova | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 677,
+          "posicao": 2
+        },
+        {
+          "participanteId": 675,
+          "posicao": 3
+        },
+        {
+          "participanteId": 678,
+          "posicao": 4
+        },
+        {
+          "participanteId": 686,
+          "posicao": 5
+        },
+        {
+          "participanteId": 685,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 688,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 293,
+      "nome": "Tênis de Mesa Masculino Duplas 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EEIEFM Afonso Pena | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EMEB Manoel Rodrigues Villarinho Filho | Monte Azul Paulista/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Conexao | Jaú/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Instituto Germinare | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Objetivo De Ituverava | Ituverava/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Arbos  | São Caetano do Sul/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Shunji Nishimura | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "IFSP-Instituto Federal | Presidente Epitácio/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Emef Professor Jarbas Massullo | Ribeirão Preto/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "COC - Jales | Jales/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Escola Criar-Te | Ubatuba/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Luminova | Sorocaba/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 677,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 683,
+          "posicao": 3
+        },
+        {
+          "participanteId": 678,
+          "posicao": 4
+        },
+        {
+          "participanteId": 682,
+          "posicao": 5
+        },
+        {
+          "participanteId": 686,
+          "posicao": 6
+        },
+        {
+          "participanteId": 688,
+          "posicao": 7
+        },
+        {
+          "participanteId": 674,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 285,
+      "nome": "Voleibol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Futuro | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "Colégio Raio De Sol | Américo Brasiliense/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Colégio Liceu de Barretos | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Preve | Jaú/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Franciscano Ave Maria | Valinhos/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Campos Salles | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Emeb Amélio De Paula Coelho | Cristais Paulista/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Educacional Suzano | Suzano/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Vale Do Paranapanema  | Assis/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Anglo Prudentino | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Colégio Santa Úrsula De Ribeirão Preto | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "Colégio Liceu Santista | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colégio Superius - Rio Preto | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Anglo Alante | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Ser Campolim | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Colégio Celestin Freinet | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 677,
+          "posicao": 2
+        },
+        {
+          "participanteId": 681,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 680,
+          "posicao": 5
+        },
+        {
+          "participanteId": 675,
+          "posicao": 6
+        },
+        {
+          "participanteId": 685,
+          "posicao": 7
+        },
+        {
+          "participanteId": 683,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 287,
+      "nome": "Voleibol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "Colégio Araçá Ltda | Araçatuba/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "Colégio Liceu de Barretos | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "Colegio Preve | Jaú/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "Colégio Raphael Di Santo | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "Colégio Campos Salles | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "Colégio Copérnico | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "Colegio Leonardo Da Vinci | Mauá/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "Colégio Criativo | Marília/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "Colégio Anglo Prudentino | Presidente Prudente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "Escola Seb | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "SESI - Centro Educacional 441 | Registro/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "Colégio Agostiniano São José - Rio Preto | São José do Rio Preto/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "Colégio Anglo Alante | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "Colégio Maxximus | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "Colégio Celestin Freinet | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 685,
+          "posicao": 4
+        },
+        {
+          "participanteId": 687,
+          "posicao": 5
+        },
+        {
+          "participanteId": 681,
+          "posicao": 6
+        },
+        {
+          "participanteId": 683,
+          "posicao": 7
+        },
+        {
+          "participanteId": 684,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
