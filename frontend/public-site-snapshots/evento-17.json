@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T20:59:39.998Z",
+  "publicadoEm": "2026-08-14T21:01:55.198Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1013,8 +1013,8 @@
       "nome": "Tênis de Mesa Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9ffc8cc3f5473458",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1112,8 +1112,50 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        675,
+        688,
+        678
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              682,
+              685
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              675,
+              679,
+              683
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              688,
+              681,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              678,
+              687,
+              674
+            ]
+          }
+        ],
+        "regra_id": 404,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1121,8 +1163,8 @@
       "nome": "Tênis de Mesa Feminino Duplas 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "a555d6088be3981b",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1215,8 +1257,43 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        688,
+        682
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              674,
+              681,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              685,
+              678
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              682,
+              687,
+              679,
+              675
+            ]
+          }
+        ],
+        "regra_id": 403,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1224,8 +1301,8 @@
       "nome": "Tênis de Mesa Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "b07c458b45c84352",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1328,8 +1405,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        677,
+        675,
+        678
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              683,
+              682
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              688,
+              679,
+              686
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              675,
+              681,
+              687
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              678,
+              674,
+              685
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
