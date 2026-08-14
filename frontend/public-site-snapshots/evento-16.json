@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-14T20:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-14T20:44:56.616Z",
+  "publicadoEm": "2026-08-14T20:47:55.146Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -354,7 +354,7 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "8022aff5e46ec174",
+      "seed": "ac7b911bbf9153d1",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -484,18 +484,18 @@
             "letra": "A",
             "participantes": [
               685,
-              679,
-              680,
-              674
+              683,
+              678,
+              675
             ]
           },
           {
             "letra": "B",
             "participantes": [
               688,
-              686,
-              675,
-              677
+              674,
+              677,
+              684
             ]
           },
           {
@@ -503,17 +503,17 @@
             "participantes": [
               687,
               676,
-              683,
-              681
+              680,
+              679
             ]
           },
           {
             "letra": "D",
             "participantes": [
               689,
-              684,
-              682,
-              678
+              681,
+              686,
+              682
             ]
           }
         ],
@@ -527,8 +527,8 @@
       "nome": "Futsal Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "71df52379a3f7990",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -646,8 +646,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        679,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              683,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              679,
+              684,
+              674,
+              685
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              682,
+              675,
+              678
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              688,
+              687,
+              677
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -655,8 +701,8 @@
       "nome": "Handebol Feminino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "82dd958397a8027e",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -774,8 +820,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        679,
+        686,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              679,
+              684,
+              680,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              688,
+              682,
+              685
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              674,
+              677,
+              676
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              681,
+              687,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -783,8 +875,8 @@
       "nome": "Handebol Masculino 17 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "1616b9c0de5f5609",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -902,8 +994,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        679,
+        686,
+        689,
+        683
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              679,
+              680,
+              674,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              677,
+              678,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              689,
+              687,
+              688,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              683,
+              682,
+              681,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
