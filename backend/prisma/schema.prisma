@@ -171,6 +171,8 @@ model Evento {
   data_inicio       DateTime?
   data_fim          DateTime?
   site_publicado_em DateTime?
+  /// Quando true, o site público deste evento só muda por ação manual do admin.
+  publicacao_manual Boolean   @default(false)
   inscricoes      Inscricao[]
   sorteios        Sorteio[]
   campeoes_anteriores CampeaoAnterior[]
