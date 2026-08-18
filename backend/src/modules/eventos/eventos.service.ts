@@ -199,9 +199,9 @@ export async function editar(id: number, data: Partial<CreateInput>) {
   })
   const acao = decidirAcaoPublicacao(antes?.status, rest.status, !!antes?.site_publicado_em)
   if (acao === 'publicar') {
-    try { await publicar(id, { permitirParcial: true }) } catch (e) { console.warn(`[editar] publicar evento ${id} falhou`, e) }
+    try { await publicar(id, { permitirParcial: true, origem: 'automatica' }) } catch (e) { console.warn(`[editar] publicar evento ${id} falhou`, e) }
   } else if (acao === 'despublicar') {
-    try { await despublicar(id) } catch (e) { console.warn(`[editar] despublicar evento ${id} falhou`, e) }
+    try { await despublicar(id, { origem: 'automatica' }) } catch (e) { console.warn(`[editar] despublicar evento ${id} falhou`, e) }
   }
   return atualizado
 }
