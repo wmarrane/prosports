@@ -152,3 +152,52 @@ it('publicar compõe subtitulo a partir de subtitulo_campos', async () => {
   const [, snap] = (store.putSnapshot as any).mock.calls[0]
   expect(snap.modalidades[0].participantes[0].subtitulo).toBe('Bauru/SP')
 })
+
+const EVENTO_MANUAL = {
+  id: 10, nome: 'Jogos', local: 'Gin', organizador: 'M',
+  data_hora: new Date('2026-05-10T12:00:00Z'), anfitriao_id: null,
+  competicao_id: 7, status: 'sorteado', publicacao_manual: true,
+  competicao: { nome: 'Regionais', considerar_anfitriao: false, subtitulo_campos: [] },
+  municipio: { nome: 'São Manuel' }, boletins: [],
+}
+
+describe('publicacao_manual bloqueia só o que é automático', () => {
+  it('automática NÃO publica quando o evento é de publicação manual', async () => {
+    mp.evento.findUnique.mockResolvedValue(EVENTO_MANUAL)
+    await service.publicar(10, { origem: 'automatica' })
+    expect(store.putSnapshot).not.toHaveBeenCalled()
+    expect(store.dispatchBuild).not.toHaveBeenCalled()
+    expect(mp.evento.update).not.toHaveBeenCalled()
+  })
+
+  it('origem omitida é tratada como automática', async () => {
+    mp.evento.findUnique.mockResolvedValue(EVENTO_MANUAL)
+    await service.publicar(10)
+    expect(store.putSnapshot).not.toHaveBeenCalled()
+  })
+
+  it('manual publica mesmo com publicação manual ligada', async () => {
+    mp.evento.findUnique.mockResolvedValue(EVENTO_MANUAL)
+    await service.publicar(10, { origem: 'manual' })
+    expect(store.putSnapshot).toHaveBeenCalled()
+  })
+
+  it('automática NÃO despublica quando o evento é de publicação manual', async () => {
+    mp.evento.findUnique.mockResolvedValue({ id: 10, publicacao_manual: true })
+    await service.despublicar(10, { origem: 'automatica' })
+    expect(store.deleteSnapshot).not.toHaveBeenCalled()
+    expect(mp.evento.update).not.toHaveBeenCalled()
+  })
+
+  it('manual despublica mesmo com publicação manual ligada', async () => {
+    mp.evento.findUnique.mockResolvedValue({ id: 10, publicacao_manual: true })
+    await service.despublicar(10, { origem: 'manual' })
+    expect(store.deleteSnapshot).toHaveBeenCalledWith(10)
+    expect(mp.evento.update).toHaveBeenCalled()
+  })
+
+  it('evento sem o parâmetro segue publicando pela via automática', async () => {
+    await service.publicar(10, { origem: 'automatica' })
+    expect(store.putSnapshot).toHaveBeenCalled()
+  })
+})
