@@ -48,3 +48,10 @@ export async function removerTodosDoEvento(req: Request, res: Response, next: Ne
     res.json(await service.removerTodosDoEvento(evento_id))
   } catch (err) { next(err) }
 }
+
+export async function metades(req: Request, res: Response, next: NextFunction) {
+  try {
+    const n = parseIntParam(req.params.numeroInscrito, 'numeroInscrito')
+    res.json(await service.metadesPorNumeroInscrito(n))
+  } catch (err) { next(err) }
+}

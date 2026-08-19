@@ -16,6 +16,7 @@ const acessoSorteioId = requireAcessoEvento(async req => {
 const acessoQueryEvento = requireAcessoEvento(req => Number(req.query.evento_id))
 
 router.get('/', requireAuth, acessoQueryEvento, ctrl.listar)
+router.get('/metades/:numeroInscrito', requireAuth, ctrl.metades)
 router.get('/:id', requireAuth, acessoSorteioId, ctrl.buscarPorId)
 router.post('/executar', requireAuth, acessoBody, ctrl.executar)
 router.delete('/evento/:evento_id', requireAuth, acessoParamsEvento, ctrl.removerTodosDoEvento)

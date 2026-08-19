@@ -564,3 +564,77 @@ describe('applyAnfitriaoRule', () => {
     expect(out).toEqual([10, 20, 30, 99])
   })
 })
+
+describe('metade da chave no sorteio', () => {
+  const GRAFO_4 = {
+    matches: [
+      { id: 'J1', round: 1, top: 'P1', bottom: 'P2' },
+      { id: 'J2', round: 1, top: 'P3', bottom: 'P4' },
+      { id: 'J3', round: 2, top: 'V:J1', bottom: 'V:J2' },
+    ],
+    final: 'J3',
+    thirdPlace: null,
+  }
+
+  function mockChaves(opts: { usaMetade: boolean; inscricoes: any[] }) {
+    mockPrisma.evento.findUnique.mockResolvedValue({
+      id: 1, competicao_id: 100, anfitriao_id: null, status: 'pronto',
+      competicao: { considerar_anfitriao: false },
+    })
+    mockPrisma.modalidade.findUnique.mockResolvedValue({
+      id: 2, competicao_id: 100, chave_versao: 'V1',
+      usa_metade_chave: opts.usaMetade,
+      tipo_modalidade: { tipo: 'chaves' },
+    })
+    mockPrisma.inscricao.findMany.mockResolvedValue(opts.inscricoes)
+    mockPrisma.sistemaDisputasChaves.findFirst.mockResolvedValue({
+      posicao_primeiro_cabeca: 0, posicao_segundo_cabeca: 0,
+      posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0,
+    })
+    mockPrisma.bracketChavesByes.findUnique.mockResolvedValue({ numero_inscrito: 4, posicoes_bye: [] })
+    mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue({ matches_graph: GRAFO_4 })
+    mockPrisma.sorteio.upsert.mockImplementation(({ create }: any) => Promise.resolve(create))
+  }
+
+  it('lê metade_chave das inscrições e coloca o inscrito na metade pedida', async () => {
+    mockChaves({
+      usaMetade: true,
+      inscricoes: [
+        { participante_id: 21, metade_chave: 'baixo' },
+        { participante_id: 22, metade_chave: null },
+        { participante_id: 23, metade_chave: null },
+        { participante_id: 24, metade_chave: null },
+      ],
+    })
+    const sorteio: any = await service.executar({ evento_id: 1, modalidade_id: 2 })
+    const pos = sorteio.resultado.slots.findIndex((s: number) => s === 21) + 1
+    expect(pos).toBeGreaterThanOrEqual(3)  // metade de baixo de uma chave de 4
+  })
+
+  it('ignora metade_chave quando a modalidade não usa a regra', async () => {
+    mockChaves({
+      usaMetade: false,
+      inscricoes: [
+        { participante_id: 21, metade_chave: 'baixo' },
+        { participante_id: 22, metade_chave: 'baixo' },
+        { participante_id: 23, metade_chave: 'baixo' },
+        { participante_id: 24, metade_chave: 'baixo' },
+      ],
+    })
+    // 4 pedidos de "baixo" numa metade de 2 vagas: se a regra valesse, seria erro.
+    const sorteio: any = await service.executar({ evento_id: 1, modalidade_id: 2 })
+    expect(sorteio.resultado.slots.filter((s: number | null) => s !== null)).toHaveLength(4)
+  })
+
+  it('metadesPorNumeroInscrito devolve o tamanho de cada metade', async () => {
+    mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue({ matches_graph: GRAFO_4 })
+    await expect(service.metadesPorNumeroInscrito(4)).resolves.toEqual({
+      numero_inscrito: 4, cima: 2, baixo: 2,
+    })
+  })
+
+  it('metadesPorNumeroInscrito falha com 404 quando não há desenho cadastrado', async () => {
+    mockPrisma.bracketChavesMatches.findUnique.mockResolvedValue(null)
+    await expect(service.metadesPorNumeroInscrito(999)).rejects.toMatchObject({ status: 404 })
+  })
+})

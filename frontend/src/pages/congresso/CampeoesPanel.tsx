@@ -9,6 +9,7 @@ import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, X } from '../../lib/icons'
 import { applyAnfitriaoRuleFront, grupoLetra } from '../../lib/anfitriao-rule'
 import { participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import type { Participante } from '../../types/participante'
 import { useToast } from '../../components/Toast'
 
@@ -21,6 +22,7 @@ type Props = {
   porModalidade?: boolean
   tipo?: 'grupos' | 'chaves'
   consideraAnfitriao?: boolean
+  mascarar?: boolean
 }
 
 const FG = 'var(--cw-fg)'
@@ -37,6 +39,7 @@ export default function CampeoesPanel({
   porModalidade = false,
   tipo,
   consideraAnfitriao = false,
+  mascarar = false,
 }: Props) {
   const queryClient = useQueryClient()
   const toast = useToast()
@@ -66,9 +69,12 @@ export default function CampeoesPanel({
   // Mapeia participante_id -> Participante efetivo (escolar: override da inscrição).
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
+    for (const i of inscricoes) {
+      const p = participanteEfetivo(i, porModalidade)
+      m.set(i.participante_id, mascarar ? { ...p, nome: mascararNome(p.nome) } : p)
+    }
     return m
-  }, [inscricoes, porModalidade])
+  }, [inscricoes, porModalidade, mascarar])
 
   // Inscrição por participante (para aplicar o override no subtítulo dos campeões).
   const inscByPid = useMemo(() => {
@@ -248,7 +254,7 @@ export default function CampeoesPanel({
                       textDecoration: it.inscrito ? 'none' : 'line-through',
                       textDecorationThickness: '2px',
                     }}
-                  >{it.participante?.nome ?? '—'}</span>
+                  >{mascarar ? mascararNome(it.participante?.nome ?? '—') : (it.participante?.nome ?? '—')}</span>
                   {(() => {
                     const l = it.participante ? subtituloLine?.(it.participante) : null
                     return l ? <span style={{ color: DIM, fontSize: 12 }}>— {l}</span> : null

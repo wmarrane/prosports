@@ -18,6 +18,7 @@ import { Shuffle, Crown, X, Report, CheckCircle2 } from '../../lib/icons'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
 import { proximoMarcoCruzado, pctSorteado } from './autopublish'
 
@@ -94,7 +95,21 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     enabled: !!evento,
   })
 
+  const mascarar = modalidade?.mascarar_nome === true
+
   const participantesById = useMemo(() => {
+    const m = new Map<number, Participante>()
+    for (const i of inscricoes) {
+      const p = participanteEfetivo(i, porModalidade)
+      m.set(i.participante_id, mascarar ? { ...p, nome: mascararNome(p.nome) } : p)
+    }
+    return m
+  }, [inscricoes, porModalidade, mascarar])
+
+  // Sem máscara, de propósito: alimenta só o PDF de impressão (uso interno,
+  // pra organização conferir quem é quem), que precisa do nome completo
+  // mesmo quando a modalidade esconde o sobrenome na tela projetada.
+  const participantesByIdImpressao = useMemo(() => {
     const m = new Map<number, Participante>()
     for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
     return m
@@ -170,18 +185,25 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       slotLabel: string | null
       slotOrder: number | null
     }
-    const items: Item[] = cabecasInscritas.map(c => ({
-      key: `c-${c.id}`,
-      participante_id: c.participante_id,
-      // Inscritos: usa o efetivo (override por modalidade no escolar). Não inscritos:
-      // sem inscrição → escolar exibe em branco; não-escolar mantém o participante.
-      participante: participantesById.get(c.participante_id)
-        ?? participanteEfetivo({ participante: c.participante }, porModalidade),
-      posicao: c.posicao,
-      inscrito: c.inscrito,
-      slotLabel: null,
-      slotOrder: null,
-    }))
+    const items: Item[] = cabecasInscritas.map(c => {
+      // Inscritos: usa o efetivo (override por modalidade no escolar), já
+      // mascarado. Não inscritos: sem inscrição → escolar exibe em branco;
+      // não-escolar mantém o participante — mas precisa mascarar aqui também
+      // (mesma condição `mascarar` que já governa participantesById), senão o
+      // campeão do ano anterior que não se inscreveu nesta modalidade vaza o
+      // nome completo ao lado dos demais mascarados.
+      const fallback = participanteEfetivo({ participante: c.participante }, porModalidade)
+      return {
+        key: `c-${c.id}`,
+        participante_id: c.participante_id,
+        participante: participantesById.get(c.participante_id)
+          ?? (mascarar ? { ...fallback, nome: mascararNome(fallback.nome) } : fallback),
+        posicao: c.posicao,
+        inscrito: c.inscrito,
+        slotLabel: null,
+        slotOrder: null,
+      }
+    })
     // Adiciona o anfitrião como entrada sintetica se ele se aplica
     // pela regra mas nao eh campeao.
     if (
@@ -221,7 +243,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       }
     }
     return [...items].sort((a, b) => (a.slotOrder ?? Infinity) - (b.slotOrder ?? Infinity))
-  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids])
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids, mascarar])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),
@@ -368,6 +390,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             porModalidade={porModalidade}
             tipo={tipo as 'grupos' | 'chaves'}
             consideraAnfitriao={consideraAnfitriao}
+            mascarar={modalidade?.mascarar_nome === true}
           />
         )}
 
@@ -571,7 +594,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           cidadeLocalData={[evento?.municipio?.nome, evento?.local, evento ? formatDateBR(evento.data_hora) : ''].filter(Boolean).join(' · ')}
           seed={sorteio.seed}
           resultado={sorteio.resultado}
-          participantesById={participantesById}
+          participantesById={participantesByIdImpressao}
           campeoesByParticipanteId={campeoesByParticipanteId}
           anfitriaoPid={anfitriaoPid}
           subtituloLine={subtituloLine}

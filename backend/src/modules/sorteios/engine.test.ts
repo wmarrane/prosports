@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import fs from 'node:fs'
+import path from 'node:path'
 import {
   shuffleSeeded,
   drawGroups,
@@ -6,7 +8,9 @@ import {
   shuffleOrder,
   shuffleOrderAnfitriao,
   liftByesToFirstRoundV2,
+  metadesDoGrafo,
 } from './engine'
+import type { MatchesGraph } from './engine'
 
 describe('shuffleSeeded', () => {
   it('mesma seed produz mesma saída', () => {
@@ -342,4 +346,305 @@ describe('shuffleOrderAnfitriao', () => {
     const ult = shuffleOrderAnfitriao([10, 20, 30], 's', 20, 3)
     expect(ult.ordem[2]).toBe(20)
   })
+})
+
+// N=4 simétrico: J1 e J2 na 1ª rodada, J3 é a final.
+const GRAFO_4: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P1', bottom: 'P2' },
+    { id: 'J2', round: 1, top: 'P3', bottom: 'P4' },
+    { id: 'J3', round: 2, top: 'V:J1', bottom: 'V:J2' },
+  ],
+  final: 'J3',
+  thirdPlace: null,
+}
+
+// N=3: P1 entra direto na final (bye). Espelha a chave real de 3 (1 em cima / 2 embaixo).
+const GRAFO_3: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P2', bottom: 'P3' },
+    { id: 'J2', round: 2, top: 'P1', bottom: 'V:J1' },
+  ],
+  final: 'J2',
+  thirdPlace: null,
+}
+
+// N=7 assimétrico: espelha a chave real de 7 (3 em cima / 4 embaixo) e tem 3º lugar.
+const GRAFO_7: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P2', bottom: 'P3' },
+    { id: 'J2', round: 1, top: 'P4', bottom: 'P5' },
+    { id: 'J3', round: 1, top: 'P6', bottom: 'P7' },
+    { id: 'J4', round: 2, top: 'P1', bottom: 'V:J1' },
+    { id: 'J5', round: 2, top: 'V:J2', bottom: 'V:J3' },
+    { id: 'J6', round: 3, top: 'V:J4', bottom: 'V:J5' },
+    { id: 'J7', round: 3, top: 'L:J4', bottom: 'L:J5' },
+  ],
+  final: 'J6',
+  thirdPlace: 'J7',
+}
+
+describe('metadesDoGrafo', () => {
+  it('parte a chave simétrica ao meio', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_4)
+    expect([...cima].sort((a, b) => a - b)).toEqual([1, 2])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([3, 4])
+  })
+
+  it('em chave ímpar segue o desenho, não o arredondamento', () => {
+    // N=3 real é 1/2 — se alguém usasse ceil(3/2) daria 2/1.
+    const { cima, baixo } = metadesDoGrafo(GRAFO_3)
+    expect([...cima]).toEqual([1])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([2, 3])
+  })
+
+  it('N=7 fica 3/4, com o extra embaixo, e o 3º lugar não polui as metades', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_7)
+    expect([...cima].sort((a, b) => a - b)).toEqual([1, 2, 3])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([4, 5, 6, 7])
+  })
+
+  it('a metade de cima é sempre a que contém a posição 1', () => {
+    const invertido: MatchesGraph = {
+      ...GRAFO_4,
+      matches: GRAFO_4.matches.map(m => (m.id === 'J3' ? { ...m, top: 'V:J2', bottom: 'V:J1' } : m)),
+    }
+    const { cima } = metadesDoGrafo(invertido)
+    expect(cima.has(1)).toBe(true)
+  })
+
+  it('as metades cobrem todas as posições sem sobreposição', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_7)
+    const todas = [...cima, ...baixo].sort((a, b) => a - b)
+    expect(todas).toEqual([1, 2, 3, 4, 5, 6, 7])
+    expect([...cima].some(p => baixo.has(p))).toBe(false)
+  })
+
+  it('grafo V2 (byes na 1ª rodada) produz as mesmas metades', () => {
+    const v1 = metadesDoGrafo(GRAFO_7)
+    const v2 = metadesDoGrafo(liftByesToFirstRoundV2(GRAFO_7))
+    expect([...v2.cima].sort((a, b) => a - b)).toEqual([...v1.cima].sort((a, b) => a - b))
+    expect([...v2.baixo].sort((a, b) => a - b)).toEqual([...v1.baixo].sort((a, b) => a - b))
+  })
+})
+
+// N=8 simétrico: cima = 1..4, baixo = 5..8.
+const GRAFO_8: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P1', bottom: 'P2' },
+    { id: 'J2', round: 1, top: 'P3', bottom: 'P4' },
+    { id: 'J3', round: 1, top: 'P5', bottom: 'P6' },
+    { id: 'J4', round: 1, top: 'P7', bottom: 'P8' },
+    { id: 'J5', round: 2, top: 'V:J1', bottom: 'V:J2' },
+    { id: 'J6', round: 2, top: 'V:J3', bottom: 'V:J4' },
+    { id: 'J7', round: 3, top: 'V:J5', bottom: 'V:J6' },
+  ],
+  final: 'J7',
+  thirdPlace: null,
+}
+
+// Mesmo desenho, mas o J4 perde a referência a P8: a posição 8 não pertence a
+// nenhuma metade. Reproduz um matches_graph cadastrado incompleto.
+const GRAFO_8_INCOMPLETO: MatchesGraph = {
+  ...GRAFO_8,
+  matches: GRAFO_8.matches.map(m => (m.id === 'J4' ? { ...m, bottom: 'BYE' } : m)),
+}
+
+const SEM_CABECA = { posicao_primeiro_cabeca: 0, posicao_segundo_cabeca: 0, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0 }
+const BYES_8 = { numero_inscrito: 8, posicoes_bye: [] }
+const PIDS_8 = [11, 12, 13, 14, 15, 16, 17, 18]
+
+const BYES_7 = { numero_inscrito: 7, posicoes_bye: [] }
+const PIDS_7 = [21, 22, 23, 24, 25, 26, 27]
+
+/** Posição 1-indexed em que o pid caiu. */
+function posDe(slots: (number | null)[], pid: number): number {
+  return slots.findIndex(s => s === pid) + 1
+}
+
+describe('drawBracket com metade da chave', () => {
+  it('respeita a metade pedida por cada inscrito', () => {
+    const metades = new Map([[11, 'cima' as const], [12, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades })
+    expect(posDe(r.slots, 11)).toBeLessThanOrEqual(4)
+    expect(posDe(r.slots, 12)).toBeGreaterThanOrEqual(5)
+    expect(r.slots.filter(s => s !== null)).toHaveLength(8)
+  })
+
+  it('quem não pediu metade preenche os dois lados', () => {
+    // 1 pede cima, 1 pede baixo: sobram 3 vagas de cada lado para os 6 sem
+    // preferência. Se o balde livre ficasse preso a um lado, esta conta quebra.
+    const metades = new Map([[11, 'cima' as const], [12, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades })
+    const posicoes = PIDS_8.filter(p => p !== 11 && p !== 12).map(p => posDe(r.slots, p))
+    expect(posicoes.filter(p => p <= 4)).toHaveLength(3)
+    expect(posicoes.filter(p => p >= 5)).toHaveLength(3)
+  })
+
+  it('recusa quando os pedidos não cabem na metade', () => {
+    const metades = new Map(PIDS_8.slice(0, 5).map(p => [p, 'cima' as const]))
+    expect(() => drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades }))
+      .toThrow(/5 .*cima.*4/s)
+  })
+
+  it('cabeça prevalece: a metade dela é ignorada e registrada', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(posDe(r.slots, 11)).toBe(1)
+    expect(r.metadesIgnoradas).toEqual([11])
+  })
+
+  it('exige o desenho da chave quando alguém pediu metade', () => {
+    const metades = new Map([[11, 'cima' as const]])
+    expect(() => drawBracket(PIDS_8, SEM_CABECA, BYES_8, null, 'seed-1', [], { metadePorPid: metades }))
+      .toThrow(/desenho de chave/i)
+  })
+
+  it('sem ninguém pedindo metade, o resultado é idêntico ao de hoje', () => {
+    const semOpts = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-42')
+    const comMapaVazio = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-42', [], {
+      metadePorPid: new Map(PIDS_8.map(p => [p, null])),
+    })
+    expect(comMapaVazio.slots).toEqual(semOpts.slots)
+    expect(comMapaVazio.metadesIgnoradas).toEqual([])
+  })
+
+  it('mesma seed, mesmo resultado', () => {
+    const metades = new Map([[11, 'cima' as const], [18, 'baixo' as const]])
+    const a = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
+    const b = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
+    expect(a.slots).toEqual(b.slots)
+  })
+
+  it('recusa quando o desenho da chave está incompleto (posição sem metade)', () => {
+    // J4 perde a referência a P8: 1 das 8 posições não cai em cima nem em
+    // baixo. Sem essa checagem, o pid dessa posição sumiria do sorteio.
+    const metades = new Map([[11, 'cima' as const]])
+    expect(() =>
+      drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8_INCOMPLETO, 'seed-1', [], { metadePorPid: metades }),
+    ).toThrow(/incompleto/i)
+  })
+
+  it('embaralha as posições livres do lado — sem viés em 40 seeds', () => {
+    // As posições de bye são fixas: se o balde de posições livres não fosse
+    // embaralhado, quem pede metade cairia sempre nas mesmas vagas.
+    const posicoes = new Set<number>()
+    for (let i = 0; i < 40; i++) {
+      const metades = new Map([[11, 'cima' as const]])
+      const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, `seed-${i}`, [], { metadePorPid: metades })
+      posicoes.add(posDe(r.slots, 11))
+    }
+    expect([...posicoes].sort((a, b) => a - b)).toEqual([1, 2, 3, 4])
+  })
+
+  it('usa o desenho real da chave de 7 (3 vagas em cima), não ⌈N/2⌉', () => {
+    // GRAFO_7 é assimétrico: cima = {1,2,3}, baixo = {4,5,6,7}. Uma
+    // implementação que usasse ⌈7/2⌉ = 4 vagas em cima aceitaria isto.
+    const metades = new Map(PIDS_7.slice(0, 4).map(p => [p, 'cima' as const]))
+    expect(() =>
+      drawBracket(PIDS_7, SEM_CABECA, BYES_7, GRAFO_7, 'seed-1', [], { metadePorPid: metades }),
+    ).toThrow(/4 .*cima.*3/s)
+  })
+
+  it('a capacidade da metade desconta a posição ocupada pela cabeça', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 2 }  // posição 2 = metade de cima
+    const metades = new Map([
+      [12, 'cima' as const], [13, 'cima' as const], [14, 'cima' as const], [15, 'cima' as const],
+    ])
+    // cima = {1,2,3,4}; a cabeça ocupa a posição 2, sobram 3 vagas para os 4 pedidos.
+    expect(() =>
+      drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades }),
+    ).toThrow(/4 .*cima.*3/s)
+  })
+
+  it('metadesIgnoradas fica vazia quando a cabeça pede a metade onde já está', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'cima' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(r.metadesIgnoradas).toEqual([])
+  })
+
+  it('metadesIgnoradas registra a cabeça quando ela pede a metade oposta', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(r.metadesIgnoradas).toEqual([11])
+  })
+})
+
+// ---- metadesDoGrafo nos 76 grafos reais cadastrados --------------------
+//
+// Reconstroi o bracket_chaves_matches como ele fica no banco: lê o seed
+// (backend/prisma/seeds/bracket_chaves_matches.sql) e, na sequência, as
+// migrations cujo nome contém "bracket_chaves" (glob dinâmico pela pasta,
+// não uma lista fixa de arquivos), extraindo os INSERT INTO
+// bracket_chaves_matches(...) de cada arquivo em ordem. Para cada
+// numero_inscrito, a última definição encontrada vence — igual a uma
+// sequência de migrations rodando contra o banco (ON CONFLICT ... DO
+// UPDATE). Sem banco: só fs/path relativos a este arquivo de teste.
+const PRISMA_DIR = path.join(__dirname, '../../../prisma')
+const INSERT_RE = /INSERT INTO bracket_chaves_matches \(numero_inscrito, matches_graph\) VALUES \((\d+), '(.*?)'::jsonb\)/g
+
+function extraiInserts(sql: string): Array<[number, MatchesGraph]> {
+  const out: Array<[number, MatchesGraph]> = []
+  for (const m of sql.matchAll(INSERT_RE)) {
+    out.push([Number(m[1]), JSON.parse(m[2]) as MatchesGraph])
+  }
+  return out
+}
+
+function carregaGrafosReais(): Map<number, MatchesGraph> {
+  const arquivos = [path.join(PRISMA_DIR, 'seeds', 'bracket_chaves_matches.sql')]
+  const migrationsDir = path.join(PRISMA_DIR, 'migrations')
+  const dirsBracketChaves = fs.readdirSync(migrationsDir)
+    .filter(nome => nome.includes('bracket_chaves'))
+    .sort()
+  for (const dir of dirsBracketChaves) {
+    arquivos.push(path.join(migrationsDir, dir, 'migration.sql'))
+  }
+
+  const grafos = new Map<number, MatchesGraph>()
+  for (const arquivo of arquivos) {
+    const sql = fs.readFileSync(arquivo, 'utf-8')
+    for (const [numero, graph] of extraiInserts(sql)) {
+      grafos.set(numero, graph)
+    }
+  }
+  return grafos
+}
+
+function isFaixaContigua(set: Set<number>): boolean {
+  if (set.size === 0) return true
+  const arr = [...set].sort((a, b) => a - b)
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] !== arr[i - 1] + 1) return false
+  }
+  return true
+}
+
+describe('metadesDoGrafo nos 76 grafos reais cadastrados', () => {
+  const grafosReais = carregaGrafosReais()
+
+  // Trava explícita do tamanho do universo: se uma migration futura vier
+  // num formato que o regex acima não reconheça, o scanner perde entradas
+  // silenciosamente — esta asserção faz o teste falhar alto em vez de
+  // passar sobre dado velho/incompleto.
+  it('o scanner encontra exatamente 76 tamanhos cadastrados', () => {
+    expect(grafosReais.size).toBe(76)
+  })
+
+  it.each([...grafosReais.entries()].sort((a, b) => a[0] - b[0]))(
+    'N=%i: metades sao faixas contiguas e complementares, cobrem 1..N, e a de cima contem a posicao 1',
+    (numero, graph) => {
+      const { cima, baixo } = metadesDoGrafo(graph)
+      const todas = [...cima, ...baixo].sort((a, b) => a - b)
+      const esperado = Array.from({ length: numero }, (_, i) => i + 1)
+      expect(todas).toEqual(esperado)
+      expect([...cima].some(p => baixo.has(p))).toBe(false)
+      expect(isFaixaContigua(cima)).toBe(true)
+      expect(isFaixaContigua(baixo)).toBe(true)
+      expect(cima.has(1)).toBe(true)
+    },
+  )
 })

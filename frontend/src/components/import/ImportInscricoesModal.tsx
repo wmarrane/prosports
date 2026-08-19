@@ -3,9 +3,64 @@ import { useQuery } from '@tanstack/react-query'
 import Papa from 'papaparse'
 import { inscricoesService } from '../../services/inscricoes'
 import { eventosService } from '../../services/eventos'
-import type { ImportRow, ImportResult } from '../../types/inscricao'
+import type { ImportRow, ImportRowResult, ImportResult } from '../../types/inscricao'
 import { downloadCsvTemplate } from '../../lib/csv-template'
 import { Download, FileSpreadsheet, Upload } from 'lucide-react'
+
+/** Aceita "cima"/"baixo" em qualquer caixa e com espaços em volta; vazio (ou
+ *  coluna ausente) significa sem preferência. Qualquer outro valor não é
+ *  reconhecido — o chamador deve rejeitar a linha com mensagem, como as
+ *  demais validações do importador (ver separaMetadeInvalida abaixo). */
+function normalizaMetade(v: unknown): { metade?: 'cima' | 'baixo'; invalida: boolean } {
+  const s = String(v ?? '').trim().toLowerCase()
+  if (s === '') return { invalida: false }
+  if (s === 'cima' || s === 'baixo') return { metade: s, invalida: false }
+  return { invalida: true }
+}
+
+/** Separa, de uma lista já filtrada pelos campos obrigatórios, as linhas com
+ *  metade inválida (viram erro local, sem ir ao backend) das linhas válidas
+ *  a enviar. `linha` é a posição 1-based na lista recebida — mesma convenção
+ *  usada pelo backend pra numerar `rows` no ImportResult, o que permite
+ *  remapear e mesclar os dois conjuntos depois (ver mesclaResultado). */
+function separaMetadeInvalida(
+  linhas: Array<Omit<ImportRow, 'metade'> & { metadeInfo: { metade?: 'cima' | 'baixo'; invalida: boolean } }>,
+): { validas: ImportRow[]; origLinhas: number[]; erros: ImportRowResult[] } {
+  const validas: ImportRow[] = []
+  const origLinhas: number[] = []
+  const erros: ImportRowResult[] = []
+  linhas.forEach((item, idx) => {
+    const linha = idx + 1
+    const { metadeInfo, ...rest } = item
+    if (metadeInfo.invalida) {
+      erros.push({
+        linha,
+        nome: item.nome,
+        status: 'erro',
+        erro: 'Metade inválida — use "cima" ou "baixo" (ou deixe em branco para sem preferência).',
+      })
+      return
+    }
+    validas.push({ ...rest, metade: metadeInfo.metade })
+    origLinhas.push(linha)
+  })
+  return { validas, origLinhas, erros }
+}
+
+/** Remapeia as linhas devolvidas pelo backend (numeradas 1..N dentro do lote
+ *  enviado) de volta pra numeração original do CSV e mescla com os erros
+ *  locais de metade inválida, ordenando por linha. */
+function mesclaResultado(res: ImportResult, linhasInvalidas: ImportRowResult[], origLinhas: number[]): ImportResult {
+  const remapeadas = res.rows.map((r, i) => ({ ...r, linha: origLinhas[i] ?? r.linha }))
+  const rows = [...remapeadas, ...linhasInvalidas].sort((a, b) => a.linha - b.linha)
+  return {
+    rows,
+    contadores: {
+      ...res.contadores,
+      erros: res.contadores.erros + linhasInvalidas.length,
+    },
+  }
+}
 
 type Props = {
   open: boolean
@@ -41,6 +96,10 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
   const [commit, setCommit] = useState<ImportResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [erro, setErro] = useState('')
+  // Erros locais de "metade" inválida (rejeitados antes de ir ao backend) e
+  // o mapeamento de volta pra numeração original do CSV.
+  const [linhasInvalidasMetade, setLinhasInvalidasMetade] = useState<ImportRowResult[]>([])
+  const [origLinhasValidas, setOrigLinhasValidas] = useState<number[]>([])
 
   const { data: evento } = useQuery({
     queryKey: ['eventos', eventoId],
@@ -89,6 +148,8 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
     setCommit(null)
     setLoading(false)
     setErro('')
+    setLinhasInvalidasMetade([])
+    setOrigLinhasValidas([])
   }
 
   function handleClose() {
@@ -131,19 +192,23 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
               setErro(`Cabeçalho inválido. Coluna(s) obrigatória(s) ausente(s): ${missingEscolar.join(', ')}`)
               return
             }
-            const parsed: ImportRow[] = result.data
+            const linhas = result.data
               .map(r => ({
                 nome: (r.participante ?? r.nome ?? '').trim(),
                 subtitulo: r.subtitulo?.trim() || undefined,
+                metadeInfo: normalizaMetade(r.metade),
                 municipio_nome: (r.municipio ?? '').trim(),
               }))
               .filter(r => r.nome && r.municipio_nome)
-            if (parsed.length === 0) {
+            if (linhas.length === 0) {
               setErro('Nenhuma linha válida encontrada no CSV.')
               return
             }
-            setRows(parsed)
-            runPreview(parsed)
+            const { validas, origLinhas, erros } = separaMetadeInvalida(linhas)
+            setRows(validas)
+            setLinhasInvalidasMetade(erros)
+            setOrigLinhasValidas(origLinhas)
+            runPreview(validas, erros, origLinhas)
           },
           error: (err) => setErro(`Erro ao ler CSV: ${err.message}`),
         })
@@ -164,36 +229,42 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
           setErro(`Cabeçalho inválido. Coluna(s) obrigatória(s) ausente(s): ${missing.join(', ')}`)
           return
         }
-        const parsed: ImportRow[] = result.data
+        const linhas = result.data
           .map(r => ({
             nome: (r.nome ?? '').trim(),
             municipio_uf: (r.municipio_uf ?? '').trim(),
             municipio_nome: (r.municipio_nome ?? '').trim(),
             subtitulo: r.subtitulo?.trim() || undefined,
+            metadeInfo: normalizaMetade(r.metade),
           }))
           .filter(r => r.nome && r.municipio_uf && r.municipio_nome)
-        if (parsed.length === 0) {
+        if (linhas.length === 0) {
           setErro('Nenhuma linha válida encontrada no CSV.')
           return
         }
-        setRows(parsed)
-        runPreview(parsed)
+        const { validas, origLinhas, erros } = separaMetadeInvalida(linhas)
+        setRows(validas)
+        setLinhasInvalidasMetade(erros)
+        setOrigLinhasValidas(origLinhas)
+        runPreview(validas, erros, origLinhas)
       },
       error: (err) => setErro(`Erro ao ler CSV: ${err.message}`),
     })
   }
 
-  async function runPreview(parsedRows: ImportRow[]) {
+  async function runPreview(parsedRows: ImportRow[], linhasInvalidas: ImportRowResult[], origLinhas: number[]) {
     setLoading(true)
     setErro('')
     try {
-      const res = await inscricoesService.importar({
-        evento_id: eventoId,
-        modalidade_id: modalidadeId,
-        dry_run: true,
-        rows: parsedRows,
-      })
-      setPreview(res)
+      const res: ImportResult = parsedRows.length > 0
+        ? await inscricoesService.importar({
+            evento_id: eventoId,
+            modalidade_id: modalidadeId,
+            dry_run: true,
+            rows: parsedRows,
+          })
+        : { rows: [], contadores: { criadas: 0, duplicadas: 0, erros: 0, nao_cadastrados: 0 } }
+      setPreview(mesclaResultado(res, linhasInvalidas, origLinhas))
       setStep('review')
     } catch (err: any) {
       setErro(err?.response?.data?.message ?? 'Erro ao validar.')
@@ -206,13 +277,15 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
     setLoading(true)
     setErro('')
     try {
-      const res = await inscricoesService.importar({
-        evento_id: eventoId,
-        modalidade_id: modalidadeId,
-        dry_run: false,
-        rows,
-      })
-      setCommit(res)
+      const res: ImportResult = rows.length > 0
+        ? await inscricoesService.importar({
+            evento_id: eventoId,
+            modalidade_id: modalidadeId,
+            dry_run: false,
+            rows,
+          })
+        : { rows: [], contadores: { criadas: 0, duplicadas: 0, erros: 0, nao_cadastrados: 0 } }
+      setCommit(mesclaResultado(res, linhasInvalidasMetade, origLinhasValidas))
       setStep('done')
     } catch (err: any) {
       setErro(err?.response?.data?.message ?? 'Erro ao importar.')
@@ -322,6 +395,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                     <li><b>Participante</b>: nome da SREL ou equipe (obrigatório).</li>
                     <li><b>Subtitulo</b>: nome da escola (opcional).</li>
                     <li><b>Municipio</b>: nome do município (case-insensitive, obrigatório).</li>
+                    <li><b>metade</b>: opcional — <code>cima</code> ou <code>baixo</code>; vazio significa sem preferência. Usada só quando a modalidade liga "usar metade da chave".</li>
                     <li>O arquivo pode ter uma linha de título antes do cabeçalho — ela será ignorada automaticamente.</li>
                     <li>Participantes não encontrados são listados como erro para cadastro e reimportação.</li>
                     <li>UTF-8, separador vírgula.</li>
@@ -332,6 +406,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                     {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
                     <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>) — município de cadastro do participante.</li>
                     <li><b>municipio_nome</b>: nome do município de cadastro (case-insensitive).</li>
+                    <li><b>metade</b>: opcional — <code>cima</code> ou <code>baixo</code>; vazio significa sem preferência. Usada só quando a modalidade liga "usar metade da chave".</li>
                     <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
                     <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
                   </>

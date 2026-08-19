@@ -18,6 +18,8 @@ export type Modalidade = {
   nome: string
   sigla: string
   chave_versao: ChaveVersao
+  usa_metade_chave: boolean
+  mascarar_nome: boolean
   mensagens_inscritos: MensagemInscritos[]
   ativa: boolean
   competicao_id: number
