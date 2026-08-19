@@ -89,6 +89,8 @@ model Modalidade {
   nome                String
   sigla               String
   chave_versao        String          @default("V1")
+  usa_metade_chave    Boolean         @default(false)
+  mascarar_nome       Boolean         @default(false)
   ativa               Boolean         @default(true)
   mensagens_inscritos Json            @default("[]")
   competicao          Competicao      @relation(fields: [competicao_id], references: [id])
@@ -205,6 +207,7 @@ model Inscricao {
   subtitulo       String?
   municipio       Municipio?   @relation("InscricaoMunicipio", fields: [municipio_id], references: [id])
   municipio_id    Int?
+  metade_chave    String?
   criado_em       DateTime     @default(now())
   atualizado_em   DateTime     @updatedAt
 
