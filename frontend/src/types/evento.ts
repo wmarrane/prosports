@@ -30,6 +30,7 @@ export type Evento = {
   data_inicio?: string | null
   data_fim?: string | null
   site_publicado_em: string | null
+  publicacao_manual?: boolean
   criado_em: string
   atualizado_em: string
   _count?: {

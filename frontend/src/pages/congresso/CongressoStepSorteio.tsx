@@ -253,7 +253,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     const marco = proximoMarcoCruzado(pct, ultimo)
     if (marco == null || publicandoMarcoRef.current) return
     publicandoMarcoRef.current = true
-    eventosService.publicarParcial(eventoId)
+    eventosService.publicarParcial(eventoId, { auto: true })
       .then(() => { ultimoMarcoPublicadoPorEvento.set(eventoId, marco); setPubBanner({ kind: 'ok', marco }) })
       .catch(() => { setPubBanner({ kind: 'erro', marco }) })
       .finally(() => { publicandoMarcoRef.current = false })

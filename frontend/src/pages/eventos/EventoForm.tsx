@@ -70,6 +70,7 @@ export default function EventoForm() {
   const [dataInicio, setDataInicio] = useState<string | null>(null)
   const [dataFim, setDataFim] = useState<string | null>(null)
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
+  const [publicacaoManual, setPublicacaoManual] = useState(false)
   const [erro, setErro] = useState('')
   const [erroLogo, setErroLogo] = useState('')
 
@@ -146,6 +147,7 @@ export default function EventoForm() {
       setDataInicio(existing.data_inicio ? existing.data_inicio.slice(0, 10) : null)
       setDataFim(existing.data_fim ? existing.data_fim.slice(0, 10) : null)
       setLogoUrl(existing.logo_url ?? null)
+      setPublicacaoManual(existing.publicacao_manual === true)
     }
   }, [existing])
 
@@ -241,6 +243,7 @@ export default function EventoForm() {
         comissao_ids: comissaoIds,
         data_inicio: dataInicio || null,
         data_fim: dataFim || null,
+        publicacao_manual: publicacaoManual,
       }
       if (isEdit) {
         await eventosService.setModalidadesExcluidas(Number(id), [...excluidas])
@@ -662,6 +665,21 @@ export default function EventoForm() {
                     </button>
                   ))}
                 </div>
+                <label className="flex items-start gap-2 text-sm text-[var(--t2)]" style={{ marginTop: 12 }}>
+                  <input
+                    type="checkbox"
+                    checked={publicacaoManual}
+                    onChange={(e) => { setPublicacaoManual(e.target.checked); setSalvo(false) }}
+                    style={{ marginTop: 3 }}
+                  />
+                  <span>
+                    Publicação manual
+                    <span className="block text-xs text-[var(--t3)]">
+                      Este evento não é publicado nem atualizado automaticamente no site público.
+                      Use os botões Publicar e Despublicar.
+                    </span>
+                  </span>
+                </label>
               </section>
 
               {/* Zona de perigo */}
