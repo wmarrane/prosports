@@ -10,6 +10,8 @@ type ModalidadePayload = {
   competicao_id: number
   tipo_modalidade_id: number
   chave_versao?: ChaveVersao
+  usa_metade_chave?: boolean
+  mascarar_nome?: boolean
   mensagens_inscritos?: MensagemInscritos[]
 }
 

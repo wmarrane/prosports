@@ -46,6 +46,8 @@ export default function ModalidadeForm() {
   const [nome, setNome] = useState('')
   const [sigla, setSigla] = useState('')
   const [chaveVersao, setChaveVersao] = useState<ChaveVersao>('V2')
+  const [usaMetadeChave, setUsaMetadeChave] = useState(false)
+  const [mascararNomeMod, setMascararNomeMod] = useState(false)
   const [mensagens, setMensagens] = useState<MensagemInscritos[]>([])
   const [replicarOpen, setReplicarOpen] = useState(false)
   const [erro, setErro] = useState('')
@@ -73,6 +75,8 @@ export default function ModalidadeForm() {
       setNome(existing.nome)
       setSigla(existing.sigla)
       setChaveVersao(existing.chave_versao ?? 'V1')
+      setUsaMetadeChave(existing.usa_metade_chave === true)
+      setMascararNomeMod(existing.mascarar_nome === true)
       setMensagens(existing.mensagens_inscritos ?? [])
     }
   }, [existing])
@@ -95,6 +99,8 @@ export default function ModalidadeForm() {
         competicao_id: Number(competicaoId),
         tipo_modalidade_id: Number(tipoModalidadeId),
         chave_versao: chaveVersao,
+        usa_metade_chave: usaMetadeChave,
+        mascarar_nome: mascararNomeMod,
         mensagens_inscritos: mensagens
           .filter(m => m.mensagem.trim() !== '')
           .map(m => ({ ...m, mensagem: m.mensagem.trim() })),
@@ -333,6 +339,40 @@ export default function ModalidadeForm() {
                 </p>
               </div>
             )}
+
+            {tipoSelecionado?.tipo === 'chaves' && (
+              <label className="flex items-start gap-2 text-sm text-[var(--t2)]" style={{ marginTop: 16 }}>
+                <input
+                  type="checkbox"
+                  checked={usaMetadeChave}
+                  onChange={e => setUsaMetadeChave(e.target.checked)}
+                  style={{ marginTop: 3 }}
+                />
+                <span>
+                  Usar metade da chave
+                  <span className="block text-xs text-[var(--t4)]">
+                    A inscrição pode exigir a parte de cima ou de baixo da chave. Quem é cabeça
+                    de chave mantém a posição de cabeça e tem a metade ignorada.
+                  </span>
+                </span>
+              </label>
+            )}
+
+            <label className="flex items-start gap-2 text-sm text-[var(--t2)]" style={{ marginTop: 16 }}>
+              <input
+                type="checkbox"
+                checked={mascararNomeMod}
+                onChange={e => setMascararNomeMod(e.target.checked)}
+                style={{ marginTop: 3 }}
+              />
+              <span>
+                Mascarar nome do participante
+                <span className="block text-xs text-[var(--t4)]">
+                  No Modo Congresso e no site público aparece só o primeiro nome. As telas
+                  internas e os relatórios seguem com o nome completo.
+                </span>
+              </span>
+            </label>
           </section>
 
           {(tipoSelecionado?.tipo === 'grupos' || tipoSelecionado?.tipo === 'chaves') && (
