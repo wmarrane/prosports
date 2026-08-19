@@ -441,9 +441,19 @@ const GRAFO_8: MatchesGraph = {
   thirdPlace: null,
 }
 
+// Mesmo desenho, mas o J4 perde a referência a P8: a posição 8 não pertence a
+// nenhuma metade. Reproduz um matches_graph cadastrado incompleto.
+const GRAFO_8_INCOMPLETO: MatchesGraph = {
+  ...GRAFO_8,
+  matches: GRAFO_8.matches.map(m => (m.id === 'J4' ? { ...m, bottom: 'BYE' } : m)),
+}
+
 const SEM_CABECA = { posicao_primeiro_cabeca: 0, posicao_segundo_cabeca: 0, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0 }
 const BYES_8 = { numero_inscrito: 8, posicoes_bye: [] }
 const PIDS_8 = [11, 12, 13, 14, 15, 16, 17, 18]
+
+const BYES_7 = { numero_inscrito: 7, posicoes_bye: [] }
+const PIDS_7 = [21, 22, 23, 24, 25, 26, 27]
 
 /** Posição 1-indexed em que o pid caiu. */
 function posDe(slots: (number | null)[], pid: number): number {
@@ -503,5 +513,60 @@ describe('drawBracket com metade da chave', () => {
     const a = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
     const b = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
     expect(a.slots).toEqual(b.slots)
+  })
+
+  it('recusa quando o desenho da chave está incompleto (posição sem metade)', () => {
+    // J4 perde a referência a P8: 1 das 8 posições não cai em cima nem em
+    // baixo. Sem essa checagem, o pid dessa posição sumiria do sorteio.
+    const metades = new Map([[11, 'cima' as const]])
+    expect(() =>
+      drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8_INCOMPLETO, 'seed-1', [], { metadePorPid: metades }),
+    ).toThrow(/incompleto/i)
+  })
+
+  it('embaralha as posições livres do lado — sem viés em 40 seeds', () => {
+    // As posições de bye são fixas: se o balde de posições livres não fosse
+    // embaralhado, quem pede metade cairia sempre nas mesmas vagas.
+    const posicoes = new Set<number>()
+    for (let i = 0; i < 40; i++) {
+      const metades = new Map([[11, 'cima' as const]])
+      const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, `seed-${i}`, [], { metadePorPid: metades })
+      posicoes.add(posDe(r.slots, 11))
+    }
+    expect([...posicoes].sort((a, b) => a - b)).toEqual([1, 2, 3, 4])
+  })
+
+  it('usa o desenho real da chave de 7 (3 vagas em cima), não ⌈N/2⌉', () => {
+    // GRAFO_7 é assimétrico: cima = {1,2,3}, baixo = {4,5,6,7}. Uma
+    // implementação que usasse ⌈7/2⌉ = 4 vagas em cima aceitaria isto.
+    const metades = new Map(PIDS_7.slice(0, 4).map(p => [p, 'cima' as const]))
+    expect(() =>
+      drawBracket(PIDS_7, SEM_CABECA, BYES_7, GRAFO_7, 'seed-1', [], { metadePorPid: metades }),
+    ).toThrow(/4 .*cima.*3/s)
+  })
+
+  it('a capacidade da metade desconta a posição ocupada pela cabeça', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 2 }  // posição 2 = metade de cima
+    const metades = new Map([
+      [12, 'cima' as const], [13, 'cima' as const], [14, 'cima' as const], [15, 'cima' as const],
+    ])
+    // cima = {1,2,3,4}; a cabeça ocupa a posição 2, sobram 3 vagas para os 4 pedidos.
+    expect(() =>
+      drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades }),
+    ).toThrow(/4 .*cima.*3/s)
+  })
+
+  it('metadesIgnoradas fica vazia quando a cabeça pede a metade onde já está', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'cima' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(r.metadesIgnoradas).toEqual([])
+  })
+
+  it('metadesIgnoradas registra a cabeça quando ela pede a metade oposta', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(r.metadesIgnoradas).toEqual([11])
   })
 })

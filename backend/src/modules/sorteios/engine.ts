@@ -180,11 +180,13 @@ export function drawBracket(
   ].filter(p => p > 0)
 
   const usedPids = new Set<number>()
+  const headPositions = new Map<number, number>()
   for (let i = 0; i < cabecasPos.length && i < campeoesPids.length; i++) {
     const pid = campeoesPids[i]
     if (cabecasPos[i] >= 1 && cabecasPos[i] <= N) {
       slots[cabecasPos[i] - 1] = pid
       usedPids.add(pid)
+      headPositions.set(pid, cabecasPos[i])
     }
   }
 
@@ -192,8 +194,19 @@ export function drawBracket(
   const metadePorPid = opts.metadePorPid
   const metadeDe = (pid: number): MetadeChave | null => metadePorPid?.get(pid) ?? null
 
-  // Cabeça prevalece: quem já tem posição fixa tem a metade descartada.
-  const metadesIgnoradas = [...usedPids].filter(pid => metadeDe(pid) !== null)
+  // Cabeça prevalece: quem já tem posição fixa tem a metade descartada — mas só
+  // entra na lista quando dá pra confirmar que o pedido não foi atendido. Sem
+  // matchesGraph não há como verificar, então mantém a marcação otimista.
+  const marcadosComPosicaoFixa = [...usedPids].filter(pid => metadeDe(pid) !== null)
+  const metadesIgnoradas = matchesGraph
+    ? (() => {
+        const { cima, baixo } = metadesDoGrafo(matchesGraph)
+        return marcadosComPosicaoFixa.filter(pid => {
+          const pos = headPositions.get(pid)!
+          return metadeDe(pid) === 'cima' ? !cima.has(pos) : !baixo.has(pos)
+        })
+      })()
+    : marcadosComPosicaoFixa
 
   const pedemCima = restantes.filter(p => metadeDe(p) === 'cima')
   const pedemBaixo = restantes.filter(p => metadeDe(p) === 'baixo')
@@ -225,6 +238,15 @@ export function drawBracket(
   for (let i = 0; i < N; i++) if (slots[i] === null) livres.push(i + 1)
   const livresCima = livres.filter(p => cima.has(p))
   const livresBaixo = livres.filter(p => baixo.has(p))
+
+  if (livresCima.length + livresBaixo.length !== livres.length) {
+    throw Object.assign(
+      new Error(
+        `O desenho da chave de ${N} inscritos está incompleto: ${livres.length - livresCima.length - livresBaixo.length} posições não pertencem a nenhuma metade.`,
+      ),
+      { status: 400 },
+    )
+  }
 
   if (pedemCima.length > livresCima.length) {
     throw Object.assign(
