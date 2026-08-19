@@ -17,14 +17,17 @@ Eventos sem o parâmetro seguem exatamente como hoje.
 |---|---|---|
 | Mudança de status do evento | vira `pronto`/`parcial`/`sorteado` → publica; vira `rascunho`/`inscricoes`/`suspenso` → despublica (se publicado) | `eventos.service.editar` → `decidirAcaoPublicacao` |
 | Boletim criado, removido ou substituído | republica o site, se o evento já estiver publicado | `boletins.service.republicarSePublicado` |
+| Modo Congresso cruza marco de 25/50/75/100% do sorteio | publica parcial, sozinho, enquanto o status for `pronto` | `CongressoStepSorteio` → `POST /eventos/:id/publicar-parcial` |
 
 Manual: `POST /eventos/:id/publicar`, `/publicar-parcial`, `/despublicar`
-(`site-publico.controller`).
+(`site-publico.controller`). Note que `/publicar-parcial` atende os dois mundos:
+o auto-publish do Congresso e o botão "Republicar" da lista de eventos.
 
 ## Decisões aprovadas
 
-- **Escopo: nada automático.** O parâmetro bloqueia os três gatilhos — publicar
-  por status, despublicar por status e republicar por boletim.
+- **Escopo: nada automático.** O parâmetro bloqueia os quatro gatilhos — publicar
+  por status, despublicar por status, republicar por boletim e o auto-publish do
+  Modo Congresso.
 - **Onde mora a trava:** dentro de `publicar`/`despublicar`, não nos chamadores.
   É um ponto único de estrangulamento; gatilhos automáticos futuros já nascem
   cobertos. *(Alternativa descartada: checar o flag em cada chamador — espalha a
@@ -51,7 +54,9 @@ despublicar(eventoId: number, opts?: { origem?: OrigemPublicacao })
 Quando `origem === 'automatica'` e o evento tem `publicacao_manual`, a função
 retorna sem efeito. Chamadores:
 
-- `site-publico.controller` (3 endpoints) → `origem: 'manual'`
+- `site-publico.controller` (3 endpoints) → `origem: 'manual'`; em
+  `/publicar-parcial`, `?auto=1` marca `origem: 'automatica'` — é o que o
+  auto-publish do Congresso manda, e o botão "Republicar" não
 - `eventos.service.editar` → `origem: 'automatica'`
 - `boletins.service.republicarSePublicado` → `origem: 'automatica'`
 
