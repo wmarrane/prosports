@@ -10,6 +10,8 @@ const createSchema = z.object({
   competicao_id: z.number().int().positive(),
   tipo_modalidade_id: z.number().int().positive(),
   chave_versao: z.enum(['V1', 'V2']).optional(),
+  usa_metade_chave: z.boolean().optional(),
+  mascarar_nome: z.boolean().optional(),
   mensagens_inscritos: z.array(z.object({
     min: z.number().int().min(1),
     max: z.number().int().min(1).nullable(),

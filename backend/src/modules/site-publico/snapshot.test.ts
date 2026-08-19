@@ -218,3 +218,33 @@ it('inclui boletins e datas inicio/fim no snapshot', () => {
   expect(snap.boletins.map(b => b.numero)).toEqual([1, 2]) // ordenado por numero asc
   expect(snap.boletins[0]).toMatchObject({ titulo: 'B1', tamanho: 1024, atualizadoEm: '2026-07-01T10:00:00.000Z' })
 })
+
+it('mascara o nome quando a modalidade pede', () => {
+  const snap = montaSnapshot({
+    evento: baseEvento as any,
+    modalidades: [{ ...modalidadeGrupos, mascarar_nome: true } as any],
+    inscricoesPorModalidade: new Map([[1, [
+      { participante: { id: 100, nome: 'Wagner Rosa Marrane', subtitulo: 'Colégio França' } },
+    ]]]) as any,
+    campeoesPorModalidade: new Map() as any,
+    sorteiosPorModalidade: new Map() as any,
+    subtituloFn: (p: any) => p.subtitulo ?? null,
+  })
+  expect(snap.modalidades[0].participantes).toEqual([
+    { id: 100, nome: 'Wagner **********', subtitulo: 'Colégio França' },
+  ])
+})
+
+it('não mascara quando a modalidade não pede', () => {
+  const snap = montaSnapshot({
+    evento: baseEvento as any,
+    modalidades: [modalidadeGrupos as any],
+    inscricoesPorModalidade: new Map([[1, [
+      { participante: { id: 100, nome: 'Wagner Rosa Marrane', subtitulo: 'Colégio França' } },
+    ]]]) as any,
+    campeoesPorModalidade: new Map() as any,
+    sorteiosPorModalidade: new Map() as any,
+    subtituloFn: (p: any) => p.subtitulo ?? null,
+  })
+  expect(snap.modalidades[0].participantes[0].nome).toBe('Wagner Rosa Marrane')
+})

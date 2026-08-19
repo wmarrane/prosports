@@ -1,5 +1,6 @@
 import { applyAnfitriaoRule } from '../sorteios/sorteios.service'
 import { participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import type {
   SnapEvento, SnapModalidade, SnapParticipante, SnapCampeao,
 } from './snapshot-types'
@@ -12,7 +13,7 @@ type EventoRow = {
   data_inicio?: Date | null; data_fim?: Date | null
   boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string; size_bytes: number; atualizado_em: Date }[]
 }
-type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown }
+type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown; mascarar_nome: boolean }
 type ParticipanteRow = {
   id: number; nome: string; subtitulo: string | null
   municipio?: { nome: string; uf: string } | null
@@ -80,9 +81,11 @@ export function montaSnapshot(input: MontaSnapshotInput): SnapEvento {
     const campeoes = campeoesPorModalidade.get(mod.id) ?? []
     const sorteio = sorteiosPorModalidade.get(mod.id) ?? null
 
+    // Mascaramos aqui, na origem: o JSON publicado não carrega o nome inteiro.
+    const mascarar = mod.mascarar_nome === true
     const participantes: SnapParticipante[] = inscricoes.map((i) => ({
       id: i.participante.id,
-      nome: i.participante.nome,
+      nome: mascarar ? mascararNome(i.participante.nome) : i.participante.nome,
       subtitulo: subtituloFn(participanteEfetivo(i, porModalidade)),
     }))
     const campeoesSnap: SnapCampeao[] = [...campeoes]

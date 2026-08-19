@@ -16,4 +16,6 @@ export const sorteiosService = {
   remover: (id: number) => api.delete(`${BASE}/${id}`),
   removerTodosDoEvento: (evento_id: number) =>
     api.delete<{ count: number }>(`${BASE}/evento/${evento_id}`).then(r => r.data),
+  metades: (numeroInscrito: number) =>
+    api.get<{ numero_inscrito: number; cima: number; baixo: number }>(`${BASE}/metades/${numeroInscrito}`).then(r => r.data),
 }

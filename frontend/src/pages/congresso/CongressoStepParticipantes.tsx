@@ -7,6 +7,7 @@ import ParticipanteSelect from '../../components/ParticipanteSelect'
 import ModalityBadge from '../../components/modalities/ModalityBadge'
 import { Plus, X, ArrowRight } from '../../lib/icons'
 import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { useToast } from '../../components/Toast'
 
@@ -124,7 +125,9 @@ export default function CongressoStepParticipantes({ eventoId, modalidadeId, com
       ) : (
         <div className="cw-plist cw-plist-full">
           {inscricoes.map((i, idx) => {
-            const nome = i.participante.nome
+            const nome = modalidade?.mascarar_nome === true
+              ? mascararNome(i.participante.nome)
+              : i.participante.nome
             const displayNome = nome.length > 50 ? nome.slice(0, 50) + '…' : nome
             return (
               <div className="cw-prow" key={i.id}>

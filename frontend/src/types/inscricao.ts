@@ -1,5 +1,7 @@
 import type { Participante } from './participante'
 
+export type MetadeChave = 'cima' | 'baixo'
+
 export type Inscricao = {
   id: number
   evento_id: number
@@ -8,6 +10,7 @@ export type Inscricao = {
   participante: Participante
   subtitulo?: string | null
   municipio?: { id: number; nome: string; uf: string } | null
+  metade_chave?: MetadeChave | null
   criado_em: string
   atualizado_em: string
 }
@@ -17,6 +20,7 @@ export type ImportRow = {
   municipio_uf?: string
   municipio_nome: string
   subtitulo?: string
+  metade?: MetadeChave
 }
 
 export type ImportRowResult = {

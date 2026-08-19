@@ -191,6 +191,19 @@ export default function EventoInscricoes() {
   }, [campeoes])
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
+  // usa_metade_chave pode sobreviver a uma troca de tipo (chaves → grupos) no
+  // payload salvo; o seletor cima/baixo só faz sentido em chaves, então exige
+  // também o tipo atual da modalidade, não só a flag.
+  const usaMetade = modalidadeAtual?.usa_metade_chave === true
+    && modalidadeAtual?.tipo_modalidade?.tipo === 'chaves'
+
+  const { data: metadesInfo } = useQuery({
+    queryKey: ['metades-chave', inscricoes.length],
+    queryFn: () => sorteiosService.metades(inscricoes.length),
+    enabled: usaMetade && inscricoes.length > 1,
+    retry: false,   // sem desenho cadastrado o endpoint responde 404; o contador só some
+  })
+
   const tipoDaModalidade = modalidadeAtual?.tipo_modalidade?.tipo
   const regraMensagem = useMemo(
     () => matchMensagem(modalidadeAtual?.mensagens_inscritos ?? [], inscricoes.length),
@@ -319,6 +332,13 @@ export default function EventoInscricoes() {
       toast.success('Inscrição atualizada.')
     },
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao editar inscrição.'),
+  })
+
+  const { mutate: definirMetade } = useMutation({
+    mutationFn: ({ id, metade_chave }: { id: number; metade_chave: 'cima' | 'baixo' | null }) =>
+      inscricoesService.editar(id, { metade_chave }),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['inscricoes', eventoId, modalidadeId] }) },
+    onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao definir a metade da chave.'),
   })
 
   const { mutate: salvarPosAnfitriao } = useMutation({
@@ -815,7 +835,38 @@ export default function EventoInscricoes() {
                       </p>
                     </div>
                   ) : (
-                    <div
+                    <>
+                      {usaMetade && (() => {
+                        const pedemCima = inscricoes.filter(i => i.metade_chave === 'cima').length
+                        const pedemBaixo = inscricoes.filter(i => i.metade_chave === 'baixo').length
+                        const capCima = metadesInfo?.cima
+                        const capBaixo = metadesInfo?.baixo
+                        const estouro = (capCima != null && pedemCima > capCima) || (capBaixo != null && pedemBaixo > capBaixo)
+                        const ignoradas = sorteioDaModalidade?.tipo === 'chaves'
+                          ? sorteioDaModalidade.resultado.metadesIgnoradas
+                          : undefined
+                        return (
+                          <div
+                            style={{
+                              marginBottom: 8, padding: '8px 12px', fontSize: 12,
+                              borderRadius: 'var(--radius-lg)',
+                              background: estouro ? 'var(--danger-bg, #3b1113)' : 'var(--card-bg-2)',
+                              border: `1px solid ${estouro ? 'var(--danger)' : 'var(--card-border)'}`,
+                              color: estouro ? 'var(--danger)' : 'var(--t3)',
+                            }}
+                          >
+                            Metade da chave — cima {pedemCima}{capCima != null ? `/${capCima}` : ''} · baixo {pedemBaixo}{capBaixo != null ? `/${capBaixo}` : ''}
+                            {estouro && <b> · não cabe: o sorteio vai recusar</b>}
+                            {ignoradas && ignoradas.length > 0 && (
+                              <span style={{ display: 'block', marginTop: 4, color: 'var(--t4)' }}>
+                                O último sorteio ignorou a metade de {ignoradas.length}{' '}
+                                {ignoradas.length === 1 ? 'inscrito que é cabeça de chave' : 'inscritos que são cabeça de chave'}.
+                              </span>
+                            )}
+                          </div>
+                        )
+                      })()}
+                      <div
                       style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
@@ -910,6 +961,23 @@ export default function EventoInscricoes() {
                                 <Home size={12} />
                               </span>
                             )}
+                            {usaMetade && isAdmin && (
+                              <select
+                                value={i.metade_chave ?? ''}
+                                onChange={e => definirMetade({ id: i.id, metade_chave: (e.target.value || null) as 'cima' | 'baixo' | null })}
+                                disabled={eventoSuspenso}
+                                title="Metade da chave em que este inscrito deve cair"
+                                style={{
+                                  fontSize: 11, padding: '2px 4px', borderRadius: 6, flexShrink: 0,
+                                  background: 'var(--card-bg)', color: 'var(--t2)',
+                                  border: '1px solid var(--card-border)',
+                                }}
+                              >
+                                <option value="">—</option>
+                                <option value="cima">Cima</option>
+                                <option value="baixo">Baixo</option>
+                              </select>
+                            )}
                             {subMunPorMod && isAdmin && (
                               <button
                                 onClick={() => {
@@ -958,6 +1026,7 @@ export default function EventoInscricoes() {
                         )
                       })}
                     </div>
+                    </>
                   )}
                 </section>
 

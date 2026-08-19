@@ -20,6 +20,7 @@ export type ChavesResultado = {
   slots: (number | null)[]
   byePositions?: number[]  // 1-indexed; ausente em sorteios pré-v1.18.0
   matchesGraph?: MatchesGraph | null   // NOVO
+  metadesIgnoradas?: number[]   // pids de cabeças cuja metade foi descartada (posição de cabeça prevalece)
 }
 
 export type OrdemResultado = {
