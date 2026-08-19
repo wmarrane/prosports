@@ -333,6 +333,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                     <li><b>Participante</b>: nome da SREL ou equipe (obrigatório).</li>
                     <li><b>Subtitulo</b>: nome da escola (opcional).</li>
                     <li><b>Municipio</b>: nome do município (case-insensitive, obrigatório).</li>
+                    <li><b>metade</b>: opcional — <code>cima</code> ou <code>baixo</code>; vazio significa sem preferência. Usada só quando a modalidade liga "usar metade da chave".</li>
                     <li>O arquivo pode ter uma linha de título antes do cabeçalho — ela será ignorada automaticamente.</li>
                     <li>Participantes não encontrados são listados como erro para cadastro e reimportação.</li>
                     <li>UTF-8, separador vírgula.</li>
