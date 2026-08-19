@@ -103,3 +103,48 @@ describe('computeLayout — ordem da 1ª rodada (V2)', () => {
     expect(idx('B6')).toBe(idx('J6') + 1)  // Aguaí (P22) abaixo do J6
   })
 })
+
+describe('BracketTree — tamanho do subtítulo', () => {
+  // O mesmo componente desenha o Modo Congresso (projetado) e o site público.
+  // A prop `subtituloGrande` existe para aumentar o subtítulo SÓ na projeção;
+  // sem ela, o tamanho tem que continuar o de antes, senão a mudança vaza para
+  // o site público.
+  const comSubtitulo = new Map<number, Participante>([
+    [10, { id: 10, nome: 'Fulano', subtitulo: 'Colégio França' } as any],
+    [20, { id: 20, nome: 'Beltrano', subtitulo: 'Colégio Recanto' } as any],
+    [30, { id: 30, nome: 'Sicrano', subtitulo: 'Colégio Aurora' } as any],
+  ])
+  const render = (props: Record<string, unknown>) =>
+    renderToStaticMarkup(
+      <BracketTree
+        matchesGraph={graphV2 as any}
+        slots={[10, 20, 30]}
+        participantesById={comSubtitulo}
+        subtituloLine={(p: any) => p.subtitulo}
+        {...props}
+      />,
+    )
+
+  // O rótulo "BYE" também usa 1rem no modo grande, então olhamos só o estilo do
+  // span do subtítulo (o único com color:var(--t3) e line-height:1.2).
+  const tamanhoDoSubtitulo = (html: string) => {
+    const m = html.match(/font-size:([^;"]+);color:var\(--t3\);line-height:1\.2/)
+    return m?.[1] ?? null
+  }
+
+  it('mantém 0.8rem no modo grande sem a prop (site público inalterado)', () => {
+    const html = render({ large: true })
+    expect(html).toContain('Colégio França')
+    expect(tamanhoDoSubtitulo(html)).toBe('0.8rem')
+  })
+
+  it('usa 1rem quando o Modo Congresso pede subtítulo grande', () => {
+    const html = render({ large: true, subtituloGrande: true })
+    expect(tamanhoDoSubtitulo(html)).toBe('1rem')
+  })
+
+  it('ignora a prop fora do modo grande (telas compactas seguem iguais)', () => {
+    const html = render({ subtituloGrande: true })
+    expect(tamanhoDoSubtitulo(html)).toBe('0.7rem')
+  })
+})

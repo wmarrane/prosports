@@ -257,7 +257,7 @@ export default function CampeoesPanel({
                   >{mascarar ? mascararNome(it.participante?.nome ?? '—') : (it.participante?.nome ?? '—')}</span>
                   {(() => {
                     const l = it.participante ? subtituloLine?.(it.participante) : null
-                    return l ? <span style={{ color: DIM, fontSize: 12 }}>— {l}</span> : null
+                    return l ? <span style={{ color: DIM, fontSize: 14 }}>— {l}</span> : null
                   })()}
                   {it.inscrito ? (
                     <Check size={14} style={{ color: 'var(--success)' }} />
