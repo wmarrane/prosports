@@ -7,6 +7,15 @@ import type { ImportRow, ImportResult } from '../../types/inscricao'
 import { downloadCsvTemplate } from '../../lib/csv-template'
 import { Download, FileSpreadsheet, Upload } from 'lucide-react'
 
+/** Aceita "cima"/"baixo" em qualquer caixa e com acento sobrando; qualquer
+ *  outra coisa vira "sem preferência", que é o comportamento padrão. */
+function normalizaMetade(v: unknown): 'cima' | 'baixo' | undefined {
+  const s = String(v ?? '').trim().toLowerCase()
+  if (s === 'cima') return 'cima'
+  if (s === 'baixo') return 'baixo'
+  return undefined
+}
+
 type Props = {
   open: boolean
   eventoId: number
@@ -135,6 +144,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
               .map(r => ({
                 nome: (r.participante ?? r.nome ?? '').trim(),
                 subtitulo: r.subtitulo?.trim() || undefined,
+                metade: normalizaMetade(r.metade),
                 municipio_nome: (r.municipio ?? '').trim(),
               }))
               .filter(r => r.nome && r.municipio_nome)
@@ -170,6 +180,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
             municipio_uf: (r.municipio_uf ?? '').trim(),
             municipio_nome: (r.municipio_nome ?? '').trim(),
             subtitulo: r.subtitulo?.trim() || undefined,
+            metade: normalizaMetade(r.metade),
           }))
           .filter(r => r.nome && r.municipio_uf && r.municipio_nome)
         if (parsed.length === 0) {
@@ -332,6 +343,7 @@ export default function ImportInscricoesModal({ open, eventoId, modalidadeId, on
                     {incluiSubtitulo && <li><b>subtitulo</b>: opcional — aparece ao lado do nome quando a competição habilita.</li>}
                     <li><b>municipio_uf</b>: sigla UF em maiúsculas (ex.: <code className="font-mono">SP</code>) — município de cadastro do participante.</li>
                     <li><b>municipio_nome</b>: nome do município de cadastro (case-insensitive).</li>
+                    <li><b>metade</b>: opcional — <code>cima</code> ou <code>baixo</code>; vazio significa sem preferência. Usada só quando a modalidade liga "usar metade da chave".</li>
                     <li>Os participantes precisam estar cadastrados em <b>Participantes</b>. Não cadastrados são listados como erro para você cadastrar e reimportar.</li>
                     <li>UTF-8, separador vírgula, cabeçalho na primeira linha.</li>
                   </>
