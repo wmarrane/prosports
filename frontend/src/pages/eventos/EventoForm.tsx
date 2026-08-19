@@ -669,7 +669,7 @@ export default function EventoForm() {
                   <input
                     type="checkbox"
                     checked={publicacaoManual}
-                    onChange={(e) => setPublicacaoManual(e.target.checked)}
+                    onChange={(e) => { setPublicacaoManual(e.target.checked); setSalvo(false) }}
                     style={{ marginTop: 3 }}
                   />
                   <span>

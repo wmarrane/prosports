@@ -31,7 +31,7 @@ export async function publicar(
   // Evento de publicação manual não reage a gatilho automático. Não é erro: é o
   // comportamento pedido, então sai em silêncio.
   if ((opts.origem ?? 'automatica') === 'automatica' && evento.publicacao_manual) {
-    logger.debug({ eventoId }, 'publicacao automatica ignorada: evento com publicacao_manual')
+    logger.info({ eventoId }, 'publicacao automatica ignorada: evento com publicacao_manual')
     return
   }
   if (opts.permitirParcial) {
@@ -120,7 +120,7 @@ export async function despublicar(
       select: { publicacao_manual: true },
     })
     if (evento?.publicacao_manual) {
-      logger.debug({ eventoId }, 'despublicacao automatica ignorada: evento com publicacao_manual')
+      logger.info({ eventoId }, 'despublicacao automatica ignorada: evento com publicacao_manual')
       return
     }
   }

@@ -60,6 +60,7 @@ type CreateInput = {
   comissao_ids?: number[]
   data_inicio?: Date | null
   data_fim?: Date | null
+  publicacao_manual?: boolean
 }
 
 export async function listar(competicao_id?: number, user?: { sub: number; role: string }) {
