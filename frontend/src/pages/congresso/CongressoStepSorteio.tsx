@@ -106,6 +106,15 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     return m
   }, [inscricoes, porModalidade, mascarar])
 
+  // Sem máscara, de propósito: alimenta só o PDF de impressão (uso interno,
+  // pra organização conferir quem é quem), que precisa do nome completo
+  // mesmo quando a modalidade esconde o sobrenome na tela projetada.
+  const participantesByIdImpressao = useMemo(() => {
+    const m = new Map<number, Participante>()
+    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
+    return m
+  }, [inscricoes, porModalidade])
+
   const campeoesByParticipanteId = useMemo(() => {
     const m = new Map<number, number>()
     for (const c of campeoes) m.set(c.participante_id, c.posicao)
@@ -578,7 +587,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
           cidadeLocalData={[evento?.municipio?.nome, evento?.local, evento ? formatDateBR(evento.data_hora) : ''].filter(Boolean).join(' · ')}
           seed={sorteio.seed}
           resultado={sorteio.resultado}
-          participantesById={participantesById}
+          participantesById={participantesByIdImpressao}
           campeoesByParticipanteId={campeoesByParticipanteId}
           anfitriaoPid={anfitriaoPid}
           subtituloLine={subtituloLine}
