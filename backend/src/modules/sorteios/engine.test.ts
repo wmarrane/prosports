@@ -425,3 +425,83 @@ describe('metadesDoGrafo', () => {
     expect([...v2.baixo].sort((a, b) => a - b)).toEqual([...v1.baixo].sort((a, b) => a - b))
   })
 })
+
+// N=8 simétrico: cima = 1..4, baixo = 5..8.
+const GRAFO_8: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P1', bottom: 'P2' },
+    { id: 'J2', round: 1, top: 'P3', bottom: 'P4' },
+    { id: 'J3', round: 1, top: 'P5', bottom: 'P6' },
+    { id: 'J4', round: 1, top: 'P7', bottom: 'P8' },
+    { id: 'J5', round: 2, top: 'V:J1', bottom: 'V:J2' },
+    { id: 'J6', round: 2, top: 'V:J3', bottom: 'V:J4' },
+    { id: 'J7', round: 3, top: 'V:J5', bottom: 'V:J6' },
+  ],
+  final: 'J7',
+  thirdPlace: null,
+}
+
+const SEM_CABECA = { posicao_primeiro_cabeca: 0, posicao_segundo_cabeca: 0, posicao_terceiro_cabeca: 0, posicao_quarto_cabeca: 0 }
+const BYES_8 = { numero_inscrito: 8, posicoes_bye: [] }
+const PIDS_8 = [11, 12, 13, 14, 15, 16, 17, 18]
+
+/** Posição 1-indexed em que o pid caiu. */
+function posDe(slots: (number | null)[], pid: number): number {
+  return slots.findIndex(s => s === pid) + 1
+}
+
+describe('drawBracket com metade da chave', () => {
+  it('respeita a metade pedida por cada inscrito', () => {
+    const metades = new Map([[11, 'cima' as const], [12, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades })
+    expect(posDe(r.slots, 11)).toBeLessThanOrEqual(4)
+    expect(posDe(r.slots, 12)).toBeGreaterThanOrEqual(5)
+    expect(r.slots.filter(s => s !== null)).toHaveLength(8)
+  })
+
+  it('quem não pediu metade preenche os dois lados', () => {
+    // 1 pede cima, 1 pede baixo: sobram 3 vagas de cada lado para os 6 sem
+    // preferência. Se o balde livre ficasse preso a um lado, esta conta quebra.
+    const metades = new Map([[11, 'cima' as const], [12, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades })
+    const posicoes = PIDS_8.filter(p => p !== 11 && p !== 12).map(p => posDe(r.slots, p))
+    expect(posicoes.filter(p => p <= 4)).toHaveLength(3)
+    expect(posicoes.filter(p => p >= 5)).toHaveLength(3)
+  })
+
+  it('recusa quando os pedidos não cabem na metade', () => {
+    const metades = new Map(PIDS_8.slice(0, 5).map(p => [p, 'cima' as const]))
+    expect(() => drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-1', [], { metadePorPid: metades }))
+      .toThrow(/5 .*cima.*4/s)
+  })
+
+  it('cabeça prevalece: a metade dela é ignorada e registrada', () => {
+    const regra = { ...SEM_CABECA, posicao_primeiro_cabeca: 1 }  // posição 1 = metade de cima
+    const metades = new Map([[11, 'baixo' as const]])
+    const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
+    expect(posDe(r.slots, 11)).toBe(1)
+    expect(r.metadesIgnoradas).toEqual([11])
+  })
+
+  it('exige o desenho da chave quando alguém pediu metade', () => {
+    const metades = new Map([[11, 'cima' as const]])
+    expect(() => drawBracket(PIDS_8, SEM_CABECA, BYES_8, null, 'seed-1', [], { metadePorPid: metades }))
+      .toThrow(/desenho de chave/i)
+  })
+
+  it('sem ninguém pedindo metade, o resultado é idêntico ao de hoje', () => {
+    const semOpts = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-42')
+    const comMapaVazio = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-42', [], {
+      metadePorPid: new Map(PIDS_8.map(p => [p, null])),
+    })
+    expect(comMapaVazio.slots).toEqual(semOpts.slots)
+    expect(comMapaVazio.metadesIgnoradas).toEqual([])
+  })
+
+  it('mesma seed, mesmo resultado', () => {
+    const metades = new Map([[11, 'cima' as const], [18, 'baixo' as const]])
+    const a = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
+    const b = drawBracket(PIDS_8, SEM_CABECA, BYES_8, GRAFO_8, 'seed-7', [], { metadePorPid: metades })
+    expect(a.slots).toEqual(b.slots)
+  })
+})

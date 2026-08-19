@@ -144,6 +144,8 @@ export type BracketResultado = {
   slots: (number | null)[]
   byePositions: number[]
   matchesGraph: MatchesGraph | null
+  /** Pids de cabeças cuja metade foi descartada — a posição de cabeça prevalece. */
+  metadesIgnoradas: number[]
 }
 
 export type RegraChaves = {
@@ -165,6 +167,7 @@ export function drawBracket(
   matchesGraph: MatchesGraph | null,
   seed: string,
   campeoesPids: readonly number[] = [],
+  opts: { metadePorPid?: ReadonlyMap<number, MetadeChave | null> } = {},
 ): BracketResultado {
   const N = participantes.length
   const slots: (number | null)[] = new Array(N).fill(null)
@@ -186,17 +189,78 @@ export function drawBracket(
   }
 
   const restantes = participantes.filter(p => !usedPids.has(p))
-  const shuffled = shuffleSeeded(restantes, seed)
+  const metadePorPid = opts.metadePorPid
+  const metadeDe = (pid: number): MetadeChave | null => metadePorPid?.get(pid) ?? null
 
-  let idx = 0
-  for (let i = 0; i < N; i++) {
-    if (slots[i] === null && idx < shuffled.length) {
-      slots[i] = shuffled[idx++]
+  // Cabeça prevalece: quem já tem posição fixa tem a metade descartada.
+  const metadesIgnoradas = [...usedPids].filter(pid => metadeDe(pid) !== null)
+
+  const pedemCima = restantes.filter(p => metadeDe(p) === 'cima')
+  const pedemBaixo = restantes.filter(p => metadeDe(p) === 'baixo')
+
+  // Ninguém pediu nada: caminho de hoje, byte a byte.
+  if (pedemCima.length === 0 && pedemBaixo.length === 0) {
+    const shuffled = shuffleSeeded(restantes, seed)
+    let idx = 0
+    for (let i = 0; i < N; i++) {
+      if (slots[i] === null && idx < shuffled.length) {
+        slots[i] = shuffled[idx++]
+      }
     }
+    const byePositions = [...regraBracket.posicoes_bye].sort((a, b) => a - b)
+    return { size: N, slots, byePositions, matchesGraph, metadesIgnoradas }
   }
 
+  if (!matchesGraph) {
+    throw Object.assign(
+      new Error(
+        `Não há desenho de chave cadastrado para ${N} inscritos — ele é necessário para respeitar a metade da chave.`,
+      ),
+      { status: 400 },
+    )
+  }
+
+  const { cima, baixo } = metadesDoGrafo(matchesGraph)
+  const livres: number[] = []
+  for (let i = 0; i < N; i++) if (slots[i] === null) livres.push(i + 1)
+  const livresCima = livres.filter(p => cima.has(p))
+  const livresBaixo = livres.filter(p => baixo.has(p))
+
+  if (pedemCima.length > livresCima.length) {
+    throw Object.assign(
+      new Error(
+        `${pedemCima.length} inscritos pedem a parte de cima da chave, que tem ${livresCima.length} vagas.`,
+      ),
+      { status: 400 },
+    )
+  }
+  if (pedemBaixo.length > livresBaixo.length) {
+    throw Object.assign(
+      new Error(
+        `${pedemBaixo.length} inscritos pedem a parte de baixo da chave, que tem ${livresBaixo.length} vagas.`,
+      ),
+      { status: 400 },
+    )
+  }
+
+  // Embaralhar as POSIÇÕES (e não só os pids) evita que os inscritos com metade
+  // marcada caiam sempre nas primeiras vagas do seu lado — o que enviesaria
+  // quem pega bye.
+  const posCima = shuffleSeeded(livresCima, `${seed}:pos-cima`)
+  const posBaixo = shuffleSeeded(livresBaixo, `${seed}:pos-baixo`)
+  const sobra = [...posCima.slice(pedemCima.length), ...posBaixo.slice(pedemBaixo.length)]
+  const posLivre = shuffleSeeded(sobra, `${seed}:pos-livre`)
+  const semPreferencia = restantes.filter(p => metadeDe(p) === null)
+
+  const atribui = (posicoes: readonly number[], pids: readonly number[]) => {
+    for (let k = 0; k < pids.length; k++) slots[posicoes[k] - 1] = pids[k]
+  }
+  atribui(posCima, pedemCima)
+  atribui(posBaixo, pedemBaixo)
+  atribui(posLivre, semPreferencia)
+
   const byePositions = [...regraBracket.posicoes_bye].sort((a, b) => a - b)
-  return { size: N, slots, byePositions, matchesGraph }
+  return { size: N, slots, byePositions, matchesGraph, metadesIgnoradas }
 }
 
 export type OrdemResultado = { ordem: number[] }
