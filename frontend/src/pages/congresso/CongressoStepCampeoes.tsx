@@ -135,7 +135,7 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
                       porModalidade,
                     )
                     const l = composeSubtituloLine(efetivo, camposSubtitulo)
-                    return l ? <div style={{ fontSize: 14, color: DIM, marginTop: 4 }}>{l}</div> : null
+                    return l ? <div style={{ fontSize: 'clamp(14px, 1.05vw, 16px)', color: DIM, marginTop: 4 }}>{l}</div> : null
                   })()}
                 </div>
                 <span

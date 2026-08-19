@@ -15,6 +15,9 @@ type Props = {
   subtituloLine?: (p: Participante) => string | null
   onMatchClick?: (matchId: string) => void
   cabecasPids?: Set<number>
+  /** Modo Congresso: aumenta o subtítulo para leitura à distância na projeção.
+   *  O site público usa o mesmo componente e NÃO passa esta prop. */
+  subtituloGrande?: boolean
 }
 
 type MatchLayout = {
@@ -154,11 +157,12 @@ function renderSlot(
   anfitriaoPid?: number | null,
   cabecasPids?: Set<number>,
   byeStubTop?: Record<string, string>,
+  subtituloGrande?: boolean,
 ): React.ReactNode {
   // Fonte do nome do participante = maior (destaque). Labels BYE/Vencedor/Perdedor = original.
   const labelFontSize = large ? '1rem' : '0.85rem'
   const nameFontSize = large ? '1.2rem' : '1rem'
-  const subFontSize = large ? '0.8rem' : '0.7rem'
+  const subFontSize = large ? (subtituloGrande ? '1rem' : '0.8rem') : '0.7rem'
   if (ref === 'BYE') {
     return <span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 700, fontSize: labelFontSize }}>BYE</span>
   }
@@ -207,7 +211,7 @@ function renderSlot(
   return null
 }
 
-export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick, cabecasPids }: Props) {
+export default function BracketTree({ matchesGraph, slots, participantesById, campeoesByParticipanteId, anfitriaoPid, large = false, subtituloLine, onMatchClick, cabecasPids, subtituloGrande = false }: Props) {
   const layout = useMemo(() => computeLayout(matchesGraph, slots.length), [matchesGraph, slots.length])
 
   const byeStubTop: Record<string, string> = {}
@@ -303,10 +307,10 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               </div>
             )}
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
+              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
             </div>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop)}
+              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
             </div>
             {!m.id.startsWith('B') && (
               <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>

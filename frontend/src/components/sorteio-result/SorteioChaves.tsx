@@ -13,6 +13,8 @@ type Props = {
   subtituloLine?: (p: Participante) => string | null
   onMatchClick?: (matchId: string) => void
   cabecasPids?: Set<number>
+  /** Modo Congresso: subtítulo maior na projeção. O site público não passa. */
+  subtituloGrande?: boolean
 }
 
 type Match = {
@@ -133,7 +135,7 @@ function MatchCard({ match, large, participantesById, campeoesByParticipanteId, 
   )
 }
 
-export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, subtituloLine, onMatchClick, cabecasPids }: Props) {
+export default function SorteioChaves({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, subtituloLine, onMatchClick, cabecasPids, subtituloGrande = false }: Props) {
   // v1.19.0: render field via grafo de matches (preferido)
   if (resultado.matchesGraph && resultado.matchesGraph.matches.length > 0) {
     return (
@@ -147,6 +149,7 @@ export default function SorteioChaves({ resultado, participantesById, large = fa
         subtituloLine={subtituloLine}
         onMatchClick={onMatchClick}
         cabecasPids={cabecasPids}
+        subtituloGrande={subtituloGrande}
       />
     )
   }
