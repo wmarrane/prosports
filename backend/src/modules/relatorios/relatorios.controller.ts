@@ -17,7 +17,7 @@ export async function congresso(req: Request, res: Response, next: NextFunction)
       select: {
         id: true,
         nome: true,
-        competicao: { select: { subtitulo_municipio_por_modalidade: true } },
+        competicao: { select: { modelo_congresso: true } },
       },
     })
     if (!evento) {
@@ -25,11 +25,13 @@ export async function congresso(req: Request, res: Response, next: NextFunction)
       return
     }
 
-    // Competição escolar (JEESP) tem layout próprio: uma aba por esporte, com um
-    // bloco por modalidade. As demais seguem no relatório visual de sempre.
-    const escolar = evento.competicao?.subtitulo_municipio_por_modalidade === true
-    const buf = escolar ? await gerarCongressoJeespXlsx(eventoId) : await gerarCongressoXlsx(eventoId)
-    const filename = escolar ? nomeArquivoCongressoJeesp(evento) : nomeArquivo(evento)
+    // O layout é escolha da competição, não consequência de outra flag: o
+    // modelo 'jeesp' tem uma aba por esporte com um bloco por modalidade; o
+    // 'padrao' é o relatório visual dos Jogos Regionais, que também sabe
+    // mostrar o subtítulo por inscrição das competições escolares.
+    const jeesp = evento.competicao?.modelo_congresso === 'jeesp'
+    const buf = jeesp ? await gerarCongressoJeespXlsx(eventoId) : await gerarCongressoXlsx(eventoId)
+    const filename = jeesp ? nomeArquivoCongressoJeesp(evento) : nomeArquivo(evento)
 
     res.setHeader('Content-Type', XLSX_MIME)
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`)
