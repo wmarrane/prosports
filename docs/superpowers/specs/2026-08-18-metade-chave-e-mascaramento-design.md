@@ -72,6 +72,10 @@ model Inscricao {
 }
 ```
 
+Os valores gravados são exatamente as strings `cima` e `baixo`; qualquer outro
+valor é rejeitado na API. Desligar `usa_metade_chave` não apaga o que já foi
+marcado nas inscrições — os valores ficam guardados e passam a ser ignorados.
+
 Migração aditiva, tudo com default. Nenhuma competição existente muda de
 comportamento. Os dois parâmetros da modalidade são independentes: dá para
 mascarar sem usar metade e vice-versa.
@@ -117,7 +121,15 @@ Se um balde não cabe na sua metade, não existe sorteio válido. Duas defesas:
 2. **Recusa no sorteio** — se ninguém corrigir, o sorteio falha com a conta na
    mensagem: *"6 inscritos pedem a parte de cima, que tem 4 vagas."*
 
-A capacidade de cada metade desconta as posições já ocupadas por cabeças.
+**Como a conta é feita no sorteio (autoritativa):** cabeças saem da conta dos
+dois lados — eles já têm posição fixa e a metade deles é ignorada. Sobra, para
+cada metade, o número de vagas livres contra o número de inscritos não-cabeça
+que pediram aquela metade.
+
+**Como a conta é feita na tela (aviso antecipado):** a tela não sabe quem será
+cabeça no momento do sorteio, então compara simplesmente os pedidos de cada
+metade contra o tamanho total daquela metade. É um alerta, não um veredito — a
+recusa autoritativa é a do sorteio.
 
 ## Mascaramento
 
