@@ -15,6 +15,7 @@ const createSchema = z.object({
     .default([]),
   considerar_anfitriao: z.boolean().optional().default(false),
   subtitulo_municipio_por_modalidade: z.boolean().optional().default(false),
+  modelo_congresso: z.enum(['padrao', 'jeesp']).optional(),
 })
 
 const updateSchema = createSchema.partial()

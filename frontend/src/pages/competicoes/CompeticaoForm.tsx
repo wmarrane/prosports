@@ -7,7 +7,7 @@ import { competicoesService } from '../../services/competicoes'
 import { UFS } from '../../lib/ufs'
 import { Check, X, Trophy } from '../../lib/icons'
 import { ChevronUp, ChevronDown } from 'lucide-react'
-import type { CampoSubtitulo } from '../../types/competicao'
+import type { CampoSubtitulo, ModeloCongresso } from '../../types/competicao'
 import { composeSubtituloLine } from '../../lib/compose-subtitulo'
 
 const CAMPOS_LABELS: Record<CampoSubtitulo, string> = {
@@ -38,6 +38,7 @@ export default function CompeticaoForm() {
   const [estados, setEstados] = useState<string[]>([])
   const [campos, setCampos] = useState<CampoSubtitulo[]>([])
   const [subMunPorMod, setSubMunPorMod] = useState(false)
+  const [modeloCongresso, setModeloCongresso] = useState<ModeloCongresso>('padrao')
   const [considerarAnfitriao, setConsiderarAnfitriao] = useState(false)
   const [erro, setErro] = useState('')
 
@@ -53,13 +54,14 @@ export default function CompeticaoForm() {
       setEstados(existing.estados)
       setCampos(existing.subtitulo_campos ?? [])
       setSubMunPorMod(existing.subtitulo_municipio_por_modalidade ?? false)
+      setModeloCongresso(existing.modelo_congresso ?? 'padrao')
       setConsiderarAnfitriao(existing.considerar_anfitriao ?? false)
     }
   }, [existing])
 
   const { mutate: salvar, isPending } = useMutation({
     mutationFn: () => {
-      const payload = { nome, estados, subtitulo_campos: campos, considerar_anfitriao: considerarAnfitriao, subtitulo_municipio_por_modalidade: subMunPorMod }
+      const payload = { nome, estados, subtitulo_campos: campos, considerar_anfitriao: considerarAnfitriao, subtitulo_municipio_por_modalidade: subMunPorMod, modelo_congresso: modeloCongresso }
       return isEdit
         ? competicoesService.editar(Number(id), payload)
         : competicoesService.criar(payload)
@@ -376,6 +378,24 @@ export default function CompeticaoForm() {
             />
             <span className="text-sm font-medium text-[var(--t1)]">Subtítulo e município variam por modalidade (competição escolar)</span>
           </label>
+
+          <div style={{ marginTop: 14 }}>
+            <label className="block text-sm font-medium text-[var(--t2)] mb-1.5">
+              Modelo do congresso técnico
+            </label>
+            <select
+              value={modeloCongresso}
+              onChange={e => setModeloCongresso(e.target.value as ModeloCongresso)}
+              className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--card-bg)] px-3 py-2 text-sm text-[var(--t1)] focus:border-[var(--brand-500)] focus:outline-none"
+            >
+              <option value="padrao">Padrão — uma aba por modalidade (Jogos Regionais)</option>
+              <option value="jeesp">JEESP — uma aba por esporte, com bloco por modalidade</option>
+            </select>
+            <p className="text-xs text-[var(--t4)] mt-1.5">
+              Define o layout do Excel do congresso técnico. O modelo padrão também mostra
+              o subtítulo por inscrição quando a competição é escolar.
+            </p>
+          </div>
         </div>
 
         <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid var(--card-border)' }}>

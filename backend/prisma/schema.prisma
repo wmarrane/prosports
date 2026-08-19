@@ -115,6 +115,7 @@ model Competicao {
   estados                  String[]
   subtitulo_campos                    String[]                 @default([])
   subtitulo_municipio_por_modalidade  Boolean                  @default(false)
+  modelo_congresso                    String                   @default("padrao")
   considerar_anfitriao                Boolean                  @default(false)
   modalidades              Modalidade[]
   eventos                  Evento[]
