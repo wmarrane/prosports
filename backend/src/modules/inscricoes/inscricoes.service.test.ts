@@ -302,6 +302,22 @@ describe('inscricoes.service', () => {
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
     })
 
+    it('grava metade_chave quando a linha traz metade preenchida', async () => {
+      setupOk()
+      mockPrisma.participante.findMany.mockResolvedValue([
+        { id: 500, nome: 'João Silva', municipio_id: 100 },
+      ])
+      mockPrisma.inscricao.findMany.mockResolvedValue([])
+      mockPrisma.inscricao.create.mockResolvedValue({ id: 999 })
+      const result = await service.importar(baseInput({
+        rows: [{ nome: 'João Silva', municipio_uf: 'SP', municipio_nome: 'São Paulo', metade: 'cima' }],
+      }))
+      expect(result.rows[0]).toMatchObject({ status: 'criada' })
+      expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
+        data: { evento_id: 1, modalidade_id: 2, participante_id: 500, metade_chave: 'cima' },
+      })
+    })
+
     it('importar NÃO cria participante; não cadastrado vira erro e conta nao_cadastrados', async () => {
       mockPrisma.evento.findUnique.mockResolvedValue({ id: 5, competicao_id: 1 })
       mockPrisma.modalidade.findUnique.mockResolvedValue({ id: 2, competicao_id: 1 })
@@ -427,6 +443,34 @@ describe('inscricoes.service', () => {
             subtitulo: 'Escola B',
             municipio_id: 100,
             metade_chave: null,
+          },
+        })
+      })
+
+      it('escolar: grava metade_chave quando a linha traz metade preenchida', async () => {
+        setupEscolarOn([{ id: 500, nome: 'SREL Existente' }])
+        const result = await service.importar({
+          evento_id: 1,
+          modalidade_id: 2,
+          dry_run: false,
+          rows: [
+            {
+              nome: 'SREL Existente',
+              municipio_nome: 'São Paulo',
+              subtitulo: 'Escola B',
+              metade: 'cima',
+            },
+          ],
+        })
+        expect(result.rows[0]).toMatchObject({ status: 'criada' })
+        expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
+          data: {
+            evento_id: 1,
+            modalidade_id: 2,
+            participante_id: 500,
+            subtitulo: 'Escola B',
+            municipio_id: 100,
+            metade_chave: 'cima',
           },
         })
       })

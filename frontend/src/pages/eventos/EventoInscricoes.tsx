@@ -191,7 +191,11 @@ export default function EventoInscricoes() {
   }, [campeoes])
 
   const modalidadeAtual = modalidades.find(m => m.id === modalidadeId)
+  // usa_metade_chave pode sobreviver a uma troca de tipo (chaves → grupos) no
+  // payload salvo; o seletor cima/baixo só faz sentido em chaves, então exige
+  // também o tipo atual da modalidade, não só a flag.
   const usaMetade = modalidadeAtual?.usa_metade_chave === true
+    && modalidadeAtual?.tipo_modalidade?.tipo === 'chaves'
 
   const { data: metadesInfo } = useQuery({
     queryKey: ['metades-chave', inscricoes.length],
@@ -838,7 +842,9 @@ export default function EventoInscricoes() {
                         const capCima = metadesInfo?.cima
                         const capBaixo = metadesInfo?.baixo
                         const estouro = (capCima != null && pedemCima > capCima) || (capBaixo != null && pedemBaixo > capBaixo)
-                        const ignoradas = (sorteioDaModalidade?.resultado as any)?.metadesIgnoradas as number[] | undefined
+                        const ignoradas = sorteioDaModalidade?.tipo === 'chaves'
+                          ? sorteioDaModalidade.resultado.metadesIgnoradas
+                          : undefined
                         return (
                           <div
                             style={{

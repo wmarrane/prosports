@@ -185,18 +185,25 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       slotLabel: string | null
       slotOrder: number | null
     }
-    const items: Item[] = cabecasInscritas.map(c => ({
-      key: `c-${c.id}`,
-      participante_id: c.participante_id,
-      // Inscritos: usa o efetivo (override por modalidade no escolar). Não inscritos:
-      // sem inscrição → escolar exibe em branco; não-escolar mantém o participante.
-      participante: participantesById.get(c.participante_id)
-        ?? participanteEfetivo({ participante: c.participante }, porModalidade),
-      posicao: c.posicao,
-      inscrito: c.inscrito,
-      slotLabel: null,
-      slotOrder: null,
-    }))
+    const items: Item[] = cabecasInscritas.map(c => {
+      // Inscritos: usa o efetivo (override por modalidade no escolar), já
+      // mascarado. Não inscritos: sem inscrição → escolar exibe em branco;
+      // não-escolar mantém o participante — mas precisa mascarar aqui também
+      // (mesma condição `mascarar` que já governa participantesById), senão o
+      // campeão do ano anterior que não se inscreveu nesta modalidade vaza o
+      // nome completo ao lado dos demais mascarados.
+      const fallback = participanteEfetivo({ participante: c.participante }, porModalidade)
+      return {
+        key: `c-${c.id}`,
+        participante_id: c.participante_id,
+        participante: participantesById.get(c.participante_id)
+          ?? (mascarar ? { ...fallback, nome: mascararNome(fallback.nome) } : fallback),
+        posicao: c.posicao,
+        inscrito: c.inscrito,
+        slotLabel: null,
+        slotOrder: null,
+      }
+    })
     // Adiciona o anfitrião como entrada sintetica se ele se aplica
     // pela regra mas nao eh campeao.
     if (
@@ -236,7 +243,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
       }
     }
     return [...items].sort((a, b) => (a.slotOrder ?? Infinity) - (b.slotOrder ?? Infinity))
-  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids])
+  }, [cabecasInscritas, sorteio, anfitriaoPid, anfitriaoInscrito, consideraAnfitriao, participantesById, porModalidade, cabecasPids, mascarar])
 
   const { mutate: executar, isPending: executando } = useMutation({
     mutationFn: () => sorteiosService.executar({ evento_id: eventoId, modalidade_id: modalidadeId }),

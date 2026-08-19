@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import fs from 'node:fs'
+import path from 'node:path'
 import {
   shuffleSeeded,
   drawGroups,
@@ -569,4 +571,80 @@ describe('drawBracket com metade da chave', () => {
     const r = drawBracket(PIDS_8, regra, BYES_8, GRAFO_8, 'seed-1', [11], { metadePorPid: metades })
     expect(r.metadesIgnoradas).toEqual([11])
   })
+})
+
+// ---- metadesDoGrafo nos 76 grafos reais cadastrados --------------------
+//
+// Reconstroi o bracket_chaves_matches como ele fica no banco: lê o seed
+// (backend/prisma/seeds/bracket_chaves_matches.sql) e, na sequência, as
+// migrations cujo nome contém "bracket_chaves" (glob dinâmico pela pasta,
+// não uma lista fixa de arquivos), extraindo os INSERT INTO
+// bracket_chaves_matches(...) de cada arquivo em ordem. Para cada
+// numero_inscrito, a última definição encontrada vence — igual a uma
+// sequência de migrations rodando contra o banco (ON CONFLICT ... DO
+// UPDATE). Sem banco: só fs/path relativos a este arquivo de teste.
+const PRISMA_DIR = path.join(__dirname, '../../../prisma')
+const INSERT_RE = /INSERT INTO bracket_chaves_matches \(numero_inscrito, matches_graph\) VALUES \((\d+), '(.*?)'::jsonb\)/g
+
+function extraiInserts(sql: string): Array<[number, MatchesGraph]> {
+  const out: Array<[number, MatchesGraph]> = []
+  for (const m of sql.matchAll(INSERT_RE)) {
+    out.push([Number(m[1]), JSON.parse(m[2]) as MatchesGraph])
+  }
+  return out
+}
+
+function carregaGrafosReais(): Map<number, MatchesGraph> {
+  const arquivos = [path.join(PRISMA_DIR, 'seeds', 'bracket_chaves_matches.sql')]
+  const migrationsDir = path.join(PRISMA_DIR, 'migrations')
+  const dirsBracketChaves = fs.readdirSync(migrationsDir)
+    .filter(nome => nome.includes('bracket_chaves'))
+    .sort()
+  for (const dir of dirsBracketChaves) {
+    arquivos.push(path.join(migrationsDir, dir, 'migration.sql'))
+  }
+
+  const grafos = new Map<number, MatchesGraph>()
+  for (const arquivo of arquivos) {
+    const sql = fs.readFileSync(arquivo, 'utf-8')
+    for (const [numero, graph] of extraiInserts(sql)) {
+      grafos.set(numero, graph)
+    }
+  }
+  return grafos
+}
+
+function isFaixaContigua(set: Set<number>): boolean {
+  if (set.size === 0) return true
+  const arr = [...set].sort((a, b) => a - b)
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] !== arr[i - 1] + 1) return false
+  }
+  return true
+}
+
+describe('metadesDoGrafo nos 76 grafos reais cadastrados', () => {
+  const grafosReais = carregaGrafosReais()
+
+  // Trava explícita do tamanho do universo: se uma migration futura vier
+  // num formato que o regex acima não reconheça, o scanner perde entradas
+  // silenciosamente — esta asserção faz o teste falhar alto em vez de
+  // passar sobre dado velho/incompleto.
+  it('o scanner encontra exatamente 76 tamanhos cadastrados', () => {
+    expect(grafosReais.size).toBe(76)
+  })
+
+  it.each([...grafosReais.entries()].sort((a, b) => a[0] - b[0]))(
+    'N=%i: metades sao faixas contiguas e complementares, cobrem 1..N, e a de cima contem a posicao 1',
+    (numero, graph) => {
+      const { cima, baixo } = metadesDoGrafo(graph)
+      const todas = [...cima, ...baixo].sort((a, b) => a - b)
+      const esperado = Array.from({ length: numero }, (_, i) => i + 1)
+      expect(todas).toEqual(esperado)
+      expect([...cima].some(p => baixo.has(p))).toBe(false)
+      expect(isFaixaContigua(cima)).toBe(true)
+      expect(isFaixaContigua(baixo)).toBe(true)
+      expect(cima.has(1)).toBe(true)
+    },
+  )
 })

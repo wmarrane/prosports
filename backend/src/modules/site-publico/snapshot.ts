@@ -13,7 +13,7 @@ type EventoRow = {
   data_inicio?: Date | null; data_fim?: Date | null
   boletins?: { numero: number; titulo: string; categoria: string; data_publicacao: Date; public_url: string; size_bytes: number; atualizado_em: Date }[]
 }
-type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown; mascarar_nome?: boolean }
+type ModalidadeRow = { id: number; nome: string; tipo_modalidade: { tipo: string }; mensagens_inscritos: unknown; mascarar_nome: boolean }
 type ParticipanteRow = {
   id: number; nome: string; subtitulo: string | null
   municipio?: { nome: string; uf: string } | null

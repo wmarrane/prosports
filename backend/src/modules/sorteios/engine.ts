@@ -198,7 +198,7 @@ export function drawBracket(
   // entra na lista quando dá pra confirmar que o pedido não foi atendido. Sem
   // matchesGraph não há como verificar, então mantém a marcação otimista.
   const marcadosComPosicaoFixa = [...usedPids].filter(pid => metadeDe(pid) !== null)
-  const metadesIgnoradas = matchesGraph
+  const metadesIgnoradas = matchesGraph && marcadosComPosicaoFixa.length > 0
     ? (() => {
         const { cima, baixo } = metadesDoGrafo(matchesGraph)
         return marcadosComPosicaoFixa.filter(pid => {
