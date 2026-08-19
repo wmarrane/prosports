@@ -102,6 +102,7 @@ export async function executar(input: { evento_id: number; modalidade_id: number
         id: true,
         competicao_id: true,
         chave_versao: true,
+        usa_metade_chave: true,
         tipo_modalidade: { select: { tipo: true } },
       },
     }),
@@ -130,7 +131,7 @@ export async function executar(input: { evento_id: number; modalidade_id: number
   const inscricoes = await prisma.inscricao.findMany({
     where: { evento_id: input.evento_id, modalidade_id: input.modalidade_id },
     orderBy: { criado_em: 'asc' },
-    select: { participante_id: true },
+    select: { participante_id: true, metade_chave: true },
   })
   if (inscricoes.length === 0) {
     throw Object.assign(
@@ -223,7 +224,17 @@ export async function executar(input: { evento_id: number; modalidade_id: number
       consideraAnfitriao,
       tipo: 'chaves',
     })
-    resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, cabecasFinais)
+    // Só monta o mapa quando a modalidade usa a regra: sem isso, uma metade
+    // marcada em modalidade que não usa a regra mudaria o sorteio.
+    const metadePorPid = modalidade.usa_metade_chave
+      ? new Map<number, engine.MetadeChave | null>(
+          inscricoes.map(i => [
+            i.participante_id,
+            (i.metade_chave === 'cima' || i.metade_chave === 'baixo') ? i.metade_chave : null,
+          ]),
+        )
+      : undefined
+    resultado = engine.drawBracket(pids, regra, regraBracket, matchesGraph, seed, cabecasFinais, { metadePorPid })
   } else if (tipo === 'ordem_entrada') {
     const cfg = (consideraAnfitriao && anfitriaoInscrito && anfitriaoPid != null)
       ? await prisma.eventoModalidadeAnfitriao.findUnique({
@@ -266,4 +277,20 @@ export async function executar(input: { evento_id: number; modalidade_id: number
       resultado: resultado as any,
     },
   })
+}
+
+/** Tamanho de cada metade da chave de N inscritos — alimenta o contador da
+ *  tela de inscrições. Lê o mesmo desenho que o sorteio usa. */
+export async function metadesPorNumeroInscrito(numeroInscrito: number) {
+  const row = await prisma.bracketChavesMatches.findUnique({
+    where: { numero_inscrito: numeroInscrito },
+  })
+  if (!row?.matches_graph) {
+    throw Object.assign(
+      new Error(`Não há desenho de chave cadastrado para ${numeroInscrito} inscritos.`),
+      { status: 404 },
+    )
+  }
+  const { cima, baixo } = engine.metadesDoGrafo(row.matches_graph as any)
+  return { numero_inscrito: numeroInscrito, cima: cima.size, baixo: baixo.size }
 }
