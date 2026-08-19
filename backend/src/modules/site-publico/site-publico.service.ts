@@ -1,24 +1,39 @@
+import pino from 'pino'
 import prisma from '../../lib/prisma'
 import { montaSnapshot } from './snapshot'
 import { putSnapshot, deleteSnapshot, dispatchBuild } from './snapshot-store'
 import { composeSubtituloLine, type CampoSubtitulo } from '../../lib/compose-subtitulo'
 import { getModalidadeIdsExcluidas } from '../eventos/evento-modalidades.service'
 
+const logger = pino()
+
 const STATUS_PARCIAL_OK = ['pronto', 'parcial', 'sorteado']
 
-export async function publicar(eventoId: number, opts: { permitirParcial?: boolean } = {}): Promise<void> {
+/** De onde veio a chamada: 'manual' = botão do admin; 'automatica' = gatilho do sistema. */
+export type OrigemPublicacao = 'manual' | 'automatica'
+
+export async function publicar(
+  eventoId: number,
+  opts: { permitirParcial?: boolean; origem?: OrigemPublicacao } = {},
+): Promise<void> {
   const evento = await prisma.evento.findUnique({
     where: { id: eventoId },
     select: {
       id: true, nome: true, local: true, organizador: true, data_hora: true,
       anfitriao_id: true, competicao_id: true, status: true,
-      data_inicio: true, data_fim: true,
+      data_inicio: true, data_fim: true, publicacao_manual: true,
       boletins: { select: { numero: true, titulo: true, categoria: true, data_publicacao: true, public_url: true, size_bytes: true, atualizado_em: true } },
       competicao: { select: { nome: true, considerar_anfitriao: true, subtitulo_campos: true, subtitulo_municipio_por_modalidade: true } },
       municipio: { select: { nome: true } },
     },
   })
   if (!evento) throw Object.assign(new Error('Evento não encontrado'), { status: 404 })
+  // Evento de publicação manual não reage a gatilho automático. Não é erro: é o
+  // comportamento pedido, então sai em silêncio.
+  if ((opts.origem ?? 'automatica') === 'automatica' && evento.publicacao_manual) {
+    logger.info({ eventoId }, 'publicacao automatica ignorada: evento com publicacao_manual')
+    return
+  }
   if (opts.permitirParcial) {
     if (!STATUS_PARCIAL_OK.includes(evento.status)) {
       throw Object.assign(
@@ -95,7 +110,20 @@ export async function publicar(eventoId: number, opts: { permitirParcial?: boole
   await prisma.evento.update({ where: { id: eventoId }, data: { site_publicado_em: new Date() } })
 }
 
-export async function despublicar(eventoId: number): Promise<void> {
+export async function despublicar(
+  eventoId: number,
+  opts: { origem?: OrigemPublicacao } = {},
+): Promise<void> {
+  if ((opts.origem ?? 'automatica') === 'automatica') {
+    const evento = await prisma.evento.findUnique({
+      where: { id: eventoId },
+      select: { publicacao_manual: true },
+    })
+    if (evento?.publicacao_manual) {
+      logger.info({ eventoId }, 'despublicacao automatica ignorada: evento com publicacao_manual')
+      return
+    }
+  }
   await deleteSnapshot(eventoId)
   await dispatchBuild()
   await prisma.evento.update({ where: { id: eventoId }, data: { site_publicado_em: null } })

@@ -1,13 +1,13 @@
 {
   "id": 14,
   "nome": "JEESP Sub 14 - Etapa I",
-  "status": "pronto",
+  "status": "sorteado",
   "competicao": "JEESP",
   "cidade": "Praia Grande",
   "local": ".",
   "data": "2026-08-01T12:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-01T18:40:52.195Z",
+  "publicadoEm": "2026-08-01T21:46:10.514Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -17,8 +17,8 @@
       "nome": "Basquetebol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "c9a22e231e6a85dc",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -121,8 +121,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        681,
+        680,
+        674,
+        675
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              681,
+              682,
+              684
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              683,
+              679
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              674,
+              678,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              675,
+              687,
+              686,
+              688
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -130,8 +173,8 @@
       "nome": "Basquetebol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "e4c347a0b710edf7",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -244,8 +287,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        679,
+        682,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              686,
+              675,
+              677
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              679,
+              684,
+              683,
+              674
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              682,
+              685,
+              678,
+              681
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              680,
+              687
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -443,8 +531,8 @@
       "nome": "Futsal Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "5de23e01081e2230",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -562,8 +650,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        688,
+        681,
+        680,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              677,
+              685,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              681,
+              674,
+              679,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              684,
+              678,
+              687
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              676,
+              683,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -571,8 +705,8 @@
       "nome": "Futsal Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "33df178bb1b0259c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -685,8 +819,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        674,
+        680,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              674,
+              683,
+              685,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              687,
+              682,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              679,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              688,
+              678,
+              675
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -694,8 +873,8 @@
       "nome": "Handebol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9cb6de10a1cc043e",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -808,8 +987,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        680,
+        677,
+        679,
+        685
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              681,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              687,
+              682,
+              678
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              679,
+              683,
+              675,
+              688
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              685,
+              674,
+              684
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -817,8 +1041,8 @@
       "nome": "Handebol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9ffe34bf97694356",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -931,8 +1155,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        678,
+        686,
+        677,
+        685
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              682,
+              681
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              680,
+              683,
+              688
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              677,
+              675,
+              684,
+              674
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              685,
+              676,
+              679,
+              687
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -940,8 +1209,8 @@
       "nome": "Tênis de Mesa Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "da61700d61b1289c",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1054,8 +1323,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        681,
+        680,
+        686,
+        688
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              681,
+              683,
+              685,
+              675
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              679,
+              674
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              678,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              688,
+              682,
+              677,
+              676
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1063,8 +1377,8 @@
       "nome": "Tênis de Mesa Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9eca751c6ffd1d2d",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1177,8 +1491,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        684,
+        686,
+        680,
+        674
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              684,
+              683,
+              687,
+              682
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              681,
+              688,
+              676
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              677,
+              675,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              674,
+              679,
+              678
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1186,8 +1545,8 @@
       "nome": "Voleibol Feminino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f558bbb9136736a1",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1300,8 +1659,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        686,
+        685,
+        681,
+        683
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              686,
+              675,
+              676,
+              687
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              685,
+              677,
+              684,
+              680
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              679,
+              678,
+              682
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              683,
+              688,
+              674
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1309,8 +1713,8 @@
       "nome": "Voleibol Masculino 14 anos",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f11e1036bb561ae1",
       "anfitriaoId": 689,
       "participantes": [
         {
@@ -1423,8 +1827,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        684,
+        677,
+        674,
+        679
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              684,
+              685,
+              688,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              676,
+              682,
+              680
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              674,
+              687,
+              681,
+              675
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              679,
+              678,
+              683
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1509,7 +1958,7 @@
         {
           "id": 687,
           "nome": "SREL Sorocaba",
-          "subtitulo": null
+          "subtitulo": "EE Diógenes Ribeiro de Lima | Ribeira/SP"
         },
         {
           "id": 689,
@@ -1579,7 +2028,7 @@
         {
           "id": 682,
           "nome": "SREL Presidente Prudente",
-          "subtitulo": "EE  Profª. Josepha Cubas Da Silva | Ourinhos/SP"
+          "subtitulo": "EE Francisco Pessoa | Presidente Prudente/SP"
         },
         {
           "id": 683,

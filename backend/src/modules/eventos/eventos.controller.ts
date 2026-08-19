@@ -20,6 +20,7 @@ const createSchema = z.object({
   comissao_ids: z.array(z.coerce.number().int().positive()).optional(),
   data_inicio: z.coerce.date().nullable().optional(),
   data_fim: z.coerce.date().nullable().optional(),
+  publicacao_manual: z.boolean().optional(),
 })
 const updateSchema = createSchema.partial()
 const listQuerySchema = z.object({

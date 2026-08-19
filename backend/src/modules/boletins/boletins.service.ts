@@ -30,7 +30,7 @@ type CriarInput = {
 async function republicarSePublicado(eventoId: number) {
   try {
     const ev = await prisma.evento.findUnique({ where: { id: eventoId }, select: { id: true, site_publicado_em: true } })
-    if (ev?.site_publicado_em) await publicar(eventoId)
+    if (ev?.site_publicado_em) await publicar(eventoId, { origem: 'automatica' })
   } catch (err) {
     logger.warn({ err, eventoId }, 'Boletim salvo, mas a republicação do site público falhou')
   }

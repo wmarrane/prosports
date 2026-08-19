@@ -1,0 +1,2068 @@
+{
+  "id": 16,
+  "nome": "JEESP Sub 17 - Etapa I",
+  "status": "sorteado",
+  "competicao": "JEESP",
+  "cidade": "Praia Grande",
+  "local": ".",
+  "data": "2026-08-14T20:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-08-14T21:09:24.380Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 267,
+      "nome": "Basquetebol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "7fd6060c558a6b09",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Dorival Alves  | Araraquara/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Aurélio Arrobas Martins | Jaboticabal/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "ETEC Gustavo Teixeira | São Pedro/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Recanto Verde Sol | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Dr. João Marciano De Almeida | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Cid Boucalt | Mogi das Cruzes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Joaquim Abarca | Tupã/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Profº Idene Rodrigues Dos Santos | Junqueirópolis/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Bairro Francisco Castilho  | Cravinhos/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Professor Archimedes Bava | Bertioga/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Paulo De Lima Correa | Catanduva/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Hyeróclio Eloy Pessoa Barros | Santa Isabel/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE Sarah Salvestro | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Antonio Nunes Lopes da Silva | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 685,
+          "posicao": 1
+        },
+        {
+          "participanteId": 678,
+          "posicao": 2
+        },
+        {
+          "participanteId": 681,
+          "posicao": 3
+        },
+        {
+          "participanteId": 675,
+          "posicao": 4
+        },
+        {
+          "participanteId": 680,
+          "posicao": 5
+        },
+        {
+          "participanteId": 688,
+          "posicao": 6
+        },
+        {
+          "participanteId": 687,
+          "posicao": 7
+        },
+        {
+          "participanteId": 679,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        685,
+        678,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              685,
+              688,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              678,
+              683,
+              676,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              679,
+              675
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              680,
+              686
+            ]
+          }
+        ],
+        "regra_id": 406,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 266,
+      "nome": "Basquetebol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "389fbd815395bd2e",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Prof. Stélio Machado Loureiro | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Alvaro Guiao  | São Carlos/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE José Marcelino De Almeida | Severínia/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Vera Braga Franco Giacomini | Lençóis Paulista/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Cesarino Borba | Iracemápolis/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Prof. Augusto Ribeiro De Carvalho | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "ETEC Dr. Julio Cardoso | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Prof. Cid Boucalt | Mogi das Cruzes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Índia Vanuíre | Tupã/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Profº Idene Rodrigues Dos Santos | Junqueirópolis/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Winston Churchill  | Sertãozinho/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Prefeito Domingos De Souza | Guarujá/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Irmãos Ismael | Onda Verde/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE João Cursino | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE Cel. João Rosa | Tapiraí/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Antonio Nunes Lopes da Silva | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 675,
+          "posicao": 1
+        },
+        {
+          "participanteId": 680,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 679,
+          "posicao": 4
+        },
+        {
+          "participanteId": 674,
+          "posicao": 5
+        },
+        {
+          "participanteId": 677,
+          "posicao": 6
+        },
+        {
+          "participanteId": 684,
+          "posicao": 7
+        },
+        {
+          "participanteId": 688,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        675,
+        680,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              675,
+              676,
+              688,
+              686
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              680,
+              681,
+              679,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              674,
+              682,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              683,
+              677,
+              687
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 275,
+      "nome": "Futsal Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "ac7b911bbf9153d1",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE João Arruda Brasil | Guararapes/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Abdalla Miguel  | Tabatinga/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Prof. Maria Helena Scannavino | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Carlos Chagas | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Aurora Scodro Groff | Indaiatuba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Nossa Sra. Da Penha | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE José Vicente Machado Netto  | Pedregulho/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Prof. Alipio De Oliveira E Silva | Taboão da Serra/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Cultura E Liberdade | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE João Bernardi | Monte Castelo/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Jardim Das Rosas  | Serrana/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Prof. Alice Rodrigues Motta | Juquiá/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Cecília Meireles | Parisi/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Benedito Miguel Carlota | Caraguatatuba/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE Humberto De Campos | Sorocaba/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Antonio Nunes Lopes da Silva | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 685,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 687,
+          "posicao": 3
+        },
+        {
+          "participanteId": 681,
+          "posicao": 4
+        },
+        {
+          "participanteId": 679,
+          "posicao": 5
+        },
+        {
+          "participanteId": 680,
+          "posicao": 6
+        },
+        {
+          "participanteId": 674,
+          "posicao": 7
+        },
+        {
+          "participanteId": 675,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        685,
+        688,
+        687,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              685,
+              683,
+              678,
+              675
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              674,
+              677,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              687,
+              676,
+              680,
+              679
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              681,
+              686,
+              682
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 273,
+      "nome": "Futsal Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "71df52379a3f7990",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Profª Luiza Maria Bernardes Nory  | Penápolis/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Prof Joaquim De Toledo  Camargo | Itirapina/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Benedito Pereira Cardoso | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Joaquim Rodrigues Madureira | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Dr Alfredo Cardoso | Piracicaba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Padre Manuel Da Nóbrega | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Marechal Rondon | Guará/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Mario Toledo Moraes | Caieiras/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Dr. Clybas Pinto Ferraz | Assis/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Cleófano Mota | Taciba/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE. Margarida Pinho Rodrigues | São Vicente/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Dr Isaias Jose Ferreira  | Sertãozinho/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Giuseppe Formigoni | Santa Adélia/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Zilah Ferreira Viagi Passareli De Campos | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE Aparicio Biglia Filho | Bom Sucesso de Itararé/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Pedro Paulo Gonçalves Lopes | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 679,
+          "posicao": 2
+        },
+        {
+          "participanteId": 681,
+          "posicao": 3
+        },
+        {
+          "participanteId": 675,
+          "posicao": 4
+        },
+        {
+          "participanteId": 685,
+          "posicao": 5
+        },
+        {
+          "participanteId": 689,
+          "posicao": 6
+        },
+        {
+          "participanteId": 683,
+          "posicao": 7
+        },
+        {
+          "participanteId": 684,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        680,
+        679,
+        681,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              683,
+              686,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              679,
+              684,
+              674,
+              685
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              681,
+              682,
+              675,
+              678
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              688,
+              687,
+              677
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 279,
+      "nome": "Handebol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "82dd958397a8027e",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Dr. Reynaldo Kuntz Busch | Praia Grande/SP"
+        },
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Dr Paulo Grassi Bonilha | Itapura/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Jose Juliano Neto | São Carlos/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Dr Joaquim Batista | Jaboticabal/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Stela Machado | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Dr Silvio De Carvalho Pinto Jr | Bragança Paulista/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Plínio Damasco Penna | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Dr. João Marciano De Almeida | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Chácara Camponesa  | Francisco Morato/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE José Gonçalves De Mendonça | Maracaí/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Iraldo Antônio Martins De Toledo | Inúbia Paulista/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Cônego Barros  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Doutor Roberto Amaury Galliera | Guarujá/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Dom Arthur Horthuis | Jales/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Francisco Feliciano Ferreira Da Silva | Jacareí/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "PEI Maria Elisa De Oliveira | São Miguel Arcanjo/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 679,
+          "posicao": 1
+        },
+        {
+          "participanteId": 686,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 684,
+          "posicao": 4
+        },
+        {
+          "participanteId": 675,
+          "posicao": 5
+        },
+        {
+          "participanteId": 680,
+          "posicao": 6
+        },
+        {
+          "participanteId": 677,
+          "posicao": 7
+        },
+        {
+          "participanteId": 688,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        679,
+        686,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              679,
+              684,
+              680,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              688,
+              682,
+              685
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              674,
+              677,
+              676
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              681,
+              687,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 277,
+      "nome": "Handebol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "1616b9c0de5f5609",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Dr. Alvaro Guião | Andradina/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "ETEC Dr Adail Nunes Silva | Taquaritinga/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "ETEC Cel. Raphael  Brandão | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Stela Machado | Bauru/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Dr Silvio De Carvalho Pinto Jr | Bragança Paulista/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Plínio Damasco Penna | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Dr. João Marciano De Almeida | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "PEI Ede Wilson Gonzaga | Embu das Artes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Prof. Teófilo Elias  | Florínea/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE João Da Cruz Mellão | Teodoro Sampaio/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Cônego Barros  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "PEI Eng. Clay Presgrave Do Amaral | Itariri/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Dom Arthur Horthuis | Jales/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Francisco Feliciano Ferreira Da Silva | Jacareí/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "PEI Semíramis Turelli Azevedo | Tatuí/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Balneário das Palmeiras | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 679,
+          "posicao": 1
+        },
+        {
+          "participanteId": 686,
+          "posicao": 2
+        },
+        {
+          "participanteId": 689,
+          "posicao": 3
+        },
+        {
+          "participanteId": 683,
+          "posicao": 4
+        },
+        {
+          "participanteId": 684,
+          "posicao": 5
+        },
+        {
+          "participanteId": 678,
+          "posicao": 6
+        },
+        {
+          "participanteId": 680,
+          "posicao": 7
+        },
+        {
+          "participanteId": 675,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        679,
+        686,
+        689,
+        683
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              679,
+              680,
+              674,
+              676
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              677,
+              678,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              689,
+              687,
+              688,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              683,
+              682,
+              681,
+              675
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 281,
+      "nome": "Tênis de Mesa Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "1a6f7d0b96add146",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "PEI Expedicionário Diogo Garcia Martins | Alto Alegre/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Andre Donatoni | Ibaté/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "ETEC Cel. Raphael  Brandão | Barretos/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Prof. José Pedretti Neto | Botucatu/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Comendador Luciano Guidotti | Piracicaba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "PEI Santo Dias Da Silva | São Paulo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Francisco Duarte | Ibirarema/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Batuira | Poá/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Ana Maria Junqueira | Franca/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Ferdinando Ienny | Ouro Verde/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Orminda Guimarães Cotrim  | Pitangueiras/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Anisio José Moreira  | Mirassol/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "ETEC Padre Carlos Leôncio | Lorena/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "ETEC Darcy Pereira de Moraes | Itapetininga/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Magali Alonso | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 684,
+          "posicao": 2
+        },
+        {
+          "participanteId": 687,
+          "posicao": 3
+        },
+        {
+          "participanteId": 686,
+          "posicao": 4
+        },
+        {
+          "participanteId": 675,
+          "posicao": 5
+        },
+        {
+          "participanteId": 679,
+          "posicao": 6
+        },
+        {
+          "participanteId": 677,
+          "posicao": 7
+        },
+        {
+          "participanteId": 685,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        680,
+        687,
+        686,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              681,
+              677,
+              688
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              687,
+              676,
+              682
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              685,
+              674,
+              678
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              683,
+              679,
+              675
+            ]
+          }
+        ],
+        "regra_id": 407,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 292,
+      "nome": "Tênis de Mesa Feminino Duplas 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "40e0af316c993f23",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Andre Donatoni | Ibaté/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Luiz Latorraca | Jaboticabal/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Rubens Pietraróia | Lençóis Paulista/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Telêmaco Paioli Melges | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Ana Siqueira Da Silva | São Paulo/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Miquelina Cartolano | Lorena/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Profª Alzira Vale Rollemberg | São José do Rio Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE De Três Barras | Pedro de Toledo/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Bairro Francisco Castilho  | Cravinhos/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Profº Hiroshi Shirassu Shiruca | Presidente Venceslau/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Francisco Duarte | Ibirarema/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Batuira | Poá/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Ana Maria Junqueira | Franca/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 686,
+          "posicao": 2
+        },
+        {
+          "participanteId": 674,
+          "posicao": 3
+        },
+        {
+          "participanteId": 682,
+          "posicao": 4
+        },
+        {
+          "participanteId": 684,
+          "posicao": 5
+        },
+        {
+          "participanteId": 681,
+          "posicao": 6
+        },
+        {
+          "participanteId": 679,
+          "posicao": 7
+        },
+        {
+          "participanteId": 688,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        680,
+        686,
+        682,
+        684
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              685,
+              681,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              686,
+              688,
+              679
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              682,
+              675,
+              677
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              684,
+              678,
+              676
+            ]
+          }
+        ],
+        "regra_id": 405,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 283,
+      "nome": "Tênis de Mesa Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "a4f4ece02c3e244b",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "PEI Prof. Stélio Machado Loureiro | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Andre Donatoni | Ibaté/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Oswaldo Schiavon | Bebedouro/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Vera Braga Franco Giacomini | Lençóis Paulista/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Prof. Antonio Alves Aranha | Valinhos/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "ETEC Getúlio Vargas | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "ETEC José Ignácio Azevedo Filho | Ituverava/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Domingos Peixoto Da Silva | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Cel. Marcos Ribeiro | Fartura/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Osvaldo Martins | Osvaldo Cruz/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Prof Sebastião Fernandes Palma  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE William Aureli | Bertioga/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Anisio José Moreira  | Mirassol/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Miquelina Cartolano | Lorena/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE Peixoto Gomide | Itapetininga/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Magali Alonso | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 688,
+          "posicao": 1
+        },
+        {
+          "participanteId": 682,
+          "posicao": 2
+        },
+        {
+          "participanteId": 686,
+          "posicao": 3
+        },
+        {
+          "participanteId": 687,
+          "posicao": 4
+        },
+        {
+          "participanteId": 684,
+          "posicao": 5
+        },
+        {
+          "participanteId": 675,
+          "posicao": 6
+        },
+        {
+          "participanteId": 681,
+          "posicao": 7
+        },
+        {
+          "participanteId": 685,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        688,
+        682,
+        686,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              688,
+              675,
+              674,
+              683
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              682,
+              679,
+              687,
+              684
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              686,
+              678,
+              681,
+              685
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              680,
+              677,
+              676
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 293,
+      "nome": "Tênis de Mesa Masculino Duplas 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "f71faffdcfa11cdb",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Dr. Carlos Rosa | Araçatuba/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Andre Donatoni | Ibaté/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE Oswaldo Schiavon | Bebedouro/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Vera Braga Franco Giacomini | Lençóis Paulista/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Pedro De Mello | Piracicaba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Casimiro De Abreu | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE Ana Maria Junqueira | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Domingos Peixoto Da Silva | São Bernardo do Campo/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Cel. Marcos Ribeiro | Fartura/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Osvaldo Martins | Osvaldo Cruz/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Bairro Francisco Castilho  | Cravinhos/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE William Aureli | Bertioga/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Anisio José Moreira  | Mirassol/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Miquelina Cartolano | Lorena/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "PEI Armando Rizzo | Votorantim/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Julio Pardo | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 680,
+          "posicao": 1
+        },
+        {
+          "participanteId": 677,
+          "posicao": 2
+        },
+        {
+          "participanteId": 678,
+          "posicao": 3
+        },
+        {
+          "participanteId": 686,
+          "posicao": 4
+        },
+        {
+          "participanteId": 684,
+          "posicao": 5
+        },
+        {
+          "participanteId": 683,
+          "posicao": 6
+        },
+        {
+          "participanteId": 681,
+          "posicao": 7
+        },
+        {
+          "participanteId": 682,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        680,
+        677,
+        678,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              680,
+              684,
+              685,
+              675
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              677,
+              686,
+              682,
+              683
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              678,
+              681,
+              687,
+              688
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              674,
+              679,
+              676
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 285,
+      "nome": "Voleibol Feminino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "7b19919017ec2058",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Profa. Maria Eunice Martins Ferreira | Avanhandava/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE José Ferreira da Silva | Descalvado/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "ETEC Bento Carlos Botelho do Amaral | Guariba/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Padre Jorge Mattar | Iacanga/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Celso Henrique Tozzi | Campinas/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Dr. Carlos Augusto de Freitas Villalva Júnior | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "EE João de Faria | Cristais Paulista/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "ETEC Presidente Vargas | Mogi das Cruzes/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Prof. Homero Calvoso | São Pedro do Turvo/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE Cleófano Mota | Taciba/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Cônego Barros  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Olga Cury | Santos/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Desolina Betti Gregorim | Irapuã/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Major Aviador José Mariotto Ferreira | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE José Baltazar De Souza | São Miguel Arcanjo/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Antonio Nunes Lopes da Silva | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 678,
+          "posicao": 1
+        },
+        {
+          "participanteId": 679,
+          "posicao": 2
+        },
+        {
+          "participanteId": 680,
+          "posicao": 3
+        },
+        {
+          "participanteId": 686,
+          "posicao": 4
+        },
+        {
+          "participanteId": 677,
+          "posicao": 5
+        },
+        {
+          "participanteId": 674,
+          "posicao": 6
+        },
+        {
+          "participanteId": 688,
+          "posicao": 7
+        },
+        {
+          "participanteId": 685,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        678,
+        679,
+        680,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              682,
+              685,
+              687
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              679,
+              674,
+              676,
+              675
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              684,
+              683,
+              686
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              681,
+              677,
+              688
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 287,
+      "nome": "Voleibol Masculino 17 anos",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "d73f6489c05c3751",
+      "anfitriaoId": 689,
+      "participantes": [
+        {
+          "id": 674,
+          "nome": "SREL Araçatuba",
+          "subtitulo": "EE Profª Lydia Helena Frandsen Sthur | Birigui/SP"
+        },
+        {
+          "id": 675,
+          "nome": "SREL Araraquara",
+          "subtitulo": "EE Victor Maida | Ibitinga/SP"
+        },
+        {
+          "id": 676,
+          "nome": "SREL Barretos",
+          "subtitulo": "EE José Pacífico | Guariba/SP"
+        },
+        {
+          "id": 677,
+          "nome": "SREL Bauru",
+          "subtitulo": "EE Maria Angélica Marcondes | Pirajuí/SP"
+        },
+        {
+          "id": 678,
+          "nome": "SREL Campinas",
+          "subtitulo": "EE Profª Suely Maria Cação Ambiel Batista | Indaiatuba/SP"
+        },
+        {
+          "id": 688,
+          "nome": "SREL Capital",
+          "subtitulo": "EE Carlos Gomes | São Paulo/SP"
+        },
+        {
+          "id": 679,
+          "nome": "SREL Franca",
+          "subtitulo": "ETEC Dr. Julio Cardoso | Franca/SP"
+        },
+        {
+          "id": 680,
+          "nome": "SREL Grande São Paulo",
+          "subtitulo": "EE Antonio Raposo Tavares  | Osasco/SP"
+        },
+        {
+          "id": 681,
+          "nome": "SREL Marília",
+          "subtitulo": "EE Cultura E Liberdade | Pompéia/SP"
+        },
+        {
+          "id": 682,
+          "nome": "SREL Presidente Prudente",
+          "subtitulo": "EE 18 De Junho | Presidente Epitácio/SP"
+        },
+        {
+          "id": 684,
+          "nome": "SREL Santos",
+          "subtitulo": "EE Parque Dos Sonhos | Cubatão/SP"
+        },
+        {
+          "id": 683,
+          "nome": "SREL Ribeirão Preto",
+          "subtitulo": "EE Prof Rafael Leme  | Ribeirão Preto/SP"
+        },
+        {
+          "id": 686,
+          "nome": "SREL São José do Rio Preto",
+          "subtitulo": "EE Achiles Malvezzi | Potirendaba/SP"
+        },
+        {
+          "id": 685,
+          "nome": "SREL São José dos Campos",
+          "subtitulo": "EE Major Aviador José Mariotto Ferreira | São José dos Campos/SP"
+        },
+        {
+          "id": 687,
+          "nome": "SREL Sorocaba",
+          "subtitulo": "EE José Baltazar De Souza | São Miguel Arcanjo/SP"
+        },
+        {
+          "id": 689,
+          "nome": "Cidade Sede",
+          "subtitulo": "EE Vila Tupi | Praia Grande/SP"
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 678,
+          "posicao": 1
+        },
+        {
+          "participanteId": 688,
+          "posicao": 2
+        },
+        {
+          "participanteId": 680,
+          "posicao": 3
+        },
+        {
+          "participanteId": 677,
+          "posicao": 4
+        },
+        {
+          "participanteId": 682,
+          "posicao": 5
+        },
+        {
+          "participanteId": 683,
+          "posicao": 6
+        },
+        {
+          "participanteId": 681,
+          "posicao": 7
+        },
+        {
+          "participanteId": 685,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [
+        678,
+        688,
+        680,
+        689
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              678,
+              681,
+              679,
+              677
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              688,
+              684,
+              682,
+              686
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              680,
+              685,
+              675,
+              676
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              689,
+              674,
+              687,
+              683
+            ]
+          }
+        ],
+        "regra_id": 408,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": []
+    }
+  ]
+}

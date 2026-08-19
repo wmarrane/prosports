@@ -23,7 +23,7 @@ describe('boletins.service', () => {
     const r = await criarBoletim({ eventoId: 9, numero: 1, titulo: 'B1', categoria: 'Resultados', data_publicacao: new Date(), file: { buffer: Buffer.from('%PDF-1.7\n'), originalname: 'b.pdf', size: 1, mimetype: 'application/pdf' } as any })
     expect(putMock).toHaveBeenCalled()
     expect(prismaMock.boletim.create).toHaveBeenCalled()
-    expect(publicarMock).toHaveBeenCalledWith(9)
+    expect(publicarMock).toHaveBeenCalledWith(9, { origem: 'automatica' })
     expect(r.id).toBe(1)
   })
 
@@ -97,7 +97,7 @@ describe('substituirBoletim', () => {
     expect(putMock).toHaveBeenCalled()
     expect(removeMock).toHaveBeenCalledWith('eventos/9/boletim-3-old.pdf')
     expect(prismaMock.boletim.update).toHaveBeenCalled()
-    expect(publicarMock).toHaveBeenCalledWith(9)
+    expect(publicarMock).toHaveBeenCalledWith(9, { origem: 'automatica' })
   })
   it('substitui só campos (sem arquivo): não mexe no storage', async () => {
     prismaMock.boletim.findFirst.mockResolvedValue({ id: 5, evento_id: 9, numero: 3, object_key: 'k' })

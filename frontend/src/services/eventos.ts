@@ -33,7 +33,8 @@ export const eventosService = {
   },
   removerLogo: (id: number) => api.delete<Evento>(`${BASE}/${id}/logo`).then(r => r.data),
   publicar: (id: number) => api.post(`${BASE}/${id}/publicar`).then(r => r.data),
-  publicarParcial: (id: number) => api.post(`${BASE}/${id}/publicar-parcial`).then(r => r.data),
+  publicarParcial: (id: number, opts?: { auto?: boolean }) =>
+    api.post(`${BASE}/${id}/publicar-parcial${opts?.auto ? '?auto=1' : ''}`).then(r => r.data),
   despublicar: (id: number) => api.post(`${BASE}/${id}/despublicar`).then(r => r.data),
   getAnfitriaoOrdem: (eventoId: number) =>
     api.get<Record<number, number>>(`${BASE}/${eventoId}/anfitriao-ordem`).then(r => r.data),
