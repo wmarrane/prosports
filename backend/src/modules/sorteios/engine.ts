@@ -102,6 +102,43 @@ export type MatchesGraph = {
   thirdPlace: string | null
 }
 
+export type MetadeChave = 'cima' | 'baixo'
+
+export type Metades = { cima: Set<number>; baixo: Set<number> }
+
+/**
+ * Metades da chave lidas do DESENHO, não do número de inscritos: cada lado da
+ * final é uma metade. É isso que garante a promessa da regra — quem está numa
+ * metade só encontra a outra na final.
+ *
+ * Não use ⌈N/2⌉: nas planilhas CHAVES CT o participante extra das chaves
+ * ímpares fica embaixo em 33 dos 38 tamanhos (N=7 é 3/4, N=19 é 9/10).
+ *
+ * A metade que contém a posição 1 é a "de cima". O jogo de 3º lugar não
+ * participa: o caminho é percorrido a partir da final.
+ */
+export function metadesDoGrafo(graph: MatchesGraph): Metades {
+  const byId = new Map(graph.matches.map(m => [m.id, m]))
+
+  const posicoes = (ref: MatchRef): Set<number> => {
+    if (ref === 'BYE') return new Set()
+    if (ref.startsWith('P')) return new Set([Number(ref.slice(1))])
+    const alvo = byId.get(ref.split(':')[1])
+    if (!alvo) return new Set()
+    const out = posicoes(alvo.top)
+    for (const p of posicoes(alvo.bottom)) out.add(p)
+    return out
+  }
+
+  const final = byId.get(graph.final)
+  if (!final) {
+    throw Object.assign(new Error('Desenho da chave sem jogo final.'), { status: 400 })
+  }
+  const a = posicoes(final.top)
+  const b = posicoes(final.bottom)
+  return a.has(1) ? { cima: a, baixo: b } : { cima: b, baixo: a }
+}
+
 export type BracketResultado = {
   size: number
   slots: (number | null)[]

@@ -6,7 +6,9 @@ import {
   shuffleOrder,
   shuffleOrderAnfitriao,
   liftByesToFirstRoundV2,
+  metadesDoGrafo,
 } from './engine'
+import type { MatchesGraph } from './engine'
 
 describe('shuffleSeeded', () => {
   it('mesma seed produz mesma saída', () => {
@@ -341,5 +343,85 @@ describe('shuffleOrderAnfitriao', () => {
     expect(shuffleOrderAnfitriao([10, 20, 30], 's', 20, 1).ordem[0]).toBe(20)
     const ult = shuffleOrderAnfitriao([10, 20, 30], 's', 20, 3)
     expect(ult.ordem[2]).toBe(20)
+  })
+})
+
+// N=4 simétrico: J1 e J2 na 1ª rodada, J3 é a final.
+const GRAFO_4: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P1', bottom: 'P2' },
+    { id: 'J2', round: 1, top: 'P3', bottom: 'P4' },
+    { id: 'J3', round: 2, top: 'V:J1', bottom: 'V:J2' },
+  ],
+  final: 'J3',
+  thirdPlace: null,
+}
+
+// N=3: P1 entra direto na final (bye). Espelha a chave real de 3 (1 em cima / 2 embaixo).
+const GRAFO_3: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P2', bottom: 'P3' },
+    { id: 'J2', round: 2, top: 'P1', bottom: 'V:J1' },
+  ],
+  final: 'J2',
+  thirdPlace: null,
+}
+
+// N=7 assimétrico: espelha a chave real de 7 (3 em cima / 4 embaixo) e tem 3º lugar.
+const GRAFO_7: MatchesGraph = {
+  matches: [
+    { id: 'J1', round: 1, top: 'P2', bottom: 'P3' },
+    { id: 'J2', round: 1, top: 'P4', bottom: 'P5' },
+    { id: 'J3', round: 1, top: 'P6', bottom: 'P7' },
+    { id: 'J4', round: 2, top: 'P1', bottom: 'V:J1' },
+    { id: 'J5', round: 2, top: 'V:J2', bottom: 'V:J3' },
+    { id: 'J6', round: 3, top: 'V:J4', bottom: 'V:J5' },
+    { id: 'J7', round: 3, top: 'L:J4', bottom: 'L:J5' },
+  ],
+  final: 'J6',
+  thirdPlace: 'J7',
+}
+
+describe('metadesDoGrafo', () => {
+  it('parte a chave simétrica ao meio', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_4)
+    expect([...cima].sort((a, b) => a - b)).toEqual([1, 2])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([3, 4])
+  })
+
+  it('em chave ímpar segue o desenho, não o arredondamento', () => {
+    // N=3 real é 1/2 — se alguém usasse ceil(3/2) daria 2/1.
+    const { cima, baixo } = metadesDoGrafo(GRAFO_3)
+    expect([...cima]).toEqual([1])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([2, 3])
+  })
+
+  it('N=7 fica 3/4, com o extra embaixo, e o 3º lugar não polui as metades', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_7)
+    expect([...cima].sort((a, b) => a - b)).toEqual([1, 2, 3])
+    expect([...baixo].sort((a, b) => a - b)).toEqual([4, 5, 6, 7])
+  })
+
+  it('a metade de cima é sempre a que contém a posição 1', () => {
+    const invertido: MatchesGraph = {
+      ...GRAFO_4,
+      matches: GRAFO_4.matches.map(m => (m.id === 'J3' ? { ...m, top: 'V:J2', bottom: 'V:J1' } : m)),
+    }
+    const { cima } = metadesDoGrafo(invertido)
+    expect(cima.has(1)).toBe(true)
+  })
+
+  it('as metades cobrem todas as posições sem sobreposição', () => {
+    const { cima, baixo } = metadesDoGrafo(GRAFO_7)
+    const todas = [...cima, ...baixo].sort((a, b) => a - b)
+    expect(todas).toEqual([1, 2, 3, 4, 5, 6, 7])
+    expect([...cima].some(p => baixo.has(p))).toBe(false)
+  })
+
+  it('grafo V2 (byes na 1ª rodada) produz as mesmas metades', () => {
+    const v1 = metadesDoGrafo(GRAFO_7)
+    const v2 = metadesDoGrafo(liftByesToFirstRoundV2(GRAFO_7))
+    expect([...v2.cima].sort((a, b) => a - b)).toEqual([...v1.cima].sort((a, b) => a - b))
+    expect([...v2.baixo].sort((a, b) => a - b)).toEqual([...v1.baixo].sort((a, b) => a - b))
   })
 })
