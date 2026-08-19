@@ -11,9 +11,11 @@ type Props = {
   anfitriaoPid?: number | null
   onGroupClick?: (letra: string) => void
   subtituloLine?: (p: Participante) => string | null
+  /** Modo Congresso: subtítulo maior na projeção. O site público não passa. */
+  subtituloGrande?: boolean
 }
 
-export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, onGroupClick, subtituloLine }: Props) {
+export default function SorteioGrupos({ resultado, participantesById, large = false, campeoesByParticipanteId, anfitriaoPid, onGroupClick, subtituloLine, subtituloGrande = false }: Props) {
   const minCol = large ? 360 : 240
   const gap = large ? 24 : 16
   const cardPad = large ? 'p-6' : 'p-4'
@@ -24,7 +26,9 @@ export default function SorteioGrupos({ resultado, participantesById, large = fa
   const titleStyle: React.CSSProperties = { color: 'var(--warn)' }
   const subClass = large ? 'text-sm text-[var(--t3)]' : 'text-xs text-[var(--t3)]'
   const itemClass = large ? 'text-xl text-[var(--t1)]' : 'text-sm text-[var(--t1)]'
-  const subItemClass = large ? 'text-sm text-[var(--t3)] mt-0.5' : 'text-xs text-[var(--t3)] mt-0.5'
+  const subItemClass = large
+    ? (subtituloGrande ? 'text-base text-[var(--t3)] mt-0.5' : 'text-sm text-[var(--t3)] mt-0.5')
+    : 'text-xs text-[var(--t3)] mt-0.5'
   const clickable = !!onGroupClick
 
   return (

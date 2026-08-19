@@ -542,7 +542,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
                       </span>
                       {(() => {
                         const l = c.participante ? subtituloLine(c.participante) : null
-                        return l ? <span style={{ fontSize: 11, color: DIM }}>{l}</span> : null
+                        return l ? <span style={{ fontSize: 13, color: DIM }}>{l}</span> : null
                       })()}
                     </div>
                     {anfitriaoPid != null && c.participante_id === anfitriaoPid && <AnfitriaoBadge />}
@@ -562,6 +562,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             anfitriaoPid={anfitriaoPid}
             onGroupClick={(letra) => setGrupoExpandido(letra)}
             subtituloLine={subtituloLine}
+            subtituloGrande
           />
         )}
         {sorteio.tipo === 'chaves' && (
@@ -574,6 +575,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             subtituloLine={subtituloLine}
             onMatchClick={(matchId) => setMatchExpandido(matchId)}
             cabecasPids={cabecasPids}
+            subtituloGrande
           />
         )}
         {sorteio.tipo === 'ordem_entrada' && (
