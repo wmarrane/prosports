@@ -8,6 +8,7 @@ import CampeaoBadge from '../../components/CampeaoBadge'
 import CampeaoSlot from '../../components/CampeaoSlot'
 import { Crown, Check, ArrowRight, X } from '../../lib/icons'
 import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import type { Participante } from '../../types/participante'
 import { useToast } from '../../components/Toast'
 
@@ -125,7 +126,9 @@ export default function CongressoStepCampeoes({ eventoId, modalidadeId, competic
               >
                 <CampeaoBadge posicao={c.posicao} large />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 'clamp(18px, 1.6vw, 22px)', color: FG, fontWeight: 700 }}>{c.participante.nome}</div>
+                  <div style={{ fontSize: 'clamp(18px, 1.6vw, 22px)', color: FG, fontWeight: 700 }}>
+                    {modalidade?.mascarar_nome === true ? mascararNome(c.participante.nome) : c.participante.nome}
+                  </div>
                   {(() => {
                     const efetivo = participanteEfetivo(
                       inscByPid.get(c.participante_id) ?? { participante: c.participante as Participante },

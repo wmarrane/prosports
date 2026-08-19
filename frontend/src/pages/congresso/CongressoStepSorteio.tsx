@@ -18,6 +18,7 @@ import { Shuffle, Crown, X, Report, CheckCircle2 } from '../../lib/icons'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Participante } from '../../types/participante'
 import { composeSubtituloLine, participanteEfetivo } from '../../lib/compose-subtitulo'
+import { mascararNome } from '../../lib/mascarar-nome'
 import { applyAnfitriaoRuleFront } from '../../lib/anfitriao-rule'
 import { proximoMarcoCruzado, pctSorteado } from './autopublish'
 
@@ -94,11 +95,16 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
     enabled: !!evento,
   })
 
+  const mascarar = modalidade?.mascarar_nome === true
+
   const participantesById = useMemo(() => {
     const m = new Map<number, Participante>()
-    for (const i of inscricoes) m.set(i.participante_id, participanteEfetivo(i, porModalidade))
+    for (const i of inscricoes) {
+      const p = participanteEfetivo(i, porModalidade)
+      m.set(i.participante_id, mascarar ? { ...p, nome: mascararNome(p.nome) } : p)
+    }
     return m
-  }, [inscricoes, porModalidade])
+  }, [inscricoes, porModalidade, mascarar])
 
   const campeoesByParticipanteId = useMemo(() => {
     const m = new Map<number, number>()
@@ -368,6 +374,7 @@ export default function CongressoStepSorteio({ eventoId, modalidadeId, competica
             porModalidade={porModalidade}
             tipo={tipo as 'grupos' | 'chaves'}
             consideraAnfitriao={consideraAnfitriao}
+            mascarar={modalidade?.mascarar_nome === true}
           />
         )}
 
