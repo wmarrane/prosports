@@ -3,12 +3,15 @@ import { z } from 'zod'
 import * as service from './inscricoes.service'
 import { parseIntParam } from '../../lib/parse-id'
 
+const metadeChaveSchema = z.enum(['cima', 'baixo'])
+
 const createSchema = z.object({
   evento_id: z.coerce.number().int().positive(),
   modalidade_id: z.coerce.number().int().positive(),
   participante_id: z.coerce.number().int().positive(),
   subtitulo: z.string().max(200).nullish(),
   municipio_id: z.coerce.number().int().positive().nullish(),
+  metade_chave: metadeChaveSchema.nullish(),
 })
 
 const listQuerySchema = z.object({
@@ -21,6 +24,7 @@ const importRowSchema = z.object({
   municipio_uf: z.string().length(2).optional(),
   municipio_nome: z.string().min(1).max(120),
   subtitulo: z.string().max(200).optional(),
+  metade: metadeChaveSchema.optional(),
 })
 
 const importSchema = z.object({
@@ -33,6 +37,7 @@ const importSchema = z.object({
 const patchSchema = z.object({
   subtitulo: z.string().max(200).nullish(),
   municipio_id: z.coerce.number().int().positive().nullish(),
+  metade_chave: metadeChaveSchema.nullish(),
 })
 
 const bulkSchema = z.object({

@@ -26,6 +26,7 @@ type CreateInput = {
   participante_id: number
   subtitulo?: string | null
   municipio_id?: number | null
+  metade_chave?: 'cima' | 'baixo' | null
 }
 
 export async function listar(filtros: { evento_id?: number; modalidade_id?: number }) {
@@ -69,10 +70,14 @@ export async function criar(data: CreateInput) {
   }
   if (data.subtitulo !== undefined) createData.subtitulo = data.subtitulo
   if (data.municipio_id !== undefined) createData.municipio_id = data.municipio_id
+  if (data.metade_chave !== undefined) createData.metade_chave = data.metade_chave
   return mapPrismaError(() => prisma.inscricao.create({ data: createData as any, include: INCLUDE }))
 }
 
-export async function editar(id: number, data: { subtitulo?: string | null; municipio_id?: number | null }) {
+export async function editar(
+  id: number,
+  data: { subtitulo?: string | null; municipio_id?: number | null; metade_chave?: 'cima' | 'baixo' | null },
+) {
   if (data.municipio_id != null) {
     const m = await prisma.municipio.findUnique({ where: { id: data.municipio_id }, select: { id: true } })
     if (!m) throw Object.assign(new Error('Município inválido'), { status: 400 })
@@ -80,6 +85,7 @@ export async function editar(id: number, data: { subtitulo?: string | null; muni
   const patch: Record<string, unknown> = {}
   if (data.subtitulo !== undefined) patch.subtitulo = data.subtitulo
   if (data.municipio_id !== undefined) patch.municipio_id = data.municipio_id
+  if (data.metade_chave !== undefined) patch.metade_chave = data.metade_chave
   return prisma.inscricao.update({ where: { id }, data: patch, include: INCLUDE })
 }
 
@@ -183,6 +189,7 @@ export type ImportRow = {
   municipio_uf?: string
   municipio_nome: string
   subtitulo?: string
+  metade?: 'cima' | 'baixo'
 }
 
 export type ImportRowResult = {
@@ -292,6 +299,7 @@ export async function importar(input: {
             participante_id,
             subtitulo: row.subtitulo?.trim() || null,
             municipio_id: r.municipio_id,
+            metade_chave: row.metade ?? null,
           },
         })
         inscritosSet.add(participante_id)
@@ -339,6 +347,7 @@ export async function importar(input: {
             evento_id: input.evento_id,
             modalidade_id: input.modalidade_id,
             participante_id: r.participante_id,
+            metade_chave: row.metade ?? null,
           },
         })
       }

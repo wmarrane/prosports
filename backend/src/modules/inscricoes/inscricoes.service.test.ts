@@ -297,7 +297,7 @@ describe('inscricoes.service', () => {
       }))
       expect(result.rows[0]).toMatchObject({ status: 'criada' })
       expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
-        data: { evento_id: 1, modalidade_id: 2, participante_id: 500 },
+        data: { evento_id: 1, modalidade_id: 2, participante_id: 500, metade_chave: null },
       })
       expect(mockPrisma.participante.create).not.toHaveBeenCalled()
     })
@@ -398,6 +398,7 @@ describe('inscricoes.service', () => {
             participante_id: 888,
             subtitulo: 'Escola A',
             municipio_id: 200,
+            metade_chave: null,
           },
         })
       })
@@ -425,6 +426,7 @@ describe('inscricoes.service', () => {
             participante_id: 500,
             subtitulo: 'Escola B',
             municipio_id: 100,
+            metade_chave: null,
           },
         })
       })
@@ -483,9 +485,24 @@ describe('inscricoes.service', () => {
         expect(result.rows[0]).toMatchObject({ status: 'criada' })
         expect(mockPrisma.participante.create).not.toHaveBeenCalled()
         expect(mockPrisma.inscricao.create).toHaveBeenCalledWith({
-          data: { evento_id: 1, modalidade_id: 2, participante_id: 500 },
+          data: { evento_id: 1, modalidade_id: 2, participante_id: 500, metade_chave: null },
         })
       })
     })
+  })
+
+  it('editar grava metade_chave quando informada', async () => {
+    mockPrisma.inscricao.update.mockResolvedValue({ id: 7 })
+    await service.editar(7, { metade_chave: 'cima' })
+    expect(mockPrisma.inscricao.update).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { id: 7 }, data: { metade_chave: 'cima' } }),
+    )
+  })
+
+  it('editar não toca em metade_chave quando o campo não vem', async () => {
+    mockPrisma.inscricao.update.mockResolvedValue({ id: 7 })
+    await service.editar(7, { subtitulo: 'Colégio França' })
+    const chamada = mockPrisma.inscricao.update.mock.calls[0][0]
+    expect(chamada.data).not.toHaveProperty('metade_chave')
   })
 })
