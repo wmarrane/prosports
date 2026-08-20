@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": ".",
-  "publicadoEm": "2026-08-20T17:36:01.217Z",
+  "publicadoEm": "2026-08-20T17:37:37.543Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1480,8 +1480,8 @@
       "nome": "Tênis de Mesa Duplas Feminino Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "10484c8bc2efeb10",
       "anfitriaoId": 463,
       "participantes": [
         {
@@ -1502,7 +1502,42 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 3,
+        "slots": [
+          703,
+          701,
+          723
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1510,8 +1545,8 @@
       "nome": "Tênis de Mesa Duplas Masculino Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d5db87694bccd961",
       "anfitriaoId": 463,
       "participantes": [
         {
@@ -1577,7 +1612,132 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 12,
+        "slots": [
+          723,
+          703,
+          696,
+          690,
+          695,
+          709,
+          699,
+          701,
+          705,
+          707,
+          697,
+          704
+        ],
+        "byePositions": [
+          1,
+          6,
+          7,
+          12
+        ],
+        "matchesGraph": {
+          "final": "J12",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J4",
+              "top": "P10",
+              "round": 1,
+              "bottom": "P11"
+            },
+            {
+              "id": "J5",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:B3",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:B4"
+            },
+            {
+              "id": "J9",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 3,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J12",
+              "top": "V:J9",
+              "round": 4,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J11",
+              "top": "L:J9",
+              "round": 4,
+              "bottom": "L:J10"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P7",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B4",
+              "top": "P12",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J11"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
