@@ -50,7 +50,6 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
   const periodo = evento.dataInicio
     ? `${dataPtBr(evento.dataInicio)}${evento.dataFim ? ` a ${dataPtBr(evento.dataFim)}` : ''}`
     : dataPtBr(evento.data)
-  const ano = new Date(evento.data).getUTCFullYear()
 
   return (
     <>
@@ -62,7 +61,7 @@ export default function EventoPage({ evento }: { evento: SnapEvento }) {
             <nav className="breadcrumb">
               <a href="/index.html">Início</a><span>›</span>
               <a href="/eventos.html">Eventos</a><span>›</span>
-              <a href="/eventos.html">{ano}</a><span>›</span>
+              <a href="/eventos.html">{evento.competicao}</a><span>›</span>
               <b>{evento.nome}</b>
             </nav>
             <div className="ev-badges">
