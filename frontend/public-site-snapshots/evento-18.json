@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-20T22:02:55.712Z",
+  "publicadoEm": "2026-08-20T22:05:59.920Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -422,6 +422,11 @@
         {
           "id": 720,
           "nome": "Colégio Jean Piaget",
+          "subtitulo": null
+        },
+        {
+          "id": 692,
+          "nome": "EM Felipe Avelino",
           "subtitulo": null
         }
       ],
