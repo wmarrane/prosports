@@ -1,0 +1,2625 @@
+{
+  "id": 19,
+  "nome": "XVII Jogos Escolares de Praia Grande 2026 - Sub 17",
+  "status": "sorteado",
+  "competicao": "Jogos Escolares de Praia Grande",
+  "cidade": "Praia Grande",
+  "local": ".",
+  "data": "2026-08-20T16:30:00.000Z",
+  "organizador": ".",
+  "publicadoEm": "2026-08-20T17:49:48.704Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 299,
+      "nome": "Atletismo Feminino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 779,
+          "nome": "Centro Educ. de Praia Grande e Com. de Artigos Escolares",
+          "subtitulo": null
+        },
+        {
+          "id": 718,
+          "nome": "Colégio Fortec",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 776,
+          "nome": "EM Vereador Felipe Avelino Moraes",
+          "subtitulo": null
+        },
+        {
+          "id": 780,
+          "nome": "EE Profa. Vilma Catharina Mosca Leone",
+          "subtitulo": null
+        },
+        {
+          "id": 711,
+          "nome": "EM Albert Einstein",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 781,
+          "nome": "Serviços Educacionais do Litoral Paulista Ltda",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 300,
+      "nome": "Atletismo Feminino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 776,
+          "nome": "EM Vereador Felipe Avelino Moraes",
+          "subtitulo": null
+        },
+        {
+          "id": 711,
+          "nome": "EM Albert Einstein",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        },
+        {
+          "id": 777,
+          "nome": "EM Gov. Orestes Quercia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 301,
+      "nome": "Atletismo Feminino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 774,
+          "nome": "Creci Constance Kamii Ltda",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 769,
+          "nome": "EM Ary Cabral",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 770,
+          "nome": "EM Profa. Maria de Lourdes Santos",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 771,
+          "nome": "EM Profa. Isabel Figueroa Bréfere",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 773,
+          "nome": "José Júlio Martins Baptista",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 302,
+      "nome": "Atletismo Feminino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 769,
+          "nome": "EM Ary Cabral",
+          "subtitulo": null
+        },
+        {
+          "id": 770,
+          "nome": "EM Profa. Maria de Lourdes Santos",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 771,
+          "nome": "EM Profa. Isabel Figueroa Bréfere",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 303,
+      "nome": "Atletismo Feminino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 294,
+      "nome": "Atletismo Masculino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 774,
+          "nome": "Creci Constance Kamii Ltda",
+          "subtitulo": null
+        },
+        {
+          "id": 718,
+          "nome": "Colégio Fortec",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 715,
+          "nome": "EM São Francisco de Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 776,
+          "nome": "EM Vereador Felipe Avelino Moraes",
+          "subtitulo": null
+        },
+        {
+          "id": 780,
+          "nome": "EE Profa. Vilma Catharina Mosca Leone",
+          "subtitulo": null
+        },
+        {
+          "id": 711,
+          "nome": "EM Albert Einstein",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 778,
+          "nome": "Escola Educ. Inf. Ens. Fund. e Médio Alpha do Futuro",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 777,
+          "nome": "EM Gov. Orestes Quercia",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 781,
+          "nome": "Serviços Educacionais do Litoral Paulista Ltda",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 295,
+      "nome": "Atletismo Masculino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 774,
+          "nome": "Creci Constance Kamii Ltda",
+          "subtitulo": null
+        },
+        {
+          "id": 718,
+          "nome": "Colégio Fortec",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 715,
+          "nome": "EM São Francisco de Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 711,
+          "nome": "EM Albert Einstein",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 770,
+          "nome": "EM Profa. Maria de Lourdes Santos",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 710,
+          "nome": "EM Sebastião Tavares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 777,
+          "nome": "EM Gov. Orestes Quercia",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 773,
+          "nome": "José Júlio Martins Baptista",
+          "subtitulo": null
+        },
+        {
+          "id": 778,
+          "nome": "Escola Educ. Inf. Ens. Fund. e Médio Alpha do Futuro",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 296,
+      "nome": "Atletismo Masculino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 774,
+          "nome": "Creci Constance Kamii Ltda",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 767,
+          "nome": "Colégio Recanto Educacional",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 736,
+          "nome": "Kaleo Arima Soler Fernandes",
+          "subtitulo": null
+        },
+        {
+          "id": 769,
+          "nome": "EM Ary Cabral",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 770,
+          "nome": "EM Profa. Maria de Lourdes Santos",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 771,
+          "nome": "EM Profa. Isabel Figueroa Bréfere",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 775,
+          "nome": "EM Roberto Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        },
+        {
+          "id": 773,
+          "nome": "José Júlio Martins Baptista",
+          "subtitulo": null
+        },
+        {
+          "id": 710,
+          "nome": "EM Sebastião Tavares de Oliveira",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 297,
+      "nome": "Atletismo Masculino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 769,
+          "nome": "EM Ary Cabral",
+          "subtitulo": null
+        },
+        {
+          "id": 770,
+          "nome": "EM Profa. Maria de Lourdes Santos",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 771,
+          "nome": "EM Profa. Isabel Figueroa Bréfere",
+          "subtitulo": null
+        },
+        {
+          "id": 772,
+          "nome": "EM Profa. Maria Clotilde Lopes Comitre Rigo",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 298,
+      "nome": "Atletismo Masculino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 724,
+          "nome": "EM 19 de Janeiro",
+          "subtitulo": null
+        },
+        {
+          "id": 768,
+          "nome": "EM Vereadora Isaura Campos Garcia",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 312,
+      "nome": "Basquetebol Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 694,
+          "nome": "Colégio Vila Verde",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 314,
+      "nome": "Basquetebol Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "1a27acdfa2f81835",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 712,
+          "nome": "EM Gov. Franco Montoro",
+          "subtitulo": null
+        },
+        {
+          "id": 705,
+          "nome": "Colégio Recanto",
+          "subtitulo": null
+        },
+        {
+          "id": 694,
+          "nome": "Colégio Vila Verde",
+          "subtitulo": null
+        },
+        {
+          "id": 722,
+          "nome": "Colégio Trivium",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        },
+        {
+          "id": 710,
+          "nome": "EM Sebastião Tavares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              694,
+              705,
+              712
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              698,
+              710,
+              695
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              722,
+              707,
+              709
+            ]
+          }
+        ],
+        "regra_id": 467,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 304,
+      "nome": "Damas Misto Cat A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 780,
+          "nome": "EE Profa. Vilma Catharina Mosca Leone",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 700,
+          "nome": "EM Maria Clotilde",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 316,
+      "nome": "Futsal Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 718,
+          "nome": "Colégio Fortec",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 318,
+      "nome": "Futsal Masculino Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "a98147ebe34fcbe6",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 705,
+          "nome": "Colégio Recanto",
+          "subtitulo": null
+        },
+        {
+          "id": 706,
+          "nome": "Colégio Alexo",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 720,
+          "nome": "Colégio Jean Piaget",
+          "subtitulo": null
+        },
+        {
+          "id": 710,
+          "nome": "EM Sebastião Tavares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 723,
+          "nome": "EE Profa. Vilma Catharina",
+          "subtitulo": null
+        },
+        {
+          "id": 725,
+          "nome": "EM Maria de Lourdes",
+          "subtitulo": null
+        },
+        {
+          "id": 715,
+          "nome": "EM São Francisco de Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 717,
+          "nome": "Colégio Celestin Freinet",
+          "subtitulo": null
+        },
+        {
+          "id": 718,
+          "nome": "Colégio Fortec",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 721,
+          "nome": "Colégio Piteco",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 700,
+          "nome": "EM Maria Clotilde",
+          "subtitulo": null
+        },
+        {
+          "id": 702,
+          "nome": "EM Cidade da Criança",
+          "subtitulo": null
+        },
+        {
+          "id": 692,
+          "nome": "EM Felipe Avelino",
+          "subtitulo": null
+        },
+        {
+          "id": 716,
+          "nome": "Colégio Alpha",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 20,
+        "slots": [
+          698,
+          723,
+          725,
+          715,
+          718,
+          701,
+          709,
+          717,
+          705,
+          706,
+          700,
+          720,
+          716,
+          699,
+          721,
+          710,
+          703,
+          697,
+          702,
+          692
+        ],
+        "byePositions": [
+          1,
+          10,
+          11,
+          20
+        ],
+        "matchesGraph": {
+          "final": "J20",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J3",
+              "top": "P12",
+              "round": 1,
+              "bottom": "P13"
+            },
+            {
+              "id": "J4",
+              "top": "P18",
+              "round": 1,
+              "bottom": "P19"
+            },
+            {
+              "id": "J5",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J6",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J7",
+              "top": "P6",
+              "round": 1,
+              "bottom": "P7"
+            },
+            {
+              "id": "J8",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J9",
+              "top": "V:B3",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J10",
+              "top": "P14",
+              "round": 1,
+              "bottom": "P15"
+            },
+            {
+              "id": "J11",
+              "top": "P16",
+              "round": 1,
+              "bottom": "P17"
+            },
+            {
+              "id": "J12",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:B4"
+            },
+            {
+              "id": "J13",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J14",
+              "top": "V:J7",
+              "round": 3,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J15",
+              "top": "V:J9",
+              "round": 3,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J16",
+              "top": "V:J11",
+              "round": 3,
+              "bottom": "V:J12"
+            },
+            {
+              "id": "J17",
+              "top": "V:J13",
+              "round": 4,
+              "bottom": "V:J14"
+            },
+            {
+              "id": "J18",
+              "top": "V:J15",
+              "round": 4,
+              "bottom": "V:J16"
+            },
+            {
+              "id": "J20",
+              "top": "V:J17",
+              "round": 5,
+              "bottom": "V:J18"
+            },
+            {
+              "id": "J19",
+              "top": "L:J17",
+              "round": 5,
+              "bottom": "L:J18"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P10",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P11",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B4",
+              "top": "P20",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J19"
+        },
+        "metadesIgnoradas": []
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 322,
+      "nome": "Handebol Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 320,
+      "nome": "Handebol Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "20bc55c72abb56c0",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 715,
+          "nome": "EM São Francisco de Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 690,
+          "nome": "Colégio Objetivo",
+          "subtitulo": null
+        },
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        },
+        {
+          "id": 710,
+          "nome": "EM Sebastião Tavares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              704,
+              698,
+              703,
+              690
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              697,
+              710,
+              715,
+              709
+            ]
+          }
+        ],
+        "regra_id": 466,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 330,
+      "nome": "Tênis de Mesa Duplas Feminino Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "10484c8bc2efeb10",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 723,
+          "nome": "EE Profa. Vilma Catharina",
+          "subtitulo": null
+        },
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 3,
+        "slots": [
+          703,
+          701,
+          723
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 328,
+      "nome": "Tênis de Mesa Duplas Masculino Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "d5db87694bccd961",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 690,
+          "nome": "Colégio Objetivo",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 696,
+          "nome": "Colégio Universo",
+          "subtitulo": null
+        },
+        {
+          "id": 723,
+          "nome": "EE Profa. Vilma Catharina",
+          "subtitulo": null
+        },
+        {
+          "id": 705,
+          "nome": "Colégio Recanto",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 12,
+        "slots": [
+          723,
+          703,
+          696,
+          690,
+          695,
+          709,
+          699,
+          701,
+          705,
+          707,
+          697,
+          704
+        ],
+        "byePositions": [
+          1,
+          6,
+          7,
+          12
+        ],
+        "matchesGraph": {
+          "final": "J12",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J4",
+              "top": "P10",
+              "round": 1,
+              "bottom": "P11"
+            },
+            {
+              "id": "J5",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:B3",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:B4"
+            },
+            {
+              "id": "J9",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 3,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J12",
+              "top": "V:J9",
+              "round": 4,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J11",
+              "top": "L:J9",
+              "round": 4,
+              "bottom": "L:J10"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P7",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B4",
+              "top": "P12",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J11"
+        },
+        "metadesIgnoradas": []
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 306,
+      "nome": "Tênis de Mesa Feminino Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "a36b81b881dc5d60",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 813,
+          "nome": "Aissa **********",
+          "subtitulo": "A Municipal Roberto Mário Santini"
+        },
+        {
+          "id": 814,
+          "nome": "Ana **********",
+          "subtitulo": "EE Prof Vilma Catharina Mosca Leone"
+        },
+        {
+          "id": 815,
+          "nome": "Kethellen **********",
+          "subtitulo": "EM Domingos Soares de Oliveira"
+        },
+        {
+          "id": 816,
+          "nome": "Maria **********",
+          "subtitulo": "EM Domingos Soares de Oliveira"
+        },
+        {
+          "id": 817,
+          "nome": "Alexia **********",
+          "subtitulo": "EM Joaquim Augusto Ferreira Mourão"
+        },
+        {
+          "id": 818,
+          "nome": "Sophia **********",
+          "subtitulo": "EM Joaquim Augusto Ferreira Mourão"
+        },
+        {
+          "id": 819,
+          "nome": "Ana **********",
+          "subtitulo": "EE Profa. Magali Alonso"
+        },
+        {
+          "id": 820,
+          "nome": "Caroline **********",
+          "subtitulo": "EE Profa. Magali Alonso"
+        },
+        {
+          "id": 821,
+          "nome": "Thayllana **********",
+          "subtitulo": "EM Profa. Maria Clotilde Lopes Comitre Rigo"
+        },
+        {
+          "id": 822,
+          "nome": "Esther **********",
+          "subtitulo": "EM Roberto Mário Santini"
+        },
+        {
+          "id": 823,
+          "nome": "Ana **********",
+          "subtitulo": "José Júlio Martins Baptista"
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 11,
+        "slots": [
+          823,
+          815,
+          819,
+          817,
+          813,
+          814,
+          820,
+          821,
+          816,
+          822,
+          818
+        ],
+        "byePositions": [
+          1,
+          6,
+          11
+        ],
+        "matchesGraph": {
+          "final": "J11",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J3",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J4",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J5",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J6",
+              "top": "V:B2",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J7",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:B3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 3,
+              "bottom": "V:J5"
+            },
+            {
+              "id": "J9",
+              "top": "V:J6",
+              "round": 3,
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J11",
+              "top": "V:J8",
+              "round": 4,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J10",
+              "top": "L:J8",
+              "round": 4,
+              "bottom": "L:J9"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P11",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J10"
+        },
+        "metadesIgnoradas": []
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 308,
+      "nome": "Tênis de Mesa Masculino Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "sorteado",
+      "seed": "2b8cc6b774f0a0f8",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 783,
+          "nome": "Mateus **********",
+          "subtitulo": "Colégio Alexo Unidade II LTDA"
+        },
+        {
+          "id": 784,
+          "nome": "Gabriel **********",
+          "subtitulo": "Colégio Fortec"
+        },
+        {
+          "id": 785,
+          "nome": "Gabriel **********",
+          "subtitulo": "Colégio França"
+        },
+        {
+          "id": 786,
+          "nome": "Rhuan **********",
+          "subtitulo": "Colégio França"
+        },
+        {
+          "id": 787,
+          "nome": "Isaac **********",
+          "subtitulo": "Colégio Objetivo"
+        },
+        {
+          "id": 788,
+          "nome": "Lucas **********",
+          "subtitulo": "Colégio Objetivo"
+        },
+        {
+          "id": 789,
+          "nome": "Joaquin **********",
+          "subtitulo": "Colégio Recanto Educacional"
+        },
+        {
+          "id": 790,
+          "nome": "Theo **********",
+          "subtitulo": "Colégio Recanto Educacional"
+        },
+        {
+          "id": 791,
+          "nome": "Davi **********",
+          "subtitulo": "EM Antônio Peres Ferreira"
+        },
+        {
+          "id": 792,
+          "nome": "Diego **********",
+          "subtitulo": "EM Antônio Peres Ferreira"
+        },
+        {
+          "id": 793,
+          "nome": "Marcelo **********",
+          "subtitulo": "EE Prof Vilma Catharina Mosca Leone"
+        },
+        {
+          "id": 794,
+          "nome": "Arthur **********",
+          "subtitulo": "EM Albert Einstein"
+        },
+        {
+          "id": 795,
+          "nome": "Arthur **********",
+          "subtitulo": "EM Domingos Soares de Oliveira"
+        },
+        {
+          "id": 796,
+          "nome": "João **********",
+          "subtitulo": "EM Domingos Soares de Oliveira"
+        },
+        {
+          "id": 797,
+          "nome": "Miguel **********",
+          "subtitulo": "EM Joaquim Augusto Ferreira Mourão"
+        },
+        {
+          "id": 798,
+          "nome": "Vitor **********",
+          "subtitulo": "EM Joaquim Augusto Ferreira Mourão"
+        },
+        {
+          "id": 799,
+          "nome": "Filipe **********",
+          "subtitulo": "EM Ronaldo Sergio Alves Lameira Ramos"
+        },
+        {
+          "id": 800,
+          "nome": "Igor **********",
+          "subtitulo": "EM Ronaldo Sergio Alves Lameira Ramos"
+        },
+        {
+          "id": 801,
+          "nome": "Lucas **********",
+          "subtitulo": "EM Sebastião Tavares de Oliveira"
+        },
+        {
+          "id": 802,
+          "nome": "Ryan **********",
+          "subtitulo": "EM Sebastião Tavares de Oliveira"
+        },
+        {
+          "id": 803,
+          "nome": "Alisson **********",
+          "subtitulo": "EE Profa. Magali Alonso"
+        },
+        {
+          "id": 804,
+          "nome": "Ytalo **********",
+          "subtitulo": "EE Professora Magali Alonso"
+        },
+        {
+          "id": 806,
+          "nome": "David **********",
+          "subtitulo": "EM Profa. Maria Clotilde Lopes Comitre Rigo"
+        },
+        {
+          "id": 805,
+          "nome": "Rogério **********",
+          "subtitulo": "EM Profa. Maria Clotilde Lopes Comitre Rigo"
+        },
+        {
+          "id": 807,
+          "nome": "Arthur **********",
+          "subtitulo": "EM Roberto Mário Santini"
+        },
+        {
+          "id": 808,
+          "nome": "Herik **********",
+          "subtitulo": "EM Roberto Mário Santini"
+        },
+        {
+          "id": 809,
+          "nome": "Pedro **********",
+          "subtitulo": "José Júlio Martins Baptista"
+        },
+        {
+          "id": 810,
+          "nome": "Rikelmy **********",
+          "subtitulo": "José Júlio Martins Baptista"
+        },
+        {
+          "id": 811,
+          "nome": "Enzo **********",
+          "subtitulo": "Universo Empreendimentos Educacionais LTDA."
+        },
+        {
+          "id": 812,
+          "nome": "Miguel **********",
+          "subtitulo": "Universo Empreendimentos Educacionais LTDA."
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "size": 30,
+        "slots": [
+          799,
+          785,
+          803,
+          783,
+          787,
+          807,
+          797,
+          801,
+          806,
+          809,
+          793,
+          795,
+          789,
+          791,
+          811,
+          802,
+          794,
+          786,
+          805,
+          784,
+          808,
+          788,
+          800,
+          812,
+          796,
+          810,
+          792,
+          798,
+          790,
+          804
+        ],
+        "byePositions": [
+          1,
+          30
+        ],
+        "matchesGraph": {
+          "final": "J30",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P6",
+              "round": 1,
+              "bottom": "P7"
+            },
+            {
+              "id": "J4",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J5",
+              "top": "P10",
+              "round": 1,
+              "bottom": "P11"
+            },
+            {
+              "id": "J6",
+              "top": "P12",
+              "round": 1,
+              "bottom": "P13"
+            },
+            {
+              "id": "J7",
+              "top": "P14",
+              "round": 1,
+              "bottom": "P15"
+            },
+            {
+              "id": "J8",
+              "top": "P16",
+              "round": 1,
+              "bottom": "P17"
+            },
+            {
+              "id": "J9",
+              "top": "P18",
+              "round": 1,
+              "bottom": "P19"
+            },
+            {
+              "id": "J10",
+              "top": "P20",
+              "round": 1,
+              "bottom": "P21"
+            },
+            {
+              "id": "J11",
+              "top": "P22",
+              "round": 1,
+              "bottom": "P23"
+            },
+            {
+              "id": "J12",
+              "top": "P24",
+              "round": 1,
+              "bottom": "P25"
+            },
+            {
+              "id": "J13",
+              "top": "P26",
+              "round": 1,
+              "bottom": "P27"
+            },
+            {
+              "id": "J14",
+              "top": "P28",
+              "round": 1,
+              "bottom": "P29"
+            },
+            {
+              "id": "J15",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J16",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J17",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:J5"
+            },
+            {
+              "id": "J18",
+              "top": "V:J6",
+              "round": 2,
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J19",
+              "top": "V:J8",
+              "round": 2,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J20",
+              "top": "V:J10",
+              "round": 2,
+              "bottom": "V:J11"
+            },
+            {
+              "id": "J21",
+              "top": "V:J12",
+              "round": 2,
+              "bottom": "V:J13"
+            },
+            {
+              "id": "J22",
+              "top": "V:J14",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J23",
+              "top": "V:J15",
+              "round": 3,
+              "bottom": "V:J16"
+            },
+            {
+              "id": "J24",
+              "top": "V:J17",
+              "round": 3,
+              "bottom": "V:J18"
+            },
+            {
+              "id": "J25",
+              "top": "V:J19",
+              "round": 3,
+              "bottom": "V:J20"
+            },
+            {
+              "id": "J26",
+              "top": "V:J21",
+              "round": 3,
+              "bottom": "V:J22"
+            },
+            {
+              "id": "J27",
+              "top": "V:J23",
+              "round": 4,
+              "bottom": "V:J24"
+            },
+            {
+              "id": "J28",
+              "top": "V:J25",
+              "round": 4,
+              "bottom": "V:J26"
+            },
+            {
+              "id": "J30",
+              "top": "V:J27",
+              "round": 5,
+              "bottom": "V:J28"
+            },
+            {
+              "id": "J29",
+              "top": "L:J27",
+              "round": 5,
+              "bottom": "L:J28"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P30",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J29"
+        },
+        "metadesIgnoradas": []
+      },
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 324,
+      "nome": "Volebol Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "197ee7b19f33954e",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 696,
+          "nome": "Colégio Universo",
+          "subtitulo": null
+        },
+        {
+          "id": 705,
+          "nome": "Colégio Recanto",
+          "subtitulo": null
+        },
+        {
+          "id": 720,
+          "nome": "Colégio Jean Piaget",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 717,
+          "nome": "Colégio Celestin Freinet",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 723,
+          "nome": "EE Profa. Vilma Catharina",
+          "subtitulo": null
+        },
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              699,
+              707,
+              701
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              705,
+              723,
+              709
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              696,
+              720,
+              703
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              717,
+              695,
+              697
+            ]
+          }
+        ],
+        "regra_id": 470,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 326,
+      "nome": "Volebol Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "sorteado",
+      "seed": "cedebad74dc031a1",
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 696,
+          "nome": "Colégio Universo",
+          "subtitulo": null
+        },
+        {
+          "id": 717,
+          "nome": "Colégio Celestin Freinet",
+          "subtitulo": null
+        },
+        {
+          "id": 723,
+          "nome": "EE Profa. Vilma Catharina",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        },
+        {
+          "id": 709,
+          "nome": "EE Prof. Antonio Nunes Lopes da Silva",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              696,
+              701,
+              699
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              707,
+              709,
+              695,
+              704
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              723,
+              697,
+              717
+            ]
+          }
+        ],
+        "regra_id": 468,
+        "classificados_por_grupo": 2
+      },
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 2,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 310,
+      "nome": "Xadrez Misto Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 463,
+      "participantes": [
+        {
+          "id": 695,
+          "nome": "Colégio França",
+          "subtitulo": null
+        },
+        {
+          "id": 780,
+          "nome": "EE Profa. Vilma Catharina Mosca Leone",
+          "subtitulo": null
+        },
+        {
+          "id": 704,
+          "nome": "EM Ronaldo Sergio Alves Lameira Ramos",
+          "subtitulo": null
+        },
+        {
+          "id": 698,
+          "nome": "EM João Gonçalves",
+          "subtitulo": null
+        },
+        {
+          "id": 697,
+          "nome": "EM Joaquim Augusto Ferreira Mourão",
+          "subtitulo": null
+        },
+        {
+          "id": 699,
+          "nome": "EM Antonio Peres Ferreira",
+          "subtitulo": null
+        },
+        {
+          "id": 701,
+          "nome": "EM Domingos Soares de Oliveira",
+          "subtitulo": null
+        },
+        {
+          "id": 703,
+          "nome": "EM Mario Santini",
+          "subtitulo": null
+        },
+        {
+          "id": 706,
+          "nome": "Colégio Alexo",
+          "subtitulo": null
+        },
+        {
+          "id": 707,
+          "nome": "EE Profa. Magali Alonso",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}

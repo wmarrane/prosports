@@ -1,5 +1,6 @@
 import prisma from '../../lib/prisma'
 import { SIGLAS_VALIDAS } from '../municipios/uf'
+import { publicar } from '../site-publico/site-publico.service'
 
 export const CAMPOS_VALIDOS = ['subtitulo', 'municipio', 'inspetoria', 'delegacia'] as const
 export type CampoSubtitulo = typeof CAMPOS_VALIDOS[number]
@@ -69,13 +70,57 @@ export async function criar(input: {
   return mapPrismaError(() => prisma.competicao.create({ data }))
 }
 
+/**
+ * O site público agrupa os eventos por NOME de competição, e o nome fica
+ * congelado dentro de cada snapshot publicado. Sem republicar, renomear uma
+ * competição criaria dois blocos na listagem: os eventos antigos com o nome
+ * velho e os novos com o novo.
+ *
+ * Republica pela via automática de propósito: evento marcado como publicação
+ * manual continua intocado — é exatamente o que aquele parâmetro promete — e
+ * mantém o nome antigo até alguém publicar na mão.
+ *
+ * Falha ao republicar não derruba o rename: o nome já está gravado e a
+ * republicação é efeito colateral.
+ */
+async function republicarEventosPublicados(competicao_id: number): Promise<void> {
+  const eventos = await prisma.evento.findMany({
+    where: { competicao_id, site_publicado_em: { not: null } },
+    select: { id: true },
+  })
+  for (const e of eventos) {
+    try {
+      await publicar(e.id, { permitirParcial: true, origem: 'automatica' })
+    } catch (err) {
+      console.warn(`[competicao ${competicao_id}] republicar evento ${e.id} falhou`, err)
+    }
+  }
+}
+
 export async function editar(
   id: number,
-  input: Partial<{ nome: string; estados: string[]; subtitulo_campos: string[]; considerar_anfitriao: boolean; subtitulo_municipio_por_modalidade: boolean }>
+  input: Partial<{
+    nome: string
+    estados: string[]
+    subtitulo_campos: string[]
+    considerar_anfitriao: boolean
+    subtitulo_municipio_por_modalidade: boolean
+    modelo_congresso: string
+  }>
 ) {
   if (input.estados !== undefined) validateUfs(input.estados)
   if (input.subtitulo_campos !== undefined) validateCampos(input.subtitulo_campos)
-  return mapPrismaError(() => prisma.competicao.update({ where: { id }, data: input }))
+
+  const antes = input.nome !== undefined
+    ? await prisma.competicao.findUnique({ where: { id }, select: { nome: true } })
+    : null
+
+  const atualizada = await mapPrismaError(() => prisma.competicao.update({ where: { id }, data: input }))
+
+  if (antes && input.nome !== undefined && antes.nome !== input.nome) {
+    await republicarEventosPublicados(id)
+  }
+  return atualizada
 }
 
 export async function remover(id: number) {
