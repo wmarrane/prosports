@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-20T17:53:09.693Z",
+  "publicadoEm": "2026-08-20T17:55:15.234Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -751,8 +751,8 @@
       "nome": "Handebol Masculino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9a81d65e48a880d1",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -798,7 +798,30 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              704,
+              712,
+              699,
+              698
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              715,
+              710,
+              697,
+              705
+            ]
+          }
+        ],
+        "regra_id": 466,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -819,8 +842,8 @@
       "nome": "Tênis de Mesa Duplas Feminino Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "3fcb28e2409de760",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -841,7 +864,42 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 3,
+        "slots": [
+          703,
+          695,
+          701
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
