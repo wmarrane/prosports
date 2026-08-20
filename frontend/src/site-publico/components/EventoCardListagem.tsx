@@ -4,12 +4,20 @@ import { dataPtBr } from '../../lib/boletim-categorias'
 import { Medal, MapPin, ArrowRight } from 'lucide-react'
 import { statusPublico } from '../lib/status-evento'
 
-export default function EventoCardListagem({ evento }: { evento: SnapEvento }) {
+type Props = {
+  evento: SnapEvento
+  /** Ano do evento — lido pelo filtro da listagem. */
+  ano?: number
+  /** Nome + cidade normalizados (sem acento, minúsculo) — lidos pela busca. */
+  busca?: string
+}
+
+export default function EventoCardListagem({ evento, ano, busca }: Props) {
   const { sorteadas, done } = progressoSorteios(evento)
   const info = statusPublico(evento.status)
   const sortCls = sorteadas === 0 ? 'zero' : done ? 'hl' : ''
   return (
-    <a className="evc" href={`/evento-${evento.id}.html`} data-status={evento.status}>
+    <a className="evc" href={`/evento-${evento.id}.html`} data-status={evento.status} data-ano={ano} data-busca={busca}>
       <div className="accent" style={{ background: info.grad }} />
       <div className="evc-h">
         <div className="evc-tile" style={{ background: info.grad }}><Medal size={19} /></div>
