@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-20T17:58:58.398Z",
+  "publicadoEm": "2026-08-20T18:05:11.101Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -1738,8 +1738,8 @@
       "nome": "Volebol Feminino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "10d8745ea6e7036c",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -1825,7 +1825,48 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              701,
+              710,
+              700,
+              706
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              715,
+              702,
+              703,
+              697
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              695,
+              704,
+              696,
+              722
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              699,
+              711,
+              717,
+              725
+            ]
+          }
+        ],
+        "regra_id": 474,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1846,8 +1887,8 @@
       "nome": "Volebol Masculino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "0e2a97653b73430b",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -1898,7 +1939,36 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              711,
+              703,
+              692
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              717,
+              699,
+              697
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              704,
+              710,
+              701
+            ]
+          }
+        ],
+        "regra_id": 467,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
