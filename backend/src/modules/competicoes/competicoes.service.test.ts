@@ -14,11 +14,17 @@ vi.mock('../../lib/prisma', () => ({
     },
     evento: {
       count: vi.fn(),
+      findMany: vi.fn(),
     },
   },
 }))
 
+vi.mock('../site-publico/site-publico.service', () => ({
+  publicar: vi.fn(async () => {}),
+}))
+
 import prisma from '../../lib/prisma'
+import { publicar } from '../site-publico/site-publico.service'
 import * as service from './competicoes.service'
 
 const mockPrisma = prisma as any
@@ -144,5 +150,50 @@ describe('competicoes.service', () => {
     mockPrisma.competicao.delete.mockResolvedValue({ id: 1 })
     await service.remover(1)
     expect(mockPrisma.competicao.delete).toHaveBeenCalledWith({ where: { id: 1 } })
+  })
+})
+
+describe('editar — renomear republica os eventos publicados', () => {
+  beforeEach(() => {
+    mockPrisma.competicao.update.mockResolvedValue({ id: 1, nome: 'Novo' })
+    mockPrisma.evento.findMany.mockResolvedValue([{ id: 7 }, { id: 9 }])
+  })
+
+  it('republica os eventos publicados quando o nome muda', async () => {
+    mockPrisma.competicao.findUnique.mockResolvedValue({ nome: 'Antigo' })
+    await service.editar(1, { nome: 'Novo' })
+    // Só os que já estão no ar: o where filtra por site_publicado_em não nulo.
+    expect(mockPrisma.evento.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { competicao_id: 1, site_publicado_em: { not: null } } }),
+    )
+    expect(publicar).toHaveBeenCalledTimes(2)
+    expect(publicar).toHaveBeenCalledWith(7, { permitirParcial: true, origem: 'automatica' })
+    expect(publicar).toHaveBeenCalledWith(9, { permitirParcial: true, origem: 'automatica' })
+  })
+
+  it('não republica quando o nome enviado é igual ao atual', async () => {
+    mockPrisma.competicao.findUnique.mockResolvedValue({ nome: 'Igual' })
+    await service.editar(1, { nome: 'Igual' })
+    expect(publicar).not.toHaveBeenCalled()
+  })
+
+  it('não republica quando a edição não mexe no nome', async () => {
+    await service.editar(1, { considerar_anfitriao: true })
+    expect(mockPrisma.competicao.findUnique).not.toHaveBeenCalled()
+    expect(publicar).not.toHaveBeenCalled()
+  })
+
+  it('falha ao republicar não derruba o rename', async () => {
+    mockPrisma.competicao.findUnique.mockResolvedValue({ nome: 'Antigo' })
+    ;(publicar as any).mockRejectedValueOnce(new Error('site fora do ar'))
+    await expect(service.editar(1, { nome: 'Novo' })).resolves.toEqual({ id: 1, nome: 'Novo' })
+    expect(publicar).toHaveBeenCalledTimes(2)  // o segundo evento ainda é tentado
+  })
+
+  it('aceita e grava modelo_congresso', async () => {
+    await service.editar(1, { modelo_congresso: 'jeesp' })
+    expect(mockPrisma.competicao.update).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { id: 1 }, data: { modelo_congresso: 'jeesp' } }),
+    )
   })
 })

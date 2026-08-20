@@ -35,3 +35,14 @@ describe('EventoPage hero', () => {
     expect(renderToStaticMarkup(<EventoPage evento={base({ status: 'sorteado' } as any)} />)).toContain('Sorteado')
   })
 })
+
+describe('EventoPage breadcrumb', () => {
+  it('aponta para a competição, que é como a listagem se organiza', () => {
+    // A listagem agrupa por competição; um degrau com o ano levaria para uma
+    // página onde aquele rótulo não existe mais.
+    const html = renderToStaticMarkup(<EventoPage evento={base()} />)
+    const trilha = html.split('class="breadcrumb"')[1].split('</nav>')[0]
+    expect(trilha).toContain('Regionais 2026')
+    expect(trilha).not.toContain('>2026<')
+  })
+})
