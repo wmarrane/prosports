@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-20T17:55:15.234Z",
+  "publicadoEm": "2026-08-20T17:58:58.398Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -907,8 +907,8 @@
       "nome": "Tênis de Mesa Duplas Masculino Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d1b540c1a0e6acdd",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -969,7 +969,118 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 11,
+        "slots": [
+          704,
+          690,
+          705,
+          701,
+          696,
+          703,
+          710,
+          697,
+          699,
+          695,
+          691
+        ],
+        "byePositions": [
+          1,
+          6,
+          11
+        ],
+        "matchesGraph": {
+          "final": "J11",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J3",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J4",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J5",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J6",
+              "top": "V:B2",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J7",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:B3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 3,
+              "bottom": "V:J5"
+            },
+            {
+              "id": "J9",
+              "top": "V:J6",
+              "round": 3,
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J11",
+              "top": "V:J8",
+              "round": 4,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J10",
+              "top": "L:J8",
+              "round": 4,
+              "bottom": "L:J9"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P11",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J10"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
@@ -977,8 +1088,8 @@
       "nome": "Tênis de Mesa Feminino Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d40b6891df2a2cfe",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -1064,7 +1175,131 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 16,
+        "slots": [
+          824,
+          834,
+          836,
+          826,
+          830,
+          828,
+          832,
+          838,
+          837,
+          831,
+          833,
+          835,
+          825,
+          839,
+          829,
+          827
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J16",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J3",
+              "top": "P5",
+              "round": 1,
+              "bottom": "P6"
+            },
+            {
+              "id": "J4",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J5",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J6",
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
+            },
+            {
+              "id": "J7",
+              "top": "P13",
+              "round": 1,
+              "bottom": "P14"
+            },
+            {
+              "id": "J8",
+              "top": "P15",
+              "round": 1,
+              "bottom": "P16"
+            },
+            {
+              "id": "J9",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J10",
+              "top": "V:J3",
+              "round": 2,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J11",
+              "top": "V:J5",
+              "round": 2,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J12",
+              "top": "V:J7",
+              "round": 2,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J13",
+              "top": "V:J9",
+              "round": 3,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J14",
+              "top": "V:J11",
+              "round": 3,
+              "bottom": "V:J12"
+            },
+            {
+              "id": "J16",
+              "top": "V:J13",
+              "round": 4,
+              "bottom": "V:J14"
+            },
+            {
+              "id": "J15",
+              "top": "L:J13",
+              "round": 4,
+              "bottom": "L:J14"
+            }
+          ],
+          "thirdPlace": "J15"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1072,8 +1307,8 @@
       "nome": "Tênis de Mesa Masculino Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "b7c5319ac2801a66",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -1244,7 +1479,258 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 33,
+        "slots": [
+          757,
+          728,
+          734,
+          749,
+          747,
+          730,
+          755,
+          745,
+          753,
+          751,
+          727,
+          742,
+          738,
+          736,
+          740,
+          732,
+          752,
+          733,
+          744,
+          746,
+          748,
+          739,
+          756,
+          731,
+          754,
+          741,
+          735,
+          743,
+          729,
+          759,
+          750,
+          758,
+          737
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J33",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P18",
+              "round": 1,
+              "bottom": "P19"
+            },
+            {
+              "id": "J2",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J3",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "P5",
+              "round": 1,
+              "bottom": "P6"
+            },
+            {
+              "id": "J5",
+              "top": "P7",
+              "round": 1,
+              "bottom": "P8"
+            },
+            {
+              "id": "J6",
+              "top": "P9",
+              "round": 1,
+              "bottom": "P10"
+            },
+            {
+              "id": "J7",
+              "top": "P11",
+              "round": 1,
+              "bottom": "P12"
+            },
+            {
+              "id": "J8",
+              "top": "P13",
+              "round": 1,
+              "bottom": "P14"
+            },
+            {
+              "id": "J9",
+              "top": "P15",
+              "round": 1,
+              "bottom": "P16"
+            },
+            {
+              "id": "J10",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J11",
+              "top": "P20",
+              "round": 1,
+              "bottom": "P21"
+            },
+            {
+              "id": "J12",
+              "top": "P22",
+              "round": 1,
+              "bottom": "P23"
+            },
+            {
+              "id": "J13",
+              "top": "P24",
+              "round": 1,
+              "bottom": "P25"
+            },
+            {
+              "id": "J14",
+              "top": "P26",
+              "round": 1,
+              "bottom": "P27"
+            },
+            {
+              "id": "J15",
+              "top": "P28",
+              "round": 1,
+              "bottom": "P29"
+            },
+            {
+              "id": "J16",
+              "top": "P30",
+              "round": 1,
+              "bottom": "P31"
+            },
+            {
+              "id": "J17",
+              "top": "P32",
+              "round": 1,
+              "bottom": "P33"
+            },
+            {
+              "id": "J18",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J19",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:J5"
+            },
+            {
+              "id": "J20",
+              "top": "V:J6",
+              "round": 2,
+              "bottom": "V:J7"
+            },
+            {
+              "id": "J21",
+              "top": "V:J8",
+              "round": 2,
+              "bottom": "V:J9"
+            },
+            {
+              "id": "J22",
+              "top": "V:J10",
+              "round": 3,
+              "bottom": "V:J11"
+            },
+            {
+              "id": "J23",
+              "top": "V:J12",
+              "round": 2,
+              "bottom": "V:J13"
+            },
+            {
+              "id": "J24",
+              "top": "V:J14",
+              "round": 2,
+              "bottom": "V:J15"
+            },
+            {
+              "id": "J25",
+              "top": "V:J16",
+              "round": 2,
+              "bottom": "V:J17"
+            },
+            {
+              "id": "J26",
+              "top": "V:J18",
+              "round": 3,
+              "bottom": "V:J19"
+            },
+            {
+              "id": "J27",
+              "top": "V:J20",
+              "round": 3,
+              "bottom": "V:J21"
+            },
+            {
+              "id": "J28",
+              "top": "V:J22",
+              "round": 4,
+              "bottom": "V:J23"
+            },
+            {
+              "id": "J29",
+              "top": "V:J24",
+              "round": 3,
+              "bottom": "V:J25"
+            },
+            {
+              "id": "J30",
+              "top": "V:J26",
+              "round": 4,
+              "bottom": "V:J27"
+            },
+            {
+              "id": "J31",
+              "top": "V:J28",
+              "round": 5,
+              "bottom": "V:J29"
+            },
+            {
+              "id": "J33",
+              "top": "V:J30",
+              "round": 6,
+              "bottom": "V:J31"
+            },
+            {
+              "id": "J32",
+              "top": "L:J30",
+              "round": 6,
+              "bottom": "L:J31"
+            },
+            {
+              "id": "B1",
+              "top": "P17",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J32"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": []
     },
     {
