@@ -7,7 +7,7 @@
   "local": "A Definir",
   "data": "2026-06-30T01:14:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-09-01T18:38:29.485Z",
+  "publicadoEm": "2026-09-01T20:09:38.117Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -97,11 +97,6 @@
           "subtitulo": null
         },
         {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
@@ -137,6 +132,11 @@
       "anfitriaoId": 687,
       "participantes": [
         {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
           "id": 608,
           "nome": "Tatuí",
           "subtitulo": null
@@ -187,16 +187,6 @@
           "subtitulo": null
         },
         {
-          "id": 456,
-          "nome": "Porangaba",
-          "subtitulo": null
-        },
-        {
-          "id": 430,
-          "nome": "Pilar do Sul",
-          "subtitulo": null
-        },
-        {
           "id": 297,
           "nome": "Jundiaí",
           "subtitulo": null
@@ -207,23 +197,8 @@
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -232,8 +207,18 @@
           "subtitulo": null
         },
         {
-          "id": 97,
-          "nome": "Cabreúva",
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -242,13 +227,18 @@
           "subtitulo": null
         },
         {
-          "id": 276,
-          "nome": "Itu",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
-          "id": 269,
-          "nome": "Itararé",
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
           "subtitulo": null
         }
       ],
@@ -267,83 +257,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
           "id": 97,
           "nome": "Cabreúva",
           "subtitulo": null
         },
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
-          "subtitulo": null
-        },
-        {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
+          "id": 608,
+          "nome": "Tatuí",
           "subtitulo": null
         },
         {
@@ -352,8 +272,78 @@
           "subtitulo": null
         },
         {
-          "id": 608,
-          "nome": "Tatuí",
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         }
       ],
@@ -372,63 +362,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 613,
-          "nome": "Tietê",
-          "subtitulo": null
-        },
-        {
-          "id": 600,
-          "nome": "Tapiraí",
-          "subtitulo": null
-        },
-        {
           "id": 586,
           "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 512,
-          "nome": "Salto de Pirapora",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
           "id": 276,
           "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
           "subtitulo": null
         },
         {
@@ -444,6 +384,51 @@
         {
           "id": 132,
           "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
           "subtitulo": null
         }
       ],
@@ -467,21 +452,6 @@
           "subtitulo": null
         },
         {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 484,
-          "nome": "Ribeirão Bonito",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
@@ -494,6 +464,21 @@
         {
           "id": 111,
           "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 484,
+          "nome": "Ribeirão Bonito",
           "subtitulo": null
         },
         {
@@ -522,8 +507,8 @@
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -542,43 +527,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
           "id": 600,
           "nome": "Tapiraí",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -587,13 +537,38 @@
           "subtitulo": null
         },
         {
-          "id": 97,
-          "nome": "Cabreúva",
+          "id": 236,
+          "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
-          "id": 236,
-          "nome": "Ilha Comprida",
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         }
       ],
@@ -612,13 +587,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -627,13 +597,18 @@
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 485,
+          "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
@@ -642,8 +617,8 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -662,33 +637,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
           "id": 566,
           "nome": "São Miguel Arcanjo",
           "subtitulo": null
         },
         {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -697,8 +652,28 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -717,18 +692,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 119,
-          "nome": "Capão Bonito",
+          "id": 269,
+          "nome": "Itararé",
           "subtitulo": null
         },
         {
           "id": 26,
           "nome": "Angatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 32,
-          "nome": "Araçariguama",
           "subtitulo": null
         },
         {
@@ -747,6 +717,11 @@
           "subtitulo": null
         },
         {
+          "id": 119,
+          "nome": "Capão Bonito",
+          "subtitulo": null
+        },
+        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
@@ -757,18 +732,8 @@
           "subtitulo": null
         },
         {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
           "id": 259,
           "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
           "subtitulo": null
         },
         {
@@ -857,23 +822,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 302,
-          "nome": "Laranjal Paulista",
-          "subtitulo": null
-        },
-        {
           "id": 430,
           "nome": "Pilar do Sul",
-          "subtitulo": null
-        },
-        {
-          "id": 456,
-          "nome": "Porangaba",
           "subtitulo": null
         },
         {
@@ -942,11 +892,6 @@
           "subtitulo": null
         },
         {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
           "id": 259,
           "nome": "Itapetininga",
           "subtitulo": null
@@ -962,8 +907,23 @@
           "subtitulo": null
         },
         {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
           "id": 297,
           "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
           "subtitulo": null
         }
       ],
@@ -982,18 +942,63 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
           "id": 600,
           "nome": "Tapiraí",
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 119,
+          "nome": "Capão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -1007,6 +1012,11 @@
           "subtitulo": null
         },
         {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
           "id": 456,
           "nome": "Porangaba",
           "subtitulo": null
@@ -1017,56 +1027,6 @@
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 119,
-          "nome": "Capão Bonito",
-          "subtitulo": null
-        },
-        {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 26,
-          "nome": "Angatuba",
-          "subtitulo": null
-        },
-        {
           "id": 485,
           "nome": "Ribeirão Branco",
           "subtitulo": null
@@ -1074,11 +1034,6 @@
         {
           "id": 566,
           "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
           "subtitulo": null
         }
       ],
@@ -1096,6 +1051,21 @@
       "seed": null,
       "anfitriaoId": 687,
       "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
         {
           "id": 111,
           "nome": "Campo Limpo Paulista",
@@ -1157,18 +1127,8 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -1177,13 +1137,8 @@
           "subtitulo": null
         },
         {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
+          "id": 236,
+          "nome": "Ilha Comprida",
           "subtitulo": null
         }
       ],
@@ -1202,31 +1157,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 608,
-          "nome": "Tatuí",
-          "subtitulo": null
-        },
-        {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
@@ -1242,6 +1172,36 @@
           "subtitulo": null
         },
         {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 484,
+          "nome": "Ribeirão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
           "id": 276,
           "nome": "Itu",
           "subtitulo": null
@@ -1252,18 +1212,13 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         },
         {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 484,
-          "nome": "Ribeirão Bonito",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -1282,13 +1237,23 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 485,
-          "nome": "Ribeirão Branco",
+          "id": 236,
+          "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
           "id": 132,
           "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -1302,23 +1267,8 @@
           "subtitulo": null
         },
         {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
+          "id": 485,
+          "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
@@ -1347,23 +1297,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
           "subtitulo": null
         },
         {
@@ -1372,18 +1307,33 @@
           "subtitulo": null
         },
         {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
           "subtitulo": null
         },
         {
           "id": 485,
           "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -1402,18 +1352,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 481,
-          "nome": "Registro",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 566,
-          "nome": "São Miguel Arcanjo",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
+          "id": 236,
+          "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
@@ -1422,13 +1367,18 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 481,
+          "nome": "Registro",
           "subtitulo": null
         },
         {
-          "id": 236,
-          "nome": "Ilha Comprida",
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
           "subtitulo": null
         },
         {
@@ -1470,11 +1420,6 @@
           "id": 457,
           "nome": "Porto Feliz",
           "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
         }
       ],
       "campeoes": [],
@@ -1514,11 +1459,6 @@
           "id": 586,
           "nome": "Sorocaba",
           "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
         }
       ],
       "campeoes": [],
@@ -1555,28 +1495,23 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
           "id": 111,
           "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
           "id": 276,
           "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -1614,18 +1549,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
           "id": 276,
           "nome": "Itu",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -1658,13 +1588,58 @@
       "nome": "Bocha Rafa Masculino ou Misto",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "ace9f3bb36c37a0b",
       "anfitriaoId": 687,
       "participantes": [
         {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 15,
+          "nome": "Alumínio",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
           "id": 259,
           "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
@@ -1678,97 +1653,80 @@
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 15,
-          "nome": "Alumínio",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
           "id": 476,
           "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 511,
-          "nome": "Salto",
           "subtitulo": null
         },
         {
           "id": 537,
           "nome": "Santana de Parnaíba",
           "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 511,
+          "participanteId": 586,
           "posicao": 1
         },
         {
-          "participanteId": 276,
+          "participanteId": 53,
           "posicao": 2
         },
         {
-          "participanteId": 586,
+          "participanteId": 277,
           "posicao": 3
         },
         {
-          "participanteId": 608,
+          "participanteId": 537,
           "posicao": 4
-        },
-        {
-          "participanteId": 259,
-          "posicao": 5
-        },
-        {
-          "participanteId": 53,
-          "posicao": 6
-        },
-        {
-          "participanteId": 132,
-          "posicao": 7
-        },
-        {
-          "participanteId": 15,
-          "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        586,
+        53,
+        277,
+        537
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              586,
+              132,
+              276,
+              476
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              53,
+              259,
+              302
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              277,
+              297,
+              312
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              537,
+              511,
+              236,
+              15
+            ]
+          }
+        ],
+        "regra_id": 208,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1795,18 +1753,93 @@
       "nome": "Buraco Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "a86f07ba18d72d1c",
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 608,
-          "nome": "Tatuí",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
           "subtitulo": null
         },
         {
@@ -1815,13 +1848,8 @@
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 80,
-          "nome": "Boituva",
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         },
         {
@@ -1835,127 +1863,111 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
           "id": 613,
           "nome": "Tietê",
-          "subtitulo": null
-        },
-        {
-          "id": 430,
-          "nome": "Pilar do Sul",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 512,
-          "nome": "Salto de Pirapora",
-          "subtitulo": null
-        },
-        {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 600,
-          "nome": "Tapiraí",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 608,
+          "participanteId": 586,
           "posicao": 1
         },
         {
-          "participanteId": 638,
+          "participanteId": 297,
           "posicao": 2
         },
         {
-          "participanteId": 586,
+          "participanteId": 26,
           "posicao": 3
         },
         {
-          "participanteId": 613,
+          "participanteId": 132,
           "posicao": 4
         },
         {
-          "participanteId": 32,
+          "participanteId": 608,
           "posicao": 5
         },
         {
-          "participanteId": 276,
+          "participanteId": 511,
           "posicao": 6
         },
         {
-          "participanteId": 297,
+          "participanteId": 613,
           "posicao": 7
         },
         {
-          "participanteId": 512,
+          "participanteId": 120,
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        586,
+        297,
+        26,
+        132,
+        608,
+        613
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              586,
+              537,
+              430,
+              312
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              297,
+              53,
+              276,
+              600
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              26,
+              570,
+              80,
+              277
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              132,
+              7,
+              259,
+              111
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              608,
+              236,
+              97
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              613,
+              512,
+              476
+            ]
+          }
+        ],
+        "regra_id": 216,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1982,78 +1994,18 @@
       "nome": "Buraco Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "54f142cc3f542f75",
       "anfitriaoId": 687,
       "participantes": [
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 32,
-          "nome": "Araçariguama",
-          "subtitulo": null
-        },
-        {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
         {
           "id": 430,
           "nome": "Pilar do Sul",
           "subtitulo": null
         },
         {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 512,
-          "nome": "Salto de Pirapora",
+          "id": 600,
+          "nome": "Tapiraí",
           "subtitulo": null
         },
         {
@@ -2062,30 +2014,80 @@
           "subtitulo": null
         },
         {
-          "id": 600,
-          "nome": "Tapiraí",
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 512,
+          "participanteId": 132,
           "posicao": 1
         },
         {
-          "participanteId": 638,
+          "participanteId": 512,
           "posicao": 2
         },
         {
-          "participanteId": 277,
+          "participanteId": 586,
           "posicao": 3
         },
         {
-          "participanteId": 586,
+          "participanteId": 638,
           "posicao": 4
         },
         {
-          "participanteId": 297,
+          "participanteId": 430,
           "posicao": 5
         },
         {
@@ -2093,7 +2095,7 @@
           "posicao": 6
         },
         {
-          "participanteId": 132,
+          "participanteId": 276,
           "posicao": 7
         },
         {
@@ -2101,8 +2103,52 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        132,
+        512,
+        586,
+        430
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              132,
+              570,
+              111
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              512,
+              236,
+              312
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              586,
+              7,
+              297,
+              276
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              430,
+              259,
+              600,
+              277
+            ]
+          }
+        ],
+        "regra_id": 208,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -2129,18 +2175,18 @@
       "nome": "Coreografia Cat. A",
       "grupo": null,
       "tipo": "ordem_entrada",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "4490f4736cd8a3b8",
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 485,
+          "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
-          "id": 485,
-          "nome": "Ribeirão Branco",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -2149,14 +2195,21 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "ordem": [
+          586,
+          297,
+          132,
+          485
+        ]
+      },
       "mensagens_inscritos": []
     },
     {
@@ -2164,28 +2217,43 @@
       "nome": "Coreografia Cat. B",
       "grupo": null,
       "tipo": "ordem_entrada",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "eab5e2342b417085",
       "anfitriaoId": 687,
       "participantes": [
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
         {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
-          "id": 235,
-          "nome": "Iguape",
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
           "subtitulo": null
         },
         {
@@ -2204,39 +2272,34 @@
           "subtitulo": null
         },
         {
-          "id": 34,
-          "nome": "Araçoiaba da Serra",
+          "id": 476,
+          "nome": "Rafard",
           "subtitulo": null
         },
         {
-          "id": 80,
-          "nome": "Boituva",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 120,
-          "nome": "Capela do Alto",
-          "subtitulo": null
-        },
-        {
-          "id": 456,
-          "nome": "Porangaba",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "ordem": [
+          236,
+          276,
+          111,
+          97,
+          312,
+          456,
+          259,
+          80,
+          120,
+          476,
+          277,
+          34
+        ]
+      },
       "mensagens_inscritos": []
     },
     {
@@ -2249,33 +2312,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
@@ -2284,53 +2322,8 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 36,
-          "nome": "Arandu",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -2339,8 +2332,68 @@
           "subtitulo": null
         },
         {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
           "id": 259,
           "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
           "subtitulo": null
         }
       ],
@@ -2359,53 +2412,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 36,
-          "nome": "Arandu",
-          "subtitulo": null
-        },
-        {
           "id": 53,
           "nome": "Avaré",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 36,
+          "nome": "Arandu",
           "subtitulo": null
         },
         {
@@ -2424,18 +2437,18 @@
           "subtitulo": null
         },
         {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
           "id": 537,
           "nome": "Santana de Parnaíba",
           "subtitulo": null
         },
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
@@ -2446,6 +2459,36 @@
         {
           "id": 600,
           "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -2464,13 +2507,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 276,
-          "nome": "Itu",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -2479,18 +2522,18 @@
           "subtitulo": null
         },
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -2514,18 +2557,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
           "id": 586,
           "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -2552,6 +2590,11 @@
           "id": 297,
           "nome": "Jundiaí",
           "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
         }
       ],
       "campeoes": [],
@@ -2569,8 +2612,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -2589,18 +2637,13 @@
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -2614,13 +2657,13 @@
       "nome": "Dominó Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f938cfa29d0fd7d9",
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 600,
-          "nome": "Tapiraí",
+          "id": 613,
+          "nome": "Tietê",
           "subtitulo": null
         },
         {
@@ -2659,18 +2702,13 @@
           "subtitulo": null
         },
         {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
           "id": 236,
           "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
-          "id": 613,
-          "nome": "Tietê",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -2739,47 +2777,117 @@
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 600,
+          "nome": "Tapiraí",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 613,
+          "participanteId": 537,
           "posicao": 1
         },
         {
-          "participanteId": 111,
+          "participanteId": 277,
           "posicao": 2
         },
         {
-          "participanteId": 276,
+          "participanteId": 32,
           "posicao": 3
         },
         {
-          "participanteId": 297,
+          "participanteId": 613,
           "posicao": 4
         },
         {
-          "participanteId": 600,
-          "posicao": 5
-        },
-        {
-          "participanteId": 638,
+          "participanteId": 441,
           "posicao": 6
         },
         {
-          "participanteId": 32,
+          "participanteId": 456,
           "posicao": 7
         },
         {
-          "participanteId": 456,
+          "participanteId": 485,
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        537,
+        277,
+        613,
+        485
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              537,
+              512,
+              80
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              277,
+              269,
+              53
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              613,
+              276,
+              586
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              485,
+              120,
+              132
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              97,
+              600,
+              476
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              570,
+              312,
+              297
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              430,
+              259,
+              7
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              481,
+              111,
+              236
+            ]
+          }
+        ],
+        "regra_id": 218,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -2806,18 +2914,28 @@
       "nome": "Dominó Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "309b92edd9275264",
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 120,
-          "nome": "Capela do Alto",
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         },
         {
@@ -2831,28 +2949,28 @@
           "subtitulo": null
         },
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 481,
+          "nome": "Registro",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 456,
+          "nome": "Porangaba",
           "subtitulo": null
         },
         {
-          "id": 600,
-          "nome": "Tapiraí",
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
           "id": 277,
           "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -2871,43 +2989,18 @@
           "subtitulo": null
         },
         {
-          "id": 235,
-          "nome": "Iguape",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
+          "id": 120,
+          "nome": "Capela do Alto",
           "subtitulo": null
         },
         {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 456,
-          "nome": "Porangaba",
-          "subtitulo": null
-        },
-        {
-          "id": 36,
-          "nome": "Arandu",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
@@ -2916,47 +3009,120 @@
           "subtitulo": null
         },
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 276,
+          "participanteId": 111,
           "posicao": 1
         },
         {
-          "participanteId": 586,
+          "participanteId": 236,
           "posicao": 2
         },
         {
-          "participanteId": 111,
+          "participanteId": 476,
           "posicao": 3
         },
         {
-          "participanteId": 120,
+          "participanteId": 456,
           "posicao": 4
         },
         {
-          "participanteId": 32,
+          "participanteId": 586,
           "posicao": 5
         },
         {
-          "participanteId": 132,
+          "participanteId": 120,
           "posicao": 6
         },
         {
-          "participanteId": 277,
+          "participanteId": 312,
           "posicao": 7
         },
         {
-          "participanteId": 426,
+          "participanteId": 277,
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        111,
+        236,
+        456,
+        586,
+        120,
+        312
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              111,
+              600,
+              276,
+              259
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              236,
+              80,
+              269
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              456,
+              36,
+              570,
+              481
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              586,
+              277,
+              132
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              120,
+              7,
+              297,
+              485
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              312,
+              537,
+              53
+            ]
+          }
+        ],
+        "regra_id": 215,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -2983,10 +3149,45 @@
       "nome": "Malha Masculino ou Misto",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "a184a755581681cc",
       "anfitriaoId": 687,
       "participantes": [
+        {
+          "id": 109,
+          "nome": "Campina do Monte Alegre",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
         {
           "id": 277,
           "nome": "Itupeva",
@@ -3016,41 +3217,6 @@
           "id": 600,
           "nome": "Tapiraí",
           "subtitulo": null
-        },
-        {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 26,
-          "nome": "Angatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 109,
-          "nome": "Campina do Monte Alegre",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
         }
       ],
       "campeoes": [
@@ -3063,32 +3229,75 @@
           "posicao": 2
         },
         {
-          "participanteId": 276,
+          "participanteId": 53,
           "posicao": 3
         },
         {
-          "participanteId": 53,
+          "participanteId": 26,
           "posicao": 4
         },
         {
-          "participanteId": 511,
+          "participanteId": 276,
           "posicao": 5
         },
         {
-          "participanteId": 512,
+          "participanteId": 259,
           "posicao": 6
         },
         {
-          "participanteId": 26,
+          "participanteId": 570,
           "posicao": 7
         },
         {
-          "participanteId": 312,
+          "participanteId": 512,
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        132,
+        586,
+        53,
+        26
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              132,
+              600,
+              109,
+              7
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              586,
+              430,
+              297
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              53,
+              276,
+              259
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              26,
+              570,
+              277
+            ]
+          }
+        ],
+        "regra_id": 207,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -3120,31 +3329,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
@@ -3155,13 +3339,13 @@
           "subtitulo": null
         },
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 537,
+          "nome": "Santana de Parnaíba",
           "subtitulo": null
         },
         {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         },
         {
@@ -3170,8 +3354,33 @@
           "subtitulo": null
         },
         {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
           "id": 476,
           "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         }
       ],
@@ -3190,38 +3399,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 34,
-          "nome": "Araçoiaba da Serra",
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         },
         {
@@ -3230,18 +3409,43 @@
           "subtitulo": null
         },
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
           "subtitulo": null
         },
         {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
           "id": 481,
           "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
           "subtitulo": null
         }
       ],
@@ -3260,33 +3464,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
-          "subtitulo": null
-        },
-        {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
           "id": 297,
           "nome": "Jundiaí",
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
@@ -3295,13 +3479,28 @@
           "subtitulo": null
         },
         {
-          "id": 97,
-          "nome": "Cabreúva",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -3325,8 +3524,8 @@
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
@@ -3335,13 +3534,13 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
@@ -3350,13 +3549,8 @@
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         }
       ],
@@ -3375,18 +3569,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
           "id": 97,
           "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -3397,6 +3581,16 @@
         {
           "id": 586,
           "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -3415,18 +3609,18 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
           "id": 586,
           "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -3435,8 +3629,8 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         }
       ],
@@ -3455,11 +3649,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
@@ -3467,6 +3656,11 @@
         {
           "id": 586,
           "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -3485,13 +3679,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -3510,13 +3704,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 97,
+          "nome": "Cabreúva",
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
@@ -3535,18 +3729,18 @@
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
+          "id": 277,
+          "nome": "Itupeva",
           "subtitulo": null
         },
         {
           "id": 259,
           "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -3565,8 +3759,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 276,
-          "nome": "Itu",
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
           "subtitulo": null
         },
         {
@@ -3590,11 +3789,6 @@
           "subtitulo": null
         },
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
@@ -3610,8 +3804,8 @@
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 276,
+          "nome": "Itu",
           "subtitulo": null
         }
       ],
@@ -3630,23 +3824,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
           "id": 235,
           "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -3655,13 +3834,28 @@
           "subtitulo": null
         },
         {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
           "id": 570,
           "nome": "São Roque",
           "subtitulo": null
         },
         {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
           "id": 277,
           "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         }
       ],
@@ -3680,13 +3874,23 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -3700,13 +3904,8 @@
           "subtitulo": null
         },
         {
-          "id": 97,
-          "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
@@ -3715,13 +3914,8 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 34,
-          "nome": "Araçoiaba da Serra",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -3740,18 +3934,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 426,
-          "nome": "Pereiras",
-          "subtitulo": null
-        },
-        {
           "id": 132,
           "nome": "Cerquilho",
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 426,
+          "nome": "Pereiras",
           "subtitulo": null
         },
         {
@@ -3762,6 +3951,11 @@
         {
           "id": 297,
           "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -3780,18 +3974,18 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
           "id": 277,
           "nome": "Itupeva",
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -3800,8 +3994,8 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         }
       ],
@@ -3820,8 +4014,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -3830,8 +4024,8 @@
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -3850,8 +4044,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 608,
+          "nome": "Tatuí",
           "subtitulo": null
         },
         {
@@ -3860,8 +4054,8 @@
           "subtitulo": null
         },
         {
-          "id": 608,
-          "nome": "Tatuí",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -3875,23 +4069,23 @@
       "nome": "Tênis de Mesa Feminino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "b8cbdd32ae46424d",
       "anfitriaoId": 687,
       "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
         {
           "id": 586,
           "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 644,
+          "nome": "Votorantim",
           "subtitulo": null
         },
         {
@@ -3905,45 +4099,75 @@
           "subtitulo": null
         },
         {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
           "id": 97,
           "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 644,
-          "nome": "Votorantim",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
           "subtitulo": null
         }
       ],
       "campeoes": [
         {
-          "participanteId": 586,
+          "participanteId": 608,
           "posicao": 1
         },
         {
-          "participanteId": 644,
+          "participanteId": 276,
           "posicao": 2
         },
         {
-          "participanteId": 132,
+          "participanteId": 297,
           "posicao": 3
         },
         {
-          "participanteId": 456,
+          "participanteId": 277,
           "posicao": 4
         },
         {
-          "participanteId": 111,
+          "participanteId": 34,
           "posicao": 5
+        },
+        {
+          "participanteId": 97,
+          "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        297,
+        277
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              297,
+              586,
+              132,
+              97
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              277,
+              111,
+              259,
+              644
+            ]
+          }
+        ],
+        "regra_id": 202,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -3975,18 +4199,18 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 644,
+          "nome": "Votorantim",
           "subtitulo": null
         },
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 456,
+          "nome": "Porangaba",
           "subtitulo": null
         },
         {
@@ -4005,18 +4229,18 @@
           "subtitulo": null
         },
         {
-          "id": 456,
-          "nome": "Porangaba",
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
-          "id": 644,
-          "nome": "Votorantim",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -4083,23 +4307,23 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
           "id": 111,
           "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
           "id": 430,
           "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         }
       ],
@@ -4146,21 +4370,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 511,
-          "nome": "Salto",
-          "subtitulo": null
-        },
-        {
-          "id": 269,
-          "nome": "Itararé",
-          "subtitulo": null
-        },
-        {
           "id": 259,
           "nome": "Itapetininga",
           "subtitulo": null
@@ -4191,8 +4400,13 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -4201,8 +4415,18 @@
           "subtitulo": null
         },
         {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
           "id": 277,
           "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
           "subtitulo": null
         }
       ],
@@ -4273,8 +4497,23 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -4303,33 +4542,18 @@
           "subtitulo": null
         },
         {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
           "id": 297,
           "nome": "Jundiaí",
           "subtitulo": null
         },
         {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
           "id": 511,
           "nome": "Salto",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 600,
-          "nome": "Tapiraí",
-          "subtitulo": null
-        },
-        {
-          "id": 644,
-          "nome": "Votorantim",
           "subtitulo": null
         }
       ],
@@ -4400,13 +4624,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 259,
+          "nome": "Itapetininga",
           "subtitulo": null
         },
         {
@@ -4415,18 +4634,23 @@
           "subtitulo": null
         },
         {
-          "id": 269,
-          "nome": "Itararé",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
-          "id": 259,
-          "nome": "Itapetininga",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
           "id": 132,
           "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
           "subtitulo": null
         }
       ],
@@ -4489,28 +4713,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
           "id": 97,
           "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
           "subtitulo": null
         },
         {
@@ -4521,6 +4725,26 @@
         {
           "id": 253,
           "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -4618,28 +4842,18 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
           "id": 269,
           "nome": "Itararé",
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 511,
+          "nome": "Salto",
           "subtitulo": null
         },
         {
           "id": 485,
           "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 511,
-          "nome": "Salto",
           "subtitulo": null
         },
         {
@@ -4653,8 +4867,18 @@
           "subtitulo": null
         },
         {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
           "id": 34,
           "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         }
       ],
@@ -4697,13 +4921,18 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
+          "id": 485,
+          "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
           "id": 586,
           "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
@@ -4714,11 +4943,6 @@
         {
           "id": 132,
           "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
           "subtitulo": null
         }
       ],
@@ -4758,8 +4982,8 @@
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -4768,8 +4992,8 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -4800,26 +5024,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 302,
-          "nome": "Laranjal Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 277,
-          "nome": "Itupeva",
-          "subtitulo": null
-        },
-        {
           "id": 259,
           "nome": "Itapetininga",
           "subtitulo": null
@@ -4832,6 +5036,26 @@
         {
           "id": 111,
           "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
           "subtitulo": null
         }
       ],
@@ -4939,6 +5163,11 @@
       "anfitriaoId": 687,
       "participantes": [
         {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
           "id": 485,
           "nome": "Ribeirão Branco",
           "subtitulo": null
@@ -4954,18 +5183,13 @@
           "subtitulo": null
         },
         {
-          "id": 276,
-          "nome": "Itu",
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         },
         {
           "id": 7,
           "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
           "subtitulo": null
         }
       ],
@@ -5012,8 +5236,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 570,
-          "nome": "São Roque",
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
           "subtitulo": null
         },
         {
@@ -5022,8 +5251,8 @@
           "subtitulo": null
         },
         {
-          "id": 456,
-          "nome": "Porangaba",
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         },
         {
@@ -5049,11 +5278,6 @@
         {
           "id": 7,
           "nome": "Águas de Santa Bárbara",
-          "subtitulo": null
-        },
-        {
-          "id": 608,
-          "nome": "Tatuí",
           "subtitulo": null
         }
       ],
@@ -5100,6 +5324,11 @@
       "anfitriaoId": 687,
       "participantes": [
         {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
           "id": 570,
           "nome": "São Roque",
           "subtitulo": null
@@ -5117,11 +5346,6 @@
         {
           "id": 132,
           "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
           "subtitulo": null
         }
       ],
@@ -5197,8 +5421,8 @@
           "subtitulo": null
         },
         {
-          "id": 120,
-          "nome": "Capela do Alto",
+          "id": 236,
+          "nome": "Ilha Comprida",
           "subtitulo": null
         },
         {
@@ -5207,8 +5431,8 @@
           "subtitulo": null
         },
         {
-          "id": 236,
-          "nome": "Ilha Comprida",
+          "id": 120,
+          "nome": "Capela do Alto",
           "subtitulo": null
         }
       ],
@@ -5246,23 +5470,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 26,
-          "nome": "Angatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 36,
-          "nome": "Arandu",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 80,
-          "nome": "Boituva",
+          "id": 120,
+          "nome": "Capela do Alto",
           "subtitulo": null
         },
         {
@@ -5271,18 +5480,73 @@
           "subtitulo": null
         },
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
+          "id": 80,
+          "nome": "Boituva",
           "subtitulo": null
         },
         {
-          "id": 120,
-          "nome": "Capela do Alto",
+          "id": 53,
+          "nome": "Avaré",
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 32,
+          "nome": "Araçariguama",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 15,
+          "nome": "Alumínio",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
           "subtitulo": null
         },
         {
@@ -5306,53 +5570,8 @@
           "subtitulo": null
         },
         {
-          "id": 613,
-          "nome": "Tietê",
-          "subtitulo": null
-        },
-        {
-          "id": 608,
-          "nome": "Tatuí",
-          "subtitulo": null
-        },
-        {
-          "id": 600,
-          "nome": "Tapiraí",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 485,
-          "nome": "Ribeirão Branco",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 457,
-          "nome": "Porto Feliz",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 302,
-          "nome": "Laranjal Paulista",
+          "id": 277,
+          "nome": "Itupeva",
           "subtitulo": null
         },
         {
@@ -5361,23 +5580,28 @@
           "subtitulo": null
         },
         {
-          "id": 277,
-          "nome": "Itupeva",
+          "id": 302,
+          "nome": "Laranjal Paulista",
           "subtitulo": null
         },
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
+          "id": 312,
+          "nome": "Louveira",
           "subtitulo": null
         },
         {
-          "id": 15,
-          "nome": "Alumínio",
+          "id": 457,
+          "nome": "Porto Feliz",
           "subtitulo": null
         },
         {
-          "id": 32,
-          "nome": "Araçariguama",
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         }
       ],
@@ -5448,76 +5672,6 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 323,
-          "nome": "Mairinque",
-          "subtitulo": null
-        },
-        {
-          "id": 456,
-          "nome": "Porangaba",
-          "subtitulo": null
-        },
-        {
-          "id": 476,
-          "nome": "Rafard",
-          "subtitulo": null
-        },
-        {
-          "id": 481,
-          "nome": "Registro",
-          "subtitulo": null
-        },
-        {
-          "id": 511,
-          "nome": "Salto",
-          "subtitulo": null
-        },
-        {
-          "id": 512,
-          "nome": "Salto de Pirapora",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 608,
-          "nome": "Tatuí",
-          "subtitulo": null
-        },
-        {
-          "id": 26,
-          "nome": "Angatuba",
-          "subtitulo": null
-        },
-        {
-          "id": 53,
-          "nome": "Avaré",
-          "subtitulo": null
-        },
-        {
-          "id": 80,
-          "nome": "Boituva",
-          "subtitulo": null
-        },
-        {
           "id": 97,
           "nome": "Cabreúva",
           "subtitulo": null
@@ -5533,23 +5687,18 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
+          "id": 608,
+          "nome": "Tatuí",
           "subtitulo": null
         },
         {
           "id": 259,
           "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -5563,8 +5712,8 @@
           "subtitulo": null
         },
         {
-          "id": 276,
-          "nome": "Itu",
+          "id": 297,
+          "nome": "Jundiaí",
           "subtitulo": null
         },
         {
@@ -5573,8 +5722,83 @@
           "subtitulo": null
         },
         {
-          "id": 297,
-          "nome": "Jundiaí",
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 323,
+          "nome": "Mairinque",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
           "subtitulo": null
         }
       ],
@@ -5645,13 +5869,8 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 80,
-          "nome": "Boituva",
+          "id": 253,
+          "nome": "Itaí",
           "subtitulo": null
         },
         {
@@ -5665,48 +5884,18 @@
           "subtitulo": null
         },
         {
-          "id": 613,
-          "nome": "Tietê",
+          "id": 80,
+          "nome": "Boituva",
           "subtitulo": null
         },
         {
-          "id": 608,
-          "nome": "Tatuí",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 260,
-          "nome": "Itapeva",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 253,
-          "nome": "Itaí",
+          "id": 132,
+          "nome": "Cerquilho",
           "subtitulo": null
         },
         {
@@ -5715,8 +5904,43 @@
           "subtitulo": null
         },
         {
-          "id": 132,
-          "nome": "Cerquilho",
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
           "subtitulo": null
         }
       ],
@@ -5787,68 +6011,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 586,
-          "nome": "Sorocaba",
-          "subtitulo": null
-        },
-        {
-          "id": 570,
-          "nome": "São Roque",
-          "subtitulo": null
-        },
-        {
           "id": 456,
           "nome": "Porangaba",
           "subtitulo": null
         },
         {
-          "id": 511,
-          "nome": "Salto",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 260,
-          "nome": "Itapeva",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 244,
-          "nome": "Iperó",
-          "subtitulo": null
-        },
-        {
-          "id": 236,
-          "nome": "Ilha Comprida",
-          "subtitulo": null
-        },
-        {
-          "id": 235,
-          "nome": "Iguape",
-          "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 111,
-          "nome": "Campo Limpo Paulista",
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         },
         {
@@ -5857,8 +6026,63 @@
           "subtitulo": null
         },
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 244,
+          "nome": "Iperó",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -5929,38 +6153,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
           "id": 111,
           "nome": "Campo Limpo Paulista",
-          "subtitulo": null
-        },
-        {
-          "id": 312,
-          "nome": "Louveira",
-          "subtitulo": null
-        },
-        {
-          "id": 297,
-          "nome": "Jundiaí",
-          "subtitulo": null
-        },
-        {
-          "id": 276,
-          "nome": "Itu",
-          "subtitulo": null
-        },
-        {
-          "id": 260,
-          "nome": "Itapeva",
-          "subtitulo": null
-        },
-        {
-          "id": 259,
-          "nome": "Itapetininga",
-          "subtitulo": null
-        },
-        {
-          "id": 244,
-          "nome": "Iperó",
           "subtitulo": null
         },
         {
@@ -5974,8 +6173,33 @@
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 244,
+          "nome": "Iperó",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
           "subtitulo": null
         },
         {
@@ -5984,8 +6208,8 @@
           "subtitulo": null
         },
         {
-          "id": 511,
-          "nome": "Salto",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         }
       ],
@@ -6056,13 +6280,33 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 7,
-          "nome": "Águas de Santa Bárbara",
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
           "subtitulo": null
         },
         {
           "id": 586,
           "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
           "subtitulo": null
         },
         {
@@ -6094,26 +6338,6 @@
           "id": 253,
           "nome": "Itaí",
           "subtitulo": null
-        },
-        {
-          "id": 132,
-          "nome": "Cerquilho",
-          "subtitulo": null
-        },
-        {
-          "id": 120,
-          "nome": "Capela do Alto",
-          "subtitulo": null
-        },
-        {
-          "id": 97,
-          "nome": "Cabreúva",
-          "subtitulo": null
-        },
-        {
-          "id": 26,
-          "nome": "Angatuba",
-          "subtitulo": null
         }
       ],
       "campeoes": [],
@@ -6131,18 +6355,13 @@
       "anfitriaoId": 687,
       "participantes": [
         {
-          "id": 430,
-          "nome": "Pilar do Sul",
-          "subtitulo": null
-        },
-        {
           "id": 570,
           "nome": "São Roque",
           "subtitulo": null
         },
         {
-          "id": 537,
-          "nome": "Santana de Parnaíba",
+          "id": 586,
+          "nome": "Sorocaba",
           "subtitulo": null
         },
         {
@@ -6196,13 +6415,18 @@
           "subtitulo": null
         },
         {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
           "id": 485,
           "nome": "Ribeirão Branco",
           "subtitulo": null
         },
         {
-          "id": 586,
-          "nome": "Sorocaba",
+          "id": 537,
+          "nome": "Santana de Parnaíba",
           "subtitulo": null
         }
       ],
