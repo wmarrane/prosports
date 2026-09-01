@@ -1,0 +1,6215 @@
+{
+  "id": 3,
+  "nome": "28º Jogos da Melhor Idade de SREL Sorocaba",
+  "status": "pronto",
+  "competicao": "Jogos da Melhor Idade",
+  "cidade": "Sorocaba",
+  "local": "A Definir",
+  "data": "2026-06-30T01:14:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-09-01T18:38:29.485Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 168,
+      "nome": "Atletismo Feminino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 166,
+      "nome": "Atletismo Feminino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 167,
+      "nome": "Atletismo Feminino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 154,
+      "nome": "Atletismo Feminino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 162,
+      "nome": "Atletismo Feminino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 484,
+          "nome": "Ribeirão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 161,
+      "nome": "Atletismo Feminino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 158,
+      "nome": "Atletismo Feminino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 157,
+      "nome": "Atletismo Feminino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 179,
+      "nome": "Atletismo Masculino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 119,
+          "nome": "Capão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 32,
+          "nome": "Araçariguama",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 457,
+          "nome": "Porto Feliz",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 176,
+      "nome": "Atletismo Masculino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 159,
+      "nome": "Atletismo Masculino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 119,
+          "nome": "Capão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 160,
+      "nome": "Atletismo Masculino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 174,
+      "nome": "Atletismo Masculino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 484,
+          "nome": "Ribeirão Bonito",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 171,
+      "nome": "Atletismo Masculino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 164,
+      "nome": "Atletismo Masculino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 165,
+      "nome": "Atletismo Masculino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 566,
+          "nome": "São Miguel Arcanjo",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 107,
+      "nome": "Basquete 3x3 Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 457,
+          "nome": "Porto Feliz",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 134,
+      "nome": "Basquete 3x3 Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "nome": "Basquete 3x3 Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 135,
+      "nome": "Basquete 3x3 Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 143,
+      "nome": "Bocha Rafa Masculino ou Misto",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 15,
+          "nome": "Alumínio",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 511,
+          "posicao": 1
+        },
+        {
+          "participanteId": 276,
+          "posicao": 2
+        },
+        {
+          "participanteId": 586,
+          "posicao": 3
+        },
+        {
+          "participanteId": 608,
+          "posicao": 4
+        },
+        {
+          "participanteId": 259,
+          "posicao": 5
+        },
+        {
+          "participanteId": 53,
+          "posicao": 6
+        },
+        {
+          "participanteId": 132,
+          "posicao": 7
+        },
+        {
+          "participanteId": 15,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 144,
+      "nome": "Buraco Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 608,
+          "posicao": 1
+        },
+        {
+          "participanteId": 638,
+          "posicao": 2
+        },
+        {
+          "participanteId": 586,
+          "posicao": 3
+        },
+        {
+          "participanteId": 613,
+          "posicao": 4
+        },
+        {
+          "participanteId": 32,
+          "posicao": 5
+        },
+        {
+          "participanteId": 276,
+          "posicao": 6
+        },
+        {
+          "participanteId": 297,
+          "posicao": 7
+        },
+        {
+          "participanteId": 512,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 117,
+      "nome": "Buraco Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 32,
+          "nome": "Araçariguama",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 512,
+          "posicao": 1
+        },
+        {
+          "participanteId": 638,
+          "posicao": 2
+        },
+        {
+          "participanteId": 277,
+          "posicao": 3
+        },
+        {
+          "participanteId": 586,
+          "posicao": 4
+        },
+        {
+          "participanteId": 297,
+          "posicao": 5
+        },
+        {
+          "participanteId": 600,
+          "posicao": 6
+        },
+        {
+          "participanteId": 132,
+          "posicao": 7
+        },
+        {
+          "participanteId": 111,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 116,
+      "nome": "Coreografia Cat. A",
+      "grupo": null,
+      "tipo": "ordem_entrada",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 142,
+      "nome": "Coreografia Cat. B",
+      "grupo": null,
+      "tipo": "ordem_entrada",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 145,
+      "nome": "Damas Feminino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 118,
+      "nome": "Damas Masculino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 457,
+          "nome": "Porto Feliz",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 111,
+      "nome": "Dança de Salão Misto Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 138,
+      "nome": "Dança de Salão Misto Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 112,
+      "nome": "Dança de Salão Misto Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 146,
+      "nome": "Dominó Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 613,
+          "posicao": 1
+        },
+        {
+          "participanteId": 111,
+          "posicao": 2
+        },
+        {
+          "participanteId": 276,
+          "posicao": 3
+        },
+        {
+          "participanteId": 297,
+          "posicao": 4
+        },
+        {
+          "participanteId": 600,
+          "posicao": 5
+        },
+        {
+          "participanteId": 638,
+          "posicao": 6
+        },
+        {
+          "participanteId": 32,
+          "posicao": 7
+        },
+        {
+          "participanteId": 456,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 119,
+      "nome": "Dominó Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 276,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 111,
+          "posicao": 3
+        },
+        {
+          "participanteId": 120,
+          "posicao": 4
+        },
+        {
+          "participanteId": 32,
+          "posicao": 5
+        },
+        {
+          "participanteId": 132,
+          "posicao": 6
+        },
+        {
+          "participanteId": 277,
+          "posicao": 7
+        },
+        {
+          "participanteId": 426,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 120,
+      "nome": "Malha Masculino ou Misto",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 109,
+          "nome": "Campina do Monte Alegre",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 132,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 276,
+          "posicao": 3
+        },
+        {
+          "participanteId": 53,
+          "posicao": 4
+        },
+        {
+          "participanteId": 511,
+          "posicao": 5
+        },
+        {
+          "participanteId": 512,
+          "posicao": 6
+        },
+        {
+          "participanteId": 26,
+          "posicao": 7
+        },
+        {
+          "participanteId": 312,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 172,
+      "nome": "Natação Feminino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 173,
+      "nome": "Natação Feminino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 177,
+      "nome": "Natação Feminino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 155,
+      "nome": "Natação Feminino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 175,
+      "nome": "Natação Feminino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 169,
+      "nome": "Natação Feminino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 178,
+      "nome": "Natação Feminino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 156,
+      "nome": "Natação Feminino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 131,
+      "nome": "Natação Masculino Cat. A",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 170,
+      "nome": "Natação Masculino Cat. B",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 130,
+      "nome": "Natação Masculino Cat. C",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 163,
+      "nome": "Natação Masculino Cat. D",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 105,
+      "nome": "Natação Masculino Cat. E",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 426,
+          "nome": "Pereiras",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 132,
+      "nome": "Natação Masculino Cat. F",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 106,
+      "nome": "Natação Masculino Cat. G",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 133,
+      "nome": "Natação Masculino Cat. H",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 114,
+      "nome": "Tênis de Mesa Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        },
+        {
+          "participanteId": 644,
+          "posicao": 2
+        },
+        {
+          "participanteId": 132,
+          "posicao": 3
+        },
+        {
+          "participanteId": 456,
+          "posicao": 4
+        },
+        {
+          "participanteId": 111,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 141,
+      "nome": "Tênis de Mesa Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 644,
+          "posicao": 1
+        },
+        {
+          "participanteId": 297,
+          "posicao": 2
+        },
+        {
+          "participanteId": 481,
+          "posicao": 3
+        },
+        {
+          "participanteId": 235,
+          "posicao": 4
+        },
+        {
+          "participanteId": 277,
+          "posicao": 5
+        },
+        {
+          "participanteId": 111,
+          "posicao": 6
+        },
+        {
+          "participanteId": 586,
+          "posicao": 7
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 115,
+      "nome": "Tênis de Mesa Feminino Cat. C",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        },
+        {
+          "participanteId": 132,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 139,
+      "nome": "Tênis de Mesa Masculino Cat.A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 511,
+          "posicao": 1
+        },
+        {
+          "participanteId": 26,
+          "posicao": 2
+        },
+        {
+          "participanteId": 586,
+          "posicao": 3
+        },
+        {
+          "participanteId": 111,
+          "posicao": 4
+        },
+        {
+          "participanteId": 261,
+          "posicao": 5
+        },
+        {
+          "participanteId": 259,
+          "posicao": 6
+        },
+        {
+          "participanteId": 297,
+          "posicao": 7
+        },
+        {
+          "participanteId": 132,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "nome": "Tênis de Mesa Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 644,
+          "nome": "Votorantim",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 276,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 644,
+          "posicao": 3
+        },
+        {
+          "participanteId": 511,
+          "posicao": 4
+        },
+        {
+          "participanteId": 277,
+          "posicao": 5
+        },
+        {
+          "participanteId": 111,
+          "posicao": 6
+        },
+        {
+          "participanteId": 26,
+          "posicao": 7
+        },
+        {
+          "participanteId": 456,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 140,
+      "nome": "Tênis de Mesa Masculino Cat. C",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 277,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 276,
+          "posicao": 3
+        },
+        {
+          "participanteId": 613,
+          "posicao": 4
+        },
+        {
+          "participanteId": 269,
+          "posicao": 5
+        },
+        {
+          "participanteId": 429,
+          "posicao": 6
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 152,
+      "nome": "Tênis Feminino Duplas Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 129,
+      "nome": "Tênis Feminino Duplas Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        },
+        {
+          "participanteId": 608,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 153,
+      "nome": "Tênis Feminino Duplas Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 124,
+      "nome": "Tênis Feminino Individual Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 34,
+          "nome": "Araçoiaba da Serra",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 608,
+          "posicao": 1
+        },
+        {
+          "participanteId": 297,
+          "posicao": 2
+        },
+        {
+          "participanteId": 276,
+          "posicao": 3
+        },
+        {
+          "participanteId": 511,
+          "posicao": 4
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 148,
+      "nome": "Tênis Feminino Individual Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 297,
+          "posicao": 1
+        },
+        {
+          "participanteId": 111,
+          "posicao": 2
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 125,
+      "nome": "Tênis Feminino Individual Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 127,
+      "nome": "Tênis Masculino Duplas Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 608,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 276,
+          "posicao": 3
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 151,
+      "nome": "Tênis Masculino Duplas Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 128,
+      "nome": "Tênis Masculino Duplas Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 149,
+      "nome": "Tênis Masculino Individual Cat. A",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 111,
+          "posicao": 1
+        },
+        {
+          "participanteId": 312,
+          "posicao": 2
+        },
+        {
+          "participanteId": 297,
+          "posicao": 3
+        },
+        {
+          "participanteId": 638,
+          "posicao": 4
+        },
+        {
+          "participanteId": 426,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 126,
+      "nome": "Tênis Masculino Individual Cat. B",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 297,
+          "posicao": 1
+        },
+        {
+          "participanteId": 481,
+          "posicao": 2
+        },
+        {
+          "participanteId": 644,
+          "posicao": 3
+        },
+        {
+          "participanteId": 312,
+          "posicao": 4
+        },
+        {
+          "participanteId": 97,
+          "posicao": 5
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 150,
+      "nome": "Tênis Masculino Individual Cat. C",
+      "grupo": null,
+      "tipo": "chaves",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 297,
+          "posicao": 1
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "nome": "Truco Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 121,
+      "nome": "Truco Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 36,
+          "nome": "Arandu",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 600,
+          "nome": "Tapiraí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 457,
+          "nome": "Porto Feliz",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 302,
+          "nome": "Laranjal Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 15,
+          "nome": "Alumínio",
+          "subtitulo": null
+        },
+        {
+          "id": 32,
+          "nome": "Araçariguama",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        },
+        {
+          "participanteId": 613,
+          "posicao": 2
+        },
+        {
+          "participanteId": 26,
+          "posicao": 3
+        },
+        {
+          "participanteId": 512,
+          "posicao": 4
+        },
+        {
+          "participanteId": 53,
+          "posicao": 5
+        },
+        {
+          "participanteId": 638,
+          "posicao": 6
+        },
+        {
+          "participanteId": 97,
+          "posicao": 7
+        },
+        {
+          "participanteId": 269,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "nome": "Voleibol Feminino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 323,
+          "nome": "Mairinque",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 476,
+          "nome": "Rafard",
+          "subtitulo": null
+        },
+        {
+          "id": 481,
+          "nome": "Registro",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 512,
+          "nome": "Salto de Pirapora",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 119,
+          "nome": "Capão Bonito",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 511,
+          "posicao": 1
+        },
+        {
+          "participanteId": 297,
+          "posicao": 2
+        },
+        {
+          "participanteId": 586,
+          "posicao": 3
+        },
+        {
+          "participanteId": 260,
+          "posicao": 4
+        },
+        {
+          "participanteId": 80,
+          "posicao": 5
+        },
+        {
+          "participanteId": 53,
+          "posicao": 6
+        },
+        {
+          "participanteId": 259,
+          "posicao": 7
+        },
+        {
+          "participanteId": 277,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 137,
+      "nome": "Voleibol Feminino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 613,
+          "nome": "Tietê",
+          "subtitulo": null
+        },
+        {
+          "id": 608,
+          "nome": "Tatuí",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 586,
+          "posicao": 1
+        },
+        {
+          "participanteId": 297,
+          "posicao": 2
+        },
+        {
+          "participanteId": 608,
+          "posicao": 3
+        },
+        {
+          "participanteId": 111,
+          "posicao": 4
+        },
+        {
+          "participanteId": 312,
+          "posicao": 5
+        },
+        {
+          "participanteId": 26,
+          "posicao": 6
+        },
+        {
+          "participanteId": 276,
+          "posicao": 7
+        },
+        {
+          "participanteId": 132,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "nome": "Voleibol Masculino Cat. A",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 456,
+          "nome": "Porangaba",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 244,
+          "nome": "Iperó",
+          "subtitulo": null
+        },
+        {
+          "id": 236,
+          "nome": "Ilha Comprida",
+          "subtitulo": null
+        },
+        {
+          "id": 235,
+          "nome": "Iguape",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 80,
+          "nome": "Boituva",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 511,
+          "posicao": 1
+        },
+        {
+          "participanteId": 259,
+          "posicao": 2
+        },
+        {
+          "participanteId": 297,
+          "posicao": 3
+        },
+        {
+          "participanteId": 586,
+          "posicao": 4
+        },
+        {
+          "participanteId": 97,
+          "posicao": 5
+        },
+        {
+          "participanteId": 132,
+          "posicao": 6
+        },
+        {
+          "participanteId": 312,
+          "posicao": 7
+        },
+        {
+          "participanteId": 80,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 136,
+      "nome": "Voleibol Masculino Cat. B",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 111,
+          "nome": "Campo Limpo Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 276,
+          "nome": "Itu",
+          "subtitulo": null
+        },
+        {
+          "id": 260,
+          "nome": "Itapeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 244,
+          "nome": "Iperó",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 237,
+          "nome": "Ilha Solteira",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 511,
+          "nome": "Salto",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [
+        {
+          "participanteId": 297,
+          "posicao": 1
+        },
+        {
+          "participanteId": 586,
+          "posicao": 2
+        },
+        {
+          "participanteId": 312,
+          "posicao": 3
+        },
+        {
+          "participanteId": 511,
+          "posicao": 4
+        },
+        {
+          "participanteId": 80,
+          "posicao": 5
+        },
+        {
+          "participanteId": 276,
+          "posicao": 6
+        },
+        {
+          "participanteId": 111,
+          "posicao": 7
+        },
+        {
+          "participanteId": 456,
+          "posicao": 8
+        }
+      ],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": [
+        {
+          "max": 5,
+          "min": 3,
+          "mensagem": "Turno único",
+          "pular_sorteio": true
+        },
+        {
+          "max": 2,
+          "min": 2,
+          "mensagem": "Melhor de 3 partidas",
+          "pular_sorteio": true
+        },
+        {
+          "max": 1,
+          "min": 1,
+          "mensagem": "Classificado",
+          "pular_sorteio": true
+        }
+      ]
+    },
+    {
+      "id": 123,
+      "nome": "Xadrez Feminino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 132,
+          "nome": "Cerquilho",
+          "subtitulo": null
+        },
+        {
+          "id": 120,
+          "nome": "Capela do Alto",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 147,
+      "nome": "Xadrez Masculino",
+      "grupo": null,
+      "tipo": "especifico",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 687,
+      "participantes": [
+        {
+          "id": 430,
+          "nome": "Pilar do Sul",
+          "subtitulo": null
+        },
+        {
+          "id": 570,
+          "nome": "São Roque",
+          "subtitulo": null
+        },
+        {
+          "id": 537,
+          "nome": "Santana de Parnaíba",
+          "subtitulo": null
+        },
+        {
+          "id": 7,
+          "nome": "Águas de Santa Bárbara",
+          "subtitulo": null
+        },
+        {
+          "id": 26,
+          "nome": "Angatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 53,
+          "nome": "Avaré",
+          "subtitulo": null
+        },
+        {
+          "id": 97,
+          "nome": "Cabreúva",
+          "subtitulo": null
+        },
+        {
+          "id": 253,
+          "nome": "Itaí",
+          "subtitulo": null
+        },
+        {
+          "id": 259,
+          "nome": "Itapetininga",
+          "subtitulo": null
+        },
+        {
+          "id": 269,
+          "nome": "Itararé",
+          "subtitulo": null
+        },
+        {
+          "id": 277,
+          "nome": "Itupeva",
+          "subtitulo": null
+        },
+        {
+          "id": 297,
+          "nome": "Jundiaí",
+          "subtitulo": null
+        },
+        {
+          "id": 312,
+          "nome": "Louveira",
+          "subtitulo": null
+        },
+        {
+          "id": 485,
+          "nome": "Ribeirão Branco",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
