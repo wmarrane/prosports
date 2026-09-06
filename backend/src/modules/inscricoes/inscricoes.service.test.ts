@@ -12,12 +12,14 @@ vi.mock('../../lib/prisma', () => ({
     },
     sorteio: {
       findFirst: vi.fn(),
+      findMany: vi.fn(),
     },
     evento: {
       findUnique: vi.fn(),
     },
     modalidade: {
       findUnique: vi.fn(),
+      findMany: vi.fn(),
     },
     competicao: {
       findUnique: vi.fn(),
@@ -550,3 +552,77 @@ describe('inscricoes.service', () => {
     expect(chamada.data).not.toHaveProperty('metade_chave')
   })
 })
+
+describe('removerBulk — participante desiste de várias modalidades', () => {
+  beforeEach(() => {
+    mockPrisma.sorteio.findMany.mockResolvedValue([])
+    mockPrisma.modalidade.findMany.mockResolvedValue([])
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 0 })
+  })
+
+  it('remove as inscrições pedidas quando nenhuma modalidade foi sorteada', async () => {
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { id: 100, modalidade_id: 1 },
+      { id: 200, modalidade_id: 2 },
+    ])
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 2 })
+
+    const r = await service.removerBulk({ evento_id: 5, participante_id: 9, modalidade_ids: [1, 2] })
+
+    expect(mockPrisma.inscricao.deleteMany).toHaveBeenCalledWith({ where: { id: { in: [100, 200] } } })
+    expect(r).toEqual({ removidas: 2, bloqueadas: [] })
+  })
+
+  it('não remove modalidade já sorteada e devolve qual foi bloqueada', async () => {
+    mockPrisma.inscricao.findMany.mockResolvedValue([
+      { id: 100, modalidade_id: 1 },
+      { id: 200, modalidade_id: 2 },
+    ])
+    mockPrisma.sorteio.findMany.mockResolvedValue([{ modalidade_id: 2 }])
+    mockPrisma.modalidade.findMany.mockResolvedValue([{ id: 2, nome: 'Futsal Masculino' }])
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 1 })
+
+    const r = await service.removerBulk({ evento_id: 5, participante_id: 9, modalidade_ids: [1, 2] })
+
+    // só a inscrição da modalidade sem sorteio é apagada
+    expect(mockPrisma.inscricao.deleteMany).toHaveBeenCalledWith({ where: { id: { in: [100] } } })
+    expect(r).toEqual({ removidas: 1, bloqueadas: [{ modalidade_id: 2, nome: 'Futsal Masculino' }] })
+  })
+
+  it('não apaga nada quando todas as modalidades pedidas já foram sorteadas', async () => {
+    mockPrisma.inscricao.findMany.mockResolvedValue([{ id: 100, modalidade_id: 1 }])
+    mockPrisma.sorteio.findMany.mockResolvedValue([{ modalidade_id: 1 }])
+    mockPrisma.modalidade.findMany.mockResolvedValue([{ id: 1, nome: 'Judô' }])
+
+    const r = await service.removerBulk({ evento_id: 5, participante_id: 9, modalidade_ids: [1] })
+
+    expect(mockPrisma.inscricao.deleteMany).not.toHaveBeenCalled()
+    expect(r).toEqual({ removidas: 0, bloqueadas: [{ modalidade_id: 1, nome: 'Judô' }] })
+  })
+
+  it('ignora modalidade em que o participante não está inscrito', async () => {
+    // pede 1, 2 e 3, mas só existe inscrição na 1
+    mockPrisma.inscricao.findMany.mockResolvedValue([{ id: 100, modalidade_id: 1 }])
+    mockPrisma.inscricao.deleteMany.mockResolvedValue({ count: 1 })
+
+    const r = await service.removerBulk({ evento_id: 5, participante_id: 9, modalidade_ids: [1, 2, 3] })
+
+    expect(mockPrisma.inscricao.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { evento_id: 5, participante_id: 9, modalidade_id: { in: [1, 2, 3] } },
+      }),
+    )
+    expect(r).toEqual({ removidas: 1, bloqueadas: [] })
+  })
+
+  it('participante sem nenhuma inscrição não quebra nem consulta sorteios', async () => {
+    mockPrisma.inscricao.findMany.mockResolvedValue([])
+
+    const r = await service.removerBulk({ evento_id: 5, participante_id: 9, modalidade_ids: [1, 2] })
+
+    expect(r).toEqual({ removidas: 0, bloqueadas: [] })
+    expect(mockPrisma.sorteio.findMany).not.toHaveBeenCalled()
+    expect(mockPrisma.inscricao.deleteMany).not.toHaveBeenCalled()
+  })
+})
+
