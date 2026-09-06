@@ -549,6 +549,14 @@ export default function EventoInscricoes() {
                   >
                     Modalidades do evento
                   </button>
+                  <button
+                    onClick={() => setRemoverModalidadesOpen(true)}
+                    disabled={eventoSuspenso}
+                    title="Tirar um participante de várias modalidades deste evento de uma vez"
+                    className="text-xs text-[var(--brand-500)] hover:text-[var(--brand-400)] font-semibold ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Remover de modalidades
+                  </button>
                 </>
               )}
               <button
@@ -798,15 +806,6 @@ export default function EventoInscricoes() {
                           <Trash2 size={14} /> Remover todos
                         </button>
                       )}
-                      <button
-                        onClick={() => setRemoverModalidadesOpen(true)}
-                        disabled={eventoSuspenso}
-                        title="Tirar um participante de várias modalidades deste evento de uma vez"
-                        className="btn btn-ghost btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
-                      >
-                        <Trash2 size={14} /> Remover de modalidades
-                      </button>
                       <button
                         onClick={() => setImportOpen(true)}
                         disabled={eventoSuspenso}
