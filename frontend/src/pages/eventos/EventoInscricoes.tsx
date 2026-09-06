@@ -31,6 +31,7 @@ import { cabecasComGrupo } from '../../lib/cabecas-grupo'
 import { isSorteavel } from '../../lib/sorteaveis'
 import { matchMensagem } from '../../lib/mensagens-inscritos'
 import { clearVistas } from '../../lib/congresso-vistas'
+import RemoverModalidadesModal from '../../components/RemoverModalidadesModal'
 
 function formatDateBR(iso: string): string {
   try {
@@ -99,6 +100,7 @@ export default function EventoInscricoes() {
   const [apagarSorteioAlvo, setApagarSorteioAlvo] = useState<number | null>(null)
   const [erroSorteio, setErroSorteio] = useState('')
   const [importOpen, setImportOpen] = useState(false)
+  const [removerModalidadesOpen, setRemoverModalidadesOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
   const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
@@ -797,6 +799,15 @@ export default function EventoInscricoes() {
                         </button>
                       )}
                       <button
+                        onClick={() => setRemoverModalidadesOpen(true)}
+                        disabled={eventoSuspenso}
+                        title="Tirar um participante de várias modalidades deste evento de uma vez"
+                        className="btn btn-ghost btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                      >
+                        <Trash2 size={14} /> Remover de modalidades
+                      </button>
+                      <button
                         onClick={() => setImportOpen(true)}
                         disabled={eventoSuspenso}
                         title="Importar inscritos via arquivo CSV"
@@ -1475,6 +1486,14 @@ export default function EventoInscricoes() {
           </div>
         </div>
       )}
+
+      <RemoverModalidadesModal
+        open={removerModalidadesOpen}
+        onClose={() => setRemoverModalidadesOpen(false)}
+        eventoId={eventoId}
+        modalidades={modalidades}
+        sorteios={sorteios}
+      />
 
       {/* Modal: editar override (subtítulo + município) de inscrição escolar */}
       {editarAlvo && (

@@ -20,6 +20,8 @@ router.get('/', requireAuth, acessoQueryEvento, ctrl.listar)
 router.get('/:id', requireAuth, acessoInscricaoId, ctrl.buscarPorId)
 router.post('/', requireAuth, acessoBody, ctrl.criar)
 router.post('/bulk', requireAuth, acessoBody, ctrl.criarBulk)
+// POST (e não DELETE) porque leva corpo com a lista de modalidades, igual ao /bulk.
+router.post('/remover-bulk', requireAuth, acessoBody, ctrl.removerBulk)
 router.post('/import', requireAuth, acessoBody, ctrl.importar)
 router.patch('/:id', requireAuth, acessoInscricaoId, ctrl.editar)
 router.delete('/evento/:eventoId/modalidade/:modalidadeId', requireAuth, acessoParamsEvento, ctrl.removerTodosDaModalidade)
