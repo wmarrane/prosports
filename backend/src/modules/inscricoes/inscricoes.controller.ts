@@ -19,6 +19,12 @@ const listQuerySchema = z.object({
   modalidade_id: z.coerce.number().int().positive().optional(),
 })
 
+const removerBulkSchema = z.object({
+  evento_id: z.coerce.number().int().positive(),
+  participante_id: z.coerce.number().int().positive(),
+  modalidade_ids: z.array(z.coerce.number().int().positive()).min(1).max(500),
+})
+
 const importRowSchema = z.object({
   nome: z.string().min(1).max(200),
   municipio_uf: z.string().length(2).optional(),
@@ -79,6 +85,12 @@ export async function remover(req: Request, res: Response, next: NextFunction) {
   try {
     await service.remover(parseIntParam(req.params.id, 'id'))
     res.status(204).send()
+  } catch (err) { next(err) }
+}
+
+export async function removerBulk(req: Request, res: Response, next: NextFunction) {
+  try {
+    res.json(await service.removerBulk(removerBulkSchema.parse(req.body)))
   } catch (err) { next(err) }
 }
 

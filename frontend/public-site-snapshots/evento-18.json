@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-08-20T16:30:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-08-20T18:07:33.506Z",
+  "publicadoEm": "2026-08-20T22:11:14.557Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -301,7 +301,7 @@
       "grupo": null,
       "tipo": "chaves",
       "status": "sorteado",
-      "seed": "094ef6f9e1bb9544",
+      "seed": "38d5e9f3c592718a",
       "anfitriaoId": null,
       "participantes": [
         {
@@ -423,37 +423,43 @@
           "id": 720,
           "nome": "Colégio Jean Piaget",
           "subtitulo": null
+        },
+        {
+          "id": 692,
+          "nome": "EM Felipe Avelino",
+          "subtitulo": null
         }
       ],
       "campeoes": [],
       "cabecasPids": [],
       "resultado": {
-        "size": 24,
+        "size": 25,
         "slots": [
-          699,
-          716,
-          710,
-          722,
-          717,
-          702,
-          698,
-          719,
-          718,
-          725,
-          697,
-          705,
-          726,
-          706,
           724,
-          700,
-          703,
-          711,
-          720,
-          721,
-          691,
-          695,
+          722,
           701,
-          715
+          721,
+          717,
+          697,
+          700,
+          725,
+          710,
+          703,
+          706,
+          698,
+          716,
+          726,
+          702,
+          715,
+          695,
+          719,
+          691,
+          711,
+          718,
+          705,
+          692,
+          699,
+          720
         ],
         "byePositions": [
           1,
@@ -461,12 +467,11 @@
           7,
           12,
           13,
-          18,
           19,
-          24
+          25
         ],
         "matchesGraph": {
-          "final": "J24",
+          "final": "J25",
           "matches": [
             {
               "id": "J1",
@@ -506,111 +511,117 @@
             },
             {
               "id": "J7",
-              "top": "P20",
+              "top": "P19",
               "round": 1,
-              "bottom": "P21"
+              "bottom": "P20"
             },
             {
               "id": "J8",
-              "top": "P22",
+              "top": "P21",
               "round": 1,
-              "bottom": "P23"
+              "bottom": "P22"
             },
             {
               "id": "J9",
+              "top": "P23",
+              "round": 1,
+              "bottom": "P24"
+            },
+            {
+              "id": "J10",
               "top": "V:B1",
               "round": 2,
               "bottom": "V:J1"
             },
             {
-              "id": "J10",
+              "id": "J11",
               "top": "V:J2",
               "round": 2,
               "bottom": "V:B2"
             },
             {
-              "id": "J11",
+              "id": "J12",
               "top": "V:B3",
               "round": 2,
               "bottom": "V:J3"
             },
             {
-              "id": "J12",
+              "id": "J13",
               "top": "V:J4",
               "round": 2,
               "bottom": "V:B4"
             },
             {
-              "id": "J13",
+              "id": "J14",
               "top": "V:B5",
               "round": 2,
               "bottom": "V:J5"
             },
             {
-              "id": "J14",
+              "id": "J15",
               "top": "V:J6",
               "round": 2,
               "bottom": "V:B6"
             },
             {
-              "id": "J15",
-              "top": "V:B7",
-              "round": 2,
-              "bottom": "V:J7"
-            },
-            {
               "id": "J16",
-              "top": "V:J8",
+              "top": "V:J7",
               "round": 2,
-              "bottom": "V:B8"
+              "bottom": "V:J8"
             },
             {
               "id": "J17",
               "top": "V:J9",
-              "round": 3,
-              "bottom": "V:J10"
+              "round": 2,
+              "bottom": "V:B7"
             },
             {
               "id": "J18",
-              "top": "V:J11",
+              "top": "V:J10",
               "round": 3,
-              "bottom": "V:J12"
+              "bottom": "V:J11"
             },
             {
               "id": "J19",
-              "top": "V:J13",
+              "top": "V:J12",
               "round": 3,
-              "bottom": "V:J14"
+              "bottom": "V:J13"
             },
             {
               "id": "J20",
-              "top": "V:J15",
+              "top": "V:J14",
               "round": 3,
-              "bottom": "V:J16"
-            },
-            {
-              "id": "J22",
-              "top": "V:J19",
-              "round": 4,
-              "bottom": "V:J20"
-            },
-            {
-              "id": "J23",
-              "top": "V:J17",
-              "round": 4,
-              "bottom": "V:J18"
-            },
-            {
-              "id": "J24",
-              "top": "V:J23",
-              "round": 5,
-              "bottom": "V:J22"
+              "bottom": "V:J15"
             },
             {
               "id": "J21",
-              "top": "L:J23",
+              "top": "V:J16",
+              "round": 3,
+              "bottom": "V:J17"
+            },
+            {
+              "id": "J22",
+              "top": "V:J18",
+              "round": 4,
+              "bottom": "V:J19"
+            },
+            {
+              "id": "J23",
+              "top": "V:J20",
+              "round": 4,
+              "bottom": "V:J21"
+            },
+            {
+              "id": "J25",
+              "top": "V:J22",
               "round": 5,
-              "bottom": "L:J22"
+              "bottom": "V:J23"
+            },
+            {
+              "id": "J24",
+              "top": "L:J22",
+              "round": 5,
+              "bottom": "L:J23"
             },
             {
               "id": "B1",
@@ -650,18 +661,12 @@
             },
             {
               "id": "B7",
-              "top": "P19",
-              "round": 1,
-              "bottom": "BYE"
-            },
-            {
-              "id": "B8",
-              "top": "P24",
+              "top": "P25",
               "round": 1,
               "bottom": "BYE"
             }
           ],
-          "thirdPlace": "J21"
+          "thirdPlace": "J24"
         },
         "metadesIgnoradas": []
       },

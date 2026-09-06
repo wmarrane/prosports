@@ -110,6 +110,56 @@ export async function removerTodosDaModalidade(
   return prisma.inscricao.deleteMany({ where: { evento_id, modalidade_id } })
 }
 
+/**
+ * Tira um participante de várias modalidades de um evento de uma vez — o caso
+ * do dia do congresso, em que a delegação avisa de quais provas desistiu.
+ *
+ * Modalidade já sorteada é RECUSADA, mesma regra do `removerTodosDaModalidade`:
+ * apagar a inscrição deixaria o resultado do sorteio apontando para quem não
+ * está mais inscrito. As demais são removidas e as recusadas voltam nomeadas,
+ * para a tela dizer exatamente o que ficou de fora — melhor do que perder a
+ * operação inteira porque uma modalidade foi sorteada no meio do caminho.
+ *
+ * Ids de modalidade em que o participante não está inscrito são ignorados em
+ * silêncio: o pedido é "remova destas", não "estas têm que existir".
+ */
+export async function removerBulk(input: {
+  evento_id: number
+  participante_id: number
+  modalidade_ids: number[]
+}): Promise<{ removidas: number; bloqueadas: { modalidade_id: number; nome: string }[] }> {
+  const { evento_id, participante_id, modalidade_ids } = input
+
+  const inscricoes = await prisma.inscricao.findMany({
+    where: { evento_id, participante_id, modalidade_id: { in: modalidade_ids } },
+    select: { id: true, modalidade_id: true },
+  })
+  if (inscricoes.length === 0) return { removidas: 0, bloqueadas: [] }
+
+  const sorteios = await prisma.sorteio.findMany({
+    where: { evento_id, modalidade_id: { in: inscricoes.map((i) => i.modalidade_id) } },
+    select: { modalidade_id: true },
+  })
+  const sorteadas = new Set(sorteios.map((s) => s.modalidade_id))
+
+  const remover = inscricoes.filter((i) => !sorteadas.has(i.modalidade_id))
+  let removidas = 0
+  if (remover.length > 0) {
+    const r = await prisma.inscricao.deleteMany({ where: { id: { in: remover.map((i) => i.id) } } })
+    removidas = r.count
+  }
+
+  const idsBloqueados = inscricoes.filter((i) => sorteadas.has(i.modalidade_id)).map((i) => i.modalidade_id)
+  const nomes = idsBloqueados.length > 0
+    ? await prisma.modalidade.findMany({ where: { id: { in: idsBloqueados } }, select: { id: true, nome: true } })
+    : []
+
+  return {
+    removidas,
+    bloqueadas: nomes.map((m) => ({ modalidade_id: m.id, nome: m.nome })),
+  }
+}
+
 export async function contarPorModalidade(evento_id: number): Promise<Record<number, number>> {
   const grupos = await prisma.inscricao.groupBy({
     by: ['modalidade_id'],

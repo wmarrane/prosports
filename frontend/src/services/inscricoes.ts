@@ -24,6 +24,11 @@ type BulkPayload = {
   participante_ids: number[]
 }
 
+export type RemoverBulkResult = {
+  removidas: number
+  bloqueadas: Array<{ modalidade_id: number; nome: string }>
+}
+
 export type BulkResult = {
   criadas: number
   duplicadas: number
@@ -33,6 +38,10 @@ export type BulkResult = {
 export const inscricoesService = {
   listar: (params?: { evento_id?: number; modalidade_id?: number }) =>
     api.get<Inscricao[]>(BASE, { params }).then(r => r.data),
+  /** Tira o participante de várias modalidades do evento de uma vez.
+   *  Modalidade já sorteada volta em `bloqueadas` em vez de ser removida. */
+  removerBulk: (payload: { evento_id: number; participante_id: number; modalidade_ids: number[] }) =>
+    api.post<RemoverBulkResult>(`${BASE}/remover-bulk`, payload).then(r => r.data),
   counts: (evento_id: number) =>
     api.get<Record<number, number>>(`${BASE}/counts`, { params: { evento_id } }).then(r => r.data),
   criar: (data: InscricaoPayload) => api.post<Inscricao>(BASE, data).then(r => r.data),
