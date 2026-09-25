@@ -151,13 +151,18 @@ export function computeLayout(graph: MatchesGraph, N: number): { matches: MatchL
 // A árvore é posicionada em absoluto e, numa chave grande, não existe linha
 // horizontal que não corte algum card (os cards das rodadas seguintes ficam
 // sobre os vãos da 1ª). Deixada por conta do navegador, a quebra de página
-// fatiava cards ao meio. Na impressão a chave é reduzida para caber na largura
-// da página (A4 paisagem) e dividida em faixas do tamanho de uma página; cada
-// card é desenhado uma única vez, inteiro, na faixa onde começa.
+// fatiava cards ao meio. Na impressão a chave vai para A4 paisagem:
+//   - se cabe inteira numa folha sem ficar menor que MIN_PRINT_ZOOM, sai numa
+//     folha só (fatiar uma chave pequena separa jogos que se enfrentam);
+//   - senão, reduz para caber na largura e divide em faixas de mesma altura;
+//     cada card é desenhado uma única vez, inteiro, na faixa onde começa.
 
 /** Área útil de A4 paisagem com margem de 10mm (277×190mm), com folga. */
 export const PRINT_PAGE_WIDTH = 1020
 export const PRINT_PAGE_HEIGHT = 690
+/** Menor redução aceita para caber numa folha — é a que a chave de 33 já usa
+ *  só para caber na largura, e continua legível. */
+export const MIN_PRINT_ZOOM = 0.5
 /** Rótulo "🏆 Final" / "3º lugar" fica 18px acima do card. */
 const CARD_LABEL_HEIGHT = 20
 const CARD_EXTENT = CARD_HEIGHT + CARD_LABEL_HEIGHT
@@ -169,23 +174,46 @@ export function computePrintSlices(
   pageWidth = PRINT_PAGE_WIDTH,
   pageHeight = PRINT_PAGE_HEIGHT,
 ): { zoom: number; slices: PrintSlice[] } {
-  const zoom = Math.min(1, pageWidth / layout.width)
-  const janela = pageHeight / zoom
-  if (layout.height <= janela) {
-    return { zoom, slices: [{ start: 0, height: layout.height, matchIds: layout.matches.map(m => m.id) }] }
+  const zoomLargura = Math.min(1, pageWidth / layout.width)
+  const zoomFolha = Math.min(zoomLargura, pageHeight / layout.height)
+  if (zoomFolha >= Math.min(MIN_PRINT_ZOOM, zoomLargura)) {
+    return { zoom: zoomFolha, slices: [{ start: 0, height: layout.height, matchIds: layout.matches.map(m => m.id) }] }
   }
-  // Passo entre faixas: a faixa k começa em k*step e mostra step + CARD_EXTENT,
-  // então qualquer card que COMECE dentro do passo termina dentro da faixa.
-  const step = janela - CARD_EXTENT
-  const porFaixa = new Map<number, string[]>()
+  const zoom = zoomLargura
+  const janela = pageHeight / zoom
+  // A faixa k começa em k*step e mostra step + CARD_EXTENT, então qualquer card
+  // que COMECE dentro do passo termina dentro da faixa. O passo reparte por
+  // igual a altura da 1ª rodada: numa chave simétrica o corte cai entre as
+  // metades (ou quartos) em vez de no meio de uma sub-chave. O que fica abaixo
+  // dela (3º lugar) entra na última faixa se couber, senão ganha a sua.
+  const passoMax = janela - CARD_EXTENT
+  const r1 = layout.matches.filter(m => m.round === 1 && !m.isThirdPlace)
+  const alturaR1 = r1.length ? Math.max(...r1.map(m => m.y)) + POS_ROW_HEIGHT / 2 : layout.height
+  const n = Math.ceil(alturaR1 / passoMax)
+  const step = alturaR1 / n
+  const topoDe = (m: MatchLayout) => m.y - CARD_HEIGHT / 2 - (m.isFinal || m.isThirdPlace ? CARD_LABEL_HEIGHT : 0)
+  const porFaixa = new Map<number, MatchLayout[]>()
+  const abaixo: MatchLayout[] = []
   for (const m of layout.matches) {
-    const topo = m.y - CARD_HEIGHT / 2 - (m.isFinal || m.isThirdPlace ? CARD_LABEL_HEIGHT : 0)
-    const k = Math.max(0, Math.floor(topo / step))
-    porFaixa.set(k, [...(porFaixa.get(k) ?? []), m.id])
+    const k = Math.max(0, Math.floor(topoDe(m) / step))
+    if (k >= n) { abaixo.push(m); continue }
+    porFaixa.set(k, [...(porFaixa.get(k) ?? []), m])
+  }
+  // Cada faixa começa no seu primeiro card (não no ponto de corte), o que
+  // deixa espaço para o 3º lugar caber na última.
+  const inicio = (cards: MatchLayout[]) => Math.min(...cards.map(topoDe))
+  const fimDe = (cards: MatchLayout[]) => Math.max(...cards.map(m => m.y + CARD_HEIGHT / 2))
+  for (const m of abaixo.sort((a, b) => a.y - b.y)) {
+    const ultima = porFaixa.get(n - 1) ?? []
+    const k = ultima.length && fimDe([...ultima, m]) - inicio(ultima) <= janela
+      ? n - 1
+      : Math.max(...porFaixa.keys()) + 1
+    porFaixa.set(k, [...(porFaixa.get(k) ?? []), m])
   }
   const slices = [...porFaixa.keys()].sort((a, b) => a - b).map(k => {
-    const start = k * step
-    return { start, height: Math.min(janela, layout.height - start), matchIds: porFaixa.get(k)! }
+    const cards = porFaixa.get(k)!
+    const start = inicio(cards)
+    return { start, height: fimDe(cards) - start, matchIds: cards.map(m => m.id) }
   })
   return { zoom, slices }
 }
@@ -277,7 +305,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
     return `hsl(${hue}deg 65% 60%)`
   }
 
-  type ConnectorEx = Connector & { stroke: string; isThirdPlace: boolean }
+  type ConnectorEx = Connector & { stroke: string; isThirdPlace: boolean; from: string; to: string }
   const connectors: ConnectorEx[] = []
   for (const m of layout.matches) {
     for (const [slot, ref] of [['top', m.top], ['bottom', m.bottom]] as const) {
@@ -295,6 +323,8 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       connectors.push({
         d,
         key: `${srcId}-${m.id}-${slot}`,
+        from: srcId,
+        to: m.id,
         stroke: isThirdPlace ? 'var(--t4)' : roundColor(src.round),
         isThirdPlace,
       })
@@ -304,12 +334,14 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
   const printLayout = useMemo(() => computePrintSlices(layout), [layout])
 
   // top/height recortam a faixa da impressão; na tela é a árvore inteira.
-  const renderConnectors = (top = 0, height = layout.height) => (
+  // Na impressão, cada faixa só desenha as linhas que tocam um card dela:
+  // sem isso sobravam pontas soltas de jogos que estão na página vizinha.
+  const renderConnectors = (top = 0, height = layout.height, cardsDaFaixa?: Set<string>) => (
     <svg
       style={{ position: 'absolute', left: 0, top: 0, width: layout.width, height, pointerEvents: 'none' }}
       viewBox={`0 ${top} ${layout.width} ${height}`}
     >
-      {connectors.map(c => (
+      {connectors.filter(c => !cardsDaFaixa || cardsDaFaixa.has(c.from) || cardsDaFaixa.has(c.to)).map(c => (
         <path
           key={c.key}
           d={c.d}
@@ -390,7 +422,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
                 layout: com transform a faixa "media" o tamanho original e os
                 cards de baixo eram empurrados para fora da página. */}
             <div style={{ position: 'relative', width: layout.width, height: s.height, zoom: printLayout.zoom }}>
-              {renderConnectors(s.start, s.height)}
+              {renderConnectors(s.start, s.height, new Set(s.matchIds))}
               {s.matchIds.map(id => renderCard(matchMap[id], s.start))}
             </div>
           </div>
