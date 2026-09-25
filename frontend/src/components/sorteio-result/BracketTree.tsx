@@ -303,10 +303,11 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
 
   const printLayout = useMemo(() => computePrintSlices(layout), [layout])
 
-  const renderConnectors = () => (
+  // top/height recortam a faixa da impressão; na tela é a árvore inteira.
+  const renderConnectors = (top = 0, height = layout.height) => (
     <svg
-      style={{ position: 'absolute', inset: 0, width: layout.width, height: layout.height, pointerEvents: 'none' }}
-      viewBox={`0 0 ${layout.width} ${layout.height}`}
+      style={{ position: 'absolute', left: 0, top: 0, width: layout.width, height, pointerEvents: 'none' }}
+      viewBox={`0 ${top} ${layout.width} ${height}`}
     >
       {connectors.map(c => (
         <path
@@ -322,7 +323,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
     </svg>
   )
 
-  const renderCard = (m: MatchLayout) => {
+  const renderCard = (m: MatchLayout, offsetY = 0) => {
     const bye = matchIsBye(m, slots)
     return (
       <div
@@ -333,7 +334,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
         style={{
           position: 'absolute',
           left: m.x,
-          top: m.y - CARD_HEIGHT / 2,
+          top: m.y - CARD_HEIGHT / 2 - offsetY,
           width: CARD_WIDTH,
           height: CARD_HEIGHT,
           padding: 6,
@@ -369,7 +370,7 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
       <div className="bracket-scroll bracket-screen" style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
         <div className="bracket-canvas" style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
           {renderConnectors()}
-          {layout.matches.map(renderCard)}
+          {layout.matches.map(m => renderCard(m))}
         </div>
       </div>
       {/* Só aparece na impressão (prosports-theme.css, @media print). O display
@@ -385,12 +386,12 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
               breakInside: 'avoid', pageBreakInside: 'avoid',
             }}
           >
-            <div style={{
-              position: 'absolute', left: 0, top: 0, width: layout.width, height: layout.height,
-              transform: `scale(${printLayout.zoom}) translateY(${-s.start}px)`, transformOrigin: 'top left',
-            }}>
-              {renderConnectors()}
-              {s.matchIds.map(id => renderCard(matchMap[id]))}
+            {/* zoom (e não transform) porque o Chrome pagina pelo tamanho de
+                layout: com transform a faixa "media" o tamanho original e os
+                cards de baixo eram empurrados para fora da página. */}
+            <div style={{ position: 'relative', width: layout.width, height: s.height, zoom: printLayout.zoom }}>
+              {renderConnectors(s.start, s.height)}
+              {s.matchIds.map(id => renderCard(matchMap[id], s.start))}
             </div>
           </div>
         ))}
