@@ -21,7 +21,7 @@ import { inscricoesService } from '../../services/inscricoes'
 import { sorteiosService } from '../../services/sorteios'
 import { campeoesAnterioresService } from '../../services/campeoes-anteriores'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, slugify, inlineRootImages } from '../../lib/export-html'
+import { serializeLoadedStyles, buildExportDocument, downloadHtmlFile, printHtmlDocument, slugify, inlineRootImages } from '../../lib/export-html'
 import type { Participante } from '../../types/participante'
 import type { TipoDisputa } from '../../types/modalidade'
 import { Plus, X, Check, Trophy, Shuffle } from '../../lib/icons'
@@ -102,6 +102,7 @@ export default function EventoInscricoes() {
   const [importOpen, setImportOpen] = useState(false)
   const [removerModalidadesOpen, setRemoverModalidadesOpen] = useState(false)
   const [exportandoHtml, setExportandoHtml] = useState(false)
+  const [exportandoPdf, setExportandoPdf] = useState(false)
   const [modalidadesModalOpen, setModalidadesModalOpen] = useState(false)
   const [removerInscritosOpen, setRemoverInscritosOpen] = useState(false)
   const [importCampeoesOpen, setImportCampeoesOpen] = useState(false)
@@ -352,15 +353,16 @@ export default function EventoInscricoes() {
     onError: (err: any) => toast.error(err?.response?.data?.message ?? 'Erro ao salvar posição.'),
   })
 
-  async function handleExportarHtml() {
-    if (!evento) return
-    setExportandoHtml(true)
-    try {
+  /** Monta o documento do evento inteiro. Mesma saída para o HTML e para o PDF:
+   *  o PDF é este HTML passando pelo diálogo de impressão. */
+  async function montarDocumentoDoEvento(): Promise<{ html: string; arquivo: string } | null> {
+    if (!evento) return null
+    {
       const counts = countsByModalidade as Record<number, number>
       const comInscritos = modalidades.filter(m => (counts[m.id] ?? 0) > 0)
       if (comInscritos.length === 0) {
         toast.error('Nenhuma modalidade com inscritos para exportar.')
-        return
+        return null
       }
 
       const dados = await Promise.all(
@@ -431,12 +433,34 @@ export default function EventoInscricoes() {
       const css = serializeLoadedStyles()
       const bodyHtml = await inlineRootImages([headerHtml, ...secoes].join('\n'))
       const html = buildExportDocument({ titulo: evento.nome, css, bodyHtml })
-      downloadHtmlFile(`evento-${slugify(evento.nome)}.html`, html)
+      return { html, arquivo: `evento-${slugify(evento.nome)}.html` }
+    }
+  }
+
+  async function handleExportarHtml() {
+    setExportandoHtml(true)
+    try {
+      const doc = await montarDocumentoDoEvento()
+      if (!doc) return
+      downloadHtmlFile(doc.arquivo, doc.html)
       toast.success('HTML exportado.')
     } catch (err: any) {
       toast.error(err?.response?.data?.message ?? 'Erro ao exportar HTML.')
     } finally {
       setExportandoHtml(false)
+    }
+  }
+
+  async function handleExportarPdf() {
+    setExportandoPdf(true)
+    try {
+      const doc = await montarDocumentoDoEvento()
+      if (!doc) return
+      printHtmlDocument(doc.html)
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message ?? 'Erro ao gerar o PDF.')
+    } finally {
+      setExportandoPdf(false)
     }
   }
 
@@ -567,6 +591,15 @@ export default function EventoInscricoes() {
                 title="Exportar todas as modalidades (inscritos, campeões e sorteio) em HTML"
               >
                 <Download size={12} /> {exportandoHtml ? 'Exportando...' : 'Exportar HTML'}
+              </button>
+              <button
+                onClick={handleExportarPdf}
+                disabled={exportandoPdf}
+                className="text-xs text-[var(--t2)] hover:text-[var(--t1)] font-semibold disabled:opacity-50"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                title="Abrir o diálogo de impressão com todas as modalidades — escolha 'Salvar como PDF'"
+              >
+                <Download size={12} /> {exportandoPdf ? 'Gerando...' : 'Exportar PDF'}
               </button>
               <button
                 onClick={() => { setApagarTodosOpen(true); setApagarTodosResumo(null) }}

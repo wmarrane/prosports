@@ -90,6 +90,42 @@ export async function inlineRootImages(html: string): Promise<string> {
   return out
 }
 
+/**
+ * Abre o diálogo de impressão do navegador com o documento exportado, de onde
+ * o operador escolhe "Salvar como PDF".
+ *
+ * Usa o MESMO HTML do export, então o PDF sai idêntico ao arquivo — inclusive
+ * a quebra de página por modalidade, que já vem no CSS de impressão. As imagens
+ * chegam embutidas como data URL, então não há espera por rede.
+ *
+ * O iframe só é removido depois do `afterprint` (ou de um tempo limite, para
+ * navegadores que não emitem o evento): tirar antes cancela o diálogo.
+ */
+export function printHtmlDocument(html: string): void {
+  const iframe = document.createElement('iframe')
+  iframe.setAttribute('aria-hidden', 'true')
+  iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden'
+  iframe.srcdoc = html
+
+  let removido = false
+  const remover = () => {
+    if (removido) return
+    removido = true
+    iframe.remove()
+  }
+
+  iframe.onload = () => {
+    const win = iframe.contentWindow
+    if (!win) { remover(); return }
+    win.addEventListener('afterprint', remover, { once: true })
+    setTimeout(remover, 120_000)
+    win.focus()
+    win.print()
+  }
+
+  document.body.appendChild(iframe)
+}
+
 export function downloadHtmlFile(filename: string, html: string): void {
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
   const url = URL.createObjectURL(blob)
