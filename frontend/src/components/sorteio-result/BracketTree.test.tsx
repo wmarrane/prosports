@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import BracketTree, { computeLayout } from './BracketTree'
+import BracketTree, { computeLayout, computePrintSlices, PRINT_PAGE_WIDTH, PRINT_PAGE_HEIGHT } from './BracketTree'
 import type { Participante } from '../../types/participante'
 
 const participantesById = new Map<number, Participante>([
@@ -146,5 +146,76 @@ describe('BracketTree — tamanho do subtítulo', () => {
   it('ignora a prop fora do modo grande (telas compactas seguem iguais)', () => {
     const html = render({ subtituloGrande: true })
     expect(tamanhoDoSubtitulo(html)).toBe('0.7rem')
+  })
+})
+
+/** Chave eliminatória cheia de N (potência de 2), com disputa de 3º lugar. */
+function chaveCheia(N: number) {
+  const matches: { id: string; top: string; bottom: string; round: number }[] = []
+  let anteriores: string[] = []
+  let j = 0
+  for (let p = 1; p <= N; p += 2) {
+    const id = `J${++j}`
+    matches.push({ id, top: `P${p}`, bottom: `P${p + 1}`, round: 1 })
+    anteriores.push(id)
+  }
+  let round = 1
+  let semis: string[] = []
+  while (anteriores.length > 1) {
+    round++
+    if (anteriores.length === 2) semis = anteriores
+    const prox: string[] = []
+    for (let i = 0; i < anteriores.length; i += 2) {
+      const id = `J${++j}`
+      matches.push({ id, top: `V:${anteriores[i]}`, bottom: `V:${anteriores[i + 1]}`, round })
+      prox.push(id)
+    }
+    anteriores = prox
+  }
+  const final = anteriores[0]
+  const tp = `J${++j}`
+  matches.push({ id: tp, top: `L:${semis[0]}`, bottom: `L:${semis[1]}`, round })
+  return { matches, final, thirdPlace: tp }
+}
+
+describe('computePrintSlices — chave paginada na impressão', () => {
+  for (const N of [8, 16, 64, 128]) {
+    it(`N=${N}: cada card aparece uma vez, inteiro, numa faixa que cabe na página`, () => {
+      const layout = computeLayout(chaveCheia(N), N)
+      const { zoom, slices } = computePrintSlices(layout)
+
+      expect(layout.width * zoom).toBeLessThanOrEqual(PRINT_PAGE_WIDTH)
+      const ids = slices.flatMap(s => s.matchIds)
+      expect(ids.sort()).toEqual(layout.matches.map(m => m.id).sort())
+
+      const porId = new Map(layout.matches.map(m => [m.id, m]))
+      for (const s of slices) {
+        expect(s.height * zoom).toBeLessThanOrEqual(PRINT_PAGE_HEIGHT + 0.001)
+        for (const id of s.matchIds) {
+          const m = porId.get(id)!
+          const rotulo = m.isFinal || m.isThirdPlace ? 18 : 0
+          expect(m.y - 60 - rotulo).toBeGreaterThanOrEqual(s.start)
+          expect(m.y + 60).toBeLessThanOrEqual(s.start + s.height)
+        }
+      }
+    })
+  }
+
+  it('chave pequena sai numa faixa só, sem reduzir', () => {
+    const { zoom, slices } = computePrintSlices(computeLayout(chaveCheia(4), 4))
+    expect(zoom).toBe(1)
+    expect(slices).toHaveLength(1)
+  })
+
+  it('chave grande quebra em várias faixas', () => {
+    expect(computePrintSlices(computeLayout(chaveCheia(64), 64)).slices.length).toBeGreaterThan(1)
+  })
+
+  it('a versão de impressão fica oculta por padrão (a tela não muda)', () => {
+    const html = renderToStaticMarkup(
+      <BracketTree matchesGraph={graphV2} slots={[10, 20, 30]} participantesById={participantesById} />
+    )
+    expect(html).toContain('class="bracket-scroll bracket-screen"')
+    expect(html).toContain('class="bracket-print" style="display:none"')
   })
 })
