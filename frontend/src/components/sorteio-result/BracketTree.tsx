@@ -147,6 +147,49 @@ export function computeLayout(graph: MatchesGraph, N: number): { matches: MatchL
   return { matches: Object.values(matchById), width, height }
 }
 
+// ── Impressão paginada ──
+// A árvore é posicionada em absoluto e, numa chave grande, não existe linha
+// horizontal que não corte algum card (os cards das rodadas seguintes ficam
+// sobre os vãos da 1ª). Deixada por conta do navegador, a quebra de página
+// fatiava cards ao meio. Na impressão a chave é reduzida para caber na largura
+// da página (A4 paisagem) e dividida em faixas do tamanho de uma página; cada
+// card é desenhado uma única vez, inteiro, na faixa onde começa.
+
+/** Área útil de A4 paisagem com margem de 10mm (277×190mm), com folga. */
+export const PRINT_PAGE_WIDTH = 1020
+export const PRINT_PAGE_HEIGHT = 690
+/** Rótulo "🏆 Final" / "3º lugar" fica 18px acima do card. */
+const CARD_LABEL_HEIGHT = 20
+const CARD_EXTENT = CARD_HEIGHT + CARD_LABEL_HEIGHT
+
+export type PrintSlice = { start: number; height: number; matchIds: string[] }
+
+export function computePrintSlices(
+  layout: { matches: MatchLayout[]; width: number; height: number },
+  pageWidth = PRINT_PAGE_WIDTH,
+  pageHeight = PRINT_PAGE_HEIGHT,
+): { zoom: number; slices: PrintSlice[] } {
+  const zoom = Math.min(1, pageWidth / layout.width)
+  const janela = pageHeight / zoom
+  if (layout.height <= janela) {
+    return { zoom, slices: [{ start: 0, height: layout.height, matchIds: layout.matches.map(m => m.id) }] }
+  }
+  // Passo entre faixas: a faixa k começa em k*step e mostra step + CARD_EXTENT,
+  // então qualquer card que COMECE dentro do passo termina dentro da faixa.
+  const step = janela - CARD_EXTENT
+  const porFaixa = new Map<number, string[]>()
+  for (const m of layout.matches) {
+    const topo = m.y - CARD_HEIGHT / 2 - (m.isFinal || m.isThirdPlace ? CARD_LABEL_HEIGHT : 0)
+    const k = Math.max(0, Math.floor(topo / step))
+    porFaixa.set(k, [...(porFaixa.get(k) ?? []), m.id])
+  }
+  const slices = [...porFaixa.keys()].sort((a, b) => a - b).map(k => {
+    const start = k * step
+    return { start, height: Math.min(janela, layout.height - start), matchIds: porFaixa.get(k)! }
+  })
+  return { zoom, slices }
+}
+
 function renderSlot(
   ref: string,
   slots: (number | null)[],
@@ -258,67 +301,100 @@ export default function BracketTree({ matchesGraph, slots, participantesById, ca
     }
   }
 
+  const printLayout = useMemo(() => computePrintSlices(layout), [layout])
+
+  const renderConnectors = () => (
+    <svg
+      style={{ position: 'absolute', inset: 0, width: layout.width, height: layout.height, pointerEvents: 'none' }}
+      viewBox={`0 0 ${layout.width} ${layout.height}`}
+    >
+      {connectors.map(c => (
+        <path
+          key={c.key}
+          d={c.d}
+          stroke={c.stroke}
+          strokeWidth={c.isThirdPlace ? 2.5 : 4}
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ))}
+    </svg>
+  )
+
+  const renderCard = (m: MatchLayout) => {
+    const bye = matchIsBye(m, slots)
+    return (
+      <div
+        key={m.id}
+        className={`bg-[var(--card-bg-2)] rounded-lg ${m.isFinal ? 'border-amber-500' : ''}`}
+        onClick={onMatchClick ? () => onMatchClick(m.id) : undefined}
+        title={onMatchClick ? 'Clique para expandir' : undefined}
+        style={{
+          position: 'absolute',
+          left: m.x,
+          top: m.y - CARD_HEIGHT / 2,
+          width: CARD_WIDTH,
+          height: CARD_HEIGHT,
+          padding: 6,
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          background: bye ? 'var(--warn-soft)' : undefined,
+          border: m.isFinal ? '2px solid #f59e0b' : bye ? '1.5px solid var(--warn)' : '1.5px solid var(--t2)',
+          cursor: onMatchClick ? 'pointer' : 'default',
+        }}
+      >
+        {(m.isFinal || m.isThirdPlace) && (
+          <div style={{ position: 'absolute', top: -18, left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: '#f59e0b', fontWeight: 600 }}>
+            🏆 {m.isThirdPlace ? '3º lugar' : 'Final'}
+          </div>
+        )}
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
+          {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
+        </div>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
+          {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
+        </div>
+        {!m.id.startsWith('B') && (
+          <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
+        )}
+      </div>
+    )
+  }
+
   return (
-    <div className="bracket-scroll" style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
-      <div className="bracket-canvas" style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
-        <svg
-          style={{ position: 'absolute', inset: 0, width: layout.width, height: layout.height, pointerEvents: 'none' }}
-          viewBox={`0 0 ${layout.width} ${layout.height}`}
-        >
-          {connectors.map(c => (
-            <path
-              key={c.key}
-              d={c.d}
-              stroke={c.stroke}
-              strokeWidth={c.isThirdPlace ? 2.5 : 4}
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          ))}
-        </svg>
-        {layout.matches.map(m => {
-          const bye = matchIsBye(m, slots)
-          return (
+    <>
+      <div className="bracket-scroll bracket-screen" style={{ overflowX: 'auto', overflowY: 'auto', padding: 16, position: 'relative' }}>
+        <div className="bracket-canvas" style={{ position: 'relative', width: layout.width, height: layout.height, minWidth: '100%' }}>
+          {renderConnectors()}
+          {layout.matches.map(renderCard)}
+        </div>
+      </div>
+      {/* Só aparece na impressão (prosports-theme.css, @media print). O display
+          inline garante que fique oculto na tela mesmo onde a folha não carrega. */}
+      <div className="bracket-print" style={{ display: 'none' }}>
+        {printLayout.slices.map(s => (
           <div
-            key={m.id}
-            className={`bg-[var(--card-bg-2)] rounded-lg ${m.isFinal ? 'border-amber-500' : ''}`}
-            onClick={onMatchClick ? () => onMatchClick(m.id) : undefined}
-            title={onMatchClick ? 'Clique para expandir' : undefined}
+            key={s.start}
+            className="bracket-print-slice"
             style={{
-              position: 'absolute',
-              left: m.x,
-              top: m.y - CARD_HEIGHT / 2,
-              width: CARD_WIDTH,
-              height: CARD_HEIGHT,
-              padding: 6,
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              background: bye ? 'var(--warn-soft)' : undefined,
-              border: m.isFinal ? '2px solid #f59e0b' : bye ? '1.5px solid var(--warn)' : '1.5px solid var(--t2)',
-              cursor: onMatchClick ? 'pointer' : 'default',
+              position: 'relative', overflow: 'hidden',
+              width: layout.width * printLayout.zoom, height: s.height * printLayout.zoom,
+              breakInside: 'avoid', pageBreakInside: 'avoid',
             }}
           >
-            {(m.isFinal || m.isThirdPlace) && (
-              <div style={{ position: 'absolute', top: -18, left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: '#f59e0b', fontWeight: 600 }}>
-                🏆 {m.isThirdPlace ? '3º lugar' : 'Final'}
-              </div>
-            )}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', borderBottom: '1px solid var(--t3)', paddingBottom: 4 }}>
-              {renderSlot(m.top, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
+            <div style={{
+              position: 'absolute', left: 0, top: 0, width: layout.width, height: layout.height,
+              transform: `scale(${printLayout.zoom}) translateY(${-s.start}px)`, transformOrigin: 'top left',
+            }}>
+              {renderConnectors()}
+              {s.matchIds.map(id => renderCard(matchMap[id]))}
             </div>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 4 }}>
-              {renderSlot(m.bottom, slots, participantesById, campeoesByParticipanteId, large, subtituloLine, anfitriaoPid, cabecasPids, byeStubTop, subtituloGrande)}
-            </div>
-            {!m.id.startsWith('B') && (
-              <div style={{ position: 'absolute', top: 2, right: 4, fontSize: '0.65rem', color: 'var(--t4)' }}>{m.id}</div>
-            )}
           </div>
-          )
-        })}
+        ))}
       </div>
-    </div>
+    </>
   )
 }

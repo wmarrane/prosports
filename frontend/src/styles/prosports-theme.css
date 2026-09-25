@@ -683,7 +683,14 @@ body {
     --warn: #b45309; --brand-500: #1061d8; --success: #15803d;
   }
   .no-print { display: none !important; }
+  /* Chaves: a árvore da tela sai da impressão; entra a versão paginada do
+     BracketTree (faixas do tamanho de uma página, card nunca cortado), em
+     páginas A4 paisagem próprias. */
+  .bracket-screen { display: none !important; }
+  .bracket-print { display: block !important; page: chave-paisagem; }
+  .bracket-print-slice + .bracket-print-slice { margin-top: 6mm; }
 }
+@page chave-paisagem { size: A4 landscape; margin: 10mm; }
 
 /* Barra de carregamento global (react-query useIsFetching/useIsMutating) */
 .global-loading-bar {
