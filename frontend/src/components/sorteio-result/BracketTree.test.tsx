@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import BracketTree, { computeLayout, computePrintSlices, PRINT_PAGE_WIDTH, PRINT_PAGE_HEIGHT } from './BracketTree'
+import BracketTree, { computeLayout, computePrintSlices, PRINT_PAGE_WIDTH, PRINT_PAGE_HEIGHT, MIN_PRINT_ZOOM } from './BracketTree'
 import type { Participante } from '../../types/participante'
 
 const participantesById = new Map<number, Participante>([
@@ -205,6 +205,23 @@ describe('computePrintSlices — chave paginada na impressão', () => {
     const { zoom, slices } = computePrintSlices(computeLayout(chaveCheia(4), 4))
     expect(zoom).toBe(1)
     expect(slices).toHaveLength(1)
+  })
+
+  it('chave de 16 cabe numa folha só, reduzida, em vez de ser fatiada', () => {
+    const { zoom, slices } = computePrintSlices(computeLayout(chaveCheia(16), 16))
+    expect(slices).toHaveLength(1)
+    expect(zoom).toBeGreaterThanOrEqual(MIN_PRINT_ZOOM)
+  })
+
+  it('faixas de uma chave simétrica cortam entre as metades', () => {
+    const layout = computeLayout(chaveCheia(64), 64)
+    const { slices } = computePrintSlices(layout)
+    // Cada R1 da metade de cima na primeira metade das faixas, e vice-versa.
+    const r1 = layout.matches.filter(m => m.round === 1 && !m.isThirdPlace).sort((a, b) => a.y - b.y)
+    const faixaDe = (id: string) => slices.findIndex(s => s.matchIds.includes(id))
+    const meio = slices.length / 2
+    expect(r1.slice(0, 16).every(m => faixaDe(m.id) < meio)).toBe(true)
+    expect(r1.slice(16).every(m => faixaDe(m.id) >= meio)).toBe(true)
   })
 
   it('chave grande quebra em várias faixas', () => {
