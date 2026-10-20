@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-10-20T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-10-20T19:35:30.241Z",
+  "publicadoEm": "2026-10-20T19:42:46.791Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -4598,8 +4598,8 @@
       "nome": "Tênis de Mesa Feminino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "5d656f4d488a1e50",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -4702,8 +4702,51 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        448,
+        347,
+        590,
+        112
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              448,
+              122,
+              191
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              347,
+              626,
+              431,
+              310
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              590,
+              105,
+              618
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              112,
+              46,
+              571
+            ]
+          }
+        ],
+        "regra_id": 207,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4730,8 +4773,8 @@
       "nome": "Tênis de Mesa Feminino Cat. C",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "e3667136749c3b45",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -4791,8 +4834,32 @@
           "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        590,
+        562
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              590,
+              310,
+              105
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              562,
+              448,
+              571
+            ]
+          }
+        ],
+        "regra_id": 200,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4819,8 +4886,8 @@
       "nome": "Tênis de Mesa Masculino Cat.A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d8e9a39a27d6fe12",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -4859,18 +4926,8 @@
           "subtitulo": null
         },
         {
-          "id": 268,
-          "nome": "Itaquaquecetuba",
-          "subtitulo": null
-        },
-        {
           "id": 281,
           "nome": "Jacareí",
-          "subtitulo": null
-        },
-        {
-          "id": 310,
-          "nome": "Lorena",
           "subtitulo": null
         },
         {
@@ -4948,8 +5005,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        103,
+        562,
+        448,
+        609
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              103,
+              191,
+              212,
+              590
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              562,
+              211,
+              626,
+              431
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              448,
+              618,
+              98,
+              281
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              105,
+              216,
+              571
+            ]
+          }
+        ],
+        "regra_id": 210,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4976,8 +5079,8 @@
       "nome": "Tênis de Mesa Masculino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "6dbc3588ef708620",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5090,8 +5193,53 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        216,
+        448,
+        590,
+        609
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              216,
+              310,
+              571,
+              431
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              448,
+              112,
+              626,
+              105
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              590,
+              122,
+              98,
+              281
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              46,
+              562
+            ]
+          }
+        ],
+        "regra_id": 209,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -5135,11 +5283,6 @@
         {
           "id": 562,
           "nome": "São José dos Campos",
-          "subtitulo": null
-        },
-        {
-          "id": 571,
-          "nome": "São Sebastião",
           "subtitulo": null
         },
         {
@@ -5207,8 +5350,8 @@
       "nome": "Tênis Feminino Duplas Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "46fff0ccec9fdfc7",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5246,8 +5389,53 @@
           "posicao": 3
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        448,
+        590,
+        122,
+        609
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          448,
+          609,
+          122,
+          590
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5262,8 +5450,8 @@
       "nome": "Tênis Feminino Duplas Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9a6d4d9f2c221d8a",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5284,7 +5472,27 @@
         }
       ],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 2,
+        "slots": [
+          448,
+          590
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
