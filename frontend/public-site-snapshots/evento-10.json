@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-10-20T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-10-20T19:58:48.087Z",
+  "publicadoEm": "2026-10-20T20:01:46.066Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -7945,11 +7945,6 @@
         {
           "id": 590,
           "nome": "Suzano",
-          "subtitulo": null
-        },
-        {
-          "id": 609,
-          "nome": "Taubaté",
           "subtitulo": null
         },
         {
