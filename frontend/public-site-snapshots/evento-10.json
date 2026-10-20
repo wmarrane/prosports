@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-10-20T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-10-20T19:50:05.805Z",
+  "publicadoEm": "2026-10-20T19:58:48.087Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -6526,18 +6526,13 @@
       "nome": "Truco Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "73581197626d3e34",
       "anfitriaoId": 609,
       "participantes": [
         {
           "id": 29,
           "nome": "Aparecida",
-          "subtitulo": null
-        },
-        {
-          "id": 76,
-          "nome": "Biritiba Mirim",
           "subtitulo": null
         },
         {
@@ -6622,8 +6617,49 @@
           "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        609,
+        431,
+        324
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              609,
+              98,
+              29
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              431,
+              590,
+              122
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              324,
+              562,
+              105
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              571,
+              626,
+              99
+            ]
+          }
+        ],
+        "regra_id": 206,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -6650,8 +6686,8 @@
       "nome": "Truco Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "7f8bd5301f408183",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -6730,11 +6766,6 @@
           "subtitulo": null
         },
         {
-          "id": 404,
-          "nome": "Paraibuna",
-          "subtitulo": null
-        },
-        {
           "id": 431,
           "nome": "Pindamonhangaba",
           "subtitulo": null
@@ -6809,8 +6840,73 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        304,
+        105,
+        211,
+        609,
+        590,
+        431
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              304,
+              281,
+              435,
+              115
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              105,
+              268,
+              459,
+              151
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              211,
+              310,
+              76
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              99,
+              98,
+              324
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              590,
+              112,
+              562,
+              626
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              431,
+              571,
+              184,
+              103
+            ]
+          }
+        ],
+        "regra_id": 217,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -6837,8 +6933,8 @@
       "nome": "Voleibol Feminino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d2872155fc63e333",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -7016,8 +7112,90 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        347,
+        310,
+        448,
+        609,
+        431,
+        216,
+        404,
+        590
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              347,
+              212,
+              618
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              310,
+              238,
+              626,
+              459
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              448,
+              151,
+              324,
+              281
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              571,
+              105
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              431,
+              103,
+              191,
+              435
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              216,
+              562,
+              184
+            ]
+          },
+          {
+            "letra": "G",
+            "participantes": [
+              404,
+              122,
+              528,
+              548
+            ]
+          },
+          {
+            "letra": "H",
+            "participantes": [
+              590,
+              268,
+              190
+            ]
+          }
+        ],
+        "regra_id": 222,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -7044,8 +7222,8 @@
       "nome": "Voleibol Feminino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "765baccab054e6f2",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -7178,8 +7356,69 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        562,
+        216,
+        571,
+        609,
+        310,
+        448
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              562,
+              268,
+              431,
+              151
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              216,
+              212,
+              184
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              571,
+              103,
+              618
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              281,
+              122
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              310,
+              191,
+              626
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              448,
+              105,
+              347
+            ]
+          }
+        ],
+        "regra_id": 213,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -7206,8 +7445,8 @@
       "nome": "Voleibol Masculino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "47d73d43ec17e306",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -7350,8 +7589,71 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        431,
+        310,
+        448,
+        609,
+        571,
+        238
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              431,
+              626,
+              105
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              310,
+              122,
+              281,
+              151
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              448,
+              324,
+              404
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              191,
+              528
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              571,
+              212,
+              347,
+              548
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              238,
+              216,
+              618,
+              562
+            ]
+          }
+        ],
+        "regra_id": 215,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -7378,8 +7680,8 @@
       "nome": "Voleibol Masculino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "079ce9c75a415da3",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -7497,8 +7799,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        431,
+        562,
+        448,
+        609
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              431,
+              281,
+              571,
+              268
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              562,
+              105,
+              191,
+              103
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              448,
+              151,
+              618,
+              404
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              609,
+              122,
+              347,
+              216
+            ]
+          }
+        ],
+        "regra_id": 210,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
