@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-10-20T18:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-10-20T19:42:46.791Z",
+  "publicadoEm": "2026-10-20T19:50:05.805Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -5528,8 +5528,8 @@
       "nome": "Tênis Feminino Individual Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "dfef2f41f80a9f6e",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5589,8 +5589,82 @@
           "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        562,
+        151,
+        191,
+        431
+      ],
+      "resultado": {
+        "size": 6,
+        "slots": [
+          562,
+          571,
+          431,
+          191,
+          216,
+          151
+        ],
+        "byePositions": [
+          1,
+          6
+        ],
+        "matchesGraph": {
+          "final": "J6",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J4",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J6",
+              "top": "V:J3",
+              "round": 3,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J5",
+              "top": "L:J3",
+              "round": 3,
+              "bottom": "L:J4"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J5"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5605,8 +5679,8 @@
       "nome": "Tênis Feminino Individual Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "7222313362521503",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5652,8 +5726,53 @@
           "posicao": 5
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        238,
+        571,
+        191,
+        609
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          238,
+          609,
+          191,
+          571
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5671,13 +5790,7 @@
       "status": "aguardando",
       "seed": null,
       "anfitriaoId": 609,
-      "participantes": [
-        {
-          "id": 571,
-          "nome": "São Sebastião",
-          "subtitulo": null
-        }
-      ],
+      "participantes": [],
       "campeoes": [
         {
           "participanteId": 112,
@@ -5704,8 +5817,8 @@
       "nome": "Tênis Masculino Duplas Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "816bebb67409c1ce",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5737,8 +5850,31 @@
           "posicao": 4
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        590,
+        212
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          590,
+          212
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5753,8 +5889,8 @@
       "nome": "Tênis Masculino Duplas Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "954f5115c509e850",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5783,7 +5919,27 @@
         }
       ],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "size": 2,
+        "slots": [
+          626,
+          212
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5825,8 +5981,8 @@
       "nome": "Tênis Masculino Individual Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "2f938adcdcbf0950",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -5852,11 +6008,6 @@
         {
           "id": 216,
           "nome": "Guarulhos",
-          "subtitulo": null
-        },
-        {
-          "id": 324,
-          "nome": "Mairiporã",
           "subtitulo": null
         },
         {
@@ -5929,8 +6080,138 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        562,
+        431,
+        571,
+        609
+      ],
+      "resultado": {
+        "size": 12,
+        "slots": [
+          562,
+          626,
+          564,
+          448,
+          103,
+          609,
+          571,
+          191,
+          216,
+          151,
+          98,
+          431
+        ],
+        "byePositions": [
+          1,
+          6,
+          7,
+          12
+        ],
+        "matchesGraph": {
+          "final": "J12",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J3",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J4",
+              "top": "P10",
+              "round": 1,
+              "bottom": "P11"
+            },
+            {
+              "id": "J5",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:B3",
+              "round": 2,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J8",
+              "top": "V:J4",
+              "round": 2,
+              "bottom": "V:B4"
+            },
+            {
+              "id": "J9",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 3,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J12",
+              "top": "V:J9",
+              "round": 4,
+              "bottom": "V:J10"
+            },
+            {
+              "id": "J11",
+              "top": "L:J9",
+              "round": 4,
+              "bottom": "L:J10"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P6",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B3",
+              "top": "P7",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B4",
+              "top": "P12",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J11"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5945,8 +6226,8 @@
       "nome": "Tênis Masculino Individual Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f80f4931de9a17ea",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -6030,8 +6311,110 @@
           "posicao": 7
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        122,
+        281,
+        324,
+        609
+      ],
+      "resultado": {
+        "size": 10,
+        "slots": [
+          122,
+          105,
+          103,
+          562,
+          609,
+          324,
+          571,
+          431,
+          216,
+          281
+        ],
+        "byePositions": [
+          1,
+          10
+        ],
+        "matchesGraph": {
+          "final": "J10",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "P8",
+              "round": 1,
+              "bottom": "P9"
+            },
+            {
+              "id": "J3",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J4",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "P6",
+              "round": 1,
+              "bottom": "P7"
+            },
+            {
+              "id": "J6",
+              "top": "V:J2",
+              "round": 2,
+              "bottom": "V:B2"
+            },
+            {
+              "id": "J7",
+              "top": "V:J3",
+              "round": 3,
+              "bottom": "V:J4"
+            },
+            {
+              "id": "J8",
+              "top": "V:J5",
+              "round": 3,
+              "bottom": "V:J6"
+            },
+            {
+              "id": "J10",
+              "top": "V:J7",
+              "round": 4,
+              "bottom": "V:J8"
+            },
+            {
+              "id": "J9",
+              "top": "L:J7",
+              "round": 4,
+              "bottom": "L:J8"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            },
+            {
+              "id": "B2",
+              "top": "P10",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J9"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -6046,8 +6429,8 @@
       "nome": "Tênis Masculino Individual Cat. C",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "ba18a0b894efd18f",
       "anfitriaoId": 609,
       "participantes": [
         {
@@ -6063,11 +6446,6 @@
         {
           "id": 571,
           "nome": "São Sebastião",
-          "subtitulo": null
-        },
-        {
-          "id": 609,
-          "nome": "Taubaté",
           "subtitulo": null
         },
         {
@@ -6090,8 +6468,50 @@
           "posicao": 3
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        122
+      ],
+      "resultado": {
+        "size": 4,
+        "slots": [
+          122,
+          571,
+          216,
+          626
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J4",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            },
+            {
+              "id": "J2",
+              "top": "P3",
+              "round": 1,
+              "bottom": "P4"
+            },
+            {
+              "id": "J4",
+              "top": "V:J1",
+              "round": 2,
+              "bottom": "V:J2"
+            },
+            {
+              "id": "J3",
+              "top": "L:J1",
+              "round": 2,
+              "bottom": "L:J2"
+            }
+          ],
+          "thirdPlace": "J3"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
