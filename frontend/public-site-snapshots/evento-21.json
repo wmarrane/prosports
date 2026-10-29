@@ -7,7 +7,7 @@
   "local": ",",
   "data": "2026-10-29T18:00:00.000Z",
   "organizador": ".",
-  "publicadoEm": "2026-10-29T18:18:39.130Z",
+  "publicadoEm": "2026-10-29T19:16:29.370Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -104,11 +104,6 @@
         {
           "id": 70,
           "nome": "Bebedouro",
-          "subtitulo": null
-        },
-        {
-          "id": 91,
-          "nome": "Brodowski",
           "subtitulo": null
         },
         {
@@ -267,11 +262,6 @@
           "subtitulo": null
         },
         {
-          "id": 91,
-          "nome": "Brodowski",
-          "subtitulo": null
-        },
-        {
           "id": 189,
           "nome": "Franca",
           "subtitulo": null
@@ -324,11 +314,6 @@
         {
           "id": 38,
           "nome": "Araraquara",
-          "subtitulo": null
-        },
-        {
-          "id": 91,
-          "nome": "Brodowski",
           "subtitulo": null
         },
         {
@@ -632,11 +617,6 @@
           "subtitulo": null
         },
         {
-          "id": 91,
-          "nome": "Brodowski",
-          "subtitulo": null
-        },
-        {
           "id": 137,
           "nome": "Colina",
           "subtitulo": null
@@ -729,11 +709,6 @@
         {
           "id": 70,
           "nome": "Bebedouro",
-          "subtitulo": null
-        },
-        {
-          "id": 91,
-          "nome": "Brodowski",
           "subtitulo": null
         },
         {
@@ -889,11 +864,6 @@
         {
           "id": 38,
           "nome": "Araraquara",
-          "subtitulo": null
-        },
-        {
-          "id": 91,
-          "nome": "Brodowski",
           "subtitulo": null
         },
         {
@@ -1082,8 +1052,8 @@
       "nome": "Basquete 3x3 Feminino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "7616952ba30d3862",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1131,8 +1101,32 @@
           "posicao": 3
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        189,
+        412
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              38,
+              280
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              412,
+              581,
+              491
+            ]
+          }
+        ],
+        "regra_id": 200,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1222,8 +1216,8 @@
       "nome": "Basquete 3x3 Masculino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "e918a580d6c35def",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1298,8 +1292,41 @@
           "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        148,
+        189,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              148,
+              280,
+              228
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              189,
+              70,
+              491
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              64,
+              581,
+              38
+            ]
+          }
+        ],
+        "regra_id": 203,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1398,8 +1425,8 @@
       "nome": "Bocha Rafa Masculino ou Misto",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "5eca3a05037b76e1",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1522,8 +1549,61 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        38,
+        91,
+        117,
+        354,
+        491
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              333,
+              581
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              91,
+              138,
+              189,
+              390
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              117,
+              64,
+              278,
+              386
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              354,
+              288,
+              603
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              491,
+              573,
+              280
+            ]
+          }
+        ],
+        "regra_id": 211,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1550,8 +1630,8 @@
       "nome": "Buraco Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "9073bee3e229d2e5",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1694,8 +1774,71 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        280,
+        540,
+        440,
+        38,
+        333,
+        412
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              280,
+              64,
+              641
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              540,
+              278,
+              491,
+              189
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              440,
+              581,
+              612,
+              603
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              38,
+              362,
+              137
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              333,
+              70,
+              202,
+              386
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              412,
+              462,
+              148
+            ]
+          }
+        ],
+        "regra_id": 215,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1722,8 +1865,8 @@
       "nome": "Buraco Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "4e0666e5d8b33926",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1782,11 +1925,6 @@
           "subtitulo": null
         },
         {
-          "id": 603,
-          "nome": "Taquaritinga",
-          "subtitulo": null
-        },
-        {
           "id": 641,
           "nome": "Viradouro",
           "subtitulo": null
@@ -1823,8 +1961,51 @@
           "posicao": 6
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        641,
+        540,
+        202,
+        280
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              641,
+              278,
+              38
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              540,
+              412,
+              445
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              202,
+              189,
+              64
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              280,
+              70,
+              581,
+              612
+            ]
+          }
+        ],
+        "regra_id": 207,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -1851,8 +2032,8 @@
       "nome": "Coreografia Cat. A",
       "grupo": null,
       "tipo": "ordem_entrada",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "5823b4c23404f6ff",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1883,7 +2064,15 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "ordem": [
+          581,
+          641,
+          354,
+          280,
+          38
+        ]
+      },
       "mensagens_inscritos": []
     },
     {
@@ -1891,8 +2080,8 @@
       "nome": "Coreografia Cat. B",
       "grupo": null,
       "tipo": "ordem_entrada",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "df07bad25fb4f407",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -1953,7 +2142,21 @@
       ],
       "campeoes": [],
       "cabecasPids": [],
-      "resultado": null,
+      "resultado": {
+        "ordem": [
+          445,
+          362,
+          315,
+          612,
+          375,
+          189,
+          91,
+          412,
+          390,
+          333,
+          491
+        ]
+      },
       "mensagens_inscritos": []
     },
     {
@@ -2356,8 +2559,8 @@
       "nome": "Dominó Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "80de8eec70289ea3",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -2490,8 +2693,69 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        440,
+        280,
+        354,
+        581,
+        137,
+        64
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              440,
+              412,
+              70
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              280,
+              445,
+              189,
+              462
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              354,
+              534,
+              91
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              581,
+              386,
+              612
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              137,
+              603,
+              641
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              64,
+              38,
+              278
+            ]
+          }
+        ],
+        "regra_id": 213,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -2518,8 +2782,8 @@
       "nome": "Dominó Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "cc7c0cd34c80d76b",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -2647,8 +2911,67 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        641,
+        64,
+        280,
+        354,
+        581
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              641,
+              315,
+              137
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              64,
+              189,
+              70
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              280,
+              278,
+              91
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              354,
+              386,
+              202
+            ]
+          },
+          {
+            "letra": "E",
+            "participantes": [
+              581,
+              38,
+              603
+            ]
+          },
+          {
+            "letra": "F",
+            "participantes": [
+              462,
+              445,
+              612
+            ]
+          }
+        ],
+        "regra_id": 212,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -2675,8 +2998,8 @@
       "nome": "Malha Masculino ou Misto",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "f3d11b6b94001782",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -2769,8 +3092,43 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        581,
+        280,
+        189
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              581,
+              390,
+              603
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              280,
+              491,
+              137,
+              64
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              189,
+              386,
+              333,
+              38
+            ]
+          }
+        ],
+        "regra_id": 205,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
