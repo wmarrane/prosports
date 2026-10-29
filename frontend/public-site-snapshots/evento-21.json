@@ -7,7 +7,7 @@
   "local": ",",
   "data": "2026-10-29T18:00:00.000Z",
   "organizador": ".",
-  "publicadoEm": "2026-10-29T19:30:34.001Z",
+  "publicadoEm": "2026-10-29T19:39:29.051Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -3885,8 +3885,8 @@
       "nome": "Tênis de Mesa Feminino Cat. A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "4642291aff5dd931",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -3907,11 +3907,6 @@
         {
           "id": 278,
           "nome": "Ituverava",
-          "subtitulo": null
-        },
-        {
-          "id": 280,
-          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
@@ -3974,8 +3969,41 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        491,
+        38,
+        70
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              445,
+              581
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              38,
+              288,
+              333
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              70,
+              278,
+              189
+            ]
+          }
+        ],
+        "regra_id": 203,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4002,8 +4030,8 @@
       "nome": "Tênis de Mesa Feminino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "d43e8dd33f8ddcb0",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -4092,8 +4120,43 @@
           "posicao": 7
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        189,
+        491,
+        354
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              189,
+              534,
+              581,
+              70
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              491,
+              278,
+              280
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              354,
+              38,
+              412,
+              91
+            ]
+          }
+        ],
+        "regra_id": 205,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4120,8 +4183,8 @@
       "nome": "Tênis de Mesa Feminino Cat. C",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "7dfa931a45c48892",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -4165,8 +4228,32 @@
           "posicao": 2
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        491,
+        278
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              491,
+              280,
+              70
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              278,
+              581,
+              38
+            ]
+          }
+        ],
+        "regra_id": 200,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4193,8 +4280,8 @@
       "nome": "Tênis de Mesa Masculino Cat.A",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "3603b37d887a2a64",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -4225,11 +4312,6 @@
         {
           "id": 278,
           "nome": "Ituverava",
-          "subtitulo": null
-        },
-        {
-          "id": 280,
-          "nome": "Jaboticabal",
           "subtitulo": null
         },
         {
@@ -4287,8 +4369,42 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        148,
+        581,
+        354
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              148,
+              278,
+              288
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              581,
+              603,
+              70
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              354,
+              64,
+              38,
+              189
+            ]
+          }
+        ],
+        "regra_id": 204,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4315,8 +4431,8 @@
       "nome": "Tênis de Mesa Masculino Cat. B",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "ee06c09c87139ce9",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -4414,8 +4530,50 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        38,
+        333,
+        189,
+        202
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              38,
+              64,
+              412
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              333,
+              288,
+              280
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              189,
+              278,
+              581
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              202,
+              91,
+              491
+            ]
+          }
+        ],
+        "regra_id": 206,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": [
         {
           "max": 5,
@@ -4634,18 +4792,13 @@
       "nome": "Tênis Feminino Duplas Cat. C",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "66e14dafb1b88c02",
       "anfitriaoId": 354,
       "participantes": [
         {
           "id": 38,
           "nome": "Araraquara",
-          "subtitulo": null
-        },
-        {
-          "id": 278,
-          "nome": "Ituverava",
           "subtitulo": null
         },
         {
@@ -4660,8 +4813,30 @@
           "posicao": 1
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        280
+      ],
+      "resultado": {
+        "size": 2,
+        "slots": [
+          280,
+          38
+        ],
+        "byePositions": [],
+        "matchesGraph": {
+          "final": "J1",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "P2"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -4949,8 +5124,8 @@
       "nome": "Tênis Masculino Duplas Cat. A",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "8f173cd733e1c553",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -4989,8 +5164,66 @@
           "posicao": 2
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        189,
+        354
+      ],
+      "resultado": {
+        "size": 5,
+        "slots": [
+          189,
+          64,
+          38,
+          491,
+          354
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J5",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "J3",
+              "top": "P4",
+              "round": 1,
+              "bottom": "P5"
+            },
+            {
+              "id": "J5",
+              "top": "V:J2",
+              "round": 3,
+              "bottom": "V:J3"
+            },
+            {
+              "id": "J4",
+              "top": "L:J2",
+              "round": 3,
+              "bottom": "L:J3"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": "J4"
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
@@ -5005,8 +5238,8 @@
       "nome": "Tênis Masculino Duplas Cat. B",
       "grupo": null,
       "tipo": "chaves",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "819c22f7674d425b",
       "anfitriaoId": 354,
       "participantes": [
         {
@@ -5039,8 +5272,47 @@
           "posicao": 3
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        581,
+        491,
+        354
+      ],
+      "resultado": {
+        "size": 3,
+        "slots": [
+          581,
+          354,
+          491
+        ],
+        "byePositions": [
+          1
+        ],
+        "matchesGraph": {
+          "final": "J2",
+          "matches": [
+            {
+              "id": "J1",
+              "top": "P2",
+              "round": 1,
+              "bottom": "P3"
+            },
+            {
+              "id": "J2",
+              "top": "V:B1",
+              "round": 2,
+              "bottom": "V:J1"
+            },
+            {
+              "id": "B1",
+              "top": "P1",
+              "round": 1,
+              "bottom": "BYE"
+            }
+          ],
+          "thirdPlace": null
+        },
+        "metadesIgnoradas": []
+      },
       "mensagens_inscritos": [
         {
           "max": 1,
