@@ -1,13 +1,13 @@
 {
   "id": 21,
   "nome": "28º Jogos da Melhor Idade de Monte Alto",
-  "status": "pronto",
+  "status": "sorteado",
   "competicao": "Jogos da Melhor Idade",
   "cidade": "Monte Alto",
   "local": ",",
   "data": "2026-10-29T18:00:00.000Z",
   "organizador": ".",
-  "publicadoEm": "2026-10-29T19:47:21.294Z",
+  "publicadoEm": "2026-10-29T19:52:04.907Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -584,6 +584,11 @@
         {
           "id": 581,
           "nome": "Sertãozinho",
+          "subtitulo": null
+        },
+        {
+          "id": 603,
+          "nome": "Taquaritinga",
           "subtitulo": null
         }
       ],
