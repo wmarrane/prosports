@@ -1,0 +1,125 @@
+{
+  "id": 11,
+  "nome": "Copa de Voleibol de Taquarituba",
+  "status": "pronto",
+  "competicao": "Copa de Voleibol",
+  "cidade": "Taquarituba",
+  "local": ".",
+  "data": "2026-11-14T19:00:00.000Z",
+  "organizador": null,
+  "publicadoEm": "2026-11-12T13:27:36.709Z",
+  "dataInicio": null,
+  "dataFim": null,
+  "boletins": [],
+  "modalidades": [
+    {
+      "id": 352,
+      "nome": "Voleibol Feminino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 604,
+      "participantes": [
+        {
+          "id": 33,
+          "nome": "Araçatuba",
+          "subtitulo": null
+        },
+        {
+          "id": 38,
+          "nome": "Araraquara",
+          "subtitulo": null
+        },
+        {
+          "id": 48,
+          "nome": "Assis",
+          "subtitulo": null
+        },
+        {
+          "id": 123,
+          "nome": "Carapicuíba",
+          "subtitulo": null
+        },
+        {
+          "id": 148,
+          "nome": "Cravinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 149,
+          "nome": "Cristais Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 284,
+          "nome": "Jaguariúna",
+          "subtitulo": null
+        },
+        {
+          "id": 306,
+          "nome": "Lençóis Paulista",
+          "subtitulo": null
+        },
+        {
+          "id": 467,
+          "nome": "Presidente Epitácio",
+          "subtitulo": null
+        },
+        {
+          "id": 561,
+          "nome": "São José do Rio Preto",
+          "subtitulo": null
+        },
+        {
+          "id": 562,
+          "nome": "São José dos Campos",
+          "subtitulo": null
+        },
+        {
+          "id": 574,
+          "nome": "São Vicente",
+          "subtitulo": null
+        },
+        {
+          "id": 586,
+          "nome": "Sorocaba",
+          "subtitulo": null
+        },
+        {
+          "id": 604,
+          "nome": "Taquarituba",
+          "subtitulo": null
+        },
+        {
+          "id": 633,
+          "nome": "Valinhos",
+          "subtitulo": null
+        },
+        {
+          "id": 641,
+          "nome": "Viradouro",
+          "subtitulo": null
+        }
+      ],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    },
+    {
+      "id": 351,
+      "nome": "Voleibol Masculino",
+      "grupo": null,
+      "tipo": "grupos",
+      "status": "aguardando",
+      "seed": null,
+      "anfitriaoId": 604,
+      "participantes": [],
+      "campeoes": [],
+      "cabecasPids": [],
+      "resultado": null,
+      "mensagens_inscritos": []
+    }
+  ]
+}
