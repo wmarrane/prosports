@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-11-14T19:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-11-14T18:26:50.966Z",
+  "publicadoEm": "2026-11-14T19:26:17.362Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -17,8 +17,8 @@
       "nome": "Voleibol Feminino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "6373a80fa156588c",
       "anfitriaoId": 604,
       "participantes": [
         {
@@ -136,8 +136,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        633,
+        284,
+        123,
+        586
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              633,
+              604,
+              148,
+              641
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              284,
+              562,
+              48,
+              467
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              123,
+              149,
+              38,
+              561
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              586,
+              33,
+              306,
+              574
+            ]
+          }
+        ],
+        "regra_id": 342,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     },
     {
