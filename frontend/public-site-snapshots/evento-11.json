@@ -7,7 +7,7 @@
   "local": ".",
   "data": "2026-11-14T19:00:00.000Z",
   "organizador": null,
-  "publicadoEm": "2026-11-14T19:26:17.362Z",
+  "publicadoEm": "2026-11-14T19:32:51.980Z",
   "dataInicio": null,
   "dataFim": null,
   "boletins": [],
@@ -18,7 +18,7 @@
       "grupo": null,
       "tipo": "grupos",
       "status": "sorteado",
-      "seed": "6373a80fa156588c",
+      "seed": "5767794afe4f7d96",
       "anfitriaoId": 604,
       "participantes": [
         {
@@ -140,7 +140,7 @@
         633,
         284,
         123,
-        586
+        604
       ],
       "resultado": {
         "grupos": [
@@ -148,9 +148,9 @@
             "letra": "A",
             "participantes": [
               633,
-              604,
-              148,
-              641
+              33,
+              586,
+              148
             ]
           },
           {
@@ -158,26 +158,26 @@
             "participantes": [
               284,
               562,
-              48,
-              467
+              149,
+              48
             ]
           },
           {
             "letra": "C",
             "participantes": [
               123,
-              149,
-              38,
-              561
+              306,
+              574,
+              38
             ]
           },
           {
             "letra": "D",
             "participantes": [
-              586,
-              33,
-              306,
-              574
+              604,
+              641,
+              467,
+              561
             ]
           }
         ],
@@ -191,8 +191,8 @@
       "nome": "Voleibol Masculino",
       "grupo": null,
       "tipo": "grupos",
-      "status": "aguardando",
-      "seed": null,
+      "status": "sorteado",
+      "seed": "7cfc6c73e2854bec",
       "anfitriaoId": 604,
       "participantes": [
         {
@@ -310,8 +310,54 @@
           "posicao": 8
         }
       ],
-      "cabecasPids": [],
-      "resultado": null,
+      "cabecasPids": [
+        334,
+        586,
+        562,
+        604
+      ],
+      "resultado": {
+        "grupos": [
+          {
+            "letra": "A",
+            "participantes": [
+              334,
+              561,
+              33,
+              256
+            ]
+          },
+          {
+            "letra": "B",
+            "participantes": [
+              586,
+              319,
+              189,
+              228
+            ]
+          },
+          {
+            "letra": "C",
+            "participantes": [
+              562,
+              450,
+              468,
+              491
+            ]
+          },
+          {
+            "letra": "D",
+            "participantes": [
+              604,
+              110,
+              391,
+              64
+            ]
+          }
+        ],
+        "regra_id": 342,
+        "classificados_por_grupo": 2
+      },
       "mensagens_inscritos": []
     }
   ]
